@@ -1,0 +1,86 @@
+{
+  "name": "ace-core",
+  "version": "0.1.0",
+  "description": "Ace by DAISY, an Accessibility Checker for EPUB",
+  "keywords": [
+    "a11y",
+    "accessibility",
+    "ace",
+    "checker",
+    "daisy",
+    "epub",
+    "validator",
+    "wcag"
+  ],
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  ],
+  "author": {
+    "name": "DAISY developers",
+    "organization": "DAISY Consortium",
+    "url": "https://github.com/daisy/"
+  },
+  "homepage": "https://github.com/daisy/ace-core",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daisy/ace-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/daisy/ace-core/issues"
+  },
+  "engines": {
+    "node": ">=6",
+    "npm": ">=4",
+    "yarn": ">= 0.20"
+  },
+  "main": "src/index.js",
+  "bin": {
+    "ace": "dist/cli/cli.js"
+  },
+  "files": [
+    "LICENCE.txt",
+    "README.md",
+    "dist"
+  ],
+  "dependencies": {
+    "axe-core": "^2.1.7",
+    "extract-zip": "^1.6.5",
+    "filehound": "^1.16.1",
+    "filenamify-url": "^1.0.0",
+    "fs-extra": "^3.0.1",
+    "marko": "^4.4.7",
+    "meow": "^3.7.0",
+    "nightmare": "^2.10.0",
+    "path": "^0.12.7",
+    "tmp": "^0.0.31",
+    "unzip": "^0.1.11",
+    "xmldom": "^0.1.27",
+    "xpath": "^0.0.24"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0",
+    "jest": "^20.0.3",
+    "rimraf": "^2.6.1",
+    "uglify-js": "^3.0.8",
+    "watch": "^1.0.2"
+  },
+  "scripts": {
+    "start": "node dist/cli/cli.js",
+    "clean": "rimraf dist && mkdir dist",
+    "prebuild": "yarn run clean -s",
+    "build": "yarn run build:js -s && yarn run build:axe -s",
+    "build:js": "mkdir dist/axe && cp node_modules/axe-core/axe.min.js dist/axe/",
+    "build:axe": "cp -R src/ dist",
+    "build:watch": "watch 'yarn run build' src",
+    "test": "echo add tests",
+    "docs": "echo add docs",
+    "lint": "eslint src",
+    "dist": "echo add dist"
+  }
+}
