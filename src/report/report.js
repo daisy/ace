@@ -1,6 +1,6 @@
 'use strict';
 
-const filenamify = require('filenamify-url');
+const shortid = require('shortid');
 const filehound = require('filehound');
 const fs = require('fs-extra');
 const path = require('path');
@@ -11,12 +11,17 @@ const template = require('./report-template'); // eslint-disable-line import/no-
 
 const report = exports;
 
+function getFilename(url) {
+  const filename = url.split('/').pop();
+  return filename.substr(0, filename.lastIndexOf('.'));
+}
+
 report.processResult = function processResult(result) {
   const fullReport = result;
   const url = result.axe.url;
   const basedir = this.tmpdir;
-  const outdir = path.join(basedir, filenamify(url));
-  // console.log('reporting '+url+' to '+outdir);
+  const outdir = path.join(basedir, `${getFilename(url).substring(0, 100)}-${shortid.generate()}`);
+  // console.log(`reporting ${url} to ${outdir}`);
   return fs.pathExists(outdir)
     .then((exists) => {
       if (!exists) fs.mkdirSync(outdir);
