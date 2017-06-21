@@ -35,6 +35,9 @@ module.exports = function ace(epubPath, options) {
   } else {
     delete options.outdir;
   }
+
+  report.initialize(epubPath);
+
   /* eslint-enable no-param-reassign */
 
   // Unzip the EPUB
@@ -46,11 +49,11 @@ module.exports = function ace(epubPath, options) {
   // Check each Content Docs
   .then(urls => checker.check(urls))
   // Process the Results
-  .then(results => Promise.all(results.map(report.processResult, options)))
-  .then(() => report.createSummary(epubPath, options.tmpdir, options.outdir))
-  .then(() => {
-    console.log('Done.');
-  })
+  //.then(results => Promise.all(results.map(report.processResult, options)))
+//  .then(() => report.createSummary(epubPath, options.tmpdir, options.outdir))
+  //.then(() => report.saveJson(options.outdir))
+  //.then(() => console.log('Done.'))
+  .then(() => report.saveJson(options.outdir))
   .catch((err) => {
     console.error(`Unexpected error: ${err}`);
     process.exit(1);
