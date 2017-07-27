@@ -6,6 +6,9 @@ const tmp = require('tmp');
 
 function EPUB(path) {
   this.path = path;
+  this.contentDocs = [];
+  this.title = "";
+  this.identifier = "";
 }
 
 EPUB.prototype.extract = function extract() {
@@ -26,8 +29,17 @@ EPUB.prototype.extract = function extract() {
   });
 };
 
-EPUB.prototype.getContentDocsPaths = function getContentDocsPaths() {
-  return Promise.resolve(epubParse.getSpinePaths(this.dir, 'application/xhtml+xml'));
-};
+EPUB.prototype.parse = function() {
+  const epubParser = new epubParse.EpubParser();
+  epubParser.parse(this.dir)
+    .then(epubParser => {
+      this.contentDocs = epubParser.contentDocs;
+      this.title = epubParser.docTitle;
+      this.identifier = epubParser.identifier;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 module.exports = EPUB;

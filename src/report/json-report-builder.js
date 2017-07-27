@@ -1,17 +1,17 @@
-// report objects 
+// report objects
 
 // static
 var AceSoftwareDescription = {
-    "@type": "software",
+    "@type": "earl:software",
     "doap:name": "DAISY Ace",
     "doap:description": "DAISY Accessibility Checker for EPUB",
     "doap:homepage": "http://ace.daisy.org",
     "doap:created": "2017-07-01",
-    "release": {"doap:revision": "v0.2.0"}
+    "doap:release": {"doap:revision": "v0.2.0"}
 }
 // create properties with our json vocabulary
 function withOutcome (obj, outcome) {
-    obj["outcome"] = outcome;
+    obj["earl:outcome"] = outcome;
     return obj;
 }
 function withDescription (obj, description) {
@@ -19,7 +19,7 @@ function withDescription (obj, description) {
     return obj;
 }
 function withPointer(obj, cfi, css) {
-    obj["result"] = {"cfi": cfi, "css": css};
+    obj["earl:pointer"] = {"cfi": cfi, "css": css};
     return obj;
 }
 function withType(obj, type) {
@@ -27,11 +27,17 @@ function withType(obj, type) {
     return obj;
 }
 function withAssertedBy(obj, assertor) {
-    obj["assertedBy"] = assertor;
+    obj["earl:assertedBy"] = assertor;
     return obj;
 }
-function withTestSubject (obj, testSubject) {
-    obj["testSubject"] = testSubject;
+function withTestSubject (obj, url, title, identifier) {
+    obj["earl:testSubject"] = {
+      "url": url,
+      "dct:title": title,
+    };
+    if (identifier.length > 0) {
+      obj["earl:testSubject"]["dct:identifier"] = identifier;
+    }
     return obj;
 }
 
@@ -39,19 +45,20 @@ function withTestSubject (obj, testSubject) {
 function withAssertion(obj, assertion) {
     if (!("assertions" in obj)) {
         obj["assertions"] = [];
-    } 
+    }
     obj["assertions"].push(assertion);
-    
+    console.log(obj);
+    console.log(assertion);
     withResult(obj, calculateResult(obj.assertions));
-    
+
     return obj;
 }
 function withResult(obj, result) {
-    obj["result"] = result;
+    obj["earl:result"] = result;
     return obj;
 }
 function withMode(obj, mode) {
-    obj["mode"] = mode;
+    obj["earl:mode"] = mode;
     return obj;
 }
 function withTitle(obj, title) {
@@ -63,7 +70,7 @@ function withDescription(obj, description) {
     return obj;
 }
 function withDate(obj, date) {
-    obj["dct:Date"] = date;
+    obj["dct:date"] = date;
     return obj;
 }
 function withContext(obj, context) {
@@ -71,11 +78,11 @@ function withContext(obj, context) {
     return obj;
 }
 function withTest(obj, test) {
-    obj["test"] = test;
+    obj["earl:test"] = test;
     return obj;
 }
 function withImpact(obj, impact) {
-    obj["impact"] = impact;
+    obj["earl:impact"] = impact;
     return obj;
 }
 function withHelpUrl(obj, helpUrl) {
@@ -87,7 +94,7 @@ function withHelpUrl(obj, helpUrl) {
 function calculateResult(assertions) {
     var outcome = "pass";
     assertions.forEach(function(assertion) {
-        if (assertion.result.outcome === "fail") {
+        if (assertion['earl:result']['earl:outcome'] === "fail") {
             outcome = "fail";
             return;
         }
@@ -101,8 +108,8 @@ function calculateResult(assertions) {
 // main report objects: Report, Result, ContentDocAssertion, SingleCheckAssertion, Test
 
 function Report() {
-    withType(this, "Report");
-    withContext(this, {});
+    withType(this, "earl:report");
+    withContext(this, "http://ace.daisy.org/ns/ace-report.jsonld");
     withAssertedBy(this, AceSoftwareDescription);
     withDate(this, new Date().toLocaleString());
 }
@@ -112,8 +119,8 @@ Report.prototype.withTitle = function(title) {
 Report.prototype.withDescription = function(description) {
     return withDescription(this, description);
 }
-Report.prototype.withTestSubject = function(testSubject) {
-    return withTestSubject(this, testSubject);
+Report.prototype.withTestSubject = function(url, title, identifier) {
+    return withTestSubject(this, url, title, identifier);
 }
 Report.prototype.withAssertion = function(assertions) {
     return withAssertion(this, assertions);
@@ -133,17 +140,17 @@ Result.prototype.withPointer = function(css, cfi) {
 
 
 function ContentDocAssertion() {
-    withType(this, "Assertion");
+    withType(this, "earl:assertion");
 }
-ContentDocAssertion.prototype.withTestSubject = function(testSubject) {
-    return withTestSubject(this, testSubject);
+ContentDocAssertion.prototype.withTestSubject = function(url, title) {
+    return withTestSubject(this, url, title, "");
 }
 ContentDocAssertion.prototype.withAssertion = function(assertions) {
     return withAssertion(this, assertions);
 }
 
 function SingleCheckAssertion() {
-    withType(this, "Assertion");
+    withType(this, "earl:assertion");
 }
 SingleCheckAssertion.prototype.withAssertedBy = function(assertedBy) {
     return withAssertedBy(this, assertedBy);
@@ -179,5 +186,3 @@ module.exports.SingleCheckAssertion = SingleCheckAssertion;
 module.exports.ContentDocAssertion = ContentDocAssertion;
 module.exports.Test = Test;
 module.exports.Result = Result;
-
-

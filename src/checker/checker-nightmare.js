@@ -55,19 +55,19 @@ const nightmare = Nightmare({
   },
 });
 
-function checkSingle(url) {
+function checkSingle(spineItem) {
   // console.log(`>>>>>>>>>> PROCESSING URL: ${url}`);
 
   return nightmare
-    .goto(url)
+    .goto(spineItem.url)
     .inject('js', PATH_TO_AXE)
     .inject('js', PATH_TO_WEBVIEWJS_EACT)
     .inject('js', PATH_TO_WEBVIEWJS)
     .wait(50)
-    .axe(url, () => {})
+    .axe(spineItem.url, () => {})
     .then(jsonStr => JSON.parse(jsonStr))
     .then((jsonStr) => {
-        var results = axe2ace.axe2ace(url, jsonStr);
+        var results = axe2ace.axe2ace(spineItem, jsonStr);
         report.addContentDocAssertion(results);
         //console.log("GOT THIS FAR");
         return results;
@@ -84,12 +84,11 @@ function checkSingle(url) {
       })), Promise.resolve([]))
   .then(results => nightmare.end(() => results));
 */
-module.exports.check = urls =>
-  urls.reduce((sequence, url) =>
+module.exports.check = spineItems =>
+  spineItems.reduce((sequence, spineItem) =>
     sequence.then(results =>
-      checkSingle(url)
+      checkSingle(spineItem)
       .then((result) => {
-        //console.log("GOT THIS FAR TOO");
         results.push(result);
         return results;
       })), Promise.resolve([]))

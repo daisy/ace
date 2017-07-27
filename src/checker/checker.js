@@ -2,7 +2,7 @@
 
 const checker = require('./checker-nightmare.js');
 
-module.exports.check = function check(urls) {
+module.exports.check = function check(spineItems) {
   console.log("Checking documents...");
-  return checker.check(urls);
+  return checker.check(spineItems);
 };

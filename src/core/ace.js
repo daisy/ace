@@ -36,18 +36,16 @@ module.exports = function ace(epubPath, options) {
     delete options.outdir;
   }
 
-  report.initialize(epubPath);
-
   /* eslint-enable no-param-reassign */
 
   // Unzip the EPUB
-  new EPUB(epubPath).extract()
-  // Get Content Docs as paths
-  .then(epub => epub.getContentDocsPaths())
-  // Get Content Docs as URLs
-  .then(paths => paths.map(docpath => `file://${docpath}`))
-  // Check each Content Docs
-  .then(urls => checker.check(urls))
+  var epub = new EPUB(epubPath);
+  epub.extract()
+  .then(() => epub.parse())
+  // initialize the report
+  .then(() => report.initialize(epub))
+  // Check each Content Doc
+  .then(() => checker.check(epub.contentDocs))
   // Process the Results
   //.then(results => Promise.all(results.map(report.processResult, options)))
 //  .then(() => report.createSummary(epubPath, options.tmpdir, options.outdir))

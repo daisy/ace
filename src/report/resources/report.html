@@ -1,0 +1,92 @@
+<html>
+<head>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
+
+  <script type="text/javascript" src="js/ace-report-viewer.js"></script>
+  <script type="text/javascript" src="aceReportData.js"></script>
+  <script type="text/javascript">
+
+  function updateTableContents() {
+
+  }
+  function createFilters() {
+
+  }
+
+  function refreshDataTable() {
+    $('#report-table').DataTable({
+      "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+    });
+  }
+
+  function filterSelected() {
+    console.log("filter!");
+    console.log(aceReport);
+  }
+
+
+  $(document).ready( function () {
+    // populate table
+    updateTableContents();
+    // populate filters
+    // attach handlers to filters
+
+    document.querySelector('select[name="impact"]').onchange=filterSelected;
+
+
+  });
+
+
+  </script>
+
+
+
+
+  <title>DAISY Ace Report</title>
+</head>
+<body>
+
+  <div id="header">
+    <h1>DAISY ACE Accessibility Testing Report</h1>
+  </div>
+
+  <div id="report-metadata">
+
+  </div>
+
+  <h1>Violations</h1>
+    <p>
+      Filter by:
+    </p>
+
+        <span>Impact</span>
+        <select name="impact">
+          <option value="all" selected>All</option>
+          <option value="spicy">Serious</option>
+          <option value="medium">Medium</option>
+          <option value="mild">Mild</option>
+        </select>
+
+        <span>File</span>
+        <select name="file">
+          <option value="all" selected>All</option>
+          <option value="p1.xhtml">p1.xhtml: The Beginnings of Lorem Ipsum</option>
+          <option value="p2.xhtml">p2.xhtml: The Middle Parts</option>
+          <option value="p3.xhtml">p3.xhtml: The Final Chapter</option>
+        </select>
+
+
+
+  </div>
+
+
+  <table id="report-table">
+
+  </table>
+
+
+</body>
+
+</html>

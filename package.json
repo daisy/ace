@@ -69,7 +69,8 @@
     "jest": "^20.0.3",
     "rimraf": "^2.6.1",
     "uglify-js": "^3.0.8",
-    "watch": "^1.0.2"
+    "watch": "^1.0.2",
+    "rimraf": "^2.6.1"
   },
   "scripts": {
     "start": "node dist/cli/cli.js",
