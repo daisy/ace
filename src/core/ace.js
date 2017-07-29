@@ -52,6 +52,7 @@ module.exports = function ace(epubPath, options) {
   //.then(() => report.saveJson(options.outdir))
   //.then(() => console.log('Done.'))
   .then(() => report.saveJson(options.outdir))
+  .then(() => report.saveHtml(options.outdir))
   .catch((err) => {
     console.error(`Unexpected error: ${err}`);
     process.exit(1);

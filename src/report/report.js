@@ -16,7 +16,6 @@ TBD
 
 */
 
-const filehound = require('filehound');
 const fs = require('fs-extra');
 const path = require('path');
 const reportBuilder = require('./json-report-builder.js');
@@ -44,9 +43,6 @@ report.addOutline = function addOutline(outline) {
 report.getJsonReport = function getJsonReport() {
     return jsonReport;
 }
-report.createHtmlReport = function createHtmlReport() {
-    // TODO
-}
 report.saveJson = function saveJson(outdir) {
     console.log("saving json");
     //console.log(jsonReport);
@@ -63,5 +59,15 @@ report.saveJson = function saveJson(outdir) {
         ]));
 }
 report.saveHtml = function saveHtml(outdir) {
-    // TODO
+  console.log("saving html");
+  // create a js file that the html report uses as its data source
+  const aceReport = JSON.stringify(jsonReport, null, '  ');
+  const js = "const aceReportData = " + aceReport + ";";
+
+  // copy report.html and the contents of /js and /css to the outdir
+  return fs.copy(path.join(__dirname, 'resources/report.html'), path.join(outdir, "report.html"))
+    .then(() => fs.copy(path.join(__dirname, './resources/css/'), path.join(outdir, "css/")))
+    .then(() => fs.copy(path.join(__dirname, './resources/js/'), path.join(outdir, "js/")))
+    .then(() => fs.writeFile(path.join(outdir, 'js/', 'aceReportData.js'), js, 'UTF-8'))
+    .catch(err => console.error(err));
 }

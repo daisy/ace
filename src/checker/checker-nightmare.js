@@ -68,8 +68,9 @@ function checkSingle(spineItem) {
     .then(jsonStr => JSON.parse(jsonStr))
     .then((jsonStr) => {
         var results = axe2ace.axe2ace(spineItem, jsonStr);
-        report.addContentDocAssertion(results);
-        //console.log("GOT THIS FAR");
+        if (results != null) {
+          report.addContentDocAssertion(results);
+        }
         return results;
     });
 }

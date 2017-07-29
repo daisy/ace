@@ -1,48 +1,94 @@
 function AceReport(data) {
-  this.data = data;
   // lists of unique values for the UI filtering
-  this.ruleFilter = [];
-  this.impactFilter = [];
-  this.fileFilter = [];
+  this.ruleFilter = ["all"];
+  this.impactFilter = ["all"];
+  this.fileFilter = ["all"];
+  // maps filepath to titles
+  this.fileTitles = {};
+
+  this.metadata = this.parseMetadata(data);
+  this.flatData = [];
+  this.flattenData(data);
 }
 
 // returns {"filterName": [labels,... ],...}
 AceReport.prototype.getFilters = function() {
-
+  return [
+      {"name": "rule", "values": this.ruleFilter},
+      {"name": "impact", "values": this.impactFilter},
+      {"name": "file", "values": this.fileFilter}
+  ];
 }
 
-AceReport.prototype.getFileTitle = function(filename) {
-
+AceReport.prototype.getMetadata = function(filename) {
+  return this.metadata;
 }
-AceReport.prototype.getFilteredViolations = function(filterName, filterValue) {
-  if (filterName === "file") {
-    return getViolationsForFile(filterValue);
-  }
-  else if (filterName == "") {
-
-  }
-  else if (filterName == "") {
-
-  }
+AceReport.prototype.getTitleForFile = function(filename) {
+  return this.fileTitles[filename];
 }
+
 AceReport.prototype.getAllViolations = function() {
-  var filtered = [];
-  this.data.assertions.forEach(function(assertion) {
-    var filtered_ = filtered.concat(assertion.assertions);
-    filtered_.forEach(function(item) {
-      
-    })
-  })
+  return this.flatData;
 }
 
-AcePrototype.getViolationsForFile = function(filename) {
-
+// expects:
+// {"rule": "all", "impact": "serious", "file": "p1.xhtml"}
+AceReport.prototype.filterViolations = function(filters) {
+  var filteredList = [];
+  this.flatData.forEach(function(item) {
+    if (
+      (filters["rule"] == "all" || item["rule"] === filters["rule"])
+      &&
+      (filters["impact"] == "all" || item["impact"] === filters["impact"])
+      &&
+      (filters["file"] == "all" || item["file"] === filters["file"])
+      )
+    {
+      filteredList.push(item);
+    }
+  });
+  return filteredList;
 }
 
-AcePrototype.getViolationsForRule = function(rulename) {
+// make a flat list of the violations
+AceReport.prototype.flattenData = function(data) {
+  var thiz = this;
+  data.assertions.forEach(function(assertion) {
+    var filename = assertion["earl:testSubject"]["url"];
+    var filetitle = assertion["earl:testSubject"]["dct:title"];
+    assertion.assertions.forEach(function(item) {
+      var obj = {
+        "file": filename,
+        "engine": item["earl:assertedBy"],
+        "kburl": item["earl:test"]["helpUrl"],
+        "rule": item["earl:test"]["dct:title"],
+        "desc": item["earl:result"]["dct:description"],
+        "pointer": item["earl:result"]["earl:pointer"],
+        "impact": item["earl:test"]["earl:impact"]
+      };
+      thiz.flatData.push(obj);
 
+      thiz.addIfUnique(obj["file"], thiz.fileFilter);
+      thiz.addIfUnique(obj["rule"], thiz.ruleFilter);
+      thiz.addIfUnique(obj["impact"], thiz.impactFilter);
+    });
+    thiz.fileTitles[filename] = filetitle;
+  });
 }
 
-AcePrototype.getViolationsForImpact = function(impact) {
+AceReport.prototype.parseMetadata = function(data) {
+  return {
+    "softwareName": data["earl:assertedBy"]["doap:name"],
+    "softwareVersion": data["earl:assertedBy"]["doap:release"]["doap:revision"],
+    "pubTitle": data["earl:testSubject"]["dct:title"],
+    "pubIdentifier": data["earl:testSubject"]["dct:identifier"],
+    "pubUrl": data["earl:testSubject"]["url"],
+    "reportDate": data["dct:date"]
+  };
+}
 
+AceReport.prototype.addIfUnique = function(value, list) {
+  if (list.indexOf(value) == -1) {
+    list.push(value);
+  }
 }

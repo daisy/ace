@@ -77,7 +77,12 @@ EpubParser.prototype.parseContentDocTitle = function(filepath) {
   const doc = new DOMParser().parseFromString(content);
   const select = xpath.useNamespaces({html: "http://www.w3.org/1999/xhtml", epub: "http://www.idpf.org/2007/ops"});
   const title = select('//html:title/text()', doc);
-  return title[0].nodeValue;
+  if (title.length > 0) {
+    return title[0].nodeValue;
+  }
+  else {
+    return "";
+  }
 }
 
 EpubParser.prototype.calculatePackageDocPath = function(epubDir) {

@@ -47,8 +47,6 @@ function withAssertion(obj, assertion) {
         obj["assertions"] = [];
     }
     obj["assertions"].push(assertion);
-    console.log(obj);
-    console.log(assertion);
     withResult(obj, calculateResult(obj.assertions));
 
     return obj;
@@ -94,10 +92,11 @@ function withHelpUrl(obj, helpUrl) {
 function calculateResult(assertions) {
     var outcome = "pass";
     assertions.forEach(function(assertion) {
-        if (assertion['earl:result']['earl:outcome'] === "fail") {
-            outcome = "fail";
-            return;
-        }
+      if ('earl:result' in assertion &&
+          assertion['earl:result']['earl:outcome'] === "fail") {
+          outcome = "fail";
+          return;
+      }
     });
     var result = new Result().withOutcome(outcome);
     return result;
