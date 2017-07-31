@@ -44,7 +44,7 @@ report.getJsonReport = function getJsonReport() {
     return jsonReport;
 }
 report.saveJson = function saveJson(outdir) {
-    console.log("saving json");
+    console.log("Saving JSON...");
     //console.log(jsonReport);
     return fs.pathExists(outdir)
         .then((exists) => {
@@ -59,7 +59,7 @@ report.saveJson = function saveJson(outdir) {
         ]));
 }
 report.saveHtml = function saveHtml(outdir) {
-  console.log("saving html");
+  console.log("Saving HTML...");
   // create a js file that the html report uses as its data source
   const aceReport = JSON.stringify(jsonReport, null, '  ');
   const js = "const aceReportData = " + aceReport + ";";
