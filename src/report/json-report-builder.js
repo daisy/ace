@@ -87,6 +87,21 @@ function withHelpUrl(obj, helpUrl) {
     obj["helpUrl"] = helpUrl;
     return obj;
 }
+function withHeadingsOutline(obj, outline) {
+  obj.outlines = obj.outlines || {};
+  obj.outlines.headings = outline;
+  return obj;
+}
+function withHTMLOutline(obj, outline) {
+  obj.outlines = obj.outlines || {};
+  obj.outlines.html = outline;
+  return obj;
+}
+function withEPUBOutline(obj, outline) {
+  obj.outlines = obj.outlines || {};
+  obj.outlines.toc = outline;
+  return obj;
+}
 
 // helper function
 function calculateResult(assertions) {
@@ -123,6 +138,15 @@ Report.prototype.withTestSubject = function(url, title, identifier) {
 }
 Report.prototype.withAssertion = function(assertions) {
     return withAssertion(this, assertions);
+}
+Report.prototype.withHeadingsOutline = function(outline) {
+    return withHeadingsOutline(this, outline);
+}
+Report.prototype.withHTMLOutline = function(outline) {
+    return withHTMLOutline(this, outline);
+}
+Report.prototype.withEPUBOutline = function(outline) {
+    return withEPUBOutline(this, outline);
 }
 
 function Result() {

@@ -1,5 +1,6 @@
 <html>
 <head>
+  <meta charset="utf-8">
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
@@ -115,6 +116,16 @@
     $('select').change(filterSelected);
   }
 
+  function populateOutlines(outlines) {
+    var section = $('#outlines');
+    section.append('<h3>EPUB Table of Contents</h3>');
+    section.append(outlines.toc);
+    section.append('<h3>Headings outline</h3>');
+    section.append(outlines.headings);
+    section.append('<h3>HTML outline</h3>');
+    section.append(outlines.html);
+  }
+
   $(document).ready(function() {
     aceReportViewer = new AceReport(aceReportData);
 
@@ -125,6 +136,9 @@
 
     // populate table
     updateTableContents(aceReportViewer.getAllViolations());
+
+    // populate outlines
+    populateOutlines(aceReportData.outlines);
 
   });
 
@@ -163,7 +177,7 @@
   </div>
 
   <div class="container-fluid">
-    <h1>Violations</h1>
+    <h2>Violations</h2>
 
     <div id="filters" class="py-3">
     </div>
@@ -184,6 +198,10 @@
       </tbody>
 
     </table>
+  </div>
+
+  <div id="outlines" class="container-fluid">
+    <h2>Outlines</h2>
   </div>
 
 </body>

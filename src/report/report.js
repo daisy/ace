@@ -23,6 +23,37 @@ const reportBuilder = require('./json-report-builder.js');
 const report = exports;
 const jsonReport = new reportBuilder.Report();
 
+function headingsToOutline(headings) {
+  const result = [];
+  let level = 1;
+
+  result.push('<ul>');
+  headings.forEach((hx) => {
+    if (hx.level < level) {
+      result.push('</li>');
+      for (let i = hx.level; i < level; i += 1) {
+        result.push('</ul></li>');
+      }
+    } else if (hx.level > level) {
+      for (let i = level + 1; i < hx.level; i += 1) {
+        result.push(`<ul><li><span class="toc-missing">Missing heading h${i}</span>`);
+      }
+      result.push('<ul>');
+    }
+    result.push(`<li><span class="toc-h${hx.level}">`, hx.html, '</span>');
+    level = hx.level;
+  });
+  for (let i = level; i > 0; i -= 1) {
+    result.push('</li></ul>');
+  }
+  return result.join('');
+}
+
+function aggregateHTMLOutlines(outlines) {
+
+  return `<ol><li>${outlines.join('</li><li>')}</li></ol>`;
+}
+
 
 report.initialize = function initialize(epub) {
     jsonReport.withTitle("ACE Report")
@@ -38,7 +69,16 @@ report.addMetadata = function addMetadata(metadata) {
     jsonReport.withMetadata(metadata);
 }
 report.addOutline = function addOutline(outline) {
-    jsonReport.withOutline(outline);
+    jsonReport.withHOutline(outline);
+}
+report.addHeadings = function addHeadings(headings) {
+    jsonReport.withHeadingsOutline(headingsToOutline(headings));
+}
+report.addHTMLOutlines = function addHTMLOutlines(outlines) {
+    jsonReport.withHTMLOutline(aggregateHTMLOutlines(outlines));
+}
+report.addEPUBNav = function addEPUBNav(navDoc) {
+    jsonReport.withEPUBOutline(navDoc.tocHTML);
 }
 report.getJsonReport = function getJsonReport() {
     return jsonReport;

@@ -44,6 +44,8 @@ module.exports = function ace(epubPath, options) {
   .then(() => epub.parse())
   // initialize the report
   .then(() => report.initialize(epub))
+  // Report the Nav Doc
+  .then(() => report.addEPUBNav(epub.navDoc))
   // Check each Content Doc
   .then(() => checker.check(epub.contentDocs))
   // Process the Results
