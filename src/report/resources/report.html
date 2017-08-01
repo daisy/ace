@@ -96,12 +96,12 @@
   }
 
   function populateFilters(filters) {
-    $("#filters-wrapper").empty();
+    $("#filters").empty();
 
     filters.forEach(function(filter) {
-      $("#filters-wrapper").append("<span class='filter-label'>" + filter.name + "</span>");
+      $("#filters").append("<span class='filter-label'>" + filter.name + "</span>");
       var filterSelect = $("<select name='" + filter.name + "'></select>");
-      $("#filters-wrapper").append(filterSelect);
+      $("#filters").append(filterSelect);
       filter.values.forEach(function(value) {
         if (value === "all") {
           // preselect 'all'
@@ -132,7 +132,7 @@
 
   </script>
   <style>
-  #filters-wrapper span, #filters-wrapper select {
+  #filters span, #filters select {
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -165,16 +165,11 @@
   <div class="container-fluid">
     <h1>Violations</h1>
 
-
     <div id="filters" class="py-3">
-      <p>Filter by:</p>
-      <div id="filters-wrapper">
-      </div>
-
     </div>
 
     <table id="report-table" class="table table-striped table-bordered">
-      <thead>
+      <thead class="thead-inverse">
         <tr>
           <th>Impact</th>
           <th>File</th>
