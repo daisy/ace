@@ -2,7 +2,10 @@
 <head>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap4.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css"/>
 
   <script type="text/javascript" src="js/ace-report-viewer.js"></script>
   <script type="text/javascript" src="js/aceReportData.js"></script>
@@ -11,21 +14,47 @@
   var aceReportViewer = null;
 
   function updateTableContents(data) {
-    var table = $("#report-table > tbody");
-    table.empty();
+    $('#report-table').dataTable().fnDestroy();
+    var tablebody = $("#report-table > tbody");
+    tablebody.empty();
+
 
     data.forEach(function(violation) {
+
       var tr = $("<tr></tr>");
 
       var tdImpact = $("<td>" + violation["impact"] + "</td>");
-      var tdFile = $("<td>" + violation["file"] + "</td>");
-      var tdTarget = $("<td>" + violation["pointer"]["css"] +
-        "<br/>" + violation["pointer"]["cfi"] + "</td>");
+
+      var tdFile = $("<td>" + violation["file"] + "<br/><br/><em>\"" + aceReportViewer.getTitleForFile(violation["file"]) + "\"</em></td>");
+
+      var tdTarget = $("<td><code>"
+        + violation["pointer"]["css"]
+        + "<br/><br/>"
+        + violation["pointer"]["cfi"]
+        + "</code></td>");
+
       var tdRule = $("<td>" + violation["rule"] + "</td>");
-      var tdDesc = $("<td>" + violation["desc"] + "</td>");
+
+      var desc = violation["desc"];
+      desc = desc.replace("Fix all of the following:", "");
+      desc = desc.replace("Fix any of the following:", "");
+
+      var descArr = desc.split("\n");
+      var tdDesc = $("<td></td>");
+      var ul = $("<ul></ul>");
+      tdDesc.append(ul);
+      descArr.forEach(function(item) {
+        if (item != "") {
+          var elm = $("<li></li>");
+          elm.text(item);
+          ul.append(elm);
+        }
+      });
+
       var tdLink = $("<td><a href='"
-        + violation["kburl"] + "' target='_blank'>"
-        + violation["kburl"] + "</a></td>");
+        + violation["kburl"]
+        + "' target='_blank'>More info</a></td>");
+
       var tdEngine = $("<td>" + violation["engine"] + "</td>");
 
       tr.append(tdImpact);
@@ -35,16 +64,12 @@
       tr.append(tdDesc);
       tr.append(tdLink);
       tr.append(tdEngine);
-      table.append(tr);
+      tablebody.append(tr);
 
     });
 
+    $('#report-table').DataTable();
   }
-  /*function refreshDataTable() {
-    $('#report-table').DataTable({
-      "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
-    });
-  }*/
 
   function filterSelected() {
     var filters = [];
@@ -58,21 +83,6 @@
 
     var filteredData = aceReportViewer.filterViolations(filters);
     updateTableContents(filteredData);
-    var filterString = "";
-    var isAll = true;
-    for (var key in filters) {
-      filterString += key + ": " + filters[key];
-      if (filters[key] != "all") {
-        isAll = false;
-      }
-    }
-    if (isAll) {
-      filterString = "Showing all violations";
-    }
-    else {
-      filterString = "Showing violations with <code>" + filterString + "</code>";
-    }
-    $("#filter-desc").text(filterString);
   }
 
   function applyMetadata(metadata) {
@@ -86,12 +96,12 @@
   }
 
   function populateFilters(filters) {
-    $("#filters").empty();
+    $("#filters-wrapper").empty();
 
     filters.forEach(function(filter) {
-      $("#filters").append("<span>" + filter.name + "</span>");
+      $("#filters-wrapper").append("<span class='filter-label'>" + filter.name + "</span>");
       var filterSelect = $("<select name='" + filter.name + "'></select>");
-      $("#filters").append(filterSelect);
+      $("#filters-wrapper").append(filterSelect);
       filter.values.forEach(function(value) {
         if (value === "all") {
           // preselect 'all'
@@ -115,56 +125,71 @@
 
     // populate table
     updateTableContents(aceReportViewer.getAllViolations());
-    $("#filter-desc").text("Showing all");
-
-    // attach handlers to filters
 
   });
 
 
+
   </script>
+  <style>
+  #filters-wrapper span, #filters-wrapper select {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .filter-label {
+    text-transform: capitalize;
+  }
+  </style>
 
 
 
-
-  <title>DAISY Ace Report</title>
+  <title>EPUB Accessibility Report by DAISY Ace</title>
 </head>
 <body>
 
-  <div id="report-metadata">
+  <div id="report-metadata" class="jumbotron">
     <h1>EPUB Accessiblity Report</h1>
-    <p>Title: <span id="pub-title"></span></p>
-    <p>ID: <span id="pub-identifier"></span></p>
-    <p>Generated by: <span id="software-name"></span> (<span id="software-version"></span>) on <span id="report-date"></span></p>
+    <dl>
+      <dt>Publication Title</dt>
+      <dd id="pub-title"></dd>
+      <dt>Publication Identifier</dt>
+      <dd id="pub-identifier"></dd>
+      <dt>Report generated by</dt>
+      <dd><span id="software-name"></span> (<span id="software-version"></span>)</dd>
+      <dt>Report created on</dt>
+      <dd id="report-date"></dd>
+    </dl>
   </div>
 
-  <h1>Violations</h1>
-  <p id="filter-desc"></p>
-  <p>Filter by:</p>
-
-  <div id="filters">
-
-</div>
+  <div class="container-fluid">
+    <h1>Violations</h1>
 
 
+    <div id="filters" class="py-3">
+      <p>Filter by:</p>
+      <div id="filters-wrapper">
+      </div>
 
-  <table id="report-table">
-    <thead>
-      <tr>
-        <td>Impact</td>
-        <td>File</td>
-        <td>Target</td>
-        <td>Rule</td>
-        <td>Description</td>
-        <td>KB Link</td>
-        <td>Engine</td>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
+    </div>
 
-  </table>
+    <table id="report-table" class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Impact</th>
+          <th>File</th>
+          <th>Target</th>
+          <th>Rule</th>
+          <th>Description</th>
+          <th>KB Link</th>
+          <th>Engine</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
 
+    </table>
+  </div>
 
 </body>
 

@@ -72,7 +72,6 @@ module.exports = {
 
         // process axe's individual checks for a single content document
         axeResults.axe.violations.forEach(function(violation) {
-          console.log('axe2ace');
             var test = new reportBuilder.Test()
                 .withImpact(violation.impact)
                 .withTitle(violation.id)

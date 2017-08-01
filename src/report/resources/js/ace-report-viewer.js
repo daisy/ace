@@ -24,6 +24,9 @@ AceReport.prototype.getMetadata = function(filename) {
   return this.metadata;
 }
 AceReport.prototype.getTitleForFile = function(filename) {
+  if (this.fileTitles[filename] === "") {
+    return "No title";
+  }
   return this.fileTitles[filename];
 }
 

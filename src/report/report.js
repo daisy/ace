@@ -66,7 +66,7 @@ report.saveHtml = function saveHtml(outdir) {
 
   // copy report.html and the contents of /js and /css to the outdir
   return fs.copy(path.join(__dirname, 'resources/report.html'), path.join(outdir, "report.html"))
-    .then(() => fs.copy(path.join(__dirname, './resources/css/'), path.join(outdir, "css/")))
+    //.then(() => fs.copy(path.join(__dirname, './resources/css/'), path.join(outdir, "css/")))
     .then(() => fs.copy(path.join(__dirname, './resources/js/'), path.join(outdir, "js/")))
     .then(() => fs.writeFile(path.join(outdir, 'js/', 'aceReportData.js'), js, 'UTF-8'))
     .catch(err => console.error(err));
