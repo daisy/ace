@@ -24,7 +24,7 @@ const kbMap = {
     "th-has-data-cells": "docs/html/tables.html",
     "layout-table": "docs/html/tables.html",
     "scope-attr-valid": " docs/html/tables.html",
-    "image-alt": "docs/html/images/html",
+    "image-alt": "docs/html/images.html",
     "image-redundant-alt": "docs/html/images.html",
     "input-image-alt": "docs/html/images.html",
     "frame-title-unique": "docs/html/iframes.html",
