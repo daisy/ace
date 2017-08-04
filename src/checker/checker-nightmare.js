@@ -62,9 +62,11 @@ function checkSingle(spineItem) {
     .wait(50)
     .axe()
     .then((json) => {
-      const results = axe2ace.axe2ace(spineItem, json);
-      if (results != null) {
-        report.addContentDocAssertion(results);
+      const results = json;
+      results.assertions = (json.axe != null) ? axe2ace.axe2ace(spineItem, json.axe) : [];
+      delete results.axe;
+      if (results.assertions != null) {
+        report.addContentDocAssertion(results.assertions);
       }
       return results;
     });

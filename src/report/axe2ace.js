@@ -63,7 +63,7 @@ const kbMap = {
 module.exports = {
     // each report is content doc level
     axe2ace: function (spineItem, axeResults) {
-      if (axeResults.axe.violations.length == 0) {
+      if (axeResults.violations.length == 0) {
         return null;
       }
         // the top-level assertion
@@ -71,7 +71,7 @@ module.exports = {
                 .withTestSubject(spineItem.relpath, spineItem.title);
 
         // process axe's individual checks for a single content document
-        axeResults.axe.violations.forEach(function(violation) {
+        axeResults.violations.forEach(function(violation) {
             var test = new reportBuilder.Test()
                 .withImpact(violation.impact)
                 .withTitle(violation.id)
