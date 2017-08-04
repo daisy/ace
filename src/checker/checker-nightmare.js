@@ -52,6 +52,7 @@ const nightmare = Nightmare({
 
 function checkSingle(spineItem) {
   // console.log(`>>>>>>>>>> PROCESSING URL: ${url}`);
+  console.log(`- ${spineItem.relpath}`);
 
   return nightmare
     .goto(spineItem.url)
