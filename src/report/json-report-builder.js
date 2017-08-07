@@ -102,6 +102,11 @@ function withEPUBOutline(obj, outline) {
   obj.outlines.toc = outline;
   return obj;
 }
+function withImages(obj, images) {
+  obj.data = obj.data || {};
+  obj.data.images = images;
+  return obj;
+}
 
 // helper function
 function calculateResult(assertions) {
@@ -147,6 +152,9 @@ Report.prototype.withHTMLOutline = function(outline) {
 }
 Report.prototype.withEPUBOutline = function(outline) {
     return withEPUBOutline(this, outline);
+}
+Report.prototype.withImages = function(images) {
+    return withImages(this, images);
 }
 
 function Result() {

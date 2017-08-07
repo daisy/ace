@@ -69,6 +69,12 @@ function checkSingle(spineItem) {
       if (results.assertions != null) {
         report.addContentDocAssertion(results.assertions);
       }
+      if (results.data != null && results.data.images != null) {
+        results.data.images.forEach((img) => {
+          img.filepath = path.resolve(path.dirname(spineItem.filepath), img.path);
+          img.location = `${spineItem.relpath}#epubcfi(${img.cfi})`;
+        });
+      }
       return results;
     });
 }

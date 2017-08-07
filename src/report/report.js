@@ -80,8 +80,31 @@ report.addHTMLOutlines = function addHTMLOutlines(outlines) {
 report.addEPUBNav = function addEPUBNav(navDoc) {
     jsonReport.withEPUBOutline(navDoc.tocHTML);
 }
+report.addImages = function addHImages(images) {
+    jsonReport.withImages(images);
+}
 report.getJsonReport = function getJsonReport() {
     return jsonReport;
+}
+report.copyData = function copyData(outdir) {
+    console.log("Copying data...");
+    if (jsonReport.data === null) return;
+    return fs.pathExists(outdir)
+        .then((exists) => {
+          if (!exists) fs.mkdirSync(outdir);
+        })
+        .then(() => {
+          if (jsonReport.data.images != null) {
+            jsonReport.data.images.forEach((img) => {
+              const fromPath = img.filepath;
+              const toPath = path.join(outdir, 'data', img.path);
+              delete img.filepath;
+              return fs.copy(fromPath, toPath, {
+                overwrite: false,
+              });
+            });
+          }
+        });
 }
 report.saveJson = function saveJson(outdir) {
     console.log("Saving JSON...");

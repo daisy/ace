@@ -53,6 +53,7 @@ module.exports = function ace(epubPath, options) {
     if (options.outdir === undefined) {
       console.log(JSON.stringify(report.getJsonReport(), null, '  '));
     } else {
+      report.copyData(options.outdir);
       report.saveJson(options.outdir);
       report.saveHtml(options.outdir);
     }

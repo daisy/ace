@@ -126,6 +126,50 @@
     section.append(outlines.html);
   }
 
+  function populateImagesTable(images) {
+    $('#image-table').dataTable().fnDestroy();
+    var tablebody = $("#image-table > tbody");
+    tablebody.empty();
+    images.forEach(function(image) {
+      var tr = $("<tr></tr>");
+
+      var tdImage = $('<td class="image">'
+        + '<a href="data/' + image['path'] + '">'
+        + '<img src="data/' + image['path'] + '" '
+        +  'alt="' + image['alt'] + '"/>'
+        + '</a></td>');
+      tr.append(tdImage);
+
+
+      var tdAlt = (image.alt === undefined) ?
+      $('<td class="missing">N/A</td>')
+       : $('<td>' + image.alt + '</td>');
+      tr.append(tdAlt);
+
+      var tdDescribedby = (image.describedby === undefined) ?
+      $('<td class="missing">N/A</td>')
+       : $('<td>' + image.describedby + '</td>');
+      tr.append(tdDescribedby);
+
+      var tdFigcaption = (image.figcaption === undefined) ?
+      $('<td class="missing">N/A</td>')
+       : $('<td>' + image.figcaption + '</td>');
+      tr.append(tdFigcaption);
+
+      var tdLocation = $('<td class="location">'
+        + image['location']
+        + '</td>');
+      tr.append(tdLocation);
+
+
+      tablebody.append(tr);
+
+    });
+
+    $('#report-table').DataTable();
+
+  }
+
   $(document).ready(function() {
     aceReportViewer = new AceReport(aceReportData);
 
@@ -139,6 +183,9 @@
 
     // populate outlines
     populateOutlines(aceReportData.outlines);
+
+    // populate the images table
+    populateImagesTable(aceReportData.data.images);
 
   });
 
@@ -154,6 +201,43 @@
   .filter-label {
     text-transform: capitalize;
   }
+
+  .toc-h1:before,.toc-h2:before,.toc-h3:before,.toc-h4:before,.toc-h5:before,.toc-h6:before,.toc-missing{
+    display:inline-block;
+    height:1.5em;
+    padding:0 .4em;
+    background-color:#449d44;
+    border-radius:4px;
+    color:#fff;
+    font-size:.8em;
+    font-family:monospace;
+    margin:0 .5em 0 0
+  }
+
+  .toc-h1:before{content:'h1'}
+  .toc-h2:before{content:'h2'}
+  .toc-h3:before{content:'h3'}
+  .toc-h4:before{content:'h4'}
+  .toc-h5:before{content:'h5'}
+  .toc-h6:before{content:'h6'}
+  .toc-missing{font-family:inherit;background-color:#c9302c}
+  td.image{
+    text-align:center;
+    padding:.2em;
+  }
+  td.image img {
+    max-width: 100%;
+  }
+td.missing{
+    text-align:center;
+    color:#888;
+    font-style:italic
+}
+td.alt {border:1px solid #ddd}
+td.alt.missing{background-color:#f2dede}
+td.alt,td.image.presentation+td.alt.missing{background-color:#dff0d8}
+td.location{font-size:.8em;font-family:monospace;overflow-wrap:break-word}
+
   </style>
 
 
@@ -203,6 +287,27 @@
   <div id="outlines" class="container-fluid">
     <h2>Outlines</h2>
   </div>
+
+  <div id="images" class="container-fluid">
+    <h2>Images</h2>
+    <table  id="image-table" class="table table-striped table-bordered">
+      <caption>Images in the EPUB, with their description</caption>
+      <thead class="thead-inverse">
+         <tr>
+            <th>Image</th>
+            <th><code>alt</code> attribute
+            </th>
+            <th><code>aria-describedby</code> content
+            </th>
+            <th>Associated <code>figcaption</code></th>
+            <th>Location</th>
+         </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
 
 </body>
 

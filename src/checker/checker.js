@@ -10,6 +10,9 @@ function finalize(results) {
   // Aggregated array of the HTML outlines
   const htmlOutlines = results.map(single => single.outlines.html);
   report.addHTMLOutlines(htmlOutlines);
+  // Get a flat array of the extracted images
+  const images = [].concat(...results.map(single => single.data.images));
+  report.addImages(images);
   return results;
 }
 
