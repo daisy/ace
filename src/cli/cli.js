@@ -12,6 +12,7 @@ const cli = meow(`
   Options
     -o, --outdir  <path>   save final reports to the specified directory
     -t, --tempdir <path>   specify a custom directory to store the temporary reports
+    -v, --version          print the version number
 
   Examples
     $ ace -o out ~/Documents/book.epub
