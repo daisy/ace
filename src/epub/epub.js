@@ -38,6 +38,7 @@ EPUB.prototype.parse = function parse() {
       this.title = epubParser.docTitle;
       this.identifier = epubParser.identifier;
       this.navDoc = epubParser.navDoc;
+      this.metadata = epubParser.metadata
     })
     .catch((err) => {
       console.log(err);

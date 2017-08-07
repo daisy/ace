@@ -58,15 +58,12 @@ function aggregateHTMLOutlines(outlines) {
 report.initialize = function initialize(epub) {
     jsonReport.withTitle("ACE Report")
             .withDescription("Accessibility Checker Report" )
-            .withTestSubject(epub.path, epub.title, epub.identifier);
+            .withTestSubject(epub.path, epub.title, epub.identifier, epub.metadata);
 
 }
 report.addContentDocAssertion = function addContentDocAssertion(assertion) {
     //console.log(assertion);
     jsonReport.withAssertion(assertion);
-}
-report.addMetadata = function addMetadata(metadata) {
-    jsonReport.withMetadata(metadata);
 }
 report.addOutline = function addOutline(outline) {
     jsonReport.withHOutline(outline);

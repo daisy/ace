@@ -29,6 +29,7 @@ function EpubParser() {
   this.docTitle = "";
   this.identifier = "";
   this.contentDocs = [];
+  this.metadata = {};
   this.contentDocMediaType = "application/xhtml+xml";
 }
 
@@ -60,6 +61,27 @@ function parseNavDoc(relpath, filepath) {
   };
 }
 
+
+function addMeta(name, value, meta) {
+  if (!meta[name]) {
+    meta[name] = value;
+  } else if (!(meta[name] instanceof Array)) {
+    meta[name] = [meta[name], value];
+  } else {
+    meta[name].push(value);
+  }
+}
+function parseMetadata(doc, select) {
+  const result = {};
+  select('//dc:*', doc).forEach((dcElem) => {
+    addMeta(`dc:${dcElem.localName}`, dcElem.textContent, result);
+  });
+  select('//opf:meta[not(@refines)]', doc).forEach((meta) => {
+    addMeta(meta.getAttribute('property'), meta.textContent, result);
+  });
+  return result;
+}
+
 // override the default of XHTML
 EpubParser.prototype.setContentDocMediaType = function(mediaType) {
   this.contentDocMediaType = mediaType;
@@ -89,6 +111,8 @@ EpubParser.prototype.parseData = function(packageDocPath) {
 
   this.docTitle = select('//dc:title/text()', doc)[0].nodeValue;
   this.identifier = select('//dc:identifier/text()', doc)[0].nodeValue;
+
+  this.metadata = parseMetadata(doc, select);
 
   const spineItemIdrefs = select('//opf:itemref/@idref', doc);
   spineItemIdrefs.forEach((idref) => {

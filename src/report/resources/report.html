@@ -170,10 +170,21 @@
 
   }
 
+  function populateExtendedMetadata(metadata) {
+    var dl = $('#pub-metadata');
+    for(key in metadata) {
+      dl.append('<dt>' + key + '</dt>');
+      dl.append('<dd>' + metadata[key] + '</dd>');
+    }
+  }
+
   $(document).ready(function() {
     aceReportViewer = new AceReport(aceReportData);
 
     applyMetadata(aceReportViewer.getMetadata());
+
+    // populate extended metadata
+    populateExtendedMetadata(aceReportData["earl:testSubject"].metadata);
 
     // populate filters
     populateFilters(aceReportViewer.getFilters());
@@ -258,6 +269,10 @@ td.location{font-size:.8em;font-family:monospace;overflow-wrap:break-word}
       <dt>Report created on</dt>
       <dd id="report-date"></dd>
     </dl>
+    <details>
+      <summary>Metadata details</summary>
+      <dl id="pub-metadata"></dl>
+    </details>
   </div>
 
   <div class="container-fluid">

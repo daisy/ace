@@ -30,13 +30,16 @@ function withAssertedBy(obj, assertor) {
     obj["earl:assertedBy"] = assertor;
     return obj;
 }
-function withTestSubject (obj, url, title, identifier) {
+function withTestSubject (obj, url, title, identifier = '', metadata = null) {
     obj["earl:testSubject"] = {
       "url": url,
       "dct:title": title,
     };
     if (identifier.length > 0) {
       obj["earl:testSubject"]["dct:identifier"] = identifier;
+    }
+    if (metadata != undefined && metadata != null) {
+      obj["earl:testSubject"].metadata = metadata;
     }
     return obj;
 }
@@ -108,6 +111,7 @@ function withImages(obj, images) {
   return obj;
 }
 
+
 // helper function
 function calculateResult(assertions) {
     var outcome = "pass";
@@ -138,8 +142,8 @@ Report.prototype.withTitle = function(title) {
 Report.prototype.withDescription = function(description) {
     return withDescription(this, description);
 }
-Report.prototype.withTestSubject = function(url, title, identifier) {
-    return withTestSubject(this, url, title, identifier);
+Report.prototype.withTestSubject = function(url, title, identifier, metadata) {
+    return withTestSubject(this, url, title, identifier, metadata);
 }
 Report.prototype.withAssertion = function(assertions) {
     return withAssertion(this, assertions);
@@ -156,6 +160,7 @@ Report.prototype.withEPUBOutline = function(outline) {
 Report.prototype.withImages = function(images) {
     return withImages(this, images);
 }
+
 
 function Result() {
 }
@@ -174,7 +179,7 @@ function ContentDocAssertion() {
     withType(this, "earl:assertion");
 }
 ContentDocAssertion.prototype.withTestSubject = function(url, title) {
-    return withTestSubject(this, url, title, "");
+    return withTestSubject(this, url, title);
 }
 ContentDocAssertion.prototype.withAssertion = function(assertions) {
     return withAssertion(this, assertions);
