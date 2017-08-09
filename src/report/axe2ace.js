@@ -82,7 +82,7 @@ module.exports = {
                 var result = new reportBuilder.Result()
                     .withOutcome("fail")
                     .withDescription(node.failureSummary)
-                    .withPointer(node.target, node.targetCFI);
+                    .withPointer(node.targetCFI, node.target);
 
                 var assertion = new reportBuilder.SingleCheckAssertion()
                     .withAssertedBy("aXe")
