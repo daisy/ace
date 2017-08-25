@@ -58,7 +58,7 @@ function aggregateHTMLOutlines(outlines) {
 report.initialize = function initialize(epub) {
     jsonReport.withTitle("ACE Report")
             .withDescription("Accessibility Checker Report" )
-            .withTestSubject(epub.path, epub.title, epub.identifier, epub.metadata);
+            .withTestSubject(epub.path, "", "", epub.metadata);
 
 }
 report.addContentDocAssertion = function addContentDocAssertion(assertion) {

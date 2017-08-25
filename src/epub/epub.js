@@ -7,8 +7,6 @@ const tmp = require('tmp');
 function EPUB(path) {
   this.path = path;
   this.contentDocs = [];
-  this.title = '';
-  this.identifier = '';
   this.navDoc = {};
 }
 
@@ -35,8 +33,6 @@ EPUB.prototype.parse = function parse() {
   epubParser.parse(this.dir)
     .then(() => {
       this.contentDocs = epubParser.contentDocs;
-      this.title = epubParser.docTitle;
-      this.identifier = epubParser.identifier;
       this.navDoc = epubParser.navDoc;
       this.metadata = epubParser.metadata
     })

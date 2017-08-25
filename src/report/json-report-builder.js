@@ -30,11 +30,13 @@ function withAssertedBy(obj, assertor) {
     obj["earl:assertedBy"] = assertor;
     return obj;
 }
-function withTestSubject (obj, url, title, identifier = '', metadata = null) {
+function withTestSubject (obj, url, title = '', identifier = '', metadata = null) {
     obj["earl:testSubject"] = {
-      "url": url,
-      "dct:title": title,
+      "url": url
     };
+    if (title.length > 0) {
+        obj["earl:testSubject"]["dct:title"] = title;
+    }
     if (identifier.length > 0) {
       obj["earl:testSubject"]["dct:identifier"] = identifier;
     }

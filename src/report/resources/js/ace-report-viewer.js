@@ -83,8 +83,6 @@ AceReport.prototype.parseMetadata = function(data) {
   return {
     "softwareName": data["earl:assertedBy"]["doap:name"],
     "softwareVersion": data["earl:assertedBy"]["doap:release"]["doap:revision"],
-    "pubTitle": data["earl:testSubject"]["dct:title"],
-    "pubIdentifier": data["earl:testSubject"]["dct:identifier"],
     "pubUrl": data["earl:testSubject"]["url"],
     "reportDate": data["dct:date"]
   };

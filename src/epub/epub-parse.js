@@ -26,8 +26,6 @@ function SpineItem() {
 }
 
 function EpubParser() {
-  this.docTitle = "";
-  this.identifier = "";
   this.contentDocs = [];
   this.metadata = {};
   this.contentDocMediaType = "application/xhtml+xml";
@@ -108,9 +106,6 @@ EpubParser.prototype.parseData = function(packageDocPath) {
   const select = xpath.useNamespaces(
     { opf: 'http://www.idpf.org/2007/opf',
       dc: 'http://purl.org/dc/elements/1.1/'});
-
-  this.docTitle = select('//dc:title/text()', doc)[0].nodeValue;
-  this.identifier = select('//dc:identifier/text()', doc)[0].nodeValue;
 
   this.metadata = parseMetadata(doc, select);
 

@@ -47,21 +47,21 @@
     "dist"
   ],
   "dependencies": {
-    "axe-core": "^2.1.7",
+    "axe-core": "^2.3.1",
     "extract-zip": "^1.6.5",
-    "filehound": "^1.16.1",
+    "filehound": "^1.16.2",
     "fs-extra": "^3.0.1",
     "h5o": "^0.11.3",
-    "marko": "^4.4.7",
+    "marko": "^4.4.26",
     "meow": "^3.7.0",
     "nightmare": "^2.10.0",
     "path": "^0.12.7",
     "shortid": "^2.2.8",
-    "tmp": "^0.0.31",
+    "tmp": "0.0.31",
     "unzip": "^0.1.11",
     "xmldom": "^0.1.27",
-    "xpath": "^0.0.24",
-    "yarn": "^0.24.5"
+    "xpath": "0.0.24",
+    "yarn": "^0.24.6"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
@@ -70,8 +70,7 @@
     "jest": "^20.0.3",
     "rimraf": "^2.6.1",
     "uglify-js": "^3.0.8",
-    "watch": "^1.0.2",
-    "rimraf": "^2.6.1"
+    "watch": "^1.0.2"
   },
   "scripts": {
     "start": "node dist/cli/cli.js",
