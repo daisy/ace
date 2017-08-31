@@ -15,7 +15,7 @@ const XMLSerializer = require('xmldom').XMLSerializer;
 const fs = require('fs');
 const path = require('path');
 const xpath = require('xpath');
-
+const winston = require('winston');
 
 function SpineItem() {
   this.filepath = "";
@@ -87,12 +87,12 @@ EpubParser.prototype.setContentDocMediaType = function(mediaType) {
 
 // returns true or false
 EpubParser.prototype.parse = function(epubDir) {
-  console.log(`Parsing EPUB...`);
+  winston.info("Parsing EPUB");
 
   return new Promise((resolve, reject) => {
     const packageDocPath = this.calculatePackageDocPath(epubDir);
     if (packageDocPath === '') {
-      console.log('Package document not found.');
+      winston.error('Package document not found.');
       reject(new Error("Package document not found."));
     }
     this.parseData(packageDocPath);

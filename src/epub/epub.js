@@ -5,6 +5,7 @@ const unzip = require('extract-zip');
 const tmp = require('tmp');
 const fs = require('fs-extra');
 const path = require('path');
+const winston = require('winston');
 
 function EPUB(path) {
   this.path = path;
@@ -22,6 +23,7 @@ EPUB.prototype.extract = function extract() {
 
   // only extract if not already unpacked
   if (this.isUnpacked()) {
+    winston.verbose("EPUB is already unpacked");
     this.dir = this.path;
     return new Promise((resolve, reject) => {
       resolve(this);
@@ -29,18 +31,18 @@ EPUB.prototype.extract = function extract() {
   }
 
   else {
+    winston.verbose("Extracting EPUB");
     tmp.setGracefulCleanup(); // remove tmpdir automatically upon process exit
     const tmpdir = tmp.dirSync({ unsafeCleanup: true }); // remove even when not empty
-    console.log('Unzipping...');
 
     return new Promise((resolve, reject) => {
       unzip(this.path, { dir: tmpdir.name }, (err) => {
         if (err) {
+          winston.error(err);
           reject(err);
           return;
         }
         this.dir = tmpdir.name;
-        // console.log(`Unzipped EPUB.`);
         resolve(this);
       });
     });
@@ -56,7 +58,7 @@ EPUB.prototype.parse = function parse() {
       this.metadata = epubParser.metadata
     })
     .catch((err) => {
-      console.log(err);
+      winston.error(err);
     });
 };
 

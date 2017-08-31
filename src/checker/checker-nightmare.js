@@ -5,28 +5,29 @@ const path = require('path');
 const Nightmare = require('nightmare');
 const report = require('../report/report.js');
 const axe2ace = require('../report/axe2ace.js');
+const winston = require('winston');
 
 const PATH_TO_AXE = path.join(__dirname, '../ext/axe/axe.min.js');
 if (!fs.existsSync(PATH_TO_AXE)) {
-  console.log(PATH_TO_AXE);
+  winston.verbose(PATH_TO_AXE);
   process.exit(1);
 }
 
 const PATH_TO_H5O = path.join(__dirname, '../ext/h5o/outliner.min.js');
 if (!fs.existsSync(PATH_TO_H5O)) {
-  console.log(PATH_TO_H5O);
+  winston.verbose(PATH_TO_H5O);
   process.exit(1);
 }
 
 const PATH_TO_ACE_AXE = path.join(__dirname, '../scripts/ace-axe.js');
 if (!fs.existsSync(PATH_TO_ACE_AXE)) {
-  console.log(PATH_TO_ACE_AXE);
+  winston.verbose(PATH_TO_ACE_AXE);
   process.exit(1);
 }
 
 const PATH_TO_ACE_EXTRACTION = path.join(__dirname, '../scripts/ace-extraction.js');
 if (!fs.existsSync(PATH_TO_ACE_EXTRACTION)) {
-  console.log(PATH_TO_ACE_EXTRACTION);
+  winston.verbose(PATH_TO_ACE_EXTRACTION);
   process.exit(1);
 }
 // EMXIF
@@ -51,8 +52,7 @@ const nightmare = Nightmare({
 });
 
 function checkSingle(spineItem) {
-  // console.log(`>>>>>>>>>> PROCESSING URL: ${url}`);
-  console.log(`- ${spineItem.relpath}`);
+  winston.info(`- ${spineItem.relpath}`);
 
   return nightmare
     .goto(spineItem.url)
@@ -66,9 +66,12 @@ function checkSingle(spineItem) {
       const results = json;
       results.assertions = (json.axe != null) ? axe2ace.axe2ace(spineItem, json.axe) : [];
       delete results.axe;
+      var numIssues = 0;
       if (results.assertions != null) {
+        numIssues = results.assertions.assertions.length;
         report.addContentDocAssertion(results.assertions);
       }
+      winston.info(`- ${numIssues} issues found`);
       if (results.data != null && results.data.images != null) {
         results.data.images.forEach((img) => {
           img.filepath = path.resolve(path.dirname(spineItem.filepath), img.path);

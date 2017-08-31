@@ -1,19 +1,25 @@
 'use strict';
 
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const tmp = require('tmp');
 
 const checker = require('../checker/checker.js');
 const EPUB = require('../epub/epub.js');
 const report = require('../report/report.js');
+const winston = require('winston');
+
+const LOGFILE = __dirname + "/../ace.log";
 
 tmp.setGracefulCleanup();
 
 module.exports = function ace(epubPath, options) {
+  initLogger(options);
+  winston.verbose("ACE", options);
+
   // Check that the EPUB exists
   if (!fs.existsSync(epubPath)) {
-    console.log(`Couldn’t find EPUB file '${epubPath}'`);
+    winston.error(`Couldn’t find EPUB file '${epubPath}'`);
     process.exit(1);
   }
 
@@ -36,6 +42,8 @@ module.exports = function ace(epubPath, options) {
     delete options.outdir;
   }
 
+  winston.info("Processing " + epubPath);
+
   /* eslint-enable no-param-reassign */
 
   // Unzip the EPUB
@@ -51,16 +59,16 @@ module.exports = function ace(epubPath, options) {
   // Process the Results
   .then(() => {
     if (options.outdir === undefined) {
-      console.log(JSON.stringify(report.getJsonReport(), null, '  '));
+      winston.info(JSON.stringify(report.getJsonReport(), null, '  '));
     } else {
       report.copyData(options.outdir);
       report.saveJson(options.outdir);
       report.saveHtml(options.outdir);
     }
   })
-  .then(() => console.log('Done.'))
+  .then(() => winston.info('Done.'))
   .catch((err) => {
-    console.error(`Unexpected error: ${err}`);
+    winston.error(`Unexpected error: ${err}`);
     process.exit(1);
   });
 
@@ -78,3 +86,25 @@ module.exports = function ace(epubPath, options) {
   //   getJSON('story.json').then(function(story) {
   //   addHtmlToPage(story.heading);
 };
+
+function initLogger(options) {
+  // clear old log file
+  fs.removeSync(LOGFILE);
+
+  // set up logger
+  var level = 'info';
+  if (options.verbose) {
+    level = 'verbose';
+  }
+  winston.configure({
+    level: level,
+    transports: [
+      new (winston.transports.File)({name: "file", filename: LOGFILE}),
+      new (winston.transports.Console)({name: "console"})
+    ]
+  });
+  if (options.silent) {
+      winston.remove("console");
+  }
+  winston.cli();
+}

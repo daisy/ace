@@ -18,6 +18,8 @@ TBD
 
 const fs = require('fs-extra');
 const path = require('path');
+const winston = require('winston');
+
 const reportBuilder = require('./json-report-builder.js');
 
 const report = exports;
@@ -62,7 +64,6 @@ report.initialize = function initialize(epub) {
 
 }
 report.addContentDocAssertion = function addContentDocAssertion(assertion) {
-    //console.log(assertion);
     jsonReport.withAssertion(assertion);
 }
 report.addOutline = function addOutline(outline) {
@@ -84,7 +85,7 @@ report.getJsonReport = function getJsonReport() {
     return jsonReport;
 }
 report.copyData = function copyData(outdir) {
-    console.log("Copying data...");
+    winston.info("Copying data");
     if (jsonReport.data === null) return;
     return fs.pathExists(outdir)
         .then((exists) => {
@@ -104,8 +105,7 @@ report.copyData = function copyData(outdir) {
         });
 }
 report.saveJson = function saveJson(outdir) {
-    console.log("Saving JSON...");
-    //console.log(jsonReport);
+    winston.info("Saving JSON report");
     return fs.pathExists(outdir)
         .then((exists) => {
           if (!exists) fs.mkdirSync(outdir);
@@ -119,7 +119,7 @@ report.saveJson = function saveJson(outdir) {
         ]));
 }
 report.saveHtml = function saveHtml(outdir) {
-  console.log("Saving HTML...");
+  winston.info("Saving HTML report");
   // create a js file that the html report uses as its data source
   const aceReport = JSON.stringify(jsonReport, null, '  ');
   const js = "const aceReportData = " + aceReport + ";";
@@ -129,5 +129,5 @@ report.saveHtml = function saveHtml(outdir) {
     //.then(() => fs.copy(path.join(__dirname, './resources/css/'), path.join(outdir, "css/")))
     .then(() => fs.copy(path.join(__dirname, './resources/js/'), path.join(outdir, "js/")))
     .then(() => fs.writeFile(path.join(outdir, 'js/', 'aceReportData.js'), js, 'UTF-8'))
-    .catch(err => console.error(err));
+    .catch(err => winston.error(err));
 }

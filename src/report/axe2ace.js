@@ -1,6 +1,6 @@
 const reportBuilder = require('./json-report-builder.js');
 const fs = require('fs-extra');
-
+const winston = require('winston');
 
 // axe test IDs mapped to our KB pages
 const kbMap = {
@@ -63,6 +63,7 @@ const kbMap = {
 module.exports = {
     // each report is content doc level
     axe2ace: function (spineItem, axeResults) {
+        winston.verbose("Converting aXe results to ace for " + spineItem.relpath);
 
         // the top-level assertion
         var contentDocAssertion = new reportBuilder.ContentDocAssertion()
