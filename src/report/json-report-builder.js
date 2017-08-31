@@ -88,8 +88,8 @@ function withImpact(obj, impact) {
     obj["earl:impact"] = impact;
     return obj;
 }
-function withHelpUrl(obj, helpUrl) {
-    obj["helpUrl"] = helpUrl;
+function withHelp(obj, url, title) {
+    obj["help"] = {"url": url, "title": title}
     return obj;
 }
 function withHeadingsOutline(obj, outline) {
@@ -216,8 +216,8 @@ Test.prototype.withTitle = function(title) {
 Test.prototype.withDescription = function(description) {
     return withDescription(this, description);
 }
-Test.prototype.withHelpUrl = function(helpUrl) {
-    return withHelpUrl(this, helpUrl);
+Test.prototype.withHelp = function(url, title) {
+    return withHelp(this, url, title);
 }
 
 module.exports.Report = Report;

@@ -29,43 +29,41 @@
 
       var tdFile = $("<td><em>\"" + aceReportViewer.getTitleForFile(violation["file"]) + "\"</em><br/><br/><code>" + violation["file"] + "</code></td>");
 
-      var tdTarget = $("<td><code>"
+      var tdTarget = $("<td><span class='css'><code>"
         + violation["pointer"]["css"]
-        + "<br/><br/>"
+        + "</code></span><br/><br/><span class='cfi'><code>"
         + violation["pointer"]["cfi"]
         + "</code></td>");
 
-      var tdRule = $("<td>" + violation["rule"] + "</td>");
+      var tdRule = $("<td>" + violation["rule"] + "<br/><br/><span class='engine'>" + violation["engine"] + "</span></td>");
 
       var desc = violation["desc"];
       desc = desc.replace("Fix all of the following:", "");
       desc = desc.replace("Fix any of the following:", "");
 
-      var descArr = desc.split("\n");
-      var tdDesc = $("<td></td>");
+      var detailsArr = desc.split("\n");
+      var tdDetails = $("<td class='details'></td>");
+
       var ul = $("<ul></ul>");
-      tdDesc.append(ul);
-      descArr.forEach(function(item) {
+      tdDetails.append(ul);
+      detailsArr.forEach(function(item) {
         if (item != "") {
           var elm = $("<li></li>");
           elm.text(item);
           ul.append(elm);
         }
       });
-
-      var tdLink = $("<td><a href='"
+      var link = $("<p><a href='"
         + violation["kburl"]
-        + "' target='_blank'>More info</a></td>");
+        + "' target='_blank'>Learn more about " + violation["kbtitle"] + "</a></p>");
+      tdDetails.append(link);
 
-      var tdEngine = $("<td>" + violation["engine"] + "</td>");
 
       tr.append(tdRule);
       tr.append(tdFile);
       tr.append(tdTarget);
       tr.append(tdImpact);
-      tr.append(tdDesc);
-      tr.append(tdLink);
-      tr.append(tdEngine);
+      tr.append(tdDetails);
       tablebody.append(tr);
 
     });
@@ -250,6 +248,18 @@ td.location{font-size:.8em;font-family:monospace;overflow-wrap:break-word}
 td code {
   line-height: 1.5;
 }
+.engine {
+  font-style: italic;
+}
+.engine:before{content: '(via '}
+.engine:after{content: ')'}
+.css:before{content: 'CSS: '}
+.cfi:before{content: 'CFI: '}
+
+/* make the list and KB link the same padding */
+td.details p{
+  padding-left: 40px;
+}
 
   table th {
     width: auto !important;
@@ -304,9 +314,7 @@ td code {
           <th>File</th>
           <th>Target</th>
           <th>Impact</th>
-          <th>Description</th>
-          <th>KB Link</th>
-          <th>Engine</th>
+          <th>Details</th>
         </tr>
       </thead>
       <tbody>

@@ -63,7 +63,8 @@ AceReport.prototype.flattenData = function(data) {
       var obj = {
         "file": filename,
         "engine": item["earl:assertedBy"],
-        "kburl": item["earl:test"]["helpUrl"],
+        "kburl": item["earl:test"]["help"]["url"],
+        "kbtitle": item["earl:test"]["help"]["title"],
         "rule": item["earl:test"]["dct:title"],
         "desc": item["earl:result"]["dct:description"],
         "pointer": item["earl:result"]["earl:pointer"],
