@@ -63,9 +63,7 @@ const kbMap = {
 module.exports = {
     // each report is content doc level
     axe2ace: function (spineItem, axeResults) {
-      if (axeResults.violations.length == 0) {
-        return null;
-      }
+
         // the top-level assertion
         var contentDocAssertion = new reportBuilder.ContentDocAssertion()
                 .withTestSubject(spineItem.relpath, spineItem.title);

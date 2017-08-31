@@ -179,6 +179,8 @@ Result.prototype.withPointer = function(css, cfi) {
 
 function ContentDocAssertion() {
     withType(this, "earl:assertion");
+    // content doc assertions must always have an "assertions" property
+    this["assertions"] = [];
 }
 ContentDocAssertion.prototype.withTestSubject = function(url, title) {
     return withTestSubject(this, url, title);
