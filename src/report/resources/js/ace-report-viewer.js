@@ -68,7 +68,8 @@ AceReport.prototype.flattenData = function(data) {
         "rule": item["earl:test"]["dct:title"],
         "desc": item["earl:result"]["dct:description"],
         "pointer": item["earl:result"]["earl:pointer"],
-        "impact": item["earl:test"]["earl:impact"]
+        "impact": item["earl:test"]["earl:impact"],
+        "location": filename + "#epubcfi(" + item["earl:result"]["earl:pointer"]["cfi"] + ")"
       };
       thiz.flatData.push(obj);
 

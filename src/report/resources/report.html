@@ -24,17 +24,17 @@
 
       var tr = $("<tr></tr>");
 
-      var tdImpact = $("<td>" + violation["impact"] + "</td>");
-      tr.addClass(violation["impact"]);
+      var tdImpact = $("<td><span class='" + violation["impact"] + "'>" + violation["impact"] + "</span></td>");
 
-      var tdFile = $("<td><em>\"" + aceReportViewer.getTitleForFile(violation["file"]) + "\"</em><br/><br/><code>" + violation["file"] + "</code></td>");
+      /*var tdFile = $("<td><em>\"" + aceReportViewer.getTitleForFile(violation["file"]) + "\"</em><br/><br/><code>" + violation["file"] + "</code></td>");
 
       var tdTarget = $("<td><span class='css'><code>"
         + violation["pointer"]["css"]
         + "</code></span><br/><br/><span class='cfi'><code>"
         + violation["pointer"]["cfi"]
         + "</code></td>");
-
+      */
+      var tdLocation = $("<td><em>\"" + aceReportViewer.getTitleForFile(violation["file"]) + "\"</em><br/><br/><code class='location'>" + violation["location"] + "</code></td>");
       var tdRule = $("<td>" + violation["rule"] + "<br/><br/><span class='engine'>" + violation["engine"] + "</span></td>");
 
       var desc = violation["desc"];
@@ -59,10 +59,12 @@
       tdDetails.append(link);
 
 
-      tr.append(tdRule);
-      tr.append(tdFile);
-      tr.append(tdTarget);
       tr.append(tdImpact);
+      tr.append(tdRule);
+      /*tr.append(tdFile);
+      tr.append(tdTarget);
+      */
+      tr.append(tdLocation);
       tr.append(tdDetails);
       tablebody.append(tr);
 
@@ -201,14 +203,17 @@
 
   </script>
   <style>
-  #filters span, #filters select {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
 
-  .filter-label {
-    text-transform: capitalize;
+  /* general */
+  table th {
+    width: auto !important;
   }
+  code {
+    line-height: 1.5;
+  }
+  .location{font-size:.8em;font-family:monospace;overflow-wrap:break-word}
+
+  /* TOC outline */
 
   .toc-h1:before,.toc-h2:before,.toc-h3:before,.toc-h4:before,.toc-h5:before,.toc-h6:before,.toc-missing{
     display:inline-block;
@@ -219,7 +224,7 @@
     color:#fff;
     font-size:.8em;
     font-family:monospace;
-    margin:0 .5em 0 0
+    margin:0 .5em 0 0;
   }
 
   .toc-h1:before{content:'h1'}
@@ -229,6 +234,8 @@
   .toc-h5:before{content:'h5'}
   .toc-h6:before{content:'h6'}
   .toc-missing{font-family:inherit;background-color:#c9302c}
+
+  /* images */
   td.image{
     text-align:center;
     padding:.2em;
@@ -236,56 +243,72 @@
   td.image img {
     max-width: 100%;
   }
-td.missing{
-    text-align:center;
-    color:#888;
-    font-style:italic
-}
-td.alt {border:1px solid #ddd}
-td.alt.missing{background-color:#f2dede}
-td.alt,td.image.presentation+td.alt.missing{background-color:#dff0d8}
-td.location{font-size:.8em;font-family:monospace;overflow-wrap:break-word}
-td code {
-  line-height: 1.5;
-}
-.engine {
-  font-style: italic;
-}
-.engine:before{content: '(via '}
-.engine:after{content: ')'}
-.css:before{content: 'CSS: '}
-.cfi:before{content: 'CFI: '}
+  td.missing{
+      text-align:center;
+      color:#888;
+      font-style:italic
+  }
+  td.alt {border:1px solid #ddd}
+  td.alt.missing{background-color:#f2dede}
+  td.alt,td.image.presentation+td.alt.missing{background-color:#dff0d8}
 
-/* make the list and KB link the same padding */
-td.details p{
-  padding-left: 40px;
-}
 
-  table th {
-    width: auto !important;
+  /* violations table */
+  #filters span, #filters select {
+    padding-left: 10px;
+    padding-right: 10px;
   }
-  /*.critical {
-    background-color: #FFBABA;
+
+  .filter-label {
+    text-transform: capitalize;
   }
-  .serious {
-    background-color: #ffd781;
+
+  .engine {
+    font-style: italic;
   }
-  .moderate {
-    background-color: #FEEFB3;
+  .engine:before{content: '(via '}
+  .engine:after{content: ')'}
+  .css:before{content: 'CSS: '}
+  .cfi:before{content: 'CFI: '}
+
+  /* make the list and KB link the same padding */
+  td.details p{
+    padding-left: 40px;
   }
-  .minor {
-    background-color: lightyellow;
-  }*/
-  code {
-    line-height: 1.5;
+
+  span.critical, span.serious, span.moderate, span.minor {
+    display:inline-block;
+    height:1.5em;
+    padding: .4em;
+    border-radius:4px;
+    font-family:monospace;
+    font-weight: bold;
   }
+
+  span.critical {
+    background-color: #9c2b2e;
+    color: #fff;
+  }
+  span.serious {
+    background-color: #ffa500;
+    color: #000;
+  }
+  span.moderate {
+    background-color: #7b5000;
+    color: #fff;
+  }
+  span.minor {
+    background-color: #ffff7f;
+    color: #000;
+  }
+
+
   </style>
-
-
 
   <title>EPUB Accessibility Report by DAISY Ace</title>
 </head>
 <body>
+
 
   <div id="report-metadata" class="jumbotron">
     <h1>EPUB Accessibility Report</h1>
@@ -310,10 +333,9 @@ td.details p{
     <table id="report-table" class="table table-bordered">
       <thead class="thead-inverse">
         <tr>
-          <th>Rule</th>
-          <th>File</th>
-          <th>Target</th>
           <th>Impact</th>
+          <th>Rule</th>
+          <th>Location</th>
           <th>Details</th>
         </tr>
       </thead>
