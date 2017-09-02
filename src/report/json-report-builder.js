@@ -112,7 +112,10 @@ function withImages(obj, images) {
   obj.data.images = images;
   return obj;
 }
-
+function withA11yMeta(obj, metadata) {
+  obj["a11y-metadata"] = metadata;
+  return obj;
+}
 
 // helper function
 function calculateResult(assertions) {
@@ -161,6 +164,9 @@ Report.prototype.withEPUBOutline = function(outline) {
 }
 Report.prototype.withImages = function(images) {
     return withImages(this, images);
+}
+Report.prototype.withA11yMeta = function(metadata) {
+    return withA11yMeta(this, metadata);
 }
 
 

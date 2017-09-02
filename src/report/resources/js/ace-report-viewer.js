@@ -7,6 +7,7 @@ function AceReport(data) {
   this.fileTitles = {};
 
   this.metadata = this.parseMetadata(data);
+  this.a11ymetadata = data["a11y-metadata"];
   this.flatData = [];
   this.flattenData(data);
 }
@@ -22,6 +23,9 @@ AceReport.prototype.getFilters = function() {
 
 AceReport.prototype.getMetadata = function(filename) {
   return this.metadata;
+}
+AceReport.prototype.getA11yMetadata = function() {
+  return this.a11ymetadata;
 }
 AceReport.prototype.getTitleForFile = function(filename) {
   if (this.fileTitles[filename] === "") {
@@ -89,7 +93,6 @@ AceReport.prototype.parseMetadata = function(data) {
     "reportDate": data["dct:date"]
   };
 }
-
 AceReport.prototype.addIfUnique = function(value, list) {
   if (list.indexOf(value) == -1) {
     list.push(value);

@@ -21,6 +21,7 @@ const path = require('path');
 const winston = require('winston');
 
 const reportBuilder = require('./json-report-builder.js');
+const a11yMetaChecker = require("./analyze-a11y-metadata.js");
 
 const report = exports;
 const jsonReport = new reportBuilder.Report();
@@ -61,6 +62,7 @@ report.initialize = function initialize(epub) {
     jsonReport.withTitle("ACE Report")
             .withDescription("Accessibility Checker Report" )
             .withTestSubject(epub.path, "", "", epub.metadata);
+    jsonReport.withA11yMeta(a11yMetaChecker.analyze(epub.metadata));
 
 }
 report.addContentDocAssertion = function addContentDocAssertion(assertion) {
