@@ -7,13 +7,13 @@ const report = require('../report/report.js');
 const axe2ace = require('../report/axe2ace.js');
 const winston = require('winston');
 
-const PATH_TO_AXE = path.join(__dirname, '../ext/axe/axe.min.js');
+const PATH_TO_AXE = path.join(path.dirname(require.resolve('axe-core')), 'axe.min.js');
 if (!fs.existsSync(PATH_TO_AXE)) {
   winston.verbose(PATH_TO_AXE);
   process.exit(1);
 }
 
-const PATH_TO_H5O = path.join(__dirname, '../ext/h5o/outliner.min.js');
+const PATH_TO_H5O = path.join(path.dirname(require.resolve('h5o')), 'dist/outliner.min.js');
 if (!fs.existsSync(PATH_TO_H5O)) {
   winston.verbose(PATH_TO_H5O);
   process.exit(1);

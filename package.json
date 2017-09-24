@@ -37,7 +37,7 @@
     "npm": ">=4",
     "yarn": ">= 0.20"
   },
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "bin": {
     "ace": "dist/cli/cli.js"
   },
@@ -79,9 +79,7 @@
     "start": "node dist/cli/cli.js",
     "clean": "rimraf dist && mkdir dist",
     "prebuild": "yarn run clean -s",
-    "build": "yarn run build:js -s && yarn run build:axe -s && yarn run build:h5o -s",
-    "build:axe": "mkdir -p dist/ext/axe && cp node_modules/axe-core/axe.min.js dist/ext/axe/",
-    "build:h5o": "mkdir dist/ext/h5o && cp node_modules/h5o/dist/outliner.min.js dist/ext/h5o/",
+    "build": "yarn run build:js -s",
     "build:js": "cp -R src/ dist",
     "build:watch": "watch 'yarn run build' src",
     "test": "echo add tests",
