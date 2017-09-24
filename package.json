@@ -61,8 +61,7 @@
     "unzip": "^0.1.11",
     "winston": "^2.3.1",
     "xmldom": "^0.1.27",
-    "xpath": "0.0.24",
-    "yarn": "^0.24.6"
+    "xpath": "^0.0.24"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
