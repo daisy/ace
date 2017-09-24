@@ -72,6 +72,9 @@
     "uglify-js": "^3.0.8",
     "watch": "^1.0.2"
   },
+  "resolutions": {
+    "nightmare/electron": "1.7.8"
+  },
   "scripts": {
     "start": "node dist/cli/cli.js",
     "clean": "rimraf dist && mkdir dist",
