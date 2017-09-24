@@ -78,8 +78,8 @@
   "scripts": {
     "start": "node dist/cli/cli.js",
     "clean": "rimraf dist && mkdir dist",
-    "prebuild": "yarn run clean -s",
-    "build": "yarn run build:js -s",
+    "prebuild": "yarn run clean",
+    "build": "yarn run build:js",
     "build:js": "cp -R src/ dist",
     "build:watch": "watch 'yarn run build' src",
     "test": "echo add tests",
