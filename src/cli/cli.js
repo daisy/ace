@@ -4,6 +4,7 @@
 
 const ace = require('../core/ace.js');
 const meow = require('meow');
+const winston = require('winston');
 
 const cli = meow(`
   Usage
@@ -40,6 +41,9 @@ ace(cli.input[0], {
   tmpdir: cli.flags.tempdir,
   verbose: cli.flags.verbose,
   silent: cli.flags.silent,
-  jobId: ''
+  jobId: '',
 })
-.catch(() => process.exit(1));
+.catch((err) => {
+  winston.error(err.message);
+  process.exit(1);
+});

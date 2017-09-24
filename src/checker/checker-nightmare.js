@@ -10,25 +10,25 @@ const winston = require('winston');
 const PATH_TO_AXE = path.join(path.dirname(require.resolve('axe-core')), 'axe.min.js');
 if (!fs.existsSync(PATH_TO_AXE)) {
   winston.verbose(PATH_TO_AXE);
-  process.exit(1);
+  throw new Error('Can’t find aXe');
 }
 
 const PATH_TO_H5O = path.join(path.dirname(require.resolve('h5o')), 'dist/outliner.min.js');
 if (!fs.existsSync(PATH_TO_H5O)) {
   winston.verbose(PATH_TO_H5O);
-  process.exit(1);
+  throw new Error('Can’t find h5o');
 }
 
 const PATH_TO_ACE_AXE = path.join(__dirname, '../scripts/ace-axe.js');
 if (!fs.existsSync(PATH_TO_ACE_AXE)) {
   winston.verbose(PATH_TO_ACE_AXE);
-  process.exit(1);
+  throw new Error('Can’t find ace-axe script');
 }
 
 const PATH_TO_ACE_EXTRACTION = path.join(__dirname, '../scripts/ace-extraction.js');
 if (!fs.existsSync(PATH_TO_ACE_EXTRACTION)) {
   winston.verbose(PATH_TO_ACE_EXTRACTION);
-  process.exit(1);
+  throw new Error('Can’t find ace-extraction script');
 }
 // EMXIF
 

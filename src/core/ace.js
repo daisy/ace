@@ -22,7 +22,7 @@ module.exports = function ace(epubPath, options) {
     // Check that the EPUB exists
     if (!fs.existsSync(epubPath)) {
       winston.error(`Couldn’t find EPUB file '${epubPath}'`);
-      reject(jobId);
+      return reject(jobId);
     }
 
     // Process options
