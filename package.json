@@ -67,7 +67,7 @@
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.3.0",
-    "jest": "^20.0.3",
+    "jest": "^21.1.0",
     "rimraf": "^2.6.1",
     "uglify-js": "^3.0.8",
     "watch": "^1.0.2"
@@ -82,9 +82,12 @@
     "build": "yarn run build:js",
     "build:js": "cp -R src/ dist",
     "build:watch": "watch 'yarn run build' src",
-    "test": "echo add tests",
+    "test": "jest",
     "docs": "echo add docs",
     "lint": "eslint src",
     "dist": "echo add dist"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
