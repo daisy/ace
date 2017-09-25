@@ -63,9 +63,11 @@ module.exports = function ace(epubPath, options) {
       if (options.outdir === undefined) {
         winston.info(JSON.stringify(report.getJsonReport(), null, '  '));
       } else {
-        report.copyData(options.outdir);
-        report.saveJson(options.outdir);
-        report.saveHtml(options.outdir);
+        return Promise.all([
+          report.copyData(options.outdir),
+          report.saveJson(options.outdir),
+          report.saveHtml(options.outdir),
+        ]);
       }
     })
     .then(() => {
