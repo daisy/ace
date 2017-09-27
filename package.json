@@ -76,7 +76,7 @@
     "nightmare/electron": "1.7.8"
   },
   "scripts": {
-    "start": "node dist/cli/cli.js",
+    "start": "node src/cli/cli.js",
     "clean": "rimraf dist && mkdir dist",
     "prebuild": "yarn run clean",
     "build": "yarn run build:js",
