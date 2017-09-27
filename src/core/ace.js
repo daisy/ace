@@ -57,7 +57,7 @@ module.exports = function ace(epubPath, options) {
     // Report the Nav Doc
     .then(() => report.addEPUBNav(epub.navDoc))
     // Check each Content Doc
-    .then(() => checker.check(epub.contentDocs))
+    .then(() => checker.check(epub))
     // Process the Results
     .then(() => {
       if (options.outdir === undefined) {

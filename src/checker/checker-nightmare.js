@@ -43,15 +43,7 @@ Nightmare.action('axe', function axe(done) {
     }, done);
 });
 
-const nightmare = Nightmare({
-  show: false,
-  alwaysOnTop: false,
-  openDevTools: {
-    mode: 'detach',
-  },
-});
-
-function checkSingle(spineItem) {
+function checkSingle(spineItem, epub, nightmare) {
   winston.info(`- ${spineItem.relpath}`);
 
   return nightmare
@@ -82,12 +74,20 @@ function checkSingle(spineItem) {
     });
 }
 
-module.exports.check = spineItems =>
-  spineItems.reduce((sequence, spineItem) =>
+module.exports.check = (epub) => {
+  const nightmare = Nightmare({
+    show: false,
+    alwaysOnTop: false,
+    openDevTools: {
+      mode: 'detach',
+    },
+  });
+  return epub.contentDocs.reduce((sequence, spineItem) =>
     sequence.then(results =>
-      checkSingle(spineItem)
+      checkSingle(spineItem, epub, nightmare)
       .then((result) => {
         results.push(result);
         return results;
       })), Promise.resolve([]))
   .then(results => nightmare.end(() => results));
+}
