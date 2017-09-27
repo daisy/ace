@@ -66,7 +66,10 @@ function checkSingle(spineItem, epub, nightmare) {
       winston.info(`- ${numIssues} issues found`);
       if (results.data != null && results.data.images != null) {
         results.data.images.forEach((img) => {
-          img.filepath = path.resolve(path.dirname(spineItem.filepath), img.path);
+          const imageFullPath = path.resolve(path.dirname(spineItem.filepath), img.path);
+          const imageRelPath = path.relative(epub.dir, imageFullPath);
+          img.filepath = imageFullPath;
+          img.path = imageRelPath;
           img.location = `${spineItem.relpath}#epubcfi(${img.cfi})`;
         });
       }
