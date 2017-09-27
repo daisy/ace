@@ -14,64 +14,69 @@ const LOGFILE = __dirname + "/../ace.log";
 tmp.setGracefulCleanup();
 
 module.exports = function ace(epubPath, options) {
-  initLogger(options);
-  winston.verbose("ACE", options);
+  return new Promise((resolve, reject) => {
+    initLogger(options);
+    var jobId = 'jobId' in options ? options.jobId : '';
+    winston.verbose("ACE", options);
 
-  // Check that the EPUB exists
-  if (!fs.existsSync(epubPath)) {
-    winston.error(`Couldn’t find EPUB file '${epubPath}'`);
-    process.exit(1);
-  }
-
-  // Process options
-  /* eslint-disable no-param-reassign */
-  if (typeof options.tmpdir === 'string') {
-    options.tmpdir = path.resolve(options.cwd, options.tmpdir);
-    if (!fs.existsSync(options.tmpdir)) {
-      fs.mkdirSync(options.tmpdir);
+    // Check that the EPUB exists
+    if (!fs.existsSync(epubPath)) {
+      winston.error(`Couldn’t find EPUB file '${epubPath}'`);
+      reject(jobId);
     }
-  } else if (options.tmpdir === undefined) {
-    options.tmpdir = tmp.dirSync({ unsafeCleanup: true }).name;
-  }
-  if (typeof options.outdir === 'string') {
-    options.outdir = path.resolve(options.cwd, options.outdir);
-    if (!fs.existsSync(options.outdir)) {
-      fs.mkdirSync(options.outdir);
+
+    // Process options
+    /* eslint-disable no-param-reassign */
+    if (typeof options.tmpdir === 'string') {
+      options.tmpdir = path.resolve(options.cwd, options.tmpdir);
+      if (!fs.existsSync(options.tmpdir)) {
+        fs.mkdirSync(options.tmpdir);
+      }
+    } else if (options.tmpdir === undefined) {
+      options.tmpdir = tmp.dirSync({ unsafeCleanup: true }).name;
     }
-  } else {
-    delete options.outdir;
-  }
-
-  winston.info("Processing " + epubPath);
-
-  /* eslint-enable no-param-reassign */
-
-  // Unzip the EPUB
-  const epub = new EPUB(epubPath);
-  epub.extract()
-  .then(() => epub.parse())
-  // initialize the report
-  .then(() => report.initialize(epub))
-  // Report the Nav Doc
-  .then(() => report.addEPUBNav(epub.navDoc))
-  // Check each Content Doc
-  .then(() => checker.check(epub.contentDocs))
-  // Process the Results
-  .then(() => {
-    if (options.outdir === undefined) {
-      winston.info(JSON.stringify(report.getJsonReport(), null, '  '));
+    if (typeof options.outdir === 'string') {
+      options.outdir = path.resolve(options.cwd, options.outdir);
+      if (!fs.existsSync(options.outdir)) {
+        fs.mkdirSync(options.outdir);
+      }
     } else {
-      report.copyData(options.outdir);
-      report.saveJson(options.outdir);
-      report.saveHtml(options.outdir);
+      delete options.outdir;
     }
-  })
-  .then(() => winston.info('Done.'))
-  .catch((err) => {
-    winston.error(`Unexpected error: ${err}`);
-    process.exit(1);
-  });
 
+    winston.info("Processing " + epubPath);
+
+    /* eslint-enable no-param-reassign */
+
+    // Unzip the EPUB
+    const epub = new EPUB(epubPath);
+    epub.extract()
+    .then(() => epub.parse())
+    // initialize the report
+    .then(() => report.initialize(epub))
+    // Report the Nav Doc
+    .then(() => report.addEPUBNav(epub.navDoc))
+    // Check each Content Doc
+    .then(() => checker.check(epub.contentDocs))
+    // Process the Results
+    .then(() => {
+      if (options.outdir === undefined) {
+        winston.info(JSON.stringify(report.getJsonReport(), null, '  '));
+      } else {
+        report.copyData(options.outdir);
+        report.saveJson(options.outdir);
+        report.saveHtml(options.outdir);
+      }
+    })
+    .then(() => {
+      winston.info('Done.');
+      resolve(jobId);
+    })
+    .catch((err) => {
+      winston.error(`Unexpected error: ${err}`);
+      reject(jobId);
+    });
+  });
   // // Alternatively: use reduce to process results progressively ?
   // new EPUB(epubPath).extract()
   // .then(epub => epub.getContentDocsPaths())

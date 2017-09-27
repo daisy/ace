@@ -39,5 +39,7 @@ ace(cli.input[0], {
   outdir: cli.flags.outdir,
   tmpdir: cli.flags.tempdir,
   verbose: cli.flags.verbose,
-  silent: cli.flags.silent
-});
+  silent: cli.flags.silent,
+  jobId: ''
+})
+.catch(() => process.exit(1));
