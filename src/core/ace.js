@@ -16,7 +16,9 @@ tmp.setGracefulCleanup();
 module.exports = function ace(epubPath, options) {
   return new Promise((resolve, reject) => {
     initLogger(options);
-    var jobId = 'jobId' in options ? options.jobId : '';
+    // the jobid option just gets returned in the resolve/reject
+    // so the calling function can track which job finished
+    var jobId = 'jobid' in options ? options.jobid : '';
     winston.verbose("ACE", options);
 
     // Check that the EPUB exists
