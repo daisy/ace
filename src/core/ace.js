@@ -9,14 +9,13 @@ const EPUB = require('../epub/epub.js');
 const report = require('../report/report.js');
 const winston = require('winston');
 
-const LOGFILE = __dirname + "/../ace.log";
-
 tmp.setGracefulCleanup();
 
 module.exports = function ace(epubPath, options) {
   return new Promise((resolve, reject) => {
-    initLogger(options);
-    var jobId = 'jobId' in options ? options.jobId : '';
+    // the jobid option just gets returned in the resolve/reject
+    // so the calling function can track which job finished
+    var jobId = 'jobid' in options ? options.jobid : '';
     winston.verbose("ACE", options);
 
     // Check that the EPUB exists
@@ -93,25 +92,3 @@ module.exports = function ace(epubPath, options) {
   //   getJSON('story.json').then(function(story) {
   //   addHtmlToPage(story.heading);
 };
-
-function initLogger(options) {
-  // clear old log file
-  fs.removeSync(LOGFILE);
-
-  // set up logger
-  var level = 'info';
-  if (options.verbose) {
-    level = 'verbose';
-  }
-  winston.configure({
-    level: level,
-    transports: [
-      new (winston.transports.File)({name: "file", filename: LOGFILE}),
-      new (winston.transports.Console)({name: "console"})
-    ]
-  });
-  if (options.silent) {
-      winston.remove("console");
-  }
-  winston.cli();
-}

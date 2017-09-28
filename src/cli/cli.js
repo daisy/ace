@@ -7,6 +7,7 @@ const ace = require('../core/ace.js');
 const fs = require('fs');
 const meow = require('meow');
 const path = require('path');
+const logger = require('./logger.js');
 
 const cli = meow(`
   Usage: ace [options] <input>
@@ -40,9 +41,11 @@ const cli = meow(`
   string: ['outdir', 'tempdir'],
 });
 
+logger.initLogger({verbose: cli.flags.verbose, silent: cli.flags.silent});
+
 // Check that an EPUB path is specified
 if (cli.input.length === 0) {
-  console.log('Input required');
+  winston.error('Input required');
   cli.showHelp(1);
 }
 
@@ -57,7 +60,7 @@ if (outdir) {
       .map(file => path.join(outdir, file))
       .filter(fs.existsSync);
     if (overrides.length > 0) {
-      console.log(`\
+      winston.warn(`\
 Output directory is not empty.
 
 Running Ace would override the following files or directories:
@@ -81,6 +84,6 @@ ace(cli.input[0], {
   jobId: '',
 })
 .catch((err) => {
-  if (err) console.log(err.message);
+  if (err) winston.error(err.message);
   process.exit(1);
 });
