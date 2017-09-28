@@ -53,6 +53,9 @@ module.exports = class Report {
     this._builder.withAssertion(assertion);
     return this;
   }
+  addData(data) {
+    this._builder.withData(data);
+  }
   addOutline(outline) {
     this._builder.withHOutline(outline);
     return this;
@@ -69,10 +72,6 @@ module.exports = class Report {
     this._builder.withEPUBOutline(navDoc.tocHTML);
     return this;
   }
-  addImages(images) {
-    this._builder.withImages(images);
-    return this;
-  }
   addProperties(properties) {
     this._builder.withProperties(properties);
     return this;
@@ -87,9 +86,9 @@ module.exports = class Report {
         .then(() => {
           if (this.json.data.images != null) {
             this.json.data.images.forEach((img) => {
-              const fromPath = img.filepath;
-              const toPath = path.join(outdir, 'data', img.path);
-              delete img.filepath;
+              const fromPath = img.path;
+              const toPath = path.join(outdir, 'data', img.src);
+              delete img.path;
               return fs.copy(fromPath, toPath, {
                 overwrite: false,
               });

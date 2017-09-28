@@ -108,6 +108,13 @@ class ReportBuilder {
     withAssertion(this._json, assertions);
     return this;
   }
+  withData(data) {
+    Object.getOwnPropertyNames(data).forEach((key) => {
+      this._json.data[key] = (Array.isArray(this._json.data[key]))
+        ? this._json.data[key].push(data[key])
+        : data[key];
+    });
+  }
   withEPUBOutline(outline) {
     this._json.outlines.toc = outline;
     return this;
@@ -118,10 +125,6 @@ class ReportBuilder {
   }
   withHTMLOutline(outline) {
     this._json.outlines.html = outline;
-    return this;
-  }
-  withImages(images) {
-    this._json.data.images = images;
     return this;
   }
   withProperties(properties) {

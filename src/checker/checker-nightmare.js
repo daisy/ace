@@ -61,13 +61,22 @@ function checkSingle(spineItem, epub, nightmare) {
         (results.assertions == null)
           ? 'No'
           : results.assertions.assertions.length} issues found`);
-      if (results.data != null && results.data.images != null) {
-        results.data.images.forEach((img) => {
-          const imageFullPath = path.resolve(path.dirname(spineItem.filepath), img.path);
-          const imageRelPath = path.relative(epub.basedir, imageFullPath);
-          img.filepath = imageFullPath;
-          img.path = imageRelPath;
-          img.location = `${spineItem.relpath}#epubcfi(${img.cfi})`;
+      // Resolve path and locators for extracted data
+      if (results.data != null) {
+        Object.getOwnPropertyNames(results.data).forEach((key) => {
+          if (!Array.isArray(results.data[key])) return;
+          results.data[key].forEach((item) => {
+            if (item.src !== undefined) {
+              const fullpath = path.resolve(path.dirname(spineItem.filepath), item.src);
+              const relpath = path.relative(epub.basedir, fullpath);
+              item.path = fullpath;
+              item.src = relpath;
+              if (item.cfi !== undefined) {
+                item.location = `${spineItem.relpath}#epubcfi(${item.cfi})`;
+                delete item.cfi;
+              }
+            }
+          });
         });
       }
       return results;
