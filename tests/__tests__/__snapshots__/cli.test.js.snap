@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test existing output 1`] = `
+"Output directory is not empty.
+
+Running Ace would override the following files or directories:
+
+  - report/ace.json
+  - report/report.html
+  - report/js
+
+Use option --force to override.
+
+"
+`;
+
+exports[`test help 1`] = `
+"
+  Ace by DAISY, an Accessibility Checker for EPUB
+
+  Usage: ace [options] <input>
+
+  Options:
+
+    -h, --help             output usage information
+    -v, --version          output the version number
+
+    -o, --outdir  <path>   save final reports to the specified directory
+    -t, --tempdir <path>   specify a custom directory to store the temporary reports
+    -f, --force            override any existing output file or directory
+        --subdir           output reports to a sub-directory named after the input EPUB
+
+    -V, --verbose          display verbose output
+    -s, --silent           do not display any output
+
+  Examples
+    $ ace -o out ~/Documents/book.epub
+"
+`;
+
+exports[`test no input 1`] = `
+"Input required
+
+  Ace by DAISY, an Accessibility Checker for EPUB
+
+  Usage: ace [options] <input>
+
+  Options:
+
+    -h, --help             output usage information
+    -v, --version          output the version number
+
+    -o, --outdir  <path>   save final reports to the specified directory
+    -t, --tempdir <path>   specify a custom directory to store the temporary reports
+    -f, --force            override any existing output file or directory
+        --subdir           output reports to a sub-directory named after the input EPUB
+
+    -V, --verbose          display verbose output
+    -s, --silent           do not display any output
+
+  Examples
+    $ ace -o out ~/Documents/book.epub
+"
+`;
+
+exports[`test unexisting input 1`] = `
+"[31merror[39m:   Couldn’t find EPUB file 'unexisting.epub'
+"
+`;

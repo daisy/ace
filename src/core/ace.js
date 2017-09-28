@@ -24,7 +24,7 @@ module.exports = function ace(epubPath, options) {
     // Check that the EPUB exists
     if (!fs.existsSync(epubPath)) {
       winston.error(`Couldn’t find EPUB file '${epubPath}'`);
-      reject(jobId);
+      return reject(jobId);
     }
 
     // Process options
@@ -59,15 +59,17 @@ module.exports = function ace(epubPath, options) {
     // Report the Nav Doc
     .then(() => report.addEPUBNav(epub.navDoc))
     // Check each Content Doc
-    .then(() => checker.check(epub.contentDocs))
+    .then(() => checker.check(epub))
     // Process the Results
     .then(() => {
       if (options.outdir === undefined) {
         winston.info(JSON.stringify(report.getJsonReport(), null, '  '));
       } else {
-        report.copyData(options.outdir);
-        report.saveJson(options.outdir);
-        report.saveHtml(options.outdir);
+        return Promise.all([
+          report.copyData(options.outdir),
+          report.saveJson(options.outdir),
+          report.saveHtml(options.outdir),
+        ]);
       }
     })
     .then(() => {

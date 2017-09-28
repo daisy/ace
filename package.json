@@ -37,7 +37,7 @@
     "npm": ">=4",
     "yarn": ">= 0.20"
   },
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "bin": {
     "ace": "dist/cli/cli.js"
   },
@@ -65,30 +65,34 @@
     "uuidv4": "^0.5.0",
     "winston": "^2.3.1",
     "xmldom": "^0.1.27",
-    "xpath": "0.0.24",
-    "yarn": "^0.24.6"
+    "xpath": "^0.0.24"
   },
   "devDependencies": {
+    "cross-spawn": "^5.1.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.3.0",
-    "jest": "^20.0.3",
+    "jest": "^21.1.0",
     "rimraf": "^2.6.1",
     "uglify-js": "^3.0.8",
     "watch": "^1.0.2"
   },
+  "resolutions": {
+    "nightmare/electron": "1.7.8"
+  },
   "scripts": {
-    "start": "node dist/cli/cli.js",
+    "start": "node src/cli/cli.js",
     "clean": "rimraf dist && mkdir dist",
-    "prebuild": "yarn run clean -s",
-    "build": "yarn run build:js -s && yarn run build:axe -s && yarn run build:h5o -s",
-    "build:axe": "mkdir -p dist/ext/axe && cp node_modules/axe-core/axe.min.js dist/ext/axe/",
-    "build:h5o": "mkdir dist/ext/h5o && cp node_modules/h5o/dist/outliner.min.js dist/ext/h5o/",
+    "prebuild": "yarn run clean",
+    "build": "yarn run build:js",
     "build:js": "cp -R src/ dist",
     "build:watch": "watch 'yarn run build' src",
-    "test": "echo add tests",
+    "test": "jest",
     "docs": "echo add docs",
     "lint": "eslint src",
     "dist": "echo add dist"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

@@ -17,8 +17,8 @@ function finalize(results) {
   return results;
 }
 
-module.exports.check = function check(spineItems) {
+module.exports.check = function check(epub) {
   winston.info('Checking documents...');
-  return checker.check(spineItems)
+  return checker.check(epub)
     .then(results => finalize(results));
 };

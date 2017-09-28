@@ -1,0 +1,429 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap4.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css"/>
+
+  <script type="text/javascript" src="js/ace-report-viewer.js"></script>
+  <script type="text/javascript" src="js/aceReportData.js"></script>
+  <script type="text/javascript">
+
+  var aceReportViewer = null;
+
+  function updateTableContents(data) {
+    $('#report-table').dataTable().fnDestroy();
+    var tablebody = $("#report-table > tbody");
+    tablebody.empty();
+
+
+    data.forEach(function(violation) {
+
+      var tr = $("<tr></tr>");
+
+      var tdImpact = $("<td><span class='" + violation["impact"] + "'>" + violation["impact"] + "</span></td>");
+
+      /*var tdFile = $("<td><em>\"" + aceReportViewer.getTitleForFile(violation["file"]) + "\"</em><br/><br/><code>" + violation["file"] + "</code></td>");
+
+      var tdTarget = $("<td><span class='css'><code>"
+        + violation["pointer"]["css"]
+        + "</code></span><br/><br/><span class='cfi'><code>"
+        + violation["pointer"]["cfi"]
+        + "</code></td>");
+      */
+      var tdLocation = $("<td><em>\"" + aceReportViewer.getTitleForFile(violation["file"]) + "\"</em><br/><br/><code class='location'>" + violation["location"] + "</code></td>");
+      var tdRule = $("<td>" + violation["rule"] + "<br/><br/><span class='engine'>" + violation["engine"] + "</span></td>");
+
+      var desc = violation["desc"];
+      desc = desc.replace("Fix all of the following:", "");
+      desc = desc.replace("Fix any of the following:", "");
+
+      var detailsArr = desc.split("\n");
+      var tdDetails = $("<td class='details'></td>");
+
+      var ul = $("<ul></ul>");
+      tdDetails.append(ul);
+      detailsArr.forEach(function(item) {
+        if (item != "") {
+          var elm = $("<li></li>");
+          elm.text(item);
+          ul.append(elm);
+        }
+      });
+      var link = $("<p><a href='"
+        + violation["kburl"]
+        + "' target='_blank'>Learn more about " + violation["kbtitle"] + "</a></p>");
+      tdDetails.append(link);
+
+
+      tr.append(tdImpact);
+      tr.append(tdRule);
+      /*tr.append(tdFile);
+      tr.append(tdTarget);
+      */
+      tr.append(tdLocation);
+      tr.append(tdDetails);
+      tablebody.append(tr);
+
+    });
+
+    $('#report-table').DataTable();
+  }
+
+  function filterSelected() {
+    var filters = [];
+    $("select").each(function(idx, elm) {
+      $(elm).children("option").each(function (idx, optElm) {
+        if (optElm.selected) {
+          filters[elm.name] = optElm.value;
+        }
+      });
+    });
+
+    var filteredData = aceReportViewer.filterViolations(filters);
+    updateTableContents(filteredData);
+  }
+
+  function applyMetadata(metadata) {
+
+    $("#software-name").text(metadata["softwareName"]);
+    $("#software-version").text(metadata["softwareVersion"]);
+    $("#report-date").text(metadata["reportDate"]);
+
+  }
+
+  function populateFilters(filters) {
+    $("#filters").empty();
+
+    filters.forEach(function(filter) {
+      $("#filters").append("<span class='filter-label'>" + filter.name + "</span>");
+      var filterSelect = $("<select name='" + filter.name + "' aria-label='" + filter.name + "'></select>");
+      $("#filters").append(filterSelect);
+      filter.values.forEach(function(value) {
+        if (value === "all") {
+          // preselect 'all'
+          filterSelect.append("<option value='all' selected>All</option>");
+        }
+        else {
+          filterSelect.append("<option value='" + value + "'>" + value + "</option>");
+        }
+      });
+    });
+    $('select').change(filterSelected);
+  }
+
+  function populateOutlines(outlines) {
+    var section = $('#outlines');
+    section.append('<h3>EPUB Table of Contents</h3>');
+    section.append(outlines.toc);
+    section.append('<h3>Headings outline</h3>');
+    section.append(outlines.headings);
+    section.append('<h3>HTML outline</h3>');
+    section.append(outlines.html);
+  }
+
+  function populateImagesTable(images) {
+    $('#image-table').dataTable().fnDestroy();
+    var tablebody = $("#image-table > tbody");
+    tablebody.empty();
+    images.forEach(function(image) {
+      var tr = $("<tr></tr>");
+
+      var tdImage = $('<td class="image">'
+        + '<a href="data/' + image['path'] + '">'
+        + '<img src="data/' + image['path'] + '" '
+        +  'alt="' + image['alt'] + '"/>'
+        + '</a></td>');
+      tr.append(tdImage);
+
+
+      var tdAlt = (image.alt === undefined) ?
+      $('<td class="missing">N/A</td>')
+       : $('<td>' + image.alt + '</td>');
+      tr.append(tdAlt);
+
+      var tdDescribedby = (image.describedby === undefined) ?
+      $('<td class="missing">N/A</td>')
+       : $('<td>' + image.describedby + '</td>');
+      tr.append(tdDescribedby);
+
+      var tdFigcaption = (image.figcaption === undefined) ?
+      $('<td class="missing">N/A</td>')
+       : $('<td>' + image.figcaption + '</td>');
+      tr.append(tdFigcaption);
+
+      var tdLocation = $('<td class="location">'
+        + image['location']
+        + '</td>');
+      tr.append(tdLocation);
+
+
+      tablebody.append(tr);
+
+    });
+
+    $('#report-table').DataTable();
+
+  }
+
+  function populateExtendedMetadata(metadata) {
+    var dl = $('#pub-metadata');
+    for(key in metadata) {
+      dl.append('<dt>' + key + '</dt>');
+      dl.append('<dd>' + metadata[key] + '</dd>');
+    }
+  }
+  function populateA11yMetadataSummary(a11ymetadata, pubmetadata) {
+    
+    var tbody = $("#a11y-meta-present tbody");
+    var list = $("#a11y-meta-missing");
+
+    a11ymetadata["present"].forEach(function(item) {
+      var metastr = pubmetadata[item];
+      if (Array.isArray(pubmetadata[item])) {
+        metastr = pubmetadata[item].join(", ");
+      }
+      var tr = $("<tr><td><code>" + item + "</code></td><td>" + metastr + "</td></tr>");
+      tbody.append(tr);
+    });
+
+    a11ymetadata["missing"].forEach(function(item) {
+      var li = $("<li><code>" + item + "</code></li>")
+      list.append(li);
+    });
+
+    a11ymetadata["empty"].forEach(function(item) {
+      var li = $("<li><code>" + item + "</code></li>")
+      list.append(li);
+    });
+
+    if (a11ymetadata["missing"].length == 0 && a11ymetadata["empty"] == 0) {
+      var div = $("#a11y-metadata");
+      div.append("<p>No missing or empty accessibility metadata in the package document.</p>");
+    }
+  }
+
+  $(document).ready(function() {
+    aceReportViewer = new AceReport(aceReportData);
+
+    applyMetadata(aceReportViewer.getMetadata());
+
+    // populate extended metadata
+    populateExtendedMetadata(aceReportData["earl:testSubject"].metadata);
+
+    // populate filters
+    populateFilters(aceReportViewer.getFilters());
+
+    // populate table
+    updateTableContents(aceReportViewer.getAllViolations());
+
+    // populate outlines
+    populateOutlines(aceReportData.outlines);
+
+    // populate the images table
+    populateImagesTable(aceReportData.data.images);
+
+    // add the accessible metadata summary
+    populateA11yMetadataSummary(aceReportViewer.getA11yMetadata(), aceReportData["earl:testSubject"].metadata);
+
+  });
+
+
+
+  </script>
+  <style>
+
+  /* general */
+  table th {
+    width: auto !important;
+  }
+  code {
+    line-height: 1.5;
+  }
+  .location{font-size:.8em;font-family:monospace;overflow-wrap:break-word}
+
+  /* TOC outline */
+
+  .toc-h1:before,.toc-h2:before,.toc-h3:before,.toc-h4:before,.toc-h5:before,.toc-h6:before,.toc-missing{
+    display:inline-block;
+    height:1.5em;
+    padding:0 .4em;
+    background-color:#449d44;
+    border-radius:4px;
+    color:#fff;
+    font-size:.8em;
+    font-family:monospace;
+    margin:0 .5em 0 0;
+  }
+
+  .toc-h1:before{content:'h1'}
+  .toc-h2:before{content:'h2'}
+  .toc-h3:before{content:'h3'}
+  .toc-h4:before{content:'h4'}
+  .toc-h5:before{content:'h5'}
+  .toc-h6:before{content:'h6'}
+  .toc-missing{font-family:inherit;background-color:#c9302c}
+
+  /* images */
+  td.image{
+    text-align:center;
+    padding:.2em;
+  }
+  td.image img {
+    max-width: 100%;
+  }
+  td.missing{
+      text-align:center;
+      color:#888;
+      font-style:italic
+  }
+  td.alt {border:1px solid #ddd}
+  td.alt.missing{background-color:#f2dede}
+  td.alt,td.image.presentation+td.alt.missing{background-color:#dff0d8}
+
+
+  /* violations table */
+  #filters span, #filters select {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .filter-label {
+    text-transform: capitalize;
+  }
+
+  .engine {
+    font-style: italic;
+  }
+  .engine:before{content: '(via '}
+  .engine:after{content: ')'}
+  .css:before{content: 'CSS: '}
+  .cfi:before{content: 'CFI: '}
+
+  /* make the list and KB link the same padding */
+  td.details p{
+    padding-left: 40px;
+  }
+
+  span.critical, span.serious, span.moderate, span.minor {
+    display:inline-block;
+    height:1.5em;
+    padding: .4em;
+    border-radius:4px;
+    font-family:monospace;
+    font-weight: bold;
+  }
+
+  span.critical {
+    background-color: #9c2b2e;
+    color: #fff;
+  }
+  span.serious {
+    background-color: #ffa500;
+    color: #000;
+  }
+  span.moderate {
+    background-color: #7b5000;
+    color: #fff;
+  }
+  span.minor {
+    background-color: #ffff7f;
+    color: #000;
+  }
+
+
+  </style>
+
+  <title>EPUB Accessibility Report by DAISY Ace</title>
+</head>
+<body>
+
+
+  <div id="report-metadata" class="jumbotron">
+    <h1>EPUB Accessibility Report</h1>
+    <dl>
+      <dt>Generated by</dt>
+      <dd><span id="software-name"></span> (<span id="software-version"></span>)</dd>
+      <dt>Created on</dt>
+      <dd id="report-date"></dd>
+    </dl>
+    <details>
+      <summary>Metadata details</summary>
+      <dl id="pub-metadata"></dl>
+    </details>
+  </div>
+
+  <div class="container-fluid">
+    <h2>Violations</h2>
+
+    <div id="filters" class="py-3">
+    </div>
+
+    <table id="report-table" class="table table-bordered">
+      <caption>Violations in the EPUB, with references to severity, guidelines and specific location of problem.</caption>
+      <thead class="thead-inverse">
+        <tr>
+          <th>Impact</th>
+          <th>Rule</th>
+          <th>Location</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+
+    </table>
+  </div>
+
+  <div id="outlines" class="container-fluid">
+    <h2>Outlines</h2>
+  </div>
+
+  <div id="a11y-metadata" class="container-fluid">
+    <h2>Accessibility Metadata Summary</h2>
+    <p>This is a summary of the <a href="http://www.idpf.org/epub/a11y/accessibility.html#sec-disc-package" target="_blank">accessibility metadata</a> in the package document.</p>
+
+    <h3>Present</h3>
+    <table id="a11y-meta-present" class="table table-bordered">
+      <thead class="thead-inverse">
+        <th>Property</th>
+        <th>Value</th>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <h3>Missing or empty</h3>
+    <ul id="a11y-meta-missing">
+    </ul>
+  </div>
+
+  <div id="images" class="container-fluid">
+    <h2>Images</h2>
+    <table  id="image-table" class="table table-striped table-bordered">
+      <caption>Images in the EPUB, with their description</caption>
+      <thead class="thead-inverse">
+         <tr>
+            <th>Image</th>
+            <th><code>alt</code> attribute
+            </th>
+            <th><code>aria-describedby</code> content
+            </th>
+            <th>Associated <code>figcaption</code></th>
+            <th>Location</th>
+         </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+</body>
+
+</html>

@@ -7,28 +7,28 @@ const report = require('../report/report.js');
 const axe2ace = require('../report/axe2ace.js');
 const winston = require('winston');
 
-const PATH_TO_AXE = path.join(__dirname, '../ext/axe/axe.min.js');
+const PATH_TO_AXE = path.join(path.dirname(require.resolve('axe-core')), 'axe.min.js');
 if (!fs.existsSync(PATH_TO_AXE)) {
   winston.verbose(PATH_TO_AXE);
-  process.exit(1);
+  throw new Error('Can’t find aXe');
 }
 
-const PATH_TO_H5O = path.join(__dirname, '../ext/h5o/outliner.min.js');
+const PATH_TO_H5O = path.join(path.dirname(require.resolve('h5o')), 'dist/outliner.min.js');
 if (!fs.existsSync(PATH_TO_H5O)) {
   winston.verbose(PATH_TO_H5O);
-  process.exit(1);
+  throw new Error('Can’t find h5o');
 }
 
 const PATH_TO_ACE_AXE = path.join(__dirname, '../scripts/ace-axe.js');
 if (!fs.existsSync(PATH_TO_ACE_AXE)) {
   winston.verbose(PATH_TO_ACE_AXE);
-  process.exit(1);
+  throw new Error('Can’t find ace-axe script');
 }
 
 const PATH_TO_ACE_EXTRACTION = path.join(__dirname, '../scripts/ace-extraction.js');
 if (!fs.existsSync(PATH_TO_ACE_EXTRACTION)) {
   winston.verbose(PATH_TO_ACE_EXTRACTION);
-  process.exit(1);
+  throw new Error('Can’t find ace-extraction script');
 }
 // EMXIF
 
@@ -43,15 +43,7 @@ Nightmare.action('axe', function axe(done) {
     }, done);
 });
 
-const nightmare = Nightmare({
-  show: false,
-  alwaysOnTop: false,
-  openDevTools: {
-    mode: 'detach',
-  },
-});
-
-function checkSingle(spineItem) {
+function checkSingle(spineItem, epub, nightmare) {
   winston.info(`- ${spineItem.relpath}`);
 
   return nightmare
@@ -74,7 +66,10 @@ function checkSingle(spineItem) {
       winston.info(`- ${numIssues} issues found`);
       if (results.data != null && results.data.images != null) {
         results.data.images.forEach((img) => {
-          img.filepath = path.resolve(path.dirname(spineItem.filepath), img.path);
+          const imageFullPath = path.resolve(path.dirname(spineItem.filepath), img.path);
+          const imageRelPath = path.relative(epub.dir, imageFullPath);
+          img.filepath = imageFullPath;
+          img.path = imageRelPath;
           img.location = `${spineItem.relpath}#epubcfi(${img.cfi})`;
         });
       }
@@ -82,12 +77,20 @@ function checkSingle(spineItem) {
     });
 }
 
-module.exports.check = spineItems =>
-  spineItems.reduce((sequence, spineItem) =>
+module.exports.check = (epub) => {
+  const nightmare = Nightmare({
+    show: false,
+    alwaysOnTop: false,
+    openDevTools: {
+      mode: 'detach',
+    },
+  });
+  return epub.contentDocs.reduce((sequence, spineItem) =>
     sequence.then(results =>
-      checkSingle(spineItem)
+      checkSingle(spineItem, epub, nightmare)
       .then((result) => {
         results.push(result);
         return results;
       })), Promise.resolve([]))
   .then(results => nightmare.end(() => results));
+}
