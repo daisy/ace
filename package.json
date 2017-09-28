@@ -39,7 +39,8 @@
   },
   "main": "dist/index.js",
   "bin": {
-    "ace": "dist/cli/cli.js"
+    "ace": "dist/cli/cli.js",
+    "ace-http": "dist/http/http.js"
   },
   "files": [
     "LICENCE.txt",

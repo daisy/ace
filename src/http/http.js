@@ -7,6 +7,8 @@ const path = require('path');
 const tmp = require('tmp');
 const winston = require('winston');
 const ace = require('../core/ace.js');
+const meow = require('meow');
+const logger = require('../core/logger.js');
 
 const UPLOADS = tmp.dirSync({ unsafeCleanup: true }).name;
 const DEFAULTPORT = 8000;
@@ -16,12 +18,48 @@ var server = express();
 var upload = multer({dest: UPLOADS});
 var joblist = [];
 
+const cli = meow(`
+  Usage: ace-http [options]
+
+  Options:
+
+    -h, --help             output usage information
+    -v, --version          output the version number
+
+    -H, --host             set the server's hostname (default: ${DEFAULTHOST})
+    -p, --port             set the server's port (default: ${DEFAULTPORT})
+
+    -V, --verbose          display verbose output
+    -s, --silent           do not display any output
+
+  Examples
+    $ ace-http -p 3000
+`, {
+  alias: {
+    h: 'help',
+    s: 'silent',
+    v: 'version',
+    V: 'verbose',
+    H: 'host',
+    p: 'port'
+  },
+  boolean: ['verbose', 'silent'],
+  string: ['host', 'port'],
+});
+
+
+logger.initLogger({verbose: cli.flags.verbose, silent: cli.flags.silent});
 server = express();
 server.use(zip());
 initRoutes();
+
+var host = cli.flags.host ? cli.flags.host : DEFAULTHOST;
+var port = cli.flags.port ? cli.flags.port : DEFAULTPORT;
+var baseurl = "http://" + host + ":" + port; // just for convenience
+
 // todo customize port and hostname
-server.listen(DEFAULTPORT, DEFAULTHOST, function() {
-  winston.info("Ace server listening on " + DEFAULTHOST + ":" + DEFAULTPORT);
+server.listen(port, host, function() {
+  winston.info("Ace server listening on " + baseurl);
 });
 
 function initRoutes() {
@@ -31,91 +69,93 @@ function initRoutes() {
   server.get('/jobs/', getJobs);
 }
 
-// return a jobinfo object
+// return the job information
 function getJob(req, res, next) {
-  if(!("jobid" in req.params)) {
-    res.sendStatus(400); // bad request
+  var jobdata = joblist.find(jobdata => jobdata.internal.id === req.params.jobid);
+  if (jobdata == undefined || jobdata == null) {
+    res.sendStatus(404); // not found
   }
   else {
-    var jobdata = joblist.find(jobdata => jobdata.jobinfo.id === req.params.jobid);
-    if (jobdata == undefined || jobdata == null) {
-      res.sendStatus(404); // not found
-    }
-    else {
-      res.json(jobdata.jobinfo);
-    }
+    res.json(jobdata.public);
   }
   next();
 }
 
-// return a list of jobinfo objects
+// return a list of job objects
 function getJobs(req, res, next) {
   let jobsinfo = joblist.map((jobdata, index, joblist) => {
-    return jobdata.jobinfo;
+    return jobdata.public;
   });
   res.json(jobsinfo);
   next();
 }
 
-// return a jobinfo object
+// return the job information
 function postJob(req, res, next) {
   if (req.file == undefined) {
     res.sendStatus(400); // bad request
   }
   else {
-    var jobdata = newJob(req.file.path);
+    var jobid = uuidv4();
+    var jobdata = {
+      public: {
+        "job": baseurl + "/jobs/" + jobid,
+        "status": JOBSTATUS.processing,
+        "report": {"zip": undefined, "json": undefined}
+      },
+      internal: {
+        "id": jobid,
+        "outputDir": tmp.dirSync({ unsafeCleanup: true }).name,
+        "epubPath": req.file.path
+      }
+    };
+    newJob(jobdata);
+
     res.status(201); // created
-    res.json(jobdata.jobinfo);
+    res.json(jobdata.public);
   }
   next();
 }
 
-// return a zipfile of the report directory
+// return the report as either a zipfile or a json object, depending on what was specifically requested
 function getReport(req, res) {
-  if(!("jobid" in req.params)) {
-    res.sendStatus(400); // bad request
+  var jobdata = joblist.find(jobdata => jobdata.internal.id === req.params.jobid);
+  if (jobdata == undefined || jobdata == null) {
+    res.sendStatus(404); // not found
   }
   else {
-    var jobdata = joblist.find(jobdata => jobdata.jobinfo.id === req.params.jobid);
-    if (jobdata == undefined || jobdata == null) {
-      res.sendStatus(404); // not found
+    if ("type" in req.query && req.query.type === "json") {
+      var jsonReport = require(path.join(jobdata.internal.outputDir, "ace.json"));
+      res.json(jsonReport);
     }
     else {
       res.zip({
         files: [
-            { path: jobdata.internal.outputDir, name: 'aceOutput' + jobdata.jobinfo.id }
+            { path: jobdata.internal.outputDir, name: 'ace-report-' + jobdata.internal.id }
         ],
-        filename: 'ace-report-' + req.params.jobid + '.zip'
+        filename: 'ace-report-' + jobdata.internal.id + '.zip'
       });
     }
   }
 }
 
 // start a new job
-function newJob(epubPath) {
-
-  winston.info("Submitting job");
-  var jobdata = {
-    jobinfo: {"id": uuidv4(), "status": JOBSTATUS.processing, "reportUrl": undefined},
-    internal: {"outputDir": tmp.dirSync({ unsafeCleanup: true }).name, "epubPath": epubPath}
-  };
-
+function newJob(jobdata) {
+  winston.info("Job started");
   joblist.push(jobdata);
 
   // execute the job with Ace
-  ace(epubPath, {jobid: jobdata.jobinfo.id, outdir: jobdata.internal.outputDir})
+  ace(jobdata.internal.epubPath, {'jobid': jobdata.internal.id, 'outdir': jobdata.internal.outputDir})
   .then((jobid) => {
-    var idx = joblist.findIndex(job => job.jobinfo.id === jobid);
-    winston.info("Job finished " + joblist[idx].jobinfo.id);
-    joblist[idx].jobinfo.status = JOBSTATUS.done;
-    joblist[idx].jobinfo.reportUrl = "http://" + DEFAULTHOST + ":" + DEFAULTPORT + "/jobs/" + joblist[idx].jobinfo.id + "/report/";
+    var idx = joblist.findIndex(job => job.internal.id === jobid);
+    winston.info("Job finished " + joblist[idx].internal.id);
+    joblist[idx].public.status = JOBSTATUS.done;
+    joblist[idx].public.report.zip = joblist[idx].public.job + "/report/?type=zip";
+    joblist[idx].public.report.json = joblist[idx].public.job + "/report/?type=json";
   })
   .catch((jobid) => {
-    var idx = joblist.findIndex(job => job.jobinfo.id === jobid);
-    winston.info("Job error " + joblist[idx].jobinfo.id);
-    joblist[idx].jobinfo.status = JOBSTATUS.error;
+    var idx = joblist.findIndex(job => job.internal.id === jobid);
+    winston.info("Job error " + joblist[idx].internal.id);
+    joblist[idx].public.status = JOBSTATUS.error;
   });
-
-  // return the jobinfo
-  return jobdata.jobinfo;
 }
