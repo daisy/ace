@@ -7,7 +7,7 @@ const ace = require('../core/ace.js');
 const fs = require('fs');
 const meow = require('meow');
 const path = require('path');
-const logger = require('./logger.js');
+const logger = require('../core/logger.js');
 
 const cli = meow(`
   Usage: ace [options] <input>
