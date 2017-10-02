@@ -43,15 +43,27 @@ test('unexisting EPUB fails with an error', () => {
     .rejects.toMatch('');
 });
 
-test('report dir is correctly created', async () => {
+test('packaged EPUB with absolute path', async () => {
   expect.assertions(1);
   await runAce(path.join(__dirname, '../data/base-epub-30.epub'));
   expect(fs.existsSync(path.join(outdir.name, 'report.html'))).toBeTruthy();
 });
 
-test('expanded EPUBs are supported', async () => {
+test('packaged EPUB with relative path', async () => {
+  expect.assertions(1);
+  await ace('tests/data/base-epub-30.epub', { cwd: path.join(__dirname, '../..') });
+  expect(fs.existsSync(path.join(outdir.name, 'report.html'))).toBeTruthy();
+});
+
+test('expanded EPUB with absolute path', async () => {
   expect.assertions(1);
   await runAce(path.join(__dirname, '../data/base-epub-30'));
+  expect(fs.existsSync(path.join(outdir.name, 'report.html'))).toBeTruthy();
+});
+
+test('expanded EPUB with relative path', async () => {
+  expect.assertions(1);
+  await ace('tests/data/base-epub-30', { cwd: path.join(__dirname, '../..') });
   expect(fs.existsSync(path.join(outdir.name, 'report.html'))).toBeTruthy();
 });
 

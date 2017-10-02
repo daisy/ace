@@ -19,7 +19,8 @@ module.exports = function ace(epubPath, options) {
     winston.verbose("ACE", options);
 
     // Check that the EPUB exists
-    if (!fs.existsSync(epubPath)) {
+    const epubPathResolved = path.resolve(options.cwd, epubPath);
+    if (!fs.existsSync(epubPathResolved)) {
       winston.error(`Couldn’t find EPUB file '${epubPath}'`);
       return reject(jobId);
     }
@@ -48,7 +49,7 @@ module.exports = function ace(epubPath, options) {
     /* eslint-enable no-param-reassign */
 
     // Unzip the EPUB
-    const epub = new EPUB(epubPath);
+    const epub = new EPUB(epubPathResolved);
     epub.extract()
     .then(() => epub.parse())
     // initialize the report
