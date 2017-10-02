@@ -49,12 +49,18 @@ test('report dir is correctly created', async () => {
   expect(fs.existsSync(path.join(outdir.name, 'report.html'))).toBeTruthy();
 });
 
+test('expanded EPUBs are supported', async () => {
+  expect.assertions(1);
+  await runAce(path.join(__dirname, '../data/base-epub-30'));
+  expect(fs.existsSync(path.join(outdir.name, 'report.html'))).toBeTruthy();
+});
+
 test('files don’t leak outside the report dir', async () => {
   // Add another directory level to prevent any leak in the user's temp dir
   const outpath = path.join(outdir.name, 'report');
   fs.mkdirSync(outpath);
   expect.assertions(2);
-  await runAce(path.join(__dirname, '../data/issue33.epub'), { outpath });
+  await runAce(path.join(__dirname, '../data/issue33'), { outpath });
   expect(fs.existsSync(path.join(outpath, 'report.html'))).toBeTruthy();
   expect(fs.existsSync(path.join(outpath, 'data/EPUB/images/img_001.jpg'))).toBeTruthy();
 });
