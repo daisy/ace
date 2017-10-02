@@ -6,7 +6,7 @@ const tmp = require('tmp');
 
 const checker = require('../checker/checker.js');
 const EPUB = require('../epub/epub.js');
-const report = require('../report/report.js');
+const Report = require('../report/report.js');
 const winston = require('winston');
 
 tmp.setGracefulCleanup();
@@ -53,22 +53,21 @@ module.exports = function ace(epubPath, options) {
     epub.extract()
     .then(() => epub.parse())
     // initialize the report
-    .then(() => report.initialize(epub))
+    .then(() => new Report(epub))
     // Report the Nav Doc
-    .then(() => report.addEPUBNav(epub.navDoc))
+    .then(report => report.addEPUBNav(epub.navDoc))
     // Check each Content Doc
-    .then(() => checker.check(epub))
+    .then(report => checker.check(epub, report))
     // Process the Results
-    .then(() => {
+    .then((report) => {
       if (options.outdir === undefined) {
-        winston.info(JSON.stringify(report.getJsonReport(), null, '  '));
-      } else {
-        return Promise.all([
-          report.copyData(options.outdir),
-          report.saveJson(options.outdir),
-          report.saveHtml(options.outdir),
-        ]);
+        return winston.info(JSON.stringify(report.json, null, '  '));
       }
+      return Promise.all([
+        report.copyData(options.outdir),
+        report.saveJson(options.outdir),
+        report.saveHtml(options.outdir),
+      ]);
     })
     .then(() => {
       winston.info('Done.');
@@ -80,17 +79,4 @@ module.exports = function ace(epubPath, options) {
       reject(jobId);
     });
   });
-  // // Alternatively: use reduce to process results progressively ?
-  // new EPUB(epubPath).extract()
-  // .then(epub => epub.getContentDocsPaths())
-  // .then(paths => paths.map(path => `file://${path}`))
-  // .then(urls =>
-  //   urls.reduce((sequence, url) =>
-  //     sequence.then(() => check(url)).then((result) => {
-  //       console.log(`do sth with ${result}`);
-  //       return result;
-  //     }), Promise.resolve()))
-  // .then(...);
-  //   getJSON('story.json').then(function(story) {
-  //   addHtmlToPage(story.heading);
 };

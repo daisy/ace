@@ -3,7 +3,6 @@
 const fs = require('fs');
 const path = require('path');
 const Nightmare = require('nightmare');
-const report = require('../report/report.js');
 const axe2ace = require('../report/axe2ace.js');
 const winston = require('winston');
 
@@ -58,12 +57,10 @@ function checkSingle(spineItem, epub, nightmare) {
       const results = json;
       results.assertions = (json.axe != null) ? axe2ace.axe2ace(spineItem, json.axe) : [];
       delete results.axe;
-      var numIssues = 0;
-      if (results.assertions != null) {
-        numIssues = results.assertions.assertions.length;
-        report.addContentDocAssertion(results.assertions);
-      }
-      winston.info(`- ${numIssues} issues found`);
+      winston.info(`- ${
+        (results.assertions == null)
+          ? 'No'
+          : results.assertions.assertions.length} issues found`);
       if (results.data != null && results.data.images != null) {
         results.data.images.forEach((img) => {
           const imageFullPath = path.resolve(path.dirname(spineItem.filepath), img.path);

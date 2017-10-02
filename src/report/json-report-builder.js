@@ -53,7 +53,6 @@ function withAssertion(obj, assertion) {
     }
     obj["assertions"].push(assertion);
     withResult(obj, calculateResult(obj.assertions));
-
     return obj;
 }
 function withResult(obj, result) {

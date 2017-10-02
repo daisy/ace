@@ -23,8 +23,6 @@ const winston = require('winston');
 const reportBuilder = require('./json-report-builder.js');
 const a11yMetaChecker = require("./analyze-a11y-metadata.js");
 
-const report = exports;
-const jsonReport = new reportBuilder.Report();
 
 function headingsToOutline(headings) {
   const result = [];
@@ -57,45 +55,51 @@ function aggregateHTMLOutlines(outlines) {
   return `<ol><li>${outlines.join('</li><li>')}</li></ol>`;
 }
 
+module.exports = class Report {
 
-report.initialize = function initialize(epub) {
-    jsonReport.withTitle("ACE Report")
+
+  constructor(epub) {
+    this.json = new reportBuilder.Report();
+    this.json.withTitle("ACE Report")
             .withDescription("Accessibility Checker Report" )
             .withTestSubject(epub.path, "", "", epub.metadata);
-    jsonReport.withA11yMeta(a11yMetaChecker.analyze(epub.metadata));
+    this.json.withA11yMeta(a11yMetaChecker.analyze(epub.metadata));
+  }
 
-}
-report.addContentDocAssertion = function addContentDocAssertion(assertion) {
-    jsonReport.withAssertion(assertion);
-}
-report.addOutline = function addOutline(outline) {
-    jsonReport.withHOutline(outline);
-}
-report.addHeadings = function addHeadings(headings) {
-    jsonReport.withHeadingsOutline(headingsToOutline(headings));
-}
-report.addHTMLOutlines = function addHTMLOutlines(outlines) {
-    jsonReport.withHTMLOutline(aggregateHTMLOutlines(outlines));
-}
-report.addEPUBNav = function addEPUBNav(navDoc) {
-    jsonReport.withEPUBOutline(navDoc.tocHTML);
-}
-report.addImages = function addHImages(images) {
-    jsonReport.withImages(images);
-}
-report.getJsonReport = function getJsonReport() {
-    return jsonReport;
-}
-report.copyData = function copyData(outdir) {
+  addContentDocAssertion(assertion) {
+    this.json.withAssertion(assertion);
+    return this;
+  }
+  addOutline(outline) {
+    this.json.withHOutline(outline);
+    return this;
+  }
+  addHeadings(headings) {
+    this.json.withHeadingsOutline(headingsToOutline(headings));
+    return this;
+  }
+  addHTMLOutlines(outlines) {
+    this.json.withHTMLOutline(aggregateHTMLOutlines(outlines));
+    return this;
+  }
+  addEPUBNav(navDoc) {
+    this.json.withEPUBOutline(navDoc.tocHTML);
+    return this;
+  }
+  addImages(images) {
+    this.json.withImages(images);
+    return this;
+  }
+  copyData(outdir) {
     winston.info("Copying data");
-    if (jsonReport.data === null) return;
+    if (this.json.data === null) return;
     return fs.pathExists(outdir)
         .then((exists) => {
           if (!exists) fs.mkdirSync(outdir);
         })
         .then(() => {
-          if (jsonReport.data.images != null) {
-            jsonReport.data.images.forEach((img) => {
+          if (this.json.data.images != null) {
+            this.json.data.images.forEach((img) => {
               const fromPath = img.filepath;
               const toPath = path.join(outdir, 'data', img.path);
               delete img.filepath;
@@ -105,31 +109,32 @@ report.copyData = function copyData(outdir) {
             });
           }
         });
-}
-report.saveJson = function saveJson(outdir) {
+  }
+  saveJson(outdir) {
     winston.info("Saving JSON report");
     return fs.pathExists(outdir)
         .then((exists) => {
           if (!exists) fs.mkdirSync(outdir);
         })
         .then(() => {
-            const aceReport = JSON.stringify(jsonReport, null, '  ');
+            const aceReport = JSON.stringify(this.json, null, '  ');
             return aceReport;
         })
         .then((aceReport) => Promise.all([
           fs.writeFile(path.join(outdir, 'ace.json'), aceReport, 'UTF-8'),
         ]));
-}
-report.saveHtml = function saveHtml(outdir) {
-  winston.info("Saving HTML report");
-  // create a js file that the html report uses as its data source
-  const aceReport = JSON.stringify(jsonReport, null, '  ');
-  const js = "const aceReportData = " + aceReport + ";";
+  }
+  saveHtml(outdir) {
+    winston.info("Saving HTML report");
+    // create a js file that the html report uses as its data source
+    const aceReport = JSON.stringify(this.json, null, '  ');
+    const js = "const aceReportData = " + aceReport + ";";
 
-  // copy report.html and the contents of /js and /css to the outdir
-  return fs.copy(path.join(__dirname, 'resources/report.html'), path.join(outdir, "report.html"))
-    //.then(() => fs.copy(path.join(__dirname, './resources/css/'), path.join(outdir, "css/")))
-    .then(() => fs.copy(path.join(__dirname, './resources/js/'), path.join(outdir, "js/")))
-    .then(() => fs.writeFile(path.join(outdir, 'js/', 'aceReportData.js'), js, 'UTF-8'))
-    .catch(err => winston.error(err));
+    // copy report.html and the contents of /js and /css to the outdir
+    return fs.copy(path.join(__dirname, 'resources/report.html'), path.join(outdir, "report.html"))
+      //.then(() => fs.copy(path.join(__dirname, './resources/css/'), path.join(outdir, "css/")))
+      .then(() => fs.copy(path.join(__dirname, './resources/js/'), path.join(outdir, "js/")))
+      .then(() => fs.writeFile(path.join(outdir, 'js/', 'aceReportData.js'), js, 'UTF-8'))
+      .catch(err => winston.error(err));
+  }
 }
