@@ -9,7 +9,7 @@ const path = require('path');
 test('test no input', () => {
   const { stdout, stderr, status } = ace([]);
   expect(status).toBe(1);
-  expect(stderr).toBe('');
+  expect(stderr.trim()).toMatchSnapshot();
   expect(stdout).toMatchSnapshot();
 });
 

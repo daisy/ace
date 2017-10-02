@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`test existing output 1`] = `
-"Output directory is not empty.
+"[33mwarn[39m:    Output directory is not empty.
 
 Running Ace would override the following files or directories:
 
@@ -38,9 +38,10 @@ exports[`test help 1`] = `
 "
 `;
 
-exports[`test no input 1`] = `
-"Input required
+exports[`test no input 1`] = `"[31merror[39m:   Input required"`;
 
+exports[`test no input 2`] = `
+"
   Ace by DAISY, an Accessibility Checker for EPUB
 
   Usage: ace [options] <input>
