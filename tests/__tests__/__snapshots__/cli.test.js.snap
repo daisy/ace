@@ -64,7 +64,9 @@ exports[`test no input 2`] = `
 "
 `;
 
-exports[`test unexisting input 1`] = `
+exports[`test unexisting input 1`] = `"Re-run Ace using the --verbose option to enable full debug logging."`;
+
+exports[`test unexisting input 2`] = `
 "[31merror[39m:   Couldn’t find EPUB file 'unexisting.epub'
 "
 `;

@@ -74,7 +74,8 @@ module.exports = function ace(epubPath, options) {
       resolve(jobId);
     })
     .catch((err) => {
-      winston.error(`Unexpected error: ${err}`);
+      winston.error(`Unexpected error: ${(err.message !== undefined) ? err.message : err}`);
+      if (err.stack !== undefined) winston.debug(err.stack);
       reject(jobId);
     });
   });

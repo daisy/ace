@@ -74,6 +74,10 @@ function checkSingle(spineItem, epub, nightmare) {
         });
       }
       return results;
+    })
+    .catch((err) => {
+      winston.debug(`Error when running nightmare: ${JSON.stringify(err, null, 2)}`);
+      throw new Error('Failed to check HTML content');
     });
 }
 
@@ -93,4 +97,4 @@ module.exports.check = (epub) => {
         return results;
       })), Promise.resolve([]))
   .then(results => nightmare.end(() => results));
-}
+};

@@ -86,5 +86,6 @@ ace(cli.input[0], {
 })
 .catch((err) => {
   if (err) winston.error(err.message);
+  console.log(`Re-run Ace using the --verbose option to enable full debug logging.`)
   process.exit(1);
 });

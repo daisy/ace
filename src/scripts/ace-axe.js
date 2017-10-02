@@ -92,9 +92,13 @@ daisy.ace.run = function(done) {
 
       aceResult.axe = axeResult;
 
-      daisy.ace.createReport(aceResult);
+      try {
+        daisy.ace.createReport(aceResult);
+        done(null, aceResult);
+      } catch(e) {
+        done(e, null);
+      }
 
-      done(null, aceResult);
     }
   );
 };

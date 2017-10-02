@@ -37,7 +37,7 @@ test('test version --version', () => {
 test('test unexisting input', () => {
   const { stdout, stderr, status } = ace(['unexisting.epub']);
   expect(status).toBe(1);
-  expect(stdout.trim()).toBe('');
+  expect(stdout.trim()).toMatchSnapshot();
   expect(stderr).toMatchSnapshot();
 });
 
