@@ -7,59 +7,60 @@ const fs = require('fs-extra');
 const path = require('path');
 const winston = require('winston');
 
-function EPUB(path) {
-  this.path = path;
-  this.contentDocs = [];
-  this.navDoc = {};
-}
+tmp.setGracefulCleanup();
 
-EPUB.prototype.isUnpacked = function isUnpacked() {
-  // assuming this fileset already passed epubcheck
-  // so no need to verify its format
-  return fs.statSync(this.path).isDirectory();
-};
-
-EPUB.prototype.extract = function extract() {
-
-  // only extract if not already unpacked
-  if (this.isUnpacked()) {
-    winston.verbose("EPUB is already unpacked");
-    this.dir = this.path;
-    return new Promise((resolve, reject) => {
-      resolve(this);
-    });
+class EPUB {
+  constructor(epub, cwd = process.cwd()) {
+    this.path = path.resolve(cwd, epub);
+    this.basedir = undefined;
+    this.parsed = false;
+    this.navDoc = {};
+    this.contentDocs = [];
   }
 
-  else {
-    winston.verbose("Extracting EPUB");
-    tmp.setGracefulCleanup(); // remove tmpdir automatically upon process exit
-    const tmpdir = tmp.dirSync({ unsafeCleanup: true }); // remove even when not empty
+  get expanded() {
+    return fs.statSync(this.path).isDirectory();
+  }
 
+  extract() {
     return new Promise((resolve, reject) => {
-      unzip(this.path, { dir: tmpdir.name }, (err) => {
-        if (err) {
-          winston.error(err);
-          reject(err);
-          return;
-        }
-        this.dir = tmpdir.name;
+      if (this.basedir !== undefined) {
         resolve(this);
-      });
+      } else if (this.expanded) {
+        winston.verbose('EPUB is already unpacked');
+        this.basedir = this.path;
+        resolve(this);
+      } else {
+        winston.verbose('Extracting EPUB');
+        const tmpdir = tmp.dirSync({ unsafeCleanup: true }); // remove even when not empty
+        unzip(this.path, { dir: tmpdir.name }, (err) => {
+          if (err) {
+            winston.error('Failed to unzip EPUB');
+            reject(err);
+          } else {
+            this.basedir = tmpdir.name;
+            resolve(this);
+          }
+        });
+      }
     });
   }
-};
 
-EPUB.prototype.parse = function parse() {
-  const epubParser = new epubParse.EpubParser();
-  epubParser.parse(this.dir)
-    .then(() => {
-      this.contentDocs = epubParser.contentDocs;
-      this.navDoc = epubParser.navDoc;
-      this.metadata = epubParser.metadata
-    })
-    .catch((err) => {
-      winston.error(err);
+  parse() {
+    return new Promise((resolve, reject) => {
+      if (this.parsed) return resolve(this);
+      return new epubParse.EpubParser().parse(this.basedir)
+        .then((parsed) => {
+          Object.assign(this, parsed);
+          return resolve(this);
+        })
+        .catch((err) => {
+          winston.error('Failed to parse EPUB');
+          return reject(err);
+        });
     });
-};
+  }
+
+}
 
 module.exports = EPUB;

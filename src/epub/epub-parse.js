@@ -88,6 +88,7 @@ EpubParser.prototype.setContentDocMediaType = function(mediaType) {
 // returns true or false
 EpubParser.prototype.parse = function(epubDir) {
   winston.info("Parsing EPUB");
+  winston.verbose(`at location '${epubDir}'`);
 
   return new Promise((resolve, reject) => {
     const packageDocPath = this.calculatePackageDocPath(epubDir);

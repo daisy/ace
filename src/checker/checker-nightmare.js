@@ -67,7 +67,7 @@ function checkSingle(spineItem, epub, nightmare) {
       if (results.data != null && results.data.images != null) {
         results.data.images.forEach((img) => {
           const imageFullPath = path.resolve(path.dirname(spineItem.filepath), img.path);
-          const imageRelPath = path.relative(epub.dir, imageFullPath);
+          const imageRelPath = path.relative(epub.basedir, imageFullPath);
           img.filepath = imageFullPath;
           img.path = imageRelPath;
           img.location = `${spineItem.relpath}#epubcfi(${img.cfi})`;
