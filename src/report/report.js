@@ -1,26 +1,10 @@
 'use strict';
 
-/*
-basic usage:
-
-initialize report:
-startReport(epubUrl);
-
-as each result comes in:
-addContentDocAssertion(axe2ace(axeResults));
-
-add additional info:
-addMetadata(..)
-addOutline(..)
-TBD
-
-*/
-
 const fs = require('fs-extra');
 const path = require('path');
 const winston = require('winston');
 
-const reportBuilder = require('./json-report-builder.js');
+const builders = require('./report-builders.js');
 const a11yMetaChecker = require("./analyze-a11y-metadata.js");
 
 
@@ -51,43 +35,46 @@ function headingsToOutline(headings) {
 }
 
 function aggregateHTMLOutlines(outlines) {
-
   return `<ol><li>${outlines.join('</li><li>')}</li></ol>`;
 }
 
 module.exports = class Report {
-
-
   constructor(epub) {
-    this.json = new reportBuilder.Report();
-    this.json.withTitle("ACE Report")
-            .withDescription("Accessibility Checker Report" )
-            .withTestSubject(epub.path, "", "", epub.metadata);
-    this.json.withA11yMeta(a11yMetaChecker.analyze(epub.metadata));
+    this._builder = new builders.ReportBuilder()
+      .withTestSubject(epub.path, '', '', epub.metadata)
+      .withA11yMeta(a11yMetaChecker.analyze(epub.metadata));
+  }
+
+  get json() {
+    return this._builder.build();
   }
 
   addContentDocAssertion(assertion) {
-    this.json.withAssertion(assertion);
+    this._builder.withAssertion(assertion);
     return this;
   }
   addOutline(outline) {
-    this.json.withHOutline(outline);
+    this._builder.withHOutline(outline);
     return this;
   }
   addHeadings(headings) {
-    this.json.withHeadingsOutline(headingsToOutline(headings));
+    this._builder.withHeadingsOutline(headingsToOutline(headings));
     return this;
   }
   addHTMLOutlines(outlines) {
-    this.json.withHTMLOutline(aggregateHTMLOutlines(outlines));
+    this._builder.withHTMLOutline(aggregateHTMLOutlines(outlines));
     return this;
   }
   addEPUBNav(navDoc) {
-    this.json.withEPUBOutline(navDoc.tocHTML);
+    this._builder.withEPUBOutline(navDoc.tocHTML);
     return this;
   }
   addImages(images) {
-    this.json.withImages(images);
+    this._builder.withImages(images);
+    return this;
+  }
+  addProperties(properties) {
+    this._builder.withProperties(properties);
     return this;
   }
   copyData(outdir) {

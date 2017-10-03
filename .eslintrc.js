@@ -4,7 +4,8 @@ module.exports = {
     "jest": true
   },
   "rules": {
-    "no-console": 0
+    "no-console": 0,
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
   },
   "plugins": [
     "import"
