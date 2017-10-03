@@ -81,6 +81,11 @@ daisy.ace.run = function(done) {
   };
 
   window.axe.run(
+    {
+      "rules": {
+        "bypass": { enabled: false },
+      }
+    },
     function(axeError, axeResult) {
       if (axeError)  {
         done(axeError, null);
