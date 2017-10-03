@@ -3,6 +3,8 @@
 
 'use strict';
 
+const pkg = require('../../package');
+
 // static
 const ACE_DESCRIPTION = {
   '@type': 'earl:software',
@@ -10,7 +12,7 @@ const ACE_DESCRIPTION = {
   'doap:description': 'DAISY Accessibility Checker for EPUB',
   'doap:homepage': 'http://ace.daisy.org',
   'doap:created': '2017-07-01',
-  'doap:release': { 'doap:revision': 'v0.2.0' },
+  'doap:release': { 'doap:revision': pkg.version },
 };
 
 function calculateResult(assertions) {
