@@ -85,7 +85,7 @@ function  axe2ace(spineItem, axeResults) {
         .withDescription(violation.description)
         .withHelp(kbURL, kbTitle)
         .build();
-      violation.nodes.forEach(node => assertion.withAssertion(
+      violation.nodes.forEach(node => assertion.withAssertions(
         new builders.AssertionBuilder()
           .withAssertedBy('aXe')
           .withMode('automatic')

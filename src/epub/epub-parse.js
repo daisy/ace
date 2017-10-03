@@ -31,8 +31,8 @@ function EpubParser() {
   this.contentDocMediaType = "application/xhtml+xml";
 }
 
-function parseNavDoc(relpath, filepath) {
-  const content = fs.readFileSync(filepath).toString();
+function parseNavDoc(fullpath, epubDir) {
+  const content = fs.readFileSync(fullpath).toString();
   const doc = new DOMParser().parseFromString(content);
 
   // Remove all links
@@ -52,10 +52,13 @@ function parseNavDoc(relpath, filepath) {
   const toc = select('//html:nav'
                         + '[@epub:type="toc"]/html:ol', doc);
   const tocHTML = new XMLSerializer().serializeToString(toc[0]);
+  const hasPageList = select('//html:nav'
+                        + '[@epub:type="page-list"]', doc).length > 0;
 
   return {
-    path: relpath,
+    src: path.relative(epubDir, fullpath),
     tocHTML,
+    hasPageList,
   };
 }
 
@@ -96,18 +99,20 @@ EpubParser.prototype.parse = function(epubDir) {
       winston.error('Package document not found.');
       reject(new Error("Package document not found."));
     }
-    this.parseData(packageDocPath);
+    this.packageDoc = {
+      src: path.relative(epubDir, packageDocPath),
+    };
+    this.parseData(packageDocPath, epubDir);
     resolve(this);
   });
 }
 
-EpubParser.prototype.parseData = function(packageDocPath) {
+EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
   const content = fs.readFileSync(packageDocPath).toString();
   const doc = new DOMParser().parseFromString(content);
   const select = xpath.useNamespaces(
     { opf: 'http://www.idpf.org/2007/opf',
       dc: 'http://purl.org/dc/elements/1.1/'});
-
   this.metadata = parseMetadata(doc, select);
 
   const spineItemIdrefs = select('//opf:itemref/@idref', doc);
@@ -129,7 +134,7 @@ EpubParser.prototype.parseData = function(packageDocPath) {
   if (navDocRef.length > 0) {
     const navDocPath = navDocRef[0].nodeValue;
     const navDocFullPath = path.join(path.dirname(packageDocPath), navDocPath);
-    this.navDoc = parseNavDoc(navDocPath, navDocFullPath);
+    this.navDoc = parseNavDoc(navDocFullPath, epubDir);
   }
 };
 

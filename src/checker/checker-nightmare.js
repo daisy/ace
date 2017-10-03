@@ -95,6 +95,7 @@ module.exports.check = (epub) => {
       mode: 'detach',
     },
   });
+  winston.info('Checking documents...');
   return epub.contentDocs.reduce((sequence, spineItem) =>
     sequence.then(results =>
       checkSingle(spineItem, epub, nightmare)

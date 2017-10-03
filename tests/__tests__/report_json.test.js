@@ -50,10 +50,12 @@ describe('check assertions', () => {
     const report = await ace(path.join(__dirname, '../data/base-epub-30'));
     expect(report['earl:result']).toBeDefined();
     expect(report['earl:result']).toEqual({ 'earl:outcome': 'pass' });
-    expect(report.assertions).toMatchObject([{
-      '@type': 'earl:assertion',
-      assertions: [],
-    }]);
+    expect(Array.isArray(report.assertions)).toBe(true);
+    report.assertions.forEach(
+      assertion => expect(assertion).toMatchObject({
+        '@type': 'earl:assertion',
+        assertions: [],
+      }));
   });
 });
 

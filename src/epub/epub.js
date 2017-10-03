@@ -52,6 +52,7 @@ class EPUB {
       return new epubParse.EpubParser().parse(this.basedir)
         .then((parsed) => {
           Object.assign(this, parsed);
+          this.parsed = true;
           return resolve(this);
         })
         .catch((err) => {

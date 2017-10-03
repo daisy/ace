@@ -27,9 +27,9 @@ function calculateResult(assertions) {
 }
 
 // add an assertion and recalc the top-level result
-function withAssertion(obj, assertion) {
+function withAssertions(obj, assertions) {
   if (!('assertions' in obj)) obj.assertions = [];
-  obj.assertions.push(assertion);
+  obj.assertions.push(assertions);
   obj['earl:result'] = calculateResult(obj.assertions);
   return obj;
 }
@@ -55,8 +55,8 @@ class AssertionBuilder {
     this._json['earl:assertedBy'] = assertor;
     return this;
   }
-  withAssertion(assertion) {
-    withAssertion(this._json, assertion);
+  withAssertions(assertions) {
+    withAssertions(this._json, assertions);
     return this;
   }
   withMode(mode) {
@@ -106,8 +106,8 @@ class ReportBuilder {
     this._json['a11y-metadata'] = metadata;
     return this;
   }
-  withAssertion(assertions) {
-    withAssertion(this._json, assertions);
+  withAssertions(assertions) {
+    withAssertions(this._json, assertions);
     return this;
   }
   withData(data) {

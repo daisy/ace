@@ -1,12 +1,14 @@
 'use strict';
 
-const checker = require('./checker-nightmare.js');
+const htmlChecker = require('./checker-nightmare.js');
+const epubChecker = require('./checker-epub.js');
 const winston = require('winston');
 
 function consolidate(results, report) {
+  winston.info('Consolidating results...');
   // Integrate checker results to the report
   results.forEach((res) => {
-    report.addContentDocAssertion(res.assertions);
+    report.addAssertions(res.assertions);
     report.addProperties(res.properties);
     report.addData(res.data);
   });
@@ -22,7 +24,7 @@ function consolidate(results, report) {
 }
 
 module.exports.check = function check(epub, report) {
-  winston.info('Checking documents...');
-  return checker.check(epub)
+  return epubChecker.check(epub, report)
+    .then(() => htmlChecker.check(epub))
     .then(results => consolidate(results, report));
 };

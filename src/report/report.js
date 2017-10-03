@@ -49,8 +49,8 @@ module.exports = class Report {
     return this._builder.build();
   }
 
-  addContentDocAssertion(assertion) {
-    this._builder.withAssertion(assertion);
+  addAssertions(assertions) {
+    this._builder.withAssertions(assertions);
     return this;
   }
   addData(data) {
