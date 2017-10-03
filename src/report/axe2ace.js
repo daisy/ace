@@ -72,11 +72,18 @@ function  axe2ace(spineItem, axeResults) {
       .withTestSubject(spineItem.relpath, spineItem.title);
     // process axe's individual checks for a single content document
     axeResults.violations.forEach((violation) => {
+      const kbURL = (kbMap.map.hasOwnProperty(violation.id))
+        ? kbMap.baseUrl + kbMap.map[violation.id].url
+        : kbMap.baseUrl;
+      const kbTitle = (kbMap.map.hasOwnProperty(violation.id))
+        ? kbMap.map[violation.id].title
+        : 'Unknown';
+      if (kbTitle == 'Unknown') winston.verbose(`Couldn’t find KB key for rule '${violation.id}'`)
       const test = new builders.TestBuilder()
         .withImpact(violation.impact)
         .withTitle(violation.id)
         .withDescription(violation.description)
-        .withHelp(kbMap.baseUrl + kbMap.map[violation.id].url, kbMap.map[violation.id].title)
+        .withHelp(kbURL, kbTitle)
         .build();
       violation.nodes.forEach(node => assertion.withAssertion(
         new builders.AssertionBuilder()
