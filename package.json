@@ -88,10 +88,10 @@
     "build": "yarn run build:js",
     "build:js": "cp -R src/ dist",
     "build:watch": "watch 'yarn run build' src",
+    "lint": "eslint src",
     "test": "jest",
     "docs": "echo add docs",
-    "lint": "eslint src",
-    "dist": "echo add dist"
+    "prepublishOnly": "yarn run test && yarn run build"
   },
   "jest": {
     "testEnvironment": "node"
