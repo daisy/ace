@@ -7,6 +7,15 @@ const ASSERTED_BY = 'Ace';
 const MODE = 'automatic';
 const KB_BASE = 'https://daisy.github.io/a11y-kb/';
 
+function asString(arrayOrString) {
+  if (Array.isArray(arrayOrString) && arrayOrString.length > 0) {
+    return asString(arrayOrString[0]);
+  } else if (arrayOrString !== undefined) {
+    return arrayOrString.toString().trim();
+  }
+  return '';
+}
+
 function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kbTitle }) {
   return new builders.AssertionBuilder()
     .withAssertedBy(ASSERTED_BY)
@@ -54,8 +63,8 @@ function checkMetadata(assertions, epub) {
 }
 
 function checkTitle(assertions, epub) {
-  const title = epub.metadata['dc:title'];
-  if (title === undefined || title.trim() === '') {
+  const title = asString(epub.metadata['dc:title']);
+  if (title === '') {
     assertions.withAssertions(newViolation({
       title: 'epub-title',
       testDesc: 'Ensures the EPUB has a title',
@@ -69,7 +78,7 @@ function checkTitle(assertions, epub) {
 function checkPageSource(assertion, epub) {
   if (epub.navDoc.hasPageList
     && (epub.metadata['dc:source'] === undefined
-    || epub.metadata['dc:source'].trim() === '')) {
+    || epub.metadata['dc:source'].toString() === '')) {
     assertion.withAssertions(newViolation({
       title: 'epub-pagesource',
       testDesc: 'Ensures the source of page breaks is identified',
@@ -84,9 +93,7 @@ function check(epub, report) {
   winston.info('Checking package...');
   const assertion = new builders.AssertionBuilder()
     .withSubAssertions()
-    .withTestSubject(
-      epub.packageDoc.src,
-      (epub.metadata['dc:title'] !== undefined) ? epub.metadata['dc:title'] : '');
+    .withTestSubject(epub.packageDoc.src, asString(epub.metadata['dc:title']));
 
   // Check a11y metadata
   checkMetadata(assertion, epub);
