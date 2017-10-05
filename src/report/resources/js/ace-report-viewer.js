@@ -73,8 +73,11 @@ AceReport.prototype.flattenData = function(data) {
         "desc": item["earl:result"]["dct:description"],
         "pointer": item["earl:result"]["earl:pointer"],
         "impact": item["earl:test"]["earl:impact"],
-        "location": filename + "#epubcfi(" + item["earl:result"]["earl:pointer"]["cfi"] + ")"
+        "location": filename,
       };
+      if (item["earl:result"]["earl:pointer"]) {
+        obj.location += "#epubcfi(" + item["earl:result"]["earl:pointer"]["cfi"] + ")";
+      }
       thiz.flatData.push(obj);
 
       thiz.addIfUnique(obj["file"], thiz.fileFilter);
