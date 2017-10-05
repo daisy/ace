@@ -29,7 +29,7 @@ function calculateResult(assertions) {
 // add an assertion and recalc the top-level result
 function withAssertions(obj, assertions) {
   if (!('assertions' in obj)) obj.assertions = [];
-  obj.assertions.push(assertions);
+  obj.assertions = obj.assertions.concat(assertions);
   obj['earl:result'] = calculateResult(obj.assertions);
   return obj;
 }
@@ -90,8 +90,8 @@ class ReportBuilder {
     this._json = {
       '@type': 'earl:report',
       '@context': 'http://ace.daisy.org/ns/ace-report._jsonld',
-      'dct:title': title,
-      'dct:description': description,
+      'dct:title': (title == null) ? '' : title.toString(),
+      'dct:description': (title == null) ? '' : description.toString(),
       'dct:date': new Date().toLocaleString(),
       'earl:assertedBy': ACE_DESCRIPTION,
       outlines: {},
@@ -103,37 +103,47 @@ class ReportBuilder {
     return this._json;
   }
   withA11yMeta(metadata) {
+    if (!metadata) return this;
     this._json['a11y-metadata'] = metadata;
     return this;
   }
   withAssertions(assertions) {
+    if (!assertions) return this;
     withAssertions(this._json, assertions);
     return this;
   }
   withData(data) {
+    if (!data) return this;
     Object.getOwnPropertyNames(data).forEach((key) => {
-      this._json.data[key] = (Array.isArray(this._json.data[key]))
-        ? this._json.data[key].push(data[key])
-        : data[key];
+      if (Array.isArray(this._json.data[key])) {
+        this._json.data[key] = this._json.data[key].concat(data[key]);
+      } else {
+        this._json.data[key] = data[key];
+      }
     });
+    return this;
   }
   withEPUBOutline(outline) {
+    if (!outline) return this;
     this._json.outlines.toc = outline;
     return this;
   }
   withHeadingsOutline(outline) {
+    if (!outline) return this;
     this._json.outlines.headings = outline;
     return this;
   }
   withHTMLOutline(outline) {
+    if (!outline) return this;
     this._json.outlines.html = outline;
     return this;
   }
   withProperties(properties) {
+    if (!properties) return this;
     Object.getOwnPropertyNames(properties).forEach((key) => {
-      this._json.properties[key] = (key in properties)
-        ? this._json.properties[key] || properties[key]
-        : properties[key];
+      this._json.properties[key] = (key in this._json.properties)
+        ? this._json.properties[key] || Boolean(properties[key])
+        : Boolean(properties[key]);
     });
     return this;
   }
