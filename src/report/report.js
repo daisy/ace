@@ -89,9 +89,17 @@ module.exports = class Report {
               const fromPath = img.path;
               const toPath = path.join(outdir, 'data', img.src);
               delete img.path;
-              return fs.copy(fromPath, toPath, {
-                overwrite: false,
-              });
+              return fs.pathExists(fromPath)
+                .then((exists) => {
+                  if (exists) {
+                    return fs.copy(fromPath, toPath, {
+                      overwrite: false,
+                    });
+                  } else {
+                    winston.warn(`Couldn’t copy resource '${img.src}'`);
+                    return Promise.resolve();
+                  }
+                });
             });
           }
         });

@@ -67,3 +67,12 @@ test('files don’t leak outside the report dir', async () => {
   expect(fs.existsSync(path.join(outpath, 'report.html'))).toBeTruthy();
   expect(fs.existsSync(path.join(outpath, 'data/EPUB/images/img_001.jpg'))).toBeTruthy();
 });
+
+test('don’t crash when a resource isn’t in the EPUB', async () => {
+  // Add another directory level to prevent any leak in the user's temp dir
+  const outpath = path.join(outdir.name, 'report');
+  fs.mkdirSync(outpath);
+  expect.assertions(1);
+  await ace(path.join(__dirname, '../data/fs-resource-missing'), { outdir: outpath });
+  expect(fs.existsSync(path.join(outpath, 'report.html'))).toBeTruthy();
+});
