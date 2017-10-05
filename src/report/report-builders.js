@@ -89,7 +89,7 @@ class ReportBuilder {
     ) {
     this._json = {
       '@type': 'earl:report',
-      '@context': 'http://ace.daisy.org/ns/ace-report._jsonld',
+      '@context': 'http://ace.daisy.org/ns/ace-report.jsonld',
       'dct:title': (title == null) ? '' : title.toString(),
       'dct:description': (title == null) ? '' : description.toString(),
       'dct:date': new Date().toLocaleString(),
