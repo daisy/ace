@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const express = require('express');
 const uuidv4 = require('uuid/v4');
 const multer = require('multer');
