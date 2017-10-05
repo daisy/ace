@@ -42,7 +42,7 @@ test('nothing to report', async () => {
 });
 
 describe('page list and breaks', () => {
-  test.only('page list correctly sourced', async () => {
+  test('page list correctly sourced', async () => {
     const report = await ace('../data/epubrules-pagelist');
     expect(report['earl:result']['earl:outcome']).toEqual('pass');
   });

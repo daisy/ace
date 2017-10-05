@@ -63,7 +63,7 @@ test('files don’t leak outside the report dir', async () => {
   const outpath = path.join(outdir.name, 'report');
   fs.mkdirSync(outpath);
   expect.assertions(2);
-  await ace(path.join(__dirname, '../data/issue33'), { outdir: outpath });
+  await ace(path.join(__dirname, '../data/fs-no-leaks'), { outdir: outpath });
   expect(fs.existsSync(path.join(outpath, 'report.html'))).toBeTruthy();
   expect(fs.existsSync(path.join(outpath, 'data/EPUB/images/img_001.jpg'))).toBeTruthy();
 });

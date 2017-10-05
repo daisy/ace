@@ -37,11 +37,11 @@ function ace(epub, options = {}) {
 }
 
 test('issue #49: multiple \'dc:title\' elements', async () => {
-  const report = await ace('../data/issue49');
+  const report = await ace('../data/issue-49');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
 
-test.only('issue #53: XXX', async () => {
-  const report = await ace('../data/issue53');
+test('issue #53: XXX', async () => {
+  const report = await ace('../data/issue-53');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
