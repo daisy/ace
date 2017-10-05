@@ -121,4 +121,13 @@ describe('check data', () => {
       }],
     });
   });
+
+  test('extract videos with sources', async () => {
+    const report = await ace(path.join(__dirname, '../data/feat-video-sources'));
+    expect(report.data).toMatchObject({
+      videos: [{
+        src: [{ src: 'EPUB/video_001.mp4' }, { src: 'EPUB/video_002.mp4' }],
+      }],
+    });
+  });
 });

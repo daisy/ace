@@ -67,10 +67,18 @@ function checkSingle(spineItem, epub, nightmare) {
           if (!Array.isArray(results.data[key])) return;
           results.data[key].forEach((item) => {
             if (item.src !== undefined) {
-              const fullpath = path.resolve(path.dirname(spineItem.filepath), item.src);
-              const relpath = path.relative(epub.basedir, fullpath);
-              item.path = fullpath;
-              item.src = relpath;
+              if (Array.isArray(item.src)) {
+                item.src = item.src.map((srcItem) => {
+                  if (srcItem.src !== undefined) {
+                    srcItem.path = path.resolve(path.dirname(spineItem.filepath), srcItem.src.toString());
+                    srcItem.src = path.relative(epub.basedir, srcItem.path);
+                  }
+                  return srcItem;
+                });
+              } else {
+                item.path = path.resolve(path.dirname(spineItem.filepath), item.src.toString());
+                item.src = path.relative(epub.basedir, item.path);
+              }
               if (item.cfi !== undefined) {
                 item.location = `${spineItem.relpath}#epubcfi(${item.cfi})`;
                 delete item.cfi;
