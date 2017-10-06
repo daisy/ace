@@ -133,8 +133,8 @@
       var tr = $("<tr></tr>");
 
       var tdImage = $('<td class="image">'
-        + '<a href="data/' + image['path'] + '">'
-        + '<img src="data/' + image['path'] + '" '
+        + '<a href="data/' + image['src'] + '">'
+        + '<img src="data/' + image['src'] + '" '
         +  'alt="' + image['alt'] + '"/>'
         + '</a></td>');
       tr.append(tdImage);
@@ -177,7 +177,7 @@
     }
   }
   function populateA11yMetadataSummary(a11ymetadata, pubmetadata) {
-    
+
     var tbody = $("#a11y-meta-present tbody");
     var list = $("#a11y-meta-missing");
 
