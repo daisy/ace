@@ -1,3 +1,5 @@
+'use strict';
+
 // input: json extraction of metadata
 // output: description of accessibility metadata
 /*
@@ -11,7 +13,7 @@
 
 const winston = require('winston');
 
-a11yMeta = [
+const a11yMeta = [
 "schema:accessMode",
 "schema:accessibilityFeature",
 "schema:accessibilityHazard",

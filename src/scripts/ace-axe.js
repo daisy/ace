@@ -1,5 +1,8 @@
 /* eslint-disable */
-window.daisy =  window.daisy || {};
+
+'use strict';
+
+var daisy = window.daisy =  window.daisy || {};
 daisy.ace = daisy.ace || {};
 daisy.epub = daisy.epub || {};
 

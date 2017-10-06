@@ -1,3 +1,5 @@
+'use strict';
+
 const winston = require('winston');
 const fs = require('fs-extra');
 const LOGFILE = __dirname + "/../ace.log";

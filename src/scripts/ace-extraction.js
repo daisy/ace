@@ -1,6 +1,9 @@
 /* eslint-disable */
-window.daisy =  window.daisy || {};
-ace = daisy.ace = daisy.ace || {};
+
+'use strict';
+
+var daisy = window.daisy =  window.daisy || {};
+var ace = daisy.ace = daisy.ace || {};
 
 ace.createReport = function(report) {
     let reportData = function(field, array) {
