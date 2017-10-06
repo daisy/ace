@@ -69,6 +69,9 @@
     "xpath": "^0.0.24"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^21.2.0",
+    "babel-preset-env": "^1.6.0",
     "cross-spawn": "^5.1.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
@@ -86,12 +89,27 @@
     "clean": "rimraf dist && mkdir dist",
     "prebuild": "yarn run clean",
     "build": "yarn run build:js",
-    "build:js": "cp -R src/ dist",
+    "build:js": "babel src -d dist --copy-files --ignore *.test.js",
+    "build:scripts": "babel src -d dist --presets browsers --only src/scripts",
     "build:watch": "watch 'yarn run build' src",
     "lint": "eslint src",
     "test": "jest",
     "docs": "echo add docs",
     "prepublishOnly": "yarn run test && yarn run build"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": [
+              "6"
+            ]
+          }
+        }
+      ]
+    ]
   },
   "jest": {
     "testEnvironment": "node"
