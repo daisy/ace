@@ -41,7 +41,12 @@ test('issue #49: multiple \'dc:title\' elements', async () => {
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
 
-test('issue #53: XXX', async () => {
+test('issue #53: this.json.data.images.forEach is not a function', async () => {
   const report = await ace('../data/issue-53');
+  expect(report['earl:result']['earl:outcome']).toEqual('pass');
+});
+
+test('issue #57: Failed to execute \'matches\' on \'Element\': \'m:annotation-xml\'', async () => {
+  const report = await ace('../data/issue-57');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });

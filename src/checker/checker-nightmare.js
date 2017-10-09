@@ -18,6 +18,12 @@ if (!fs.existsSync(PATH_TO_H5O)) {
   throw new Error('Can’t find h5o');
 }
 
+const PATH_TO_AXE_PATCH = path.join(__dirname, '../scripts/axe-patch.js');
+if (!fs.existsSync(PATH_TO_AXE_PATCH)) {
+  winston.verbose(PATH_TO_AXE_PATCH);
+  throw new Error('Can’t find axe-patch script');
+}
+
 const PATH_TO_ACE_AXE = path.join(__dirname, '../scripts/ace-axe.js');
 if (!fs.existsSync(PATH_TO_ACE_AXE)) {
   winston.verbose(PATH_TO_ACE_AXE);
@@ -49,6 +55,7 @@ function checkSingle(spineItem, epub, nightmare) {
     .goto(spineItem.url)
     .inject('js', PATH_TO_AXE)
     .inject('js', PATH_TO_H5O)
+    .inject('js', PATH_TO_AXE_PATCH)
     .inject('js', PATH_TO_ACE_AXE)
     .inject('js', PATH_TO_ACE_EXTRACTION)
     .wait(50)
