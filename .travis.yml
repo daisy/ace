@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "node"
+  - "lts/*"
+script:
+  - yarn test
+branches:
+  only:
+  - master
+cache:
+  yarn: true
