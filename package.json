@@ -34,8 +34,8 @@
   },
   "engines": {
     "node": ">=6",
-    "npm": ">=4",
-    "yarn": ">= 0.20"
+    "npm": ">=5",
+    "yarn": ">= 1.0.0"
   },
   "main": "dist/index.js",
   "bin": {
@@ -88,15 +88,15 @@
   "scripts": {
     "start": "node src/cli/cli.js",
     "clean": "rimraf dist && mkdir dist",
-    "prebuild": "yarn run clean",
-    "build": "yarn run build:js",
+    "prebuild": "npm run clean",
+    "build": "npm run build:js",
     "build:js": "babel src -d dist --copy-files --ignore *.test.js",
     "build:scripts": "babel src -d dist --presets browsers --only src/scripts",
-    "build:watch": "watch 'yarn run build' src",
+    "build:watch": "watch 'npm run build' src",
     "lint": "eslint src",
     "test": "jest",
     "docs": "echo add docs",
-    "prepublishOnly": "yarn run test && yarn run build"
+    "prepublishOnly": "npm run test && npm run build"
   },
   "babel": {
     "presets": [
