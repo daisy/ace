@@ -42,50 +42,63 @@ const cli = meow(`
   string: ['outdir', 'tempdir'],
 });
 
-logger.initLogger({verbose: cli.flags.verbose, silent: cli.flags.silent});
-
-// Check that an EPUB path is specified
-if (cli.input.length === 0) {
-  winston.error('Input required');
-  cli.showHelp(1);
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// Check that output directories can be overridden
-let outdir = cli.flags.outdir;
-if (outdir) {
-  if (cli.flags.subdir) {
-    outdir = path.join(outdir, path.parse(cli.input[0]).name);
+(async function processArgs() {
+  logger.initLogger({ verbose: cli.flags.verbose, silent: cli.flags.silent });
+
+  // Check that an EPUB path is specified
+  if (cli.input.length === 0) {
+    winston.logAndExit('error', 'Input required', () => {
+      console.log(cli.help);
+      process.exit(1);
+    });
+    await sleep(5000);
+    process.exit(1);
   }
-  if (!cli.flags.force) {
-    const overrides = ['ace.json', 'report.html', 'data', 'js']
-      .map(file => path.join(outdir, file))
-      .filter(fs.existsSync);
-    if (overrides.length > 0) {
-      winston.warn(`\
+
+  // Check that output directories can be overridden
+  let outdir = cli.flags.outdir;
+  if (outdir) {
+    if (cli.flags.subdir) {
+      outdir = path.join(outdir, path.parse(cli.input[0]).name);
+    }
+    if (!cli.flags.force) {
+      const overrides = ['ace.json', 'report.html', 'data', 'js']
+        .map(file => path.join(outdir, file))
+        .filter(fs.existsSync);
+      if (overrides.length > 0) {
+        winston.logAndExit('warn', `\
 Output directory is not empty.
 
-Running Ace would override the following files or directories:
+  Running Ace would override the following files or directories:
 
 ${overrides.map(file => `  - ${file}`).join('\n')}
 
-Use option --force to override.
-`);
-      process.exit(1);
+  Use option --force to override.
+  `, 1);
+        await sleep(5000);
+        process.exit(1);
+      }
     }
   }
-}
 
-// finally, invoke Ace
-ace(cli.input[0], {
-  cwd: cli.flags.cwd || process.cwd(),
-  outdir,
-  tmpdir: cli.flags.tempdir,
-  verbose: cli.flags.verbose,
-  silent: cli.flags.silent,
-  jobId: '',
-})
-.catch((err) => {
-  if (err) winston.error(err.message);
-  console.log(`Re-run Ace using the --verbose option to enable full debug logging.`)
-  process.exit(1);
-});
+  // finally, invoke Ace
+  ace(cli.input[0], {
+    cwd: cli.flags.cwd || process.cwd(),
+    outdir,
+    tmpdir: cli.flags.tempdir,
+    verbose: cli.flags.verbose,
+    silent: cli.flags.silent,
+    jobId: '',
+  })
+  .catch((err) => {
+    if (err && err.message) winston.error(err.message);
+    winston.logAndExit('info', 'Closing logs.', () => {
+      console.log('Re-run Ace using the --verbose option to enable full debug logging.');
+      process.exit(1);
+    });
+  });
+}());

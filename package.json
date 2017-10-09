@@ -49,6 +49,7 @@
   ],
   "dependencies": {
     "axe-core": "^2.3.1",
+    "env-paths": "^1.0.0",
     "express": "^4.15.5",
     "express-easy-zip": "^1.1.4",
     "extract-zip": "^1.6.5",
@@ -64,7 +65,7 @@
     "tmp": "0.0.31",
     "unzip": "^0.1.11",
     "uuidv4": "^0.5.0",
-    "winston": "^2.3.1",
+    "winston": "^2.4.0",
     "xmldom": "^0.1.27",
     "xpath": "^0.0.24"
   },

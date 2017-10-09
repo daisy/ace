@@ -3,14 +3,14 @@
 exports[`test existing output 1`] = `
 "[33mwarn[39m:    Output directory is not empty.
 
-Running Ace would override the following files or directories:
+  Running Ace would override the following files or directories:
 
   - report/ace.json
   - report/report.html
   - report/js
 
-Use option --force to override.
-
+  Use option --force to override.
+  
 "
 `;
 
@@ -64,7 +64,10 @@ exports[`test no input 2`] = `
 "
 `;
 
-exports[`test unexisting input 1`] = `"Re-run Ace using the --verbose option to enable full debug logging."`;
+exports[`test unexisting input 1`] = `
+"[32minfo[39m:    Closing logs.
+Re-run Ace using the --verbose option to enable full debug logging."
+`;
 
 exports[`test unexisting input 2`] = `
 "[31merror[39m:   Couldn’t find EPUB file 'unexisting.epub'
