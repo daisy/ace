@@ -5,7 +5,7 @@ const winston = require('winston');
 
 const ASSERTED_BY = 'Ace';
 const MODE = 'automatic';
-const KB_BASE = 'https://daisy.github.io/a11y-kb/';
+const KB_BASE = 'http://kb.daisy.org/publishing/';
 
 function asString(arrayOrString) {
   if (Array.isArray(arrayOrString) && arrayOrString.length > 0) {

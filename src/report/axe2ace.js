@@ -7,7 +7,7 @@ const winston = require('winston');
 
 // axe test IDs mapped to our KB pages
 const kbMap = {
-  'baseUrl': 'https://daisy.github.io/a11y-kb/',
+  'baseUrl': 'http://kb.daisy.org/publishing/',
   'map': {
     'html-has-lang': {url: 'docs/html/lang.html', title: 'Language'},
     'html-lang-valid': {url: 'docs/html/lang.html', title: 'Language'},
