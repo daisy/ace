@@ -30,7 +30,7 @@ module.exports = function ace(epubPath, options) {
     if (typeof options.tmpdir === 'string') {
       options.tmpdir = path.resolve(options.cwd, options.tmpdir);
       if (!fs.existsSync(options.tmpdir)) {
-        fs.mkdirSync(options.tmpdir);
+        fs.ensureDirSync(options.tmpdir);
       }
     } else if (options.tmpdir === undefined) {
       options.tmpdir = tmp.dirSync({ unsafeCleanup: true }).name;
@@ -38,7 +38,7 @@ module.exports = function ace(epubPath, options) {
     if (typeof options.outdir === 'string') {
       options.outdir = path.resolve(options.cwd, options.outdir);
       if (!fs.existsSync(options.outdir)) {
-        fs.mkdirSync(options.outdir);
+        fs.ensureDirSync(options.outdir);
       }
     } else {
       delete options.outdir;

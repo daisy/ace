@@ -10,7 +10,7 @@ const acePaths = envPaths('DAISY Ace', { suffix: null });
 module.exports.initLogger = function initLogger(options = {}) {
   // Check logging directoy exists
   if (!fs.existsSync(acePaths.log)) {
-    fs.mkdirSync(acePaths.log);
+    fs.ensureDirSync(acePaths.log);
   }
 
   // OS-dependant path to log file

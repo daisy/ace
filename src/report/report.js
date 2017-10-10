@@ -81,7 +81,7 @@ module.exports = class Report {
     if (this.json.data === null) return;
     return fs.pathExists(outdir)
         .then((exists) => {
-          if (!exists) fs.mkdirSync(outdir);
+          if (!exists) fs.ensureDirSync(outdir);
         })
         .then(() => {
           if (this.json.data.images != null) {
@@ -108,7 +108,7 @@ module.exports = class Report {
     winston.info("Saving JSON report");
     return fs.pathExists(outdir)
         .then((exists) => {
-          if (!exists) fs.mkdirSync(outdir);
+          if (!exists) fs.ensureDirSync(outdir);
         })
         .then(() => {
             const aceReport = JSON.stringify(this.json, null, '  ');
