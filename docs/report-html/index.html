@@ -266,31 +266,126 @@ Latest version: v0.5.0 (beta 1)</p>
     
       
 
+  <nav class="toc" aria-labelledby="toc-heading">
+    <h2 id="toc-heading">Table of contents</h2>
+    
+    
+    
+    
+      
+      
+        
+        <ol>
+        
+        
+        
+        <li>
+          <a href="#the-header">
+            The header
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#violations-table">
+            Violations table
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#outlines">
+            Outlines
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#accessibility-metadata-summary">
+            Accessibility metadata summary
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#images">
+            Images
+          </a>
+    
+    
+        </li></ol>
+        
+
+  </nav>
+
 
     
-    <p>In this report, you&rsquo;ll find a violations table, telling you which automated checks failed and why; and a series of sections containing extracted data, such as a headings outline and list of images, to highlight potential problem areas and to assist in manual checking.</p>
+    
 
-<p>This report includes:</p>
+<p>Ace&rsquo;s outputs a human-readable report in HTML format, detailing the automated tests. You can see which tests failed and why; and also see extracted data, such as a list of images, along with accessibility information for each, to highlight potential problem areas and to assist in manual checking.</p>
+
+<h2 id="the-header">The header</h2>
+
+<p>Includes the version of Ace, the report date, and some basic metadata extracted from the book, for identifying the publication.</p>
+
+<h2 id="violations-table">Violations table</h2>
+
+<p>The report contains a table listing the violations found in the EPUB. The table columns are:</p>
 
 <ul>
-<li>Basic information about the book (<code>Metadata details</code>)</li>
-<li>A list of violations, organized into a  (<code>Violations</code>)</li>
-<li>A summary of the publication&rsquo;s TOC</li>
-<li>An outline view of all the headings in the publication, arranged in reading order. Any skipped levels (i.e. going from H1 to H3 with no H2 in between) are flagged as <code>Missing heading</code>.</li>
-<li>An outline view for each HTML file in the publication</li>
-<li>A summary of accessibility metadata, including what&rsquo;s missing</li>
-<li>A list of images and associated descriptions, organized into a table</li>
+<li><code>Impact</code>: the severity of the violation</li>
+<li><code>Rule</code>: identifier for the rule that was violated</li>
+<li><code>Location</code>: where in the book the violation occurred</li>
+<li><code>Details</code>: suggestions on how to fix the problem, as well as a link to the relevant topic page in our online knowledge base.</li>
 </ul>
 
-<p>Here are some screenshots of Ace&rsquo;s HTML report.</p>
+<p>There is a set of drop-down filters at the top of the table where you can refine by Impact, File, and Rule.</p>
 
-<p>The document header and start of the violations table:</p>
+<h2 id="outlines">Outlines</h2>
 
-<p><img src="img/ace-report-violations.png" alt="Example of the violations table in an Ace HTML report" /></p>
+<p>The outlines are intended to assist with manual checking. They represent extracted views of different aspects of the EPUB. The outlines are:</p>
 
-<p>The headings outline:</p>
+<ul>
+<li><strong>Table of contents</strong>, taken from the EPUB navigation document</li>
+<li><strong>Headings</strong>, including indications of missing heading levels (i.e. going from <code>h1</code> to <code>h3</code> with no <code>h2</code> in between)</li>
+<li><strong>HTML</strong>, which is a view of just the heading content and sectioning content</li>
+</ul>
 
-<p><img src="img/ace-report-headings.png" alt="Example of the headings outline in an Ace HTML report" /></p>
+<h2 id="accessibility-metadata-summary">Accessibility metadata summary</h2>
+
+<p>This section lists both present accessibility metadata, summarized in a table, as well as a list of what&rsquo;s missing or empty.</p>
+
+<h2 id="images">Images</h2>
+
+<p>This table contains each image in the EPUB and information about it. The table columns are:</p>
+
+<ul>
+<li><code>Image</code>: the image itself</li>
+<li><code>alt attribute</code>: the contents of the <code>alt</code> attribute</li>
+<li><code>aria-describedby</code>: the contents of the element referenced by the <code>aria-describedby</code> attribute</li>
+<li><code>Associated figcaption</code>: the <code>figcaption</code> for this image</li>
+<li><code>Location</code>: location in the EPUB of this image</li>
+</ul>
 
   </main>
 

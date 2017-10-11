@@ -38,9 +38,8 @@ Ace by DAISY, an Accessibility Checker for EPUB Usage: ace-http [options] Option
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/docs/report-html/</guid>
-      <description>In this report, you&amp;rsquo;ll find a violations table, telling you which automated checks failed and why; and a series of sections containing extracted data, such as a headings outline and list of images, to highlight potential problem areas and to assist in manual checking.
-This report includes:
- Basic information about the book (Metadata details) A list of violations, organized into a (Violations) A summary of the publication&amp;rsquo;s TOC An outline view of all the headings in the publication, arranged in reading order.</description>
+      <description>Ace&amp;rsquo;s outputs a human-readable report in HTML format, detailing the automated tests. You can see which tests failed and why; and also see extracted data, such as a list of images, along with accessibility information for each, to highlight potential problem areas and to assist in manual checking.
+The header Includes the version of Ace, the report date, and some basic metadata extracted from the book, for identifying the publication.</description>
     </item>
     
     <item>
@@ -49,9 +48,9 @@ This report includes:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/docs/report-json/</guid>
-      <description>Ace produces a JSON report based on the JSON-LD format and using the EARL vocabulary.
-Example report:
-{ &amp;quot;@type&amp;quot;: &amp;quot;earl:report&amp;quot;, &amp;quot;@context&amp;quot;: &amp;quot;http://ace.daisy.org/ns/ace-report.jsonld&amp;quot;, &amp;quot;dct:title&amp;quot;: &amp;quot;Ace Report&amp;quot;, &amp;quot;dct:description&amp;quot;: &amp;quot;Report on automated accessibility checks for EPUB&amp;quot;, &amp;quot;dct:date&amp;quot;: &amp;quot;10/10/2017, 12:00:00 PM&amp;quot;, &amp;quot;earl:assertedBy&amp;quot;: { &amp;quot;@type&amp;quot;: &amp;quot;earl:software&amp;quot;, &amp;quot;doap:name&amp;quot;: &amp;quot;DAISY Ace&amp;quot;, &amp;quot;doap:description&amp;quot;: &amp;quot;DAISY Accessibility Checker for EPUB&amp;quot;, &amp;quot;doap:homepage&amp;quot;: &amp;quot;http://ace.daisy.org&amp;quot;, &amp;quot;doap:created&amp;quot;: &amp;quot;2017-07-01&amp;quot;, &amp;quot;doap:release&amp;quot;: { &amp;quot;doap:revision&amp;quot;: &amp;quot;0.3.4&amp;quot; } }, &amp;quot;outlines&amp;quot;: { &amp;quot;toc&amp;quot;: &amp;quot;...&amp;quot;, &amp;quot;headings&amp;quot;: &amp;quot;...&amp;quot;, &amp;quot;html&amp;quot;: &amp;quot;...&amp;quot; }, &amp;quot;data&amp;quot;: { &amp;quot;images&amp;quot;: [ .</description>
+      <description>Ace&amp;rsquo;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of EARL (Evaluation and Reporting Language), basic Dublin Core terms, and custom fields.
+Document structure Each example chunk of the report shown below appears in order, in one JSON file.
+ Header information Outlines Image list Iframes list Properties earl:testSubject for this EPUB file Accessibility metadata summary Assertions  Header information { &amp;quot;@type&amp;quot;: &amp;quot;earl:report&amp;quot;, &amp;quot;dct:title&amp;quot;: &amp;quot;Ace Report&amp;quot;, &amp;quot;dct:description&amp;quot;: &amp;quot;Report on automated accessibility checks for EPUB&amp;quot;, &amp;quot;dct:date&amp;quot;: &amp;quot;10/8/2017, 1:08:03 PM&amp;quot;, &amp;quot;earl:assertedBy&amp;quot;: { &amp;quot;@type&amp;quot;: &amp;quot;earl:software&amp;quot;, &amp;quot;doap:name&amp;quot;: &amp;quot;DAISY Ace&amp;quot;, &amp;quot;doap:description&amp;quot;: &amp;quot;DAISY Accessibility Checker for EPUB&amp;quot;, &amp;quot;doap:homepage&amp;quot;: &amp;quot;http://ace.</description>
     </item>
     
   </channel>

@@ -266,18 +266,170 @@ Latest version: v0.5.0 (beta 1)</p>
     
       
 
+  <nav class="toc" aria-labelledby="toc-heading">
+    <h2 id="toc-heading">Table of contents</h2>
+    
+    
+    
+    
+      
+      
+        
+        <ol>
+        
+        
+        
+        <li>
+          <a href="#document-structure">
+            Document structure
+          </a>
+    
+      
+      
+        
+        <ol>
+        
+        
+        
+        <li>
+          <a href="#header-information">
+            Header information
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#outlines">
+            Outlines
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#image-list">
+            Image list
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#iframes-list">
+            Iframes list
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#properties">
+            Properties
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#earltestsubject-for-this-epub-file">
+            earl:testSubject for this EPUB file
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#accessibility-metadata-summary">
+            Accessibility metadata summary
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#assertions">
+            Assertions
+          </a>
+    
+      
+      
+        
+        
+        
+        
+        </li></ol>
+        
+        </li></ol>
+        
+        
+        <li>
+          <a href="#caveats">
+            Caveats
+          </a>
+    
+    
+        </li></ol>
+        
+
+  </nav>
+
 
     
-    <p>Ace produces a JSON report based on the JSON-LD format and using the EARL vocabulary.</p>
+    
 
-<p>Example report:</p>
+<p>Ace&rsquo;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of <a href="https://www.w3.org/TR/EARL10-Schema/">EARL</a> (Evaluation and Reporting Language), basic Dublin Core terms, and custom fields.</p>
 
-<pre><code class="language-json">{
+<h2 id="document-structure">Document structure</h2>
+
+<p>Each example chunk of the report shown below appears in order, in one JSON file.</p>
+
+<ul>
+<li><a href="#header-information">Header information</a></li>
+<li><a href="#outlines">Outlines</a></li>
+<li><a href="#image-list">Image list</a></li>
+<li><a href="#iframes-list">Iframes list</a></li>
+<li><a href="#properties">Properties</a></li>
+<li><a href="#earltestsubject-for-this-epub-file">earl:testSubject for this EPUB file</a></li>
+<li><a href="#accessibility-metadata-summary">Accessibility metadata summary</a></li>
+<li><a href="#assertions">Assertions</a></li>
+</ul>
+
+<h3 id="header-information">Header information</h3>
+
+<pre><code>{
   &quot;@type&quot;: &quot;earl:report&quot;,
-  &quot;@context&quot;: &quot;http://ace.daisy.org/ns/ace-report.jsonld&quot;,
   &quot;dct:title&quot;: &quot;Ace Report&quot;,
   &quot;dct:description&quot;: &quot;Report on automated accessibility checks for EPUB&quot;,
-  &quot;dct:date&quot;: &quot;10/10/2017, 12:00:00 PM&quot;,
+  &quot;dct:date&quot;: &quot;10/8/2017, 1:08:03 PM&quot;,
   &quot;earl:assertedBy&quot;: {
     &quot;@type&quot;: &quot;earl:software&quot;,
     &quot;doap:name&quot;: &quot;DAISY Ace&quot;,
@@ -285,66 +437,152 @@ Latest version: v0.5.0 (beta 1)</p>
     &quot;doap:homepage&quot;: &quot;http://ace.daisy.org&quot;,
     &quot;doap:created&quot;: &quot;2017-07-01&quot;,
     &quot;doap:release&quot;: {
-      &quot;doap:revision&quot;: &quot;0.3.4&quot;
+      &quot;doap:revision&quot;: &quot;0.3.2&quot;
     }
   },
-  &quot;outlines&quot;: {
-    &quot;toc&quot;: &quot;...&quot;,
-    &quot;headings&quot;: &quot;...&quot;,
-    &quot;html&quot;: &quot;...&quot;
+</code></pre>
+
+<h3 id="outlines">Outlines</h3>
+
+<pre><code>  &quot;outlines&quot;: {
+    &quot;toc&quot;: // HTML fragment representing an extracted view of the table of contents
+    ,
+    &quot;headings&quot;: // HTML fragment representing an extracted view of the headings
+    ,
+    &quot;html&quot;: // outline view of heading and sectioning content
   },
-  &quot;data&quot;: {
-    &quot;images&quot;: [ ... ]
+</code></pre>
+
+<h3 id="image-list">Image list</h3>
+
+<pre><code>  &quot;data&quot;: {
+    &quot;images&quot;: [
+      {
+        &quot;alt&quot;: &quot;The DAISY Consortium&quot;,
+        &quot;html&quot;: &quot;&lt;img xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot; src=\&quot;../images/daisy.png\&quot; alt=\&quot;The DAISY Consortium\&quot; /&gt;&quot;,
+        &quot;role&quot;: null,
+        &quot;src&quot;: &quot;EPUB/images/daisy.png&quot;,
+        &quot;location&quot;: &quot;xhtml/image-desc.xhtml#epubcfi(/4/4/4)&quot;
+      },
+      ...
+    ],
+</code></pre>
+
+<h3 id="iframes-list">Iframes list</h3>
+
+<pre><code>    &quot;iframes&quot;: [
+      {
+        &quot;src&quot;: &quot;EPUB/xhtml/out-of-spine-content-embed-01.xhtml&quot;,
+        &quot;path&quot;: &quot;/var/folders/x0/tvbr6tz54js_7q7gvg9s2g240000gn/T/tmp-53884sdqiaos75Cgw/EPUB/xhtml/out-of-spine-content-embed-01.xhtml&quot;,
+        &quot;location&quot;: &quot;xhtml/out-of-spine-content.xhtml#epubcfi(/4/6/6)&quot;
+      },
+    ]
   },
-  &quot;properties&quot;: {
+</code></pre>
+
+<h3 id="properties">Properties</h3>
+
+<pre><code>  &quot;properties&quot;: {
     &quot;hasMathML&quot;: false,
     &quot;hasPageBreaks&quot;: false
   },
-  &quot;earl:testSubject&quot;: {
-    &quot;url&quot;: &quot;/data/epub/&quot;,
+</code></pre>
+
+<h3 id="earl-testsubject-for-this-epub-file">earl:testSubject for this EPUB file</h3>
+
+<p>This just formally states that the test subject of this report is <code>epub-a11y-tests-001.epub</code>.</p>
+
+<pre><code>  &quot;earl:testSubject&quot;: {
+    &quot;url&quot;: &quot;/Users/marisa/dev/epub-a11y-checker/samples/build/epub-a11y-tests-001.epub&quot;,
     &quot;metadata&quot;: {
-      &quot;dc:title&quot;: &quot;Minimal EPUB 3.0&quot;,
+      &quot;dc:identifier&quot;: &quot;com.github.epub-a11y-checker.epub-a11y-tests-001&quot;,
+      &quot;dc:description&quot;: &quot;Samples for EPUB Accessibility Testing&quot;,
+      &quot;dc:title&quot;: &quot;EPUB-A11Y-TESTS-001&quot;,
+      &quot;dc:creator&quot;: [
+        &quot;Marisa DeMeglio&quot;,
+        &quot;Romain Deltour&quot;
+      ],
       &quot;dc:language&quot;: &quot;en&quot;,
-      &quot;dc:identifier&quot;: &quot;NOID&quot;,
-      &quot;dcterms:modified&quot;: [
-        &quot;2017-01-01T00:00:01Z&quot;,
-        &quot;2017-01-01T00:00:01Z&quot;
-      ],
-      &quot;schema:accessibilityFeature&quot;: &quot;structuralNavigation&quot;,
-      &quot;schema:accessibilitySummary&quot;: &quot;everything OK!&quot;,
-      &quot;schema:accessibilityHazard&quot;: [
-        &quot;noFlashingHazard&quot;,
-        &quot;noSoundHazard&quot;,
-        &quot;noMotionSimulationHazard&quot;
-      ],
-      &quot;schema:accessMode&quot;: &quot;textual&quot;,
-      &quot;schema:accessModeSufficient&quot;: &quot;textual&quot;
+      &quot;dcterms:modified&quot;: &quot;2017-02-21T13:00:00Z&quot;
     }
   },
-  &quot;a11y-metadata&quot;: { ... },
-  &quot;assertions&quot;: [
-    {
-      &quot;@type&quot;: &quot;earl:assertion&quot;,
-      &quot;assertions&quot;: [],
-      &quot;earl:testSubject&quot;: {
-        &quot;url&quot;: &quot;EPUB/package.opf&quot;,
-        &quot;dct:title&quot;: &quot;Minimal EPUB 3.0&quot;
-      }
-    },
-    {
-      &quot;@type&quot;: &quot;earl:assertion&quot;,
-      &quot;assertions&quot;: [],
-      &quot;earl:testSubject&quot;: {
-        &quot;url&quot;: &quot;content_001.xhtml&quot;,
-        &quot;dct:title&quot;: &quot;Minimal EPUB&quot;
-      }
+</code></pre>
+
+<h3 id="accessibility-metadata-summary">Accessibility metadata summary</h3>
+
+<pre><code>  &quot;a11y-metadata&quot;: {
+    &quot;missing&quot;: [
+      &quot;schema:accessMode&quot;,
+      &quot;schema:accessibilityFeature&quot;,
+      &quot;schema:accessibilityHazard&quot;,
+      &quot;schema:accessibilitySummary&quot;,
+      &quot;schema:accessModeSufficient&quot;,
+      &quot;schema:accessibilityAPI&quot;,
+      &quot;schema:accessibilityControl&quot;,
+      &quot;a11y:certifiedBy&quot;
+    ],
+    &quot;empty&quot;: [],
+    &quot;present&quot;: []
+  },
+</code></pre>
+
+<h3 id="assertions">Assertions</h3>
+
+<p>The <code>assertions</code> section of the report, found as a top-level term, contains a list of <code>earl:assertion</code> items, each for a different document in the EPUB. Those assertion items, in turn, contain assertions for tests that failed</p>
+
+<p>An <code>assertion</code> for a document looks like this. Note that <code>earl:testSubject</code> points to the package document (it could also, instead, point to a content document), and <code>earl:result</code> does not include a pointer to a location within the document (as individual test assertions do), because this assertion is for the entire document.</p>
+
+<pre><code>{
+ &quot;@type&quot;: &quot;earl:assertion&quot;,
+ &quot;assertions&quot;: [
+   // list of assertions for tests
+   ...
+ ],
+ &quot;earl:testSubject&quot;: {
+   &quot;url&quot;: &quot;EPUB/package.opf&quot;,
+   &quot;dct:title&quot;: &quot;EPUB-A11Y-TESTS-001&quot;
+ },
+ &quot;earl:result&quot;: {
+   &quot;earl:outcome&quot;: &quot;fail&quot;
+ }
+}
+</code></pre>
+
+<p>An example of an assertion for an individual test is shown below. Note that it includes a location reference, a test description, and suggestions for remedying the issue.</p>
+
+<pre><code>{
+  &quot;@type&quot;: &quot;earl:assertion&quot;,
+  &quot;earl:assertedBy&quot;: &quot;aXe&quot;,
+  &quot;earl:mode&quot;: &quot;automatic&quot;,
+  &quot;earl:test&quot;: {
+    &quot;earl:impact&quot;: &quot;critical&quot;,
+    &quot;dct:title&quot;: &quot;aria-roles&quot;,
+    &quot;dct:description&quot;: &quot;Ensures all elements with a role attribute use a valid value&quot;,
+    &quot;help&quot;: {
+      &quot;url&quot;: &quot;http://kb.daisy.org/publishing/docs/script/aria.html&quot;,
+      &quot;title&quot;: &quot;ARIA&quot;
     }
-  ],
+  },
   &quot;earl:result&quot;: {
-    &quot;earl:outcome&quot;: &quot;pass&quot;
+    &quot;earl:outcome&quot;: &quot;fail&quot;,
+    &quot;dct:description&quot;: &quot;Fix all of the following:\n  Role must be one of the valid ARIA roles&quot;,
+    &quot;earl:pointer&quot;: {
+      &quot;cfi&quot;: [
+        &quot;/4/16/4/2&quot;
+      ],
+      &quot;css&quot;: [
+        &quot;p &gt; img[role=\&quot;none\\ presentation\&quot;]&quot;
+      ]
+    }
   }
 }
 </code></pre>
+
+<h2 id="caveats">Caveats</h2>
+
+<ul>
+<li>Ace does not report assertions for tests that passed</li>
+</ul>
 
   </main>
 
