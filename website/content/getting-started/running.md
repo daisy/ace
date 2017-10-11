@@ -15,13 +15,13 @@ The above command will run the automated accessibility tests on the EPUB documen
 
 ## Getting the results
 
-You can specify the directory for Ace to store its output with the `--outputdir` option. For example:
+You can specify the directory for Ace to store its output with the `--outdir` option. For example:
 
 ```
-$ ace --outputdir ~/Documents/moby-dick-report ~/Documents/moby-dick.epub
+$ ace --outdir ~/Documents/moby-dick-report ~/Documents/moby-dick.epub
 ```
 
-_Note that if you do not specify a directory with `--outputdir`, no reports get saved. You would only see output in the shell._
+_Note that if you do not specify a directory with `--outdir`, no reports get saved. You would only see output in the shell._
 
 If the specified directory does not exist, it will be created. In this example, two versions of the results report will be found under the `~/Documents/moby-dick-report` directory:
 
