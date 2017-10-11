@@ -147,8 +147,8 @@ Headless browser During the evaluation of an EPUB, Ace loads each HTML content d
       <guid>https://daisy.github.io/ace/getting-started/running/</guid>
       <description>Checking an EPUB You can check an EPUB by running the ace command followed by the path to the EPUB document. For example:
 $ ace ~/Documents/moby-dick.epub  The above command will run the automated accessibility tests on the EPUB document and output the results.
-Getting the results You can specify the directory for Ace to store its output with the --outputdir option. For example:
-$ ace --outputdir ~/Documents/moby-dick-report ~/Documents/moby-dick.epub  Note that if you do not specify a directory with --outputdir, no reports get saved.</description>
+Getting the results You can specify the directory for Ace to store its output with the --outdir option. For example:
+$ ace --outdir ~/Documents/moby-dick-report ~/Documents/moby-dick.epub  Note that if you do not specify a directory with --outdir, no reports get saved.</description>
     </item>
     
     <item>
