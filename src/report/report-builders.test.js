@@ -23,7 +23,7 @@ describe('report builder', () => {
           '@type': 'earl:software',
           'doap:name': 'DAISY Ace',
           'doap:description': 'DAISY Accessibility Checker for EPUB',
-          'doap:homepage': 'http://ace.daisy.org',
+          'doap:homepage': 'http://daisy.github.io/ace',
           'doap:created': '2017-07-01',
           'doap:release': { 'doap:revision': pkg.version },
         },
