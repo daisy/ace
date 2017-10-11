@@ -1,0 +1,32 @@
+{{ $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content }}
+{{ if ge (len $headers) 2 }}
+  <nav class="toc" aria-labelledby="toc-heading">
+    <h2 id="toc-heading">Table of contents</h2>
+    {{ $levels := apply $headers "replaceRE" "<h([1-6]) .*" "$1" "." }}
+    {{ $start_level := int (index $levels 0) }}
+    {{ $end_level := index (last 1 $levels) 0 }}
+    {{ range $i, $hx := $headers}}
+      {{ $current_level := index $levels $i }}
+      {{ $prev_level := default 0 (index $levels (sub $i 1)) }}
+        {{ if gt $current_level $prev_level }}
+        <ol>
+        {{ end }}
+        {{ if (eq $current_level $prev_level) }}
+        </li>
+        {{ end }}
+        {{ if lt $current_level $prev_level }}
+        {{ range (seq $current_level $prev_level) }}
+        </li></ol>
+        {{ end }}
+        {{ end }}
+        <li>
+          <a href="#{{ $hx | htmlUnescape | plainify | urlize }}">
+            {{ $hx | htmlUnescape | plainify }}
+          </a>
+    {{ end }}
+    {{ range (seq $start_level $end_level) }}
+        </li></ol>
+    {{ end }}    
+
+  </nav>
+{{ end }}

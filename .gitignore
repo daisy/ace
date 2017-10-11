@@ -8,6 +8,9 @@ yarn-error.log*
 # Build directory
 dist/
 
+# Website build directory
+website/site
+
 # Dependency directories
 node_modules/
 

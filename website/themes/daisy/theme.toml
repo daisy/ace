@@ -1,0 +1,16 @@
+name = "daisy"
+license = "MIT"
+licenselink = "https://github.com/daisy/daisy-hugo/blob/master/LICENSE.md"
+description = "A theme for DAISY’s development projects"
+homepage = "https://github.com/daisy/daisy-hugo"
+tags = []
+min_version = "0.29"
+
+[author]
+  name = "Romain Deltour"
+
+# If porting an existing theme
+[original]
+  name = "Infusion"
+  homepage = "https://www.paciellogroup.com"
+  repo = "https://github.com/thepaciellogroup/infusion/"

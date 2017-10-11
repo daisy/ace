@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="{{ .Permalink }}">
+    <title>
+      {{- block "title" . -}}
+      {{ .Title }} | {{ .Site.Title }}
+      {{- end -}}
+    </title>
+    {{ partial "head/styles.html" . }}
+    {{ .Hugo.Generator }}
+  </head>
+  <body>
+    <a href="#main">skip to content</a>
+    {{ partial "svg.html" . }}
+    <div class="wrapper">
+      <header class="intro-and-nav" role="banner">
+        <div>
+          <div class="intro">
+            <!-- <a class="logo" href="/" aria-label="{{ .Site.Title }} home page">
+              <img src="{{ "images/logo.svg" | absURL }}" alt="">
+            </a> -->
+            <p class="library-desc">
+              {{- .Site.Params.Description | markdownify -}}
+            </p>
+          </div>
+          {{ block "nav" . }}
+              <nav id="pages-nav" class="pages" role="navigation">
+                <h2 class="vh">Main navigation</h2>
+                <button id="menu-button" aria-expanded="false">
+                  <svg viewBox="0 0 50 50" aria-hidden="true" focusable="false">
+                    <use xlink:href="#menu"></use>
+                  </svg>
+                  Menu
+                </button>
+                {{ $current := . }}
+                <ul id="pages-list">
+                {{ range $.Site.Sections.ByWeight }}
+                  <li>
+                  <h3>{{ .Title }}</h3>
+                  <ul>
+                    {{ range .Pages.ByWeight }}
+                      <li class="page">
+                        <a href="{{ .RelPermalink }}" {{ if eq $current.Title .Title  }}aria-current="page"{{ end }}>
+                          <span class="text">{{ .Title }}</span>
+                        </a>
+                      </li>
+                    {{ end }}
+                  </ul>
+                  </li>
+                {{ end }}
+                </ul>
+              </nav>
+            {{ end }}
+        </div>
+      </header>
+      <div class="main-and-footer">
+        <div>
+          {{ block "main" . }}
+          {{ end }}
+          {{ partial "footer/footer.html" . }}
+        </div>
+      </div>
+    </div>
+    {{ partial "footer/scripts.html" . }}
+  </body>
+</html>

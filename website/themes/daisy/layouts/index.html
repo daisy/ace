@@ -1,0 +1,19 @@
+{{ define "title" }}{{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+  <main id="main">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    <ul class="pages-list">
+      {{ range $.Site.Sections.ByWeight }}
+        <li>
+        <h2>
+          <a href="{{ .RelPermalink }}">
+            <span class="text">{{ .Title }}</span>
+          </a>
+        </h2>
+        </li>
+      {{ end }}
+    </ul>
+  </main>
+{{ end }}
