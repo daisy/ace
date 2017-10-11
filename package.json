@@ -1,6 +1,6 @@
 {
   "name": "ace-core",
-  "version": "0.3.4",
+  "version": "0.5.0",
   "description": "Ace by DAISY, an Accessibility Checker for EPUB",
   "keywords": [
     "a11y",
