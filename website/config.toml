@@ -6,4 +6,6 @@ theme = "daisy"
 publishDir = "site"
 
 [params]
-  description = "**[Ace](/ace)**, an accessibility checker for EPUB!<br>A **[DAISY Consortium](http://daisy.org)** project."
+  description = "**[Ace](/ace)**, an accessibility checker for EPUB!  \n\
+  A **[DAISY Consortium](http://daisy.org)** project. \n\
+  Latest version: v0.5.0 (beta 1)"
