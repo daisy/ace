@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://daisy.github.io/ace/">
-    <title>Ace, by DAISY</title>
+    <link rel="canonical" href="https://daisy.github.io/ace/getting-started/why-ace/">
+    <title>Why Ace? | Ace, by DAISY</title>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" rel="stylesheet" media="none" onload="this.media='all';">
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
@@ -126,7 +126,7 @@
                   <ul>
                     
                       <li class="page">
-                        <a href="/ace/getting-started/why-ace/" >
+                        <a href="/ace/getting-started/why-ace/" aria-current="page">
                           <span class="text">Why Ace?</span>
                         </a>
                       </li>
@@ -249,52 +249,86 @@
         <div>
           
   <main id="main">
-    <h1>Ace, by DAISY</h1>
-    <p>Ace, the Accessibility Checker for EPUB, is a tool developed by the <a href="http://daisy.org">DAISY Consortium</a> to assist with the evaluation of accessibility features of EPUB publications.</p>
+    <h1>Why Ace?</h1>
+    
+    
+      
 
-    <ul class="pages-list">
+  <nav class="toc" aria-labelledby="toc-heading">
+    <h2 id="toc-heading">Table of contents</h2>
+    
+    
+    
+    
       
+      
+        
+        <ol>
+        
+        
+        
         <li>
-        <h2>
-          <a href="/ace/getting-started/">
-            <span class="text">Getting started</span>
+          <a href="#what-is-ace">
+            What is Ace?
           </a>
-        </h2>
-        </li>
+    
       
+      
+        
+        
+        </li>
+        
+        
         <li>
-        <h2>
-          <a href="/ace/docs/">
-            <span class="text">Reference</span>
+          <a href="#what-does-ace-do">
+            What does Ace do?
           </a>
-        </h2>
-        </li>
+    
       
+      
+        
+        
+        </li>
+        
+        
         <li>
-        <h2>
-          <a href="/ace/rules/">
-            <span class="text">Rules</span>
+          <a href="#what-ace-doesnt-do">
+            What Ace doesn’t do?
           </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/contributing/">
-            <span class="text">Contributing</span>
-          </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/help/">
-            <span class="text">Need Help?</span>
-          </a>
-        </h2>
-        </li>
-      
-    </ul>
+    
+    
+        </li></ol>
+        
+
+  </nav>
+
+
+    
+    
+
+<h2 id="what-is-ace">What is Ace?</h2>
+
+<p>Ace is a tool to run automated accessibility checks for EPUB Publications, in order to assist in the evaluation of conformance to the <a href="http://www.idpf.org/epub/latest/accessibility">EPUB Accessibility</a> specification.</p>
+
+<h2 id="what-does-ace-do">What does Ace do?</h2>
+
+<p>Specifically, Ace:</p>
+
+<ul>
+<li>runs automated accessibility tests on EPUB content documents</li>
+<li>extracts the publication metadata, and checks accessibility-related metadata</li>
+<li>extracts various document outlines (the ToC, headings, and HTML structure) for side-by-side comparison</li>
+<li>extracts all the EPUBs images and graphics and their associated accessibility descriptions in a consolidated table, for easier review</li>
+<li>extracts other various content features to facilitate human-driven accessibility audits</li>
+<li>can be run as a command line tool, or integrated as a Javascript node module, or driven by an HTTP API</li>
+</ul>
+
+<p>Under the hood, Ace currently runs <a href="https://github.com/dequelabs/axe-core">aXe</a>, an engine for automated testing of HTML developped by the good folks at Deque Systems.</p>
+
+<h2 id="what-ace-doesn-t-do">What Ace doesn’t do?</h2>
+
+<p>It is important to keep in mind that only a limited portion of accessibility checks can be automated, and therefore <strong>Ace is just a helper tool to assist in a broader, human-driven, evaluation process</strong>.</p>
+
   </main>
 
           <footer role="contentinfo">

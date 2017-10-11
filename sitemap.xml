@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://daisy.github.io/ace/docs/cli/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/getting-started/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/rules/html/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/contributing/contributing/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/help/troubleshooting/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/getting-started/why-ace/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/contributing/code/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/help/contact/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/rules/epub/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/docs/http-api/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/getting-started/installation/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/docs/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/docs/report-html/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/contributing/notes/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/rules/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/getting-started/running/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/contributing/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/docs/report-json/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/help/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rules on Ace, by DAISY</title>
+    <link>https://daisy.github.io/ace/rules/</link>
+    <description>Recent content in Rules on Ace, by DAISY</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://daisy.github.io/ace/rules/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HTML Rules</title>
+      <link>https://daisy.github.io/ace/rules/html/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/rules/html/</guid>
+      <description>Under the hood, most of the accessibility checks ran by Ace are powered by aXe, an engine for automated testing of HTML.
+Refer to aXe’s documentation to see the complete of rules it runs.</description>
+    </item>
+    
+    <item>
+      <title>EPUB Rules</title>
+      <link>https://daisy.github.io/ace/rules/epub/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/rules/epub/</guid>
+      <description>Publication title Checks that the EPUB’s title is defined in the Package Document.
+Accessbility metadata Checks that schema.org accessbility metadata is defined in the Package Document.
+Page break source When content has page breaks, checks that the print source is identified in metadata with dc:source.</description>
+    </item>
+    
+  </channel>
+</rss>

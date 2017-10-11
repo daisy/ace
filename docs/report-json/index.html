@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://daisy.github.io/ace/">
-    <title>Ace, by DAISY</title>
+    <link rel="canonical" href="https://daisy.github.io/ace/docs/report-json/">
+    <title>JSON Report | Ace, by DAISY</title>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" rel="stylesheet" media="none" onload="this.media='all';">
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
@@ -169,7 +169,7 @@
                       </li>
                     
                       <li class="page">
-                        <a href="/ace/docs/report-json/" >
+                        <a href="/ace/docs/report-json/" aria-current="page">
                           <span class="text">JSON Report</span>
                         </a>
                       </li>
@@ -249,52 +249,101 @@
         <div>
           
   <main id="main">
-    <h1>Ace, by DAISY</h1>
-    <p>Ace, the Accessibility Checker for EPUB, is a tool developed by the <a href="http://daisy.org">DAISY Consortium</a> to assist with the evaluation of accessibility features of EPUB publications.</p>
+    <h1>JSON Report</h1>
+    
+      <aside aria-label="warning" class="note warning">
+  <div>
+    <svg class="sign" aria-hidden="true" viewBox="0 0 48.430474 41.646302" focusable="false">
+      <use xlink:href="#warning"></use>
+    </svg>
+    This page is a work in progress!
+  </div>
+</aside>
 
-    <ul class="pages-list">
+    
+    
       
-        <li>
-        <h2>
-          <a href="/ace/getting-started/">
-            <span class="text">Getting started</span>
-          </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/docs/">
-            <span class="text">Reference</span>
-          </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/rules/">
-            <span class="text">Rules</span>
-          </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/contributing/">
-            <span class="text">Contributing</span>
-          </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/help/">
-            <span class="text">Need Help?</span>
-          </a>
-        </h2>
-        </li>
-      
-    </ul>
+
+
+    
+    <p>Ace produces a JSON report based on the JSON-LD format and using the EARL vocabulary.</p>
+
+<p>Example report:</p>
+
+<pre><code class="language-json">{
+  &quot;@type&quot;: &quot;earl:report&quot;,
+  &quot;@context&quot;: &quot;http://ace.daisy.org/ns/ace-report.jsonld&quot;,
+  &quot;dct:title&quot;: &quot;Ace Report&quot;,
+  &quot;dct:description&quot;: &quot;Report on automated accessibility checks for EPUB&quot;,
+  &quot;dct:date&quot;: &quot;10/10/2017, 12:00:00 PM&quot;,
+  &quot;earl:assertedBy&quot;: {
+    &quot;@type&quot;: &quot;earl:software&quot;,
+    &quot;doap:name&quot;: &quot;DAISY Ace&quot;,
+    &quot;doap:description&quot;: &quot;DAISY Accessibility Checker for EPUB&quot;,
+    &quot;doap:homepage&quot;: &quot;http://ace.daisy.org&quot;,
+    &quot;doap:created&quot;: &quot;2017-07-01&quot;,
+    &quot;doap:release&quot;: {
+      &quot;doap:revision&quot;: &quot;0.3.4&quot;
+    }
+  },
+  &quot;outlines&quot;: {
+    &quot;toc&quot;: &quot;...&quot;,
+    &quot;headings&quot;: &quot;...&quot;,
+    &quot;html&quot;: &quot;...&quot;
+  },
+  &quot;data&quot;: {
+    &quot;images&quot;: [ ... ]
+  },
+  &quot;properties&quot;: {
+    &quot;hasMathML&quot;: false,
+    &quot;hasPageBreaks&quot;: false
+  },
+  &quot;earl:testSubject&quot;: {
+    &quot;url&quot;: &quot;/data/epub/&quot;,
+    &quot;metadata&quot;: {
+      &quot;dc:title&quot;: &quot;Minimal EPUB 3.0&quot;,
+      &quot;dc:language&quot;: &quot;en&quot;,
+      &quot;dc:identifier&quot;: &quot;NOID&quot;,
+      &quot;dcterms:modified&quot;: [
+        &quot;2017-01-01T00:00:01Z&quot;,
+        &quot;2017-01-01T00:00:01Z&quot;
+      ],
+      &quot;schema:accessibilityFeature&quot;: &quot;structuralNavigation&quot;,
+      &quot;schema:accessibilitySummary&quot;: &quot;everything OK!&quot;,
+      &quot;schema:accessibilityHazard&quot;: [
+        &quot;noFlashingHazard&quot;,
+        &quot;noSoundHazard&quot;,
+        &quot;noMotionSimulationHazard&quot;
+      ],
+      &quot;schema:accessMode&quot;: &quot;textual&quot;,
+      &quot;schema:accessModeSufficient&quot;: &quot;textual&quot;
+    }
+  },
+  &quot;a11y-metadata&quot;: { ... },
+  &quot;assertions&quot;: [
+    {
+      &quot;@type&quot;: &quot;earl:assertion&quot;,
+      &quot;assertions&quot;: [],
+      &quot;earl:testSubject&quot;: {
+        &quot;url&quot;: &quot;EPUB/package.opf&quot;,
+        &quot;dct:title&quot;: &quot;Minimal EPUB 3.0&quot;
+      }
+    },
+    {
+      &quot;@type&quot;: &quot;earl:assertion&quot;,
+      &quot;assertions&quot;: [],
+      &quot;earl:testSubject&quot;: {
+        &quot;url&quot;: &quot;content_001.xhtml&quot;,
+        &quot;dct:title&quot;: &quot;Minimal EPUB&quot;
+      }
+    }
+  ],
+  &quot;earl:result&quot;: {
+    &quot;earl:outcome&quot;: &quot;pass&quot;
+  }
+}
+</code></pre>
+
   </main>
 
           <footer role="contentinfo">

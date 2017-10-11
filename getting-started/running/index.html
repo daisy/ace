@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://daisy.github.io/ace/">
-    <title>Ace, by DAISY</title>
+    <link rel="canonical" href="https://daisy.github.io/ace/getting-started/running/">
+    <title>Running Ace | Ace, by DAISY</title>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" rel="stylesheet" media="none" onload="this.media='all';">
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
@@ -138,7 +138,7 @@
                       </li>
                     
                       <li class="page">
-                        <a href="/ace/getting-started/running/" >
+                        <a href="/ace/getting-started/running/" aria-current="page">
                           <span class="text">Running Ace</span>
                         </a>
                       </li>
@@ -249,52 +249,80 @@
         <div>
           
   <main id="main">
-    <h1>Ace, by DAISY</h1>
-    <p>Ace, the Accessibility Checker for EPUB, is a tool developed by the <a href="http://daisy.org">DAISY Consortium</a> to assist with the evaluation of accessibility features of EPUB publications.</p>
+    <h1>Running Ace</h1>
+    
+    
+      
 
-    <ul class="pages-list">
+  <nav class="toc" aria-labelledby="toc-heading">
+    <h2 id="toc-heading">Table of contents</h2>
+    
+    
+    
+    
       
+      
+        
+        <ol>
+        
+        
+        
         <li>
-        <h2>
-          <a href="/ace/getting-started/">
-            <span class="text">Getting started</span>
+          <a href="#checking-an-epub">
+            Checking an EPUB
           </a>
-        </h2>
-        </li>
+    
       
+      
+        
+        
+        </li>
+        
+        
         <li>
-        <h2>
-          <a href="/ace/docs/">
-            <span class="text">Reference</span>
+          <a href="#getting-the-results">
+            Getting the results
           </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/rules/">
-            <span class="text">Rules</span>
-          </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/contributing/">
-            <span class="text">Contributing</span>
-          </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/help/">
-            <span class="text">Need Help?</span>
-          </a>
-        </h2>
-        </li>
-      
-    </ul>
+    
+    
+        </li></ol>
+        
+
+  </nav>
+
+
+    
+    
+
+<h2 id="checking-an-epub">Checking an EPUB</h2>
+
+<p>You can check an EPUB by running the <code>ace</code> command followed by the path to the EPUB document. For example:</p>
+
+<pre><code>$ ace ~/Documents/moby-dick.epub
+</code></pre>
+
+<p>The above command will run the automated accessibility tests on the EPUB document and output the results.</p>
+
+<h2 id="getting-the-results">Getting the results</h2>
+
+<p>You can specify the directory for Ace to store its output with the <code>--outputdir</code> option. For example:</p>
+
+<pre><code>$ ace --outputdir ~/Documents/moby-dick-report ~/Documents/moby-dick.epub
+</code></pre>
+
+<p><em>Note that if you do not specify a directory with <code>--outputdir</code>, no reports get saved. You would only see output in the shell.</em></p>
+
+<p>If the specified directory does not exist, it will be created. In this example, two versions of the results report will be found under the <code>~/Documents/moby-dick-report</code> directory:</p>
+
+<ul>
+<li><code>report.json</code>: A machine-readable version of the report, in JSON format</li>
+<li><code>report.html</code>: A human-readable version of the report, in HTML format.</li>
+</ul>
+
+<p>To learn more, please read the <a href="/ace/docs/cli/">reference documentation</a>.</p>
+
+<p>A more detailed step-by-step guide is also available on <a href="http://inclusivepublishing.org/ace">InclusivePublishing.org</a>.</p>
+
   </main>
 
           <footer role="contentinfo">

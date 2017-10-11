@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Getting started on Ace, by DAISY</title>
+    <link>https://daisy.github.io/ace/getting-started/</link>
+    <description>Recent content in Getting started on Ace, by DAISY</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://daisy.github.io/ace/getting-started/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Why Ace?</title>
+      <link>https://daisy.github.io/ace/getting-started/why-ace/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/getting-started/why-ace/</guid>
+      <description>What is Ace? Ace is a tool to run automated accessibility checks for EPUB Publications, in order to assist in the evaluation of conformance to the EPUB Accessibility specification.
+What does Ace do? Specifically, Ace:
+ runs automated accessibility tests on EPUB content documents extracts the publication metadata, and checks accessibility-related metadata extracts various document outlines (the ToC, headings, and HTML structure) for side-by-side comparison extracts all the EPUBs images and graphics and their associated accessibility descriptions in a consolidated table, for easier review extracts other various content features to facilitate human-driven accessibility audits can be run as a command line tool, or integrated as a Javascript node module, or driven by an HTTP API  Under the hood, Ace currently runs aXe, an engine for automated testing of HTML developped by the good folks at Deque Systems.</description>
+    </item>
+    
+    <item>
+      <title>Installation</title>
+      <link>https://daisy.github.io/ace/getting-started/installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/getting-started/installation/</guid>
+      <description>Install Node.JS  Go to Node.JS Download version 6 or higher Double-click to install  Install (or update) Ace  After installing Node, open a shell window  On Windows: Windows System-&amp;gt;Command Prompt or Start-&amp;gt;Run-&amp;gt;cmd.exe On Mac: Applications-&amp;gt;Utilities-&amp;gt;Terminal  Type npm install ace-core -g to install or update Ace  If everything went smoothly, you should now be able to run the ace command in your shell.</description>
+    </item>
+    
+    <item>
+      <title>Running Ace</title>
+      <link>https://daisy.github.io/ace/getting-started/running/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/getting-started/running/</guid>
+      <description>Checking an EPUB You can check an EPUB by running the ace command followed by the path to the EPUB document. For example:
+$ ace ~/Documents/moby-dick.epub  The above command will run the automated accessibility tests on the EPUB document and output the results.
+Getting the results You can specify the directory for Ace to store its output with the --outputdir option. For example:
+$ ace --outputdir ~/Documents/moby-dick-report ~/Documents/moby-dick.epub  Note that if you do not specify a directory with --outputdir, no reports get saved.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reference on Ace, by DAISY</title>
+    <link>https://daisy.github.io/ace/docs/</link>
+    <description>Recent content in Reference on Ace, by DAISY</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://daisy.github.io/ace/docs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Command line interface</title>
+      <link>https://daisy.github.io/ace/docs/cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/docs/cli/</guid>
+      <description>Overview The easiest way to run Ace is to type this on the command line:
+$ ace ~/Documents/book.epub  You&amp;rsquo;ll then see a decription of Ace&amp;rsquo;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify --outdir for that).
+Example:
+info: Processing /Users/marisa/dev/epub-a11y-checker/samples/build/epub-a11y-tests-001.epub info: Parsing EPUB info: Analyzing accessibility metadata info: Checking package.</description>
+    </item>
+    
+    <item>
+      <title>Http API</title>
+      <link>https://daisy.github.io/ace/docs/http-api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/docs/http-api/</guid>
+      <description>Starting the server After installing Ace, run the ace-http command from the terminal. There are a few options listed below.
+Ace by DAISY, an Accessibility Checker for EPUB Usage: ace-http [options] Options: -h, --help output usage information -v, --version output the version number -H, --host set the server&#39;s hostname (default: localhost) -p, --port set the server&#39;s port (default: 8000) -V, --verbose display verbose output -s, --silent do not display any output Examples $ ace-http -p 3000  API This API is available to client applications.</description>
+    </item>
+    
+    <item>
+      <title>HTML Report</title>
+      <link>https://daisy.github.io/ace/docs/report-html/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/docs/report-html/</guid>
+      <description>In this report, you&amp;rsquo;ll find a violations table, telling you which automated checks failed and why; and a series of sections containing extracted data, such as a headings outline and list of images, to highlight potential problem areas and to assist in manual checking.
+This report includes:
+ Basic information about the book (Metadata details) A list of violations, organized into a (Violations) A summary of the publication&amp;rsquo;s TOC An outline view of all the headings in the publication, arranged in reading order.</description>
+    </item>
+    
+    <item>
+      <title>JSON Report</title>
+      <link>https://daisy.github.io/ace/docs/report-json/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/docs/report-json/</guid>
+      <description>Ace produces a JSON report based on the JSON-LD format and using the EARL vocabulary.
+Example report:
+{ &amp;quot;@type&amp;quot;: &amp;quot;earl:report&amp;quot;, &amp;quot;@context&amp;quot;: &amp;quot;http://ace.daisy.org/ns/ace-report.jsonld&amp;quot;, &amp;quot;dct:title&amp;quot;: &amp;quot;Ace Report&amp;quot;, &amp;quot;dct:description&amp;quot;: &amp;quot;Report on automated accessibility checks for EPUB&amp;quot;, &amp;quot;dct:date&amp;quot;: &amp;quot;10/10/2017, 12:00:00 PM&amp;quot;, &amp;quot;earl:assertedBy&amp;quot;: { &amp;quot;@type&amp;quot;: &amp;quot;earl:software&amp;quot;, &amp;quot;doap:name&amp;quot;: &amp;quot;DAISY Ace&amp;quot;, &amp;quot;doap:description&amp;quot;: &amp;quot;DAISY Accessibility Checker for EPUB&amp;quot;, &amp;quot;doap:homepage&amp;quot;: &amp;quot;http://ace.daisy.org&amp;quot;, &amp;quot;doap:created&amp;quot;: &amp;quot;2017-07-01&amp;quot;, &amp;quot;doap:release&amp;quot;: { &amp;quot;doap:revision&amp;quot;: &amp;quot;0.3.4&amp;quot; } }, &amp;quot;outlines&amp;quot;: { &amp;quot;toc&amp;quot;: &amp;quot;...&amp;quot;, &amp;quot;headings&amp;quot;: &amp;quot;...&amp;quot;, &amp;quot;html&amp;quot;: &amp;quot;...&amp;quot; }, &amp;quot;data&amp;quot;: { &amp;quot;images&amp;quot;: [ .</description>
+    </item>
+    
+  </channel>
+</rss>

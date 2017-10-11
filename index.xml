@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ace, by DAISY</title>
+    <link>https://daisy.github.io/ace/</link>
+    <description>Recent content on Ace, by DAISY</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://daisy.github.io/ace/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Command line interface</title>
+      <link>https://daisy.github.io/ace/docs/cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/docs/cli/</guid>
+      <description>Overview The easiest way to run Ace is to type this on the command line:
+$ ace ~/Documents/book.epub  You&amp;rsquo;ll then see a decription of Ace&amp;rsquo;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify --outdir for that).
+Example:
+info: Processing /Users/marisa/dev/epub-a11y-checker/samples/build/epub-a11y-tests-001.epub info: Parsing EPUB info: Analyzing accessibility metadata info: Checking package.</description>
+    </item>
+    
+    <item>
+      <title>HTML Rules</title>
+      <link>https://daisy.github.io/ace/rules/html/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/rules/html/</guid>
+      <description>Under the hood, most of the accessibility checks ran by Ace are powered by aXe, an engine for automated testing of HTML.
+Refer to aXe’s documentation to see the complete of rules it runs.</description>
+    </item>
+    
+    <item>
+      <title>How to contribute?</title>
+      <link>https://daisy.github.io/ace/contributing/contributing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/contributing/contributing/</guid>
+      <description>First, welcome to Ace and thank you so much for willing to contribute!
+Submitting an issue Feel free to file issues on our GitHub issue tracker.
+When filing an issue, please provide the following details:
+ the version of Ace impacted by the issue (it can be retrieved by running ace -v in a command shell). the version of Node used to run Ace (it can be retrieved by running node -v in a command shell).</description>
+    </item>
+    
+    <item>
+      <title>Troubleshooting</title>
+      <link>https://daisy.github.io/ace/help/troubleshooting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/help/troubleshooting/</guid>
+      <description>Ace fails with &amp;ldquo;Unexpected error&amp;rdquo; Erm… you probably just hit a bug in Ace.
+You can first check the issue tracker to see if some already reported the issue. Don’t forget to included the closed issues in your search in case we fixed it already!
+If you can’t find any mention of your issue in our tracker, please file a new issue!
+You can run Ace with verbose logging (by using the command line option --verbose) to provide us with debugging information.</description>
+    </item>
+    
+    <item>
+      <title>Why Ace?</title>
+      <link>https://daisy.github.io/ace/getting-started/why-ace/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/getting-started/why-ace/</guid>
+      <description>What is Ace? Ace is a tool to run automated accessibility checks for EPUB Publications, in order to assist in the evaluation of conformance to the EPUB Accessibility specification.
+What does Ace do? Specifically, Ace:
+ runs automated accessibility tests on EPUB content documents extracts the publication metadata, and checks accessibility-related metadata extracts various document outlines (the ToC, headings, and HTML structure) for side-by-side comparison extracts all the EPUBs images and graphics and their associated accessibility descriptions in a consolidated table, for easier review extracts other various content features to facilitate human-driven accessibility audits can be run as a command line tool, or integrated as a Javascript node module, or driven by an HTTP API  Under the hood, Ace currently runs aXe, an engine for automated testing of HTML developped by the good folks at Deque Systems.</description>
+    </item>
+    
+    <item>
+      <title>Code base overview</title>
+      <link>https://daisy.github.io/ace/contributing/code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/contributing/code/</guid>
+      <description>Ace consists of the following components:
+ core: the core checker’s logic, and the code responsible for running the underlying Web checker cli: the command line interface epub: utils for parsing EPUBs http: the Http API report: utils for building Ace’s reports scripts: the Javascript files injected in the headless browser to run Ace’s checks  </description>
+    </item>
+    
+    <item>
+      <title>Contact us</title>
+      <link>https://daisy.github.io/ace/help/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/help/contact/</guid>
+      <description>You can reach us:
+ via the contact form on InclusivePublishing.org on GitHub, we’re @daisy on Twitter, we’re @InclusivePub  </description>
+    </item>
+    
+    <item>
+      <title>EPUB Rules</title>
+      <link>https://daisy.github.io/ace/rules/epub/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/rules/epub/</guid>
+      <description>Publication title Checks that the EPUB’s title is defined in the Package Document.
+Accessbility metadata Checks that schema.org accessbility metadata is defined in the Package Document.
+Page break source When content has page breaks, checks that the print source is identified in metadata with dc:source.</description>
+    </item>
+    
+    <item>
+      <title>Http API</title>
+      <link>https://daisy.github.io/ace/docs/http-api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/docs/http-api/</guid>
+      <description>Starting the server After installing Ace, run the ace-http command from the terminal. There are a few options listed below.
+Ace by DAISY, an Accessibility Checker for EPUB Usage: ace-http [options] Options: -h, --help output usage information -v, --version output the version number -H, --host set the server&#39;s hostname (default: localhost) -p, --port set the server&#39;s port (default: 8000) -V, --verbose display verbose output -s, --silent do not display any output Examples $ ace-http -p 3000  API This API is available to client applications.</description>
+    </item>
+    
+    <item>
+      <title>Installation</title>
+      <link>https://daisy.github.io/ace/getting-started/installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/getting-started/installation/</guid>
+      <description>Install Node.JS  Go to Node.JS Download version 6 or higher Double-click to install  Install (or update) Ace  After installing Node, open a shell window  On Windows: Windows System-&amp;gt;Command Prompt or Start-&amp;gt;Run-&amp;gt;cmd.exe On Mac: Applications-&amp;gt;Utilities-&amp;gt;Terminal  Type npm install ace-core -g to install or update Ace  If everything went smoothly, you should now be able to run the ace command in your shell.</description>
+    </item>
+    
+    <item>
+      <title>HTML Report</title>
+      <link>https://daisy.github.io/ace/docs/report-html/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/docs/report-html/</guid>
+      <description>In this report, you&amp;rsquo;ll find a violations table, telling you which automated checks failed and why; and a series of sections containing extracted data, such as a headings outline and list of images, to highlight potential problem areas and to assist in manual checking.
+This report includes:
+ Basic information about the book (Metadata details) A list of violations, organized into a (Violations) A summary of the publication&amp;rsquo;s TOC An outline view of all the headings in the publication, arranged in reading order.</description>
+    </item>
+    
+    <item>
+      <title>Implementation notes</title>
+      <link>https://daisy.github.io/ace/contributing/notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/contributing/notes/</guid>
+      <description>Design principles TBD.
+HTML checker Under the hood, most of the HTML checks are powered by aXe, an engine for automated testing of HTML from Deque Systems.
+Headless browser During the evaluation of an EPUB, Ace loads each HTML content documeent in a headless browser using Nightmare.js, a high-level browser automatiom library from Segment.</description>
+    </item>
+    
+    <item>
+      <title>Running Ace</title>
+      <link>https://daisy.github.io/ace/getting-started/running/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/getting-started/running/</guid>
+      <description>Checking an EPUB You can check an EPUB by running the ace command followed by the path to the EPUB document. For example:
+$ ace ~/Documents/moby-dick.epub  The above command will run the automated accessibility tests on the EPUB document and output the results.
+Getting the results You can specify the directory for Ace to store its output with the --outputdir option. For example:
+$ ace --outputdir ~/Documents/moby-dick-report ~/Documents/moby-dick.epub  Note that if you do not specify a directory with --outputdir, no reports get saved.</description>
+    </item>
+    
+    <item>
+      <title>JSON Report</title>
+      <link>https://daisy.github.io/ace/docs/report-json/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/docs/report-json/</guid>
+      <description>Ace produces a JSON report based on the JSON-LD format and using the EARL vocabulary.
+Example report:
+{ &amp;quot;@type&amp;quot;: &amp;quot;earl:report&amp;quot;, &amp;quot;@context&amp;quot;: &amp;quot;http://ace.daisy.org/ns/ace-report.jsonld&amp;quot;, &amp;quot;dct:title&amp;quot;: &amp;quot;Ace Report&amp;quot;, &amp;quot;dct:description&amp;quot;: &amp;quot;Report on automated accessibility checks for EPUB&amp;quot;, &amp;quot;dct:date&amp;quot;: &amp;quot;10/10/2017, 12:00:00 PM&amp;quot;, &amp;quot;earl:assertedBy&amp;quot;: { &amp;quot;@type&amp;quot;: &amp;quot;earl:software&amp;quot;, &amp;quot;doap:name&amp;quot;: &amp;quot;DAISY Ace&amp;quot;, &amp;quot;doap:description&amp;quot;: &amp;quot;DAISY Accessibility Checker for EPUB&amp;quot;, &amp;quot;doap:homepage&amp;quot;: &amp;quot;http://ace.daisy.org&amp;quot;, &amp;quot;doap:created&amp;quot;: &amp;quot;2017-07-01&amp;quot;, &amp;quot;doap:release&amp;quot;: { &amp;quot;doap:revision&amp;quot;: &amp;quot;0.3.4&amp;quot; } }, &amp;quot;outlines&amp;quot;: { &amp;quot;toc&amp;quot;: &amp;quot;...&amp;quot;, &amp;quot;headings&amp;quot;: &amp;quot;...&amp;quot;, &amp;quot;html&amp;quot;: &amp;quot;...&amp;quot; }, &amp;quot;data&amp;quot;: { &amp;quot;images&amp;quot;: [ .</description>
+    </item>
+    
+  </channel>
+</rss>

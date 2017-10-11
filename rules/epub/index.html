@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://daisy.github.io/ace/">
-    <title>Ace, by DAISY</title>
+    <link rel="canonical" href="https://daisy.github.io/ace/rules/epub/">
+    <title>EPUB Rules | Ace, by DAISY</title>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" rel="stylesheet" media="none" onload="this.media='all';">
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
@@ -188,7 +188,7 @@
                       </li>
                     
                       <li class="page">
-                        <a href="/ace/rules/epub/" >
+                        <a href="/ace/rules/epub/" aria-current="page">
                           <span class="text">EPUB Rules</span>
                         </a>
                       </li>
@@ -249,52 +249,85 @@
         <div>
           
   <main id="main">
-    <h1>Ace, by DAISY</h1>
-    <p>Ace, the Accessibility Checker for EPUB, is a tool developed by the <a href="http://daisy.org">DAISY Consortium</a> to assist with the evaluation of accessibility features of EPUB publications.</p>
+    <h1>EPUB Rules</h1>
+    
+      <aside aria-label="warning" class="note warning">
+  <div>
+    <svg class="sign" aria-hidden="true" viewBox="0 0 48.430474 41.646302" focusable="false">
+      <use xlink:href="#warning"></use>
+    </svg>
+    This page is a work in progress!
+  </div>
+</aside>
 
-    <ul class="pages-list">
+    
+    
       
+
+  <nav class="toc" aria-labelledby="toc-heading">
+    <h2 id="toc-heading">Table of contents</h2>
+    
+    
+    
+    
+      
+      
+        
+        <ol>
+        
+        
+        
         <li>
-        <h2>
-          <a href="/ace/getting-started/">
-            <span class="text">Getting started</span>
+          <a href="#publication-title">
+            Publication title
           </a>
-        </h2>
-        </li>
+    
       
+      
+        
+        
+        </li>
+        
+        
         <li>
-        <h2>
-          <a href="/ace/docs/">
-            <span class="text">Reference</span>
+          <a href="#accessbility-metadata">
+            Accessbility metadata
           </a>
-        </h2>
-        </li>
+    
       
+      
+        
+        
+        </li>
+        
+        
         <li>
-        <h2>
-          <a href="/ace/rules/">
-            <span class="text">Rules</span>
+          <a href="#page-break-source">
+            Page break source
           </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/contributing/">
-            <span class="text">Contributing</span>
-          </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/help/">
-            <span class="text">Need Help?</span>
-          </a>
-        </h2>
-        </li>
-      
-    </ul>
+    
+    
+        </li></ol>
+        
+
+  </nav>
+
+
+    
+    
+
+<h2 id="publication-title">Publication title</h2>
+
+<p>Checks that the EPUB’s title is defined in the Package Document.</p>
+
+<h2 id="accessbility-metadata">Accessbility metadata</h2>
+
+<p>Checks that schema.org accessbility metadata is defined in the Package Document.</p>
+
+<h2 id="page-break-source">Page break source</h2>
+
+<p>When content has page breaks, checks that the print source is identified in metadata with <code>dc:source</code>.</p>
+
   </main>
 
           <footer role="contentinfo">

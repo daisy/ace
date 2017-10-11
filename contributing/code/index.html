@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://daisy.github.io/ace/">
-    <title>Ace, by DAISY</title>
+    <link rel="canonical" href="https://daisy.github.io/ace/contributing/code/">
+    <title>Code base overview | Ace, by DAISY</title>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" rel="stylesheet" media="none" onload="this.media='all';">
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
@@ -207,7 +207,7 @@
                       </li>
                     
                       <li class="page">
-                        <a href="/ace/contributing/code/" >
+                        <a href="/ace/contributing/code/" aria-current="page">
                           <span class="text">Code base overview</span>
                         </a>
                       </li>
@@ -249,52 +249,34 @@
         <div>
           
   <main id="main">
-    <h1>Ace, by DAISY</h1>
-    <p>Ace, the Accessibility Checker for EPUB, is a tool developed by the <a href="http://daisy.org">DAISY Consortium</a> to assist with the evaluation of accessibility features of EPUB publications.</p>
+    <h1>Code base overview</h1>
+    
+      <aside aria-label="warning" class="note warning">
+  <div>
+    <svg class="sign" aria-hidden="true" viewBox="0 0 48.430474 41.646302" focusable="false">
+      <use xlink:href="#warning"></use>
+    </svg>
+    This page is a work in progress!
+  </div>
+</aside>
 
-    <ul class="pages-list">
+    
+    
       
-        <li>
-        <h2>
-          <a href="/ace/getting-started/">
-            <span class="text">Getting started</span>
-          </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/docs/">
-            <span class="text">Reference</span>
-          </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/rules/">
-            <span class="text">Rules</span>
-          </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/contributing/">
-            <span class="text">Contributing</span>
-          </a>
-        </h2>
-        </li>
-      
-        <li>
-        <h2>
-          <a href="/ace/help/">
-            <span class="text">Need Help?</span>
-          </a>
-        </h2>
-        </li>
-      
-    </ul>
+
+
+    
+    <p>Ace consists of the following components:</p>
+
+<ul>
+<li><strong>core</strong>: the core checker’s logic, and the code responsible for running the underlying Web checker</li>
+<li><strong>cli</strong>: the command line interface</li>
+<li><strong>epub</strong>: utils for parsing EPUBs</li>
+<li><strong>http</strong>: the Http API</li>
+<li><strong>report</strong>: utils for building Ace’s reports</li>
+<li><strong>scripts</strong>: the Javascript files injected in the headless browser to run Ace’s checks</li>
+</ul>
+
   </main>
 
           <footer role="contentinfo">

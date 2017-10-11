@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://daisy.github.io/ace/">
-    <title>Ace, by DAISY</title>
+    <link rel="canonical" href="https://daisy.github.io/ace/contributing/contributing/">
+    <title>How to contribute? | Ace, by DAISY</title>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" rel="stylesheet" media="none" onload="this.media='all';">
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
@@ -201,7 +201,7 @@
                   <ul>
                     
                       <li class="page">
-                        <a href="/ace/contributing/contributing/" >
+                        <a href="/ace/contributing/contributing/" aria-current="page">
                           <span class="text">How to contribute?</span>
                         </a>
                       </li>
@@ -249,52 +249,173 @@
         <div>
           
   <main id="main">
-    <h1>Ace, by DAISY</h1>
-    <p>Ace, the Accessibility Checker for EPUB, is a tool developed by the <a href="http://daisy.org">DAISY Consortium</a> to assist with the evaluation of accessibility features of EPUB publications.</p>
+    <h1>How to contribute?</h1>
+    
+      <aside aria-label="warning" class="note warning">
+  <div>
+    <svg class="sign" aria-hidden="true" viewBox="0 0 48.430474 41.646302" focusable="false">
+      <use xlink:href="#warning"></use>
+    </svg>
+    This page is a work in progress!
+  </div>
+</aside>
 
-    <ul class="pages-list">
+    
+    
       
+
+  <nav class="toc" aria-labelledby="toc-heading">
+    <h2 id="toc-heading">Table of contents</h2>
+    
+    
+    
+    
+      
+      
+        
+        <ol>
+        
+        
+        
         <li>
-        <h2>
-          <a href="/ace/getting-started/">
-            <span class="text">Getting started</span>
+          <a href="#submitting-an-issue">
+            Submitting an issue
           </a>
-        </h2>
-        </li>
+    
       
+      
+        
+        
+        </li>
+        
+        
         <li>
-        <h2>
-          <a href="/ace/docs/">
-            <span class="text">Reference</span>
+          <a href="#contributing-code">
+            Contributing code
           </a>
-        </h2>
-        </li>
+    
       
+      
+        
+        <ol>
+        
+        
+        
         <li>
-        <h2>
-          <a href="/ace/rules/">
-            <span class="text">Rules</span>
+          <a href="#pull-requests">
+            Pull requests
           </a>
-        </h2>
-        </li>
+    
       
+      
+        
+        
+        </li>
+        
+        
         <li>
-        <h2>
-          <a href="/ace/contributing/">
-            <span class="text">Contributing</span>
+          <a href="#tests">
+            Tests
           </a>
-        </h2>
-        </li>
+    
       
+      
+        
+        
+        </li>
+        
+        
         <li>
-        <h2>
-          <a href="/ace/help/">
-            <span class="text">Need Help?</span>
+          <a href="#code-style">
+            Code style
           </a>
-        </h2>
-        </li>
+    
       
-    </ul>
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#commit-guidelines">
+            Commit guidelines
+          </a>
+    
+    
+        </li></ol>
+    
+        </li></ol>
+        
+
+  </nav>
+
+
+    
+    
+
+<p>First, welcome to Ace and thank you so much for willing to contribute!</p>
+
+<h2 id="submitting-an-issue">Submitting an issue</h2>
+
+<p>Feel free to  file issues on our <a href="https://github.com/daisy/ace/issues">GitHub issue tracker</a>.</p>
+
+<p>When filing an issue, please provide the following details:</p>
+
+<ul>
+<li>the version of Ace impacted by the issue (it can be retrieved by running <code>ace -v</code> in a command shell).</li>
+<li>the version of Node used to run Ace (it can be retrieved by running <code>node -v</code> in a command shell).</li>
+<li>if possible, provide the error details as produced in the error log</li>
+</ul>
+
+<h2 id="contributing-code">Contributing code</h2>
+
+<h3 id="pull-requests">Pull requests</h3>
+
+<p>We accept changes via GitHub pull requests.</p>
+
+<p>We try to keep a clean and readable commit history, so if we decide to merge your code we will rebase your commits on the <code>master</code> branch, and possibly squash them too.</p>
+
+<p>Please make sure your branch is reasonably up-to-date with the <code>master</code> branch (by regularly pulling from or rebasing onto the <code>master</code> branch).</p>
+
+<h3 id="tests">Tests</h3>
+
+<p>Please make surre to provided tests for any change you’re proposing.</p>
+
+<h3 id="code-style">Code style</h3>
+
+<p>We do not yet have formal code style guidelines, so please try to respect the style of the code files you are editting!</p>
+
+<p>We may change your code style when merging a pull request.</p>
+
+<h3 id="commit-guidelines">Commit guidelines</h3>
+
+<p>We follow a commit message convention (adapted from <a href="https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#">Angular’s convention</a>), which allows us to keep a readable history and automatically generate change logs.</p>
+
+<p>Each commit message should consist of a simple header, a body, and an optional footer, each separated with a blank line. The header is a single line consisting of a <em>type</em>, an optional <em>scope</em>, and a <em>subject</em>.</p>
+
+<p>The allowed types are:</p>
+
+<ul>
+<li>feat (feature)</li>
+<li>fix (bug fix)</li>
+<li>docs (documentation)</li>
+<li>style (formatting, missing semi colons, …)</li>
+<li>refactor</li>
+<li>test (when adding missing tests)</li>
+<li>chore (maintain)</li>
+</ul>
+
+<p>An example of a commit message is</p>
+
+<pre><code>feat: enable support for checking EPUB 2.0.1
+
+- Make sure that the parsing doesn’t choke on EPUB 2.0.1
+- Warn when checking an EPUB 2.0.1
+
+Closes #21
+</code></pre>
+
   </main>
 
           <footer role="contentinfo">

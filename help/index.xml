@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Need Help? on Ace, by DAISY</title>
+    <link>https://daisy.github.io/ace/help/</link>
+    <description>Recent content in Need Help? on Ace, by DAISY</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://daisy.github.io/ace/help/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Troubleshooting</title>
+      <link>https://daisy.github.io/ace/help/troubleshooting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/help/troubleshooting/</guid>
+      <description>Ace fails with &amp;ldquo;Unexpected error&amp;rdquo; Erm… you probably just hit a bug in Ace.
+You can first check the issue tracker to see if some already reported the issue. Don’t forget to included the closed issues in your search in case we fixed it already!
+If you can’t find any mention of your issue in our tracker, please file a new issue!
+You can run Ace with verbose logging (by using the command line option --verbose) to provide us with debugging information.</description>
+    </item>
+    
+    <item>
+      <title>Contact us</title>
+      <link>https://daisy.github.io/ace/help/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/help/contact/</guid>
+      <description>You can reach us:
+ via the contact form on InclusivePublishing.org on GitHub, we’re @daisy on Twitter, we’re @InclusivePub  </description>
+    </item>
+    
+  </channel>
+</rss>
