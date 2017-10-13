@@ -109,7 +109,7 @@ $ ace --outdir results ~/Documents/book.epub
 
 This will produce output in a `results` subdirectory of your current working directory. If that directory does not exist, it will be created.
 
-_Note: If you do not specify an `--outputdir` option, Ace outputs the JSON version of the report on the command line and saves nothing to disk._
+_Note: If you do not specify an `--outdir` option, Ace outputs the JSON version of the report on the command line and saves nothing to disk._
 
 ### tempdir
 
