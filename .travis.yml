@@ -6,7 +6,7 @@ before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.1.0
   - export PATH="$HOME/.yarn/bin:$PATH"
 script:
-  - yarn test
+  - yarn test --runInBand
 branches:
   only:
   - master
