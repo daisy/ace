@@ -3,7 +3,13 @@
 const path = require('path');
 const spawn = require('cross-spawn'); // eslint-disable-line import/no-extraneous-dependencies
 
-const ACE_PATH = path.resolve(__dirname, './cli-babelized.js');
+const pkg = require('../package');
+
+const ACE_PATH = path.resolve(__dirname, '..', pkg.bin.ace);
+
+(function init() {
+  spawn.sync('yarn', ['build']);
+}());
 
 // return the result of the spawned process:
 //  [ 'status', 'signal', 'output', 'pid', 'stdout', 'stderr',
