@@ -1,9 +1,12 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 'use strict';
 
 const path = require('path');
-const spawn = require('cross-spawn'); // eslint-disable-line import/no-extraneous-dependencies
+const spawn = require('cross-spawn');
+const babelCLIPkg = require('babel-cli/package');
 
-const BABEL_NODE = path.join(path.dirname(require.resolve('babel-cli')), 'bin/babel-node.js');
+const BABEL_NODE = path.join(path.dirname(require.resolve('babel-cli')), babelCLIPkg.bin['babel-node']);
 const ACE_PATH = path.resolve(__dirname, '../src/cli/cli.js');
 
 // return the result of the spawned process:
