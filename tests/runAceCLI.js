@@ -3,13 +3,8 @@
 const path = require('path');
 const spawn = require('cross-spawn'); // eslint-disable-line import/no-extraneous-dependencies
 
-const pkg = require('../package');
-
-const ACE_PATH = path.resolve(__dirname, '..', pkg.bin.ace);
-
-(function init() {
-  spawn.sync('yarn', ['build']);
-}());
+const BABEL_NODE = path.join(path.dirname(require.resolve('babel-cli')), 'bin/babel-node.js');
+const ACE_PATH = path.resolve(__dirname, '../src/cli/cli.js');
 
 // return the result of the spawned process:
 //  [ 'status', 'signal', 'output', 'pid', 'stdout', 'stderr',
@@ -22,7 +17,7 @@ function ace(args, options = {}) {
     ? options.cwd
     : process.cwd();
 
-  const result = spawn.sync(ACE_PATH, args || [], { cwd, env });
+  const result = spawn.sync(BABEL_NODE, ['--', ACE_PATH].concat(args || []), { cwd, env });
 
   result.stdout = result.stdout && result.stdout.toString();
   result.stderr = result.stderr && result.stderr.toString();
