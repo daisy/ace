@@ -3,8 +3,6 @@
 const ace = require('../src/core/ace');
 const logger = require('../src/core/logger');
 
-jest.setTimeout(10000);
-
 function runAce(epub, {
     cwd = process.cwd(),
     outdir,

@@ -1,8 +1,12 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 'use strict';
 
 const path = require('path');
-const spawn = require('cross-spawn'); // eslint-disable-line import/no-extraneous-dependencies
+const spawn = require('cross-spawn');
+const babelCLIPkg = require('babel-cli/package');
 
+const BABEL_NODE = path.join(path.dirname(require.resolve('babel-cli')), babelCLIPkg.bin['babel-node']);
 const ACE_PATH = path.resolve(__dirname, '../src/cli/cli.js');
 
 // return the result of the spawned process:
@@ -16,7 +20,7 @@ function ace(args, options = {}) {
     ? options.cwd
     : process.cwd();
 
-  const result = spawn.sync(ACE_PATH, args || [], { cwd, env });
+  const result = spawn.sync(BABEL_NODE, ['--', ACE_PATH].concat(args || []), { cwd, env });
 
   result.stdout = result.stdout && result.stdout.toString();
   result.stderr = result.stderr && result.stderr.toString();
