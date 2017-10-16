@@ -114,6 +114,7 @@
     ]
   },
   "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/tests/jest-setup.js",
     "testEnvironment": "node"
   }
 }
