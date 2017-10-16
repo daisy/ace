@@ -1,6 +1,9 @@
 'use strict';
 
 const ace = require('../src/core/ace');
+const logger = require('../src/core/logger');
+
+jest.setTimeout(10000);
 
 function runAce(epub, {
     cwd = process.cwd(),
@@ -9,6 +12,7 @@ function runAce(epub, {
     verbose = false,
     silent = true,
   } = {}) {
+  logger.initLogger({ verbose, silent });
   return ace(epub, {
     cwd,
     outdir,
