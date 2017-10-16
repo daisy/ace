@@ -24,13 +24,13 @@
     "organization": "DAISY Consortium",
     "url": "https://github.com/daisy/"
   },
-  "homepage": "https://github.com/daisy/ace-core",
+  "homepage": "https://github.com/daisy/ace",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/daisy/ace-core.git"
+    "url": "git+https://github.com/daisy/ace.git"
   },
   "bugs": {
-    "url": "https://github.com/daisy/ace-core/issues"
+    "url": "https://github.com/daisy/ace/issues"
   },
   "engines": {
     "node": ">=6",
