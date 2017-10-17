@@ -2,7 +2,7 @@
 
 [![Version](https://img.shields.io/npm/v/ace-core.svg)](https://www.npmjs.com/package/ace-core)
 [![License](https://img.shields.io/npm/l/ace-core.svg)](LICENSE)
-[![Downloads](https://img.shields.io/npm/dt/ace-core.svg)](https://www.npmjs.com/package/ace-core)
+[![Downloads](https://img.shields.io/npm/dt/ace-core.svg)](https://www.npmjs.com/package/ace-core)  
 [![Travis CI](https://img.shields.io/travis/daisy/ace.svg)](https://travis-ci.org/daisy/ace)
 [![Open Bugs](https://img.shields.io/github/issues-raw/daisy/ace/bug.svg)](https://github.com/daisy/ace/issues)
 [![Dependencies Status](https://img.shields.io/david/daisy/ace.svg)](https://david-dm.org/daisy/ace)
