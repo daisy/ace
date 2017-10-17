@@ -67,7 +67,8 @@
     "uuidv4": "^0.5.0",
     "winston": "^2.4.0",
     "xmldom": "^0.1.27",
-    "xpath": "^0.0.24"
+    "xpath": "^0.0.24",
+    "snyk": "^1.42.7"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -97,6 +98,8 @@
     "lint": "eslint src",
     "test": "jest",
     "docs": "echo add docs",
+    "protect": "snyk protect",
+    "prepare": "npm run protect",
     "prepublishOnly": "npm run test && npm run build"
   },
   "babel": {
@@ -116,5 +119,6 @@
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/tests/jest-setup.js",
     "testEnvironment": "node"
-  }
+  },
+  "snyk": true
 }
