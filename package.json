@@ -100,7 +100,9 @@
     "docs": "echo add docs",
     "protect": "snyk protect",
     "prepare": "npm run protect",
-    "prepublishOnly": "npm run test && npm run build"
+    "prepublishOnly": "npm run test && npm run build",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "babel": {
     "presets": [
