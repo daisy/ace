@@ -54,7 +54,7 @@
     "express-easy-zip": "^1.1.4",
     "extract-zip": "^1.6.5",
     "filehound": "^1.16.2",
-    "fs-extra": "^3.0.1",
+    "fs-extra": "^4.0.2",
     "h5o": "^0.11.3",
     "marko": "^4.4.26",
     "meow": "^3.7.0",
@@ -62,13 +62,13 @@
     "nightmare": "^2.10.0",
     "path": "^0.12.7",
     "shortid": "^2.2.8",
-    "tmp": "0.0.31",
+    "snyk": "^1.42.7",
+    "tmp": "^0.0.33",
     "unzip": "^0.1.11",
     "uuidv4": "^0.5.0",
     "winston": "^2.4.0",
     "xmldom": "^0.1.27",
-    "xpath": "^0.0.24",
-    "snyk": "^1.42.7"
+    "xpath": "^0.0.24"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
