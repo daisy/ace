@@ -5,11 +5,11 @@ ignore: {}
 patch:
   'npm:debug:20170905':
     - extract-zip > debug:
-        patched: '2017-10-17T08:18:37.542Z'
+        patched: '2017-10-18T22:22:29.402Z'
     - nightmare > electron > extract-zip > debug:
-        patched: '2017-10-17T08:18:37.542Z'
+        patched: '2017-10-18T22:22:29.402Z'
   'npm:ms:20170412':
     - extract-zip > debug > ms:
-        patched: '2017-10-17T08:18:37.542Z'
+        patched: '2017-10-18T22:22:29.402Z'
     - nightmare > electron > extract-zip > debug > ms:
-        patched: '2017-10-17T08:18:37.542Z'
+        patched: '2017-10-18T22:22:29.402Z'
