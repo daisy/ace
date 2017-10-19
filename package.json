@@ -101,7 +101,7 @@
     "docs": "echo add docs",
     "protect": "snyk protect",
     "prepare": "npm run protect",
-    "prepublishOnly": "npm run test && npm run build",
+    "prepublishOnly": "npm run build",
     "release": "standard-version -s"
   },
   "babel": {
