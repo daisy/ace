@@ -16,7 +16,7 @@ Ace is a tool to run automated accessibility checks for EPUB Publications, in or
 
 It is important to keep in mind that only a limited portion of accessibility checks can be automated, and therefore __Ace is just a helper tool to assist in a broader, human-driven, evaluation process__.
 
-Under the hood, Ace currently runs the [aXe engine for automated testing of HTML](https://github.com/dequelabs/axe-core), developped by the good folks at Deque Systems.
+Under the hood, Ace currently runs the [aXe engine for automated testing of HTML](https://github.com/dequelabs/axe-core), developed by the good folks at Deque Systems.
 
 ## Getting started
 
@@ -32,12 +32,20 @@ The following help message is displayed when running `ace --help`:
 ```
 Ace by DAISY, an Accessibility Checker for EPUB
 
-  Usage
-    $ ace [options] <input>
+  Usage: ace [options] <input>
 
-  Options
+  Options:
+
+    -h, --help             output usage information
+    -v, --version          output the version number
+
     -o, --outdir  <path>   save final reports to the specified directory
     -t, --tempdir <path>   specify a custom directory to store the temporary reports
+    -f, --force            override any existing output file or directory
+        --subdir           output reports to a sub-directory named after the input EPUB
+
+    -V, --verbose          display verbose output
+    -s, --silent           do not display any output
 
   Examples
     $ ace -o out ~/Documents/book.epub
@@ -57,10 +65,10 @@ When ran with no further options, the tool will produce a JSON report to the sta
 
 ### Saving the reports on disk
 
-You can specify a directory where to store the JSON report along with a human-readable HTML report, with the `--outputdir` option. For example:
+You can specify a directory where to store the JSON report along with a human-readable HTML report, with the `--outdir` option. For example:
 
 ```
-$ ace -o results ~/Documents/moby-dick.epub
+$ ace --outdir results ~/Documents/moby-dick.epub
 ```
 
 The above command will run the test rules and store both a JSON report (`report.json`) and an HTML report (`report.html`) under the `results` directory of your current working directory.
