@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-  - "node"
-  - "lts/*"
+  - node
+  - lts/*
 addons:
   apt:
     packages:
@@ -14,6 +14,15 @@ script:
   - xvfb-run yarn test --runInBand
 branches:
   only:
-  - master
+    - master
 cache:
   yarn: true
+deploy:
+  provider: npm
+  email: rdeltour@gmail.com
+  api_key:
+    secure: bjL1URPi2WQXViHQz9My7yYDLfpBf+tDa4Hh0FLRqGRnt953oOcn5T3/cAVI0uxamKBaaHTaahC86rARfWz+TQhjK0SCLfb5GbA6BeSgMHavRJ1vjnblLlPjeqQm2ng0XHcGMaIjQlX2IEn3vXWtyvDPqUylS7zKaiFGLmKnInUTvWPfhDEqFDNF5/p3VldJoyFbBdFXk+H3hW0NwnH2VbJdqQDtpoOfpo5PEX/1+s6/YklP+V7Lp6fUlvDVwzskH3KWN9iBfX8B/gQl0wAlZLTl/c2aEniNJoh5nLXLRfHV9UX7OWWGoMaB+M8dJdBkrBpwpufSVfLO14TU/vtZWde16Qar7dEL+QCxxk5q8BM1GVwY/85SiPLcqdjuwje5OAdouo4wFPvLvbfwjAtcR2I7+lqeEuQRSZAITcQ1aFgcFmeqg3aLxgxlSLUML4eug8Tb1uZrN1f4Eyq/HOf7XwR/ZWjUR2WQ/eWwigCCOVnFQLq11W05Nm9rgfc09oMNfRJ0E3Lk8VMwIsNei653+6AAWbfEFymXdOWUq5jDqd7JD4K1pd6NnVEsMPRvZWrEycjtLfKzv2QG5MSrrZ/qmqw8Cvn/CgOiiVzT5PCK0Z+DKwrvgkHUgEElUjC9/TUIdBtqYOlqSYYH1kvzDP9Ip+IlYcT4QMdpJf2ohZ76G3k=
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: daisy/ace
