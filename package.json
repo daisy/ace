@@ -81,6 +81,7 @@
     "eslint-plugin-import": "^2.3.0",
     "jest": "^21.1.0",
     "rimraf": "^2.6.1",
+    "standard-version": "^4.2.0",
     "uglify-js": "^3.0.8",
     "watch": "^1.0.2"
   },
@@ -100,7 +101,8 @@
     "docs": "echo add docs",
     "protect": "snyk protect",
     "prepare": "npm run protect",
-    "prepublishOnly": "npm run test && npm run build"
+    "prepublishOnly": "npm run test && npm run build",
+    "release": "standard-version -s"
   },
   "babel": {
     "presets": [
