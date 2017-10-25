@@ -18,10 +18,16 @@ if (!fs.existsSync(PATH_TO_H5O)) {
   throw new Error('Can’t find h5o');
 }
 
-const PATH_TO_AXE_PATCH = path.join(__dirname, '../scripts/axe-patch.js');
-if (!fs.existsSync(PATH_TO_AXE_PATCH)) {
-  winston.verbose(PATH_TO_AXE_PATCH);
-  throw new Error('Can’t find axe-patch script');
+const PATH_TO_AXE_PATCH_GETSELECTOR = path.join(__dirname, '../scripts/axe-patch-getselector.js');
+if (!fs.existsSync(PATH_TO_AXE_PATCH_GETSELECTOR)) {
+  winston.verbose(PATH_TO_AXE_PATCH_GETSELECTOR);
+  throw new Error('Can’t find axe-patch-getselector script');
+}
+
+const PATH_TO_AXE_PATCH_ARIALOOKUPTABLE = path.join(__dirname, '../scripts/axe-patch-arialookuptable.js');
+if (!fs.existsSync(PATH_TO_AXE_PATCH_ARIALOOKUPTABLE)) {
+  winston.verbose(PATH_TO_AXE_PATCH_ARIALOOKUPTABLE);
+  throw new Error('Can’t find axe-patch-arialookuptable script');
 }
 
 const PATH_TO_ACE_AXE = path.join(__dirname, '../scripts/ace-axe.js');
@@ -54,8 +60,9 @@ function checkSingle(spineItem, epub, nightmare) {
   return nightmare
     .goto(spineItem.url)
     .inject('js', PATH_TO_AXE)
+    .inject('js', PATH_TO_AXE_PATCH_GETSELECTOR)
+    .inject('js', PATH_TO_AXE_PATCH_ARIALOOKUPTABLE)
     .inject('js', PATH_TO_H5O)
-    .inject('js', PATH_TO_AXE_PATCH)
     .inject('js', PATH_TO_ACE_AXE)
     .inject('js', PATH_TO_ACE_EXTRACTION)
     .wait(50)

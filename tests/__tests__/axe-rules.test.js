@@ -40,3 +40,8 @@ test('`bypass` rule is disabled', async () => {
   const report = await ace('../data/axerule-bypass');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
+
+test('DPUB ARIA roles are allowed', async () => {
+  const report = await ace('../data/axerule-dpubroles');
+  expect(report['earl:result']['earl:outcome']).toEqual('pass');
+});
