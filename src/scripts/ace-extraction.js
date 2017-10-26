@@ -188,7 +188,7 @@ ace.getObjects = function() {
 }
 
 ace.getScripts = function() {
-  let scriptElems = document.querySelectorAll('script');
+  let scriptElems = document.querySelectorAll('script:not([data-ace])');
   let scripts = [];
   scriptElems.forEach(function(script) {
     let scriptObj = {

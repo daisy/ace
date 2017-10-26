@@ -1,6 +1,6 @@
 'use strict';
 
-const htmlChecker = require('./checker-nightmare.js');
+const htmlChecker = require('./checker-chromium.js');
 const epubChecker = require('./checker-epub.js');
 const winston = require('winston');
 
