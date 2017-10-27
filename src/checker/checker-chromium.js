@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const pMap = require('p-map');
 const puppeteer = require('puppeteer');
 const axe2ace = require('../report/axe2ace.js');
 const winston = require('winston');
@@ -43,7 +44,7 @@ if (!fs.existsSync(PATH_TO_ACE_EXTRACTION)) {
 }
 
 async function checkSingle(spineItem, epub, browser) {
-  winston.info(`- ${spineItem.relpath}`);
+  winston.verbose(`- Processing ${spineItem.relpath}`);
   try {
     const page = await browser.newPage();
     await page.goto(spineItem.url);
@@ -92,10 +93,10 @@ async function checkSingle(spineItem, epub, browser) {
     // Post-process results
     results.assertions = (results.axe != null) ? axe2ace.axe2ace(spineItem, results.axe) : [];
     delete results.axe;
-    winston.info(`- ${
-      (results.assertions == null)
-        ? 'No'
-        : results.assertions.assertions.length} issues found`);
+    winston.info(`- ${spineItem.relpath}: ${
+      (results.assertions && results.assertions.lentgh > 0)
+        ? results.assertions.assertions.length
+        : 'No'} issues found`);
     // Resolve path and locators for extracted data
     if (results.data != null) {
       Object.getOwnPropertyNames(results.data).forEach((key) => {
@@ -133,13 +134,7 @@ async function checkSingle(spineItem, epub, browser) {
 module.exports.check = async (epub) => {
   const browser = await puppeteer.launch();
   winston.info('Checking documents...');
-  return epub.contentDocs.reduce((sequence, spineItem) =>
-    sequence.then(results =>
-      checkSingle(spineItem, epub, browser)
-      .then((result) => {
-        results.push(result);
-        return results;
-      })), Promise.resolve([]))
+  return pMap(epub.contentDocs, doc => checkSingle(doc, epub, browser), { concurrency: 4 })
   .then(async (results) => {
     await browser.close();
     return results;
