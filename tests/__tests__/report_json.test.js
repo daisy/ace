@@ -60,10 +60,19 @@ describe('check assertions', () => {
 });
 
 describe('check properties', () => {
-  test('without mathml', async () => {
+  test('defaults', async () => {
     const report = await ace(path.join(__dirname, '../data/base-epub-30'));
     expect(report.properties).toMatchObject({
       hasMathML: false,
+      hasPageBreaks: false,
+      hasFormElements: false,
+    });
+  });
+
+  test('with form elements', async () => {
+    const report = await ace(path.join(__dirname, '../data/feat-forms'));
+    expect(report.properties).toMatchObject({
+      hasFormElements: true,
     });
   });
 
@@ -71,13 +80,6 @@ describe('check properties', () => {
     const report = await ace(path.join(__dirname, '../data/feat-mathml'));
     expect(report.properties).toMatchObject({
       hasMathML: true,
-    });
-  });
-
-  test('without page breaks', async () => {
-    const report = await ace(path.join(__dirname, '../data/base-epub-30'));
-    expect(report.properties).toMatchObject({
-      hasPageBreaks: false,
     });
   });
 

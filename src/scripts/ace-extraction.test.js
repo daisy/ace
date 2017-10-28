@@ -336,3 +336,60 @@ describe('finding pagebreaks', () => {
     expect(results).toBe(true);
   });
 });
+
+describe('finding form elements', () => {
+  test('no form elements', async () => {
+    const results = await run('hasFormElements', '<p>foo</p>');
+    expect(results).toBe(false);
+  });
+
+  test('form', async () => {
+    const results = await run('hasFormElements', '<form/>');
+    expect(results).toBe(true);
+  });
+
+  test('input', async () => {
+    const results = await run('hasFormElements', '<input/>');
+    expect(results).toBe(true);
+  });
+
+  test('button', async () => {
+    const results = await run('hasFormElements', '<button/>');
+    expect(results).toBe(true);
+  });
+
+  test('select', async () => {
+    const results = await run('hasFormElements', '<select/>');
+    expect(results).toBe(true);
+  });
+
+  test('datalist', async () => {
+    const results = await run('hasFormElements', '<datalist/>');
+    expect(results).toBe(true);
+  });
+
+  test('textarea', async () => {
+    const results = await run('hasFormElements', '<textarea/>');
+    expect(results).toBe(true);
+  });
+
+  test('output', async () => {
+    const results = await run('hasFormElements', '<output/>');
+    expect(results).toBe(true);
+  });
+
+  test('progress', async () => {
+    const results = await run('hasFormElements', '<progress/>');
+    expect(results).toBe(true);
+  });
+
+  test('meter', async () => {
+    const results = await run('hasFormElements', '<meter/>');
+    expect(results).toBe(true);
+  });
+
+  test('option', async () => {
+    const results = await run('hasFormElements', '<option/>');
+    expect(results).toBe(true);
+  });
+});

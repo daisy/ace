@@ -22,6 +22,7 @@ ace.createReport = function(report) {
     reportData('scripts`', ace.getScripts());
     reportData('videos', ace.getVideos());
     report.properties = report.properties || {};
+    report.properties.hasFormElements = ace.hasFormElements();
     report.properties.hasMathML = ace.hasMathML();
     report.properties.hasPageBreaks = ace.hasPageBreaks();
 };
@@ -235,6 +236,10 @@ ace.getVideos = function() {
     videos.push(videoObj);
   });
   return videos;
+}
+
+ace.hasFormElements = function() {
+  return document.querySelectorAll('form, input, button, select, datalist, textarea, option, output, progress, meter').length > 0;
 }
 
 ace.hasMathML = function() {
