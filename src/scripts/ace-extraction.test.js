@@ -147,6 +147,46 @@ describe('extracting embeds', () => {
   });
 });
 
+describe('extracting epub:switch', () => {
+  test('switch with id', async () => {
+    const results = await run('getEPUBSwitches', '<epub:switch id="foo" />');
+    expect(results.length).toBe(1);
+    expect(results[0].html).toBeUndefined();
+    expect(results[0].id).toEqual('foo');
+  });
+
+  test('embed with no id', async () => {
+    const results = await run('getEPUBSwitches', '<epub:switch />');
+    expect(results.length).toBe(1);
+    expect(results[0].id).toBeUndefined();
+  });
+
+  test('switch in other namespace', async () => {
+    const results = await run('getEPUBSwitches', '<ex:switch id="foo" xmlns:ex="https://example.com"/>');
+    expect(results.length).toBe(0);
+  });
+});
+
+describe('extracting epub:trigger', () => {
+  test('trigger with id', async () => {
+    const results = await run('getEPUBTriggers', '<epub:trigger id="foo" />');
+    expect(results.length).toBe(1);
+    expect(results[0].html).toBeUndefined();
+    expect(results[0].id).toEqual('foo');
+  });
+
+  test('embed with no id', async () => {
+    const results = await run('getEPUBTriggers', '<epub:trigger />');
+    expect(results.length).toBe(1);
+    expect(results[0].id).toBeUndefined();
+  });
+
+  test('trigger in other namespace', async () => {
+    const results = await run('getEPUBTriggers', '<ex:trigger id="foo" xmlns:ex="https://example.com"/>');
+    expect(results.length).toBe(0);
+  });
+});
+
 describe('extracting headings', () => {
   test('simple h1', async () => {
     const results = await run('getHeadings', '<h1>title 1</h1>');

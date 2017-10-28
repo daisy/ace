@@ -17,9 +17,11 @@ ace.createReport = function(report) {
     reportData('audios', ace.getAudios());
     reportData('canvases', ace.getCanvases());
     reportData('embeds', ace.getEmbeds());
+    reportData('epub-triggers', ace.getEPUBTriggers());
+    reportData('epub-switches', ace.getEPUBSwitches());
     reportData('iframes', ace.getIframes());
     reportData('maps', ace.getMaps());
-    reportData('scripts`', ace.getScripts());
+    reportData('scripts', ace.getScripts());
     reportData('videos', ace.getVideos());
     report.properties = report.properties || {};
     report.properties.hasFormElements = ace.hasFormElements();
@@ -88,6 +90,36 @@ ace.getEmbeds = function() {
     embeds.push(embedObj);
   });
   return embeds;
+}
+
+ace.getEPUBSwitches = function() {
+  let switchElems = document.querySelectorAll('*|switch');
+  let switches = [];
+  switchElems.forEach(function(elem) {
+    if (elem.namespaceURI === 'http://www.idpf.org/2007/ops') {
+      let obj = {
+        cfi: window.daisy.epub.createCFI(elem),
+      }
+      if (elem.hasAttribute('id')) obj.id = elem.getAttribute('id');
+      switches.push(obj);
+    }
+  });
+  return switches;
+}
+
+ace.getEPUBTriggers = function() {
+  let triggerElems = document.querySelectorAll('*|trigger');
+  let triggers = [];
+  triggerElems.forEach(function(elem) {
+    if (elem.namespaceURI === 'http://www.idpf.org/2007/ops') {
+      let obj = {
+        cfi: window.daisy.epub.createCFI(elem),
+      }
+      if (elem.hasAttribute('id')) obj.id = elem.getAttribute('id');
+      triggers.push(obj);
+    }
+  });
+  return triggers;
 }
 
 ace.getHTMLOutline = function() {

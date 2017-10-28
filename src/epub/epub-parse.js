@@ -136,6 +136,9 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
     const navDocFullPath = path.join(path.dirname(packageDocPath), navDocPath);
     this.navDoc = parseNavDoc(navDocFullPath, epubDir);
   }
+
+  this.hasBindings = select('//opf:bindings', doc).length > 0;
+  this.hasManifestFallbacks = select('//opf:item[@fallback]', doc).length > 0;
 };
 
 EpubParser.prototype.parseContentDocTitle = function(filepath) {

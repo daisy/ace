@@ -105,8 +105,16 @@ function check(epub, report) {
   checkPageSource(assertion, epub);
 
   report.addAssertions(assertion.build());
-// Report the Nav Doc
+
+  // Report the Nav Doc
   report.addEPUBNav(epub.navDoc);
+
+  // Report package properties
+  report.addProperties({
+    hasManifestFallbacks: epub.hasManifestFallbacks,
+    hasBindings: epub.hasBindings,
+  });
+
   return Promise.resolve();
 }
 

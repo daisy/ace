@@ -63,9 +63,18 @@ describe('check properties', () => {
   test('defaults', async () => {
     const report = await ace(path.join(__dirname, '../data/base-epub-30'));
     expect(report.properties).toMatchObject({
+      hasBindings: false,
+      hasManifestFallbacks: false,
       hasMathML: false,
       hasPageBreaks: false,
       hasFormElements: false,
+    });
+  });
+
+  test('with bindings element', async () => {
+    const report = await ace(path.join(__dirname, '../data/feat-bindings'));
+    expect(report.properties).toMatchObject({
+      hasBindings: true,
     });
   });
 
@@ -73,6 +82,13 @@ describe('check properties', () => {
     const report = await ace(path.join(__dirname, '../data/feat-forms'));
     expect(report.properties).toMatchObject({
       hasFormElements: true,
+    });
+  });
+
+  test('with manifest fallbacks', async () => {
+    const report = await ace(path.join(__dirname, '../data/feat-manifest-fallbacks'));
+    expect(report.properties).toMatchObject({
+      hasManifestFallbacks: true,
     });
   });
 
@@ -97,20 +113,34 @@ describe('check data', () => {
     expect(report.data).toEqual({});
   });
 
-  test('extract images', async () => {
-    const report = await ace(path.join(__dirname, '../data/feat-image'));
-    expect(report.data).toMatchObject({
-      images: [{
-        src: 'EPUB/image_001.jpg',
-      }],
-    });
-  });
-
   test('extract audios', async () => {
     const report = await ace(path.join(__dirname, '../data/feat-audio'));
     expect(report.data).toMatchObject({
       audios: [{
         src: 'EPUB/audio_001.mp3',
+      }],
+    });
+  });
+
+  test('extract epub:switch elements', async () => {
+    const report = await ace(path.join(__dirname, '../data/feat-epub-switch'));
+    expect(report.data).toMatchObject({
+      'epub-switches': [{}],
+    });
+  });
+
+  test('extract epub:trigger elements', async () => {
+    const report = await ace(path.join(__dirname, '../data/feat-epub-trigger'));
+    expect(report.data).toMatchObject({
+      'epub-triggers': [{}],
+    });
+  });
+
+  test('extract images', async () => {
+    const report = await ace(path.join(__dirname, '../data/feat-image'));
+    expect(report.data).toMatchObject({
+      images: [{
+        src: 'EPUB/image_001.jpg',
       }],
     });
   });
@@ -132,4 +162,7 @@ describe('check data', () => {
       }],
     });
   });
+
+  //FIXME extract switch
+  //FIXME extract trigger
 });
