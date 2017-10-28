@@ -321,7 +321,7 @@ describe('finding pagebreaks', () => {
     expect(results).toBe(false);
   });
 
-  test.skip('epub:type break', async () => {
+  test('epub:type break', async () => {
     const results = await run('hasPageBreaks', '<span epub:type="pagebreak" />');
     expect(results).toBe(true);
   });

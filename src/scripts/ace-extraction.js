@@ -242,5 +242,5 @@ ace.hasMathML = function() {
 }
 
 ace.hasPageBreaks = function() {
-  return document.querySelectorAll('[epub\\:type~="pagebreak"], [role~="doc-pagebreak"]').length > 0;
+  return document.querySelectorAll('[*|type~="pagebreak"], [role~="doc-pagebreak"]').length > 0;
 }
