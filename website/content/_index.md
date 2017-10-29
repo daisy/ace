@@ -9,5 +9,5 @@ Read more about the Ace project on [Inclusive Publishing](http://inclusivepublis
 Latest version: v0.5.0 (“Beta 1”).
 
 {{% note %}}
-Ace is currently in public beta testing. It may have rough edges, [feedback is welcome](https://github.com/daisy/ace/issues/new)!
+Ace is currently in public beta testing. It may have rough edges, feedback is more than welcome! (via our [issue tracker](https://github.com/daisy/ace/issues/new) or the [beta-testing feedback form](https://www.surveymonkey.co.uk/r/YQ2MRRP))
 {{% /note %}}
