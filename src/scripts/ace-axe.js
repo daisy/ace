@@ -83,6 +83,20 @@ daisy.ace.run = function(done) {
     }
   };
 
+  window.axe.configure({
+    rules: [
+      {
+        id: 'pagebreak-label',
+        selector: '[*|type~="pagebreak"], [role~="doc-pagebreak"]',
+        any: ['aria-label', 'non-empty-title'],
+        metadata: {
+          description: "Ensure page markers have an accessible label",
+        },
+        tags: ['cat.epub']
+      }
+    ]
+  });
+
   window.axe.run(
     {
       "rules": {

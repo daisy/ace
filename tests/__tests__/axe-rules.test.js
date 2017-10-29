@@ -45,3 +45,28 @@ test('DPUB ARIA roles are allowed', async () => {
   const report = await ace('../data/axerule-dpubroles');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
+
+test('Ensure page breaks have labels', async () => {
+  const report = await ace('../data/axerule-pagebreak-label');
+  expect(report['earl:result']['earl:outcome']).toEqual('fail');
+  expect(report.assertions).toEqual(expect.arrayContaining([
+    expect.objectContaining({
+      'earl:testSubject': expect.objectContaining({ url: 'content_001.xhtml' }),
+      assertions: [
+        expect.objectContaining({
+          'earl:test': expect.objectContaining({ 'dct:title': 'pagebreak-label' }),
+          'earl:result': expect.objectContaining({
+            'earl:outcome': 'fail',
+            'earl:pointer': expect.objectContaining({ css: ['#p3'] }),
+          }),
+        }),
+        expect.objectContaining({
+          'earl:test': expect.objectContaining({ 'dct:title': 'pagebreak-label' }),
+          'earl:result': expect.objectContaining({
+            'earl:outcome': 'fail',
+            'earl:pointer': expect.objectContaining({ css: ['#p4'] }),
+          }),
+        }),
+      ],
+    })]));
+});

@@ -9,6 +9,7 @@ const winston = require('winston');
 const kbMap = {
   'baseUrl': 'http://kb.daisy.org/publishing/',
   'map': {
+    'pagebreak-label': {url: 'docs/navigation/pagelist.html', 'title': 'Page Breaks'},
     'html-has-lang': {url: 'docs/html/lang.html', title: 'Language'},
     'html-lang-valid': {url: 'docs/html/lang.html', title: 'Language'},
     'valid-lang': {url: 'docs/html/lang.html', title: 'Language'},
