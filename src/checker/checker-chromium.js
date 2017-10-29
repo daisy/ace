@@ -41,7 +41,7 @@ async function checkSingle(spineItem, epub, browser) {
     results.assertions = (results.axe != null) ? axe2ace.axe2ace(spineItem, results.axe) : [];
     delete results.axe;
     winston.info(`- ${spineItem.relpath}: ${
-      (results.assertions && results.assertions.lentgh > 0)
+      (results.assertions && results.assertions.assertions.length > 0)
         ? results.assertions.assertions.length
         : 'No'} issues found`);
     // Resolve path and locators for extracted data
