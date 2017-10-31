@@ -115,7 +115,7 @@ module.exports = class Report {
             return aceReport;
         })
         .then((aceReport) => Promise.all([
-          fs.writeFile(path.join(outdir, 'ace.json'), aceReport, 'UTF-8'),
+          fs.writeFile(path.join(outdir, 'report.json'), aceReport, 'UTF-8'),
         ]));
   }
   saveHtml(outdir) {
