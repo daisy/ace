@@ -66,7 +66,7 @@ function sleep(ms) {
       outdir = path.join(outdir, path.parse(cli.input[0]).name);
     }
     if (!cli.flags.force) {
-      const overrides = ['ace.json', 'report.html', 'data', 'js']
+      const overrides = ['report.json', 'report.html', 'data', 'js']
         .map(file => path.join(outdir, file))
         .filter(fs.existsSync);
       if (overrides.length > 0) {
@@ -78,7 +78,7 @@ Output directory is not empty.
 ${overrides.map(file => `  - ${file}`).join('\n')}
 
   Use option --force to override.
-  `, 1);
+`, 1);
         await sleep(5000);
         process.exit(1);
       }

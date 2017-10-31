@@ -138,7 +138,7 @@ warn:    Output directory is not empty.
 
 Running Ace would override the following files or directories:
 
-  - /Users/marisa/dev/out/ace.json
+  - /Users/marisa/dev/out/report.json
   - /Users/marisa/dev/out/report.html
   - /Users/marisa/dev/out/data
   - /Users/marisa/dev/out/js
@@ -195,4 +195,3 @@ $
 ```
 
 Note that the log file is not 'silent'; it contains the default level of detail about Ace's operation.
-

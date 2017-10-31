@@ -5,12 +5,12 @@ exports[`test existing output 1`] = `
 
   Running Ace would override the following files or directories:
 
-  - report/ace.json
+  - report/report.json
   - report/report.html
   - report/js
 
   Use option --force to override.
-  
+
 "
 `;
 

@@ -129,7 +129,7 @@ function getReport(req, res) {
   }
   else {
     if ("type" in req.query && req.query.type === "json") {
-      var jsonReport = require(path.join(jobdata.internal.outputDir, "ace.json"));
+      var jsonReport = require(path.join(jobdata.internal.outputDir, "report.json"));
       res.json(jsonReport);
     }
     else {

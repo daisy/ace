@@ -82,7 +82,7 @@ Note that failing to specify `type` of report will return the default format (wh
 
 ~ ❯❯❯ unzip ~/out.zip
 Archive:  /Users/marisa/out.zip
-  inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/ace.json
+  inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/report.json
   inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/data/EPUB/images/daisy.png
   inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/js/ace-report-viewer.js
   inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/js/aceReportData.js
@@ -108,4 +108,3 @@ Archive:  /Users/marisa/out.zip
 ~ ❯❯❯ curl http://localhost:8000/jobs/
 [{"job":"http://localhost:8000/jobs/8198e049-2e81-4be8-b889-ace01978dabc","status":-1,"report":{}},{"job":"http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1","status":0,"report":{"zip":"http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1/report/?type=zip","json":"http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1/report/?type=json"}},{"job":"http://localhost:8000/jobs/107df1e7-deff-436f-811e-2a8473b20237","status":0,"report":{"zip":"http://localhost:8000/jobs/107df1e7-deff-436f-811e-2a8473b20237/report/?type=zip","json":"http://localhost:8000/jobs/107df1e7-deff-436f-811e-2a8473b20237/report/?type=json"}},{"job":"http://localhost:8000/jobs/d62bb7c7-4eea-4f0b-bd73-b45f28630ebe","status":0,"report":{"zip":"http://localhost:8000/jobs/d62bb7c7-4eea-4f0b-bd73-b45f28630ebe/report/?type=zip","json":"http://localhost:8000/jobs/d62bb7c7-4eea-4f0b-bd73-b45f28630ebe/report/?type=json"}},{"job":"http://localhost:8000/jobs/4363a917-c422-486f-98c0-bd98cc423fc0","status":0,"report":{"zip":"http://localhost:8000/jobs/4363a917-c422-486f-98c0-bd98cc423fc0/report/?type=zip","json":"http://localhost:8000/jobs/4363a917-c422-486f-98c0-bd98cc423fc0/report/?type=json"}}]%
 ```
-

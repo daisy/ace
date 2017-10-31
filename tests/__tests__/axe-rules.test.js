@@ -15,7 +15,7 @@ let reportPath;
 beforeEach(() => {
   outdir = tmp.dirSync({ prefix: 'ace_out_', unsafeCleanup: true });
   tmpdir = tmp.dirSync({ prefix: 'ace_tmp_', unsafeCleanup: true });
-  reportPath = path.join(outdir.name, 'ace.json');
+  reportPath = path.join(outdir.name, 'report.json');
 });
 
 afterEach(() => {
