@@ -16,6 +16,15 @@
 
   function updateTableContents(data) {
     $('#report-table').dataTable().fnDestroy();
+
+    if (data.length == 0) {
+      var div = $("#violations");
+      div.append("<p>No violations found in this publication.</p>");
+      $("#report-table").remove();
+      $("#filters").remove();
+      return;
+    }
+
     var tablebody = $("#report-table > tbody");
     tablebody.empty();
 
@@ -71,6 +80,7 @@
     });
 
     $('#report-table').DataTable();
+
   }
 
   function filterSelected() {
@@ -129,6 +139,14 @@
     $('#image-table').dataTable().fnDestroy();
     var tablebody = $("#image-table > tbody");
     tablebody.empty();
+
+    if (images == null || images == undefined) {
+      $("#image-table").remove();
+      var div = $("#images");
+      div.append("<p>No images found in this publication.</p>");
+      return;
+    }
+
     images.forEach(function(image) {
       var tr = $("<tr></tr>");
 
@@ -164,7 +182,11 @@
       tablebody.append(tr);
 
     });
-
+    if (images.length == 0) {
+      var div = $("#images");
+      div.append("<p>No images found in this publication.</p>");
+      $("#image-table").remove();
+    }
     $('#report-table').DataTable();
 
   }
@@ -178,8 +200,8 @@
   }
   function populateA11yMetadataSummary(a11ymetadata, pubmetadata) {
 
-    var tbody = $("#a11y-meta-present tbody");
-    var list = $("#a11y-meta-missing");
+    var tbody = $("#a11y-metadata-present tbody");
+    var list = $("#a11y-metadata-missing");
 
     a11ymetadata["present"].forEach(function(item) {
       var metastr = pubmetadata[item];
@@ -189,6 +211,11 @@
       var tr = $("<tr><td><code>" + item + "</code></td><td>" + metastr + "</td></tr>");
       tbody.append(tr);
     });
+    if (a11ymetadata["present"].length == 0) {
+      var div = $("#a11y-metadata-present-container");
+      div.append("<p>No accessibility metadata present in the package document.</p>");
+      $("#a11y-metadata-present").remove();
+    }
 
     a11ymetadata["missing"].forEach(function(item) {
       var li = $("<li><code>" + item + "</code></li>")
@@ -201,8 +228,9 @@
     });
 
     if (a11ymetadata["missing"].length == 0 && a11ymetadata["empty"] == 0) {
-      var div = $("#a11y-metadata");
+      var div = $("#a11y-metadata-missing-container");
       div.append("<p>No missing or empty accessibility metadata in the package document.</p>");
+      $("#a11y-metadata-missing").remove();
     }
   }
 
@@ -356,7 +384,7 @@
     </details>
   </div>
 
-  <div class="container-fluid">
+  <div class="container-fluid" id="violations">
     <h2>Violations</h2>
 
     <div id="filters" class="py-3">
@@ -386,19 +414,23 @@
     <h2>Accessibility Metadata Summary</h2>
     <p>This is a summary of the <a href="http://www.idpf.org/epub/a11y/accessibility.html#sec-disc-package" target="_blank">accessibility metadata</a> in the package document.</p>
 
-    <h3>Present</h3>
-    <table id="a11y-meta-present" class="table table-bordered">
-      <thead class="thead-inverse">
-        <th>Property</th>
-        <th>Value</th>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+    <div id="a11y-metadata-present-container">
+      <h3>Present</h3>
+      <table id="a11y-metadata-present" class="table table-bordered">
+        <thead class="thead-inverse">
+          <th>Property</th>
+          <th>Value</th>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
 
-    <h3>Missing or empty</h3>
-    <ul id="a11y-meta-missing">
-    </ul>
+    <div id="a11y-metadata-missing-container">
+      <h3>Missing or empty</h3>
+      <ul id="a11y-metadata-missing">
+      </ul>
+    </div>
   </div>
 
   <div id="images" class="container-fluid">
