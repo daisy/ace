@@ -6,7 +6,8 @@
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap4.min.css"/>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
 
   <script type="text/javascript" src="js/ace-report-viewer.js"></script>
   <script type="text/javascript" src="js/aceReportData.js"></script>
@@ -125,13 +126,17 @@
   }
 
   function populateOutlines(outlines) {
-    var section = $('#outlines');
-    section.append('<h3>EPUB Table of Contents</h3>');
-    section.append(outlines.toc);
-    section.append('<h3>Headings outline</h3>');
-    section.append(outlines.headings);
-    section.append('<h3>HTML outline</h3>');
-    section.append(outlines.html);
+    var toc = $("#toc-outline");
+    toc.append('<h3>EPUB Table of Contents</h3>');
+    toc.append(outlines.toc);
+
+    var headings = $("#headings-outline");
+    headings.append('<h3>Headings outline</h3>');
+    headings.append(outlines.headings);
+
+    var html = $("#html-outline");
+    html.append('<h3>HTML outline</h3>');
+    html.append(outlines.html);
   }
 
   function populateImagesTable(images) {
@@ -364,6 +369,13 @@
     color: #000;
   }
 
+  #violations, #outlines, #a11y-metadata, #images{
+    margin-top: 1.5em;
+    margin-left: 1em;
+  }
+  #outlines h3 {
+    font-size: large;
+  }
 
   </style>
 
@@ -382,73 +394,98 @@
     </details>
   </div>
 
+  <ul class="nav nav-pills">
+    <li class="nav-item"><a class="nav-link" href="#violations">Violations</a></li>
+    <li class="nav-item"><a class="nav-link" href="#outlines">Outlines</a></li>
+    <li class="nav-item"><a class="nav-link" href="#a11y-metadata">Accessibility Metadata</a></li>
+    <li class="nav-item"><a class="nav-link" href="#images">Images</a></li>
+  </ul>
+
+
+
   <div class="container-fluid" id="violations">
     <h2>Violations</h2>
+    <details>
+      <summary>Violations details</summary>
+      <div id="filters" class="py-3">
+      </div>
 
-    <div id="filters" class="py-3">
-    </div>
+      <table id="report-table" class="table table-bordered">
+        <caption>Violations in the EPUB, with references to severity, guidelines and specific location of problem.</caption>
+        <thead class="thead-inverse">
+          <tr>
+            <th>Impact</th>
+            <th>Rule</th>
+            <th>Location</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
 
-    <table id="report-table" class="table table-bordered">
-      <caption>Violations in the EPUB, with references to severity, guidelines and specific location of problem.</caption>
-      <thead class="thead-inverse">
-        <tr>
-          <th>Impact</th>
-          <th>Rule</th>
-          <th>Location</th>
-          <th>Details</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-
-    </table>
+      </table>
+    </details>
   </div>
 
   <div id="outlines" class="container-fluid">
     <h2>Outlines</h2>
+    <details>
+      <summary>Outlines details</summary>
+      <div class="row">
+        <div class="col-sm" id="toc-outline"></div>
+        <div class="col-sm" id="headings-outline"></div>
+        <div class="col-sm" id="html-outline"></div>
+      </div>
+    </details>
   </div>
 
   <div id="a11y-metadata" class="container-fluid">
-    <h2>Accessibility Metadata Summary</h2>
-    <p>This is a summary of the <a href="http://www.idpf.org/epub/a11y/accessibility.html#sec-disc-package" target="_blank">accessibility metadata</a> in the package document.</p>
+    <h2>Accessibility Metadata</h2>
+    <details>
+      <summary>Accessibility metadata details</summary>
+      <p>This is a summary of the <a href="http://www.idpf.org/epub/a11y/accessibility.html#sec-disc-package" target="_blank">accessibility metadata</a> in the package document.</p>
 
-    <div id="a11y-metadata-present-container">
-      <h3>Present</h3>
-      <table id="a11y-metadata-present" class="table table-bordered">
-        <thead class="thead-inverse">
-          <th>Property</th>
-          <th>Value</th>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>
+      <div id="a11y-metadata-present-container">
+        <h3>Present</h3>
+        <table id="a11y-metadata-present" class="table table-bordered">
+          <thead class="thead-inverse">
+            <th>Property</th>
+            <th>Value</th>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
 
-    <div id="a11y-metadata-missing-container">
-      <h3>Missing or empty</h3>
-      <ul id="a11y-metadata-missing">
-      </ul>
-    </div>
+      <div id="a11y-metadata-missing-container">
+        <h3>Missing or empty</h3>
+        <ul id="a11y-metadata-missing">
+        </ul>
+      </div>
+    </details>
   </div>
 
   <div id="images" class="container-fluid">
     <h2>Images</h2>
-    <table  id="image-table" class="table table-striped table-bordered">
-      <caption>Images in the EPUB, with their description</caption>
-      <thead class="thead-inverse">
-         <tr>
-            <th>Image</th>
-            <th><code>alt</code> attribute
-            </th>
-            <th><code>aria-describedby</code> content
-            </th>
-            <th>Associated <code>figcaption</code></th>
-            <th>Location</th>
-         </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+    <details>
+      <summary>Images details</summary>
+      <table  id="image-table" class="table table-striped table-bordered">
+        <caption>Images in the EPUB, with their description</caption>
+        <thead class="thead-inverse">
+           <tr>
+              <th>Image</th>
+              <th><code>alt</code> attribute
+              </th>
+              <th><code>aria-describedby</code> content
+              </th>
+              <th>Associated <code>figcaption</code></th>
+              <th>Location</th>
+           </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </details>
   </div>
 
 
