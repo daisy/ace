@@ -18,7 +18,7 @@
       <guid>https://daisy.github.io/ace/getting-started/why-ace/</guid>
       <description>What is Ace? Ace is a tool to run automated accessibility checks for EPUB Publications, in order to assist in the evaluation of conformance to the EPUB Accessibility specification.
 What does Ace do? Specifically, Ace:
- runs automated accessibility tests on EPUB content documents extracts the publication metadata, and checks accessibility-related metadata extracts various document outlines (the ToC, headings, and HTML structure) for side-by-side comparison extracts all the EPUBs images and graphics and their associated accessibility descriptions in a consolidated table, for easier review extracts other various content features to facilitate human-driven accessibility audits can be run as a command line tool, or integrated as a Javascript node module, or driven by an HTTP API  Under the hood, Ace currently runs aXe, an engine for automated testing of HTML developped by the good folks at Deque Systems.</description>
+ runs automated accessibility tests on EPUB content documents extracts the publication metadata, and checks accessibility-related metadata extracts various document outlines (the ToC, headings, and HTML structure) for side-by-side comparison extracts all the EPUBs images and graphics and their associated accessibility descriptions in a consolidated table, for easier review extracts other various content features to facilitate human-driven accessibility audits can be run as a command line tool, or integrated as a Javascript node module, or driven by an HTTP API  Under the hood, Ace currently runs aXe, an engine for automated testing of HTML developed by the good folks at Deque Systems.</description>
     </item>
     
     <item>
@@ -36,10 +36,9 @@ What does Ace do? Specifically, Ace:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/getting-started/running/</guid>
-      <description>Checking an EPUB You can check an EPUB by running the ace command followed by the path to the EPUB document. For example:
+      <description>Checking an EPUB You can check an EPUB by running the ace command followed by the path to the EPUB document (if the file name includes spaces, place it inside &amp;quot; marks). For example:
 $ ace ~/Documents/moby-dick.epub  The above command will run the automated accessibility tests on the EPUB document and output the results.
-Getting the results You can specify the directory for Ace to store its output with the --outdir option. For example:
-$ ace --outdir ~/Documents/moby-dick-report ~/Documents/moby-dick.epub  Note that if you do not specify a directory with --outdir, no reports get saved.</description>
+Getting the results You can specify the directory for Ace to store its output with the --outdir option.</description>
     </item>
     
   </channel>

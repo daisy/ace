@@ -40,7 +40,7 @@ When filing an issue, please provide the following details:
       <guid>https://daisy.github.io/ace/contributing/notes/</guid>
       <description>Design principles TBD.
 HTML checker Under the hood, most of the HTML checks are powered by aXe, an engine for automated testing of HTML from Deque Systems.
-Headless browser During the evaluation of an EPUB, Ace loads each HTML content documeent in a headless browser using Nightmare.js, a high-level browser automatiom library from Segment.</description>
+Headless browser During the evaluation of an EPUB, Ace loads each HTML content document in a headless browser, using headless Chrome via Puppeteer.</description>
     </item>
     
   </channel>
