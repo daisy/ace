@@ -18,7 +18,7 @@ Specifically, Ace:
 - extracts other various content features to facilitate human-driven accessibility audits 
 - can be run as a command line tool, or integrated as a Javascript node module, or driven by an HTTP API
 
-Under the hood, Ace currently runs [aXe](https://github.com/dequelabs/axe-core), an engine for automated testing of HTML developped by the good folks at Deque Systems.
+Under the hood, Ace currently runs [aXe](https://github.com/dequelabs/axe-core), an engine for automated testing of HTML developed by the good folks at Deque Systems.
 
 
 ## What Ace doesn’t do?

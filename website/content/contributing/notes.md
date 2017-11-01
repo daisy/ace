@@ -14,4 +14,4 @@ Under the hood, most of the HTML checks are powered by [aXe](https://github.com/
 
 ## Headless browser
 
-During the evaluation of an EPUB, Ace loads each HTML content documeent in a headless browser using [Nightmare.js](https://github.com/segmentio/nightmare), a high-level browser automatiom library from [Segment](https://segment.com/).
+During the evaluation of an EPUB, Ace loads each HTML content document in a headless browser, using headless Chrome via [Puppeteer](https://github.com/GoogleChrome/puppeteer).

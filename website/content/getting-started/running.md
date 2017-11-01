@@ -5,7 +5,7 @@ weight = 3
 
 ## Checking an EPUB
 
-You can check an EPUB by running the `ace` command followed by the path to the EPUB document. For example:
+You can check an EPUB by running the `ace` command followed by the path to the EPUB document (if the file name includes spaces, place it inside `"` marks). For example:
 
 ```
 $ ace ~/Documents/moby-dick.epub
