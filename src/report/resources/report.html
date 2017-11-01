@@ -195,6 +195,51 @@
 
   }
 
+  function populateViolationsSummaryStats(stats) {
+    $("#wcag2a-critical").text(stats['critical']['wcag2a']);
+    $("#wcag2a-serious").text(stats['serious']['wcag2a']);
+    $("#wcag2a-moderate").text(stats['moderate']['wcag2a']);
+    $("#wcag2a-minor").text(stats['minor']['wcag2a']);
+
+    $("#wcag2aa-critical").text(stats['critical']['wcag2aa']);
+    $("#wcag2aa-serious").text(stats['serious']['wcag2aa']);
+    $("#wcag2aa-moderate").text(stats['moderate']['wcag2aa']);
+    $("#wcag2aa-minor").text(stats['minor']['wcag2aa']);
+
+    $("#EPUB-critical").text(stats['critical']['EPUB']);
+    $("#EPUB-serious").text(stats['serious']['EPUB']);
+    $("#EPUB-moderate").text(stats['moderate']['EPUB']);
+    $("#EPUB-minor").text(stats['minor']['EPUB']);
+
+    $("#other-critical").text(stats['critical']['other']);
+    $("#other-serious").text(stats['serious']['other']);
+    $("#other-moderate").text(stats['moderate']['other']);
+    $("#other-minor").text(stats['minor']['other']);
+
+
+    var wcag2aTotal = stats['critical']['wcag2a'] + stats['serious']['wcag2a'] + stats['moderate']['wcag2a'] + stats['minor']['wcag2a'];
+    var wcag2aaTotal = stats['critical']['wcag2aa'] + stats['serious']['wcag2aa'] + stats['moderate']['wcag2aa'] + stats['minor']['wcag2aa'];
+    var epubTotal = stats['critical']['EPUB'] + stats['serious']['EPUB'] + stats['moderate']['EPUB'] + stats['minor']['EPUB'];
+    var otherTotal = stats['critical']['other'] + stats['serious']['other'] + stats['moderate']['other'] + stats['minor']['other'];
+
+    var criticalTotal = stats['critical']['wcag2a'] + stats['critical']['wcag2aa'] + stats['critical']['EPUB'] + stats['critical']['other'];
+    var seriousTotal = stats['serious']['wcag2a'] + stats['serious']['wcag2aa'] + stats['serious']['EPUB'] + stats['serious']['other'];
+    var moderateTotal = stats['moderate']['wcag2a'] + stats['moderate']['wcag2aa'] + stats['moderate']['EPUB'] + stats['moderate']['other'];
+    var minorTotal = stats['minor']['wcag2a'] + stats['minor']['wcag2aa'] + stats['minor']['EPUB'] + stats['minor']['other'];
+
+    $("#wcag2a-total").text(wcag2aTotal);
+    $("#wcag2aa-total").text(wcag2aaTotal);
+    $("#EPUB-total").text(epubTotal);
+    $("#other-total").text(otherTotal);
+
+    $("#critical-total").text(criticalTotal);
+    $("#serious-total").text(seriousTotal);
+    $("#moderate-total").text(moderateTotal);
+    $("#minor-total").text(minorTotal);
+
+    $("#total-total").text(criticalTotal + seriousTotal + moderateTotal + minorTotal);
+  }
+
   function populateExtendedMetadata(metadata) {
     var dl = $('#pub-metadata');
     for(key in metadata) {
@@ -264,6 +309,8 @@
     // add the accessible metadata summary
     populateA11yMetadataSummary(aceReportViewer.getA11yMetadata(), aceReportData["earl:testSubject"].metadata);
 
+    // add the violations summary statistics
+    populateViolationsSummaryStats(aceReportViewer.getSummaryOfViolations());
   });
 
 
@@ -278,7 +325,10 @@
   code {
     line-height: 1.5;
   }
-  .location{font-size:.8em;font-family:monospace;overflow-wrap:break-word}
+
+  .location {
+    font-size:.8em;font-family:monospace;overflow-wrap:break-word
+  }
 
   /* TOC outline */
 
@@ -407,6 +457,68 @@
     <h2>Violations</h2>
     <details>
       <summary>Violations details</summary>
+
+      <div id="violations-summary-stats">
+        <h3>Summary of violations, organized by ruleset and severity</h3>
+        <table id="violations-summary-stats-table" class="table table-striped">
+          <caption>Summary of the types of violations found.</caption>
+          <thead class="thead-inverse">
+            <tr>
+              <th></th>
+              <th scope="col">Critical</th>
+              <th scope="col">Serious</th>
+              <th scope="col">Moderate</th>
+              <th scope="col">Minor</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">WCAG 2.0 A</th>
+              <td id="wcag2a-critical"></td>
+              <td id="wcag2a-serious"></td>
+              <td id="wcag2a-moderate"></td>
+              <td id="wcag2a-minor"></td>
+              <td id="wcag2a-total"></td>
+            </tr>
+            <tr>
+              <th scope="row">WCAG 2.0 AA</th>
+              <td id="wcag2aa-critical"></td>
+              <td id="wcag2aa-serious"></td>
+              <td id="wcag2aa-moderate"></td>
+              <td id="wcag2aa-minor"></td>
+              <td id="wcag2aa-total"></td>
+            </tr>
+            <tr>
+              <th scope="row">EPUB</th>
+              <td id="EPUB-critical"></td>
+              <td id="EPUB-serious"></td>
+              <td id="EPUB-moderate"></td>
+              <td id="EPUB-minor"></td>
+              <td id="EPUB-total"></td>
+            </tr>
+            <tr>
+              <th scope="row">Other</th>
+              <td id="other-critical"></td>
+              <td id="other-serious"></td>
+              <td id="other-moderate"></td>
+              <td id="other-minor"></td>
+              <td id="other-total"></td>
+            </tr>
+            <tr>
+              <th scope="row">Total</th>
+              <td id="critical-total"></td>
+              <td id="serious-total"></td>
+              <td id="moderate-total"></td>
+              <td id="minor-total"></td>
+              <td id="total-total"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <h3>List of all violations</h3>
       <div id="filters" class="py-3">
       </div>
 

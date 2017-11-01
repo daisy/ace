@@ -193,6 +193,10 @@ class TestBuilder {
     this._json.help = { url, title };
     return this;
   }
+  withRulesetTags(tags) {
+    this._json.rulesetTags = tags;
+    return this;
+  }
 }
 
 module.exports.AssertionBuilder = AssertionBuilder;

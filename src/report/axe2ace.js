@@ -85,6 +85,7 @@ function  axe2ace(spineItem, axeResults) {
         .withTitle(violation.id)
         .withDescription(violation.description)
         .withHelp(kbURL, kbTitle)
+        .withRulesetTags(violation.tags)
         .build();
       violation.nodes.forEach(node => assertion.withAssertions(
         new builders.AssertionBuilder()
@@ -103,4 +104,3 @@ function  axe2ace(spineItem, axeResults) {
 }
 
 module.exports.axe2ace = axe2ace;
-

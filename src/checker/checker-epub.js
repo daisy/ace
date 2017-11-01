@@ -28,6 +28,7 @@ function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kb
         .withHelp(
           KB_BASE + kbPath,
           kbTitle)
+        .withRulesetTags(['EPUB'])
         .build())
     .withResult(
       new builders.ResultBuilder('fail')

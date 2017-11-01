@@ -30,7 +30,6 @@ module.exports = {
   analyze: function(metadata) {
     winston.info("Analyzing accessibility metadata");
     var results = {"missing": [], "empty": [], "present": []};
-    winston.debug(metadata);
     a11yMeta.forEach(function(property) {
       if (property in metadata) {
         if (

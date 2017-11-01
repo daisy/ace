@@ -9,6 +9,7 @@ function AceReport(data) {
   this.metadata = this.parseMetadata(data);
   this.a11ymetadata = data["a11y-metadata"];
   this.flatData = [];
+  this.rulesetTags = ['wcag2a', 'wcag2aa', 'EPUB'];
   this.flattenData(data);
 }
 
@@ -57,6 +58,34 @@ AceReport.prototype.filterViolations = function(filters) {
   return filteredList;
 }
 
+
+
+AceReport.prototype.getSummaryOfViolations = function() {
+  var thiz = this;
+  var summaryData = {
+    'critical': {'wcag2a': 0, 'wcag2aa': 0, 'EPUB': 0, 'other': 0},
+    'serious': {'wcag2a': 0, 'wcag2aa': 0, 'EPUB': 0, 'other': 0},
+    'moderate': {'wcag2a': 0, 'wcag2aa': 0, 'EPUB': 0, 'other': 0},
+    'minor': {'wcag2a': 0, 'wcag2aa': 0, 'EPUB': 0, 'other': 0}
+  };
+
+  this.flatData.forEach(function(item) {
+    var found = false;
+    item.rulesetTags.forEach(function(tag) {
+      if (thiz.rulesetTags.indexOf(tag) > -1) {
+        summaryData[item.impact][tag] += 1;
+        found = true;
+      }
+    });
+    if (!found) {
+      summaryData[item.impact]['other'] += 1;
+    }
+  });
+
+  return summaryData;
+}
+
+
 // make a flat list of the violations
 AceReport.prototype.flattenData = function(data) {
   var thiz = this;
@@ -74,6 +103,7 @@ AceReport.prototype.flattenData = function(data) {
         "pointer": item["earl:result"]["earl:pointer"],
         "impact": item["earl:test"]["earl:impact"],
         "location": filename,
+        "rulesetTags": item["earl:test"]["rulesetTags"]
       };
       if (item["earl:result"]["earl:pointer"]) {
         obj.location += "#epubcfi(" + item["earl:result"]["earl:pointer"]["cfi"] + ")";
