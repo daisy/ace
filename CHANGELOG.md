@@ -1,3 +1,36 @@
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/daisy/ace/compare/v0.5.0...v0.6.0) (2017-11-01)
+
+
+### Bug Fixes
+
+* **report:** Better usability for report ([56e1222](https://github.com/daisy/ace/commit/56e1222)), closes [#31](https://github.com/daisy/ace/issues/31) [#19](https://github.com/daisy/ace/issues/19)
+* **report:** EPUB title is a top-level item ([5f210d4](https://github.com/daisy/ace/commit/5f210d4)), closes [#62](https://github.com/daisy/ace/issues/62)
+* **report:** report name is report.json ([84ddf2f](https://github.com/daisy/ace/commit/84ddf2f)), closes [#66](https://github.com/daisy/ace/issues/66)
+* **report:** States that no <x> was found ([c6b3b9a](https://github.com/daisy/ace/commit/c6b3b9a)), closes [#61](https://github.com/daisy/ace/issues/61)
+* **rules:** properly detect page markers using `epub:type="pagebreak"` ([72e5bd5](https://github.com/daisy/ace/commit/72e5bd5)), closes [#85](https://github.com/daisy/ace/issues/85)
+
+
+### Features
+
+* **core:** run HTML checks in headless Chrome ([b150b83](https://github.com/daisy/ace/commit/b150b83)), closes [#23](https://github.com/daisy/ace/issues/23)
+* **report:** report includes summary of violations ([8ce05b7](https://github.com/daisy/ace/commit/8ce05b7)), closes [#30](https://github.com/daisy/ace/issues/30)
+* **rules:** allow DPUB ARIA roles ([32cdacf](https://github.com/daisy/ace/commit/32cdacf)), closes [#65](https://github.com/daisy/ace/issues/65)
+* **rules:** ensure that page break markers have an accessible label ([a078739](https://github.com/daisy/ace/commit/a078739)), closes [#71](https://github.com/daisy/ace/issues/71)
+* **rules:** report data on fallback mechanisms with no a11y support ([b18740a](https://github.com/daisy/ace/commit/b18740a)), closes [#76](https://github.com/daisy/ace/issues/76)
+* **rules:** report the presence of interactive form content ([5680386](https://github.com/daisy/ace/commit/5680386)), closes [#75](https://github.com/daisy/ace/issues/75)
+
+
+### Performance Improvements
+
+* run HTML checks concurrently ([fb91a69](https://github.com/daisy/ace/commit/fb91a69))
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/daisy/ace/compare/v0.3.4...v0.5.0) (2017-10-11)
 
@@ -128,5 +161,3 @@
 * aggregates the results
 * produces a report on the standard output or
 * store it in a specified directory
-
-
