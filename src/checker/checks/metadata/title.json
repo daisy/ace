@@ -1,0 +1,7 @@
+{
+  "title": "epub-title",
+  "testDesc": "Ensures the EPUB has a title",
+  "resDesc": "Add a dc:title metadata property to the Package Document",
+  "kbPath": "",
+  "kbTitle": "EPUB Title"
+}
