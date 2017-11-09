@@ -1,0 +1,14 @@
+{
+  "title": "metadata-schema-accessibilityFeature",
+  "testDesc": "Ensures a schema:accessibilityFeature metadata is present",
+  "resDesc": "Add a 'schema:accessibilityFeature' metadata property to the Package Document",
+  "kbPath": "docs/metadata/schema-org.html",
+  "kbTitle": "Schema.org Accessibility Metadata",
+  "impact": "serious",
+  "tag" : "epub",
+  "spec" : {
+    "name": "EPUB Accessibility 1.0",
+    "conformance" : "MUST"
+  },
+  "audit": "./checks/metadata/schema-accessibilityFeature.js"
+}

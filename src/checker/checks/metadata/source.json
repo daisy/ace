@@ -1,0 +1,14 @@
+{
+  "title": "epub-pagesource",
+  "testDesc": "Ensures the source of page breaks is identified",
+  "resDesc": "Add a 'dc:source' metadata property to the Package Document",
+  "kbPath": "docs/navigation/pagelist.html",
+  "kbTitle": "Page Navigation",
+  "impact": "serious",
+  "tag" : "epub",
+  "spec" : {
+    "name": "EPUB Accessibility 1.0",
+    "conformance" : "MUST"
+  },
+  "audit": "./checks/metadata/source.js"
+}

@@ -1,7 +1,14 @@
 {
   "title": "epub-title",
   "testDesc": "Ensures the EPUB has a title",
-  "resDesc": "Add a dc:title metadata property to the Package Document",
+  "resDesc": "Add a 'dc:title' metadata property to the Package Document",
   "kbPath": "",
-  "kbTitle": "EPUB Title"
+  "kbTitle": "EPUB Title",
+  "impact": "serious",
+  "tag" : "epub",
+  "spec" : {
+    "name": "EPUB Accessibility 1.0",
+    "conformance" : "MUST"
+  },
+  "audit": "./checks/metadata/title.js"
 }

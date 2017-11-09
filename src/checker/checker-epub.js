@@ -2,10 +2,28 @@
 
 const builders = require('../report/report-builders.js');
 const winston = require('winston');
+const glob = require('glob');
 
 const ASSERTED_BY = 'Ace';
 const MODE = 'automatic';
 const KB_BASE = 'http://kb.daisy.org/publishing/';
+
+const checks = [];
+
+function validateCheck() {
+  // TODO: impl check validator
+  return true;
+}
+
+// use glob patterns to parse checks
+const files = glob.sync('./**/*.json', { cwd: './src/checker' });
+files.forEach((file) => {
+  const checkOject = require(file);
+  if (validateCheck(checkOject)) { checks.push(checkOject); }
+});
+
+// console.log(JSON.stringify(checks));
+
 
 function asString(arrayOrString) {
   if (Array.isArray(arrayOrString) && arrayOrString.length > 0) {
@@ -37,73 +55,17 @@ function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kb
     .build();
 }
 
-function newMetadataAssertion(name, impact = 'serious') {
-  return newViolation({
-    impact,
-    title: `metadata-${name.toLowerCase().replace(':', '-')}`,
-    testDesc: `Ensures a '${name}' metadata is present`,
-    resDesc: `Add a '${name}' metadata property to the Package Document`,
-    kbPath: 'docs/metadata/schema-org.html',
-    kbTitle: 'Schema.org Accessibility Metadata',
-  });
-}
-
-function checkMetadata(assertions, epub) {
-  // Required metadata
-  [
-    'schema:accessMode',
-    'schema:accessibilityFeature',
-    'schema:accessibilitySummary',
-  ].filter(meta => epub.metadata[meta] === undefined)
-    .forEach(meta => assertions.withAssertions(newMetadataAssertion(meta)));
-  // Recommended metadata
-  [
-    'schema:accessModeSufficient',
-  ].filter(meta => epub.metadata[meta] === undefined)
-    .forEach(meta => assertions.withAssertions(newMetadataAssertion(meta, 'moderate')));
-}
-
-function checkTitle(assertions, epub) {
-  const title = asString(epub.metadata['dc:title']);
-  if (title === '') {
-    assertions.withAssertions(newViolation({
-      title: 'epub-title',
-      testDesc: 'Ensures the EPUB has a title',
-      resDesc: 'Add a \'dc:title\' metadata property to the Package Document',
-      kbPath: '',
-      kbTitle: 'EPUB Title',
-    }));
-  }
-}
-
-function checkPageSource(assertion, epub) {
-  if (epub.navDoc.hasPageList
-    && (epub.metadata['dc:source'] === undefined
-    || epub.metadata['dc:source'].toString() === '')) {
-    assertion.withAssertions(newViolation({
-      title: 'epub-pagesource',
-      testDesc: 'Ensures the source of page breaks is identified',
-      resDesc: 'Add a \'dc:source\' metadata property to the Package Document',
-      kbPath: 'docs/navigation/pagelist.html',
-      kbTitle: 'Page Navigation',
-    }));
-  }
-}
-
 function check(epub, report) {
   winston.info('Checking package...');
   const assertion = new builders.AssertionBuilder()
     .withSubAssertions()
     .withTestSubject(epub.packageDoc.src, asString(epub.metadata['dc:title']));
 
-  // Check a11y metadata
-  checkMetadata(assertion, epub);
-
-  // Check presence of a title
-  checkTitle(assertion, epub);
-
-  // Check page list is sourced
-  checkPageSource(assertion, epub);
+  // run all "checks"
+  checks.forEach((checkObject) => {
+    const run = require(checkObject.audit);
+    if (run(epub)) { assertion.withAssertions(newViolation(checkObject)); }
+  });
 
   report.addAssertions(assertion.build());
 
