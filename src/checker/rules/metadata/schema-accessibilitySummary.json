@@ -10,5 +10,5 @@
     "name": "EPUB Accessibility 1.0",
     "conformance" : "MUST"
   },
-  "audit": "./checks/metadata/schema-accessibilitySummary.js"
+  "check": "schema-accessibilitySummary.js"
 }
