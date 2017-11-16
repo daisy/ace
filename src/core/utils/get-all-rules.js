@@ -1,7 +1,7 @@
 'use strict';
 
 const axe = require('axe-core');
-
+const Rules = require('../../checker/rules');
 
 function getAllRules() {
   const AllRules = {};
@@ -14,12 +14,10 @@ function getAllRules() {
 
   AllRules.Engines.push({
     name: 'Ace',
-    rules: [],
+    rules: new Rules().all,
   });
-
-  console.log(JSON.stringify(AllRules));
+  // console.log(JSON.stringify(AllRules));
+  return AllRules;
 }
-
-getAllRules();
 
 module.exports.getAllRules = getAllRules;

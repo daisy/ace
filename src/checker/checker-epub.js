@@ -1,52 +1,13 @@
 'use strict';
 
 const builders = require('../report/report-builders.js');
+const Rules = require('./rules');
 
 const winston = require('winston');
-const glob = require('glob');
-const path = require('path');
 
 const ASSERTED_BY = 'Ace';
 const MODE = 'automatic';
 const KB_BASE = 'http://kb.daisy.org/publishing/';
-const RULE_BASE_PATH = './src/checker';
-
-const rules = [];
-const ruleProperties = ['title', 'testDesc', 'kbTitle', 'resDesc', 'kbPath', 'impact', 'tag', 'spec', 'check'];
-
-function isRuleFormatValid(rule) {
-  if (Object.keys(rule).length !== ruleProperties.length) {
-    winston.error(`Rule format not valid: \n${JSON.stringify(rule)}`);
-    return false;
-  }
-  ruleProperties.forEach((prop) => {
-    if (!Object.prototype.hasOwnProperty.call(rule, prop)) {
-      winston.error(`Property ${prop} not found! \n${JSON.stringify(rule)}`);
-      return false;
-    }
-    return true;
-  });
-
-  if (rule.check.toString().length === 0) {
-    winston.error(`Rule-property 'check' should never be empty. \n${JSON.stringify(rule)}`);
-    return false;
-  }
-  return true;
-}
-
-// use glob patterns to parse rules
-const files = glob.sync('./**/*.json', { cwd: RULE_BASE_PATH });
-files.forEach((file) => {
-  const rule = require(file);
-  if (isRuleFormatValid(rule)) {
-    rule.check = path.resolve(RULE_BASE_PATH, path.dirname(file), rule.check);
-    rules.push(rule);
-  }/* else TODO: Format of some rule is not valid. Stop the whole processing?
-       process.exit(1);
-  */
-});
-
-// console.log(JSON.stringify(rules));
 
 
 function asString(arrayOrString) {
@@ -92,7 +53,7 @@ function check(epub, report) {
     .withTestSubject(epub.packageDoc.src, epub.metadata['dc:title']);
 
   // check all rules
-  rules.forEach((rule) => {
+  new Rules().all.forEach((rule) => {
     const runCheck = require(rule.check);
     if (runCheck(epub)) {
       assertion.withAssertions(newViolation(rule));

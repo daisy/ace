@@ -9,6 +9,7 @@ const winston = require('winston');
 
 const ace = require('../core/ace.js');
 const logger = require('../core/logger.js');
+const util = require('../core/utils/get-all-rules');
 
 const cli = meow(`
   Usage: ace [options] <input>
@@ -25,6 +26,7 @@ const cli = meow(`
 
     -V, --verbose          display verbose output
     -s, --silent           do not display any output
+    -R, --rules            get all rules that use Ace to check the EPUB docment
 
   Examples
     $ ace -o out ~/Documents/book.epub
@@ -37,8 +39,9 @@ const cli = meow(`
     t: 'tempdir',
     v: 'version',
     V: 'verbose',
+    R: 'rules',
   },
-  boolean: ['force', 'verbose', 'silent', 'subdir'],
+  boolean: ['force', 'verbose', 'silent', 'subdir', 'rules'],
   string: ['outdir', 'tempdir'],
 });
 
@@ -47,6 +50,12 @@ function sleep(ms) {
 }
 
 (async function processArgs() {
+
+  if (cli.flags.rules) {
+    console.log('Write rules to ./rules.json');
+    fs.writeFileSync('./rules.json', JSON.stringify(util.getAllRules(), null, 2));
+    process.exit(1);
+  }
   logger.initLogger({ verbose: cli.flags.verbose, silent: cli.flags.silent });
 
   // Check that an EPUB path is specified
