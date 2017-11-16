@@ -41,7 +41,7 @@ files.forEach((file) => {
   if (isRuleFormatValid(rule)) {
     rule.check = path.resolve(RULE_BASE_PATH, path.dirname(file), rule.check);
     rules.push(rule);
-  }/* else TODO: Format of any rule is not valid. Stop the whole processing?
+  }/* else TODO: Format of some rule is not valid. Stop the whole processing?
        process.exit(1);
   */
 });
