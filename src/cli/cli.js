@@ -26,7 +26,7 @@ const cli = meow(`
 
     -V, --verbose          display verbose output
     -s, --silent           do not display any output
-    -R, --rules            get all rules that use Ace to check the EPUB docment
+    -R, --rules            To get information on all the internal used rules 
 
   Examples
     $ ace -o out ~/Documents/book.epub
@@ -52,8 +52,9 @@ function sleep(ms) {
 (async function processArgs() {
 
   if (cli.flags.rules) {
-    console.log('Write rules to ./rules.json');
-    fs.writeFileSync('./rules.json', JSON.stringify(util.getAllRules(), null, 2));
+    console.log('Write rules description to ./rules.html...');
+    fs.writeFileSync('./rules.html', util.getAllRulesAsHTML());
+    console.log('Written rules description to ./rules.html');
     process.exit(1);
   }
   logger.initLogger({ verbose: cli.flags.verbose, silent: cli.flags.silent });
