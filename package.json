@@ -99,7 +99,6 @@
     "lint": "eslint src",
     "test": "jest",
     "docs": "echo add docs",
-    "prepare": "snyk protect",
     "prepublishOnly": "npm run build",
     "release": "standard-version -s"
   },
