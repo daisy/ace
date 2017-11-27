@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Build directory
-dist/
+# dist/
 
 # Website build directory
 website/site

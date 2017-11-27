@@ -1,0 +1,14 @@
+{
+  "title": "metadata-schema-accessibilitySummary",
+  "testDesc": "Ensures a schema:accessModeSufficient metadata is present",
+  "resDesc": "Add a schema:accessModeSufficient metadata property to the Package Document",
+  "kbPath": "docs/metadata/schema-org.html",
+  "kbTitle": "Schema.org Accessibility Metadata",
+  "impact": "moderate",
+  "tag" : "epub",
+  "spec" : {
+    "name": "EPUB Accessibility 1.0",
+    "conformance" : "RECOMMENDED"
+  },
+  "check": "schema-accessModeSufficient.js"
+}
