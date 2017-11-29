@@ -59,7 +59,7 @@ function sleep(ms) {
       console.log('Write rules description to ./rules.html...');
       fs.writeFileSync('./rules.html', util.getAllRulesAsHTML());
       console.log('Written rules description to ./rules.html');
-      process.exit(1);
+      process.exit(0);
     }
     logger.initLogger({ verbose: cli.flags.verbose, silent: cli.flags.silent });
 
