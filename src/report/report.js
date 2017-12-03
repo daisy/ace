@@ -6,7 +6,7 @@ const winston = require('winston');
 
 const builders = require('./report-builders.js');
 const a11yMetaChecker = require("./analyze-a11y-metadata.js");
-
+const generateHtmlReport = require("./generate-html-report.js");
 
 function headingsToOutline(headings) {
   const result = [];
@@ -120,8 +120,14 @@ module.exports = class Report {
   }
   saveHtml(outdir) {
     winston.info("Saving HTML report");
+
+    generateHtmlReport(this.json)
+    .then((result) => fs.writeFile(path.join(outdir, 'report.html'), result, 'UTF-8'))
+    .catch(err => winston.error(err));
+
+
     // create a js file that the html report uses as its data source
-    const aceReport = JSON.stringify(this.json, null, '  ');
+    /*const aceReport = JSON.stringify(this.json, null, '  ');
     const js = "const aceReportData = " + aceReport + ";";
 
     // copy report.html and the contents of /js and /css to the outdir
@@ -130,5 +136,6 @@ module.exports = class Report {
       .then(() => fs.copy(path.join(__dirname, './resources/js/'), path.join(outdir, "js/")))
       .then(() => fs.writeFile(path.join(outdir, 'js/', 'aceReportData.js'), js, 'UTF-8'))
       .catch(err => winston.error(err));
+  }*/
   }
 }
