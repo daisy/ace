@@ -127,7 +127,9 @@ This just formally states that the test subject of this report is `epub-a11y-tes
 
 The `assertions` section of the report, found as a top-level term, contains a list of `earl:assertion` items, each for a different document in the EPUB. Those assertion items, in turn, contain assertions for tests that failed
 
-An `assertion` for a document looks like this. Note that `earl:testSubject` points to the package document (it could also, instead, point to a content document), and `earl:result` does not include a pointer to a location within the document (as individual test assertions do), because this assertion is for the entire document.
+#### Document-level assertions
+
+An `assertion` for a document looks like this. A document may be a package document, content document, or the whole EPUB itself. Note that in this example, `earl:testSubject` points to the package document, and `earl:result` does not include a pointer to a location within the document (as individual test assertions do), because this assertion is for the entire document.
 
 ```
 {
@@ -145,7 +147,9 @@ An `assertion` for a document looks like this. Note that `earl:testSubject` poin
  }
 }
 ```
+Where `earl:outcome` is based on the results for the individual tests. If any test failed, then the document is given a `fail` outcome. The `earl:result` property belongs to its parent `earl:assertion` and is relevant to that assertion's `earl:testSubject`.
 
+#### Test-level assertions
 An example of an assertion for an individual test is shown below. Note that it includes a location reference, a test description, and suggestions for remedying the issue.
 
 ```
@@ -177,6 +181,8 @@ An example of an assertion for an individual test is shown below. Note that it i
 }
 ```
 
+
 ## Caveats
 
 * Ace does not report assertions for tests that passed
+* The very last `earl:result` in the report is often for the entire EPUB, though this depends on how the JSON data is serialized.
