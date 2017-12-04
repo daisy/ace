@@ -78,30 +78,29 @@ module.exports = class Report {
   }
   copyData(outdir) {
     winston.info("Copying data");
-    if (this.json.data === null) return;
+    if (this.json.data === null) return Promise.resolve();
     return fs.pathExists(outdir)
         .then((exists) => {
-          if (!exists) fs.ensureDirSync(outdir);
+          if (!exists) return fs.ensureDirSync(outdir);
+          return Promise.resolve();
         })
         .then(() => {
           if (this.json.data.images != null) {
-            this.json.data.images.forEach((img) => {
+            return Promise.all(this.json.data.images.map((img) => {
               const fromPath = img.path;
               const toPath = path.join(outdir, 'data', img.src);
               delete img.path;
               return fs.pathExists(fromPath)
                 .then((exists) => {
                   if (exists) {
-                    return fs.copy(fromPath, toPath, {
-                      overwrite: false,
-                    });
-                  } else {
-                    winston.warn(`Couldn’t copy resource '${img.src}'`);
-                    return Promise.resolve();
+                    return fs.copy(fromPath, toPath, { overwrite: false });
                   }
+                  winston.warn(`Couldn’t copy resource '${img.src}'`);
+                  return Promise.resolve();
                 });
-            });
+            }));
           }
+          return Promise.resolve();
         });
   }
   saveJson(outdir) {
