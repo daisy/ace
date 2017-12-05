@@ -1,5 +1,5 @@
 {
-  "title": "metadata-schema-accessibilitySummary",
+  "title": "metadata-schema-accessModeSufficient",
   "testDesc": "Ensures a schema:accessModeSufficient metadata is present",
   "resDesc": "Add a schema:accessModeSufficient metadata property to the Package Document",
   "kbPath": "docs/metadata/schema-org.html",
