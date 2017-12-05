@@ -226,20 +226,20 @@
       <h2 id="violations">All Violations</h2>
 
       <div id="filters" class="py-3">
-        <span class="filter-label">rule</span>
-        <select name="rule" aria-label="rule">
+        <span class="filter-label">impact</span>
+        <select name="impact" aria-label="impact">
           <option value="all" selected>All</option>
-          {{#violation_filter "rule"}}{{/violation_filter}}
+          {{#violation_filter "impact"}}{{/violation_filter}}
         </select>
         <span class="filter-label">ruleset</span>
         <select name="ruleset" aria-label="ruleset">
           <option value="all" selected>All</option>
           {{#violation_filter "ruleset"}}{{/violation_filter}}
         </select>
-        <span class="filter-label">impact</span>
-        <select name="impact" aria-label="impact">
+        <span class="filter-label">rule</span>
+        <select name="rule" aria-label="rule">
           <option value="all" selected>All</option>
-          {{#violation_filter "impact"}}{{/violation_filter}}
+          {{#violation_filter "rule"}}{{/violation_filter}}
         </select>
         <span class="filter-label">file</span>
         <select name="file" aria-label="file">
