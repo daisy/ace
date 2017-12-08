@@ -1,7 +1,7 @@
 'use strict';
 
 const ace = require('../runAceCLI');
-const pkg = require('../../package');
+const pkg = require('../../packages/ace-core/package');
 
 const path = require('path');
 

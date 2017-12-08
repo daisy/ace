@@ -1,7 +1,7 @@
 'use strict';
 
-const ace = require('../src/core/ace');
-const logger = require('../src/core/logger');
+const ace = require('@daisy/ace-core');
+const logger = require('@daisy/ace-logger');
 
 function runAce(epub, {
     cwd = process.cwd(),

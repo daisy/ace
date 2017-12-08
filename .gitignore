@@ -2,17 +2,17 @@
 logs
 *.log
 npm-debug.log*
+lerna-debug.log
 yarn-debug.log*
 yarn-error.log*
 
-# Build directory
-dist/
+# Build
+/node_modules
+/packages/*/lib/
+/packages/*/node_modules/
 
 # Website build directory
 website/site
-
-# Dependency directories
-node_modules/
 
 # Optional npm cache directory
 .npm
