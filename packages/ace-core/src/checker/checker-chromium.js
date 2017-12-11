@@ -74,7 +74,7 @@ async function checkSingle(spineItem, epub, browser) {
     return results;
   } catch (err) {
     winston.debug(`Error when running HTML checks: ${err}`);
-    throw new Error('Failed to check HTML content');
+    throw new Error(`Failed to check Content Document '${spineItem.relpath}'`);
   }
 }
 
