@@ -6,7 +6,7 @@ const winston = require('winston');
 
 const builders = require('./report-builders.js');
 const a11yMetaChecker = require("./analyze-a11y-metadata.js");
-
+const generateHtmlReport = require("./generate-html-report.js");
 
 function headingsToOutline(headings) {
   const result = [];
@@ -78,30 +78,29 @@ module.exports = class Report {
   }
   copyData(outdir) {
     winston.info("Copying data");
-    if (this.json.data === null) return;
+    if (this.json.data === null) return Promise.resolve();
     return fs.pathExists(outdir)
         .then((exists) => {
-          if (!exists) fs.ensureDirSync(outdir);
+          if (!exists) return fs.ensureDirSync(outdir);
+          return Promise.resolve();
         })
         .then(() => {
           if (this.json.data.images != null) {
-            this.json.data.images.forEach((img) => {
+            return Promise.all(this.json.data.images.map((img) => {
               const fromPath = img.path;
               const toPath = path.join(outdir, 'data', img.src);
               delete img.path;
               return fs.pathExists(fromPath)
                 .then((exists) => {
                   if (exists) {
-                    return fs.copy(fromPath, toPath, {
-                      overwrite: false,
-                    });
-                  } else {
-                    winston.warn(`Couldn’t copy resource '${img.src}'`);
-                    return Promise.resolve();
+                    return fs.copy(fromPath, toPath, { overwrite: false });
                   }
+                  winston.warn(`Couldn’t copy resource '${img.src}'`);
+                  return Promise.resolve();
                 });
-            });
+            }));
           }
+          return Promise.resolve();
         });
   }
   saveJson(outdir) {
@@ -120,8 +119,14 @@ module.exports = class Report {
   }
   saveHtml(outdir) {
     winston.info("Saving HTML report");
+
+    generateHtmlReport(this.json)
+    .then((result) => fs.writeFile(path.join(outdir, 'report.html'), result, 'UTF-8'))
+    .catch(err => winston.error(err));
+
+
     // create a js file that the html report uses as its data source
-    const aceReport = JSON.stringify(this.json, null, '  ');
+    /*const aceReport = JSON.stringify(this.json, null, '  ');
     const js = "const aceReportData = " + aceReport + ";";
 
     // copy report.html and the contents of /js and /css to the outdir
@@ -130,5 +135,6 @@ module.exports = class Report {
       .then(() => fs.copy(path.join(__dirname, './resources/js/'), path.join(outdir, "js/")))
       .then(() => fs.writeFile(path.join(outdir, 'js/', 'aceReportData.js'), js, 'UTF-8'))
       .catch(err => winston.error(err));
+  }*/
   }
 }
