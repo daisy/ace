@@ -67,7 +67,7 @@ const kbMap = {
 function  axe2ace(spineItem, axeResults) {
   winston.verbose(`Converting aXe results to ace for ${spineItem.relpath}`);
 
-    // the top-level assertion
+    // the content doc-level assertion
     const assertion = new builders.AssertionBuilder()
       .withSubAssertions()
       .withTestSubject(spineItem.relpath, spineItem.title);

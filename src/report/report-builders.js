@@ -47,6 +47,8 @@ function withTestSubject(obj, url, title = '', identifier = '', metadata = null)
 class AssertionBuilder {
   constructor() {
     this._json = { '@type': 'earl:assertion' };
+    var result = new ResultBuilder('pass').build();
+    this.withResult(result); // default result until we know more
   }
   build() {
     return this._json;
