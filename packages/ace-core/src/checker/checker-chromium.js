@@ -14,6 +14,7 @@ const scripts = [
   require.resolve('../scripts/vendor/outliner.min.js'),
   require.resolve('../scripts/axe-patch-getselector.js'),
   require.resolve('../scripts/axe-patch-arialookuptable.js'),
+  require.resolve('../scripts/axe-patch-dlitem.js'),
   require.resolve('../scripts/ace-axe.js'),
   require.resolve('../scripts/ace-extraction.js'),
 ];

@@ -61,3 +61,8 @@ test('issue #108: HTML5Outline is not defined (RequireJS conflict)', async () =>
   const report = await ace('../data/issue-108');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
+
+test('issue #114: Description list item does not have a <dl> parent element', async () => {
+  const report = await ace('../data/issue-114');
+  expect(report['earl:result']['earl:outcome']).toEqual('pass');
+});
