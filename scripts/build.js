@@ -16,15 +16,10 @@ const glob = require('glob');
 const micromatch = require('micromatch');
 const mkdirp = require('mkdirp');
 const path = require('path');
+const spawn = require('cross-spawn');
 
-const { listPackages, PACKAGES_DIR } = require('./build-utils');
 
-const config = {
-  srcDir: 'src',
-  buildDir: 'lib',
-  jsPattern: '**/*.js',
-  ignorePattern: '**/*.test.js',
-};
+const { config, listPackages, PACKAGES_DIR } = require('./build-utils');
 
 const babelConfig = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, '..', '.babelrc'), 'utf8'));
@@ -80,6 +75,11 @@ function buildPackage(pkg) {
   process.stdout.write(`  ${path.basename(pkg)}  ${chalk.dim('...')}`);
 
   files.forEach(file => buildFile(file, true));
+
+  const buildScript = path.resolve(pkg, 'scripts/build.js');
+  if (fs.existsSync(buildScript)) {
+    spawn.sync('node', [buildScript], { stdio: 'inherit' });
+  }
   process.stdout.write(`${chalk.reset.bold.green('  ✓ Done')}\n`);
 }
 
