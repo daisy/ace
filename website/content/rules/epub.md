@@ -8,9 +8,9 @@ wip = true
 
 Checks that the EPUB’s title is defined in the Package Document.
 
-## Accessbility metadata
+## Accessibility metadata
 
-Checks that schema.org accessbility metadata is defined in the Package Document.
+Checks that schema.org accessibility metadata is defined in the Package Document.
 
 ## Page break source
 
