@@ -1,20 +1,21 @@
 'use strict';
 
-const envPaths = require('env-paths');
+const { config, paths } = require('@daisy/ace-config');
 const fs = require('fs-extra');
 const path = require('path');
 const winston = require('winston');
+const defaults = require('./defaults');
 
-const acePaths = envPaths('DAISY Ace', { suffix: null });
+const logConfig  = config.get('logging', defaults.logging);
 
 module.exports.initLogger = function initLogger(options = {}) {
   // Check logging directoy exists
-  if (!fs.existsSync(acePaths.log)) {
-    fs.ensureDirSync(acePaths.log);
+  if (!fs.existsSync(paths.log)) {
+    fs.ensureDirSync(paths.log);
   }
 
   // OS-dependant path to log file
-  const logfile = path.join(acePaths.log, 'ace.log');
+  const logfile = path.join(paths.log, logConfig.fileName);
 
   // clear old log file
   if (fs.existsSync(logfile)) {
@@ -22,7 +23,7 @@ module.exports.initLogger = function initLogger(options = {}) {
   }
 
   // set up logger
-  const level = (options.verbose) ? 'verbose' : 'info';
+  const level = (options.verbose) ? 'verbose' : logConfig.level;
   winston.configure({
     level,
     transports: [

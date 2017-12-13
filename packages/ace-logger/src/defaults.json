@@ -1,0 +1,6 @@
+{
+  "logging": {
+    "level": "info",
+    "fileName": "ace.log"
+  }
+}
