@@ -27,7 +27,7 @@ Refer to aXe’s documentation to see the complete of rules it runs.</descriptio
       
       <guid>https://daisy.github.io/ace/rules/epub/</guid>
       <description>Publication title Checks that the EPUB’s title is defined in the Package Document.
-Accessbility metadata Checks that schema.org accessbility metadata is defined in the Package Document.
+Accessibility metadata Checks that schema.org accessibility metadata is defined in the Package Document.
 Page break source When content has page breaks, checks that the print source is identified in metadata with dc:source.</description>
     </item>
     
