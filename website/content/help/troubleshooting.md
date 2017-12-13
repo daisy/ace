@@ -14,7 +14,11 @@ If you can’t find any mention of your issue in our tracker, please [file a new
 
 You can run Ace with verbose logging (by using the command line option `--verbose`) to provide us with debugging information.
 
-## I have a permission error when trying to install Ace as a super-user with `sudo`
+## I receive an `EACCESS` error when trying to install Ace
+
+You may receive an `EACCESS` error when you try to isntall Ace, for instance when installing the `puppeteer` dependency. This indicates the you do not have write permissions to the `npm` installation directories. You can fix this by following the [instructions in the `npm` documentation](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
+
+## I receive an `EACCESS` error when trying to install Ace as a super-user with `sudo`
 
 If you tried to install Ace as a super-user with the command `sudo npm install -g ace-core`, you may have received the following error in return:
 
@@ -41,3 +45,7 @@ You need to tell the installation scripts to enforce the super-user permissions.
 ```
 sudo npm install -g ace-core --unsafe-perm=true --allow-root
 ```
+
+## I receive an `ELIFECYCLE` error when trying to install Ace on Windows version `Windows_NT 10.0.16299`
+
+This seems to be a [bug in `npm`](https://github.com/npm/npm/issues/18979). You can fix it by updating to more recent Node and npm versions.
