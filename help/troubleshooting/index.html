@@ -176,6 +176,18 @@ Latest version: v0.5.0 (beta 1)</p>
                         </a>
                       </li>
                     
+                      <li class="page">
+                        <a href="/ace/docs/config/" >
+                          <span class="text">Configuration</span>
+                        </a>
+                      </li>
+                    
+                      <li class="page">
+                        <a href="/ace/docs/logging/" >
+                          <span class="text">Logging</span>
+                        </a>
+                      </li>
+                    
                   </ul>
                   </li>
                 
@@ -292,8 +304,32 @@ Latest version: v0.5.0 (beta 1)</p>
         
         
         <li>
-          <a href="#i-have-a-permission-error-when-trying-to-install-ace-as-a-super-user-with-sudo">
-            I have a permission error when trying to install Ace as a super-user with sudo
+          <a href="#i-receive-an-eaccess-error-when-trying-to-install-ace">
+            I receive an EACCESS error when trying to install Ace
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#i-receive-an-eaccess-error-when-trying-to-install-ace-as-a-super-user-with-sudo">
+            I receive an EACCESS error when trying to install Ace as a super-user with sudo
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#i-receive-an-elifecycle-error-when-trying-to-install-ace-on-windows-version-windows_nt-10.0.16299">
+            I receive an ELIFECYCLE error when trying to install Ace on Windows version Windows_NT 10.0.16299
           </a>
     
     
@@ -316,7 +352,11 @@ Latest version: v0.5.0 (beta 1)</p>
 
 <p>You can run Ace with verbose logging (by using the command line option <code>--verbose</code>) to provide us with debugging information.</p>
 
-<h2 id="i-have-a-permission-error-when-trying-to-install-ace-as-a-super-user-with-sudo">I have a permission error when trying to install Ace as a super-user with <code>sudo</code></h2>
+<h2 id="i-receive-an-eaccess-error-when-trying-to-install-ace">I receive an <code>EACCESS</code> error when trying to install Ace</h2>
+
+<p>You may receive an <code>EACCESS</code> error when you try to isntall Ace, for instance when installing the <code>puppeteer</code> dependency. This indicates the you do not have write permissions to the <code>npm</code> installation directories. You can fix this by following the <a href="https://docs.npmjs.com/getting-started/fixing-npm-permissions">instructions in the <code>npm</code> documentation</a>.</p>
+
+<h2 id="i-receive-an-eaccess-error-when-trying-to-install-ace-as-a-super-user-with-sudo">I receive an <code>EACCESS</code> error when trying to install Ace as a super-user with <code>sudo</code></h2>
 
 <p>If you tried to install Ace as a super-user with the command <code>sudo npm install -g ace-core</code>, you may have received the following error in return:</p>
 
@@ -341,6 +381,10 @@ npm ERR! Exit status 1
 
 <pre><code>sudo npm install -g ace-core --unsafe-perm=true --allow-root
 </code></pre>
+
+<h2 id="i-receive-an-elifecycle-error-when-trying-to-install-ace-on-windows-version-windows-nt-10-0-16299">I receive an <code>ELIFECYCLE</code> error when trying to install Ace on Windows version <code>Windows_NT 10.0.16299</code></h2>
+
+<p>This seems to be a <a href="https://github.com/npm/npm/issues/18979">bug in <code>npm</code></a>. You can fix it by updating to more recent Node and npm versions.</p>
 
   </main>
 

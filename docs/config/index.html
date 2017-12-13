@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://daisy.github.io/ace/rules/">
-    <title>Rules | Ace, by DAISY</title>
+    <link rel="canonical" href="https://daisy.github.io/ace/docs/config/">
+    <title>Configuration | Ace, by DAISY</title>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" rel="stylesheet" media="none" onload="this.media='all';">
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
@@ -177,7 +177,7 @@ Latest version: v0.5.0 (beta 1)</p>
                       </li>
                     
                       <li class="page">
-                        <a href="/ace/docs/config/" >
+                        <a href="/ace/docs/config/" aria-current="page">
                           <span class="text">Configuration</span>
                         </a>
                       </li>
@@ -263,36 +263,196 @@ Latest version: v0.5.0 (beta 1)</p>
         <div>
           
   <main id="main">
-    <h1>
-      Rules
-    </h1>
-    <ul class="pages-list">
-      
-          <li>
-  <h2>
-    <a href="https://daisy.github.io/ace/rules/html/">
-      <svg class="bookmark" aria-hidden="true" viewBox="0 0 40 50" focusable="false">
-        <use xlink:href="#bookmark"></use>
-      </svg>
-      HTML Rules
-    </a>
-  </h2>
-</li>
+    <h1>Configuration</h1>
+    
+      <aside aria-label="warning" class="note warning">
+  <div>
+    <svg class="sign" aria-hidden="true" viewBox="0 0 48.430474 41.646302" focusable="false">
+      <use xlink:href="#warning"></use>
+    </svg>
+    This page is a work in progress!
+  </div>
+</aside>
 
+    
+    
       
-          <li>
-  <h2>
-    <a href="https://daisy.github.io/ace/rules/epub/">
-      <svg class="bookmark" aria-hidden="true" viewBox="0 0 40 50" focusable="false">
-        <use xlink:href="#bookmark"></use>
-      </svg>
-      EPUB Rules
-    </a>
-  </h2>
-</li>
 
+  <nav class="toc" aria-labelledby="toc-heading">
+    <h2 id="toc-heading">Table of contents</h2>
+    
+    
+    
+    
       
-    </ul>
+      
+        
+        <ol>
+        
+        
+        
+        <li>
+          <a href="#overview">
+            Overview
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#defaults">
+            Defaults
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#reference">
+            Reference
+          </a>
+    
+      
+      
+        
+        <ol>
+        
+        
+        
+        <li>
+          <a href="#logging.filename">
+            logging.fileName
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#logging.level">
+            logging.level
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#output.force">
+            output.force
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#output.subdir">
+            output.subdir
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#runtime.concurrencylevel">
+            runtime.concurrencyLevel
+          </a>
+    
+    
+        </li></ol>
+    
+        </li></ol>
+        
+
+  </nav>
+
+
+    
+    
+
+<h2 id="overview">Overview</h2>
+
+<p>Ace can be configured through a <code>config.json</code> file located in an OS-specific directory:</p>
+
+<ul>
+<li>on Windows in <code>&quot;%HOME%\AppData\Local\DAISY Ace\Config\&quot;</code></li>
+<li>on macOS in <code>&quot;~/Library/Preferences/DAISY\ Ace/&quot;</code></li>
+<li>on Linux in <code>&quot;~/.config/DAISY Ace/&quot;</code></li>
+</ul>
+
+<h2 id="defaults">Defaults</h2>
+
+<p>The defaults for Ace configuration are:</p>
+
+<pre><code class="language-json">{
+  &quot;logging&quot;: {
+    &quot;fileName&quot;: &quot;ace.log&quot;,
+    &quot;level&quot;: &quot;info&quot;
+  },
+  &quot;output&quot;: {
+    &quot;force&quot;: false,
+    &quot;subdir&quot;: false
+  }
+  &quot;runtime&quot;: {
+    &quot;concurrencyLevel&quot;: 4
+  }
+}
+</code></pre>
+
+<h2 id="reference">Reference</h2>
+
+<h3 id="logging-filename"><code>logging.fileName</code></h3>
+
+<p>Default: &ldquo;<code>info</code>&ldquo;</p>
+
+<p>The name of the file used by Ace to print a log of runtime messages. This file will reside in an OS-specific directory, as described in the <a href="https://daisy.github.io/ace/docs/logging/">logging documentation</a>.</p>
+
+<h3 id="logging-level"><code>logging.level</code></h3>
+
+<p>Default: &ldquo;<code>info</code>&ldquo;</p>
+
+<p>Indicates the severity level above which a runtime message is logged. Accepted values are <code>error</code>, <code>warn</code>, <code>info</code>, <code>verbose</code> and <code>debug</code>.</p>
+
+<h3 id="output-force"><code>output.force</code></h3>
+
+<p>Default: &ldquo;<code>false</code>&ldquo;</p>
+
+<p>Indicates whether to overwrite any files in the output directory when Ace saves a report in the file system.</p>
+
+<h3 id="output-subdir"><code>output.subdir</code></h3>
+
+<p>Default: &ldquo;<code>false</code>&ldquo;</p>
+
+<p>Indicates wheter to save reports in a subdirectory of the output directory. If set to <code>true</code>, the subdirectory will be named after hte input EPUB document.</p>
+
+<h3 id="runtime-concurrencylevel"><code>runtime.concurrencyLevel</code></h3>
+
+<p>Default: &ldquo;<code>4</code>&ldquo;</p>
+
+<p>The number of concurrent headless browser instances used to check HTML content.</p>
+
   </main>
 
           <footer role="contentinfo">

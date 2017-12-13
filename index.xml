@@ -114,7 +114,7 @@ Ace by DAISY, an Accessibility Checker for EPUB Usage: ace-http [options] Option
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/getting-started/installation/</guid>
-      <description>Install Node.JS  Go to Node.JS Download version 6 or higher Double-click to install  Install (or update) Ace  After installing Node, open a shell window  On Windows: Windows System-&amp;gt;Command Prompt or Start-&amp;gt;Run-&amp;gt;cmd.exe On Mac: Applications-&amp;gt;Utilities-&amp;gt;Terminal  Type npm install ace-core -g to install or update Ace  If everything went smoothly, you should now be able to run the ace command in your shell.</description>
+      <description>Install Node.JS  Go to Node.JS Download version 6.4.0 or higher Double-click to install  Install (or update) Ace  After installing Node, open a shell window  On Windows: Windows System-&amp;gt;Command Prompt or Start-&amp;gt;Run-&amp;gt;cmd.exe On Mac: Applications-&amp;gt;Utilities-&amp;gt;Terminal  Type npm install @daisy/ace -g to install or update Ace  If everything went smoothly, you should now be able to run the ace command in your shell.</description>
     </item>
     
     <item>
@@ -158,6 +158,28 @@ Getting the results You can specify the directory for Ace to store its output wi
       <description>Ace&amp;rsquo;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of EARL (Evaluation and Reporting Language), basic Dublin Core terms, and custom fields.
 Document structure Each example chunk of the report shown below appears in order, in one JSON file.
  Header information Outlines Image list Iframes list Properties earl:testSubject for this EPUB file Accessibility metadata summary Assertions  Header information { &amp;quot;@type&amp;quot;: &amp;quot;earl:report&amp;quot;, &amp;quot;dct:title&amp;quot;: &amp;quot;Ace Report&amp;quot;, &amp;quot;dct:description&amp;quot;: &amp;quot;Report on automated accessibility checks for EPUB&amp;quot;, &amp;quot;dct:date&amp;quot;: &amp;quot;10/8/2017, 1:08:03 PM&amp;quot;, &amp;quot;earl:assertedBy&amp;quot;: { &amp;quot;@type&amp;quot;: &amp;quot;earl:software&amp;quot;, &amp;quot;doap:name&amp;quot;: &amp;quot;DAISY Ace&amp;quot;, &amp;quot;doap:description&amp;quot;: &amp;quot;DAISY Accessibility Checker for EPUB&amp;quot;, &amp;quot;doap:homepage&amp;quot;: &amp;quot;http://ace.</description>
+    </item>
+    
+    <item>
+      <title>Configuration</title>
+      <link>https://daisy.github.io/ace/docs/config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/docs/config/</guid>
+      <description>Overview Ace can be configured through a config.json file located in an OS-specific directory:
+ on Windows in &amp;quot;%HOME%\AppData\Local\DAISY Ace\Config\&amp;quot; on macOS in &amp;quot;~/Library/Preferences/DAISY\ Ace/&amp;quot; on Linux in &amp;quot;~/.config/DAISY Ace/&amp;quot;  Defaults The defaults for Ace configuration are:
+{ &amp;quot;logging&amp;quot;: { &amp;quot;fileName&amp;quot;: &amp;quot;ace.log&amp;quot;, &amp;quot;level&amp;quot;: &amp;quot;info&amp;quot; }, &amp;quot;output&amp;quot;: { &amp;quot;force&amp;quot;: false, &amp;quot;subdir&amp;quot;: false } &amp;quot;runtime&amp;quot;: { &amp;quot;concurrencyLevel&amp;quot;: 4 } }  Reference logging.fileName Default: &amp;ldquo;info&amp;ldquo;
+The name of the file used by Ace to print a log of runtime messages.</description>
+    </item>
+    
+    <item>
+      <title>Logging</title>
+      <link>https://daisy.github.io/ace/docs/logging/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/docs/logging/</guid>
+      <description>Overview Ace prints a log of messages in a ace.log file located in an OS-specific directory:
+ on Windows in &amp;quot;%HOME%\AppData\Local\DAISY Ace\Log\&amp;quot; on macOS in &amp;quot;~/Library/Logs/DAISY\ Ace/&amp;quot; on Linux in &amp;quot;~/.local/state/DAISY Ace/&amp;quot;  Configuration The logging level and the name of the log file can be configured through Ace’s config file. Read more on Ace configuration to know more.</description>
     </item>
     
   </channel>

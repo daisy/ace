@@ -176,6 +176,18 @@ Latest version: v0.5.0 (beta 1)</p>
                         </a>
                       </li>
                     
+                      <li class="page">
+                        <a href="/ace/docs/config/" >
+                          <span class="text">Configuration</span>
+                        </a>
+                      </li>
+                    
+                      <li class="page">
+                        <a href="/ace/docs/logging/" >
+                          <span class="text">Logging</span>
+                        </a>
+                      </li>
+                    
                   </ul>
                   </li>
                 
@@ -383,8 +395,34 @@ Latest version: v0.5.0 (beta 1)</p>
       
       
         
+        <ol>
         
         
+        
+        <li>
+          <a href="#document-level-assertions">
+            Document-level assertions
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#test-level-assertions">
+            Test-level assertions
+          </a>
+    
+      
+      
+        
+        
+        
+        
+        </li></ol>
         
         </li></ol>
         
@@ -530,7 +568,9 @@ Latest version: v0.5.0 (beta 1)</p>
 
 <p>The <code>assertions</code> section of the report, found as a top-level term, contains a list of <code>earl:assertion</code> items, each for a different document in the EPUB. Those assertion items, in turn, contain assertions for tests that failed</p>
 
-<p>An <code>assertion</code> for a document looks like this. Note that <code>earl:testSubject</code> points to the package document (it could also, instead, point to a content document), and <code>earl:result</code> does not include a pointer to a location within the document (as individual test assertions do), because this assertion is for the entire document.</p>
+<h4 id="document-level-assertions">Document-level assertions</h4>
+
+<p>An <code>assertion</code> for a document looks like this. A document may be a package document, content document, or the whole EPUB itself. Note that in this example, <code>earl:testSubject</code> points to the package document, and <code>earl:result</code> does not include a pointer to a location within the document (as individual test assertions do), because this assertion is for the entire document.</p>
 
 <pre><code>{
  &quot;@type&quot;: &quot;earl:assertion&quot;,
@@ -547,6 +587,10 @@ Latest version: v0.5.0 (beta 1)</p>
  }
 }
 </code></pre>
+
+<p>Where <code>earl:outcome</code> is based on the results for the individual tests. If any test failed, then the document is given a <code>fail</code> outcome. The <code>earl:result</code> property belongs to its parent <code>earl:assertion</code> and is relevant to that assertion&rsquo;s <code>earl:testSubject</code>.</p>
+
+<h4 id="test-level-assertions">Test-level assertions</h4>
 
 <p>An example of an assertion for an individual test is shown below. Note that it includes a location reference, a test description, and suggestions for remedying the issue.</p>
 
@@ -582,6 +626,7 @@ Latest version: v0.5.0 (beta 1)</p>
 
 <ul>
 <li>Ace does not report assertions for tests that passed</li>
+<li>The very last <code>earl:result</code> in the report is often for the entire EPUB, though this depends on how the JSON data is serialized.</li>
 </ul>
 
   </main>
