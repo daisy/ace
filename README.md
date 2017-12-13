@@ -21,61 +21,15 @@ Under the hood, Ace currently runs the [aXe engine for automated testing of HTML
 ## Getting started
 
  * Install Node.JS (version 6 or higher).
- * Install Ace with `npm install ace-core -g`
+ * Install Ace with `npm install @daisy/ace -g`
 
 If everything went smoothly, you should now be able to run the `ace` command in your shell.
 
-## Usage
-
-The following help message is displayed when running `ace --help`:
-
-```
-Ace by DAISY, an Accessibility Checker for EPUB
-
-  Usage: ace [options] <input>
-
-  Options:
-
-    -h, --help             output usage information
-    -v, --version          output the version number
-
-    -o, --outdir  <path>   save final reports to the specified directory
-    -t, --tempdir <path>   specify a custom directory to store the temporary reports
-    -f, --force            override any existing output file or directory
-        --subdir           output reports to a sub-directory named after the input EPUB
-
-    -V, --verbose          display verbose output
-    -s, --silent           do not display any output
-
-  Examples
-    $ ace -o out ~/Documents/book.epub
-```
-
-### Checking an EPUB
-
-You can check an EPUB by running the `ace` command followed by the path to the EPUB document. For example:
-
-```
-$ ace ~/Documents/moby-dick.epub
-```
-
-The above command will extract the EPUB to a temporary cache directory, then run the test rules against every Content Document in the EPUB.
-
-When ran with no further options, the tool will produce a JSON report to the standard output.
-
-### Saving the reports on disk
-
-You can specify a directory where to store the JSON report along with a human-readable HTML report, with the `--outdir` option. For example:
-
-```
-$ ace --outdir results ~/Documents/moby-dick.epub
-```
-
-The above command will run the test rules and store both a JSON report (`report.json`) and an HTML report (`report.html`) under the `results` directory of your current working directory.
+A detailed getting started guide is also available on [InclusivePublishing.org](https://inclusivepublishing.org/toolbox/accessibility-checker/getting-started/).
 
 ## What’s next?
 
-Feel free to read the [project requirements](https://github.com/daisy/ace-core/wiki/Requirements) to have a better idea of where we’re heading to.
+User and developer documentation is available on [Ace’s web site](https://daisy.github.io/ace).
 
 You can also review the current work plan by looking at the [current milestones](https://github.com/daisy/ace-core/milestones) defined in the issue tracker.
 

@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-http",
-  "version": "0.0.1",
+  "version": "0.7.0-rc.1",
   "description": "HTTP API for Ace",
   "author": {
     "name": "DAISY developers",
@@ -22,8 +22,8 @@
     "express-easy-zip": "^1.1.4",
     "meow": "^3.7.0",
     "multer": "^1.3.0",
-    "uuidv4": "^0.5.0",
     "tmp": "^0.0.33",
+    "uuidv4": "^0.5.0",
     "winston": "^2.4.0"
   },
   "publishConfig": {
