@@ -1,6 +1,6 @@
 {
   "name": "@daisy/jest-puppeteer",
-  "version": "0.7.0-rc.1",
+  "version": "0.7.0",
   "description": "Utilities for running Jest tests through Google Puppeteer",
   "author": {
     "name": "DAISY developers",
@@ -17,7 +17,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/puppeteer-utils": "^0.7.0-rc.1",
+    "@daisy/puppeteer-utils": "^0.7.0",
     "jest-mock": "^21.3.0-beta.3"
   },
   "publishConfig": {

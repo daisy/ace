@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-report",
-  "version": "0.7.0-rc.1",
+  "version": "0.7.0",
   "description": "Reporting utilities for Ace",
   "author": {
     "name": "DAISY developers",
