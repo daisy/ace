@@ -83,6 +83,24 @@ function parseMetadata(doc, select) {
   return result;
 }
 
+
+function addLink(rel, href, link) {
+  if (!link[rel]) {
+    link[rel] = href;
+  } else if (!(link[rel] instanceof Array)) {
+    link[rel] = [link[rel], href];
+  } else {
+    link[rel].push(href);
+  }
+}
+function parseLinks(doc, select) {
+  const result = {};
+  select('//opf:link[not(@refines)]', doc).forEach((link) => {
+    addLink(link.getAttribute('rel'), link.getAttribute('href'), result);
+  });
+  return result;
+}
+
 // override the default of XHTML
 EpubParser.prototype.setContentDocMediaType = function(mediaType) {
   this.contentDocMediaType = mediaType;
@@ -114,6 +132,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
     { opf: 'http://www.idpf.org/2007/opf',
       dc: 'http://purl.org/dc/elements/1.1/'});
   this.metadata = parseMetadata(doc, select);
+  this.links = parseLinks(doc, select);
 
   const spineItemIdrefs = select('//opf:itemref/@idref', doc);
   spineItemIdrefs.forEach((idref) => {

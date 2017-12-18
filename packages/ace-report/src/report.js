@@ -41,8 +41,8 @@ function aggregateHTMLOutlines(outlines) {
 module.exports = class Report {
   constructor(epub) {
     this._builder = new builders.ReportBuilder()
-      .withTestSubject(epub.path, '', '', epub.metadata)
-      .withA11yMeta(a11yMetaChecker.analyze(epub.metadata));
+      .withTestSubject(epub.path, '', '', epub.metadata, epub.links)
+      .withA11yMeta(a11yMetaChecker.analyze(epub.metadata))
   }
 
   get json() {
@@ -55,10 +55,6 @@ module.exports = class Report {
   }
   addData(data) {
     this._builder.withData(data);
-  }
-  addOutline(outline) {
-    this._builder.withHOutline(outline);
-    return this;
   }
   addHeadings(headings) {
     this._builder.withHeadingsOutline(headingsToOutline(headings));
