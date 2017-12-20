@@ -5,8 +5,8 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@daisy/jest-puppeteer": "^0.7.0-rc.0",
-    "@daisy/jest-env-puppeteer": "^0.7.0-rc.0",
+    "@daisy/jest-puppeteer": "^0.7.0",
+    "@daisy/jest-env-puppeteer": "^0.7.0",
     "babel-core": "^6.0.0",
     "babel-jest": "^21.2.0",
     "babel-preset-env": "^1.6.0",
