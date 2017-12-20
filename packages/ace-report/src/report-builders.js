@@ -34,11 +34,12 @@ function withAssertions(obj, assertions) {
   return obj;
 }
 
-function withTestSubject(obj, url, title = '', identifier = '', metadata = null) {
+function withTestSubject(obj, url, title = '', identifier = '', metadata = null, links = null) {
   const testSubject = { url };
   if (title.length > 0) testSubject['dct:title'] = title;
   if (identifier.length > 0) testSubject['dct:identifier'] = identifier;
   if (metadata !== undefined && metadata != null) testSubject.metadata = metadata;
+  if (links !== undefined && links != null) testSubject.links = links;
   obj['earl:testSubject'] = testSubject;
   return obj;
 }
@@ -149,8 +150,8 @@ class ReportBuilder {
     });
     return this;
   }
-  withTestSubject(url, title, identifier, metadata) {
-    withTestSubject(this._json, url, title, identifier, metadata);
+  withTestSubject(url, title, identifier, metadata, links) {
+    withTestSubject(this._json, url, title, identifier, metadata, links);
     return this;
   }
 }

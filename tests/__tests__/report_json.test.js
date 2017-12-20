@@ -145,6 +145,15 @@ describe('check data', () => {
     });
   });
 
+  test('extract links', async () => {
+    const report = await ace(path.join(__dirname, '../data/feat-links'));
+    expect(report['earl:testSubject']).toMatchObject({
+      links: {
+        "a11y:certifierReport": "http://www.example.com/report.html"
+      },
+    });
+  });
+
   test('extract videos', async () => {
     const report = await ace(path.join(__dirname, '../data/feat-video'));
     expect(report.data).toMatchObject({

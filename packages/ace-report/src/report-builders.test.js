@@ -70,7 +70,8 @@ describe('report builder', () => {
       });
     });
   });
-  describe('adding assertions', () => {
+
+  describe('withAssertions', () => {
     let assertions;
     test('adding null assertion is ignored', () => {
       expect(report.withAssertions(null)).toBeDefined();
@@ -119,7 +120,8 @@ describe('report builder', () => {
       expect(assertions[1]).toEqual({ foo: 'foo' });
     });
   });
-  describe('adding data', () => {
+
+  describe('withData', () => {
     let data;
     beforeEach(() => {
       data = report.build().data;
@@ -152,7 +154,8 @@ describe('report builder', () => {
       expect(data).toEqual({ foo: ['foo', 'bar'] });
     });
   });
-  describe('adding properties', () => {
+
+  describe('withProperties', () => {
     let properties;
     beforeEach(() => {
       properties = report.build().properties;
@@ -187,6 +190,70 @@ describe('report builder', () => {
       expect(report.withProperties({ foo: false })).toBeDefined();
       expect(report.withProperties({ foo: [] })).toBeDefined();
       expect(properties).toEqual({ foo: true });
+    });
+  });
+
+  describe('withTestSubject', () => {
+    test('with URL', () => {
+      expect(report.withTestSubject('https://example.com')).toBeDefined();
+      const testSubject = report.build()['earl:testSubject'];
+      expect(testSubject).toBeDefined();
+      expect(testSubject).toEqual({
+        url: 'https://example.com'
+      })
+    });
+    test('with title', () => {
+      expect(report.withTestSubject('https://example.com', 'title')).toBeDefined();
+      const testSubject = report.build()['earl:testSubject'];
+      expect(testSubject).toBeDefined();
+      expect(testSubject).toEqual({
+        url: 'https://example.com',
+        'dct:title': 'title',
+      })
+    });
+    test('with identifier', () => {
+      expect(report.withTestSubject('https://example.com', '', 'uid')).toBeDefined();
+      const testSubject = report.build()['earl:testSubject'];
+      expect(testSubject).toBeDefined();
+      expect(testSubject).toEqual({
+        url: 'https://example.com',
+        'dct:identifier': 'uid',
+      })
+    });
+    test('with metadata null', () => {
+      expect(report.withTestSubject('https://example.com', '', '', null)).toBeDefined();
+      const testSubject = report.build()['earl:testSubject'];
+      expect(testSubject).toBeDefined();
+      expect(testSubject).toEqual({
+        url: 'https://example.com',
+      })
+    });
+    test('with metadata', () => {
+      expect(report.withTestSubject('https://example.com', '', '', { foo: 'bar' })).toBeDefined();
+      const testSubject = report.build()['earl:testSubject'];
+      expect(testSubject).toBeDefined();
+      expect(testSubject).toEqual({
+        url: 'https://example.com',
+        metadata: { foo: 'bar' }
+      })
+    });
+
+    test('with link null', () => {
+      expect(report.withTestSubject('https://example.com', '', '', null, null)).toBeDefined();
+      const testSubject = report.build()['earl:testSubject'];
+      expect(testSubject).toBeDefined();
+      expect(testSubject).toEqual({
+        url: 'https://example.com',
+      })
+    });
+    test('with links', () => {
+      expect(report.withTestSubject('https://example.com', '', '', null, { foo: 'bar' })).toBeDefined();
+      const testSubject = report.build()['earl:testSubject'];
+      expect(testSubject).toBeDefined();
+      expect(testSubject).toEqual({
+        url: 'https://example.com',
+        links: { foo: 'bar' }
+      })
     });
   });
 });
