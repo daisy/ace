@@ -1,0 +1,42 @@
+{
+  "name": "@daisy/ace",
+  "version": "0.7.0",
+  "description": "Ace by DAISY, an Accessibility Checker for EPUB",
+  "keywords": [
+    "a11y",
+    "accessibility",
+    "ace",
+    "checker",
+    "daisy",
+    "epub",
+    "validator",
+    "wcag"
+  ],
+  "author": {
+    "name": "DAISY developers",
+    "organization": "DAISY Consortium",
+    "url": "http://www.daisy.org/"
+  },
+  "homepage": "https://daisy.github.io/ace",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daisy/ace"
+  },
+  "bugs": {
+    "url": "https://github.com/daisy/ace/issues"
+  },
+  "license": "MIT",
+  "bin": {
+    "ace": "./bin/ace.js",
+    "ace-http": "./bin/ace-http.js"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@daisy/ace-cli": "^0.7.0",
+    "@daisy/ace-core": "^0.7.0",
+    "@daisy/ace-http": "^0.7.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

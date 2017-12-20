@@ -1,125 +1,46 @@
 {
-  "name": "ace-core",
-  "version": "0.6.0",
-  "description": "Ace by DAISY, an Accessibility Checker for EPUB",
-  "keywords": [
-    "a11y",
-    "accessibility",
-    "ace",
-    "checker",
-    "daisy",
-    "epub",
-    "validator",
-    "wcag"
-  ],
+  "private": "true",
   "license": "MIT",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://opensource.org/licenses/MIT"
-    }
+  "workspaces": [
+    "packages/*"
   ],
-  "author": {
-    "name": "DAISY developers",
-    "organization": "DAISY Consortium",
-    "url": "https://github.com/daisy/"
-  },
-  "homepage": "https://github.com/daisy/ace",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/daisy/ace.git"
-  },
-  "bugs": {
-    "url": "https://github.com/daisy/ace/issues"
-  },
-  "engines": {
-    "node": ">=6",
-    "npm": ">=5",
-    "yarn": ">= 1.0.0"
-  },
-  "main": "dist/index.js",
-  "bin": {
-    "ace": "dist/cli/cli.js",
-    "ace-http": "dist/http/http.js"
-  },
-  "files": [
-    "LICENCE.txt",
-    "README.md",
-    "dist"
-  ],
-  "dependencies": {
-    "axe-core": "^2.4.2",
-    "env-paths": "^1.0.0",
-    "express": "^4.15.5",
-    "express-easy-zip": "^1.1.4",
-    "extract-zip": "^1.6.5",
-    "filehound": "^1.16.2",
-    "fs-extra": "^4.0.2",
-    "glob": "^7.1.2",
-    "h5o": "^0.11.3",
-    "handlebars": "^4.0.11",
-    "marko": "^4.4.26",
-    "meow": "^3.7.0",
-    "multer": "^1.3.0",
-    "mustache": "^2.3.0",
-    "p-map": "^1.2.0",
-    "path": "^0.12.7",
-    "puppeteer": "^0.12.0",
-    "shortid": "^2.2.8",
-    "snyk": "^1.42.7",
-    "tmp": "^0.0.33",
-    "unzip": "^0.1.11",
-    "uuidv4": "^0.5.0",
-    "winston": "^2.4.0",
-    "xmldom": "^0.1.27",
-    "xpath": "^0.0.24"
-  },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
+    "@daisy/jest-puppeteer": "^0.7.0-rc.0",
+    "@daisy/jest-env-puppeteer": "^0.7.0-rc.0",
+    "babel-core": "^6.0.0",
     "babel-jest": "^21.2.0",
     "babel-preset-env": "^1.6.0",
     "babel-register": "^6.26.0",
+    "chalk": "^2.3.0",
     "cross-spawn": "^5.1.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.3.0",
-    "jest": "^21.3.0-beta.3",
+    "glob": "^7.1.2",
+    "jest": "21.3.0-beta.10",
+    "lerna": "^2.5.1",
+    "micromatch": "^3.1.4",
+    "mkdirp": "^0.5.1",
     "rimraf": "^2.6.1",
+    "snyk": "^1.56.0",
     "standard-version": "^4.2.0",
     "uglify-js": "^3.0.8",
     "watch": "^1.0.2"
   },
   "scripts": {
-    "start": "node src/cli/cli.js",
-    "clean": "rimraf dist && mkdir dist",
-    "prebuild": "npm run clean",
-    "build": "npm run build:js",
-    "build:js": "babel src -d dist --copy-files --ignore *.test.js",
-    "build:scripts": "babel src -d dist --presets browsers --only src/scripts",
-    "build:watch": "watch 'npm run build' src",
-    "lint": "eslint src",
+    "ace": "node ./packages/ace-cli/bin/ace.js",
+    "clean": "rimraf packages/*/lib",
+    "clean-all": "yarn clean && rimraf packages/*/node_modules && rimraf node_modules",
+    "prebuild": "yarn run clean",
+    "build": "node ./scripts/build.js",
+    "docs": "echo docs script not implemented",
+    "lint": "echo lint script not implemented",
+    "postinstall": "yarn build",
     "test": "jest",
-    "docs": "echo add docs",
-    "prepublishOnly": "npm run build",
-    "release": "standard-version -s"
-  },
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": [
-              "6"
-            ]
-          }
-        }
-      ]
-    ]
+    "watch": "yarn build && node ./scripts/watch.js"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/tests/jest-setup.js",
     "testEnvironment": "node"
-  },
-  "snyk": true
+  }
 }

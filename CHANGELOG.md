@@ -1,6 +1,22 @@
-# Change Log
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/daisy/ace/compare/v0.6.0...v0.7.0) (2017-12-13)
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### Bug Fixes
+
+* **core** error when running HTML checks ('HTML5Outline is not defined') ([03e3a3e](https://github.com/daisy/ace/commit/03e3a3e)), closes [#108](https://github.com/daisy/ace/issues/108)
+* **aXe:** description list item does not have a `<dl>` parent ([4c0afdd](https://github.com/daisy/ace/commit/4c0afdd)), closes [dequelabs/axe-core#581](https://github.com/dequelabs/axe-core/issues/581) [#114](https://github.com/daisy/ace/issues/114)
+* **report:** await for resources to be copied over to return ([b00b95b](https://github.com/daisy/ace/commit/b00b95b))
+* **report:** include earl:result for documents that have no assertions ([d131450](https://github.com/daisy/ace/commit/d131450)), closes [#120](https://github.com/daisy/ace/issues/120)
+
+
+### Features
+
+* modularize the source code into individual Node packages ([76d49ce](https://github.com/daisy/ace/commit/76d49ce))
+* **config:** enable configurability with a config file ([f63e1a5](https://github.com/daisy/ace/commit/f63e1a5)), closes [#63](https://github.com/daisy/ace/issues/63) [#77](https://github.com/daisy/ace/issues/77)
+* **config:** make the logging configurable ([5a3e4a4](https://github.com/daisy/ace/commit/5a3e4a4))
+* **core:** report the name of the Content Document where an unexpected error occurred ([ae1d814](https://github.com/daisy/ace/commit/ae1d814))
+
 
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/daisy/ace/compare/v0.5.0...v0.6.0) (2017-11-01)

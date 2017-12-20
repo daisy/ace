@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="en">
+<head>
+<title>Minimal EPUB</title>
+<script src="../../../../node_modules/axe-core/axe.js"></script>
+</head>
+<body>
+<h1>Loomings</h1>
+<p>Call me Ishmael.</p>
+<dl>
+  <dt>term</dt>
+  <dd>def</dd>
+</dl>
+<script>
+  window.axe.run({ runOnly: { type: 'rule', values: ['dlitem'] } }, function (err, results) {
+      console.log(results);
+    });
+</script>
+</body>
+</html>

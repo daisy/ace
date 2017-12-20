@@ -1,0 +1,27 @@
+{
+  "name": "@daisy/ace-logger",
+  "version": "0.7.0",
+  "description": "Logger bootsrap for Ace",
+  "author": {
+    "name": "DAISY developers",
+    "organization": "DAISY Consortium",
+    "url": "http://www.daisy.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daisy/ace"
+  },
+  "bugs": {
+    "url": "https://github.com/daisy/ace/issues"
+  },
+  "license": "MIT",
+  "main": "lib/index.js",
+  "dependencies": {
+    "@daisy/ace-config": "^0.7.0",
+    "fs-extra": "^4.0.2",
+    "winston": "^2.4.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
