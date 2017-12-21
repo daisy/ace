@@ -9,7 +9,7 @@ const winston = require('winston');
 
 const logger = require('@daisy/ace-logger');
 const ace = require('@daisy/ace-core');
-const util = require('../core/utils/get-all-rules');
+const util = require('@daisy/ace-core/lib/core/get-all-rules');
 
 const cli = meow(`
   Usage: ace [options] <input>
@@ -26,7 +26,7 @@ const cli = meow(`
 
     -V, --verbose          display verbose output
     -s, --silent           do not display any output
-    -R, --rules            To get information on all the internal used rules 
+    -R, --rules            to get information about all the internal used rules
 
   Examples
     $ ace -o out ~/Documents/book.epub

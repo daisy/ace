@@ -1,5 +1,3 @@
-/* eslint-disable class-methods-use-this */
-
 'use strict';
 
 const glob = require('glob');

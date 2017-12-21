@@ -4,11 +4,9 @@ const axe = require('axe-core');
 const mustache = require('mustache');
 const fs = require('fs');
 
-const Rules = require('../../checker/rules');
+const Rules = require('../checker/rules');
 
 const PATH_TO_RULES_TEMPLATE = `${__dirname}/rules.mustache`;
-
-const KB_BASE = 'http://kb.daisy.org/publishing/';
 
 function mapUrlsToKB(axerules) {
   // TODO: axe helping urls should be map to daisy knowledge database

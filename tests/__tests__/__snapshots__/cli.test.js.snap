@@ -32,6 +32,7 @@ exports[`test help 1`] = `
 
     -V, --verbose          display verbose output
     -s, --silent           do not display any output
+    -R, --rules            to get information about all the internal used rules
 
   Examples
     $ ace -o out ~/Documents/book.epub
@@ -58,6 +59,7 @@ exports[`test no input 2`] = `
 
     -V, --verbose          display verbose output
     -s, --silent           do not display any output
+    -R, --rules            to get information about all the internal used rules
 
   Examples
     $ ace -o out ~/Documents/book.epub
