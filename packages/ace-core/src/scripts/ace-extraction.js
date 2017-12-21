@@ -137,7 +137,7 @@ ace.getHeadings = function() {
 
   hxElems.forEach(function(hx) {
     headings.push({
-      html: hx.innerHTML,
+      html: hx.textContent,
       level: +hx.localName.slice(1)
     });
   });

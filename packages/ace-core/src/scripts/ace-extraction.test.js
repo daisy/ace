@@ -194,6 +194,13 @@ describe('extracting headings', () => {
     expect(results[0].html).toBe('title 1');
     expect(results[0].level).toBe(1);
   });
+
+  test('complex h1', async () => {
+    const results = await run('getHeadings', '<h1>title 1 <a href="#foo">link</a></h1>');
+    expect(results.length).toBe(1);
+    expect(results[0].html).toBe('title 1 link');
+    expect(results[0].level).toBe(1);
+  });
 });
 
 describe('extracting iframes', () => {

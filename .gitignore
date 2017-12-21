@@ -20,6 +20,9 @@ website/site
 # Optional eslint cache
 .eslintcache
 
+# VS Code files
+.vscode
+
 # Yarn Integrity file
 .yarn-integrity
 
