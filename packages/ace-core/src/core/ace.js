@@ -59,7 +59,7 @@ module.exports = function ace(epubPath, options) {
     // Process the Results
     .then((report) => {
       if (options.outdir === undefined) {
-        return winston.info(JSON.stringify(report.json, null, '  '));
+        return process.stdout.write(JSON.stringify(report.json, null, '  '));
       }
       return Promise.all([
         report.copyData(options.outdir),

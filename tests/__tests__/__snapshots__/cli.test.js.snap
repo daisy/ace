@@ -1,6 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test existing output 1`] = `
+exports[`Running the CLI on an unexisting document should fail 1`] = `
+"[32minfo[39m:    Closing logs.
+Re-run Ace using the --verbose option to enable full debug logging."
+`;
+
+exports[`Running the CLI on an unexisting document should fail 2`] = `
+"[31merror[39m:   Couldn’t find EPUB file 'unexisting.epub'
+"
+`;
+
+exports[`Running the CLI with -o pointing to an existing directory should fail 1`] = `
 "[33mwarn[39m:    Output directory is not empty.
 
   Running Ace would override the following files or directories:
@@ -14,7 +24,9 @@ exports[`test existing output 1`] = `
 "
 `;
 
-exports[`test help 1`] = `
+exports[`Running the CLI with no input should fail 1`] = `"[31merror[39m:   Input required"`;
+
+exports[`Running the CLI with no input should fail 2`] = `
 "
   Ace by DAISY, an Accessibility Checker for EPUB
 
@@ -38,9 +50,7 @@ exports[`test help 1`] = `
 "
 `;
 
-exports[`test no input 1`] = `"[31merror[39m:   Input required"`;
-
-exports[`test no input 2`] = `
+exports[`Running the CLI with the -h option should print help 1`] = `
 "
   Ace by DAISY, an Accessibility Checker for EPUB
 
@@ -61,15 +71,5 @@ exports[`test no input 2`] = `
 
   Examples
     $ ace -o out ~/Documents/book.epub
-"
-`;
-
-exports[`test unexisting input 1`] = `
-"[32minfo[39m:    Closing logs.
-Re-run Ace using the --verbose option to enable full debug logging."
-`;
-
-exports[`test unexisting input 2`] = `
-"[31merror[39m:   Couldn’t find EPUB file 'unexisting.epub'
 "
 `;
