@@ -167,6 +167,10 @@ class ResultBuilder {
     this._json['dct:description'] = description;
     return this;
   }
+  withHTML(html) {
+    this._json['html'] = html;
+    return this;
+  }
   withPointer(css, cfi) {
     this._json['earl:pointer'] = { cfi, css };
     return this;

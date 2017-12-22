@@ -1,5 +1,6 @@
 'use strict';
 
+const escape = require('escape-html');
 const handlebars = require('handlebars');
 const fs = require('fs');
 const path = require('path');
@@ -149,6 +150,9 @@ function createFlatListOfViolations(violations) {
       };
       if (item["earl:result"]["earl:pointer"]) {
         obj.location += "#epubcfi(" + item["earl:result"]["earl:pointer"]["cfi"] + ")";
+      }
+      if (item["earl:result"]["html"]) {
+        obj.html = escape(item["earl:result"]["html"]);
       }
       flatData.push(obj);
     });

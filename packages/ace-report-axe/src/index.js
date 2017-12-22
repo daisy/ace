@@ -96,6 +96,7 @@ function  axe2ace(spineItem, axeResults) {
             new builders.ResultBuilder('fail')
               .withDescription(node.failureSummary)
               .withPointer(node.target, node.targetCFI)
+              .withHTML(node.html)
               .build())
           .build()));
       });
