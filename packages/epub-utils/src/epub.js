@@ -35,7 +35,7 @@ class EPUB {
         const tmpdir = tmp.dirSync({ unsafeCleanup: true }); // remove even when not empty
         unzip(this.path, { dir: tmpdir.name }, (err) => {
           if (err) {
-            winston.error('Failed to unzip EPUB');
+            winston.error('Failed to unzip EPUB (the ZIP archive may be corrupt).');
             reject(err);
           } else {
             this.basedir = tmpdir.name;
