@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="en">
+<head>
+<title>Minimal EPUB</title>
+</head>
+<body>
+<h1>Loomings</h1>
+<p>Call me Ishmael.</p>
+
+<!-- Passes: -->
+<!-- pass #1: non-epub type -->
+<ol id="pass1" type="1">
+    <li>item 1</li>
+</ol>
+<!-- pass #2: type has matching role -->
+<div id="pass2" epub:type="notice" role="doc-notice">notice</div>
+<!-- pass #3: type has no defined matching role -->
+<div id="pass3" epub:type="bridgehead">hello</div>
+
+<!-- Fails: -->
+<!-- fail #1: missing role -->
+<div id="fail1" epub:type="notice">notice</div>
+<!-- fail #2: non-matching role -->
+<div id="fail2" epub:type="notice" role="doc-tip">notice</div>
+</body>
+</html>
