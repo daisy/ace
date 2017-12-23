@@ -224,6 +224,10 @@
             {{#violation_stats "EPUB"}}{{/violation_stats}}
           </tr>
           <tr>
+            <th scope="row">Best Practice</th>
+            {{#violation_stats "best-practice"}}{{/violation_stats}}
+          </tr>
+          <tr>
             <th scope="row">Other</th>
             {{#violation_stats "other"}}{{/violation_stats}}
           </tr>
@@ -435,6 +439,7 @@
       'wcag2a': 'WCAG 2.0 A',
       'wcag2aa': 'WCAG 2.0 AA',
       'EPUB': 'EPUB',
+      'best-practice': 'Best Practice',
       'other': 'Other'
     };
 

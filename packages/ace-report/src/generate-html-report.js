@@ -31,6 +31,7 @@ module.exports = function generateHtmlReport(reportData) {
         'wcag2a': 'WCAG 2.0 A',
         'wcag2aa': 'WCAG 2.0 AA',
         'EPUB': 'EPUB',
+        'best-practice': 'Best Practice',
         'other': 'Other'
       };
       violationFilters[rule].forEach(function(value) {
@@ -60,12 +61,13 @@ module.exports = function generateHtmlReport(reportData) {
 
 // summarize the violation ruleset and impact data
 function collectViolationStats(flatListOfViolations) {
-  var rulesetTags = ['wcag2a', 'wcag2aa', 'EPUB'];
+  var rulesetTags = ['wcag2a', 'wcag2aa', 'EPUB', 'best-practice'];
 
   var summaryData = {
     'wcag2a': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
     'wcag2aa': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
     'EPUB': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
+    'best-practice': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
     'other': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
     'total': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0}
   };
@@ -89,6 +91,7 @@ function collectViolationStats(flatListOfViolations) {
     summaryData['total'][key] += summaryData['wcag2a'][key]
       + summaryData['wcag2aa'][key]
       + summaryData['EPUB'][key]
+      + summaryData['best-practice'][key]
       + summaryData['other'][key];
   });
 
@@ -118,7 +121,7 @@ function createViolationFilters(violations) {
 // we're using 'assertion' and 'violation' somewhat interchangeably
 function createFlatListOfViolations(violations) {
   var flatData = [];
-  var rulesetTags = ['wcag2a', 'wcag2aa', 'EPUB']; // applicable ruleset tags
+  var rulesetTags = ['wcag2a', 'wcag2aa', 'EPUB', 'best-practice']; // applicable ruleset tags
 
   violations.forEach(function(assertion) {
     var filename = assertion["earl:testSubject"]["url"];
