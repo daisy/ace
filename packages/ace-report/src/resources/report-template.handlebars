@@ -26,6 +26,16 @@
       font-size:.8em;font-family:monospace;overflow-wrap:break-word
     }
 
+    .snippet {
+      font-size:.8em;
+    }
+    .snippet code {
+      display: block;
+      font-size:1em;
+      font-family:monospace;overflow-wrap:break-word;
+      margin-top: 1em;
+    }
+
     .tab-pane{
       margin-top: 1.5em;
       margin-left: 1em;
@@ -459,6 +469,10 @@
       var tdImpact = $("<td><span class='" + violation["impact"] + "'>" + violation["impact"] + "</span></td>");
       var tdRuleset = $("<td><span class='ruleset'>" + rulesetTagLabels[violation["applicableRulesetTag"]] + "</span></td>");
       var tdLocation = $("<td><em>\"" + violation["fileTitle"] + "\"</em><br/><br/><code class='location'>" + violation["location"] + "</code></td>");
+      if (violation.html) {
+        var tdSnippet = $("<br/><br/><div class='snippet'>Snippet:<code>"+ violation.html.trim() + "</code></div>");
+        tdLocation.append(tdSnippet);
+      }
       var tdRule = $("<td>" + violation["rule"] + "<br/><br/><span class='engine'>" + violation["engine"] + "</span></td>");
 
       var desc = violation["desc"];
