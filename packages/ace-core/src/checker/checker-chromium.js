@@ -1,14 +1,18 @@
 'use strict';
 
-const fs = require('fs');
+const fileUrl = require('file-url');
+const fs = require('fs-extra');
 const path = require('path');
 const pMap = require('p-map');
 const puppeteer = require('puppeteer');
 const os = require('os');
+const tmp = require('tmp');
 const winston = require('winston');
 
 const axe2ace = require('@daisy/ace-report-axe');
 const utils = require('@daisy/puppeteer-utils');
+
+tmp.setGracefulCleanup();
 
 const scripts = [
   path.resolve(require.resolve('axe-core'), '../axe.min.js'),
@@ -21,8 +25,22 @@ const scripts = [
 async function checkSingle(spineItem, epub, browser) {
   winston.verbose(`- Processing ${spineItem.relpath}`);
   try {
+    let url = spineItem.url;
+    let ext = path.extname(spineItem.filepath);
+    
+    // File extensions other than 'xhtml' or 'html' are not propertly loaded
+    // by puppeteer, so we copy the file to a new `.xhtml` temp file.
+    if (ext !== 'xhtml' && ext !== 'html') {
+      winston.warn(`Copying document with extension '${ext}' to a temporary '.xhtml' file…`);
+      const tmpdir = tmp.dirSync({ unsafeCleanup: true }).name;
+      const tmpFile = path.join(tmpdir, `${path.basename(spineItem.filepath, ext)}.xhtml`)
+      fs.copySync(spineItem.filepath, tmpFile);
+      url = fileUrl(tmpFile);
+      winston.debug(`checking copied file at ${url}`)
+    }
+    
     const page = await browser.newPage();
-    await page.goto(spineItem.url);
+    await page.goto(url);
     await utils.addScripts(scripts, page);
 
     const results = await page.evaluate(() => new Promise((resolve, reject) => {
