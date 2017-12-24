@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-cli",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Ace by DAISY, an Accessibility Checker for EPUB",
   "author": {
     "name": "DAISY developers",
@@ -18,7 +18,7 @@
   "main": "lib/index.js",
   "bin": "bin/ace.js",
   "dependencies": {
-    "@daisy/ace-core": "^0.7.0",
+    "@daisy/ace-core": "^0.8.0",
     "@daisy/ace-logger": "^0.7.0",
     "meow": "^3.7.0",
     "winston": "^2.4.0"
