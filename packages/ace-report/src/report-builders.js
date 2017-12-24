@@ -161,7 +161,7 @@ class ReportBuilder {
   }
   withTestSubject(url, title, identifier, metadata, links) {
     var url_ = url;
-    if (this.outdir != "" && reportConfig["use-relative-paths"]) {
+    if (this.outdir !== undefined && this.outdir != "" && reportConfig["use-relative-paths"]) {
       url_ = path.relative(this.outdir, url);
     }
     withTestSubject(this._json, url_, title, identifier, metadata, links);
