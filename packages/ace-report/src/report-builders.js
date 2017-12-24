@@ -5,6 +5,11 @@
 
 const pkg = require('../package');
 
+const { config, paths } = require('@daisy/ace-config');
+const defaults = require('./defaults');
+const reportConfig  = config.get('report', defaults.report);
+const path = require('path');
+
 // static
 const ACE_DESCRIPTION = {
   '@type': 'earl:software',
@@ -105,6 +110,10 @@ class ReportBuilder {
   build() {
     return this._json;
   }
+  setOutdir(outdir) {
+    this.outdir = outdir;
+    return this;
+  }
   withA11yMeta(metadata) {
     if (!metadata) return this;
     this._json['a11y-metadata'] = metadata;
@@ -151,7 +160,11 @@ class ReportBuilder {
     return this;
   }
   withTestSubject(url, title, identifier, metadata, links) {
-    withTestSubject(this._json, url, title, identifier, metadata, links);
+    var url_ = url;
+    if (this.outdir != "" && reportConfig["use-relative-paths"]) {
+      url_ = path.relative(this.outdir, url);
+    }
+    withTestSubject(this._json, url_, title, identifier, metadata, links);
     return this;
   }
 }

@@ -53,7 +53,7 @@ module.exports = function ace(epubPath, options) {
     epub.extract()
     .then(() => epub.parse())
     // initialize the report
-    .then(() => new Report(epub))
+    .then(() => new Report(epub, options.outdir))
     // Check each Content Doc
     .then(report => checker.check(epub, report))
     // Process the Results

@@ -39,8 +39,9 @@ function aggregateHTMLOutlines(outlines) {
 }
 
 module.exports = class Report {
-  constructor(epub) {
+  constructor(epub, outdir) {
     this._builder = new builders.ReportBuilder()
+      .setOutdir(outdir)
       .withTestSubject(epub.path, '', '', epub.metadata, epub.links)
       .withA11yMeta(a11yMetaChecker.analyze(epub.metadata))
   }
