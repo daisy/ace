@@ -1,3 +1,25 @@
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/daisy/ace/compare/v0.7.0...v0.8.0) (2017-12-24)
+
+
+### Bug Fixes
+
+* **cli:** print the JSON report even when `--silent` is enabled ([e108d4d](https://github.com/daisy/ace/commit/e108d4d)), closes [#112](https://github.com/daisy/ace/issues/112)
+* **outlines:** only use headings text content in the outline ([084fe4a](https://github.com/daisy/ace/commit/084fe4a)), closes [#129](https://github.com/daisy/ace/issues/129)
+* **report:** limit the width of images ([fd80592](https://github.com/daisy/ace/commit/fd80592)), closes [#126](https://github.com/daisy/ace/issues/126)
+* **unzip:** try to repair ZIP archives with extra comment length ([#138](https://github.com/daisy/ace/issues/138)) ([4c8b532](https://github.com/daisy/ace/commit/4c8b532)), closes [#121](https://github.com/daisy/ace/issues/121)
+* **unzip:** tweak error message to indicate possible ZIP corruption ([434d9c2](https://github.com/daisy/ace/commit/434d9c2))
+
+
+### Features
+
+* **data:** extract and report link info from the Package Document ([#130](https://github.com/daisy/ace/issues/130)) ([a010744](https://github.com/daisy/ace/commit/a010744)), closes [#96](https://github.com/daisy/ace/issues/96)
+* **report:** add a 'Best Practice' rule category ([b5ed308](https://github.com/daisy/ace/commit/b5ed308))
+* **report:** show source code snippets for violations ([#134](https://github.com/daisy/ace/issues/134)) ([5e053fa](https://github.com/daisy/ace/commit/5e053fa)), closes [#82](https://github.com/daisy/ace/issues/82)
+* **rule:** check that epub:type have matching ARIA roles ([85ffb96](https://github.com/daisy/ace/commit/85ffb96)), closes [#70](https://github.com/daisy/ace/issues/70)
+
+
+
 <a name="0.7.0"></a>
 # [0.7.0](https://github.com/daisy/ace/compare/v0.6.0...v0.7.0) (2017-12-13)
 
