@@ -12,6 +12,13 @@ module.exports = function generateHtmlReport(reportData) {
     var flatListOfViolations = createFlatListOfViolations(reportData.assertions);
     var violationStats = collectViolationStats(flatListOfViolations);
     var violationFilters = createViolationFilters(flatListOfViolations);
+    var rulesetTagLabels = {
+      'wcag2a': 'WCAG 2.0 A',
+      'wcag2aa': 'WCAG 2.0 AA',
+      'EPUB': 'EPUB',
+      'best-practice': 'Best Practice',
+      'other': 'Other'
+    };
 
     // return 5 data cells for each ruleset: critical, serious, moderate, minor, total
     // a ruleset can be "wcag2a", "wcag2aa", "EPUB", "other", or "total" (all rulesets)
@@ -27,13 +34,6 @@ module.exports = function generateHtmlReport(reportData) {
     // return a list of <option> elements containing the possible filters for given rule
     handlebars.registerHelper('violation_filter', function(rule, options) {
       var filterOptions = "";
-      var rulesetTagLabels = {
-        'wcag2a': 'WCAG 2.0 A',
-        'wcag2aa': 'WCAG 2.0 AA',
-        'EPUB': 'EPUB',
-        'best-practice': 'Best Practice',
-        'other': 'Other'
-      };
       violationFilters[rule].forEach(function(value) {
         // use nicer labels for ruleset options
         if (rule == "ruleset") {
@@ -47,10 +47,46 @@ module.exports = function generateHtmlReport(reportData) {
     });
 
     // return a stringified json object representing a flat list of violations
-    handlebars.registerHelper('violations', function(options) {
+    handlebars.registerHelper('violationsJson', function(options) {
       return new handlebars.SafeString(JSON.stringify(flatListOfViolations) + ";")
     });
 
+    handlebars.registerHelper('violationRows', function(options) {
+      var htmlStr = '';
+      flatListOfViolations.forEach(function(violation) {
+        htmlStr += `<tr>
+        <td><span class='${violation['impact']}'>${violation['impact']}</span></td>
+        <td><span class='ruleset'>${rulesetTagLabels[violation['applicableRulesetTag']]}</span></td>
+        <td><em>\"${violation['fileTitle']}\"<br/><br/><code class='location'>${violation['location']}</code>`;
+
+        if (violation.html) {
+          htmlStr +=`<br/><br/><div class='snippet'>Snippet:<code>${violation.html.trim()}</code></div>`;
+        }
+
+        htmlStr += "</td>";
+        htmlStr += `<td>${violation['rule']}<br/><br/><span class='engine'>${violation['engine']}</span></td>`;
+
+        var desc = violation["desc"];
+        desc = desc.replace("Fix all of the following:", "");
+        desc = desc.replace("Fix any of the following:", "");
+
+        var detailsArr = desc.split("\n");
+        var listStr = '';
+        detailsArr.forEach(function(item) {
+          if (item != "") {
+            listStr += `<li>${item}</li>`;
+          }
+        });
+
+        htmlStr += `<td class='details'>
+        <ul>${listStr}</ul>
+        <p><a href='${violation['kburl']}' target='_blank'>Learn more about ${violation['kbtitle']}</a></p>
+        </td>`;
+
+        htmlStr += "</tr>";
+      });
+      return new handlebars.SafeString(htmlStr);
+    });
 
     const content = fs.readFileSync(path.join(__dirname, "./resources/report-template.handlebars")).toString();
     var template = handlebars.compile(content);
@@ -144,7 +180,7 @@ function createFlatListOfViolations(violations) {
         "kburl": item["earl:test"]["help"]["url"],
         "kbtitle": item["earl:test"]["help"]["title"],
         "rule": item["earl:test"]["dct:title"],
-        "desc": item["earl:result"]["dct:description"],
+        "desc": escape(item["earl:result"]["dct:description"]),
         "pointer": item["earl:result"]["earl:pointer"],
         "impact": item["earl:test"]["earl:impact"],
         "location": filename,
