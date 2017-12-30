@@ -105,7 +105,8 @@ function check(epub, report) {
   // Check page list is sourced
   checkPageSource(assertion, epub);
 
-  report.addAssertions(assertion.build());
+  var builtAssertions = assertion.build();
+  report.addAssertions(builtAssertions);
 
   // Report the Nav Doc
   report.addEPUBNav(epub.navDoc);
@@ -115,6 +116,11 @@ function check(epub, report) {
     hasManifestFallbacks: epub.hasManifestFallbacks,
     hasBindings: epub.hasBindings,
   });
+  
+  winston.info(`- ${epub.packageDoc.src}: ${
+    (builtAssertions.assertions && builtAssertions.assertions.length > 0)
+      ? builtAssertions.assertions.length
+      : 'No'} issues found`);
 
   return Promise.resolve();
 }

@@ -60,18 +60,20 @@ module.exports = function ace(epubPath, options) {
     .then((report) => {
       if (options.outdir === undefined) {
         report.cleanData();
-        return process.stdout.write(JSON.stringify(report.json, null, '  '));
+        process.stdout.write(JSON.stringify(report.json, null, '  '));
+        return report;
       }
       return report.copyData(options.outdir)
       .then(() => report.cleanData())
       .then(() => Promise.all([
           report.saveJson(options.outdir),
           report.saveHtml(options.outdir)
-      ]));
+      ]))
+      .then(() => report);
     })
-    .then(() => {
+    .then((report) => {
       winston.info('Done.');
-      resolve(jobId);
+      resolve([jobId, report.json]);
     })
     .catch((err) => {
       winston.error(`Unexpected error: ${(err.message !== undefined) ? err.message : err}`);

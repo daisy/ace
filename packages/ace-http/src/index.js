@@ -149,7 +149,8 @@ function newJob(jobdata) {
 
   // execute the job with Ace
   ace(jobdata.internal.epubPath, {'jobid': jobdata.internal.id, 'outdir': jobdata.internal.outputDir})
-  .then((jobid) => {
+  .then((jobData) => {
+    var jobId = jobData[0];
     var idx = joblist.findIndex(job => job.internal.id === jobid);
     winston.info("Job finished " + joblist[idx].internal.id);
     joblist[idx].public.status = JOBSTATUS.done;

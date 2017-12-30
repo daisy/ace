@@ -1,0 +1,5 @@
+{
+  "cli": {
+    "return-2-on-validation-error": false
+  }
+}
