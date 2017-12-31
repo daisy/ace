@@ -110,6 +110,12 @@ class ReportBuilder {
   build() {
     return this._json;
   }
+  // run the function on the given item under _json.data
+  cleanData(key, fn) {
+    if (this._json.data.hasOwnProperty(key)) {
+        this._json.data[key] = fn(this._json.data[key]);
+    }
+  }
   setOutdir(outdir) {
     this.outdir = outdir;
     return this;

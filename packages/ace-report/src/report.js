@@ -73,6 +73,21 @@ module.exports = class Report {
     this._builder.withProperties(properties);
     return this;
   }
+  // remove the path properties as they aren't needed
+  // this has to happen after data is copied, if we're copying it
+  cleanData() {
+    winston.debug("Cleaning data");
+    var removePath = function(items) {
+      return items.map((item) => {
+        delete item.path;
+        return item;
+      });
+    };
+    this._builder.cleanData('images', removePath);
+    this._builder.cleanData('iframes', removePath);
+
+    return Promise.resolve();
+  }
   copyData(outdir) {
     winston.info("Copying data");
     if (this.json.data === null) return Promise.resolve();
@@ -86,7 +101,6 @@ module.exports = class Report {
             return Promise.all(this.json.data.images.map((img) => {
               const fromPath = img.path;
               const toPath = path.join(outdir, 'data', img.src);
-              delete img.path;
               return fs.pathExists(fromPath)
                 .then((exists) => {
                   if (exists) {
@@ -111,27 +125,14 @@ module.exports = class Report {
             return aceReport;
         })
         .then((aceReport) => Promise.all([
-          fs.writeFile(path.join(outdir, 'report.json'), aceReport, 'UTF-8'),
+          fs.writeFileSync(path.join(outdir, 'report.json'), aceReport, 'UTF-8'),
         ]));
   }
   saveHtml(outdir) {
     winston.info("Saving HTML report");
 
     generateHtmlReport(this.json)
-    .then((result) => fs.writeFile(path.join(outdir, 'report.html'), result, 'UTF-8'))
+    .then((result) => fs.writeFileSync(path.join(outdir, 'report.html'), result, 'UTF-8'))
     .catch(err => winston.error(err));
-
-
-    // create a js file that the html report uses as its data source
-    /*const aceReport = JSON.stringify(this.json, null, '  ');
-    const js = "const aceReportData = " + aceReport + ";";
-
-    // copy report.html and the contents of /js and /css to the outdir
-    return fs.copy(path.join(__dirname, 'resources/report.html'), path.join(outdir, "report.html"))
-      //.then(() => fs.copy(path.join(__dirname, './resources/css/'), path.join(outdir, "css/")))
-      .then(() => fs.copy(path.join(__dirname, './resources/js/'), path.join(outdir, "js/")))
-      .then(() => fs.writeFile(path.join(outdir, 'js/', 'aceReportData.js'), js, 'UTF-8'))
-      .catch(err => winston.error(err));
-  }*/
   }
 }

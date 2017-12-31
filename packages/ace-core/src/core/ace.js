@@ -59,13 +59,15 @@ module.exports = function ace(epubPath, options) {
     // Process the Results
     .then((report) => {
       if (options.outdir === undefined) {
+        report.cleanData();
         return process.stdout.write(JSON.stringify(report.json, null, '  '));
       }
-      return Promise.all([
-        report.copyData(options.outdir),
-        report.saveJson(options.outdir),
-        report.saveHtml(options.outdir),
-      ]);
+      return report.copyData(options.outdir)
+      .then(() => report.cleanData())
+      .then(() => Promise.all([
+          report.saveJson(options.outdir),
+          report.saveHtml(options.outdir)
+      ]));
     })
     .then(() => {
       winston.info('Done.');
