@@ -287,9 +287,9 @@ aws4@^1.2.1, aws4@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
-axe-core@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-2.5.0.tgz#2f7c662c4d7d07cc8dc81f2f1d3d8288d8628039"
+axe-core@~2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-2.6.1.tgz#28772c4f76966d373acda35b9a409299dc00d1b5"
 
 babel-code-frame@^6.16.0, babel-code-frame@^6.26.0:
   version "6.26.0"

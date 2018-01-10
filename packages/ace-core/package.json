@@ -21,7 +21,7 @@
     "@daisy/ace-report-axe": "^0.8.0",
     "@daisy/epub-utils": "^0.8.0",
     "@daisy/puppeteer-utils": "^0.7.0",
-    "axe-core": "^2.5.0",
+    "axe-core": "~2.6.1",
     "h5o": "^0.11.3",
     "p-map": "^1.2.0",
     "puppeteer": "^1.0.0",
