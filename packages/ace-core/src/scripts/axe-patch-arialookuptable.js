@@ -356,5 +356,5 @@
     },
   };
 
-  Object.assign(axe.commons.aria._lut.role, dpubRoles);
+  Object.assign(axe.commons.aria.lookupTable.role, dpubRoles);
 }(window));
