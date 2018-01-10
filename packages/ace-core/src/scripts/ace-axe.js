@@ -178,6 +178,12 @@ daisy.ace.run = function(done) {
           description: "Ensure the element has an ARIA role matching its epub:type",
         },
         tags: ['best-practice']
+      },
+      {
+        id: 'landmark-one-main',
+        all: [
+          "has-no-more-than-one-main"
+          ],
       }
     ]
   });
