@@ -13,9 +13,7 @@ const utils = require('@daisy/puppeteer-utils');
 const scripts = [
   path.resolve(require.resolve('axe-core'), '../axe.min.js'),
   require.resolve('../scripts/vendor/outliner.min.js'),
-  require.resolve('../scripts/axe-patch-getselector.js'),
   require.resolve('../scripts/axe-patch-arialookuptable.js'),
-  require.resolve('../scripts/axe-patch-dlitem.js'),
   require.resolve('../scripts/ace-axe.js'),
   require.resolve('../scripts/ace-extraction.js'),
 ];
