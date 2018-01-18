@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const pMap = require('p-map');
 const puppeteer = require('puppeteer');
+const os = require('os');
 const winston = require('winston');
 
 const axe2ace = require('@daisy/ace-report-axe');
@@ -80,7 +81,11 @@ async function checkSingle(spineItem, epub, browser) {
 }
 
 module.exports.check = async (epub) => {
-  const browser = await puppeteer.launch();
+  const args = [];
+  if (os.platform() !== 'win32' && os.platform() !== 'darwin') {
+    args.push('--no-sandbox')
+  }
+  const browser = await puppeteer.launch({ args });
   winston.info('Checking documents...');
   return pMap(epub.contentDocs, doc => checkSingle(doc, epub, browser), { concurrency: 4 })
   .then(async (results) => {
