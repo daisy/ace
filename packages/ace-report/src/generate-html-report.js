@@ -74,7 +74,7 @@ module.exports = function generateHtmlReport(reportData) {
         var listStr = '';
         detailsArr.forEach(function(item) {
           if (item != "") {
-            listStr += `<li>${item}</li>`;
+            listStr += `<li>${unescape(item)}</li>`;
           }
         });
 

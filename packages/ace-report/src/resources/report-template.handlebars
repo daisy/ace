@@ -99,14 +99,18 @@
     }
 
     /* images */
+    #images td {
+      text-align: center;
+      font-family: serif;
+    }
     #images td.image{
-      text-align:center;
+      /*text-align:center;*/
       padding:.2em;
     }
     #images td.missing{
-        text-align:center;
-        color:#888;
-        font-style:italic
+      /*text-align:center;*/
+      color:#888;
+      font-style:italic;
     }
     #images td.alt {border:1px solid #ddd}
     #images td.alt.missing{background-color:#f2dede}
@@ -404,6 +408,7 @@
                 </th>
                 <th>Associated <code>figcaption</code></th>
                 <th>Location</th>
+                <th>Role</th>
              </tr>
           </thead>
           <tbody>
@@ -434,6 +439,12 @@
                   {{/if}}
 
                   <td class="location">{{location}}</td>
+
+                  {{#if role}}
+                    <td>{{role}}</td>
+                  {{else}}
+                    <td class="missing">N/A</td>
+                  {{/if}}
                 </tr>
               {{/each}}
           </tbody>
