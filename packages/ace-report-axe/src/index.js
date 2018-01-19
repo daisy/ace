@@ -84,7 +84,7 @@ function  axe2ace(spineItem, axeResults) {
         .withImpact(violation.impact)
         .withTitle(violation.id)
         .withDescription(violation.description)
-        .withHelp(kbURL, kbTitle)
+        .withHelp(kbURL, kbTitle, violation.help)
         .withRulesetTags(violation.tags)
         .build();
       violation.nodes.forEach(node => assertion.withAssertions(

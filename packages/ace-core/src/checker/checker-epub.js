@@ -16,7 +16,7 @@ function asString(arrayOrString) {
   return '';
 }
 
-function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kbTitle }) {
+function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kbTitle, ruleDesc }) {
   return new builders.AssertionBuilder()
     .withAssertedBy(ASSERTED_BY)
     .withMode(MODE)
@@ -27,7 +27,8 @@ function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kb
         .withDescription(testDesc)
         .withHelp(
           KB_BASE + kbPath,
-          kbTitle)
+          kbTitle,
+          ruleDesc)
         .withRulesetTags(['EPUB'])
         .build())
     .withResult(
@@ -45,6 +46,7 @@ function newMetadataAssertion(name, impact = 'serious') {
     resDesc: `Add a '${name}' metadata property to the Package Document`,
     kbPath: 'docs/metadata/schema-org.html',
     kbTitle: 'Schema.org Accessibility Metadata',
+    ruleDesc: `Publications must declare the '${name}' metadata`
   });
 }
 
@@ -72,6 +74,7 @@ function checkTitle(assertions, epub) {
       resDesc: 'Add a \'dc:title\' metadata property to the Package Document',
       kbPath: '',
       kbTitle: 'EPUB Title',
+      ruleDesc: 'Publications must have a title',
     }));
   }
 }
@@ -86,6 +89,7 @@ function checkPageSource(assertion, epub) {
       resDesc: 'Add a \'dc:source\' metadata property to the Package Document',
       kbPath: 'docs/navigation/pagelist.html',
       kbTitle: 'Page Navigation',
+      ruleDesc: 'Publications with page breaks must declare the \'dc:source\' metadata',
     }));
   }
 }

@@ -215,8 +215,8 @@ class TestBuilder {
     this._json['dct:description'] = description;
     return this;
   }
-  withHelp(url, title) {
-    this._json.help = { url, title };
+  withHelp(url, title, description) {
+    this._json.help = { url, title, description };
     return this;
   }
   withRulesetTags(tags) {

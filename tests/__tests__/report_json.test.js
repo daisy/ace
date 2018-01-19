@@ -57,6 +57,32 @@ describe('check assertions', () => {
         assertions: [],
       }));
   });
+  test('with violations', async () => {
+    const report = await ace(path.join(__dirname, '../data/has-violations'));
+    expect(report['earl:result']).toBeDefined();
+    expect(report['earl:result']).toEqual({ 'earl:outcome': 'fail' });
+    expect(Array.isArray(report.assertions)).toBe(true);
+    report.assertions.forEach(
+      (assertion) => {
+        expect(assertion.assertions).toEqual(expect.arrayContaining([
+          expect.objectContaining({
+            'earl:result': expect.objectContaining({
+              'earl:outcome': 'fail',
+            }),
+            'earl:test': expect.objectContaining({
+              'earl:impact': expect.anything(),
+              'dct:title': expect.anything(),
+              'dct:description': expect.anything(),
+              'help': {
+                'url': expect.anything(),
+                'title': expect.anything(),
+                'description': expect.anything(),
+              }
+            })
+          }),
+        ]));
+      });
+  });
 });
 
 describe('check properties', () => {
