@@ -1,9 +1,11 @@
 'use strict';
 
+const path = require('path');
+const stripAnsi = require('strip-ansi');
+
 const ace = require('../runAceCLI');
 const pkg = require('../../packages/ace-core/package');
 
-const path = require('path');
 
 describe('Running the CLI', () => {
   test('with no input should fail', () => {
@@ -60,6 +62,26 @@ describe('Running the CLI', () => {
     const res = JSON.parse(stdout);
     expect(res).toMatchObject({ '@type': 'earl:report' });
   });
+
+  describe('with a valid input', () => {
+    test('raises no log warnings', () => {
+      const { stdout, stderr, status } = ace(['base-epub-30'], {
+        cwd: path.resolve(__dirname, '../data'),
+      });
+      const log = stripAnsi(stdout);
+      expect(/^warn:/m.test(log)).toBe(false);
+    });
+  });
+
+  describe('raises a warning', () => {
+    test('when the EPUB Content Docs have unusual extensions', () => {
+      const { stdout, stderr, status } = ace(['issue-122'], {
+        cwd: path.resolve(__dirname, '../data'),
+      });
+      const log = stripAnsi(stdout);
+      expect(/^warn:\s+Copying document with extension/m.test(log)).toBe(true);
+    });
+  });  
 
   /*test('with return-2-on-validation-error set to true should exit with return code 2', () => {
     // TODO this test won't work until we can specify the CLI option to enable returning 2 on violation(s)

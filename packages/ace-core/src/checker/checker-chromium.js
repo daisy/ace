@@ -30,7 +30,7 @@ async function checkSingle(spineItem, epub, browser) {
     
     // File extensions other than 'xhtml' or 'html' are not propertly loaded
     // by puppeteer, so we copy the file to a new `.xhtml` temp file.
-    if (ext !== 'xhtml' && ext !== 'html') {
+    if (ext !== '.xhtml' && ext !== '.html') {
       winston.warn(`Copying document with extension '${ext}' to a temporary '.xhtml' file…`);
       const tmpdir = tmp.dirSync({ unsafeCleanup: true }).name;
       const tmpFile = path.join(tmpdir, `${path.basename(spineItem.filepath, ext)}.xhtml`)

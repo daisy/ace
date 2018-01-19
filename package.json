@@ -5,8 +5,8 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@daisy/jest-puppeteer": "^0.9.0",
     "@daisy/jest-env-puppeteer": "^0.9.0",
+    "@daisy/jest-puppeteer": "^0.9.0",
     "babel-core": "^6.0.0",
     "babel-jest": "^21.2.0",
     "babel-preset-env": "^1.6.0",
@@ -24,6 +24,7 @@
     "rimraf": "^2.6.1",
     "snyk": "^1.56.0",
     "standard-version": "^4.2.0",
+    "strip-ansi": "^4.0.0",
     "uglify-js": "^3.0.8",
     "watch": "^1.0.2"
   },
