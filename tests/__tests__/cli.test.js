@@ -71,6 +71,13 @@ describe('Running the CLI', () => {
       const log = stripAnsi(stdout);
       expect(/^warn:/m.test(log)).toBe(false);
     });
+    test('prints the "Done" info', () => {
+      const { stdout, stderr, status } = ace(['base-epub-30'], {
+        cwd: path.resolve(__dirname, '../data'),
+      });
+      const log = stripAnsi(stdout);
+      expect(/^info:\s+Done/m.test(log)).toBe(true);
+    });
   });
 
   describe('raises a warning', () => {

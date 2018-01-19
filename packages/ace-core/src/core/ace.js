@@ -60,7 +60,7 @@ module.exports = function ace(epubPath, options) {
     .then((report) => {
       if (options.outdir === undefined) {
         report.cleanData();
-        process.stdout.write(JSON.stringify(report.json, null, '  '));
+        process.stdout.write(`${JSON.stringify(report.json, null, '  ')}\n`);
         return report;
       }
       return report.copyData(options.outdir)
