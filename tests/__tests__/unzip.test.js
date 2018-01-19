@@ -33,7 +33,9 @@ function ace(epub, options = {}) {
       expect(fs.existsSync(reportPath)).toBeTruthy();
       return JSON.parse(fs.readFileSync(reportPath, 'utf8'));
     })
-    .catch(err => console.log(err));
+    .catch((err) => {
+      // console.log(err);
+    });
 }
 
 test('well-formed EPUB archive is processed', async () => {
