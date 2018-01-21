@@ -175,6 +175,7 @@ daisy.ace.run = function(done) {
         selector: '[*|type]',
         any: ['matching-aria-role'],
         metadata: {
+          help: "ARIA role should be used in addition to epub:type",
           description: "Ensure the element has an ARIA role matching its epub:type",
         },
         tags: ['best-practice']
