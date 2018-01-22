@@ -57,6 +57,7 @@ module.exports = function generateHtmlReport(reportData) {
         htmlStr += `<tr>
         <td><span class='${violation['impact']}'>${violation['impact']}</span></td>
         <td><span class='ruleset'>${rulesetTagLabels[violation['applicableRulesetTag']]}</span></td>
+        <td>${violation['rule']}<br/><br/><span class='engine'>${violation['engine']}</span></td>
         <td><em>\"${violation['fileTitle']}\"<br/><br/><code class='location'>${violation['location']}</code>`;
 
         if (violation.html) {
@@ -64,7 +65,7 @@ module.exports = function generateHtmlReport(reportData) {
         }
 
         htmlStr += "</td>";
-        htmlStr += `<td>${violation['rule']}<br/><br/><span class='engine'>${violation['engine']}</span></td>`;
+
 
         var desc = violation["desc"];
         desc = desc.replace("Fix all of the following:", "");
