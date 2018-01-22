@@ -178,7 +178,7 @@ function createFlatListOfViolations(violations) {
         "filetitle": filetitle,
         "engine": item["earl:assertedBy"],
         "kburl": item["earl:test"]["help"]["url"],
-        "kbtitle": item["earl:test"]["help"]["title"],
+        "kbtitle": item["earl:test"]["help"]["dct:title"],
         "rule": item["earl:test"]["dct:title"],
         "desc": escape(item["earl:result"]["dct:description"]),
         "pointer": item["earl:result"]["earl:pointer"],

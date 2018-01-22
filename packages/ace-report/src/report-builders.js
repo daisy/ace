@@ -216,7 +216,11 @@ class TestBuilder {
     return this;
   }
   withHelp(url, title, description) {
-    this._json.help = { url, title, description };
+    this._json.help = {
+      "url": url,
+      "dct:title": title,
+      "dct:description": description
+    };
     return this;
   }
   withRulesetTags(tags) {

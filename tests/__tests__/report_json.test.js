@@ -75,8 +75,8 @@ describe('check assertions', () => {
               'dct:description': expect.anything(),
               'help': {
                 'url': expect.anything(),
-                'title': expect.anything(),
-                'description': expect.anything(),
+                'dct:title': expect.anything(),
+                'dct:description': expect.anything(),
               }
             })
           }),

@@ -102,13 +102,13 @@ test('Checks that `epub:type` have matching ARIA roles', async() => {
   expect(assertions).toBeDefined();
   expect(assertions).toEqual(expect.arrayContaining([
     expect.objectContaining({
-      'earl:test': expect.objectContaining({ 
+      'earl:test': expect.objectContaining({
         'dct:title': 'epub-type-has-matching-role',
         'dct:description': 'Ensure the element has an ARIA role matching its epub:type',
         'help': {
           'url': 'http://kb.daisy.org/publishing/docs/html/roles.html',
-          'title': 'ARIA role',
-          'description': 'ARIA role should be used in addition to epub:type'
+          'dct:title': 'ARIA role',
+          'dct:description': 'ARIA role should be used in addition to epub:type'
         }
       }),
     }),
