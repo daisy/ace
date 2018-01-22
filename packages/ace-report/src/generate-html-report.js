@@ -88,7 +88,7 @@ module.exports = function generateHtmlReport(reportData) {
       return new handlebars.SafeString(htmlStr);
     });
 
-    const content = fs.readFileSync(path.join(__dirname, "./resources/report-template.handlebars")).toString();
+    const content = fs.readFileSync(path.join(__dirname, "./report-template.handlebars")).toString();
     var template = handlebars.compile(content);
     var result = template(reportData);
     resolve(result);
