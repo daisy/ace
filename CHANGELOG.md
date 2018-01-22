@@ -1,4 +1,21 @@
-<a name=""></a>
+<a name="1.0.0-RC.1"></a>
+## [1.0.0-RC.1](https://github.com/daisy/ace/compare/v0.9.0...v1.0.0-RC.1) (2018-01-22)
+
+
+### Bug Fixes
+
+* **core:** properly check Content Documents extensions ([8641c36](https://github.com/daisy/ace/commit/8641c36)), closes [#157](https://github.com/daisy/ace/issues/157)
+* **report:** correct table column ordering ([f93111f](https://github.com/daisy/ace/commit/f93111f))
+* **rules:** add help title and description to `epub-type-has-matching-role` ([a2506e4](https://github.com/daisy/ace/commit/a2506e4)), closes [#156](https://github.com/daisy/ace/issues/156)
+
+
+### Features
+
+* **data:** report the presence of SVG Content Documents ([659e189](https://github.com/daisy/ace/commit/659e189)), closes [#94](https://github.com/daisy/ace/issues/94)
+
+
+
+<a name="0.9.0"></a>
 ## [0.9.0](https://github.com/daisy/ace/compare/v0.8.0...v0.9.0) (2018-01-19)
 
 

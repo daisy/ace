@@ -1,6 +1,6 @@
 {
   "name": "ace-core",
-  "version": "0.9.0",
+  "version": "1.0.0-RC.1",
   "description": "Ace by DAISY, an Accessibility Checker for EPUB",
   "keywords": [
     "a11y",
@@ -32,9 +32,9 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-cli": "^0.9.0",
-    "@daisy/ace-core": "^0.9.0",
-    "@daisy/ace-http": "^0.9.0"
+    "@daisy/ace-cli": "^1.0.0-RC.1",
+    "@daisy/ace-core": "^1.0.0-RC.1",
+    "@daisy/ace-http": "^1.0.0-RC.1"
   },
   "publishConfig": {
     "access": "public"
