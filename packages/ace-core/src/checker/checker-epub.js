@@ -119,6 +119,7 @@ function check(epub, report) {
   report.addProperties({
     hasManifestFallbacks: epub.hasManifestFallbacks,
     hasBindings: epub.hasBindings,
+    hasSVGContentDocuments: epub.hasSVGContentDocuments,
   });
   
   winston.info(`- ${epub.packageDoc.src}: ${

@@ -94,6 +94,7 @@ describe('check properties', () => {
       hasMathML: false,
       hasPageBreaks: false,
       hasFormElements: false,
+      hasSVGContentDocuments: false,
     });
   });
 
@@ -129,6 +130,13 @@ describe('check properties', () => {
     const report = await ace(path.join(__dirname, '../data/feat-pagebreaks'));
     expect(report.properties).toMatchObject({
       hasPageBreaks: true,
+    });
+  });
+
+  test('with svg content docs', async () => {
+    const report = await ace(path.join(__dirname, '../data/feat-svg'));
+    expect(report.properties).toMatchObject({
+      hasSVGContentDocuments: true,
     });
   });
 });

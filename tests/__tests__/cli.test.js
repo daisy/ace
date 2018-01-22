@@ -88,6 +88,14 @@ describe('Running the CLI', () => {
       const log = stripAnsi(stdout);
       expect(/^warn:\s+Copying document with extension/m.test(log)).toBe(true);
     });
+
+    test('when the EPUB contains SVG Content Documents', () => {
+      const { stdout, stderr, status } = ace(['feat-svg'], {
+        cwd: path.resolve(__dirname, '../data'),
+      });
+      const log = stripAnsi(stdout);
+      expect(/^warn:\s+The SVG Content Documents in this EPUB will be ignored\./m.test(log)).toBe(true);
+    });
   });  
 
   /*test('with return-2-on-validation-error set to true should exit with return code 2', () => {

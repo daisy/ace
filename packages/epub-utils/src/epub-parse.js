@@ -136,14 +136,20 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
 
   const spineItemIdrefs = select('//opf:itemref/@idref', doc);
   spineItemIdrefs.forEach((idref) => {
-    const manifestItem = select(`//opf:item[@id='${idref.nodeValue}'][@media-type='${this.contentDocMediaType}']/@href`, doc);
+    const manifestItem = select(`//opf:item[@id='${idref.nodeValue}']`, doc);
     if (manifestItem.length > 0) {
-      var spineItem = new SpineItem();
-      spineItem.relpath = manifestItem[0].nodeValue;
-      spineItem.filepath = path.join(path.dirname(packageDocPath), spineItem.relpath);
-      spineItem.title = this.parseContentDocTitle(spineItem.filepath);
-      spineItem.url = "file://" + spineItem.filepath;
-      this.contentDocs.push(spineItem);
+      const contentType = (manifestItem[0].getAttribute('media-type')||'').trim();
+      if (this.contentDocMediaType === contentType) {
+        var spineItem = new SpineItem();
+        spineItem.relpath = manifestItem[0].getAttribute('href');
+        spineItem.filepath = path.join(path.dirname(packageDocPath), spineItem.relpath);
+        spineItem.title = this.parseContentDocTitle(spineItem.filepath);
+        spineItem.url = "file://" + spineItem.filepath;
+        this.contentDocs.push(spineItem);
+      } else if (!this.hasSVGContentDocuments && 'image/svg+xml' === contentType) {
+        winston.warn('The SVG Content Documents in this EPUB will be ignored.');
+        this.hasSVGContentDocuments = true;
+      }
     }
   });
 
