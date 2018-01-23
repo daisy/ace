@@ -18,6 +18,9 @@ The defaults for Ace configuration are:
 
 ```json
 {
+  "cli": {
+    "return-2-on-validation-error": false
+  },
   "logging": {
     "fileName": "ace.log",
     "level": "info"
@@ -33,6 +36,12 @@ The defaults for Ace configuration are:
 ```
 
 ## Reference
+
+### `cli.return-2-on-validation-error`
+
+Default: "`false`"
+
+Indicates whether the CLI should return with the error code `2` if any violations were found in the input publication.
 
 ### `logging.fileName`
 
