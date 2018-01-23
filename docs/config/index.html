@@ -328,6 +328,18 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
         
         
         <li>
+          <a href="#cli.return-2-on-validation-error">
+            cli.return-2-on-validation-error
+          </a>
+    
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
           <a href="#logging.filename">
             logging.fileName
           </a>
@@ -407,6 +419,9 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
 <p>The defaults for Ace configuration are:</p>
 
 <pre><code class="language-json">{
+  &quot;cli&quot;: {
+    &quot;return-2-on-validation-error&quot;: false
+  },
   &quot;logging&quot;: {
     &quot;fileName&quot;: &quot;ace.log&quot;,
     &quot;level&quot;: &quot;info&quot;
@@ -422,6 +437,12 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
 </code></pre>
 
 <h2 id="reference">Reference</h2>
+
+<h3 id="cli-return-2-on-validation-error"><code>cli.return-2-on-validation-error</code></h3>
+
+<p>Default: &ldquo;<code>false</code>&ldquo;</p>
+
+<p>Indicates whether the CLI should return with the error code <code>2</code> if any violations were found in the input publication.</p>
 
 <h3 id="logging-filename"><code>logging.fileName</code></h3>
 

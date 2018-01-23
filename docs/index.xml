@@ -61,8 +61,7 @@ Document structure Each example chunk of the report shown below appears in order
       <guid>https://daisy.github.io/ace/docs/config/</guid>
       <description>Overview Ace can be configured through a config.json file located in an OS-specific directory:
  on Windows in &amp;quot;%HOME%\AppData\Local\DAISY Ace\Config\&amp;quot; on macOS in &amp;quot;~/Library/Preferences/DAISY\ Ace/&amp;quot; on Linux in &amp;quot;~/.config/DAISY Ace/&amp;quot;  Defaults The defaults for Ace configuration are:
-{ &amp;quot;logging&amp;quot;: { &amp;quot;fileName&amp;quot;: &amp;quot;ace.log&amp;quot;, &amp;quot;level&amp;quot;: &amp;quot;info&amp;quot; }, &amp;quot;output&amp;quot;: { &amp;quot;force&amp;quot;: false, &amp;quot;subdir&amp;quot;: false } &amp;quot;runtime&amp;quot;: { &amp;quot;concurrencyLevel&amp;quot;: 4 } }  Reference logging.fileName Default: &amp;ldquo;info&amp;ldquo;
-The name of the file used by Ace to print a log of runtime messages.</description>
+{ &amp;quot;cli&amp;quot;: { &amp;quot;return-2-on-validation-error&amp;quot;: false }, &amp;quot;logging&amp;quot;: { &amp;quot;fileName&amp;quot;: &amp;quot;ace.log&amp;quot;, &amp;quot;level&amp;quot;: &amp;quot;info&amp;quot; }, &amp;quot;output&amp;quot;: { &amp;quot;force&amp;quot;: false, &amp;quot;subdir&amp;quot;: false } &amp;quot;runtime&amp;quot;: { &amp;quot;concurrencyLevel&amp;quot;: 4 } }  Reference cli.return-2-on-validation-error Default: &amp;ldquo;false&amp;ldquo;</description>
     </item>
     
     <item>
