@@ -152,7 +152,7 @@ function newJob(jobdata) {
   ace(jobdata.internal.epubPath, {'jobid': jobdata.internal.id, 'outdir': jobdata.internal.outputDir})
   .then((jobData) => {
     var jobId = jobData[0];
-    var idx = joblist.findIndex(job => job.internal.id === jobid);
+    var idx = joblist.findIndex(job => job.internal.id === jobId);
     winston.info("[ace-http] Job finished " + joblist[idx].internal.id);
     joblist[idx].public.status = JOBSTATUS.done;
     joblist[idx].public.report.zip = joblist[idx].public.job + "/report/?type=zip";
