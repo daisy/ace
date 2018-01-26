@@ -4,6 +4,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const tmp = require('tmp');
 const winston = require('winston');
+const os = require('os');
 
 const EPUB = require('@daisy/epub-utils').EPUB;
 const Report = require('@daisy/ace-report').Report;
@@ -17,6 +18,7 @@ module.exports = function ace(epubPath, options) {
     // so the calling function can track which job finished
     var jobId = 'jobid' in options ? options.jobid : '';
     winston.verbose("ACE", options);
+    winston.verbose(`Node ${process.version}, ${os.type()} v${os.release()}`);
 
     // Check that the EPUB exists
     const epubPathResolved = path.resolve(options.cwd, epubPath);
