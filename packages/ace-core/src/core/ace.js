@@ -5,6 +5,7 @@ const path = require('path');
 const tmp = require('tmp');
 const winston = require('winston');
 const os = require('os');
+const pkg = require('../../package');
 
 const EPUB = require('@daisy/epub-utils').EPUB;
 const Report = require('@daisy/ace-report').Report;
@@ -17,8 +18,8 @@ module.exports = function ace(epubPath, options) {
     // the jobid option just gets returned in the resolve/reject
     // so the calling function can track which job finished
     var jobId = 'jobid' in options ? options.jobid : '';
-    winston.verbose("ACE", options);
-    winston.verbose(`Node ${process.version}, ${os.type()} v${os.release()}`);
+    winston.verbose(`Ace ${pkg.version}, Node ${process.version}, ${os.type()} ${os.release()}`);
+    winston.verbose("Options:", options);
 
     // Check that the EPUB exists
     const epubPathResolved = path.resolve(options.cwd, epubPath);
