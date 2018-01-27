@@ -1,7 +1,6 @@
 +++
 title = "Logging"
 weight = 5
-wip = true
 +++
 
 ## Overview

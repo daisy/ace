@@ -11,43 +11,35 @@ The easiest way to run Ace is to type this on the command line:
 $ ace ~/Documents/book.epub
 ```
 
-You'll then see a decription of Ace's actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify [`--outdir`](#outdir) for that).
+You'll then see a description of Ace's actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify [`--outdir`](#outdir) for that).
 
 Example:
 ```
-info:    Processing /Users/marisa/dev/epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
+info:    Processing ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
 info:    Parsing EPUB
 info:    Analyzing accessibility metadata
 info:    Checking package...
+info:    - EPUB/package.opf: 4 issues found
 info:    Checking documents...
-info:    - xhtml/front.xhtml
-info:    - 0 issues found
-info:    - xhtml/nav.xhtml
-info:    - 1 issues found
-info:    - xhtml/image-desc.xhtml
-info:    - 4 issues found
-info:    - xhtml/table-structure.xhtml
-info:    - 2 issues found
-info:    - xhtml/heading-order-01.xhtml
-info:    - 0 issues found
-info:    - xhtml/heading-order-02.xhtml
-info:    - 0 issues found
-info:    - xhtml/heading-order-03.xhtml
-info:    - 0 issues found
-info:    - xhtml/color-contrast.xhtml
-info:    - 2 issues found
-info:    - xhtml/epub-type-and-aria.xhtml
-info:    - 3 issues found
-info:    - xhtml/out-of-spine-content.xhtml
-info:    - 2 issues found
+info:    - xhtml/front.xhtml: No issues found
+info:    - xhtml/nav.xhtml: 2 issues found
+info:    - xhtml/table-structure.xhtml: 2 issues found
+info:    - xhtml/image-desc.xhtml: 4 issues found
+info:    - xhtml/heading-order-01.xhtml: No issues found
+info:    - xhtml/heading-order-02.xhtml: No issues found
+info:    - xhtml/heading-order-03.xhtml: No issues found
+info:    - xhtml/color-contrast.xhtml: 2 issues found
+info:    - xhtml/epub-type-and-aria.xhtml: 5 issues found
+info:    - xhtml/out-of-spine-content.xhtml: 2 issues found
 info:    Consolidating results...
-info:    {
+{
   "@type": "earl:report",
-  "@context": "http://ace.daisy.org/ns/ace-report.jsonld",
-  "dct:title": "Ace Report",
-  ...
+  "@context": "http://daisy.github.io/ace/ace-report-1.0.jsonld",
+  "dct:title": "Ace Report",  ...
 info:   Done
 ```
+
+Ace will exit with a return code of `0` when complete, or `1` if there was an error that prevented Ace from successfully executing. Note that these return codes do not indicate whether there were violations found or not; you need to enable that feature in Ace's [configuration]({{< ref "config.md" >}}).
 
 ## Options
 Ace includes a simple set of options, detailed below.
@@ -92,7 +84,7 @@ Syntax: `--version` or `-v`
 Example:
 ```
 $ ace --version
-0.3.2
+1.0.0
 ```
 
 ### outdir
@@ -105,6 +97,13 @@ Example:
 
 ```
 $ ace --outdir results ~/Documents/book.epub
+info:    Processing ~/Documents/book.epub
+...
+info:    Consolidating results...
+info:    Copying data
+info:    Saving JSON report
+info:    Saving HTML report
+info:    Done.
 ```
 
 This will produce output in a `results` subdirectory of your current working directory. If that directory does not exist, it will be created.
@@ -113,7 +112,7 @@ _Note: If you do not specify an `--outdir` option, Ace outputs the JSON version 
 
 ### tempdir
 
-Specify a custom path to save temporary reports to.
+Specify a custom path to save temporary files in.
 
 Syntax: `--tempdir` or `-t`, followed by the path
 
@@ -123,7 +122,7 @@ Example:
 $ ace --tempdir acetemp ~/Documents/book.epub
 ```
 
-This will produce output in a `acetemp` subdirectory of your current working directory. If that directory does not exist, it will be created.
+This will store temporary files in a `acetemp` subdirectory of your current working directory. If the subdirectory does not exist, it will be created.
 
 ### force
 
@@ -136,14 +135,13 @@ If the output directory is not empty, and you do not specify `--force`, Ace will
 ```
 warn:    Output directory is not empty.
 
-Running Ace would override the following files or directories:
+  Running Ace would override the following files or directories:
 
-  - /Users/marisa/dev/out/report.json
-  - /Users/marisa/dev/out/report.html
-  - /Users/marisa/dev/out/data
-  - /Users/marisa/dev/out/js
+  - ../results/report.json
+  - ../results/report.html
+  - ../results/data
 
-Use option --force to override.
+  Use option --force to override.
 ```
 
 ### subdir
@@ -158,26 +156,25 @@ Example:
 $ ace --subdir --outdir results ~/Documents/my-book.epub
 ```
 
-This creates a subdirectory named `my-book` within `results`.
+This creates as the output directory a subdirectory named `my-book` within `results`.
 
 ### verbose
 
-Output more detail when running Ace. This option is useful to use before sending a bug report as it tells us which version you're running.
+Output more detail when running Ace. This option is useful to use before sending a bug report as it tells us which version of Ace you're running, as well as your OS and Node versions.
 
 Syntax: `--verbose` or `-V`
 
 Example:
 ```
-$ ace --verbose ~/Documents/book.epub
+$ ace --verbose ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
 
-verbose: ACE cwd=/Users/marisa/dev/ace, outdir=/Users/marisa/dev/out/epub-a11y-tests-001, tmpdir=undefined, verbose=true, silent=false, jobId=
-info:    Processing /Users/marisa/dev/epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
+verbose: Ace 1.0.0, Node v9.4.0, Darwin 17.3.0
+verbose: Options: cwd=/Users/marisa/dev/ace, outdir=undefined, tmpdir=undefined, verbose=true, silent=false, jobId=
+info:    Processing ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
 verbose: Extracting EPUB
 info:    Parsing EPUB
-verbose: at location '/var/folders/x0/tvbr6tz54js_7q7gvg9s2g240000gn/T/tmp-42912vXel2GvQJ2Q6'
+verbose: at location '/var/folders/x0/tvbr6tz54js_7q7gvg9s2g240000gn/T/tmp-55388YEqs0mEKHq3x'
 info:    Analyzing accessibility metadata
-debug:    dc:identifier=com.github.epub-a11y-checker.epub-a11y-tests-001, dc:description=Samples for EPUB Accessibility Testing, dc:title=EPUB-A11Y-TESTS-001, dc:creator=[Marisa DeMeglio, Romain Deltour], dc:language=en, dcterms:modified=2017-02-21T13:00:00Z
-
 ```
 
 Note that running Ace with `--verbose` enabled also creates verbose output in the log file.
