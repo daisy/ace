@@ -1,12 +1,7 @@
 +++
 title = "Implementation notes"
 weight = 3
-wip = true
 +++
-
-## Design principles
-
-TBD.
 
 ## HTML checker
 
