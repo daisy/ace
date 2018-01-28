@@ -1,6 +1,6 @@
 {
   "name": "@daisy/epub-utils",
-  "version": "1.0.0-RC.1",
+  "version": "1.0.0",
   "description": "EPUB parser and model, used by Ace",
   "author": {
     "name": "DAISY developers",

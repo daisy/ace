@@ -1,3 +1,16 @@
+<a name="1.0.0"></a>
+## [1.0.0](https://github.com/daisy/ace/compare/v1.0.0-RC.1...v1.0.0) (2018-01-29)
+
+
+### Bug Fixes
+
+* **http-api:** fix a bug causing a job status to not be updated ([5247750](https://github.com/daisy/ace/commit/5247750))
+
+### Features
+
+* **logging:** verbose output includes Ace, NodeJS and OS versions ([229d4d1](https://github.com/daisy/ace/commit/229d4d1))
+
+
 <a name="1.0.0-RC.1"></a>
 ## [1.0.0-RC.1](https://github.com/daisy/ace/compare/v0.9.0...v1.0.0-RC.1) (2018-01-22)
 
