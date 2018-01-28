@@ -1,6 +1,6 @@
-# Ace, by DAISY
+# `ace-http`
 
-**WARNING** this is the legacy main package for Ace. It has been deprecated in favor of `@daisy/ace`.
+The HTTP API for Ace.
 
 ## What is Ace?
 

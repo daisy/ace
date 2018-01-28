@@ -1,6 +1,6 @@
-# Ace, by DAISY
+# `epub-utils`
 
-**WARNING** this is the legacy main package for Ace. It has been deprecated in favor of `@daisy/ace`.
+EPUB utilities, used in Ace, by DAISY.
 
 ## What is Ace?
 

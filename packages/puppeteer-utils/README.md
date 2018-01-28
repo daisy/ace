@@ -1,6 +1,6 @@
-# Ace, by DAISY
+# `puppeteer-utils`
 
-**WARNING** this is the legacy main package for Ace. It has been deprecated in favor of `@daisy/ace`.
+Utilities for Google’s [Puppeteer](https://github.com/GoogleChrome/puppeteer). Used in Ace, by DAISY.
 
 ## What is Ace?
 

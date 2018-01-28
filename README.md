@@ -1,8 +1,8 @@
 # Ace, by DAISY
 
-[![Version](https://img.shields.io/npm/v/ace-core.svg)](https://www.npmjs.com/package/ace-core)
-[![License](https://img.shields.io/npm/l/ace-core.svg)](LICENSE)
-[![Downloads](https://img.shields.io/npm/dt/ace-core.svg)](https://www.npmjs.com/package/ace-core)  
+[![Version](https://img.shields.io/npm/v/@daisy/ace.svg)](https://www.npmjs.com/package/@daisy/ace)
+[![License](https://img.shields.io/npm/l/@daisy/ace.svg)](LICENSE)
+[![Downloads](https://img.shields.io/npm/dm/@daisy/ace.svg)](https://www.npmjs.com/package/@daisy/ace)  
 [![Travis CI](https://img.shields.io/travis/daisy/ace.svg)](https://travis-ci.org/daisy/ace)
 [![Open Bugs](https://img.shields.io/github/issues-raw/daisy/ace/bug.svg)](https://github.com/daisy/ace/issues)
 [![Dependencies Status](https://img.shields.io/david/daisy/ace.svg)](https://david-dm.org/daisy/ace)
@@ -31,5 +31,5 @@ A detailed getting started guide is also available on [InclusivePublishing.org](
 
 User and developer documentation is available on [Ace’s web site](https://daisy.github.io/ace).
 
-You can also review the current work plan by looking at the [current milestones](https://github.com/daisy/ace-core/milestones) defined in the issue tracker.
+You can also review the current work plan by looking at the [current milestones](https://github.com/daisy/ace/milestones) defined in the issue tracker.
 

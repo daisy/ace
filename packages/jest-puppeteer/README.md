@@ -1,6 +1,6 @@
-# Ace, by DAISY
+# `jest-puppeteer`
 
-**WARNING** this is the legacy main package for Ace. It has been deprecated in favor of `@daisy/ace`.
+Utilities for running [Jest](http://github.com/facebook/jest) tests in headless Chromium driven by Google’s [Puppeteer](https://github.com/GoogleChrome/puppeteer). Used by tests in Ace, by DAISY.
 
 ## What is Ace?
 

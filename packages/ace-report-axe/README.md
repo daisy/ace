@@ -1,6 +1,6 @@
-# Ace, by DAISY
+# `ace-report-axe`
 
-**WARNING** this is the legacy main package for Ace. It has been deprecated in favor of `@daisy/ace`.
+[aXe](https://github.com/dequelabs/axe-core)-specific reporting utilities for Ace.
 
 ## What is Ace?
 
