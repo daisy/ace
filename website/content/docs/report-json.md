@@ -1,6 +1,6 @@
 +++
 title = "JSON Report"
-weight = 4
+weight = 3
 +++
 
 Ace's outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of [EARL](https://www.w3.org/TR/EARL10-Schema/) (Evaluation and Reporting Language), Dublin Core, and custom terms.
@@ -178,7 +178,8 @@ An example of an assertion for an individual test is shown below. Note that it i
     "dct:description": "Ensures all elements with a role attribute use a valid value",
     "help": {
       "url": "http://kb.daisy.org/publishing/docs/script/aria.html",
-      "title": "ARIA"
+      "dct:title": "ARIA",
+      "dct:description": "ARIA roles used must conform to valid values"
     }
   },
   "earl:result": {

@@ -28,6 +28,6 @@ If the specified directory does not exist, it will be created. In this example, 
 * `report.json`: A machine-readable version of the report, in JSON format
 * `report.html`: A human-readable version of the report, in HTML format.
 
-To learn more, please read the [reference documentation]({{% relref "docs/cli.md" %}}).
+To learn more, please read the [reference documentation]({{< relref "docs/cli.md" >}}).
 
 A more detailed step-by-step guide is also available on [InclusivePublishing.org](http://inclusivepublishing.org/ace).

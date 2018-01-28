@@ -1,11 +1,11 @@
 +++
 title = "Http API"
-weight = 2
+weight = 6
 +++
 
 ## Starting the server
 
-After [installing Ace]({{< ref "../getting-started/installation.md" >}}), run the `ace-http` command from the terminal:
+After [installing Ace]({{< relref "getting-started/installation.md" >}}), run the `ace-http` command from the terminal:
 ```
 $ ace-http
 info:    [ace-http] server listening on http://localhost:8000

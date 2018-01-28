@@ -35,11 +35,13 @@ info:    Consolidating results...
 {
   "@type": "earl:report",
   "@context": "http://daisy.github.io/ace/ace-report-1.0.jsonld",
-  "dct:title": "Ace Report",  ...
+  "dct:title": "Ace Report",  
+  ...
+}
 info:   Done
 ```
 
-Ace will exit with a return code of `0` when complete, or `1` if there was an error that prevented Ace from successfully executing. Note that these return codes do not indicate whether there were violations found or not; you need to enable that feature in Ace's [configuration]({{< ref "config.md" >}}).
+Ace will exit with a return code of `0` when complete, or `1` if there was an error that prevented Ace from successfully executing. Note that these return codes do not indicate whether there were violations in the publication; for that, you need to first edit Ace's [configuration]({{< ref "config.md" >}}).
 
 ## Options
 Ace includes a simple set of options, detailed below.
@@ -106,7 +108,7 @@ info:    Saving HTML report
 info:    Done.
 ```
 
-This will produce output in a `results` subdirectory of your current working directory. If that directory does not exist, it will be created.
+This will produce output in a `results` subdirectory of your current working directory instead of printing the JSON report to the command line. If the specified directory does not exist, it will be created.
 
 _Note: If you do not specify an `--outdir` option, Ace outputs the JSON version of the report on the command line and saves nothing to disk._
 

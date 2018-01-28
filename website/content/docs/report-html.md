@@ -1,18 +1,13 @@
 +++
 title = "HTML Report"
-weight = 3
+weight = 2
 +++
 
 Ace outputs a human-readable report in HTML format, containing information about which automated tests failed, as well as extracted data visualizations, to highlight potential problem areas and to assist in manual checking.
 
 Note that the report looks best with javascript enabled, though it's not required.
 
-After the header, which contains the Ace version, report date, and publication title, there are four sections:
-
-* [Violations](#violations)
-* [Metadata](#metadata)
-* [Outlines](#outlines)
-* [Images](#images)
+After the header, which contains the Ace version, report date, and publication title, there are four sections, detailed below.
 
 ## Violations
 

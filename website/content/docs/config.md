@@ -1,6 +1,6 @@
 +++
 title = "Configuration"
-weight = 5
+weight = 4
 +++
 
 ## Overview
@@ -36,7 +36,6 @@ The defaults for Ace configuration are:
   }
 }
 ```
-
 ## Reference
 
 ### `cli.return-2-on-validation-error`
