@@ -39,7 +39,7 @@
   </url>
   
   <url>
-    <loc>https://daisy.github.io/ace/docs/http-api/</loc>
+    <loc>https://daisy.github.io/ace/docs/report-html/</loc>
   </url>
   
   <url>
@@ -51,11 +51,11 @@
   </url>
   
   <url>
-    <loc>https://daisy.github.io/ace/docs/report-html/</loc>
+    <loc>https://daisy.github.io/ace/contributing/notes/</loc>
   </url>
   
   <url>
-    <loc>https://daisy.github.io/ace/contributing/notes/</loc>
+    <loc>https://daisy.github.io/ace/docs/report-json/</loc>
   </url>
   
   <url>
@@ -67,15 +67,11 @@
   </url>
   
   <url>
-    <loc>https://daisy.github.io/ace/contributing/</loc>
-  </url>
-  
-  <url>
-    <loc>https://daisy.github.io/ace/docs/report-json/</loc>
-  </url>
-  
-  <url>
     <loc>https://daisy.github.io/ace/docs/config/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/contributing/</loc>
   </url>
   
   <url>
@@ -84,6 +80,10 @@
   
   <url>
     <loc>https://daisy.github.io/ace/help/</loc>
+  </url>
+  
+  <url>
+    <loc>https://daisy.github.io/ace/docs/http-api/</loc>
   </url>
   
   <url>

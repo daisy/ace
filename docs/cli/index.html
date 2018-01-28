@@ -106,10 +106,12 @@
       <header class="intro-and-nav" role="banner">
         <div>
           <div class="intro">
-            
+            <a class="logo" href="/" aria-label="Ace, by DAISY home page">
+              <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
+            </a>
             <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB!<br />
 A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project.
-Latest version: v1.0.0-RC.1 (release candidate)</p>
+Latest version: v1.0.0</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -159,12 +161,6 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
                       </li>
                     
                       <li class="page">
-                        <a href="/ace/docs/http-api/" >
-                          <span class="text">Http API</span>
-                        </a>
-                      </li>
-                    
-                      <li class="page">
                         <a href="/ace/docs/report-html/" >
                           <span class="text">HTML Report</span>
                         </a>
@@ -185,6 +181,12 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
                       <li class="page">
                         <a href="/ace/docs/logging/" >
                           <span class="text">Logging</span>
+                        </a>
+                      </li>
+                    
+                      <li class="page">
+                        <a href="/ace/docs/http-api/" >
+                          <span class="text">Http API</span>
                         </a>
                       </li>
                     
@@ -413,43 +415,37 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
 <pre><code>$ ace ~/Documents/book.epub
 </code></pre>
 
-<p>You&rsquo;ll then see a decription of Ace&rsquo;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify <a href="#outdir"><code>--outdir</code></a> for that).</p>
+<p>You&rsquo;ll then see a description of Ace&rsquo;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify <a href="#outdir"><code>--outdir</code></a> for that).</p>
 
 <p>Example:</p>
 
-<pre><code>info:    Processing /Users/marisa/dev/epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
+<pre><code>info:    Processing ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
 info:    Parsing EPUB
 info:    Analyzing accessibility metadata
 info:    Checking package...
+info:    - EPUB/package.opf: 4 issues found
 info:    Checking documents...
-info:    - xhtml/front.xhtml
-info:    - 0 issues found
-info:    - xhtml/nav.xhtml
-info:    - 1 issues found
-info:    - xhtml/image-desc.xhtml
-info:    - 4 issues found
-info:    - xhtml/table-structure.xhtml
-info:    - 2 issues found
-info:    - xhtml/heading-order-01.xhtml
-info:    - 0 issues found
-info:    - xhtml/heading-order-02.xhtml
-info:    - 0 issues found
-info:    - xhtml/heading-order-03.xhtml
-info:    - 0 issues found
-info:    - xhtml/color-contrast.xhtml
-info:    - 2 issues found
-info:    - xhtml/epub-type-and-aria.xhtml
-info:    - 3 issues found
-info:    - xhtml/out-of-spine-content.xhtml
-info:    - 2 issues found
+info:    - xhtml/front.xhtml: No issues found
+info:    - xhtml/nav.xhtml: 2 issues found
+info:    - xhtml/table-structure.xhtml: 2 issues found
+info:    - xhtml/image-desc.xhtml: 4 issues found
+info:    - xhtml/heading-order-01.xhtml: No issues found
+info:    - xhtml/heading-order-02.xhtml: No issues found
+info:    - xhtml/heading-order-03.xhtml: No issues found
+info:    - xhtml/color-contrast.xhtml: 2 issues found
+info:    - xhtml/epub-type-and-aria.xhtml: 5 issues found
+info:    - xhtml/out-of-spine-content.xhtml: 2 issues found
 info:    Consolidating results...
-info:    {
+{
   &quot;@type&quot;: &quot;earl:report&quot;,
-  &quot;@context&quot;: &quot;http://ace.daisy.org/ns/ace-report.jsonld&quot;,
-  &quot;dct:title&quot;: &quot;Ace Report&quot;,
+  &quot;@context&quot;: &quot;http://daisy.github.io/ace/ace-report-1.0.jsonld&quot;,
+  &quot;dct:title&quot;: &quot;Ace Report&quot;,  
   ...
+}
 info:   Done
 </code></pre>
+
+<p>Ace will exit with a return code of <code>0</code> when complete, or <code>1</code> if there was an error that prevented Ace from successfully executing. Note that these return codes do not indicate whether there were violations in the publication; for that, you need to first edit Ace&rsquo;s <a href="https://daisy.github.io/ace/docs/config/">configuration</a>.</p>
 
 <h2 id="options">Options</h2>
 
@@ -495,7 +491,7 @@ Ace by DAISY, an Accessibility Checker for EPUB
 <p>Example:</p>
 
 <pre><code>$ ace --version
-0.3.2
+1.0.0
 </code></pre>
 
 <h3 id="outdir">outdir</h3>
@@ -507,15 +503,22 @@ Ace by DAISY, an Accessibility Checker for EPUB
 <p>Example:</p>
 
 <pre><code>$ ace --outdir results ~/Documents/book.epub
+info:    Processing ~/Documents/book.epub
+...
+info:    Consolidating results...
+info:    Copying data
+info:    Saving JSON report
+info:    Saving HTML report
+info:    Done.
 </code></pre>
 
-<p>This will produce output in a <code>results</code> subdirectory of your current working directory. If that directory does not exist, it will be created.</p>
+<p>This will produce output in a <code>results</code> subdirectory of your current working directory instead of printing the JSON report to the command line. If the specified directory does not exist, it will be created.</p>
 
 <p><em>Note: If you do not specify an <code>--outdir</code> option, Ace outputs the JSON version of the report on the command line and saves nothing to disk.</em></p>
 
 <h3 id="tempdir">tempdir</h3>
 
-<p>Specify a custom path to save temporary reports to.</p>
+<p>Specify a custom path to save temporary files in.</p>
 
 <p>Syntax: <code>--tempdir</code> or <code>-t</code>, followed by the path</p>
 
@@ -524,7 +527,7 @@ Ace by DAISY, an Accessibility Checker for EPUB
 <pre><code>$ ace --tempdir acetemp ~/Documents/book.epub
 </code></pre>
 
-<p>This will produce output in a <code>acetemp</code> subdirectory of your current working directory. If that directory does not exist, it will be created.</p>
+<p>This will store temporary files in a <code>acetemp</code> subdirectory of your current working directory. If the subdirectory does not exist, it will be created.</p>
 
 <h3 id="force">force</h3>
 
@@ -536,14 +539,13 @@ Ace by DAISY, an Accessibility Checker for EPUB
 
 <pre><code>warn:    Output directory is not empty.
 
-Running Ace would override the following files or directories:
+  Running Ace would override the following files or directories:
 
-  - /Users/marisa/dev/out/report.json
-  - /Users/marisa/dev/out/report.html
-  - /Users/marisa/dev/out/data
-  - /Users/marisa/dev/out/js
+  - ../results/report.json
+  - ../results/report.html
+  - ../results/data
 
-Use option --force to override.
+  Use option --force to override.
 </code></pre>
 
 <h3 id="subdir">subdir</h3>
@@ -557,26 +559,25 @@ Use option --force to override.
 <pre><code>$ ace --subdir --outdir results ~/Documents/my-book.epub
 </code></pre>
 
-<p>This creates a subdirectory named <code>my-book</code> within <code>results</code>.</p>
+<p>This creates as the output directory a subdirectory named <code>my-book</code> within <code>results</code>.</p>
 
 <h3 id="verbose">verbose</h3>
 
-<p>Output more detail when running Ace. This option is useful to use before sending a bug report as it tells us which version you&rsquo;re running.</p>
+<p>Output more detail when running Ace. This option is useful to use before sending a bug report as it tells us which version of Ace you&rsquo;re running, as well as your OS and Node versions.</p>
 
 <p>Syntax: <code>--verbose</code> or <code>-V</code></p>
 
 <p>Example:</p>
 
-<pre><code>$ ace --verbose ~/Documents/book.epub
+<pre><code>$ ace --verbose ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
 
-verbose: ACE cwd=/Users/marisa/dev/ace, outdir=/Users/marisa/dev/out/epub-a11y-tests-001, tmpdir=undefined, verbose=true, silent=false, jobId=
-info:    Processing /Users/marisa/dev/epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
+verbose: Ace 1.0.0, Node v9.4.0, Darwin 17.3.0
+verbose: Options: cwd=/Users/marisa/dev/ace, outdir=undefined, tmpdir=undefined, verbose=true, silent=false, jobId=
+info:    Processing ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
 verbose: Extracting EPUB
 info:    Parsing EPUB
-verbose: at location '/var/folders/x0/tvbr6tz54js_7q7gvg9s2g240000gn/T/tmp-42912vXel2GvQJ2Q6'
+verbose: at location '/var/folders/x0/tvbr6tz54js_7q7gvg9s2g240000gn/T/tmp-55388YEqs0mEKHq3x'
 info:    Analyzing accessibility metadata
-debug:    dc:identifier=com.github.epub-a11y-checker.epub-a11y-tests-001, dc:description=Samples for EPUB Accessibility Testing, dc:title=EPUB-A11Y-TESTS-001, dc:creator=[Marisa DeMeglio, Romain Deltour], dc:language=en, dcterms:modified=2017-02-21T13:00:00Z
-
 </code></pre>
 
 <p>Note that running Ace with <code>--verbose</code> enabled also creates verbose output in the log file.</p>
@@ -601,7 +602,7 @@ $
   <p>© DAISY Consortium.
     <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons Attribution">Some rights reserved</a>.</p>
   <p>Ace is part of the <a href="http://inclusivepublishing.org/ace">Inclusive Publishing</a> initiative.</p>
-  <p>Theme adapted from <a href="https://thepaciellogroup.github.io/infusion/">Infusion</a>.</p>
+  <p>Theme adapted from <a href="https://thepaciellogroup.github.io/cupper/">Cupper</a>.</p>
 </footer>
 
         </div>

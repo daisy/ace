@@ -17,19 +17,9 @@
       
       <guid>https://daisy.github.io/ace/docs/cli/</guid>
       <description>Overview The easiest way to run Ace is to type this on the command line:
-$ ace ~/Documents/book.epub  You&amp;rsquo;ll then see a decription of Ace&amp;rsquo;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify --outdir for that).
+$ ace ~/Documents/book.epub  You&amp;rsquo;ll then see a description of Ace&amp;rsquo;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify --outdir for that).
 Example:
-info: Processing /Users/marisa/dev/epub-a11y-checker/samples/build/epub-a11y-tests-001.epub info: Parsing EPUB info: Analyzing accessibility metadata info: Checking package.</description>
-    </item>
-    
-    <item>
-      <title>Http API</title>
-      <link>https://daisy.github.io/ace/docs/http-api/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://daisy.github.io/ace/docs/http-api/</guid>
-      <description>Starting the server After installing Ace, run the ace-http command from the terminal. There are a few options listed below.
-Ace by DAISY, an Accessibility Checker for EPUB Usage: ace-http [options] Options: -h, --help output usage information -v, --version output the version number -H, --host set the server&#39;s hostname (default: localhost) -p, --port set the server&#39;s port (default: 8000) -V, --verbose display verbose output -s, --silent do not display any output Examples $ ace-http -p 3000  API This API is available to client applications.</description>
+info: Processing ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub info: Parsing EPUB info: Analyzing accessibility metadata info: Checking package.</description>
     </item>
     
     <item>
@@ -38,8 +28,10 @@ Ace by DAISY, an Accessibility Checker for EPUB Usage: ace-http [options] Option
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/docs/report-html/</guid>
-      <description>Ace&amp;rsquo;s outputs a human-readable report in HTML format, detailing the automated tests. You can see which tests failed and why; and also see extracted data, such as a list of images, along with accessibility information for each, to highlight potential problem areas and to assist in manual checking.
-The header Includes the version of Ace, the report date, and some basic metadata extracted from the book, for identifying the publication.</description>
+      <description>Ace outputs a human-readable report in HTML format, containing information about which automated tests failed, as well as extracted data visualizations, to highlight potential problem areas and to assist in manual checking.
+Note that the report looks best with javascript enabled, though it&amp;rsquo;s not required.
+After the header, which contains the Ace version, report date, and publication title, there are four sections, detailed below.
+Violations Summary of Violations This table lists statistics for the violations, in terms of severity: Critical, Serious, Moderate, or Minor; and by ruleset category: WCAG 2.</description>
     </item>
     
     <item>
@@ -48,9 +40,9 @@ The header Includes the version of Ace, the report date, and some basic metadata
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/docs/report-json/</guid>
-      <description>Ace&amp;rsquo;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of EARL (Evaluation and Reporting Language), basic Dublin Core terms, and custom fields.
-Document structure Each example chunk of the report shown below appears in order, in one JSON file.
- Header information Outlines Image list Iframes list Properties earl:testSubject for this EPUB file Accessibility metadata summary Assertions  Header information { &amp;quot;@type&amp;quot;: &amp;quot;earl:report&amp;quot;, &amp;quot;dct:title&amp;quot;: &amp;quot;Ace Report&amp;quot;, &amp;quot;dct:description&amp;quot;: &amp;quot;Report on automated accessibility checks for EPUB&amp;quot;, &amp;quot;dct:date&amp;quot;: &amp;quot;10/8/2017, 1:08:03 PM&amp;quot;, &amp;quot;earl:assertedBy&amp;quot;: { &amp;quot;@type&amp;quot;: &amp;quot;earl:software&amp;quot;, &amp;quot;doap:name&amp;quot;: &amp;quot;DAISY Ace&amp;quot;, &amp;quot;doap:description&amp;quot;: &amp;quot;DAISY Accessibility Checker for EPUB&amp;quot;, &amp;quot;doap:homepage&amp;quot;: &amp;quot;http://ace.</description>
+      <description>Ace&amp;rsquo;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of EARL (Evaluation and Reporting Language), Dublin Core, and custom terms.
+Document structure Each example piece of the report shown below appears in order, in one JSON file.
+ Header information Outlines Image list Iframes list Properties earl:testSubject for this EPUB file Accessibility metadata summary Assertions  Header information This gives basic information about Ace and when the report was created.</description>
     </item>
     
     <item>
@@ -61,7 +53,7 @@ Document structure Each example chunk of the report shown below appears in order
       <guid>https://daisy.github.io/ace/docs/config/</guid>
       <description>Overview Ace can be configured through a config.json file located in an OS-specific directory:
  on Windows in &amp;quot;%HOME%\AppData\Local\DAISY Ace\Config\&amp;quot; on macOS in &amp;quot;~/Library/Preferences/DAISY\ Ace/&amp;quot; on Linux in &amp;quot;~/.config/DAISY Ace/&amp;quot;  Defaults The defaults for Ace configuration are:
-{ &amp;quot;cli&amp;quot;: { &amp;quot;return-2-on-validation-error&amp;quot;: false }, &amp;quot;logging&amp;quot;: { &amp;quot;fileName&amp;quot;: &amp;quot;ace.log&amp;quot;, &amp;quot;level&amp;quot;: &amp;quot;info&amp;quot; }, &amp;quot;output&amp;quot;: { &amp;quot;force&amp;quot;: false, &amp;quot;subdir&amp;quot;: false } &amp;quot;runtime&amp;quot;: { &amp;quot;concurrencyLevel&amp;quot;: 4 } }  Reference cli.return-2-on-validation-error Default: &amp;ldquo;false&amp;ldquo;</description>
+{ &amp;quot;cli&amp;quot;: { &amp;quot;return-2-on-validation-error&amp;quot;: false }, &amp;quot;logging&amp;quot;: { &amp;quot;fileName&amp;quot;: &amp;quot;ace.log&amp;quot;, &amp;quot;level&amp;quot;: &amp;quot;info&amp;quot; }, &amp;quot;output&amp;quot;: { &amp;quot;force&amp;quot;: false, &amp;quot;subdir&amp;quot;: false }, &amp;quot;runtime&amp;quot;: { &amp;quot;concurrencyLevel&amp;quot;: 4 }, &amp;quot;report&amp;quot;: { &amp;quot;use-relative-paths&amp;quot;: true } }  Reference cli.</description>
     </item>
     
     <item>
@@ -72,6 +64,17 @@ Document structure Each example chunk of the report shown below appears in order
       <guid>https://daisy.github.io/ace/docs/logging/</guid>
       <description>Overview Ace prints a log of messages in a ace.log file located in an OS-specific directory:
  on Windows in &amp;quot;%HOME%\AppData\Local\DAISY Ace\Log\&amp;quot; on macOS in &amp;quot;~/Library/Logs/DAISY\ Ace/&amp;quot; on Linux in &amp;quot;~/.local/state/DAISY Ace/&amp;quot;  Configuration The logging level and the name of the log file can be configured through Ace’s config file. Read more on Ace configuration to know more.</description>
+    </item>
+    
+    <item>
+      <title>Http API</title>
+      <link>https://daisy.github.io/ace/docs/http-api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/docs/http-api/</guid>
+      <description>Starting the server After installing Ace, run the ace-http command from the terminal:
+$ ace-http info: [ace-http] server listening on http://localhost:8000  The command line options are printed when you run ace-http --help:
+Ace by DAISY, an Accessibility Checker for EPUB Usage: ace-http [options] Options: -h, --help output usage information -v, --version output the version number -H, --host set the server&#39;s hostname (default: localhost) -p, --port set the server&#39;s port (default: 8000) -V, --verbose display verbose output -s, --silent do not display any output Examples $ ace-http -p 3000  API This API is available to client applications.</description>
     </item>
     
   </channel>

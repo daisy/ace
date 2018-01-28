@@ -16,8 +16,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/rules/html/</guid>
-      <description>Under the hood, most of the accessibility checks ran by Ace are powered by aXe, an engine for automated testing of HTML.
-Refer to aXe’s documentation to see the complete of rules it runs.</description>
+      <description>Under the hood, most of the accessibility checks ran by Ace are powered by aXe, an engine for automated testing of HTML. Ace uses aXe&amp;rsquo;s rules, with some modifications (described here).
+Rules Here is a list of aXe&amp;rsquo;s rules used by Ace, taken from their documentation:
+   Rule Description     accesskeys Ensures every accesskey attribute value is unique.   area-alt Ensures &amp;lt;area&amp;gt; elements of image maps have alternate text.</description>
     </item>
     
     <item>
@@ -26,9 +27,8 @@ Refer to aXe’s documentation to see the complete of rules it runs.</descriptio
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/rules/epub/</guid>
-      <description>Publication title Checks that the EPUB’s title is defined in the Package Document.
-Accessibility metadata Checks that schema.org accessibility metadata is defined in the Package Document.
-Page break source When content has page breaks, checks that the print source is identified in metadata with dc:source.</description>
+      <description>In addition to the HTML rules, Ace has a set of rules that are EPUB-specific:
+   Rule Description     epub-pagesource Ensures that if the content has page breaks, the print source is identified in the Package Document metadata with dc:source.   epub-title Ensures that the EPUB’s title is defined in the Package Document.   epub-type-has-matching-role Ensures that the element has an ARIA role matching its epub:type.</description>
     </item>
     
   </channel>

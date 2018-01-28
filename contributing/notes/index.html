@@ -106,10 +106,12 @@
       <header class="intro-and-nav" role="banner">
         <div>
           <div class="intro">
-            
+            <a class="logo" href="/" aria-label="Ace, by DAISY home page">
+              <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
+            </a>
             <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB!<br />
 A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project.
-Latest version: v1.0.0-RC.1 (release candidate)</p>
+Latest version: v1.0.0</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -159,12 +161,6 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
                       </li>
                     
                       <li class="page">
-                        <a href="/ace/docs/http-api/" >
-                          <span class="text">Http API</span>
-                        </a>
-                      </li>
-                    
-                      <li class="page">
                         <a href="/ace/docs/report-html/" >
                           <span class="text">HTML Report</span>
                         </a>
@@ -185,6 +181,12 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
                       <li class="page">
                         <a href="/ace/docs/logging/" >
                           <span class="text">Logging</span>
+                        </a>
+                      </li>
+                    
+                      <li class="page">
+                        <a href="/ace/docs/http-api/" >
+                          <span class="text">Http API</span>
                         </a>
                       </li>
                     
@@ -265,16 +267,6 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
   <main id="main">
     <h1>Implementation notes</h1>
     
-      <aside aria-label="warning" class="note warning">
-  <div>
-    <svg class="sign" aria-hidden="true" viewBox="0 0 48.430474 41.646302" focusable="false">
-      <use xlink:href="#warning"></use>
-    </svg>
-    This page is a work in progress!
-  </div>
-</aside>
-
-    
     
       
 
@@ -289,18 +281,6 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
         
         <ol>
         
-        
-        
-        <li>
-          <a href="#design-principles">
-            Design principles
-          </a>
-    
-      
-      
-        
-        
-        </li>
         
         
         <li>
@@ -330,10 +310,6 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
     
     
 
-<h2 id="design-principles">Design principles</h2>
-
-<p>TBD.</p>
-
 <h2 id="html-checker">HTML checker</h2>
 
 <p>Under the hood, most of the HTML checks are powered by <a href="https://github.com/dequelabs/axe-core">aXe</a>, an engine for automated testing of HTML from <a href="https://www.deque.com/">Deque Systems</a>.</p>
@@ -348,7 +324,7 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
   <p>© DAISY Consortium.
     <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons Attribution">Some rights reserved</a>.</p>
   <p>Ace is part of the <a href="http://inclusivepublishing.org/ace">Inclusive Publishing</a> initiative.</p>
-  <p>Theme adapted from <a href="https://thepaciellogroup.github.io/infusion/">Infusion</a>.</p>
+  <p>Theme adapted from <a href="https://thepaciellogroup.github.io/cupper/">Cupper</a>.</p>
 </footer>
 
         </div>

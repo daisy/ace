@@ -106,10 +106,12 @@
       <header class="intro-and-nav" role="banner">
         <div>
           <div class="intro">
-            
+            <a class="logo" href="/" aria-label="Ace, by DAISY home page">
+              <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
+            </a>
             <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB!<br />
 A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project.
-Latest version: v1.0.0-RC.1 (release candidate)</p>
+Latest version: v1.0.0</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -159,12 +161,6 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
                       </li>
                     
                       <li class="page">
-                        <a href="/ace/docs/http-api/" >
-                          <span class="text">Http API</span>
-                        </a>
-                      </li>
-                    
-                      <li class="page">
                         <a href="/ace/docs/report-html/" >
                           <span class="text">HTML Report</span>
                         </a>
@@ -185,6 +181,12 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
                       <li class="page">
                         <a href="/ace/docs/logging/" >
                           <span class="text">Logging</span>
+                        </a>
+                      </li>
+                    
+                      <li class="page">
+                        <a href="/ace/docs/http-api/" >
+                          <span class="text">Http API</span>
                         </a>
                       </li>
                     
@@ -264,16 +266,6 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
           
   <main id="main">
     <h1>How to contribute?</h1>
-    
-      <aside aria-label="warning" class="note warning">
-  <div>
-    <svg class="sign" aria-hidden="true" viewBox="0 0 48.430474 41.646302" focusable="false">
-      <use xlink:href="#warning"></use>
-    </svg>
-    This page is a work in progress!
-  </div>
-</aside>
-
     
     
       
@@ -368,18 +360,22 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
     
     
 
-<p>First, welcome to Ace and thank you so much for willing to contribute!</p>
+<p>First, welcome to Ace and thank you so much for being willing to contribute!</p>
 
 <h2 id="submitting-an-issue">Submitting an issue</h2>
 
-<p>Feel free to  file issues on our <a href="https://github.com/daisy/ace/issues">GitHub issue tracker</a>.</p>
+<p>You can first check the <a href="https://github.com/daisy/ace/issues">issue tracker</a> to see if someone already reported the issue. Don’t forget to included the closed issues in your search in case we fixed it already!</p>
+
+<p>If you can’t find any mention of your issue in our tracker, please <a href="https://github.com/daisy/ace/issues/new">file a new issue</a>!</p>
 
 <p>When filing an issue, please provide the following details:</p>
 
 <ul>
 <li>the version of Ace impacted by the issue (it can be retrieved by running <code>ace -v</code> in a command shell).</li>
 <li>the version of Node used to run Ace (it can be retrieved by running <code>node -v</code> in a command shell).</li>
-<li>if possible, provide the error details as produced in the error log</li>
+<li>your operating system and version</li>
+<li>if possible, provide the error details as produced in the <a href="/ace/docs/logging/">logfile</a>. Run Ace with the <code>--verbose</code> option to produce a detailed log.</li>
+<li>if you are having trouble with the HTML report produced by Ace, please specify the browser(s) and version(s) where you notice the issue</li>
 </ul>
 
 <h2 id="contributing-code">Contributing code</h2>
@@ -404,7 +400,7 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
 
 <h3 id="commit-guidelines">Commit guidelines</h3>
 
-<p>We follow a commit message convention (adapted from <a href="https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#">Angular’s convention</a>), which allows us to keep a readable history and automatically generate change logs.</p>
+<p>We follow a commit message convention (adapted from <a href="https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits">Angular’s convention</a>), which allows us to keep a readable history and automatically generate change logs.</p>
 
 <p>Each commit message should consist of a simple header, a body, and an optional footer, each separated with a blank line. The header is a single line consisting of a <em>type</em>, an optional <em>scope</em>, and a <em>subject</em>.</p>
 
@@ -436,7 +432,7 @@ Closes #21
   <p>© DAISY Consortium.
     <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons Attribution">Some rights reserved</a>.</p>
   <p>Ace is part of the <a href="http://inclusivepublishing.org/ace">Inclusive Publishing</a> initiative.</p>
-  <p>Theme adapted from <a href="https://thepaciellogroup.github.io/infusion/">Infusion</a>.</p>
+  <p>Theme adapted from <a href="https://thepaciellogroup.github.io/cupper/">Cupper</a>.</p>
 </footer>
 
         </div>

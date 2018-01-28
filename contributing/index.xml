@@ -16,10 +16,10 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/contributing/contributing/</guid>
-      <description>First, welcome to Ace and thank you so much for willing to contribute!
-Submitting an issue Feel free to file issues on our GitHub issue tracker.
-When filing an issue, please provide the following details:
- the version of Ace impacted by the issue (it can be retrieved by running ace -v in a command shell). the version of Node used to run Ace (it can be retrieved by running node -v in a command shell).</description>
+      <description>First, welcome to Ace and thank you so much for being willing to contribute!
+Submitting an issue You can first check the issue tracker to see if someone already reported the issue. Don’t forget to included the closed issues in your search in case we fixed it already!
+If you can’t find any mention of your issue in our tracker, please file a new issue!
+When filing an issue, please provide the following details:</description>
     </item>
     
     <item>
@@ -28,8 +28,8 @@ When filing an issue, please provide the following details:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/contributing/code/</guid>
-      <description>Ace consists of the following components:
- core: the core checker’s logic, and the code responsible for running the underlying Web checker cli: the command line interface epub: utils for parsing EPUBs http: the Http API report: utils for building Ace’s reports scripts: the Javascript files injected in the headless browser to run Ace’s checks  </description>
+      <description>Ace consists of the following packages:
+ ace-cli: the command line interface ace-config: unifies the per-package configuration files into a global config file ace-core: the core checker’s logic, and the code responsible for running the underlying Web checker ace-core/scripts: the Javascript files injected in the headless browser to run Ace’s checks ace-http: the Http API ace-logger: logging ace-report and ace-report-axe: utils for building Ace’s reports epub-utils: utils for parsing EPUBs jest-env-puppeteer, jest-puppeteer, and puppeteer-utils: for working with the headless browser  </description>
     </item>
     
     <item>
@@ -38,8 +38,7 @@ When filing an issue, please provide the following details:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/contributing/notes/</guid>
-      <description>Design principles TBD.
-HTML checker Under the hood, most of the HTML checks are powered by aXe, an engine for automated testing of HTML from Deque Systems.
+      <description>HTML checker Under the hood, most of the HTML checks are powered by aXe, an engine for automated testing of HTML from Deque Systems.
 Headless browser During the evaluation of an EPUB, Ace loads each HTML content document in a headless browser, using headless Chrome via Puppeteer.</description>
     </item>
     

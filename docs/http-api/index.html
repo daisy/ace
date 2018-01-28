@@ -106,10 +106,12 @@
       <header class="intro-and-nav" role="banner">
         <div>
           <div class="intro">
-            
+            <a class="logo" href="/" aria-label="Ace, by DAISY home page">
+              <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
+            </a>
             <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB!<br />
 A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project.
-Latest version: v1.0.0-RC.1 (release candidate)</p>
+Latest version: v1.0.0</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -159,12 +161,6 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
                       </li>
                     
                       <li class="page">
-                        <a href="/ace/docs/http-api/" aria-current="page">
-                          <span class="text">Http API</span>
-                        </a>
-                      </li>
-                    
-                      <li class="page">
                         <a href="/ace/docs/report-html/" >
                           <span class="text">HTML Report</span>
                         </a>
@@ -185,6 +181,12 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
                       <li class="page">
                         <a href="/ace/docs/logging/" >
                           <span class="text">Logging</span>
+                        </a>
+                      </li>
+                    
+                      <li class="page">
+                        <a href="/ace/docs/http-api/" aria-current="page">
+                          <span class="text">Http API</span>
                         </a>
                       </li>
                     
@@ -412,7 +414,13 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
 
 <h2 id="starting-the-server">Starting the server</h2>
 
-<p>After installing Ace, run the <code>ace-http</code> command from the terminal. There are a few options listed below.</p>
+<p>After <a href="/ace/getting-started/installation/">installing Ace</a>, run the <code>ace-http</code> command from the terminal:</p>
+
+<pre><code>$ ace-http
+info:    [ace-http] server listening on http://localhost:8000
+</code></pre>
+
+<p>The command line options are printed when you run <code>ace-http --help</code>:</p>
 
 <pre><code>Ace by DAISY, an Accessibility Checker for EPUB
 
@@ -438,25 +446,27 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
 <p>This API is available to client applications.</p>
 
 <ul>
-<li><code>GET /jobs/</code>: list all the jobs</li>
-<li><code>GET /job/:jobid/</code>: return information about a job</li>
+<li><code>GET  /jobs/</code>: list all the jobs</li>
+<li><code>GET  /job/:jobid/</code>: return information about a job</li>
 <li><code>POST /jobs/</code>: attach an EPUB file to run Ace</li>
-<li><code>GET /job/:jobid/report/?type=[zip|json]</code>: return a zipfile containing the report</li>
+<li><code>GET  /job/:jobid/report/?type=[zip|json]</code>: return a zipfile containing the report</li>
 </ul>
 
-<p>Note that failing to specify <code>type</code> of report will return the default format (which, at the moment, is <code>zip</code>)</p>
+<p>Note that failing to specify <code>type</code> of report will return the default format (<code>zip</code>).</p>
 
 <h3 id="job-status-codes">Job status codes</h3>
 
 <ul>
 <li><code>1</code>: Processing. The job has been submitted and is being executed.</li>
 <li><code>0</code>: Done. The job is done and the reports are ready.</li>
-<li><code>-1</code>: Error. The job could not be completed. This is different than the file having accessibility errors. The file could not be evaluated.</li>
+<li><code>-1</code>: Error. The job could not be completed. This is different than the file having accessibility errors. It means the file could not be evaluated.</li>
 </ul>
 
 <h3 id="job-information">Job information</h3>
 
-<pre><code>  {
+<p>This is returned by calling <code>GET /job/:jobid/</code> with the ID of a job.</p>
+
+<pre><code class="language-json">  {
     job: URL for the job information
     status: A job status code
     report: {
@@ -492,11 +502,9 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
 
 ~ ❯❯❯ unzip ~/out.zip
 Archive:  /Users/marisa/out.zip
-  inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/report.json
   inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/data/EPUB/images/daisy.png
-  inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/js/ace-report-viewer.js
-  inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/js/aceReportData.js
   inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/report.html
+  inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/report.json
 </code></pre>
 
 <h3 id="get-only-the-json-report">Get only the JSON report</h3>
@@ -506,13 +514,13 @@ Archive:  /Users/marisa/out.zip
                                  Dload  Upload   Total   Spent    Left  Speed
 100 24972  100 24972    0     0  3482k      0 --:--:-- --:--:-- --:--:-- 4064k
 ~ ❯❯❯ tail ~/out.json
-{&quot;@type&quot;:&quot;earl:report&quot;,&quot;@context&quot;:&quot;http://ace.daisy.org/ns/ace-report.jsonld&quot;,
+{&quot;@type&quot;:&quot;earl:report&quot;,&quot;@context&quot;:&quot;http://daisy.github.io/ace/ace-report-1.0.jsonld&quot;,&quot;dct:title&quot;:&quot;Ace Report&quot;,
 ...
 </code></pre>
 
 <h3 id="list-all-the-jobs">List all the jobs</h3>
 
-<p>(after adding several jobs)</p>
+<p>(after having added several jobs)</p>
 
 <pre><code>~ ❯❯❯ curl http://localhost:8000/jobs/
 [{&quot;job&quot;:&quot;http://localhost:8000/jobs/8198e049-2e81-4be8-b889-ace01978dabc&quot;,&quot;status&quot;:-1,&quot;report&quot;:{}},{&quot;job&quot;:&quot;http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1&quot;,&quot;status&quot;:0,&quot;report&quot;:{&quot;zip&quot;:&quot;http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1/report/?type=zip&quot;,&quot;json&quot;:&quot;http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1/report/?type=json&quot;}},{&quot;job&quot;:&quot;http://localhost:8000/jobs/107df1e7-deff-436f-811e-2a8473b20237&quot;,&quot;status&quot;:0,&quot;report&quot;:{&quot;zip&quot;:&quot;http://localhost:8000/jobs/107df1e7-deff-436f-811e-2a8473b20237/report/?type=zip&quot;,&quot;json&quot;:&quot;http://localhost:8000/jobs/107df1e7-deff-436f-811e-2a8473b20237/report/?type=json&quot;}},{&quot;job&quot;:&quot;http://localhost:8000/jobs/d62bb7c7-4eea-4f0b-bd73-b45f28630ebe&quot;,&quot;status&quot;:0,&quot;report&quot;:{&quot;zip&quot;:&quot;http://localhost:8000/jobs/d62bb7c7-4eea-4f0b-bd73-b45f28630ebe/report/?type=zip&quot;,&quot;json&quot;:&quot;http://localhost:8000/jobs/d62bb7c7-4eea-4f0b-bd73-b45f28630ebe/report/?type=json&quot;}},{&quot;job&quot;:&quot;http://localhost:8000/jobs/4363a917-c422-486f-98c0-bd98cc423fc0&quot;,&quot;status&quot;:0,&quot;report&quot;:{&quot;zip&quot;:&quot;http://localhost:8000/jobs/4363a917-c422-486f-98c0-bd98cc423fc0/report/?type=zip&quot;,&quot;json&quot;:&quot;http://localhost:8000/jobs/4363a917-c422-486f-98c0-bd98cc423fc0/report/?type=json&quot;}}]%
@@ -524,7 +532,7 @@ Archive:  /Users/marisa/out.zip
   <p>© DAISY Consortium.
     <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons Attribution">Some rights reserved</a>.</p>
   <p>Ace is part of the <a href="http://inclusivepublishing.org/ace">Inclusive Publishing</a> initiative.</p>
-  <p>Theme adapted from <a href="https://thepaciellogroup.github.io/infusion/">Infusion</a>.</p>
+  <p>Theme adapted from <a href="https://thepaciellogroup.github.io/cupper/">Cupper</a>.</p>
 </footer>
 
         </div>

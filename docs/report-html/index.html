@@ -106,10 +106,12 @@
       <header class="intro-and-nav" role="banner">
         <div>
           <div class="intro">
-            
+            <a class="logo" href="/" aria-label="Ace, by DAISY home page">
+              <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
+            </a>
             <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB!<br />
 A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project.
-Latest version: v1.0.0-RC.1 (release candidate)</p>
+Latest version: v1.0.0</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -159,12 +161,6 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
                       </li>
                     
                       <li class="page">
-                        <a href="/ace/docs/http-api/" >
-                          <span class="text">Http API</span>
-                        </a>
-                      </li>
-                    
-                      <li class="page">
                         <a href="/ace/docs/report-html/" aria-current="page">
                           <span class="text">HTML Report</span>
                         </a>
@@ -185,6 +181,12 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
                       <li class="page">
                         <a href="/ace/docs/logging/" >
                           <span class="text">Logging</span>
+                        </a>
+                      </li>
+                    
+                      <li class="page">
+                        <a href="/ace/docs/http-api/" >
+                          <span class="text">Http API</span>
                         </a>
                       </li>
                     
@@ -265,16 +267,6 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
   <main id="main">
     <h1>HTML Report</h1>
     
-      <aside aria-label="warning" class="note warning">
-  <div>
-    <svg class="sign" aria-hidden="true" viewBox="0 0 48.430474 41.646302" focusable="false">
-      <use xlink:href="#warning"></use>
-    </svg>
-    This page is a work in progress!
-  </div>
-</aside>
-
-    
     
       
 
@@ -292,8 +284,20 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
         
         
         <li>
-          <a href="#the-header">
-            The header
+          <a href="#violations">
+            Violations
+          </a>
+    
+      
+      
+        
+        <ol>
+        
+        
+        
+        <li>
+          <a href="#summary-of-violations">
+            Summary of Violations
           </a>
     
       
@@ -304,8 +308,36 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
         
         
         <li>
-          <a href="#violations-table">
-            Violations table
+          <a href="#all-violations">
+            All violations
+          </a>
+    
+      
+      
+        
+        
+        
+        
+        </li></ol>
+        
+        </li></ol>
+        
+        
+        <li>
+          <a href="#metadata">
+            Metadata
+          </a>
+    
+      
+      
+        
+        <ol>
+        
+        
+        
+        <li>
+          <a href="#all-metadata">
+            All Metadata
           </a>
     
       
@@ -313,23 +345,27 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
         
         
         </li>
+        
+        
+        <li>
+          <a href="#accessibility-metadata">
+            Accessibility Metadata
+          </a>
+    
+      
+      
+        
+        
+        
+        
+        </li></ol>
+        
+        </li></ol>
         
         
         <li>
           <a href="#outlines">
             Outlines
-          </a>
-    
-      
-      
-        
-        
-        </li>
-        
-        
-        <li>
-          <a href="#accessibility-metadata-summary">
-            Accessibility metadata summary
           </a>
     
       
@@ -354,38 +390,51 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
     
     
 
-<p>Ace&rsquo;s outputs a human-readable report in HTML format, detailing the automated tests. You can see which tests failed and why; and also see extracted data, such as a list of images, along with accessibility information for each, to highlight potential problem areas and to assist in manual checking.</p>
+<p>Ace outputs a human-readable report in HTML format, containing information about which automated tests failed, as well as extracted data visualizations, to highlight potential problem areas and to assist in manual checking.</p>
 
-<h2 id="the-header">The header</h2>
+<p>Note that the report looks best with javascript enabled, though it&rsquo;s not required.</p>
 
-<p>Includes the version of Ace, the report date, and some basic metadata extracted from the book, for identifying the publication.</p>
+<p>After the header, which contains the Ace version, report date, and publication title, there are four sections, detailed below.</p>
 
-<h2 id="violations-table">Violations table</h2>
+<h2 id="violations">Violations</h2>
 
-<p>The report contains a table listing the violations found in the EPUB. The table columns are:</p>
+<h3 id="summary-of-violations">Summary of Violations</h3>
+
+<p>This table lists statistics for the violations, in terms of severity: Critical, Serious, Moderate, or Minor; and by ruleset category: WCAG 2.0 A, WCAG 2.0 AA, EPUB, Best Practice, or Other. It&rsquo;s useful for getting a quick overview of the violations.</p>
+
+<h3 id="all-violations">All violations</h3>
+
+<p>This table details each violation and provides information about:</p>
 
 <ul>
 <li><code>Impact</code>: the severity of the violation</li>
-<li><code>Rule</code>: identifier for the rule that was violated</li>
-<li><code>Location</code>: where in the book the violation occurred</li>
+<li><code>Ruleset</code>: the category that this rule is in</li>
+<li><code>Rule</code>: identifier for the rule, as well as the underlying engine that checks for it (e.g. <em>aXe</em> or <em>Ace</em>)</li>
+<li><code>Location</code>: where in the book the violation occurred, as well as an HTML code snippet of the relevant portion.</li>
 <li><code>Details</code>: suggestions on how to fix the problem, as well as a link to the relevant topic page in our online knowledge base.</li>
 </ul>
 
-<p>There is a set of drop-down filters at the top of the table where you can refine by Impact, File, and Rule.</p>
+<p>If javascript is enabled, there is a set of drop-down filters at the top of the table where you can refine by different properties, for example, to see all violations found in a particular file. Additionally, the table is searchable and sortable.</p>
+
+<h2 id="metadata">Metadata</h2>
+
+<h3 id="all-metadata">All Metadata</h3>
+
+<p>All package document metadata is listed in this table, which is searchable and sortable (requires javascript).</p>
+
+<h3 id="accessibility-metadata">Accessibility Metadata</h3>
+
+<p>This section lists accessibility metadata, describing what&rsquo;s present in the publication, and which properties are missing.</p>
 
 <h2 id="outlines">Outlines</h2>
 
-<p>The outlines are intended to assist with manual checking. They represent extracted views of different aspects of the EPUB. The outlines are:</p>
+<p>The outlines are intended to assist with manual checking. They represent extracted views of different structural aspects of the publication. The outlines are:</p>
 
 <ul>
 <li><strong>Table of contents</strong>, taken from the EPUB navigation document</li>
 <li><strong>Headings</strong>, including indications of missing heading levels (i.e. going from <code>h1</code> to <code>h3</code> with no <code>h2</code> in between)</li>
 <li><strong>HTML</strong>, which is a view of just the heading content and sectioning content</li>
 </ul>
-
-<h2 id="accessibility-metadata-summary">Accessibility metadata summary</h2>
-
-<p>This section lists both present accessibility metadata, summarized in a table, as well as a list of what&rsquo;s missing or empty.</p>
 
 <h2 id="images">Images</h2>
 
@@ -397,7 +446,10 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
 <li><code>aria-describedby</code>: the contents of the element referenced by the <code>aria-describedby</code> attribute</li>
 <li><code>Associated figcaption</code>: the <code>figcaption</code> for this image</li>
 <li><code>Location</code>: location in the EPUB of this image</li>
+<li><code>Role</code>: the image&rsquo;s <code>role</code> attribute value(s)</li>
 </ul>
+
+<p>Please refer to the <a href="http://kb.daisy.org/publishing/docs/html/images.html">images topic</a> in the Accessible Publishing Knowledge Base for guidance on image accessibility techniques and examples.</p>
 
   </main>
 
@@ -405,7 +457,7 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
   <p>© DAISY Consortium.
     <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons Attribution">Some rights reserved</a>.</p>
   <p>Ace is part of the <a href="http://inclusivepublishing.org/ace">Inclusive Publishing</a> initiative.</p>
-  <p>Theme adapted from <a href="https://thepaciellogroup.github.io/infusion/">Infusion</a>.</p>
+  <p>Theme adapted from <a href="https://thepaciellogroup.github.io/cupper/">Cupper</a>.</p>
 </footer>
 
         </div>

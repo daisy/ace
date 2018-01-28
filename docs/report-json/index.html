@@ -106,10 +106,12 @@
       <header class="intro-and-nav" role="banner">
         <div>
           <div class="intro">
-            
+            <a class="logo" href="/" aria-label="Ace, by DAISY home page">
+              <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
+            </a>
             <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB!<br />
 A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project.
-Latest version: v1.0.0-RC.1 (release candidate)</p>
+Latest version: v1.0.0</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -159,12 +161,6 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
                       </li>
                     
                       <li class="page">
-                        <a href="/ace/docs/http-api/" >
-                          <span class="text">Http API</span>
-                        </a>
-                      </li>
-                    
-                      <li class="page">
                         <a href="/ace/docs/report-html/" >
                           <span class="text">HTML Report</span>
                         </a>
@@ -185,6 +181,12 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
                       <li class="page">
                         <a href="/ace/docs/logging/" >
                           <span class="text">Logging</span>
+                        </a>
+                      </li>
+                    
+                      <li class="page">
+                        <a href="/ace/docs/http-api/" >
+                          <span class="text">Http API</span>
                         </a>
                       </li>
                     
@@ -265,16 +267,6 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
   <main id="main">
     <h1>JSON Report</h1>
     
-      <aside aria-label="warning" class="note warning">
-  <div>
-    <svg class="sign" aria-hidden="true" viewBox="0 0 48.430474 41.646302" focusable="false">
-      <use xlink:href="#warning"></use>
-    </svg>
-    This page is a work in progress!
-  </div>
-</aside>
-
-    
     
       
 
@@ -328,20 +320,8 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
         
         
         <li>
-          <a href="#image-list">
-            Image list
-          </a>
-    
-      
-      
-        
-        
-        </li>
-        
-        
-        <li>
-          <a href="#iframes-list">
-            Iframes list
+          <a href="#data">
+            Data
           </a>
     
       
@@ -444,11 +424,11 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
     
     
 
-<p>Ace&rsquo;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of <a href="https://www.w3.org/TR/EARL10-Schema/">EARL</a> (Evaluation and Reporting Language), basic Dublin Core terms, and custom fields.</p>
+<p>Ace&rsquo;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of <a href="https://www.w3.org/TR/EARL10-Schema/">EARL</a> (Evaluation and Reporting Language), Dublin Core, and custom terms.</p>
 
 <h2 id="document-structure">Document structure</h2>
 
-<p>Each example chunk of the report shown below appears in order, in one JSON file.</p>
+<p>Each example piece of the report shown below appears in order, in one JSON file.</p>
 
 <ul>
 <li><a href="#header-information">Header information</a></li>
@@ -463,11 +443,14 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
 
 <h3 id="header-information">Header information</h3>
 
+<p>This gives basic information about Ace and when the report was created.</p>
+
 <pre><code>{
   &quot;@type&quot;: &quot;earl:report&quot;,
+  &quot;@context&quot;: &quot;http://daisy.github.io/ace/ace-report-1.0.jsonld&quot;,
   &quot;dct:title&quot;: &quot;Ace Report&quot;,
   &quot;dct:description&quot;: &quot;Report on automated accessibility checks for EPUB&quot;,
-  &quot;dct:date&quot;: &quot;10/8/2017, 1:08:03 PM&quot;,
+  &quot;dct:date&quot;: &quot;1/26/2018, 4:29:25 PM&quot;,
   &quot;earl:assertedBy&quot;: {
     &quot;@type&quot;: &quot;earl:software&quot;,
     &quot;doap:name&quot;: &quot;DAISY Ace&quot;,
@@ -475,12 +458,14 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
     &quot;doap:homepage&quot;: &quot;http://ace.daisy.org&quot;,
     &quot;doap:created&quot;: &quot;2017-07-01&quot;,
     &quot;doap:release&quot;: {
-      &quot;doap:revision&quot;: &quot;0.3.2&quot;
+      &quot;doap:revision&quot;: &quot;1.0.0&quot;
     }
   },
 </code></pre>
 
 <h3 id="outlines">Outlines</h3>
+
+<p>This is the structural data that Ace extracts.</p>
 
 <pre><code>  &quot;outlines&quot;: {
     &quot;toc&quot;: // HTML fragment representing an extracted view of the table of contents
@@ -491,36 +476,40 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
   },
 </code></pre>
 
-<h3 id="image-list">Image list</h3>
+<h3 id="data">Data</h3>
+
+<p>The fields under <code>data</code> contain extracted <code>images</code>, <code>audios</code>, <code>canvases</code>, <code>embeds</code>, <code>epub-triggers</code>, <code>epub-switches</code>, <code>iframes</code>, <code>maps</code>, <code>scripts</code>, and <code>videos</code>. The example here shows information about the publication&rsquo;s <code>images</code> and <code>iframes</code>:</p>
 
 <pre><code>  &quot;data&quot;: {
     &quot;images&quot;: [
       {
-        &quot;alt&quot;: &quot;The DAISY Consortium&quot;,
-        &quot;html&quot;: &quot;&lt;img xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot; src=\&quot;../images/daisy.png\&quot; alt=\&quot;The DAISY Consortium\&quot; /&gt;&quot;,
-        &quot;role&quot;: null,
         &quot;src&quot;: &quot;EPUB/images/daisy.png&quot;,
-        &quot;location&quot;: &quot;xhtml/image-desc.xhtml#epubcfi(/4/4/4)&quot;
+        &quot;alt&quot;: &quot;DAISY Consortium&quot;,
+        &quot;role&quot;: &quot;presentation&quot;,
+        &quot;html&quot;: &quot;&lt;img xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot; src=\&quot;../images/daisy.png\&quot; alt=\&quot;DAISY Consortium\&quot; role=\&quot;presentation\&quot; /&gt;&quot;,
+        &quot;location&quot;: &quot;xhtml/image-desc.xhtml#epubcfi(/4/18/4/2)&quot;
       },
       ...
     ],
-</code></pre>
-
-<h3 id="iframes-list">Iframes list</h3>
-
-<pre><code>    &quot;iframes&quot;: [
+    &quot;iframes&quot;: [
       {
         &quot;src&quot;: &quot;EPUB/xhtml/out-of-spine-content-embed-01.xhtml&quot;,
-        &quot;path&quot;: &quot;/var/folders/x0/tvbr6tz54js_7q7gvg9s2g240000gn/T/tmp-53884sdqiaos75Cgw/EPUB/xhtml/out-of-spine-content-embed-01.xhtml&quot;,
         &quot;location&quot;: &quot;xhtml/out-of-spine-content.xhtml#epubcfi(/4/6/6)&quot;
       },
+      ...
     ]
   },
 </code></pre>
 
 <h3 id="properties">Properties</h3>
 
+<p>These publication-wide properties describe different aspects of the EPUB as being present or absent.</p>
+
 <pre><code>  &quot;properties&quot;: {
+    &quot;hasManifestFallbacks&quot;: false,
+    &quot;hasBindings&quot;: false,
+    &quot;hasSVGContentDocuments&quot;: false,
+    &quot;hasFormElements&quot;: false,
     &quot;hasMathML&quot;: false,
     &quot;hasPageBreaks&quot;: false
   },
@@ -528,25 +517,28 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
 
 <h3 id="earl-testsubject-for-this-epub-file">earl:testSubject for this EPUB file</h3>
 
-<p>This just formally states that the test subject of this report is <code>epub-a11y-tests-001.epub</code>.</p>
+<p>This formally states that the test subject of this report is the given publication, and includes some basic metadata.</p>
 
-<pre><code>  &quot;earl:testSubject&quot;: {
-    &quot;url&quot;: &quot;/Users/marisa/dev/epub-a11y-checker/samples/build/epub-a11y-tests-001.epub&quot;,
-    &quot;metadata&quot;: {
-      &quot;dc:identifier&quot;: &quot;com.github.epub-a11y-checker.epub-a11y-tests-001&quot;,
-      &quot;dc:description&quot;: &quot;Samples for EPUB Accessibility Testing&quot;,
-      &quot;dc:title&quot;: &quot;EPUB-A11Y-TESTS-001&quot;,
-      &quot;dc:creator&quot;: [
-        &quot;Marisa DeMeglio&quot;,
-        &quot;Romain Deltour&quot;
-      ],
-      &quot;dc:language&quot;: &quot;en&quot;,
-      &quot;dcterms:modified&quot;: &quot;2017-02-21T13:00:00Z&quot;
-    }
+<pre><code>&quot;earl:testSubject&quot;: {
+  &quot;url&quot;: &quot;../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub&quot;,
+  &quot;metadata&quot;: {
+    &quot;dc:identifier&quot;: &quot;com.github.epub-a11y-checker.epub-a11y-tests-001&quot;,
+    &quot;dc:description&quot;: &quot;Samples for EPUB Accessibility Testing&quot;,
+    &quot;dc:title&quot;: &quot;EPUB-A11Y-TESTS-001&quot;,
+    &quot;dc:creator&quot;: [
+      &quot;Marisa DeMeglio&quot;,
+      &quot;Romain Deltour&quot;
+    ],
+    &quot;dc:language&quot;: &quot;en&quot;,
+    &quot;dcterms:modified&quot;: &quot;2017-02-21T13:00:00Z&quot;
   },
+  &quot;links&quot;: {}
+},
 </code></pre>
 
 <h3 id="accessibility-metadata-summary">Accessibility metadata summary</h3>
+
+<p>The accessibility metadata properties are organized by whether they are <code>missing</code>, <code>empty</code> (blank), or <code>present</code> in the publication.</p>
 
 <pre><code>  &quot;a11y-metadata&quot;: {
     &quot;missing&quot;: [
@@ -566,7 +558,7 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
 
 <h3 id="assertions">Assertions</h3>
 
-<p>The <code>assertions</code> section of the report, found as a top-level term, contains a list of <code>earl:assertion</code> items, each for a different document in the EPUB. Those assertion items, in turn, contain assertions for tests that failed</p>
+<p>The <code>assertions</code> section of the report, found as a top-level term, contains a list of <code>earl:assertion</code> items, each for a different document in the EPUB. Those assertion items, in turn, contain assertions for tests that failed.</p>
 
 <h4 id="document-level-assertions">Document-level assertions</h4>
 
@@ -592,7 +584,7 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
 
 <h4 id="test-level-assertions">Test-level assertions</h4>
 
-<p>An example of an assertion for an individual test is shown below. Note that it includes a location reference, a test description, and suggestions for remedying the issue.</p>
+<p>An example of an assertion for an individual test is shown below. Note that it includes a location reference, a test description, and suggestions for remedying the issue (including a link to the relevant section of the <a href="http://kb.daisy.org/publishing">Accessible Publishing Knowledge Base</a>).</p>
 
 <pre><code>{
   &quot;@type&quot;: &quot;earl:assertion&quot;,
@@ -604,7 +596,8 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
     &quot;dct:description&quot;: &quot;Ensures all elements with a role attribute use a valid value&quot;,
     &quot;help&quot;: {
       &quot;url&quot;: &quot;http://kb.daisy.org/publishing/docs/script/aria.html&quot;,
-      &quot;title&quot;: &quot;ARIA&quot;
+      &quot;dct:title&quot;: &quot;ARIA&quot;,
+      &quot;dct:description&quot;: &quot;ARIA roles used must conform to valid values&quot;
     }
   },
   &quot;earl:result&quot;: {
@@ -626,7 +619,7 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
 
 <ul>
 <li>Ace does not report assertions for tests that passed</li>
-<li>The very last <code>earl:result</code> in the report is often for the entire EPUB, though this depends on how the JSON data is serialized.</li>
+<li>Paths in this report are relative or absolute as specified in Ace&rsquo;s <a href="https://daisy.github.io/ace/docs/config/">configuration</a>.</li>
 </ul>
 
   </main>
@@ -635,7 +628,7 @@ Latest version: v1.0.0-RC.1 (release candidate)</p>
   <p>© DAISY Consortium.
     <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons Attribution">Some rights reserved</a>.</p>
   <p>Ace is part of the <a href="http://inclusivepublishing.org/ace">Inclusive Publishing</a> initiative.</p>
-  <p>Theme adapted from <a href="https://thepaciellogroup.github.io/infusion/">Infusion</a>.</p>
+  <p>Theme adapted from <a href="https://thepaciellogroup.github.io/cupper/">Cupper</a>.</p>
 </footer>
 
         </div>
