@@ -5,7 +5,7 @@ weight = 1
 
 ## Ace fails with "Unexpected error"
 
-Erm… you probably just hit a bug in Ace. Follow the [guidelines for submitting an issue]({{<relref "contributing/contributing.md#submitting-an-issue">}}). You may also [contact us]({{ref "contact.md"}}).
+Erm… you probably just hit a bug in Ace. Follow the [guidelines for submitting an issue]({{<relref "contributing/contributing.md#submitting-an-issue">}}). You may also [contact us]({{<ref "contact.md">}}).
 
 ## I receive an `EACCESS` error when trying to install Ace
 
@@ -39,6 +39,6 @@ You need to tell the installation scripts to enforce the super-user permissions.
 sudo npm install -g ace-core --unsafe-perm=true --allow-root
 ```
 
-## I receive an `ELIFECYCLE` error when trying to install Ace on Windows version `Windows_NT 10.0.16299`
+## I receive an `ELIFECYCLE` error when trying to install Ace on Windows version `Windows_NT 10.0.16299` 
 
 This seems to be a [bug in `npm`](https://github.com/npm/npm/issues/18979). You can fix it by updating to more recent Node and npm versions.

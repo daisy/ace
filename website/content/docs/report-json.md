@@ -11,8 +11,7 @@ Each example piece of the report shown below appears in order, in one JSON file.
 
 - [Header information](#header-information)
 - [Outlines](#outlines)
-- [Image list](#image-list)
-- [Iframes list](#iframes-list)
+- [Data](#data)
 - [Properties](#properties)
 - [earl:testSubject for this EPUB file](#earltestsubject-for-this-epub-file)
 - [Accessibility metadata summary](#accessibility-metadata-summary)
