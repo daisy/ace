@@ -17,7 +17,7 @@
       
       <guid>https://daisy.github.io/ace/help/troubleshooting/</guid>
       <description>Ace fails with &amp;ldquo;Unexpected error&amp;rdquo; Erm… you probably just hit a bug in Ace. Follow the guidelines for submitting an issue. You may also contact us.
-I receive an EACCESS error when trying to install Ace You may receive an EACCESS error when you try to isntall Ace, for instance when installing the puppeteer dependency. This indicates the you do not have write permissions to the npm installation directories. You can fix this by following the instructions in the npm documentation.</description>
+I receive an EACCESS error when trying to install Ace You may receive an EACCESS error when you try to install Ace, for instance when installing the puppeteer dependency. This indicates the you do not have write permissions to the npm installation directories. You can fix this by following the instructions in the npm documentation.</description>
     </item>
     
     <item>

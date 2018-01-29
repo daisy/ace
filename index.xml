@@ -52,7 +52,7 @@ When filing an issue, please provide the following details:</description>
       
       <guid>https://daisy.github.io/ace/help/troubleshooting/</guid>
       <description>Ace fails with &amp;ldquo;Unexpected error&amp;rdquo; Erm… you probably just hit a bug in Ace. Follow the guidelines for submitting an issue. You may also contact us.
-I receive an EACCESS error when trying to install Ace You may receive an EACCESS error when you try to isntall Ace, for instance when installing the puppeteer dependency. This indicates the you do not have write permissions to the npm installation directories. You can fix this by following the instructions in the npm documentation.</description>
+I receive an EACCESS error when trying to install Ace You may receive an EACCESS error when you try to install Ace, for instance when installing the puppeteer dependency. This indicates the you do not have write permissions to the npm installation directories. You can fix this by following the instructions in the npm documentation.</description>
     </item>
     
     <item>
@@ -157,7 +157,7 @@ Getting the results You can specify the directory for Ace to store its output wi
       <guid>https://daisy.github.io/ace/docs/config/</guid>
       <description>Overview Ace can be configured through a config.json file located in an OS-specific directory:
  on Windows in &amp;quot;%HOME%\AppData\Local\DAISY Ace\Config\&amp;quot; on macOS in &amp;quot;~/Library/Preferences/DAISY\ Ace/&amp;quot; on Linux in &amp;quot;~/.config/DAISY Ace/&amp;quot;  Defaults The defaults for Ace configuration are:
-{ &amp;quot;cli&amp;quot;: { &amp;quot;return-2-on-validation-error&amp;quot;: false }, &amp;quot;logging&amp;quot;: { &amp;quot;fileName&amp;quot;: &amp;quot;ace.log&amp;quot;, &amp;quot;level&amp;quot;: &amp;quot;info&amp;quot; }, &amp;quot;output&amp;quot;: { &amp;quot;force&amp;quot;: false, &amp;quot;subdir&amp;quot;: false }, &amp;quot;runtime&amp;quot;: { &amp;quot;concurrencyLevel&amp;quot;: 4 }, &amp;quot;report&amp;quot;: { &amp;quot;use-relative-paths&amp;quot;: true } }  Reference cli.</description>
+{ &amp;quot;cli&amp;quot;: { &amp;quot;return-2-on-validation-error&amp;quot;: false }, &amp;quot;logging&amp;quot;: { &amp;quot;fileName&amp;quot;: &amp;quot;ace.log&amp;quot;, &amp;quot;level&amp;quot;: &amp;quot;info&amp;quot; }, &amp;quot;output&amp;quot;: { &amp;quot;force&amp;quot;: false, &amp;quot;subdir&amp;quot;: false }, &amp;quot;report&amp;quot;: { &amp;quot;use-relative-paths&amp;quot;: true }, &amp;quot;runtime&amp;quot;: { &amp;quot;concurrencyLevel&amp;quot;: 4 } }  Reference cli.</description>
     </item>
     
     <item>
