@@ -9,7 +9,7 @@ Erm… you probably just hit a bug in Ace. Follow the [guidelines for submitting
 
 ## I receive an `EACCESS` error when trying to install Ace
 
-You may receive an `EACCESS` error when you try to isntall Ace, for instance when installing the `puppeteer` dependency. This indicates the you do not have write permissions to the `npm` installation directories. You can fix this by following the [instructions in the `npm` documentation](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
+You may receive an `EACCESS` error when you try to install Ace, for instance when installing the `puppeteer` dependency. This indicates the you do not have write permissions to the `npm` installation directories. You can fix this by following the [instructions in the `npm` documentation](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
 
 ## I receive an `EACCESS` error when trying to install Ace as a super-user with `sudo`
 
@@ -39,6 +39,6 @@ You need to tell the installation scripts to enforce the super-user permissions.
 sudo npm install -g ace-core --unsafe-perm=true --allow-root
 ```
 
-## I receive an `ELIFECYCLE` error when trying to install Ace on Windows version `Windows_NT 10.0.16299` 
+## I receive an `ELIFECYCLE` error when trying to install Ace on Windows version `Windows_NT 10.0.16299`
 
 This seems to be a [bug in `npm`](https://github.com/npm/npm/issues/18979). You can fix it by updating to more recent Node and npm versions.

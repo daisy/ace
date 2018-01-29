@@ -40,7 +40,7 @@ This API is available to client applications.
 * `GET  /jobs/`: list all the jobs
 * `GET  /job/:jobid/`: return information about a job
 * `POST /jobs/`: attach an EPUB file to run Ace
-* `GET  /job/:jobid/report/?type=[zip|json]`: return a zipfile containing the report
+* `GET  /job/:jobid/report/?type=[zip|json]`: return a zip file containing the report
 
 Note that failing to specify `type` of report will return the default format (`zip`).
 

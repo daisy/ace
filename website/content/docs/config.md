@@ -28,11 +28,11 @@ The defaults for Ace configuration are:
     "force": false,
     "subdir": false
   },
-  "runtime": {
-    "concurrencyLevel": 4
-  },
   "report": {
     "use-relative-paths": true
+  },
+  "runtime": {
+    "concurrencyLevel": 4
   }
 }
 ```
@@ -68,14 +68,14 @@ Default: "`false`"
 
 Indicates whether to save reports in a subdirectory of the output directory. If set to `true`, the subdirectory will be named after the input EPUB document.
 
-### `runtime.concurrencyLevel`
-
-Default: "`4`"
-
-The number of concurrent headless browser instances used to check HTML content.
-
 ### `report.use-relative-paths`
 
 Default: "`true`"
 
 Indicates whether the report uses relative or absolute paths.
+
+### `runtime.concurrencyLevel`
+
+Default: "`4`"
+
+The number of concurrent headless browser instances used to check HTML content.

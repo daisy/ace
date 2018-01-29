@@ -16,7 +16,7 @@ When filing an issue, please provide the following details:
 - the version of Ace impacted by the issue (it can be retrieved by running `ace -v` in a command shell).
 - the version of Node used to run Ace (it can be retrieved by running `node -v` in a command shell).
 - your operating system and version
-- if possible, provide the error details as produced in the [logfile]({{<relref "docs/logging.md">}}). Run Ace with the `--verbose` option to produce a detailed log.
+- if possible, provide the error details as produced in the [log file]({{<relref "docs/logging.md">}}). Run Ace with the `--verbose` option to produce a detailed log.
 - if you are having trouble with the HTML report produced by Ace, please specify the browser(s) and version(s) where you notice the issue
 
 ## Contributing code
@@ -31,11 +31,11 @@ Please make sure your branch is reasonably up-to-date with the `master` branch (
 
 ### Tests
 
-Please make surre to provided tests for any change you’re proposing.
+Please make sure to provide tests for any change you’re proposing.
 
 ### Code style
 
-We do not yet have formal code style guidelines, so please try to respect the style of the code files you are editting!
+We do not yet have formal code style guidelines, so please try to respect the style of the code files you are editing!
 
 We may change your code style when merging a pull request.
 
