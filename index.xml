@@ -135,7 +135,7 @@ Headless browser During the evaluation of an EPUB, Ace loads each HTML content d
       <guid>https://daisy.github.io/ace/docs/report-json/</guid>
       <description>Ace&amp;rsquo;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of EARL (Evaluation and Reporting Language), Dublin Core, and custom terms.
 Document structure Each example piece of the report shown below appears in order, in one JSON file.
- Header information Outlines Image list Iframes list Properties earl:testSubject for this EPUB file Accessibility metadata summary Assertions  Header information This gives basic information about Ace and when the report was created.</description>
+ Header information Outlines Data Properties earl:testSubject for this EPUB file Accessibility metadata summary Assertions  Header information This gives basic information about Ace and when the report was created.</description>
     </item>
     
     <item>
