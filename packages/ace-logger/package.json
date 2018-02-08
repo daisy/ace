@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-logger",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Logger bootsrap for Ace",
   "author": {
     "name": "DAISY developers",
@@ -17,7 +17,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-config": "^0.7.0",
+    "@daisy/ace-config": "^0.7.1",
     "fs-extra": "^4.0.2",
     "winston": "^2.4.0"
   },

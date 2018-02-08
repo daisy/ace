@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-http",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "HTTP API for Ace",
   "author": {
     "name": "DAISY developers",
