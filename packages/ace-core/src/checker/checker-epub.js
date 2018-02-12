@@ -39,21 +39,6 @@ function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kb
     .build();
 }
 
-
-function checkPageSource(assertion, epub) {
-  if (epub.navDoc.hasPageList
-    && (epub.metadata['dc:source'] === undefined
-      || epub.metadata['dc:source'].toString() === '')) {
-    assertion.withAssertions(newViolation({
-      title: 'epub-pagesource',
-      testDesc: 'Ensures the source of page breaks is identified',
-      resDesc: 'Add a \'dc:source\' metadata property to the Package Document',
-      kbPath: 'docs/navigation/pagelist.html',
-      kbTitle: 'Page Navigation',
-    }));
-  }
-}
-
 function check(epub, report) {
   winston.info('Checking package...');
 
