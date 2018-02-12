@@ -1,6 +1,6 @@
 {
   "name": "@daisy/jest-env-puppeteer",
-  "version": "0.7.1",
+  "version": "1.0.0",
   "description": "Utilities for running Jest tests through Google Puppeteer",
   "author": {
     "name": "DAISY developers",
@@ -18,7 +18,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "jest-environment-node": "^21.3.0-beta.3",
-    "puppeteer": "^0.12.0"
+    "puppeteer": "^1.0.0"
   },
   "publishConfig": {
     "access": "public"

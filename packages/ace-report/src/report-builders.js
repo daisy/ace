@@ -5,6 +5,11 @@
 
 const pkg = require('../package');
 
+const { config, paths } = require('@daisy/ace-config');
+const defaults = require('./defaults');
+const reportConfig  = config.get('report', defaults.report);
+const path = require('path');
+
 // static
 const ACE_DESCRIPTION = {
   '@type': 'earl:software',
@@ -92,7 +97,7 @@ class ReportBuilder {
     ) {
     this._json = {
       '@type': 'earl:report',
-      '@context': 'http://ace.daisy.org/ns/ace-report.jsonld',
+      '@context': 'http://daisy.github.io/ace/ace-report-1.0.jsonld',
       'dct:title': (title == null) ? '' : title.toString(),
       'dct:description': (title == null) ? '' : description.toString(),
       'dct:date': new Date().toLocaleString(),
@@ -104,6 +109,16 @@ class ReportBuilder {
   }
   build() {
     return this._json;
+  }
+  // run the function on the given item under _json.data
+  cleanData(key, fn) {
+    if (this._json.data.hasOwnProperty(key)) {
+        this._json.data[key] = fn(this._json.data[key]);
+    }
+  }
+  setOutdir(outdir) {
+    this.outdir = outdir;
+    return this;
   }
   withA11yMeta(metadata) {
     if (!metadata) return this;
@@ -151,7 +166,11 @@ class ReportBuilder {
     return this;
   }
   withTestSubject(url, title, identifier, metadata, links) {
-    withTestSubject(this._json, url, title, identifier, metadata, links);
+    var url_ = url;
+    if (this.outdir !== undefined && this.outdir != "" && reportConfig["use-relative-paths"]) {
+      url_ = path.relative(this.outdir, url);
+    }
+    withTestSubject(this._json, url_, title, identifier, metadata, links);
     return this;
   }
 }
@@ -165,6 +184,10 @@ class ResultBuilder {
   }
   withDescription(description) {
     this._json['dct:description'] = description;
+    return this;
+  }
+  withHTML(html) {
+    this._json['html'] = html;
     return this;
   }
   withPointer(css, cfi) {
@@ -192,8 +215,12 @@ class TestBuilder {
     this._json['dct:description'] = description;
     return this;
   }
-  withHelp(url, title) {
-    this._json.help = { url, title };
+  withHelp(url, title, description) {
+    this._json.help = {
+      "url": url,
+      "dct:title": title,
+      "dct:description": description
+    };
     return this;
   }
   withRulesetTags(tags) {

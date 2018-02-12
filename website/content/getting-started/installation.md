@@ -16,4 +16,9 @@ weight = 2
   * On Mac: `Applications->Utilities->Terminal`
 * Type `npm install @daisy/ace -g` to install or update Ace
 
-If everything went smoothly, you should now be able to run the `ace` command in your shell.
+If everything went smoothly, you should now be able to run the `ace` command in your shell. You can test it out like this:
+
+```
+$ ace --version
+1.0.0
+```

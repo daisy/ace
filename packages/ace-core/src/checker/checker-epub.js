@@ -17,7 +17,7 @@ function asString(arrayOrString) {
   return '';
 }
 
-function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kbTitle }) {
+function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kbTitle, ruleDesc }) {
   return new builders.AssertionBuilder()
     .withAssertedBy(ASSERTED_BY)
     .withMode(MODE)
@@ -28,7 +28,8 @@ function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kb
         .withDescription(testDesc)
         .withHelp(
           KB_BASE + kbPath,
-          kbTitle)
+          kbTitle,
+          ruleDesc)
         .withRulesetTags(['EPUB'])
         .build())
     .withResult(
@@ -36,6 +37,21 @@ function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kb
         .withDescription(resDesc)
         .build())
     .build();
+}
+
+
+function checkPageSource(assertion, epub) {
+  if (epub.navDoc.hasPageList
+    && (epub.metadata['dc:source'] === undefined
+      || epub.metadata['dc:source'].toString() === '')) {
+    assertion.withAssertions(newViolation({
+      title: 'epub-pagesource',
+      testDesc: 'Ensures the source of page breaks is identified',
+      resDesc: 'Add a \'dc:source\' metadata property to the Package Document',
+      kbPath: 'docs/navigation/pagelist.html',
+      kbTitle: 'Page Navigation',
+    }));
+  }
 }
 
 function check(epub, report) {
@@ -58,14 +74,23 @@ function check(epub, report) {
     }
   });
 
-  report.addAssertions(assertion.build());
+  var builtAssertions = assertion.build();
+  report.addAssertions(builtAssertions);
+
   // Report the Nav Doc
   report.addEPUBNav(epub.navDoc);
+
   // Report package properties
   report.addProperties({
     hasManifestFallbacks: epub.hasManifestFallbacks,
     hasBindings: epub.hasBindings,
+    hasSVGContentDocuments: epub.hasSVGContentDocuments,
   });
+
+  winston.info(`- ${epub.packageDoc.src}: ${
+    (builtAssertions.assertions && builtAssertions.assertions.length > 0)
+      ? builtAssertions.assertions.length
+      : 'No'} issues found`);
 
   return Promise.resolve();
 }

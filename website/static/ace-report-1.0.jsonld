@@ -1,0 +1,11 @@
+{
+  "@context":
+  {
+    "earl": "http://www.w3.org/ns/earl#",
+    "doap": "http://usefulinc.com/ns/doap#",
+    "dct": "http://purl.org/dc/terms/",
+    "url": "http://schema.org/url",
+    "css": "http://pending.schema.org/cssSelector",
+    "@vocab": "http://daisy.github.io/ace/terms-1.0#"
+  }
+}

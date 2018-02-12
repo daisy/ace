@@ -1,5 +1,6 @@
 'use strict';
 
+const escape = require('escape-html');
 const handlebars = require('handlebars');
 const fs = require('fs');
 const path = require('path');
@@ -11,6 +12,13 @@ module.exports = function generateHtmlReport(reportData) {
     var flatListOfViolations = createFlatListOfViolations(reportData.assertions);
     var violationStats = collectViolationStats(flatListOfViolations);
     var violationFilters = createViolationFilters(flatListOfViolations);
+    var rulesetTagLabels = {
+      'wcag2a': 'WCAG 2.0 A',
+      'wcag2aa': 'WCAG 2.0 AA',
+      'EPUB': 'EPUB',
+      'best-practice': 'Best Practice',
+      'other': 'Other'
+    };
 
     // return 5 data cells for each ruleset: critical, serious, moderate, minor, total
     // a ruleset can be "wcag2a", "wcag2aa", "EPUB", "other", or "total" (all rulesets)
@@ -26,12 +34,6 @@ module.exports = function generateHtmlReport(reportData) {
     // return a list of <option> elements containing the possible filters for given rule
     handlebars.registerHelper('violation_filter', function(rule, options) {
       var filterOptions = "";
-      var rulesetTagLabels = {
-        'wcag2a': 'WCAG 2.0 A',
-        'wcag2aa': 'WCAG 2.0 AA',
-        'EPUB': 'EPUB',
-        'other': 'Other'
-      };
       violationFilters[rule].forEach(function(value) {
         // use nicer labels for ruleset options
         if (rule == "ruleset") {
@@ -45,12 +47,49 @@ module.exports = function generateHtmlReport(reportData) {
     });
 
     // return a stringified json object representing a flat list of violations
-    handlebars.registerHelper('violations', function(options) {
+    handlebars.registerHelper('violationsJson', function(options) {
       return new handlebars.SafeString(JSON.stringify(flatListOfViolations) + ";")
     });
 
+    handlebars.registerHelper('violationRows', function(options) {
+      var htmlStr = '';
+      flatListOfViolations.forEach(function(violation) {
+        htmlStr += `<tr>
+        <td><span class='${violation['impact']}'>${violation['impact']}</span></td>
+        <td><span class='ruleset'>${rulesetTagLabels[violation['applicableRulesetTag']]}</span></td>
+        <td>${violation['rule']}<br/><br/><span class='engine'>${violation['engine']}</span></td>
+        <td><em>\"${violation['fileTitle']}\"<br/><br/><code class='location'>${violation['location']}</code>`;
 
-    const content = fs.readFileSync(path.join(__dirname, "./resources/report-template.handlebars")).toString();
+        if (violation.html) {
+          htmlStr +=`<br/><br/><div class='snippet'>Snippet:<code>${violation.html.trim()}</code></div>`;
+        }
+
+        htmlStr += "</td>";
+
+
+        var desc = violation["desc"];
+        desc = desc.replace("Fix all of the following:", "");
+        desc = desc.replace("Fix any of the following:", "");
+
+        var detailsArr = desc.split("\n");
+        var listStr = '';
+        detailsArr.forEach(function(item) {
+          if (item != "") {
+            listStr += `<li>${unescape(item)}</li>`;
+          }
+        });
+
+        htmlStr += `<td class='details'>
+        <ul>${listStr}</ul>
+        <p><a href='${violation['kburl']}' target='_blank'>Learn more about ${violation['kbtitle']}</a></p>
+        </td>`;
+
+        htmlStr += "</tr>";
+      });
+      return new handlebars.SafeString(htmlStr);
+    });
+
+    const content = fs.readFileSync(path.join(__dirname, "./report-template.handlebars")).toString();
     var template = handlebars.compile(content);
     var result = template(reportData);
     resolve(result);
@@ -59,12 +98,13 @@ module.exports = function generateHtmlReport(reportData) {
 
 // summarize the violation ruleset and impact data
 function collectViolationStats(flatListOfViolations) {
-  var rulesetTags = ['wcag2a', 'wcag2aa', 'EPUB'];
+  var rulesetTags = ['wcag2a', 'wcag2aa', 'EPUB', 'best-practice'];
 
   var summaryData = {
     'wcag2a': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
     'wcag2aa': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
     'EPUB': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
+    'best-practice': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
     'other': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
     'total': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0}
   };
@@ -88,6 +128,7 @@ function collectViolationStats(flatListOfViolations) {
     summaryData['total'][key] += summaryData['wcag2a'][key]
       + summaryData['wcag2aa'][key]
       + summaryData['EPUB'][key]
+      + summaryData['best-practice'][key]
       + summaryData['other'][key];
   });
 
@@ -117,7 +158,7 @@ function createViolationFilters(violations) {
 // we're using 'assertion' and 'violation' somewhat interchangeably
 function createFlatListOfViolations(violations) {
   var flatData = [];
-  var rulesetTags = ['wcag2a', 'wcag2aa', 'EPUB']; // applicable ruleset tags
+  var rulesetTags = ['wcag2a', 'wcag2aa', 'EPUB', 'best-practice']; // applicable ruleset tags
 
   violations.forEach(function(assertion) {
     var filename = assertion["earl:testSubject"]["url"];
@@ -138,9 +179,9 @@ function createFlatListOfViolations(violations) {
         "filetitle": filetitle,
         "engine": item["earl:assertedBy"],
         "kburl": item["earl:test"]["help"]["url"],
-        "kbtitle": item["earl:test"]["help"]["title"],
+        "kbtitle": item["earl:test"]["help"]["dct:title"],
         "rule": item["earl:test"]["dct:title"],
-        "desc": item["earl:result"]["dct:description"],
+        "desc": escape(item["earl:result"]["dct:description"]),
         "pointer": item["earl:result"]["earl:pointer"],
         "impact": item["earl:test"]["earl:impact"],
         "location": filename,
@@ -149,6 +190,9 @@ function createFlatListOfViolations(violations) {
       };
       if (item["earl:result"]["earl:pointer"]) {
         obj.location += "#epubcfi(" + item["earl:result"]["earl:pointer"]["cfi"] + ")";
+      }
+      if (item["earl:result"]["html"]) {
+        obj.html = escape(item["earl:result"]["html"]);
       }
       flatData.push(obj);
     });

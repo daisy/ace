@@ -84,6 +84,82 @@ daisy.ace.run = function(done) {
   };
 
   window.axe.configure({
+    checks: [
+      {
+        id: "matching-aria-role",
+        evaluate: function evaluate(node, options) {
+          var mappings = new Map([
+            ['abstract', 'doc-abstract'],
+            ['acknowledgments', 'doc-acknowledgments'],
+            ['afterword', 'doc-afterword'],
+            ['appendix', 'doc-appendix'],
+            ['backlink', 'doc-backlink'],
+            ['biblioentry', 'doc-biblioentry'],
+            ['bibliography', 'doc-bibliography'],
+            ['biblioref', 'doc-biblioref'],
+            ['chapter', 'doc-chapter'],
+            ['colophon', 'doc-colophon'],
+            ['conclusion', 'doc-conclusion'],
+            ['cover', 'doc-cover'],
+            ['credit', 'doc-credit'],
+            ['credits', 'doc-credits'],
+            ['dedication', 'doc-dedication'],
+            ['endnote', 'doc-endnote'],
+            ['endnotes', 'doc-endnotes'],
+            ['epigraph', 'doc-epigraph'],
+            ['epilogue', 'doc-epilogue'],
+            ['errata', 'doc-errata'],
+            ['footnote', 'doc-footnote'],
+            ['foreword', 'doc-foreword'],
+            ['glossary', 'doc-glossary'],
+            ['glossdef', 'definition'],
+            ['glossref', 'doc-glossref'],
+            ['glossterm', 'term'],
+            ['help', 'doc-tip'],
+            ['index', 'doc-index'],
+            ['introduction', 'doc-introduction'],
+            ['noteref', 'doc-noteref'],
+            ['notice', 'doc-notice'],
+            ['pagebreak', 'doc-pagebreak'],
+            ['page-list', 'doc-pagelist'],
+            ['part', 'doc-part'],
+            ['preface', 'doc-preface'],
+            ['prologue', 'doc-prologue'],
+            ['pullquote', 'doc-pullquote'],
+            ['qna', 'doc-qna'],
+            ['referrer', 'doc-backlink'],
+            ['subtitle', 'doc-subtitle'],
+            ['tip', 'doc-tip'],
+            ['toc', 'doc-toc']
+          ]);
+          if (node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')) {
+            var type = node.getAttributeNS('http://www.idpf.org/2007/ops', 'type').trim();
+            if (mappings.has(type)) {
+              if (!node.hasAttribute('role')) {
+                return false;
+              } else {
+                var role = node.getAttribute('role').trim();
+                return role == mappings.get(type);
+              }
+            }
+          }
+          return true;
+        },
+        metadata: {
+          impact: 'minor',
+          messages: {
+            pass: function anonymous(it) {
+              var out = 'Element has an ARIA role matching its epub:type';
+              return out;
+            },
+            fail: function anonymous(it) {
+              var out = 'Element has no ARIA role matching its epub:type';
+              return out;
+            }
+          }
+        }
+      }
+    ],
     rules: [
       {
         id: 'pagebreak-label',
@@ -93,6 +169,22 @@ daisy.ace.run = function(done) {
           description: "Ensure page markers have an accessible label",
         },
         tags: ['cat.epub']
+      },
+      {
+        id: 'epub-type-has-matching-role',
+        selector: '[*|type]',
+        any: ['matching-aria-role'],
+        metadata: {
+          help: "ARIA role should be used in addition to epub:type",
+          description: "Ensure the element has an ARIA role matching its epub:type",
+        },
+        tags: ['best-practice']
+      },
+      {
+        id: 'landmark-one-main',
+        all: [
+          "has-no-more-than-one-main"
+          ],
       }
     ]
   });

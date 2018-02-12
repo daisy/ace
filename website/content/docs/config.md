@@ -1,7 +1,6 @@
 +++
 title = "Configuration"
-weight = 5
-wip = true
+weight = 4
 +++
 
 ## Overview
@@ -18,6 +17,9 @@ The defaults for Ace configuration are:
 
 ```json
 {
+  "cli": {
+    "return-2-on-validation-error": false
+  },
   "logging": {
     "fileName": "ace.log",
     "level": "info"
@@ -25,14 +27,22 @@ The defaults for Ace configuration are:
   "output": {
     "force": false,
     "subdir": false
-  }
+  },
+  "report": {
+    "use-relative-paths": true
+  },
   "runtime": {
     "concurrencyLevel": 4
   }
 }
 ```
-
 ## Reference
+
+### `cli.return-2-on-validation-error`
+
+Default: "`false`"
+
+Indicates whether the CLI should return with the error code `2` if any violations were found in the input publication.
 
 ### `logging.fileName`
 
@@ -56,13 +66,16 @@ Indicates whether to overwrite any files in the output directory when Ace saves 
 
 Default: "`false`"
 
-Indicates wheter to save reports in a subdirectory of the output directory. If set to `true`, the subdirectory will be named after hte input EPUB document.
+Indicates whether to save reports in a subdirectory of the output directory. If set to `true`, the subdirectory will be named after the input EPUB document.
+
+### `report.use-relative-paths`
+
+Default: "`true`"
+
+Indicates whether the report uses relative or absolute paths.
 
 ### `runtime.concurrencyLevel`
 
 Default: "`4`"
 
 The number of concurrent headless browser instances used to check HTML content.
-
-
-

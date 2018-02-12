@@ -16,7 +16,7 @@ describe('report builder', () => {
       expect(report.build()).toBeDefined();
       expect(report.build()).toMatchObject({
         '@type': 'earl:report',
-        '@context': 'http://ace.daisy.org/ns/ace-report.jsonld',
+        '@context': 'http://daisy.github.io/ace/ace-report-1.0.jsonld',
         'dct:title': 'Ace Report',
         'dct:description': 'Report on automated accessibility checks for EPUB',
         'earl:assertedBy': {

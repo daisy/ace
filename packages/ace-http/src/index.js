@@ -19,6 +19,7 @@ const JOBSTATUS = {"done": 0, "processing": 1, "error": -1}
 var server = express();
 var upload = multer({dest: UPLOADS});
 var joblist = [];
+var baseurl = "";
 
 const cli = meow(`
   Usage: ace-http [options]
@@ -57,11 +58,11 @@ function run() {
 
   var host = cli.flags.host ? cli.flags.host : DEFAULTHOST;
   var port = cli.flags.port ? cli.flags.port : DEFAULTPORT;
-  var baseurl = "http://" + host + ":" + port; // just for convenience
+  baseurl = "http://" + host + ":" + port; // just for convenience
 
   // todo customize port and hostname
   server.listen(port, host, function() {
-    winston.info("Ace server listening on " + baseurl);
+    winston.info("[ace-http] server listening on " + baseurl);
   });
 }
 
@@ -144,21 +145,22 @@ function getReport(req, res) {
 
 // start a new job
 function newJob(jobdata) {
-  winston.info("Job started");
+  winston.info("[ace-http] Job started");
   joblist.push(jobdata);
 
   // execute the job with Ace
   ace(jobdata.internal.epubPath, {'jobid': jobdata.internal.id, 'outdir': jobdata.internal.outputDir})
-  .then((jobid) => {
-    var idx = joblist.findIndex(job => job.internal.id === jobid);
-    winston.info("Job finished " + joblist[idx].internal.id);
+  .then((jobData) => {
+    var jobId = jobData[0];
+    var idx = joblist.findIndex(job => job.internal.id === jobId);
+    winston.info("[ace-http] Job finished " + joblist[idx].internal.id);
     joblist[idx].public.status = JOBSTATUS.done;
     joblist[idx].public.report.zip = joblist[idx].public.job + "/report/?type=zip";
     joblist[idx].public.report.json = joblist[idx].public.job + "/report/?type=json";
   })
   .catch((jobid) => {
     var idx = joblist.findIndex(job => job.internal.id === jobid);
-    winston.info("Job error " + joblist[idx].internal.id);
+    winston.info("[ace-http] Job error " + joblist[idx].internal.id);
     joblist[idx].public.status = JOBSTATUS.error;
   });
 }

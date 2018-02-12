@@ -53,7 +53,6 @@ test('issue #57: Failed to execute \'matches\' on \'Element\': \'m:annotation-xm
 
 test('issue #85: failed to detect page markers from `epub:type`', async () => {
   const report = await ace('../data/issue-85');
-  expect(report['earl:result']['earl:outcome']).toEqual('pass');
   expect(report.properties.hasPageBreaks).toBe(true);
 });
 
@@ -64,5 +63,10 @@ test('issue #108: HTML5Outline is not defined (RequireJS conflict)', async () =>
 
 test('issue #114: Description list item does not have a <dl> parent element', async () => {
   const report = await ace('../data/issue-114');
+  expect(report['earl:result']['earl:outcome']).toEqual('pass');
+});
+
+test('issue #122: Failed to check HTML content with `.xml` extension', async () => {
+  const report = await ace('../data/issue-122');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });

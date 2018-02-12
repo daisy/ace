@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Running the CLI on an unexisting document should fail 1`] = `
+exports[`Running the CLI on a non-existant document should fail 1`] = `
 "[32minfo[39m:    Closing logs.
 Re-run Ace using the --verbose option to enable full debug logging."
 `;
 
-exports[`Running the CLI on an unexisting document should fail 2`] = `
+exports[`Running the CLI on a non-existant document should fail 2`] = `
 "[31merror[39m:   Couldn’t find EPUB file 'unexisting.epub'
 "
 `;

@@ -4,6 +4,8 @@ const fs = require('fs-extra');
 const path = require('path');
 const tmp = require('tmp');
 const winston = require('winston');
+const os = require('os');
+const pkg = require('../../package');
 
 const EPUB = require('@daisy/epub-utils').EPUB;
 const Report = require('@daisy/ace-report').Report;
@@ -16,7 +18,8 @@ module.exports = function ace(epubPath, options) {
     // the jobid option just gets returned in the resolve/reject
     // so the calling function can track which job finished
     var jobId = 'jobid' in options ? options.jobid : '';
-    winston.verbose("ACE", options);
+    winston.verbose(`Ace ${pkg.version}, Node ${process.version}, ${os.type()} ${os.release()}`);
+    winston.verbose("Options:", options);
 
     // Check that the EPUB exists
     const epubPathResolved = path.resolve(options.cwd, epubPath);
@@ -53,23 +56,27 @@ module.exports = function ace(epubPath, options) {
     epub.extract()
     .then(() => epub.parse())
     // initialize the report
-    .then(() => new Report(epub))
+    .then(() => new Report(epub, options.outdir))
     // Check each Content Doc
     .then(report => checker.check(epub, report))
     // Process the Results
     .then((report) => {
       if (options.outdir === undefined) {
-        return process.stdout.write(JSON.stringify(report.json, null, '  '));
+        report.cleanData();
+        process.stdout.write(`${JSON.stringify(report.json, null, '  ')}\n`);
+        return report;
       }
-      return Promise.all([
-        report.copyData(options.outdir),
-        report.saveJson(options.outdir),
-        report.saveHtml(options.outdir),
-      ]);
+      return report.copyData(options.outdir)
+      .then(() => report.cleanData())
+      .then(() => Promise.all([
+          report.saveJson(options.outdir),
+          report.saveHtml(options.outdir)
+      ]))
+      .then(() => report);
     })
-    .then(() => {
+    .then((report) => {
       winston.info('Done.');
-      resolve(jobId);
+      resolve([jobId, report.json]);
     })
     .catch((err) => {
       winston.error(`Unexpected error: ${(err.message !== undefined) ? err.message : err}`);

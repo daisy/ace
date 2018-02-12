@@ -1,11 +1,17 @@
 +++
 title = "Http API"
-weight = 2
+weight = 6
 +++
 
 ## Starting the server
 
-After installing Ace, run the `ace-http` command from the terminal. There are a few options listed below.
+After [installing Ace]({{< relref "getting-started/installation.md" >}}), run the `ace-http` command from the terminal:
+```
+$ ace-http
+info:    [ace-http] server listening on http://localhost:8000
+```
+
+The command line options are printed when you run `ace-http --help`:
 
 ```
 Ace by DAISY, an Accessibility Checker for EPUB
@@ -31,21 +37,24 @@ Ace by DAISY, an Accessibility Checker for EPUB
 
 This API is available to client applications.
 
-* `GET /jobs/`: list all the jobs
-* `GET /job/:jobid/`: return information about a job
+* `GET  /jobs/`: list all the jobs
+* `GET  /job/:jobid/`: return information about a job
 * `POST /jobs/`: attach an EPUB file to run Ace
-* `GET /job/:jobid/report/?type=[zip|json]`: return a zipfile containing the report
+* `GET  /job/:jobid/report/?type=[zip|json]`: return a zip file containing the report
 
-Note that failing to specify `type` of report will return the default format (which, at the moment, is `zip`)
+Note that failing to specify `type` of report will return the default format (`zip`).
 
 ### Job status codes
 
-* `1`: Processing. The job has been submitted and is being executed.
-* `0`: Done. The job is done and the reports are ready.
-* `-1`: Error. The job could not be completed. This is different than the file having accessibility errors. The file could not be evaluated.
+*  `1`: Processing. The job has been submitted and is being executed.
+*  `0`: Done. The job is done and the reports are ready.
+* `-1`: Error. The job could not be completed. This is different than the file having accessibility errors. It means the file could not be evaluated.
 
 ### Job information
-```
+
+This is returned by calling `GET /job/:jobid/` with the ID of a job.
+
+```json
   {
     job: URL for the job information
     status: A job status code
@@ -82,11 +91,9 @@ Note that failing to specify `type` of report will return the default format (wh
 
 ~ ❯❯❯ unzip ~/out.zip
 Archive:  /Users/marisa/out.zip
-  inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/report.json
   inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/data/EPUB/images/daisy.png
-  inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/js/ace-report-viewer.js
-  inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/js/aceReportData.js
   inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/report.html
+  inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/report.json
 ```
 
 ### Get only the JSON report
@@ -96,13 +103,13 @@ Archive:  /Users/marisa/out.zip
                                  Dload  Upload   Total   Spent    Left  Speed
 100 24972  100 24972    0     0  3482k      0 --:--:-- --:--:-- --:--:-- 4064k
 ~ ❯❯❯ tail ~/out.json
-{"@type":"earl:report","@context":"http://ace.daisy.org/ns/ace-report.jsonld",
+{"@type":"earl:report","@context":"http://daisy.github.io/ace/ace-report-1.0.jsonld","dct:title":"Ace Report",
 ...
 ```
 
 ### List all the jobs
 
-(after adding several jobs)
+(after having added several jobs)
 
 ```
 ~ ❯❯❯ curl http://localhost:8000/jobs/

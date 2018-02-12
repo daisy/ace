@@ -11,6 +11,11 @@ const logger = require('@daisy/ace-logger');
 const ace = require('@daisy/ace-core');
 const util = require('@daisy/ace-core/lib/core/get-all-rules');
 
+const { config, paths } = require('@daisy/ace-config');
+const defaults = require('./defaults');
+const cliConfig  = config.get('cli', defaults.cli);
+
+
 const cli = meow(`
   Usage: ace [options] <input>
 
@@ -104,6 +109,16 @@ ${overrides.map(file => `  - ${file}`).join('\n')}
     verbose: cli.flags.verbose,
     silent: cli.flags.silent,
     jobId: '',
+  })
+  .then((jobData) => {
+    var reportJson = jobData[1];
+    // if there were violations from the validation process, return 2
+    if (cliConfig['return-2-on-validation-error'] &&
+    reportJson['earl:result']['earl:outcome'] === 'fail') {
+      winston.logAndExit('info', 'Closing logs.', () => {
+        process.exit(2);
+      });
+    }
   })
   .catch((err) => {
     if (err && err.message) winston.error(err.message);

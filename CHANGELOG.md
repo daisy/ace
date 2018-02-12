@@ -1,5 +1,84 @@
+<a name="1.0.0"></a>
+## [1.0.0](https://github.com/daisy/ace/compare/v1.0.0-RC.1...v1.0.0) (2018-01-29)
+
+
+### Bug Fixes
+
+* **http-api:** fix a bug causing a job status to not be updated ([5247750](https://github.com/daisy/ace/commit/5247750))
+
+### Features
+
+* **logging:** verbose output includes Ace, NodeJS and OS versions ([229d4d1](https://github.com/daisy/ace/commit/229d4d1))
+
+
+<a name="1.0.0-RC.1"></a>
+## [1.0.0-RC.1](https://github.com/daisy/ace/compare/v0.9.0...v1.0.0-RC.1) (2018-01-22)
+
+
+### Bug Fixes
+
+* **core:** properly check Content Documents extensions ([8641c36](https://github.com/daisy/ace/commit/8641c36)), closes [#157](https://github.com/daisy/ace/issues/157)
+* **report:** correct table column ordering ([f93111f](https://github.com/daisy/ace/commit/f93111f))
+* **rules:** add help title and description to `epub-type-has-matching-role` ([a2506e4](https://github.com/daisy/ace/commit/a2506e4)), closes [#156](https://github.com/daisy/ace/issues/156)
+
+
+### Features
+
+* **data:** report the presence of SVG Content Documents ([659e189](https://github.com/daisy/ace/commit/659e189)), closes [#94](https://github.com/daisy/ace/issues/94)
+
+
+
+<a name="0.9.0"></a>
+## [0.9.0](https://github.com/daisy/ace/compare/v0.8.0...v0.9.0) (2018-01-19)
+
+
+### Bug Fixes
+
+* **core:** don't crash if a content document has an '.xml' extension ([181bea6](https://github.com/daisy/ace/commit/181bea6)), closes [#122](https://github.com/daisy/ace/issues/122)
+* **core:** fix Puppeteer launching issue on Linux ([bd95b20](https://github.com/daisy/ace/commit/bd95b20))
+* **report:** do not relativize paths if outdir was not set ([57b05d9](https://github.com/daisy/ace/commit/57b05d9))
+* **report:** epub url is given as relative by default ([c7bfe03](https://github.com/daisy/ace/commit/c7bfe03)), closes [#64](https://github.com/daisy/ace/issues/64)
+* **report:** remove [@path](https://github.com/path) property from iframes and images ([0ea5ca9](https://github.com/daisy/ace/commit/0ea5ca9)), closes [#64](https://github.com/daisy/ace/issues/64)
+* **report:** report looks ok even if javascript is disabled ([ac945f2](https://github.com/daisy/ace/commit/ac945f2)), closes [#119](https://github.com/daisy/ace/issues/119)
+* **report:** style fix for table pagination controls ([472e75c](https://github.com/daisy/ace/commit/472e75c)), closes [#147](https://github.com/daisy/ace/issues/147)
+* **rule:** disable aXe check requiring at least one `main` ([eb79b2b](https://github.com/daisy/ace/commit/eb79b2b)), closes [#139](https://github.com/daisy/ace/issues/139)
+* **rule:** ensure DPUB ARIA roles are accepted by aXe 2.6 ([508f6b4](https://github.com/daisy/ace/commit/508f6b4)), closes [#140](https://github.com/daisy/ace/issues/140)
+
+
+### Features
+
+* **cli:** optionally return error code 2 when violations are found ([136e3b2](https://github.com/daisy/ace/commit/136e3b2)), closes [#113](https://github.com/daisy/ace/issues/113)
+* **dependencies:** update aXe version to 2.6.1 ([f382b3c](https://github.com/daisy/ace/commit/f382b3c)), closes [#148](https://github.com/daisy/ace/issues/148)
+* **dependencies:** update Google Puppeteer to v1.0.0 ([942a8f2](https://github.com/daisy/ace/commit/942a8f2))
+* **report:** add rules descriptions to the report ([63cc88b](https://github.com/daisy/ace/commit/63cc88b)), closes [#146](https://github.com/daisy/ace/issues/146)
+* **report:** images table has role column ([0240800](https://github.com/daisy/ace/commit/0240800))
+
+
+
+<a name="0.8.0"></a>
+## [0.8.0](https://github.com/daisy/ace/compare/v0.7.0...v0.8.0) (2017-12-24)
+
+
+### Bug Fixes
+
+* **cli:** print the JSON report even when `--silent` is enabled ([e108d4d](https://github.com/daisy/ace/commit/e108d4d)), closes [#112](https://github.com/daisy/ace/issues/112)
+* **outlines:** only use headings text content in the outline ([084fe4a](https://github.com/daisy/ace/commit/084fe4a)), closes [#129](https://github.com/daisy/ace/issues/129)
+* **report:** limit the width of images ([fd80592](https://github.com/daisy/ace/commit/fd80592)), closes [#126](https://github.com/daisy/ace/issues/126)
+* **unzip:** try to repair ZIP archives with extra comment length ([#138](https://github.com/daisy/ace/issues/138)) ([4c8b532](https://github.com/daisy/ace/commit/4c8b532)), closes [#121](https://github.com/daisy/ace/issues/121)
+* **unzip:** tweak error message to indicate possible ZIP corruption ([434d9c2](https://github.com/daisy/ace/commit/434d9c2))
+
+
+### Features
+
+* **data:** extract and report link info from the Package Document ([#130](https://github.com/daisy/ace/issues/130)) ([a010744](https://github.com/daisy/ace/commit/a010744)), closes [#96](https://github.com/daisy/ace/issues/96)
+* **report:** add a 'Best Practice' rule category ([b5ed308](https://github.com/daisy/ace/commit/b5ed308))
+* **report:** show source code snippets for violations ([#134](https://github.com/daisy/ace/issues/134)) ([5e053fa](https://github.com/daisy/ace/commit/5e053fa)), closes [#82](https://github.com/daisy/ace/issues/82)
+* **rule:** check that epub:type have matching ARIA roles ([85ffb96](https://github.com/daisy/ace/commit/85ffb96)), closes [#70](https://github.com/daisy/ace/issues/70)
+
+
+
 <a name="0.7.0"></a>
-# [0.7.0](https://github.com/daisy/ace/compare/v0.6.0...v0.7.0) (2017-12-13)
+## [0.7.0](https://github.com/daisy/ace/compare/v0.6.0...v0.7.0) (2017-12-13)
 
 
 ### Bug Fixes
@@ -19,7 +98,7 @@
 
 
 <a name="0.6.0"></a>
-# [0.6.0](https://github.com/daisy/ace/compare/v0.5.0...v0.6.0) (2017-11-01)
+## [0.6.0](https://github.com/daisy/ace/compare/v0.5.0...v0.6.0) (2017-11-01)
 
 
 ### Bug Fixes
@@ -48,7 +127,7 @@
 
 
 <a name="0.5.0"></a>
-# [0.5.0](https://github.com/daisy/ace/compare/v0.3.4...v0.5.0) (2017-10-11)
+## [0.5.0](https://github.com/daisy/ace/compare/v0.3.4...v0.5.0) (2017-10-11)
 
 ### Bug Fixes
 
@@ -113,7 +192,7 @@
 
 
 <a name="0.3.0"></a>
-# [0.3.0](https://github.com/daisy/ace/compare/v0.2.0...v0.3.0) (2017-10-04)
+## [0.3.0](https://github.com/daisy/ace/compare/v0.2.0...v0.3.0) (2017-10-04)
 
 
 ### Bug Fixes
@@ -146,7 +225,7 @@
 
 
 <a name="0.2.0"></a>
-# [0.2.0](https://github.com/daisy/ace/compare/v0.1.1...v0.2.0) (2017-08-07)
+## [0.2.0](https://github.com/daisy/ace/compare/v0.1.1...v0.2.0) (2017-08-07)
 
 ### Features
 
