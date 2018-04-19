@@ -237,27 +237,27 @@
         <tbody>
           <tr>
             <th scope="row">WCAG 2.0 A</th>
-            {{#violation_stats "wcag2a"}}{{/violation_stats}}
+            {{#violationStats "wcag2a"}}{{/violationStats}}
           </tr>
           <tr>
             <th scope="row">WCAG 2.0 AA</th>
-            {{#violation_stats "wcag2aa"}}{{/violation_stats}}
+            {{#violationStats "wcag2aa"}}{{/violationStats}}
           </tr>
           <tr>
             <th scope="row">EPUB</th>
-            {{#violation_stats "EPUB"}}{{/violation_stats}}
+            {{#violationStats "EPUB"}}{{/violationStats}}
           </tr>
           <tr>
             <th scope="row">Best Practice</th>
-            {{#violation_stats "best-practice"}}{{/violation_stats}}
+            {{#violationStats "best-practice"}}{{/violationStats}}
           </tr>
           <tr>
             <th scope="row">Other</th>
-            {{#violation_stats "other"}}{{/violation_stats}}
+            {{#violationStats "other"}}{{/violationStats}}
           </tr>
           <tr>
             <th scope="row">Total</th>
-            {{#violation_stats "total"}}{{/violation_stats}}
+            {{#violationStats "total"}}{{/violationStats}}
           </tr>
         </tbody>
       </table>
@@ -268,22 +268,22 @@
         <span class="filter-label">impact</span>
         <select name="impact" aria-label="impact">
           <option value="all" selected>All</option>
-          {{#violation_filter "impact"}}{{/violation_filter}}
+          {{#violationFilter "impact"}}{{/violationFilter}}
         </select>
         <span class="filter-label">ruleset</span>
         <select name="ruleset" aria-label="ruleset">
           <option value="all" selected>All</option>
-          {{#violation_filter "ruleset"}}{{/violation_filter}}
+          {{#violationFilter "ruleset"}}{{/violationFilter}}
         </select>
         <span class="filter-label">rule</span>
         <select name="rule" aria-label="rule">
           <option value="all" selected>All</option>
-          {{#violation_filter "rule"}}{{/violation_filter}}
+          {{#violationFilter "rule"}}{{/violationFilter}}
         </select>
         <span class="filter-label">file</span>
         <select name="file" aria-label="file">
           <option value="all" selected>All</option>
-          {{#violation_filter "file"}}{{/violation_filter}}
+          {{#violationFilter "file"}}{{/violationFilter}}
         </select>
         <a href="#" onclick="resetFilters()" class="ml-4">Reset filters</a>
       </div>
@@ -329,6 +329,9 @@
             <td>{{this}}</td>
           </tr>
           {{/each}}
+          {{!-- handlebars was complaining about an #if statement here so it was replaced with a helper --}}
+          {{!-- dcterms:conformsTo is a special case metadata item (actually it lives in the links section) --}}
+          {{#insertConformsToRow}}{{/insertConformsToRow}}
         </tbody>
       </table>
 
@@ -518,7 +521,7 @@
       detailsArr.forEach(function(item) {
         if (item != "") {
           var elm = $("<li></li>");
-          elm.text(item);
+          elm.text(decodeEntities(item));
           ul.append(elm);
         }
       });
@@ -579,6 +582,26 @@
       });
     });
     filterSelected();
+  }
+
+  function decodeEntities(text) {
+    // The entities tend to appear in violation descriptions, and there are just a few named ones involved
+    var namedEntities = {
+      "&lt;": "<",
+      "&gt;": ">",
+      "&quot;": "\"",
+      "&nbsp": " "
+    };
+    // process entities
+    var str = text.replace(/&#(\d+);/g, function(match, dec) {
+      return String.fromCharCode(dec);
+		});
+
+    //process named entities
+    Object.keys(namedEntities).forEach(k => {
+      str = str.replace(new RegExp(k, 'g'), namedEntities[k]);
+    });
+    return str;
   }
 
   // certain classes need to be added to elements if we're using javascript in the browser

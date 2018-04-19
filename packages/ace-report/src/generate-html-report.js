@@ -22,7 +22,7 @@ module.exports = function generateHtmlReport(reportData) {
 
     // return 5 data cells for each ruleset: critical, serious, moderate, minor, total
     // a ruleset can be "wcag2a", "wcag2aa", "EPUB", "other", or "total" (all rulesets)
-    handlebars.registerHelper('violation_stats', function(rule, options) {
+    handlebars.registerHelper('violationStats', function(rule, options) {
       var str = "<td>" + violationStats[rule]['critical'] + "</td>"
                 + "<td>" + violationStats[rule]['serious'] + "</td>"
                 + "<td>" + violationStats[rule]['moderate'] + "</td>"
@@ -32,7 +32,7 @@ module.exports = function generateHtmlReport(reportData) {
     });
 
     // return a list of <option> elements containing the possible filters for given rule
-    handlebars.registerHelper('violation_filter', function(rule, options) {
+    handlebars.registerHelper('violationFilter', function(rule, options) {
       var filterOptions = "";
       violationFilters[rule].forEach(function(value) {
         // use nicer labels for ruleset options
@@ -48,7 +48,7 @@ module.exports = function generateHtmlReport(reportData) {
 
     // return a stringified json object representing a flat list of violations
     handlebars.registerHelper('violationsJson', function(options) {
-      return new handlebars.SafeString(JSON.stringify(flatListOfViolations) + ";")
+      return new handlebars.SafeString(unescape(JSON.stringify(flatListOfViolations)) + ";")
     });
 
     handlebars.registerHelper('violationRows', function(options) {
@@ -89,11 +89,24 @@ module.exports = function generateHtmlReport(reportData) {
       return new handlebars.SafeString(htmlStr);
     });
 
+    handlebars.registerHelper('insertConformsToRow', function(options) {
+      if (reportData['earl:testSubject'].hasOwnProperty('links') &&
+          reportData['earl:testSubject']['links'].hasOwnProperty('dcterms:conformsTo')) {
+            var conformsTo = reportData['earl:testSubject']['links']['dcterms:conformsTo'];
+        return new handlebars.SafeString(`<tr><td>dcterms:conformsTo</td>
+          <td><a href="${conformsTo}" target="_blank">${conformsTo}</a></td></tr>`);
+      }
+      else {
+        return new handlebars.SafeString('');
+      }
+    });
+
     const content = fs.readFileSync(path.join(__dirname, "./report-template.handlebars")).toString();
     var template = handlebars.compile(content);
     var result = template(reportData);
     resolve(result);
   });
+
 };
 
 // summarize the violation ruleset and impact data
