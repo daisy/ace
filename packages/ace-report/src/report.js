@@ -43,7 +43,7 @@ module.exports = class Report {
     this._builder = new builders.ReportBuilder()
       .setOutdir(outdir)
       .withTestSubject(epub.path, '', '', epub.metadata, epub.links)
-      .withA11yMeta(a11yMetaChecker.analyze(epub.metadata))
+      .withA11yMeta(a11yMetaChecker.analyze(epub.metadata, epub.links))
   }
 
   get json() {
