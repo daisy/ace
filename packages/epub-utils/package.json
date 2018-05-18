@@ -18,7 +18,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "extract-zip": "^1.6.5",
-    "fs-extra": "^4.0.2",
+    "fs-extra": "^6.0.1",
     "tmp": "^0.0.33",
     "winston": "^2.4.0",
     "xmldom": "^0.1.27",
