@@ -70,3 +70,8 @@ test('issue #122: Failed to check HTML content with `.xml` extension', async () 
   const report = await ace('../data/issue-122');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
+
+test('issue #170: heading with `doc-subtitle` role were reported empty', async () => {
+  const report = await ace('../data/issue-170');
+  expect(report['earl:result']['earl:outcome']).toEqual('pass');
+});
