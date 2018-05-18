@@ -81,7 +81,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-colophon': {
@@ -90,7 +90,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-conclusion': {
@@ -99,7 +99,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-cover': {
@@ -108,7 +108,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-credit': {
@@ -117,7 +117,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-credits': {
@@ -126,7 +126,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-dedication': {
@@ -135,7 +135,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-endnote': {
@@ -144,7 +144,7 @@
         allowed: ['aria-expanded', 'aria-level', 'aria-posinset', 'aria-setsize'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: ['doc-endnotes'],
     },
     'doc-endnotes': {
@@ -153,7 +153,7 @@
         allowed: ['aria-expanded'],
       },
       owned: ['doc-endnote'],
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-epigraph': {
@@ -162,7 +162,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-epilogue': {
@@ -171,7 +171,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-errata': {
@@ -180,7 +180,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-example': {
@@ -189,7 +189,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-footnote': {
@@ -198,7 +198,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-foreword': {
@@ -207,7 +207,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-glossary': {
@@ -216,7 +216,7 @@
         allowed: ['aria-expanded'],
       },
       owned: ['term', 'definition'],
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-glossref': {
@@ -225,7 +225,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author', 'contents'],
+      nameFrom: ['author', 'contents'],
       context: null,
     },
     'doc-index': {
@@ -234,7 +234,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-introduction': {
@@ -243,7 +243,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-noteref': {
@@ -252,7 +252,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author', 'contents'],
+      nameFrom: ['author', 'contents'],
       context: null,
     },
     'doc-notice': {
@@ -261,7 +261,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-pagebreak': {
@@ -270,7 +270,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-pagelist': {
@@ -279,7 +279,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-part': {
@@ -288,7 +288,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-preface': {
@@ -297,7 +297,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-prologue': {
@@ -306,7 +306,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-pullquote': {
@@ -315,7 +315,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-qna': {
@@ -324,7 +324,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-subtitle': {
@@ -333,7 +333,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author', 'contents'],
       context: null,
     },
     'doc-tip': {
@@ -342,7 +342,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
     'doc-toc': {
@@ -351,7 +351,7 @@
         allowed: ['aria-expanded'],
       },
       owned: null,
-      namefrom: ['author'],
+      nameFrom: ['author'],
       context: null,
     },
   };
