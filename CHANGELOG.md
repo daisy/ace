@@ -1,3 +1,13 @@
+<a name="1.0.2"></a>
+## [1.0.2](https://github.com/daisy/ace/compare/v1.0.1...v1.0.2) (2018-05-25)
+
+
+### Bug Fixes
+
+* revert to the official xmldom-alpha depdency ([c2eafb5](https://github.com/daisy/ace/commit/c2eafb5))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/daisy/ace/compare/v1.0.0...v1.0.1) (2018-05-25)
 
