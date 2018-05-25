@@ -6080,9 +6080,9 @@ xmlbuilder@~9.0.1:
   version "9.0.7"
   resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-9.0.7.tgz#132ee63d2ec5565c557e20f4c22df9aca686b10d"
 
-xmldom@^0.1.27:
-  version "0.1.27"
-  resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.27.tgz#d501f97b3bdb403af8ef9ecc20573187aadac0e9"
+"xmldom-alpha@https://github.com/fchasen/xmldom.git#a38f7ddb536ab74e9fb549477ba9f9b7ea2d0beb":
+  version "0.1.28"
+  resolved "https://github.com/fchasen/xmldom.git#a38f7ddb536ab74e9fb549477ba9f9b7ea2d0beb"
 
 xpath@^0.0.24:
   version "0.0.24"

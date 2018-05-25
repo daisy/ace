@@ -96,7 +96,17 @@ describe('Running the CLI', () => {
       const log = stripAnsi(stdout);
       expect(/^warn:\s+The SVG Content Documents in this EPUB will be ignored\./m.test(log)).toBe(true);
     });
-  });  
+  });
+
+  describe('does not raise a warning', () => {
+    test('when a named character reference is used in XHTML', () => {
+      const { stdout, stderr, status } = ace(['issue-182'], {
+        cwd: path.resolve(__dirname, '../data'),
+      });
+      const log = stripAnsi(stdout);
+      expect(/^warn:\s+\[xmldom error\]	entity not found/m.test(log)).toBe(false);
+    });
+  });
 
   /*test('with return-2-on-validation-error set to true should exit with return code 2', () => {
     // TODO this test won't work until we can specify the CLI option to enable returning 2 on violation(s)
