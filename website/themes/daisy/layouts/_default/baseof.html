@@ -9,6 +9,7 @@
       {{ .Title }} | {{ .Site.Title }}
       {{- end -}}
     </title>
+    {{ partial "head/scripts.html" . }}
     {{ partial "head/styles.html" . }}
     {{ .Hugo.Generator }}
   </head>
