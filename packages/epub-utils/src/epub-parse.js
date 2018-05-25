@@ -40,7 +40,8 @@ function EpubParser() {
 
 function parseNavDoc(fullpath, epubDir) {
   const content = fs.readFileSync(fullpath).toString();
-  const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml+xml');
+  //FIXME hack to workaround xmldom-alpha regex test
+  const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml');
 
   // Remove all links
   const aElems = doc.getElementsByTagNameNS('http://www.w3.org/1999/xhtml', 'a');
@@ -175,7 +176,8 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
 
 EpubParser.prototype.parseContentDocTitle = function(filepath) {
   const content = fs.readFileSync(filepath).toString();
-  const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml+xml');
+  //FIXME hack to workaround xmldom-alpha regex test
+  const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml');
   const select = xpath.useNamespaces({html: "http://www.w3.org/1999/xhtml", epub: "http://www.idpf.org/2007/ops"});
   const title = select('//html:title/text()', doc);
   if (title.length > 0) {

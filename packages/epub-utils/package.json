@@ -21,7 +21,7 @@
     "fs-extra": "^6.0.1",
     "tmp": "^0.0.33",
     "winston": "^2.4.0",
-    "xmldom-alpha": "https://github.com/fchasen/xmldom.git#a38f7ddb536ab74e9fb549477ba9f9b7ea2d0beb",
+    "xmldom-alpha": "^0.1.28",
     "xpath": "^0.0.24"
   },
   "publishConfig": {
