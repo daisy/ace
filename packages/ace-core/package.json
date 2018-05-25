@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Core library for Ace",
   "author": {
     "name": "DAISY developers",
@@ -17,9 +17,9 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-report": "^1.0.0",
-    "@daisy/ace-report-axe": "^1.0.0",
-    "@daisy/epub-utils": "^1.0.0",
+    "@daisy/ace-report": "^1.0.1",
+    "@daisy/ace-report-axe": "^1.0.1",
+    "@daisy/epub-utils": "^1.0.1",
     "@daisy/puppeteer-utils": "^1.0.0",
     "axe-core": "~2.6.1",
     "file-url": "^2.0.2",

@@ -1,3 +1,16 @@
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/daisy/ace/compare/v1.0.0...v1.0.1) (2018-05-25)
+
+
+### Bug Fixes
+
+* fix `fs.promises` `ExperimentalWarning` on Node v10.1.0 ([4a7d88f](https://github.com/daisy/ace/commit/4a7d88f))
+* **core:** headings with role `doc-subtitle` reported empty ([7ad1373](https://github.com/daisy/ace/commit/7ad1373))
+* **parser:** parse HTML named character references ([1e83bf7](https://github.com/daisy/ace/commit/1e83bf7)), closes [#182](https://github.com/daisy/ace/issues/182)
+* **report:** add dcterms:conformsTo, fix HTML entities ([9e00a51](https://github.com/daisy/ace/commit/9e00a51)), closes [#161](https://github.com/daisy/ace/issues/161) [#171](https://github.com/daisy/ace/issues/171)
+
+
+
 <a name="1.0.0"></a>
 ## [1.0.0](https://github.com/daisy/ace/compare/v1.0.0-RC.1...v1.0.0) (2018-01-29)
 
