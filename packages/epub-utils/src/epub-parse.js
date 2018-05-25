@@ -10,12 +10,19 @@
 
 'use strict';
 
-const DOMParser = require('xmldom').DOMParser;
-const XMLSerializer = require('xmldom').XMLSerializer;
+const DOMParser = require('xmldom-alpha').DOMParser;
+const XMLSerializer = require('xmldom-alpha').XMLSerializer;
 const fs = require('fs');
 const path = require('path');
 const xpath = require('xpath');
 const winston = require('winston');
+
+// Error Handler for DOMParser instances
+const errorHandler = {
+  warning: w => winston.warn(w),
+  error: e => winston.warn(e),
+  fatalError: fe => winston.error(fe),
+}
 
 function SpineItem() {
   this.filepath = "";
@@ -33,7 +40,7 @@ function EpubParser() {
 
 function parseNavDoc(fullpath, epubDir) {
   const content = fs.readFileSync(fullpath).toString();
-  const doc = new DOMParser().parseFromString(content);
+  const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml+xml');
 
   // Remove all links
   const aElems = doc.getElementsByTagNameNS('http://www.w3.org/1999/xhtml', 'a');
@@ -127,7 +134,7 @@ EpubParser.prototype.parse = function(epubDir) {
 
 EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
   const content = fs.readFileSync(packageDocPath).toString();
-  const doc = new DOMParser().parseFromString(content);
+  const doc = new DOMParser({errorHandler}).parseFromString(content);
   const select = xpath.useNamespaces(
     { opf: 'http://www.idpf.org/2007/opf',
       dc: 'http://purl.org/dc/elements/1.1/'});
@@ -168,7 +175,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
 
 EpubParser.prototype.parseContentDocTitle = function(filepath) {
   const content = fs.readFileSync(filepath).toString();
-  const doc = new DOMParser().parseFromString(content);
+  const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml+xml');
   const select = xpath.useNamespaces({html: "http://www.w3.org/1999/xhtml", epub: "http://www.idpf.org/2007/ops"});
   const title = select('//html:title/text()', doc);
   if (title.length > 0) {
@@ -182,7 +189,7 @@ EpubParser.prototype.parseContentDocTitle = function(filepath) {
 EpubParser.prototype.calculatePackageDocPath = function(epubDir) {
   const containerFilePath = `${epubDir}/META-INF/container.xml`;
   const content = fs.readFileSync(containerFilePath).toString();
-  const doc = new DOMParser().parseFromString(content);
+  const doc = new DOMParser({errorHandler}).parseFromString(content);
   const select = xpath.useNamespaces({ ocf: 'urn:oasis:names:tc:opendocument:xmlns:container' });
   const rootfiles = select('//ocf:rootfile[@media-type="application/oebps-package+xml"]/@full-path', doc);
   // just grab the first one as we're not handling the case of multiple renditions

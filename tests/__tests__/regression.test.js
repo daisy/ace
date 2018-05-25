@@ -75,3 +75,15 @@ test('issue #170: heading with `doc-subtitle` role were reported empty', async (
   const report = await ace('../data/issue-170');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
+
+test('issue #182: named character references are parsed', async () => {
+  const report = await ace('../data/issue-182');
+  expect(report.assertions).toEqual(expect.arrayContaining([
+    expect.objectContaining({
+      "earl:testSubject": {
+        "url": "content_001.xhtml",
+        "dct:title": "Minimal – EPUB"
+      }
+    })
+  ]));
+});
