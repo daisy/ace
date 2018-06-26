@@ -2,6 +2,7 @@
   "title": "metadata-schema-accessMode",
   "testDesc": "Ensures a schema:accessMode metadata is present",
   "resDesc": "Add a 'schema:accessMode' metadata property to the Package Document",
+  "help": "'schema:accessMode' metadata property has to be defined in the Package Document",
   "kbPath": "docs/metadata/schema-org.html",
   "kbTitle": "Schema.org Accessibility Metadata",
   "impact": "serious",
