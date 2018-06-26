@@ -2,6 +2,7 @@
   "title": "metadata-schema-accessibilityFeature",
   "testDesc": "Ensures a schema:accessibilityFeature metadata is present",
   "resDesc": "Add a 'schema:accessibilityFeature' metadata property to the Package Document",
+  "help": "'schema:accessibilityFeature' metadata property has to be defined in the Package Document",
   "kbPath": "docs/metadata/schema-org.html",
   "kbTitle": "Schema.org Accessibility Metadata",
   "impact": "serious",
