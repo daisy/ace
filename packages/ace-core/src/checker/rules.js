@@ -5,7 +5,7 @@ const path = require('path');
 const winston = require('winston');
 
 const rules = [];
-const ruleProperties = ['title', 'testDesc', 'kbTitle', 'resDesc', 'kbPath', 'impact', 'tag', 'spec', 'check'];
+const ruleProperties = ['title', 'testDesc', 'kbTitle', 'resDesc', 'kbPath', 'impact', 'tag', 'spec', 'check', 'help'];
 
 function isRuleWellDefined(rule) {
   if (Object.keys(rule).length !== ruleProperties.length) {
