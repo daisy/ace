@@ -2,6 +2,7 @@
   "title": "metadata-schema-accessibilitySummary",
   "testDesc": "Ensures a schema:accessibilitySummary metadata is present",
   "resDesc": "Add a 'schema:accessibilitySummary' metadata property to the Package Document",
+  "help": "'schema:accessibilitySummary' metadata property has to be defined in the Package Document",
   "kbPath": "docs/metadata/schema-org.html",
   "kbTitle": "Schema.org Accessibility Metadata",
   "impact": "serious",
