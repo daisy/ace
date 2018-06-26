@@ -6,7 +6,11 @@ const fs = require('fs');
 
 const Rules = require('../checker/rules');
 
+
 const PATH_TO_RULES_TEMPLATE = `${__dirname}/rules.mustache`;
+
+// fs.writeFileSync('rules.html' , getAllRulesAsHTML());
+// console.log(getAllRulesAsJSON());
 
 function mapUrlsToKB(axerules) {
   // TODO: axe helping urls should be map to daisy knowledge database
