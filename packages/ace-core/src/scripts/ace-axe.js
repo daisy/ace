@@ -166,6 +166,7 @@ daisy.ace.run = function(done) {
         selector: '[*|type~="pagebreak"], [role~="doc-pagebreak"]',
         any: ['aria-label', 'non-empty-title'],
         metadata: {
+          help: "Page markers should have an accessible label",
           description: "Ensure page markers have an accessible label",
         },
         tags: ['cat.epub']
