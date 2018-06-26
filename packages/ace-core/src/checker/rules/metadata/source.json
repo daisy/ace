@@ -2,6 +2,7 @@
   "title": "epub-pagesource",
   "testDesc": "Ensures the source of page breaks is identified",
   "resDesc": "Add a 'dc:source' metadata property to the Package Document",
+  "help": "If the content has page breaks, the print source has to be identified in the Package Document metadata with dc:source",
   "kbPath": "docs/navigation/pagelist.html",
   "kbTitle": "Page Navigation",
   "impact": "serious",
