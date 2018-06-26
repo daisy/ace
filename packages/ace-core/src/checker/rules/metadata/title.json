@@ -2,7 +2,7 @@
   "title": "epub-title",
   "testDesc": "Ensures the EPUB has a title",
   "resDesc": "Add a 'dc:title' metadata property to the Package Document",
-  "help": "The EPUB’s title has to be defined in the Package Document",
+  "help": "The EPUB’s title has to be defined in 'dc:title' metadata property of the Package Document",
   "kbPath": "",
   "kbTitle": "EPUB Title",
   "impact": "serious",
