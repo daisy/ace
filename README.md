@@ -33,3 +33,15 @@ User and developer documentation is available on [Ace’s web site](https://dais
 
 You can also review the current work plan by looking at the [current milestones](https://github.com/daisy/ace/milestones) defined in the issue tracker.
 
+## Who’s using Ace?
+
+Several publishers and service providers have integrated Ace in their production or QA workflows, including:
+
+- Hachette Livre France
+- Vital Source
+
+Some tools based on Ace are also well worth checking out:
+
+- [BACC](http://bacc.dzb.de/) – the born accessible content checker – developped by the German Central Library for the Blind in Leipzig (DZB). It is a web application backed by Ace, providing a user-friendly graphical user interface, and allowing batch processing of several EPUB files. Available in German and English.
+- [Ace plugin for Sigil](https://www.mobileread.com/forums/showthread.php?t=294678). It allows to run Ace checks directly from the Sigil EPUB editor. Check this [screecast](https://screencast-o-matic.com/watch/cF1hQNb9LX) for a quick demo.
+
