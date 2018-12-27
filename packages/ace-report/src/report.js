@@ -110,9 +110,12 @@ module.exports = class Report {
               return fs.pathExists(fromPath)
                 .then((exists) => {
                   if (exists) {
-                    return fs.copy(fromPath, toPath, { overwrite: false });
+                    return fs.copy(fromPath, toPath, { overwrite: false })
+                    .catch(err => {
+                      winston.warn(`Couldn't copy resource '${img.src}'. Error: ${err}`);
+                    });
                   }
-                  winston.warn(`Couldn’t copy resource '${img.src}'`);
+                  winston.warn(`Couldn’t copy resource '${img.src}'. File does not exist.`);
                   return Promise.resolve();
                 });
             }));
