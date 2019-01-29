@@ -22,7 +22,6 @@
     "micromatch": "^3.1.4",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.1",
-    "snyk": "^1.56.0",
     "standard-version": "^4.2.0",
     "strip-ansi": "^4.0.0",
     "uglify-js": "^3.0.8",
@@ -38,10 +37,16 @@
     "lint": "echo lint script not implemented",
     "postinstall": "yarn build",
     "test": "jest",
-    "watch": "yarn build && node ./scripts/watch.js"
+    "watch": "yarn build && node ./scripts/watch.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/tests/jest-setup.js",
     "testEnvironment": "node"
+  },
+  "snyk": true,
+  "dependencies": {
+    "snyk": "^1.123.0"
   }
 }
