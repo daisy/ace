@@ -17,7 +17,7 @@ function asString(arrayOrString) {
   return '';
 }
 
-function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kbTitle, ruleDesc }) {
+function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kbTitle, ruleDesc, tag }) {
   return new builders.AssertionBuilder()
     .withAssertedBy(ASSERTED_BY)
     .withMode(MODE)
@@ -30,7 +30,7 @@ function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kb
           KB_BASE + kbPath,
           kbTitle,
           ruleDesc)
-        .withRulesetTags(['EPUB'])
+        .withRulesetTags([tag])
         .build())
     .withResult(
       new builders.ResultBuilder('fail')
