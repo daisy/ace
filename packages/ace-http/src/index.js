@@ -35,6 +35,7 @@ const cli = meow(`
     -V, --verbose          display verbose output
     -s, --silent           do not display any output
 
+    -l, --lang  <language> language code for localized messages (e.g. "fr"), default is "en"
   Examples
     $ ace-http -p 3000
 `, {
@@ -44,10 +45,11 @@ const cli = meow(`
     v: 'version',
     V: 'verbose',
     H: 'host',
-    p: 'port'
+    p: 'port',
+    l: 'lang',
   },
   boolean: ['verbose', 'silent'],
-  string: ['host', 'port'],
+  string: ['host', 'port', 'lang'],
 });
 
 function run() {
@@ -110,7 +112,8 @@ function postJob(req, res, next) {
       internal: {
         "id": jobid,
         "outputDir": tmp.dirSync({ unsafeCleanup: true }).name,
-        "epubPath": req.file.path
+        "epubPath": req.file.path,
+        "lang": cli.flags.lang,
       }
     };
     newJob(jobdata);
@@ -149,7 +152,7 @@ function newJob(jobdata) {
   joblist.push(jobdata);
 
   // execute the job with Ace
-  ace(jobdata.internal.epubPath, {'jobid': jobdata.internal.id, 'outdir': jobdata.internal.outputDir})
+  ace(jobdata.internal.epubPath, {'jobid': jobdata.internal.id, 'outdir': jobdata.internal.outputDir, 'lang': jobdata.internal.lang})
   .then((jobData) => {
     var jobId = jobData[0];
     var idx = joblist.findIndex(job => job.internal.id === jobId);

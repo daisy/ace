@@ -1,0 +1,10 @@
+{
+    "checkepub": {
+        "metadataviolation": {
+            "testdesc": "Ensures a '{{name}}' metadata is present",
+            "resdesc": "Add a '{{name}}' metadata property to the Package Document",
+            "ruledesc": "Publications must declare the '{{name}}' metadata",
+            "kbtitle": "Schema.org Accessibility Metadata"
+        }
+    }
+}

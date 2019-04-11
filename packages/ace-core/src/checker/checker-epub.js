@@ -3,6 +3,8 @@
 const builders = require('@daisy/ace-report').builders;
 const winston = require('winston');
 
+const { localize } = require('../l10n/localize');
+
 const ASSERTED_BY = 'Ace';
 const MODE = 'automatic';
 const KB_BASE = 'http://kb.daisy.org/publishing/';
@@ -42,11 +44,11 @@ function newMetadataAssertion(name, impact = 'serious') {
   return newViolation({
     impact,
     title: `metadata-${name.toLowerCase().replace(':', '-')}`,
-    testDesc: `Ensures a '${name}' metadata is present`,
-    resDesc: `Add a '${name}' metadata property to the Package Document`,
+    testDesc: localize("checkepub.metadataviolation.testdesc", { name }),
+    resDesc: localize("checkepub.metadataviolation.resdesc", { name }),
     kbPath: 'docs/metadata/schema-org.html',
-    kbTitle: 'Schema.org Accessibility Metadata',
-    ruleDesc: `Publications must declare the '${name}' metadata`
+    kbTitle: localize("checkepub.metadataviolation.kbtitle"),
+    ruleDesc: localize("checkepub.metadataviolation.ruledesc", { name })
   });
 }
 
@@ -66,6 +68,7 @@ function checkMetadata(assertions, epub) {
 }
 
 function checkTitle(assertions, epub) {
+  // TODO translate / localize / l10n
   const title = asString(epub.metadata['dc:title']);
   if (title === '') {
     assertions.withAssertions(newViolation({
@@ -80,6 +83,7 @@ function checkTitle(assertions, epub) {
 }
 
 function checkPageSource(assertion, epub) {
+  // TODO translate / localize / l10n
   if (epub.navDoc.hasPageList
     && (epub.metadata['dc:source'] === undefined
     || epub.metadata['dc:source'].toString() === '')) {

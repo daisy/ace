@@ -9,6 +9,7 @@ function runAce(epub, {
     tmpdir,
     verbose = false,
     silent = true,
+    lang = "en",
   } = {}) {
   logger.initLogger({ verbose, silent });
   return ace(epub, {
@@ -17,6 +18,7 @@ function runAce(epub, {
     tmpdir,
     verbose,
     silent,
+    lang,
   });
 }
 

@@ -22,7 +22,7 @@ const scripts = [
   require.resolve('../scripts/ace-extraction.js'),
 ];
 
-async function checkSingle(spineItem, epub, browser) {
+async function checkSingle(spineItem, epub, browser, lang) {
   winston.verbose(`- Processing ${spineItem.relpath}`);
   try {
     let url = spineItem.url;
@@ -43,20 +43,20 @@ async function checkSingle(spineItem, epub, browser) {
     await page.goto(url);
 
     try {
-      // TODO translate / localize / l10n
-      const lang = "fr";
       winston.info(`- Axe locale: [${lang}]`);
 
       // https://github.com/dequelabs/axe-core#localization
       // https://github.com/dequelabs/axe-core/tree/develop/locales
 
-      const localePath = path.resolve(require.resolve('axe-core'), `../locales/${lang}.json`);
-      if (fs.existsSync(localePath)) {
-        const localeStr = fs.readFileSync(localePath, { encoding: "utf8" });
-        const localeScript = `window.__axeLocale__=${localeStr};`;
-        await utils.addScriptContents([localeScript], page);
-      } else {
-        winston.info(`- Axe locale missing? [${lang}] => ${localePath}`);
+      if (lang && lang !== "en" && lang.indexOf("en-") !== 0) { // default English built into Axe source code
+        const localePath = path.resolve(require.resolve('axe-core'), `../locales/${lang}.json`);
+        if (fs.existsSync(localePath)) {
+          const localeStr = fs.readFileSync(localePath, { encoding: "utf8" });
+          const localeScript = `window.__axeLocale__=${localeStr};`;
+          await utils.addScriptContents([localeScript], page);
+        } else {
+          winston.info(`- Axe locale missing? [${lang}] => ${localePath}`);
+        }
       }
     } catch (err) {
       console.log(err);
@@ -119,14 +119,14 @@ async function checkSingle(spineItem, epub, browser) {
   }
 }
 
-module.exports.check = async (epub) => {
+module.exports.check = async (epub, lang) => {
   const args = [];
   if (os.platform() !== 'win32' && os.platform() !== 'darwin') {
     args.push('--no-sandbox')
   }
   const browser = await puppeteer.launch({ args });
   winston.info('Checking documents...');
-  return pMap(epub.contentDocs, doc => checkSingle(doc, epub, browser), { concurrency: 4 })
+  return pMap(epub.contentDocs, doc => checkSingle(doc, epub, browser, lang), { concurrency: 4 })
   .then(async (results) => {
     await browser.close();
     return results;
