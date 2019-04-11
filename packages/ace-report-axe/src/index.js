@@ -75,7 +75,7 @@ function  axe2ace(spineItem, axeResults) {
     // process axe's individual checks for a single content document
     axeResults.violations.forEach((violation) => {
 
-      // TODO: tweak ResultBuilder info, nodes + relatedNodes (e.g. region Axe rule for containing landmarks)
+      // TODO: remove this debug trace
       console.log(JSON.stringify(violation, null, 4));
 
       const kbURL = (kbMap.map.hasOwnProperty(violation.id))
@@ -148,7 +148,10 @@ function  axe2ace(spineItem, axeResults) {
     });
 
     const ass = assertion.build();
+
+    // TODO: remove this debug trace
     console.log(JSON.stringify(ass, null, 4));
+
     return ass;
 }
 
