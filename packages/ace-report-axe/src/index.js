@@ -76,7 +76,7 @@ function  axe2ace(spineItem, axeResults) {
     axeResults.violations.forEach((violation) => {
 
       // TODO: tweak ResultBuilder info, nodes + relatedNodes (e.g. region Axe rule for containing landmarks)
-      // console.log(JSON.stringify(violation, null, 4));
+      console.log(JSON.stringify(violation, null, 4));
 
       const kbURL = (kbMap.map.hasOwnProperty(violation.id))
         ? kbMap.baseUrl + kbMap.map[violation.id].url
@@ -92,21 +92,64 @@ function  axe2ace(spineItem, axeResults) {
         .withHelp(kbURL, kbTitle, violation.help)
         .withRulesetTags(violation.tags)
         .build();
-      violation.nodes.forEach(node => assertion.withAssertions(
-        new builders.AssertionBuilder()
-          .withAssertedBy('aXe')
-          .withMode('automatic')
-          .withTest(test)
-          .withResult(
-            new builders.ResultBuilder('fail')
-              .withDescription(node.failureSummary)
-              .withPointer(node.target, node.targetCFI)
-              .withHTML(node.html)
-              .build())
-          .build()));
-      });
 
-    return assertion.build();
+      violation.nodes.forEach((node) => {
+
+        let description = node.failureSummary;
+
+        // TODO translate / localize / l10n
+        // weird hard-coded Axe Core message (now removed here insteadf of downstream)
+        description = description.replace("Fix all of the following:", "");
+        description = description.replace("Fix any of the following:", "");
+        description = description.trim();
+
+        let target = node.target;
+        let targetCFI = node.targetCFI;
+        let html = node.html;
+
+        const allAnyArrayItems = [];
+        if (node.any) {
+          node.any.forEach((anyItem) => {
+            allAnyArrayItems.push(anyItem);
+          });
+        }
+        if (node.all) {
+          node.all.forEach((allItem) => {
+            allAnyArrayItems.push(allItem);
+          });
+        }
+        allAnyArrayItems.forEach((item) => {
+          if (item.relatedNodes) {
+            item.relatedNodes.forEach((relatedNode) => {
+              if (relatedNode.html && relatedNode.target && relatedNode.target.length && relatedNode.targetCFI && relatedNode.targetCFI.length) {
+                html += " <!--##--> ";
+                html += relatedNode.html;
+
+                target.push(relatedNode.target[0]);
+                targetCFI.push(relatedNode.targetCFI[0]);
+              }
+            });
+          }
+        });
+  
+        assertion.withAssertions(
+          new builders.AssertionBuilder()
+            .withAssertedBy('aXe')
+            .withMode('automatic')
+            .withTest(test)
+            .withResult(
+              new builders.ResultBuilder('fail')
+                .withDescription(description)
+                .withPointer(target, targetCFI)
+                .withHTML(html)
+                .build())
+            .build());
+      });
+    });
+
+    const ass = assertion.build();
+    console.log(JSON.stringify(ass, null, 4));
+    return ass;
 }
 
 module.exports.axe2ace = axe2ace;

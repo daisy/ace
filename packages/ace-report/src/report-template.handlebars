@@ -510,8 +510,6 @@
       var tdRule = $("<td>" + violation["rule"] + "<br/><br/><span class='engine'>" + violation["engine"] + "</span></td>");
 
       var desc = violation["desc"];
-      desc = desc.replace("Fix all of the following:", "");
-      desc = desc.replace("Fix any of the following:", "");
 
       var detailsArr = desc.split("\n");
       var tdDetails = $("<td class='details'></td>");

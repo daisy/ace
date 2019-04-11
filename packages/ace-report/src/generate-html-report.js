@@ -68,8 +68,6 @@ module.exports = function generateHtmlReport(reportData) {
 
 
         var desc = violation["desc"];
-        desc = desc.replace("Fix all of the following:", ""); // TODO translate / localize / l10n
-        desc = desc.replace("Fix any of the following:", ""); // TODO translate / localize / l10n
 
         var detailsArr = desc.split("\n");
         var listStr = '';
