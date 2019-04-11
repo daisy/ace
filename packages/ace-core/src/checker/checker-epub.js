@@ -125,7 +125,12 @@ function check(epub, report) {
     hasBindings: epub.hasBindings,
     hasSVGContentDocuments: epub.hasSVGContentDocuments,
   });
-  
+
+  // TODO: remove this debug trace
+  if (builtAssertions.assertions && builtAssertions.assertions.length > 0) {
+    console.log(JSON.stringify(builtAssertions.assertions, null, 4));
+  }
+
   winston.info(`- ${epub.packageDoc.src}: ${
     (builtAssertions.assertions && builtAssertions.assertions.length > 0)
       ? builtAssertions.assertions.length

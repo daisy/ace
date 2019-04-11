@@ -1,2 +1,10 @@
 {
+    "checkepub": {
+        "metadataviolation": {
+            "testdesc": "Vérifie que la métadonnée '{{name}}' est présente",
+            "resdesc": "Ajouter la métadonnée '{{name}}' au Package Document",
+            "ruledesc": "Les publications doivent déclarer la métadonnée '{{name}}'",
+            "kbtitle": "Métadonnées d'accessibilité Schema.org"
+        }
+    }
 }

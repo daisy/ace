@@ -40,7 +40,7 @@ function ace(epub, options = {}) {
 
 // yarn build && yarn test -t "nothing to report"
 test('nothing to report', async () => {
-  const report = await ace('../data/base-epub-30');
+  const report = await ace('../data/base-epub-30', {lang:"fr"});
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
 

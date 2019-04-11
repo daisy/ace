@@ -1,7 +1,7 @@
-import * as i18n from 'i18next';
+const i18n = require('i18next');
 
-import * as enJson from "./locales/en.json";
-import * as frJson from "./locales/fr.json";
+const enJson = require("./locales/en");
+const frJson = require("./locales/fr");
 
 export const LANGUAGES = {
     en: "English",
