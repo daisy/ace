@@ -22,6 +22,13 @@ module.exports.initLogger = function initLogger(options = {}) {
     fs.removeSync(logfile);
   }
 
+  // TODO remove this, this is just for testing/debugging
+  if (options.verbose && !options.silent) {
+    console.log(`>>>>> LOG FILE PATH: ${logfile}`);
+    process.stdout.write(`>>>>> LOG FILE PATH: ${logfile}`);
+    process.stderr.write(`>>>>> LOG FILE PATH: ${logfile}`);
+  }
+
   // set up logger
   const level = (options.verbose) ? 'verbose' : logConfig.level;
   winston.configure({

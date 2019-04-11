@@ -16,8 +16,8 @@ module.exports = function generateHtmlReport(reportData) {
       'wcag2a': 'WCAG 2.0 A',
       'wcag2aa': 'WCAG 2.0 AA',
       'EPUB': 'EPUB',
-      'best-practice': 'Best Practice',
-      'other': 'Other'
+      'best-practice': 'Best Practice', // TODO translate / localize / l10n
+      'other': 'Other' // TODO translate / localize / l10n
     };
 
     // return 5 data cells for each ruleset: critical, serious, moderate, minor, total
@@ -61,15 +61,15 @@ module.exports = function generateHtmlReport(reportData) {
         <td><em>\"${violation['fileTitle']}\"<br/><br/><code class='location'>${violation['location']}</code>`;
 
         if (violation.html) {
-          htmlStr +=`<br/><br/><div class='snippet'>Snippet:<code>${violation.html.trim()}</code></div>`;
+          htmlStr +=`<br/><br/><div class='snippet'>Snippet:<code>${violation.html.trim()}</code></div>`; // TODO translate / localize / l10n
         }
 
         htmlStr += "</td>";
 
 
         var desc = violation["desc"];
-        desc = desc.replace("Fix all of the following:", "");
-        desc = desc.replace("Fix any of the following:", "");
+        desc = desc.replace("Fix all of the following:", ""); // TODO translate / localize / l10n
+        desc = desc.replace("Fix any of the following:", ""); // TODO translate / localize / l10n
 
         var detailsArr = desc.split("\n");
         var listStr = '';
@@ -82,7 +82,7 @@ module.exports = function generateHtmlReport(reportData) {
         htmlStr += `<td class='details'>
         <ul>${listStr}</ul>
         <p><a href='${violation['kburl']}' target='_blank'>Learn more about ${violation['kbtitle']}</a></p>
-        </td>`;
+        </td>`; // TODO translate / localize / l10n
 
         htmlStr += "</tr>";
       });

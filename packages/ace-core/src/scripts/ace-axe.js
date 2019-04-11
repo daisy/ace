@@ -77,7 +77,7 @@ daisy.ace.run = function(done) {
             jsonItem.targetCFI.push(cfi);
           }
         } else {
-          throw "WTF?!";
+          throw "WTF?!"; // TODO translate / localize / l10n ;)
         }
       }
     }
@@ -149,11 +149,11 @@ daisy.ace.run = function(done) {
           impact: 'minor',
           messages: {
             pass: function anonymous(it) {
-              var out = 'Element has an ARIA role matching its epub:type';
+              var out = 'Element has an ARIA role matching its epub:type'; // TODO translate / localize / l10n
               return out;
             },
             fail: function anonymous(it) {
-              var out = 'Element has no ARIA role matching its epub:type';
+              var out = 'Element has no ARIA role matching its epub:type'; // TODO translate / localize / l10n
               return out;
             }
           }
@@ -166,7 +166,7 @@ daisy.ace.run = function(done) {
         selector: '[*|type~="pagebreak"], [role~="doc-pagebreak"]',
         any: ['aria-label', 'non-empty-title'],
         metadata: {
-          description: "Ensure page markers have an accessible label",
+          description: "Ensure page markers have an accessible label", // TODO translate / localize / l10n
         },
         tags: ['cat.epub']
       },
@@ -175,15 +175,16 @@ daisy.ace.run = function(done) {
         selector: '[*|type]',
         any: ['matching-aria-role'],
         metadata: {
-          help: "ARIA role should be used in addition to epub:type",
-          description: "Ensure the element has an ARIA role matching its epub:type",
+          help: "ARIA role should be used in addition to epub:type", // TODO translate / localize / l10n
+          description: "Ensure the element has an ARIA role matching its epub:type", // TODO translate / localize / l10n
         },
         tags: ['best-practice']
       },
       {
         id: 'landmark-one-main',
         all: [
-          "has-no-more-than-one-main"
+          "has-no-more-than-one-main",
+          "page-no-duplicate-main" // Was `has-no-more-than-one-main`, see https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19
           ],
       }
     ]
@@ -193,6 +194,8 @@ daisy.ace.run = function(done) {
     {
       "rules": {
         "bypass": { enabled: false },
+        // "region": { enabled: false },
+        // "implicit-role-fallback": { enabled: false },
       }
     },
     function(axeError, axeResult) {
