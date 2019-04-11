@@ -41,6 +41,29 @@ async function checkSingle(spineItem, epub, browser) {
     
     const page = await browser.newPage();
     await page.goto(url);
+
+    try {
+      // TODO translate / localize / l10n
+      const lang = "fr";
+      winston.info(`- Axe locale: [${lang}]`);
+
+      // https://github.com/dequelabs/axe-core#localization
+      // https://github.com/dequelabs/axe-core/tree/develop/locales
+
+      const localePath = path.resolve(require.resolve('axe-core'), `../locales/${lang}.json`);
+      if (fs.existsSync(localePath)) {
+        const localeStr = fs.readFileSync(localePath, { encoding: "utf8" });
+        const localeScript = `window.__axeLocale__=${localeStr};`;
+        await utils.addScriptContents([localeScript], page);
+      } else {
+        winston.info(`- Axe locale missing? [${lang}] => ${localePath}`);
+      }
+    } catch (err) {
+      console.log(err);
+      winston.verbose(err);
+      winston.info(`- Axe locale problem? [${lang}] => ${localePath}`);
+    }
+
     await utils.addScripts(scripts, page);
 
     const results = await page.evaluate(() => new Promise((resolve, reject) => {

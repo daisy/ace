@@ -8,6 +8,10 @@ daisy.epub = daisy.epub || {};
 
 daisy.epub.createCFI = function(elem) {
 
+  if (elem && elem.parentNode && elem.parentNode.nodeType && elem.parentNode.nodeType !== 1) {
+    return "/"; // HTML root element (not "/2"!)
+  }
+
   var cfi_ = undefined;
   var currentElement = elem;
 
@@ -84,6 +88,7 @@ daisy.ace.run = function(done) {
   };
 
   window.axe.configure({
+    locale: window.__axeLocale__, // configured from host bootstrapper page (checker-chromium)
     checks: [
       {
         id: "matching-aria-role",
@@ -183,7 +188,6 @@ daisy.ace.run = function(done) {
       {
         id: 'landmark-one-main',
         all: [
-          "has-no-more-than-one-main",
           "page-no-duplicate-main" // Was `has-no-more-than-one-main`, see https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19
           ],
       }
@@ -194,8 +198,29 @@ daisy.ace.run = function(done) {
     {
       "rules": {
         "bypass": { enabled: false },
-        // "region": { enabled: false },
-        // "implicit-role-fallback": { enabled: false },
+
+        // https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md
+        // https://github.com/dequelabs/axe-core/compare/v2.6.1...v3.2.2#diff-666edcd06e006682440ca9e74470a171
+        // https://github.com/dequelabs/axe-core/commits/v3.2.2/doc/rule-descriptions.md
+        // https://github.com/dequelabs/axe-core/blob/v2.6.1/doc/rule-descriptions.md
+        "label-content-name-mismatch": { enabled: false },
+        "aria-hidden-focus": { enabled: false },
+        "landmark-complementary-is-top-level": { enabled: false },
+        "form-field-multiple-labels": { enabled: false },
+        "duplicate-id-active": { enabled: false },
+        "duplicate-id-aria": { enabled: false },
+        "css-orientation-lock": { enabled: false },
+        "aria-allowed-role": { enabled: false },
+        "html-xml-lang-mismatch": { enabled: false },
+        "autocomplete-valid": { enabled: false },
+        "landmark-banner-is-top-level": { enabled: false },
+        "landmark-contentinfo-is-top-level": { enabled: false },
+        "frame-tested": { enabled: false },
+        "landmark-no-duplicate-banner": { enabled: false }, // landmark-no-more-than-one-banner
+        "landmark-no-duplicate-contentinfo": { enabled: false }, // landmark-no-more-than-one-contentinfo
+        "page-has-heading-one": { enabled: false },
+        "aria-dpub-role-fallback": { enabled: false },
+        "focus-order-semantics": { enabled: false },
       }
     },
     function(axeError, axeResult) {
