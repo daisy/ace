@@ -76,7 +76,7 @@ function  axe2ace(spineItem, axeResults) {
     axeResults.violations.forEach((violation) => {
 
       // TODO: remove this debug trace
-      console.log(JSON.stringify(violation, null, 4));
+      // console.log(JSON.stringify(violation, null, 4));
 
       const kbURL = (kbMap.map.hasOwnProperty(violation.id))
         ? kbMap.baseUrl + kbMap.map[violation.id].url
@@ -164,7 +164,7 @@ function  axe2ace(spineItem, axeResults) {
     const ass = assertion.build();
 
     // TODO: remove this debug trace
-    console.log(JSON.stringify(ass, null, 4));
+    // console.log(JSON.stringify(ass, null, 4));
 
     return ass;
 }
