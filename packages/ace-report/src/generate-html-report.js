@@ -5,7 +5,7 @@ const handlebars = require('handlebars');
 const fs = require('fs');
 const path = require('path');
 
-const { localize } = require('../l10n/localize');
+const { localize } = require('./l10n/localize');
 
 // generate the html report and return it as a string
 module.exports = function generateHtmlReport(reportData) {
