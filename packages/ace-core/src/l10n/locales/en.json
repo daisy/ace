@@ -5,6 +5,18 @@
             "resdesc": "Add a '{{name}}' metadata property to the Package Document",
             "ruledesc": "Publications must declare the '{{name}}' metadata",
             "kbtitle": "Schema.org Accessibility Metadata"
+        },
+        "titleviolation": {
+            "testdesc": "Ensures the EPUB has a title",
+            "resdesc": "Add a 'dc:title' metadata property to the Package Document",
+            "ruledesc": "Publications must have a title",
+            "kbtitle": "EPUB Title"
+        },
+        "pagesourceviolation": {
+            "testdesc": "Ensures the source of page breaks is identified",
+            "resdesc": "Add a 'dc:source' metadata property to the Package Document",
+            "ruledesc": "Publications with page breaks must declare the 'dc:source' metadata",
+            "kbtitle": "Page Navigation"
         }
     }
 }

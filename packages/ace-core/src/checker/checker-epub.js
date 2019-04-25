@@ -68,32 +68,30 @@ function checkMetadata(assertions, epub) {
 }
 
 function checkTitle(assertions, epub) {
-  // TODO translate / localize / l10n
   const title = asString(epub.metadata['dc:title']);
   if (title === '') {
     assertions.withAssertions(newViolation({
       title: 'epub-title',
-      testDesc: 'Ensures the EPUB has a title',
-      resDesc: 'Add a \'dc:title\' metadata property to the Package Document',
+      testDesc: localize("checkepub.titleviolation.testdesc"),
+      resDesc: localize("checkepub.titleviolation.resdesc"),
       kbPath: '',
-      kbTitle: 'EPUB Title',
-      ruleDesc: 'Publications must have a title',
+      kbTitle: localize("checkepub.titleviolation.kbtitle"),
+      ruleDesc: localize("checkepub.titleviolation.ruledesc")
     }));
   }
 }
 
 function checkPageSource(assertion, epub) {
-  // TODO translate / localize / l10n
   if (epub.navDoc.hasPageList
     && (epub.metadata['dc:source'] === undefined
     || epub.metadata['dc:source'].toString() === '')) {
     assertion.withAssertions(newViolation({
       title: 'epub-pagesource',
-      testDesc: 'Ensures the source of page breaks is identified',
-      resDesc: 'Add a \'dc:source\' metadata property to the Package Document',
+      testDesc: localize("checkepub.pagesourceviolation.testdesc"),
+      resDesc: localize("checkepub.pagesourceviolation.resdesc"),
       kbPath: 'docs/navigation/pagelist.html',
-      kbTitle: 'Page Navigation',
-      ruleDesc: 'Publications with page breaks must declare the \'dc:source\' metadata',
+      kbTitle: localize("checkepub.pagesourceviolation.kbtitle"),
+      ruleDesc: localize("checkepub.pagesourceviolation.ruledesc")
     }));
   }
 }

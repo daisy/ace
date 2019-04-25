@@ -5,6 +5,18 @@
             "resdesc": "Ajouter la métadonnée '{{name}}' au Package Document",
             "ruledesc": "Les publications doivent déclarer la métadonnée '{{name}}'",
             "kbtitle": "Métadonnées d'accessibilité Schema.org"
+        },
+        "titleviolation": {
+            "testdesc": "Assure que le EPUB a un titre",
+            "resdesc": "Ajouter une métadonnée 'dc:title' au Package Document",
+            "ruledesc": "Une publication doit avoir un titre",
+            "kbtitle": "Titre EPUB"
+        },
+        "pagesourceviolation": {
+            "testdesc": "Assure que la source des breaks de page est identifiée",
+            "resdesc": "Ajouter une métadonnée 'dc:source' au Package Document",
+            "ruledesc": "Une publication avec des breaks de page doit déclarer la métadonnée 'dc:source'",
+            "kbtitle": "Navigation de page"
         }
     }
 }
