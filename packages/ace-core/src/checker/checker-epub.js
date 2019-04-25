@@ -125,9 +125,9 @@ function check(epub, report) {
   });
 
   // TODO: remove this debug trace
-  if (builtAssertions.assertions && builtAssertions.assertions.length > 0) {
-    console.log(JSON.stringify(builtAssertions.assertions, null, 4));
-  }
+  // if (builtAssertions.assertions && builtAssertions.assertions.length > 0) {
+  //   console.log(JSON.stringify(builtAssertions.assertions, null, 4));
+  // }
 
   winston.info(`- ${epub.packageDoc.src}: ${
     (builtAssertions.assertions && builtAssertions.assertions.length > 0)

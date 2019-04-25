@@ -12,6 +12,8 @@ const winston = require('winston');
 const axe2ace = require('@daisy/ace-report-axe');
 const utils = require('@daisy/puppeteer-utils');
 
+const { getRawLocalizeJson } = require('../l10n/localize');
+
 tmp.setGracefulCleanup();
 
 const scripts = [
@@ -42,6 +44,7 @@ async function checkSingle(spineItem, epub, browser, lang) {
     const page = await browser.newPage();
     await page.goto(url);
 
+    let localePath = "";
     try {
       winston.info(`- Axe locale: [${lang}]`);
 
@@ -49,7 +52,7 @@ async function checkSingle(spineItem, epub, browser, lang) {
       // https://github.com/dequelabs/axe-core/tree/develop/locales
 
       if (lang && lang !== "en" && lang.indexOf("en-") !== 0) { // default English built into Axe source code
-        const localePath = path.resolve(require.resolve('axe-core'), `../locales/${lang}.json`);
+        localePath = path.resolve(require.resolve('axe-core'), `../locales/${lang}.json`);
         if (fs.existsSync(localePath)) {
           const localeStr = fs.readFileSync(localePath, { encoding: "utf8" });
           const localeScript = `window.__axeLocale__=${localeStr};`;
@@ -58,6 +61,24 @@ async function checkSingle(spineItem, epub, browser, lang) {
           winston.info(`- Axe locale missing? [${lang}] => ${localePath}`);
         }
       }
+
+      let localizedScript = "";
+      const rawJson = getRawLocalizeJson();
+
+      ["axecheck", "axerule"].forEach((checkOrRule) => {
+        const checkOrRuleKeys = Object.keys(rawJson[checkOrRule]);
+        for (const checkOrRuleKey of checkOrRuleKeys) {
+          const msgs = Object.keys(rawJson[checkOrRule][checkOrRuleKey]);
+          for (const msg of msgs) {
+            const k = `__aceLocalize__${checkOrRule}_${checkOrRuleKey}_${msg}`;
+            localizedScript += `window[${k}]="${rawJson[checkOrRule][checkOrRuleKey][msg]}";\n`;
+          }
+        }
+      });
+      // winston.info(localizedScript);
+      // console.log(localizedScript);
+      await utils.addScriptContents([localizedScript], page);
+      
     } catch (err) {
       console.log(err);
       winston.verbose(err);

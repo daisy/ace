@@ -18,5 +18,20 @@
             "ruledesc": "Une publication avec des breaks de page doit déclarer la métadonnée 'dc:source'",
             "kbtitle": "Navigation de page"
         }
+    },
+    "axecheck": {
+        "matching-aria-role": {
+            "pass": "Un element a un role ARIA qui correspond à son epub:type",
+            "fail": "Un element n'a pas un role ARIA qui correspond à son epub:type"
+        }
+    },
+    "axerule": {
+        "pagebreak-label": {
+            "desc": "Assure que les marques de page ont un label accessible"
+        },
+        "epub-type-has-matching-role": {
+            "help": "Un role ARIA devrait être utilisé en plus de epub:type",
+            "desc": "Assure que un element a un role ARIA qui corresponde à son epub:type"
+        }
     }
 }

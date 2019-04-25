@@ -18,5 +18,20 @@
             "ruledesc": "Publications with page breaks must declare the 'dc:source' metadata",
             "kbtitle": "Page Navigation"
         }
+    },
+    "axecheck": {
+        "matching-aria-role": {
+            "pass": "Element has an ARIA role matching its epub:type",
+            "fail": "Element has no ARIA role matching its epub:type"
+        }
+    },
+    "axerule": {
+        "pagebreak-label": {
+            "desc": "Ensure page markers have an accessible label"
+        },
+        "epub-type-has-matching-role": {
+            "help": "ARIA role should be used in addition to epub:type",
+            "desc": "Ensure the element has an ARIA role matching its epub:type"
+        }
     }
 }
