@@ -1,0 +1,7 @@
+{
+    "bestpractice": "Best Practice",
+    "other": "Other",
+    "snippet": "Snippet:",
+    "learnmoreabout": "Learn more about {{name}}",
+    "missingheading": "Missing heading: h{{i}}"
+}

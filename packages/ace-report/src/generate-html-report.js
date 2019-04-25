@@ -5,6 +5,8 @@ const handlebars = require('handlebars');
 const fs = require('fs');
 const path = require('path');
 
+const { localize } = require('../l10n/localize');
+
 // generate the html report and return it as a string
 module.exports = function generateHtmlReport(reportData) {
 
@@ -16,8 +18,8 @@ module.exports = function generateHtmlReport(reportData) {
       'wcag2a': 'WCAG 2.0 A',
       'wcag2aa': 'WCAG 2.0 AA',
       'EPUB': 'EPUB',
-      'best-practice': 'Best Practice', // TODO translate / localize / l10n
-      'other': 'Other' // TODO translate / localize / l10n
+      'best-practice': localize("bestpractice"),
+      'other': localize("other")
     };
 
     // return 5 data cells for each ruleset: critical, serious, moderate, minor, total
@@ -61,7 +63,7 @@ module.exports = function generateHtmlReport(reportData) {
         <td><em>\"${violation['fileTitle']}\"<br/><br/><code class='location'>${violation['location']}</code>`;
 
         if (violation.html) {
-          htmlStr +=`<br/><br/><div class='snippet'>Snippet:<code>${violation.html.trim()}</code></div>`; // TODO translate / localize / l10n
+          htmlStr +=`<br/><br/><div class='snippet'>${localize("snippet")}<code>${violation.html.trim()}</code></div>`;
         }
 
         htmlStr += "</td>";
@@ -79,8 +81,8 @@ module.exports = function generateHtmlReport(reportData) {
 
         htmlStr += `<td class='details'>
         <ul>${listStr}</ul>
-        <p><a href='${violation['kburl']}' target='_blank'>Learn more about ${violation['kbtitle']}</a></p>
-        </td>`; // TODO translate / localize / l10n
+        <p><a href='${violation['kburl']}' target='_blank'>${localize("learnmoreabout"), {name: violation['kbtitle']}}</a></p>
+        </td>`;
 
         htmlStr += "</tr>";
       });
