@@ -5,7 +5,7 @@ const handlebars = require('handlebars');
 const fs = require('fs');
 const path = require('path');
 
-const { localize } = require('./l10n/localize');
+const { localize, getCurrentLanguage } = require('./l10n/localize');
 
 // generate the html report and return it as a string
 module.exports = function generateHtmlReport(reportData) {
@@ -99,6 +99,29 @@ module.exports = function generateHtmlReport(reportData) {
       else {
         return new handlebars.SafeString('');
       }
+    });
+
+    handlebars.registerHelper('generatedBy', function(options) {
+       
+      return new handlebars.SafeString(localize("generatedby", {
+        v1: (reportData['earl:assertedBy']) ? reportData['earl:assertedBy']['doap:name'] : "??",
+        v2: (reportData['earl:assertedBy'] && reportData['earl:assertedBy']['doap:release']) ? reportData['earl:assertedBy']['doap:release']['doap:revision'] : "??",
+        v3: reportData['dct:date'],
+        interpolation: { escapeValue: false }}));
+
+      // if (reportData['earl:assertedBy'].hasOwnProperty('doap:name') &&
+      //     reportData['earl:assertedBy'].hasOwnProperty('doap:release') &&
+      //     reportData['earl:assertedBy']['doap:release'].hasOwnProperty('doap:revision')) {
+      // }
+      // else {
+      //   return new handlebars.SafeString('');
+      // }
+    });
+    handlebars.registerHelper('localize', function(key, options) {
+      if (key === "__language__") {
+        return getCurrentLanguage();
+      }
+      return new handlebars.SafeString(localize(key)); // `htmltemplate.${key}`
     });
 
     const content = fs.readFileSync(path.join(__dirname, "./report-template.handlebars")).toString();

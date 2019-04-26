@@ -6,5 +6,15 @@
     "missingheading": "Entête manquante: h{{i}}",
     "ace-description": "Vérifieur DAISY pour l'accessibilité EPUB",
     "report-title": "Rapport Ace",
-    "report-desc": "Rapport de vérification automatique pour l'accessibilité EPUB"
+    "report-desc": "Rapport de vérification automatique pour l'accessibilité EPUB",
+    "via": "via",
+    "doctitle": "Rapport d'accessibilité EPUB par DAISY Ace",
+    "enablejavascript": "Activer javascript pour meilleure performance.",
+    "doctopheading": "Rapport d'accessibilité EPUB",
+    "generatedby": "Généré par {{v1}} ({{v2}}) le {{v3}}",
+    "title": "Titre:",
+    "violations": "Violations",
+    "metadata": "Metadonnées",
+    "outlines": "Structures",
+    "images": "Images"
 }
