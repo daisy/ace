@@ -20,8 +20,9 @@ const RESOURCES = {
     },
 };
 
+const i18nextInstance = i18n.createInstance();
 // https://www.i18next.com/overview/configuration-options
-i18n.init({
+i18nextInstance.init({
     debug: false,
     resources: RESOURCES,
     // lng: undefined,
@@ -54,11 +55,11 @@ export function setCurrentLanguage(language) {
 export function localize(msg, options) {
     const opts = options || {};
 
-    if (i18n.language !== _currentLanguage) {
-        i18n.changeLanguage(_currentLanguage);
+    if (i18nextInstance.language !== _currentLanguage) {
+        i18nextInstance.changeLanguage(_currentLanguage);
     }
 
-    return i18n.t(msg, opts);
+    return i18nextInstance.t(msg, opts);
 };
 
 export function getRawLocalizeJson() {

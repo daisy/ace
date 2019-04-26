@@ -11,17 +11,20 @@ export const LANGUAGE_KEYS = Object.keys(LANGUAGES);
 
 export const DEFAULT_LANGUAGE = "en";
 
-// https://www.i18next.com/overview/configuration-options
-i18n.init({
-    debug: false,
-    resources: {
-        en: {
-            translation: enJson.default || enJson,
-        },
-        fr: {
-            translation: frJson.default || frJson,
-        },
+const RESOURCES = {
+    en: {
+        translation: enJson.default || enJson,
     },
+    fr: {
+        translation: frJson.default || frJson,
+    },
+};
+
+const i18nextInstance = i18n.createInstance();
+// https://www.i18next.com/overview/configuration-options
+i18nextInstance.init({
+    debug: false,
+    resources: RESOURCES,
     // lng: undefined,
     fallbackLng: DEFAULT_LANGUAGE,
     // whitelist: LANGUAGE_KEYS,
@@ -52,9 +55,16 @@ export function setCurrentLanguage(language) {
 export function localize(msg, options) {
     const opts = options || {};
 
-    if (i18n.language !== _currentLanguage) {
-        i18n.changeLanguage(_currentLanguage);
+    if (i18nextInstance.language !== _currentLanguage) {
+        i18nextInstance.changeLanguage(_currentLanguage);
     }
 
-    return i18n.t(msg, opts);
+    return i18nextInstance.t(msg, opts);
+};
+
+export function getRawLocalizeJson() {
+    if (RESOURCES[_currentLanguage]) {
+        return RESOURCES[_currentLanguage].translation;
+    }
+    return RESOURCES[DEFAULT_LANGUAGE].translation;
 };
