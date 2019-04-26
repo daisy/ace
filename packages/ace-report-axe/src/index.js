@@ -5,6 +5,8 @@
 const builders = require('@daisy/ace-report').builders;
 const winston = require('winston');
 
+// TODO: translate (KB titles)
+
 // axe test IDs mapped to our KB pages
 const kbMap = {
   'baseUrl': 'http://kb.daisy.org/publishing/',

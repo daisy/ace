@@ -42,7 +42,9 @@ module.exports = function generateHtmlReport(reportData) {
           filterOptions += "<option value='" + value + "'>" + rulesetTagLabels[value] + "</option>";
         }
         else {
-          filterOptions += "<option value='" + value + "'>" + value + "</option>";
+          filterOptions += "<option value='" + value + "'>" +
+          localize(value) // preserves key if localized string not found (e.g. "serious", "moderate")
+          + "</option>";
         }
       });
       return new handlebars.SafeString(filterOptions);
@@ -57,7 +59,7 @@ module.exports = function generateHtmlReport(reportData) {
       var htmlStr = '';
       flatListOfViolations.forEach(function(violation) {
         htmlStr += `<tr>
-        <td><span class='${violation['impact']}'>${violation['impact']}</span></td>
+        <td><span class='${violation['impact']}'>${localize(violation['impact'])}</span></td>
         <td><span class='ruleset'>${rulesetTagLabels[violation['applicableRulesetTag']]}</span></td>
         <td>${violation['rule']}<br/><br/><span class='engine'>${violation['engine']}</span></td>
         <td><em>\"${violation['fileTitle']}\"<br/><br/><code class='location'>${violation['location']}</code>`;
