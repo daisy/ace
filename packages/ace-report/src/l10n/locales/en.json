@@ -3,5 +3,8 @@
     "other": "Other",
     "snippet": "Snippet:",
     "learnmoreabout": "Learn more about {{name}}",
-    "missingheading": "Missing heading: h{{i}}"
+    "missingheading": "Missing heading: h{{i}}",
+    "ace-description": "DAISY Accessibility Checker for EPUB",
+    "report-title": "Ace Report",
+    "report-desc": "Report on automated accessibility checks for EPUB"
 }

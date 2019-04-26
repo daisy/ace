@@ -3,5 +3,8 @@
     "other": "Autre",
     "snippet": "Extrait:",
     "learnmoreabout": "En savoir plus à propos de {{name}}",
-    "missingheading": "Entête manquante: h{{i}}"
+    "missingheading": "Entête manquante: h{{i}}",
+    "ace-description": "Vérifieur DAISY pour l'accessibilité EPUB",
+    "report-title": "Rapport Ace",
+    "report-desc": "Rapport de vérification automatique pour l'accessibilité EPUB"
 }

@@ -10,11 +10,13 @@ const defaults = require('./defaults');
 const reportConfig  = config.get('report', defaults.report);
 const path = require('path');
 
+const { localize } = require('./l10n/localize');
+
 // static
 const ACE_DESCRIPTION = {
   '@type': 'earl:software',
   'doap:name': 'DAISY Ace',
-  'doap:description': 'DAISY Accessibility Checker for EPUB',
+  'doap:description': localize("ace-description"),
   'doap:homepage': 'http://daisy.github.io/ace',
   'doap:created': '2017-07-01',
   'doap:release': { 'doap:revision': pkg.version },
@@ -92,8 +94,8 @@ class AssertionBuilder {
 
 class ReportBuilder {
   constructor(
-    title = 'Ace Report',
-    description = 'Report on automated accessibility checks for EPUB',
+    title = localize("report-title"),
+    description = localize("report-desc"),
     ) {
     this._json = {
       '@type': 'earl:report',
