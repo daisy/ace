@@ -12,16 +12,6 @@ const path = require('path');
 
 const { localize } = require('./l10n/localize');
 
-// static
-const ACE_DESCRIPTION = {
-  '@type': 'earl:software',
-  'doap:name': 'DAISY Ace',
-  'doap:description': localize("ace-description"),
-  'doap:homepage': 'http://daisy.github.io/ace',
-  'doap:created': '2017-07-01',
-  'doap:release': { 'doap:revision': pkg.version },
-};
-
 function calculateResult(assertions) {
   let outcome = 'pass';
   assertions.forEach((assertion) => {
@@ -103,7 +93,14 @@ class ReportBuilder {
       'dct:title': (title == null) ? '' : title.toString(),
       'dct:description': (title == null) ? '' : description.toString(),
       'dct:date': new Date().toLocaleString(),
-      'earl:assertedBy': ACE_DESCRIPTION,
+      'earl:assertedBy': {
+        '@type': 'earl:software',
+        'doap:name': 'DAISY Ace',
+        'doap:description': localize("ace-description"),
+        'doap:homepage': 'http://daisy.github.io/ace',
+        'doap:created': '2017-07-01', // TODO is this date correct?
+        'doap:release': { 'doap:revision': pkg.version },
+      },
       outlines: {},
       data: {},
       properties: {},

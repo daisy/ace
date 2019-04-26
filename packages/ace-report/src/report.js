@@ -8,7 +8,7 @@ const builders = require('./report-builders.js');
 const a11yMetaChecker = require("./analyze-a11y-metadata.js");
 const generateHtmlReport = require("./generate-html-report.js");
 
-const { localize } = require('./l10n/localize');
+const { localize, setCurrentLanguage } = require('./l10n/localize');
 
 function headingsToOutline(headings) {
   const result = [];
@@ -41,7 +41,9 @@ function aggregateHTMLOutlines(outlines) {
 }
 
 module.exports = class Report {
-  constructor(epub, outdir) {
+  constructor(epub, outdir, lang) {
+    setCurrentLanguage(lang);
+
     this._builder = new builders.ReportBuilder()
       .setOutdir(outdir)
       .withTestSubject(epub.path, '', '', epub.metadata, epub.links)
