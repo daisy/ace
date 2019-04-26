@@ -44,11 +44,11 @@ function newMetadataAssertion(name, impact = 'serious') {
   return newViolation({
     impact,
     title: `metadata-${name.toLowerCase().replace(':', '-')}`,
-    testDesc: localize("checkepub.metadataviolation.testdesc", { name }),
-    resDesc: localize("checkepub.metadataviolation.resdesc", { name }),
+    testDesc: localize("checkepub.metadataviolation.testdesc", { name, interpolation: { escapeValue: false } }),
+    resDesc: localize("checkepub.metadataviolation.resdesc", { name, interpolation: { escapeValue: false } }),
     kbPath: 'docs/metadata/schema-org.html',
     kbTitle: localize("checkepub.metadataviolation.kbtitle"),
-    ruleDesc: localize("checkepub.metadataviolation.ruledesc", { name })
+    ruleDesc: localize("checkepub.metadataviolation.ruledesc", { name, interpolation: { escapeValue: false } })
   });
 }
 
