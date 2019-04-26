@@ -23,7 +23,7 @@ function headingsToOutline(headings) {
       }
     } else if (hx.level > level) {
       for (let i = level + 1; i < hx.level; i += 1) {
-        result.push(`<ul><li><span class="toc-missing">${localize("missingheading", {name: i})}</span>`);
+        result.push(`<ul><li><span class="toc-missing">${localize("missingheading", {i})}</span>`);
       }
       result.push('<ul>');
     }
