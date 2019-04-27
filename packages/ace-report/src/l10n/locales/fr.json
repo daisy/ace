@@ -2,7 +2,7 @@
     "bestpractice": "Meilleure Pratique",
     "other": "Autre",
     "snippet": "Extrait:",
-    "learnmoreabout": "En savoir plus à propos de {{name}}",
+    "learnmoreabout": "En savoir plus:",
     "missingheading": "Entête manquante: h{{i}}",
     "ace-description": "Vérifieur DAISY pour l'accessibilité EPUB",
     "report-title": "Rapport Ace",
@@ -17,6 +17,7 @@
     "metadata": "Métadonnées",
     "outlines": "Structures",
     "images": "Images",
+    "image": "Image",
     "critical": "Critique",
     "serious": "Sérieux",
     "moderate": "Modéré",
@@ -35,6 +36,7 @@
     "resetfilters": "Réinitialiser les filtres",
     "na": "Non renseigné",
     "location": "Référence",
+    "role": "Rôle",
     "details": "Détails",
     "topsection": "Haut de section",
     "pagenav": "Navigation par page",
@@ -45,5 +47,11 @@
     "a11ymetadatamissing": "Les métadonnées d'accessibilité suivantes sont absentes:",
     "pubmetadatacaption": "Métadonnées de Publication.",
     "name": "Nom",
-    "value": "Valeur"
+    "value": "Valeur",
+    "tocoutline": "Table des Matières EPUB",
+    "headsoutline": "Structure d'Entêtes",
+    "htmloutline": "Structure HTML",
+    "noimages": "Pas d'images dans cette publication.",
+    "imagescaption": "Images dans l'EPUB, avec leurs descriptions",
+    "attribute": "attribut"
 }

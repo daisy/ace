@@ -2,7 +2,7 @@
     "bestpractice": "Best Practice",
     "other": "Other",
     "snippet": "Snippet:",
-    "learnmoreabout": "Learn more about {{name}}",
+    "learnmoreabout": "Learn more about:",
     "missingheading": "Missing heading: h{{i}}",
     "ace-description": "DAISY Accessibility Checker for EPUB",
     "report-title": "Ace Report",
@@ -17,6 +17,7 @@
     "metadata": "Metadata",
     "outlines": "Outlines",
     "images": "Images",
+    "image": "Image",
     "critical": "Critical",
     "serious": "Serious",
     "moderate": "Moderate",
@@ -35,6 +36,7 @@
     "resetfilters": "Reset filters",
     "na": "N/A",
     "location": "Location",
+    "role": "Role",
     "details": "Details",
     "topsection": "Top of section",
     "pagenav": "Page navigation",
@@ -45,5 +47,11 @@
     "a11ymetadatamissing": "The following accessibility metadata is missing:",
     "pubmetadatacaption": "Publication metadata.",
     "name": "Name",
-    "value": "Value"
+    "value": "Value",
+    "tocoutline": "TOC Outline",
+    "headsoutline": "Headings Outline",
+    "htmloutline": "HTML Outline",
+    "noimages": "No images found in this publication.",
+    "imagescaption": "Images in the EPUB, with their description",
+    "attribute": "attribute"
 }

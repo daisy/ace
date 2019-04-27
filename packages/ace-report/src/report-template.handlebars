@@ -369,22 +369,22 @@
     <!-- OUTLINES TAB -->
     <div id="outlines" role="tabpanel">
       <h2>{{#localize "outlines"}}{{/localize}}</h2>
-      <p class="sectionnav">{{#localize "goto"}}{{/localize}} <a href="#toc-outline">TOC Outline</a> | <a href="#headings-outline">Headings Outline</a> | <a href="#html-outline">HTML Outline</a> </p>
+      <p class="sectionnav">{{#localize "goto"}}{{/localize}} <a href="#toc-outline">{{#localize "tocoutline"}}{{/localize}}</a> | <a href="#headings-outline">{{#localize "headsoutline"}}{{/localize}}</a> | <a href="#html-outline">{{#localize "htmloutline"}}{{/localize}}</a> </p>
 
       <div class="row">
 
         <div class="col-sm" id="toc-outline">
-          <h3>EPUB Table of Contents</h3>
+          <h3>{{#localize "tocoutline"}}{{/localize}}</h3>
           {{{outlines.toc}}}
         </div>
 
         <div class="col-sm" id="headings-outline">
-          <h3>Headings outline</h3>
+          <h3>{{#localize "headsoutline"}}{{/localize}}</h3>
           {{{outlines.headings}}}
         </div>
 
         <div class="col-sm" id="html-outline">
-          <h3>HTML outline</h3>
+          <h3>{{#localize "htmloutline"}}{{/localize}}</h3>
           {{{outlines.html}}}
       </div>
     </div>
@@ -396,17 +396,17 @@
       <h2>{{#localize "images"}}{{/localize}}</h2>
       {{#if data.images}}
         <table  id="image-table" class="table table-striped table-bordered">
-          <caption>Images in the EPUB, with their description</caption>
+          <caption>{{#localize "imagescaption"}}{{/localize}}</caption>
           <thead class="thead-inverse">
              <tr>
-                <th>Image</th>
-                <th><code>alt</code> attribute
+                <th>{{#localize "image"}}{{/localize}}</th>
+                <th><code>alt</code>
                 </th>
-                <th><code>aria-describedby</code> content
+                <th><code>aria-describedby</code>
                 </th>
-                <th>Associated <code>figcaption</code></th>
-                <th>Location</th>
-                <th>Role</th>
+                <th><code>figcaption</code></th>
+                <th>{{#localize "location"}}{{/localize}}</th>
+                <th>{{#localize "role"}}{{/localize}}</th>
              </tr>
           </thead>
           <tbody>
@@ -448,7 +448,7 @@
           </tbody>
         </table>
       {{else}}
-        <p>No images found in this publication.</p>
+        <p>{{#localize "noimages"}}{{/localize}}</p>
       {{/if}}
       <p class="pagenav">{{#localize "goto"}}{{/localize}} <a href="#images">{{#localize "topsection"}}{{/localize}}</a> | <a href="#navlist">{{#localize "pagenav"}}{{/localize}}</a></p>
     </div>
@@ -474,8 +474,8 @@
       'wcag2a': 'WCAG 2.0 A',
       'wcag2aa': 'WCAG 2.0 AA',
       'EPUB': 'EPUB',
-      'best-practice': 'Best Practice',
-      'other': 'Other'
+      'best-practice': '{{#localize "bestpractice"}}{{/localize}}',
+      'other': '{{#localize "other"}}{{/localize}}'
     };
 
     $('#violations-table').dataTable().fnDestroy();
@@ -499,7 +499,7 @@
       var tdRuleset = $("<td><span class='ruleset'>" + rulesetTagLabels[violation["applicableRulesetTag"]] + "</span></td>");
       var tdLocation = $("<td><em>\"" + violation["fileTitle"] + "\"</em><br/><br/><code class='location'>" + violation["location"] + "</code></td>");
       if (violation.html) {
-        var tdSnippet = $("<br/><br/><div class='snippet'>Snippet:<code>"+ violation.html.trim() + "</code></div>");
+        var tdSnippet = $('<br/><br/><div class=\'snippet\'>{{#localize "snippet"}}{{/localize}} <code>'+ violation.html.trim() + "</code></div>");
         tdLocation.append(tdSnippet);
       }
       var tdRule = $("<td>" + violation["rule"] + "<br/><br/><span class='engine'>" + violation["engine"] + "</span></td>");
@@ -520,7 +520,7 @@
       });
       var link = $("<p><a href='"
         + violation["kburl"]
-        + "' target='_blank'>Learn more about " + violation["kbtitle"] + "</a></p>");
+        + '\' target=\'_blank\'>{{#localize "learnmoreabout"}}{{/localize}} ' + violation["kbtitle"] + "</a></p>");
       tdDetails.append(link);
 
       tr.append(tdImpact);

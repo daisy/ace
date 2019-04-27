@@ -87,7 +87,7 @@ module.exports = function generateHtmlReport(reportData) {
 
         htmlStr += `<td class='details'>
         <ul>${listStr}</ul>
-        <p><a href='${violation['kburl']}' target='_blank'>${localize("learnmoreabout"), {name: violation['kbtitle']}}</a></p>
+        <p><a href='${violation['kburl']}' target='_blank'>${localize("learnmoreabout") + " " + violation['kbtitle']}</a></p>
         </td>`;
 
         htmlStr += "</tr>";
