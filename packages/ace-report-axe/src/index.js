@@ -87,10 +87,13 @@ function  axe2ace(spineItem, axeResults, lang) {
       const kbURL = (kbMap.map.hasOwnProperty(violation.id))
         ? kbMap.baseUrl + kbMap.map[violation.id].url
         : kbMap.baseUrl;
-      const kbTitle = (kbMap.map.hasOwnProperty(violation.id))
+      let kbTitle = (kbMap.map.hasOwnProperty(violation.id))
         ? kbMap.map[violation.id].title
         : '??';
-      if (kbTitle == '??') winston.verbose(`Couldn’t find KB key for rule '${violation.id}'`)
+      if (kbTitle == '??') {
+        winston.verbose(`Couldn’t find KB key for rule '${violation.id}'`);
+        kbTitle = localize("nokb");
+      }
       const test = new builders.TestBuilder()
         .withImpact(violation.impact)
         .withTitle(violation.id)

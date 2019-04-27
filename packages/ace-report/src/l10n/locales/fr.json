@@ -14,7 +14,7 @@
     "generatedby": "Généré par {{v1}} ({{v2}}) le {{v3}}",
     "title": "Titre:",
     "violations": "Violations",
-    "metadata": "Metadonnées",
+    "metadata": "Métadonnées",
     "outlines": "Structures",
     "images": "Images",
     "critical": "Critique",
@@ -35,5 +35,15 @@
     "resetfilters": "Réinitialiser les filtres",
     "na": "Non renseigné",
     "location": "Référence",
-    "details": "Détails"
+    "details": "Détails",
+    "topsection": "Haut de section",
+    "pagenav": "Navigation par page",
+    "allmetadata": "Toutes les Métadonnées",
+    "a11ymetadata": "Métadonnées d'accessibilité",
+    "a11ymetadatapresent": "Les métadonnées d'accessibilité suivantes sont présentes:",
+    "a11ymetadatanotfound": "Aucune métadonnée d'accessibilité.",
+    "a11ymetadatamissing": "Les métadonnées d'accessibilité suivantes sont absentes:",
+    "pubmetadatacaption": "Métadonnées de Publication.",
+    "name": "Nom",
+    "value": "Valeur"
 }

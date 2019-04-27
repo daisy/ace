@@ -52,5 +52,6 @@
         "valid-lang": "Language",
         "video-caption": "Video",
         "video-description": "Video"
-    }
+    },
+    "nokb": "Unknown KB"
 }

@@ -299,22 +299,22 @@
         </tbody>
       </table>
 
-      <p class="pagenav">{{#localize "goto"}}{{/localize}} <a href="#violations">Top of section</a> | <a href="#navlist">Page navigation</a></p>
+      <p class="pagenav">{{#localize "goto"}}{{/localize}} <a href="#violations">{{#localize "topsection"}}{{/localize}}</a> | <a href="#navlist">{{#localize "pagenav"}}{{/localize}}</a></p>
     </div>
 
     <!-- METADATA TAB -->
     <div id="metadata" role="tabpanel">
       <h2>{{#localize "metadata"}}{{/localize}}</h2>
 
-      <p class="sectionnav">{{#localize "goto"}}{{/localize}} <a href="#all-metadata">All Metadata</a> | <a href="#a11y-metadata">Accessibility Metadata</a> </p>
+      <p class="sectionnav">{{#localize "goto"}}{{/localize}} <a href="#all-metadata">{{#localize "allmetadata"}}{{/localize}}</a> | <a href="#a11y-metadata">{{#localize "a11ymetadata"}}{{/localize}}</a> </p>
 
-      <h3 id="all-metadata">All Metadata</h3>
+      <h3 id="all-metadata">{{#localize "allmetadata"}}{{/localize}}</h3>
       <table id="metadata-table" class="table table-bordered">
-        <caption>Publication metadata.</caption>
+        <caption>{{#localize "pubmetadatacaption"}}{{/localize}}</caption>
         <thead class="thead-inverse">
           <tr>
-            <th>Name</th>
-            <th>Value</th>
+            <th>{{#localize "name"}}{{/localize}}</th>
+            <th>{{#localize "value"}}{{/localize}}</th>
           </tr>
         </thead>
         <tbody>
@@ -330,21 +330,21 @@
         </tbody>
       </table>
 
-      <h3 id="a11y-metadata">Accessibility Metadata</h3>
+      <h3 id="a11y-metadata">{{#localize "a11ymetadata"}}{{/localize}}</h3>
 
       {{#if a11y-metadata.present}}
-        <p>The following accessibility metadata is present:
+        <p>{{#localize "a11ymetadatapresent"}}{{/localize}}
         {{#each a11y-metadata.present}}
           <span class="metadata-name">{{this}}</span>
         {{/each}}
         </p>
       {{else}}
-        <p>No accessibility metadata was found.</p>
+        <p>{{#localize "a11ymetadatanotfound"}}{{/localize}}</p>
       {{/if}}
 
       {{!-- a little messy because handlebars templates have no logical operators --}}
       {{#if a11y-metadata.missing }}
-        <p>The following accessibility metadata is missing:
+        <p>{{#localize "a11ymetadatamissing"}}{{/localize}}
         {{#each a11y-metadata.missing}}
           <span class="metadata-name">{{this}}</span>
         {{/each}}
@@ -355,7 +355,7 @@
         </p>
       {{else}}
         {{#if a11y-metadata.empty}}
-          <p>The following accessibility metadata is missing:
+          <p>{{#localize "a11ymetadatamissing"}}{{/localize}}
             {{#each a11y-metadata.missing}}
               <span class="metadata-name">{{this}}</span>
             {{/each}}
@@ -363,7 +363,7 @@
           </p>
         {{/if}}
       {{/if}}
-      <p class="pagenav">{{#localize "goto"}}{{/localize}} <a href="#metadata">Top of section</a> | <a href="#navlist">Page navigation</a></p>
+      <p class="pagenav">{{#localize "goto"}}{{/localize}} <a href="#metadata">{{#localize "topsection"}}{{/localize}}</a> | <a href="#navlist">{{#localize "pagenav"}}{{/localize}}</a></p>
     </div>
 
     <!-- OUTLINES TAB -->
@@ -388,7 +388,7 @@
           {{{outlines.html}}}
       </div>
     </div>
-    <p class="pagenav">{{#localize "goto"}}{{/localize}} <a href="#outlines">Top of section</a> | <a href="#navlist">Page navigation</a></p>
+    <p class="pagenav">{{#localize "goto"}}{{/localize}} <a href="#outlines">{{#localize "topsection"}}{{/localize}}</a> | <a href="#navlist">{{#localize "pagenav"}}{{/localize}}</a></p>
   </div>
 
   <!-- IMAGES TAB -->
@@ -450,7 +450,7 @@
       {{else}}
         <p>No images found in this publication.</p>
       {{/if}}
-      <p class="pagenav">{{#localize "goto"}}{{/localize}} <a href="#images">Top of section</a> | <a href="#navlist">Page navigation</a></p>
+      <p class="pagenav">{{#localize "goto"}}{{/localize}} <a href="#images">{{#localize "topsection"}}{{/localize}}</a> | <a href="#navlist">{{#localize "pagenav"}}{{/localize}}</a></p>
     </div>
 
   </div> <!-- end div for tabs' contents -->

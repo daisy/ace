@@ -35,5 +35,15 @@
     "resetfilters": "Reset filters",
     "na": "N/A",
     "location": "Location",
-    "details": "Details"
+    "details": "Details",
+    "topsection": "Top of section",
+    "pagenav": "Page navigation",
+    "allmetadata": "All Metadata",
+    "a11ymetadata": "Accessibility Metadata",
+    "a11ymetadatapresent": "The following accessibility metadata is present:",
+    "a11ymetadatanotfound": "No accessibility metadata was found.",
+    "a11ymetadatamissing": "The following accessibility metadata is missing:",
+    "pubmetadatacaption": "Publication metadata.",
+    "name": "Name",
+    "value": "Value"
 }

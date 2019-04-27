@@ -1,5 +1,7 @@
 const i18n = require('i18next');
 
+const winston = require('winston');
+
 const enJson = require("./locales/en");
 const frJson = require("./locales/fr");
 
@@ -32,6 +34,12 @@ i18nextInstance.init({
     // load: "all",
     // preload: LANGUAGE_KEYS,
     // lowerCaseLng: false,
+    missingKeyHandler: (lng, ns, key, fallbackValue, updateMissing, options) => {
+        if (!options || !options.ignoreMissingKey) {
+            winston.info('i18next missingKey (ACE REPORT AXE): ' + key);
+        }
+        return key;
+    },
 });
 
 var _currentLanguage = DEFAULT_LANGUAGE;
