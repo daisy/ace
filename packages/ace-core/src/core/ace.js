@@ -12,11 +12,17 @@ const Report = require('@daisy/ace-report').Report;
 const checker = require('../checker/checker.js');
 const { setCurrentLanguage } = require('../l10n/localize');
 
+const logger = require('@daisy/ace-logger');
+
 tmp.setGracefulCleanup();
 
 module.exports = function ace(epubPath, options) {
   if (options.lang) {
     setCurrentLanguage(options.lang);
+  }
+
+  if (options.initLogger) {
+    logger.initLogger({ verbose: options.verbose, silent: options.silent });
   }
 
   return new Promise((resolve, reject) => {

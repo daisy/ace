@@ -42,7 +42,9 @@ function aggregateHTMLOutlines(outlines) {
 
 module.exports = class Report {
   constructor(epub, outdir, lang) {
-    setCurrentLanguage(lang);
+    if (lang) {
+      setCurrentLanguage(lang);
+    }
 
     this._builder = new builders.ReportBuilder()
       .setOutdir(outdir)

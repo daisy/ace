@@ -100,7 +100,7 @@ async function checkSingle(spineItem, epub, browser, lang) {
     await page.close();
 
     // Post-process results
-    results.assertions = (results.axe != null) ? axe2ace.axe2ace(spineItem, results.axe) : [];
+    results.assertions = (results.axe != null) ? axe2ace.axe2ace(spineItem, results.axe, lang) : [];
     delete results.axe;
     winston.info(`- ${spineItem.relpath}: ${
       (results.assertions && results.assertions.assertions.length > 0)
