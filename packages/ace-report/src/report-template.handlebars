@@ -464,6 +464,36 @@
 
   <script type="text/javascript">
 
+    // https://datatables.net/reference/option/language
+    // https://datatables.net/examples/basic_init/language.html
+    // https://datatables.net/manual/i18n
+    const dataTableInit = {
+        "language": {
+            "decimal":        "",
+            "emptyTable":     '{{#localize "dataTable_emptyTable"}}{{/localize}}',
+            "info":           '{{#localize "dataTable_info"}}{{/localize}}',
+            "infoEmpty":      '{{#localize "dataTable_infoEmpty"}}{{/localize}}',
+            "infoFiltered":   '{{#localize "dataTable_infoFiltered"}}{{/localize}}',
+            "infoPostFix":    "",
+            "thousands":      ",",
+            "lengthMenu":     '{{#localize "dataTable_lengthMenu"}}{{/localize}}',
+            "loadingRecords": '{{#localize "dataTable_loadingRecords"}}{{/localize}}',
+            "processing":     '{{#localize "dataTable_processing"}}{{/localize}}',
+            "search":         '{{#localize "dataTable_search"}}{{/localize}}',
+            "zeroRecords":    '{{#localize "dataTable_zeroRecords"}}{{/localize}}',
+            "paginate": {
+                "first":      '{{#localize "dataTable_paginateFirst"}}{{/localize}}',
+                "last":       '{{#localize "dataTable_paginateLast"}}{{/localize}}',
+                "next":       '{{#localize "dataTable_paginateNext"}}{{/localize}}',
+                "previous":   '{{#localize "dataTable_paginatePrevious"}}{{/localize}}'
+            },
+            "aria": {
+                "sortAscending":  '{{#localize "dataTable_ariaSortAscending"}}{{/localize}}',
+                "sortDescending": '{{#localize "dataTable_ariaSortDescending"}}{{/localize}}'
+            }
+        }
+    };
+
   // keep a flat list of the violations in memory for table filtering
   var violations = {{#violationsJson}}{{/violationsJson}}
 
@@ -531,7 +561,7 @@
       tablebody.append(tr);
     });
 
-    $('#violations-table').DataTable();
+    $('#violations-table').DataTable(dataTableInit);
   }
 
   function filterSelected() {
@@ -608,9 +638,9 @@
   }
   $(document).ready(function() {
     prepareForJS();
-    $('#metadata-table').DataTable();
+    $('#metadata-table').DataTable(dataTableInit);
     //updateTableContents(violations, false);
-    $('#violations-table').DataTable();
+    $('#violations-table').DataTable(dataTableInit);
     $('#filters > select').change(filterSelected);
   });
 

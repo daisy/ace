@@ -53,5 +53,20 @@
     "htmloutline": "HTML Outline",
     "noimages": "No images found in this publication.",
     "imagescaption": "Images in the EPUB, with their description",
-    "attribute": "attribute"
+    "attribute": "attribute",
+    "dataTable_lengthMenu": "Display _MENU_ records per page",
+    "dataTable_search": "Search:",
+    "dataTable_info": "Showing: _START_ - _END_ / _TOTAL_",
+    "dataTable_infoEmpty": "Showing: 0 - 0 / 0",
+    "dataTable_emptyTable": "No data available in table",
+    "dataTable_infoFiltered": "(filtered from _MAX_ total entries)",
+    "loadingRecords": "Loading...",
+    "dataTable_processing": "Processing...",
+    "dataTable_zeroRecords": "No matching records found",
+    "dataTable_paginateFirst": "First",
+    "dataTable_paginateLast": "Last",
+    "dataTable_paginateNext": "Next",
+    "dataTable_paginatePrevious": "Previous",
+    "dataTable_ariaSortAscending": ": activate to sort column ascending",
+    "dataTable_ariaSortDescending": ": activate to sort column descending"
 }

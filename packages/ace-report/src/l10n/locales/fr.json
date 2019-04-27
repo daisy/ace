@@ -53,5 +53,20 @@
     "htmloutline": "Structure HTML",
     "noimages": "Pas d'images dans cette publication.",
     "imagescaption": "Images dans l'EPUB, avec leurs descriptions",
-    "attribute": "attribut"
+    "attribute": "attribut",
+    "dataTable_lengthMenu": "Afficher _MENU_ entrées par page",
+    "dataTable_search": "Chercher:",
+    "dataTable_info": "Affiche: _START_ - _END_ / _TOTAL_",
+    "dataTable_infoEmpty": "Affiche: 0 - 0 / 0",
+    "dataTable_emptyTable": "Pas de données dans le tableau",
+    "dataTable_infoFiltered": "(filtrage de _MAX_ entrées au total)",
+    "loadingRecords": "Chargement...",
+    "dataTable_processing": "En cours...",
+    "dataTable_zeroRecords": "Aucune entrée trouvée",
+    "dataTable_paginateFirst": "Premier",
+    "dataTable_paginateLast": "Dernier",
+    "dataTable_paginateNext": "Suivant",
+    "dataTable_paginatePrevious": "Précédent",
+    "dataTable_ariaSortAscending": ": activer pour trier par colonne ascendante",
+    "dataTable_ariaSortDescending": ": activer pour trier par colonne descendante"
 }
