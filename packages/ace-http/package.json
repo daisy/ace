@@ -18,6 +18,7 @@
   "main": "lib/index.js",
   "bin": "bin/ace-http.js",
   "dependencies": {
+    "@daisy/ace-config": "^1.0.3",
     "express": "^4.15.5",
     "express-easy-zip": "^1.1.4",
     "meow": "^3.7.0",

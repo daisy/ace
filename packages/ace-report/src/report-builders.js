@@ -3,7 +3,7 @@
 
 'use strict';
 
-const pkg = require('../package');
+const pkg = require('@daisy/ace-config/package');
 
 const { config, paths } = require('@daisy/ace-config');
 const defaults = require('./defaults');

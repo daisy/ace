@@ -12,8 +12,11 @@ const { config, paths } = require('@daisy/ace-config');
 const defaults = require('./defaults');
 const cliConfig  = config.get('cli', defaults.cli);
 
+const pkg = require('@daisy/ace-config/package');
 
-const cli = meow(`
+const cli = meow({
+  help:
+`
   Usage: ace [options] <input>
 
   Options:
@@ -31,7 +34,10 @@ const cli = meow(`
 
   Examples
     $ ace -o out ~/Documents/book.epub
-`, {
+`,
+// autoVersion: false,
+version: pkg.version
+}, {
   alias: {
     f: 'force',
     h: 'help',
@@ -42,7 +48,7 @@ const cli = meow(`
     V: 'verbose',
   },
   boolean: ['force', 'verbose', 'silent', 'subdir'],
-  string: ['outdir', 'tempdir'],
+  string: ['outdir', 'tempdir']
 });
 
 function sleep(ms) {

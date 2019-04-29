@@ -17,6 +17,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
+    "@daisy/ace-config": "^1.0.3",
     "@daisy/ace-report": "^1.0.1",
     "@daisy/ace-report-axe": "^1.0.1",
     "@daisy/epub-utils": "^1.0.2",

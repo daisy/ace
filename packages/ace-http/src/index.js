@@ -12,6 +12,8 @@ const meow = require('meow');
 const ace = require('@daisy/ace-core');
 const logger = require('@daisy/ace-logger');
 
+const pkg = require('@daisy/ace-config/package');
+
 const UPLOADS = tmp.dirSync({ unsafeCleanup: true }).name;
 const DEFAULTPORT = 8000;
 const DEFAULTHOST = "localhost";
@@ -21,7 +23,9 @@ var upload = multer({dest: UPLOADS});
 var joblist = [];
 var baseurl = "";
 
-const cli = meow(`
+const cli = meow({
+  help:
+`
   Usage: ace-http [options]
 
   Options:
@@ -37,7 +41,10 @@ const cli = meow(`
 
   Examples
     $ ace-http -p 3000
-`, {
+`,
+// autoVersion: false,
+version: pkg.version
+}, {
   alias: {
     h: 'help',
     s: 'silent',
@@ -47,7 +54,7 @@ const cli = meow(`
     p: 'port'
   },
   boolean: ['verbose', 'silent'],
-  string: ['host', 'port'],
+  string: ['host', 'port']
 });
 
 function run() {
