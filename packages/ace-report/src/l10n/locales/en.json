@@ -60,7 +60,7 @@
     "dataTable_infoEmpty": "Showing: 0 - 0 / 0",
     "dataTable_emptyTable": "No data available in table",
     "dataTable_infoFiltered": "(filtered from _MAX_ total entries)",
-    "loadingRecords": "Loading...",
+    "dataTable_loadingRecords": "Loading...",
     "dataTable_processing": "Processing...",
     "dataTable_zeroRecords": "No matching records found",
     "dataTable_paginateFirst": "First",

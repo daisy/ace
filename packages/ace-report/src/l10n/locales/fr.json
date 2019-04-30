@@ -60,7 +60,7 @@
     "dataTable_infoEmpty": "Affiche: 0 - 0 / 0",
     "dataTable_emptyTable": "Pas de données dans le tableau",
     "dataTable_infoFiltered": "(filtrage de _MAX_ entrées au total)",
-    "loadingRecords": "Chargement...",
+    "dataTable_loadingRecords": "Chargement...",
     "dataTable_processing": "En cours...",
     "dataTable_zeroRecords": "Aucune entrée trouvée",
     "dataTable_paginateFirst": "Premier",
