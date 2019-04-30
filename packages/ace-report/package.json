@@ -17,7 +17,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-config": "^1.0.3",
+    "@daisy/ace-config": "^1.0.2",
     "@daisy/ace-meta": "^1.0.3",
     "escape-html": "^1.0.3",
     "fs-extra": "^6.0.1",
