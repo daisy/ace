@@ -33,6 +33,7 @@ export function newLocalizer(resources) {
         // load: "all",
         // preload: LANGUAGE_KEYS,
         // lowerCaseLng: false,
+        saveMissing: true,
         missingKeyHandler: (lng, ns, key, fallbackValue, updateMissing, options) => {
             if (!options || !options.ignoreMissingKey) {
                 winston.info('i18next missingKey (ACE REPORT AXE): ' + key);
@@ -42,6 +43,12 @@ export function newLocalizer(resources) {
     });
     
     return {
+        LANGUAGES: resources,
+
+        getDefaultLanguage: function() {
+            return DEFAULT_LANGUAGE;
+        },
+
         getCurrentLanguage: function() {
             return _currentLanguage;
         },
@@ -67,7 +74,11 @@ export function newLocalizer(resources) {
             return i18nextInstance.t(msg, opts);
         },
         
-        getRawLocalizeJson: function() {
+        getRawResources: function() {
+            return resources;
+        },
+        
+        getRawResourcesForCurrentLanguage: function() {
             if (resources[_currentLanguage]) {
                 return resources[_currentLanguage].translation;
             }
