@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-config",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "Config utilities for Ace",
   "author": {
     "name": "DAISY developers",
