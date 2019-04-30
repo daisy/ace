@@ -5,7 +5,7 @@
 const builders = require('@daisy/ace-report').builders;
 const winston = require('winston');
 
-const { localize, setCurrentLanguage } = require('./l10n/localize');
+const { localize, setCurrentLanguage } = require('./l10n/localize').localizer;
 
   // each report is content doc level
 function  axe2ace(spineItem, axeResults, lang) {

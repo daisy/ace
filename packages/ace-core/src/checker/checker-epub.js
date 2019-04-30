@@ -3,7 +3,7 @@
 const builders = require('@daisy/ace-report').builders;
 const winston = require('winston');
 
-const { localize } = require('../l10n/localize');
+const { localize } = require('../l10n/localize').localizer;
 
 const ASSERTED_BY = 'Ace';
 const MODE = 'automatic';

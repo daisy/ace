@@ -10,7 +10,7 @@ const defaults = require('./defaults');
 const reportConfig  = config.get('report', defaults.report);
 const path = require('path');
 
-const { localize } = require('./l10n/localize');
+const { localize } = require('./l10n/localize').localizer;
 
 function calculateResult(assertions) {
   let outcome = 'pass';

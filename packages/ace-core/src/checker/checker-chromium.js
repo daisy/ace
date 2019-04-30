@@ -12,7 +12,7 @@ const winston = require('winston');
 const axe2ace = require('@daisy/ace-report-axe');
 const utils = require('@daisy/puppeteer-utils');
 
-const { getRawLocalizeJson } = require('../l10n/localize');
+const { getRawLocalizeJson } = require('../l10n/localize').localizer;
 
 tmp.setGracefulCleanup();
 

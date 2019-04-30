@@ -10,7 +10,7 @@ const pkg = require('@daisy/ace-meta/package');
 const EPUB = require('@daisy/epub-utils').EPUB;
 const Report = require('@daisy/ace-report').Report;
 const checker = require('../checker/checker.js');
-const { setCurrentLanguage } = require('../l10n/localize');
+const { setCurrentLanguage } = require('../l10n/localize').localizer;
 
 const logger = require('@daisy/ace-logger');
 

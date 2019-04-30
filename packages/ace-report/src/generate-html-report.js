@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const winston = require('winston');
 
-const { localize, getCurrentLanguage } = require('./l10n/localize');
+const { localize, getCurrentLanguage } = require('./l10n/localize').localizer;
 
 // generate the html report and return it as a string
 module.exports = function generateHtmlReport(reportData) {
