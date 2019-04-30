@@ -1,7 +1,7 @@
 {
-  "name": "@daisy/ace-report-axe",
-  "version": "1.0.2",
-  "description": "Ace report adapter for aXe",
+  "name": "@daisy/ace-meta",
+  "version": "1.0.3",
+  "description": "Meta version information for Ace",
   "author": {
     "name": "DAISY developers",
     "organization": "DAISY Consortium",
@@ -15,13 +15,6 @@
     "url": "https://github.com/daisy/ace/issues"
   },
   "license": "MIT",
-  "main": "lib/index.js",
-  "dependencies": {
-    "@daisy/ace-report": "^1.0.1",
-    "fs-extra": "^6.0.1",
-    "i18next": "^15.1.0",
-    "winston": "^2.4.0"
-  },
   "publishConfig": {
     "access": "public"
   }

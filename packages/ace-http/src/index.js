@@ -12,6 +12,8 @@ const meow = require('meow');
 const ace = require('@daisy/ace-core');
 const logger = require('@daisy/ace-logger');
 
+const pkg = require('@daisy/ace-meta/package');
+
 const UPLOADS = tmp.dirSync({ unsafeCleanup: true }).name;
 const DEFAULTPORT = 8000;
 const DEFAULTHOST = "localhost";
@@ -21,7 +23,9 @@ var upload = multer({dest: UPLOADS});
 var joblist = [];
 var baseurl = "";
 
-const cli = meow(`
+const cli = meow({
+  help:
+`
   Usage: ace-http [options]
 
   Options:
@@ -38,7 +42,10 @@ const cli = meow(`
     -l, --lang  <language> language code for localized messages (e.g. "fr"), default is "en"
   Examples
     $ ace-http -p 3000
-`, {
+`,
+// autoVersion: false,
+version: pkg.version
+}, {
   alias: {
     h: 'help',
     s: 'silent',
