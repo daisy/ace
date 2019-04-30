@@ -54,7 +54,7 @@ version: pkg.version
     p: 'port'
   },
   boolean: ['verbose', 'silent'],
-  string: ['host', 'port']
+  string: ['host', 'port'],
 });
 
 function run() {

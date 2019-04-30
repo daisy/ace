@@ -48,7 +48,7 @@ version: pkg.version
     V: 'verbose',
   },
   boolean: ['force', 'verbose', 'silent', 'subdir'],
-  string: ['outdir', 'tempdir']
+  string: ['outdir', 'tempdir'],
 });
 
 function sleep(ms) {
