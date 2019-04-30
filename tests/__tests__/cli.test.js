@@ -4,7 +4,7 @@ const path = require('path');
 const stripAnsi = require('strip-ansi');
 
 const ace = require('../runAceCLI');
-const pkg = require('@daisy/ace-config/package');
+const pkg = require('@daisy/ace-meta/package');
 
 describe('Running the CLI', () => {
   test('with no input should fail', () => {

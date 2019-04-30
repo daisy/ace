@@ -1,7 +1,7 @@
 {
-  "name": "@daisy/ace-cli",
+  "name": "@daisy/ace-meta",
   "version": "1.0.3",
-  "description": "Ace by DAISY, an Accessibility Checker for EPUB",
+  "description": "Meta version information for Ace",
   "author": {
     "name": "DAISY developers",
     "organization": "DAISY Consortium",
@@ -15,16 +15,6 @@
     "url": "https://github.com/daisy/ace/issues"
   },
   "license": "MIT",
-  "main": "lib/index.js",
-  "bin": "bin/ace.js",
-  "dependencies": {
-    "@daisy/ace-config": "^1.0.3",
-    "@daisy/ace-core": "^1.0.2",
-    "@daisy/ace-logger": "^1.0.1",
-    "@daisy/ace-meta": "^1.0.3",
-    "meow": "^3.7.0",
-    "winston": "^2.4.0"
-  },
   "publishConfig": {
     "access": "public"
   }

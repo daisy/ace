@@ -12,7 +12,7 @@ const meow = require('meow');
 const ace = require('@daisy/ace-core');
 const logger = require('@daisy/ace-logger');
 
-const pkg = require('@daisy/ace-config/package');
+const pkg = require('@daisy/ace-meta/package');
 
 const UPLOADS = tmp.dirSync({ unsafeCleanup: true }).name;
 const DEFAULTPORT = 8000;

@@ -12,7 +12,7 @@ const { config, paths } = require('@daisy/ace-config');
 const defaults = require('./defaults');
 const cliConfig  = config.get('cli', defaults.cli);
 
-const pkg = require('@daisy/ace-config/package');
+const pkg = require('@daisy/ace-meta/package');
 
 const cli = meow({
   help:
