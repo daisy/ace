@@ -1,7 +1,7 @@
 'use strict';
 
 const builders = require('./report-builders');
-const pkg = require('../package');
+const pkg = require('@daisy/ace-meta/package');
 
 describe('report builder', () => {
   let report;

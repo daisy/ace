@@ -5,7 +5,7 @@ const path = require('path');
 const tmp = require('tmp');
 const winston = require('winston');
 const os = require('os');
-const pkg = require('../../package');
+const pkg = require('@daisy/ace-meta/package');
 
 const EPUB = require('@daisy/epub-utils').EPUB;
 const Report = require('@daisy/ace-report').Report;
