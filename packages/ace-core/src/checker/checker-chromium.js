@@ -4,7 +4,6 @@ const fileUrl = require('file-url');
 const fs = require('fs-extra');
 const path = require('path');
 const pMap = require('p-map');
-const os = require('os');
 const tmp = require('tmp');
 const winston = require('winston');
 
