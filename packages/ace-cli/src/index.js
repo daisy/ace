@@ -5,6 +5,8 @@ const meow = require('meow');
 const path = require('path');
 const winston = require('winston');
 
+const axeRunner = require('@daisy/ace-axe-runner-puppeteer');
+
 const logger = require('@daisy/ace-logger');
 const ace = require('@daisy/ace-core');
 
@@ -102,7 +104,7 @@ ${overrides.map(file => `  - ${file}`).join('\n')}
     verbose: cli.flags.verbose,
     silent: cli.flags.silent,
     jobId: '',
-  })
+  }, axeRunner)
   .then((jobData) => {
     var reportJson = jobData[1];
     // if there were violations from the validation process, return 2

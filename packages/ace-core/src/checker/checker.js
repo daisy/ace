@@ -23,8 +23,8 @@ function consolidate(results, report) {
   return report;
 }
 
-module.exports.check = function check(epub, report) {
+module.exports.check = function check(epub, report, axeRunner) {
   return epubChecker.check(epub, report)
-    .then(() => htmlChecker.check(epub))
+    .then(() => htmlChecker.check(epub, axeRunner))
     .then(results => consolidate(results, report));
 };

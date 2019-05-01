@@ -4,13 +4,11 @@ const fileUrl = require('file-url');
 const fs = require('fs-extra');
 const path = require('path');
 const pMap = require('p-map');
-const puppeteer = require('puppeteer');
 const os = require('os');
 const tmp = require('tmp');
 const winston = require('winston');
 
 const axe2ace = require('@daisy/ace-report-axe');
-const utils = require('@daisy/puppeteer-utils');
 
 tmp.setGracefulCleanup();
 
@@ -22,7 +20,7 @@ const scripts = [
   require.resolve('../scripts/ace-extraction.js'),
 ];
 
-async function checkSingle(spineItem, epub, browser) {
+async function checkSingle(spineItem, epub, axeRunner) {
   winston.verbose(`- Processing ${spineItem.relpath}`);
   try {
     let url = spineItem.url;
@@ -39,21 +37,7 @@ async function checkSingle(spineItem, epub, browser) {
       winston.debug(`checking copied file at ${url}`)
     }
     
-    const page = await browser.newPage();
-    await page.goto(url);
-    await utils.addScripts(scripts, page);
-
-    const results = await page.evaluate(() => new Promise((resolve, reject) => {
-        /* eslint-disable */
-        window.daisy.ace.run((err, res) => {
-          if (err) {
-            return reject(err);
-          }
-          return resolve(res);
-        });
-        /* eslint-enable */
-    }));
-    await page.close();
+    const results = await axeRunner.run(url, scripts);
 
     // Post-process results
     results.assertions = (results.axe != null) ? axe2ace.axe2ace(spineItem, results.axe) : [];
@@ -96,16 +80,12 @@ async function checkSingle(spineItem, epub, browser) {
   }
 }
 
-module.exports.check = async (epub) => {
-  const args = [];
-  if (os.platform() !== 'win32' && os.platform() !== 'darwin') {
-    args.push('--no-sandbox')
-  }
-  const browser = await puppeteer.launch({ args });
+module.exports.check = async (epub, axeRunner) => {
+  await axeRunner.launch();
   winston.info('Checking documents...');
-  return pMap(epub.contentDocs, doc => checkSingle(doc, epub, browser), { concurrency: 4 })
+  return pMap(epub.contentDocs, doc => checkSingle(doc, epub, axeRunner), { concurrency: axeRunner.concurrency })
   .then(async (results) => {
-    await browser.close();
+    await axeRunner.close();
     return results;
   });
 };
