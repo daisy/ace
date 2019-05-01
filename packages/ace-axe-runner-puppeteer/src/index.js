@@ -16,7 +16,7 @@ module.exports = {
         _browser = await puppeteer.launch({ args });
     },
     close: async function() {
-        _browser.close();
+        await _browser.close();
     },
     run: async function(url, scripts) {
         const page = await _browser.newPage();
