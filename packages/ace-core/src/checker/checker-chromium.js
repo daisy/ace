@@ -89,6 +89,6 @@ module.exports.check = async (epub, axeRunner) => {
   }).catch(async (err) => {
     winston.info(`Error HTML check: ${err}`);
     await axeRunner.close();
-    return {};
+    return [];
   });
 };
