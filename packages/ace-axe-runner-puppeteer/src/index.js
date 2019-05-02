@@ -18,7 +18,7 @@ module.exports = {
     close: async function() {
         await _browser.close();
     },
-    run: async function(url, scripts) {
+    run: async function(url, scripts, basedir) {
         const page = await _browser.newPage();
         await page.goto(url);
         await utils.addScripts(scripts, page);

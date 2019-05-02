@@ -36,13 +36,13 @@ async function checkSingle(spineItem, epub, axeRunner) {
       winston.debug(`checking copied file at ${url}`)
     }
     
-    const results = await axeRunner.run(url, scripts);
+    const results = await axeRunner.run(url, scripts, epub.basedir);
 
     // Post-process results
     results.assertions = (results.axe != null) ? axe2ace.axe2ace(spineItem, results.axe) : [];
     delete results.axe;
     winston.info(`- ${spineItem.relpath}: ${
-      (results.assertions && results.assertions.assertions.length > 0)
+      (results.assertions && results.assertions.assertions && results.assertions.assertions.length > 0)
         ? results.assertions.assertions.length
         : 'No'} issues found`);
     // Resolve path and locators for extracted data
@@ -86,5 +86,9 @@ module.exports.check = async (epub, axeRunner) => {
   .then(async (results) => {
     await axeRunner.close();
     return results;
+  }).catch(async (err) => {
+    winston.info(`Error HTML check: ${err}`);
+    await axeRunner.close();
+    return {};
   });
 };
