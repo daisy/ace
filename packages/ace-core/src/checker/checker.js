@@ -8,17 +8,35 @@ function consolidate(results, report) {
   winston.info('Consolidating results...');
   // Integrate checker results to the report
   results.forEach((res) => {
-    report.addAssertions(res.assertions);
-    report.addProperties(res.properties);
-    report.addData(res.data);
+    if (res.assertions) {
+      report.addAssertions(res.assertions);
+    }
+    if (res.properties) {
+      report.addProperties(res.properties);
+    }
+    if (res.data) {
+      report.addData(res.data);
+    }
   });
   // Get a flat array of all the headings in the documents
   const headings = []
-    .concat(...results.map(docResult => docResult.outlines.headings))
+    .concat(...results.map(docResult => {
+      if (docResult.outlines && docResult.outlines.headings) {
+        return docResult.outlines.headings;
+      }
+      return undefined;
+    }))
     .filter(e => e !== undefined);
   report.addHeadings(headings);
   // Aggregated array of the HTML outlines
-  const htmlOutlines = results.map(docResult => docResult.outlines.html);
+  const htmlOutlines = []
+    .concat(results.map(docResult => {
+      if (docResult.outlines && docResult.outlines.html) {
+        return docResult.outlines.html;
+      }
+      return undefined;
+    }))
+    .filter(e => e !== undefined);
   report.addHTMLOutlines(htmlOutlines);
   return report;
 }
