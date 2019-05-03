@@ -72,12 +72,10 @@ async function checkSingle(spineItem, epub, browser, lang) {
           const msgs = Object.keys(rawJson[checkOrRule][checkOrRuleKey]);
           for (const msg of msgs) {
             const k = `__aceLocalize__${checkOrRule}_${checkOrRuleKey}_${msg}`;
-            localizedScript += `window[${k}]="${rawJson[checkOrRule][checkOrRuleKey][msg]}";\n`;
+            localizedScript += `window['${k}']="${rawJson[checkOrRule][checkOrRuleKey][msg]}";\n`;
           }
         }
       });
-      // winston.info(localizedScript);
-      // console.log(localizedScript);
       await utils.addScriptContents([localizedScript], page);
       
     } catch (err) {
