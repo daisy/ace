@@ -163,7 +163,13 @@ daisy.ace.run = function(done) {
     rules: [
       {
         id: 'pagebreak-label',
-        selector: '[*|type~="pagebreak"], [role~="doc-pagebreak"]',
+        // selector: '[*|type~="pagebreak"], [role~="doc-pagebreak"]',
+        matches: function matches(node, virtualNode, context) {
+          return node.hasAttribute('role')
+              && node.getAttribute('role').match(/\S+/g).includes('doc-pagebreak')
+              || node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')
+              && node.getAttributeNS('http://www.idpf.org/2007/ops', 'type').match(/\S+/g).includes('pagebreak')
+        },
         any: ['aria-label', 'non-empty-title'],
         metadata: {
           description: "Ensure page markers have an accessible label",
@@ -172,7 +178,10 @@ daisy.ace.run = function(done) {
       },
       {
         id: 'epub-type-has-matching-role',
-        selector: '[*|type]',
+        // selector: '[*|type]',
+        matches: function matches(node, virtualNode, context) {
+          return node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')
+        },        
         any: ['matching-aria-role'],
         metadata: {
           help: "ARIA role should be used in addition to epub:type",
@@ -183,7 +192,7 @@ daisy.ace.run = function(done) {
       {
         id: 'landmark-one-main',
         all: [
-          "has-no-more-than-one-main"
+          "page-no-duplicate-main"
           ],
       }
     ]
@@ -193,6 +202,11 @@ daisy.ace.run = function(done) {
     {
       "rules": {
         "bypass": { enabled: false },
+        "region": { enabled: false },
+        "page-has-heading-one": { enabled: false },
+        // The following newer Axe rules need to be further reviewed
+        // to see if they're useful in an EPUB context
+        "landmark-complementary-is-top-level": { enabled: false },
       }
     },
     function(axeError, axeResult) {
