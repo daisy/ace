@@ -1,5 +1,5 @@
 {
-  "name": "ace-core",
+  "name": "ace-core-legacy",
   "version": "1.0.2",
   "description": "Ace by DAISY, an Accessibility Checker for EPUB",
   "keywords": [
@@ -20,7 +20,8 @@
   "homepage": "https://daisy.github.io/ace",
   "repository": {
     "type": "git",
-    "url": "https://github.com/daisy/ace"
+    "url": "https://github.com/daisy/ace",
+    "directory": "packages/ace-core-legacy"
   },
   "bugs": {
     "url": "https://github.com/daisy/ace/issues"
