@@ -1,7 +1,7 @@
 {
-  "name": "@daisy/jest-env-puppeteer",
+  "name": "@daisy/ace-localize",
   "version": "1.0.0",
-  "description": "Utilities for running Jest tests through Google Puppeteer",
+  "description": "Localization for Ace",
   "author": {
     "name": "DAISY developers",
     "organization": "DAISY Consortium",
@@ -10,16 +10,16 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/daisy/ace",
-    "directory": "packages/jest-env-puppeteer"
+    "directory": "packages/ace-localize"
   },
   "bugs": {
     "url": "https://github.com/daisy/ace/issues"
   },
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "lib/localize.js",
   "dependencies": {
-    "jest-environment-node": "^21.3.0-beta.3",
-    "puppeteer": "^1.0.0"
+    "i18next": "^15.1.0",
+    "winston": "^2.4.0"
   },
   "publishConfig": {
     "access": "public"

@@ -9,7 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/daisy/ace"
+    "url": "https://github.com/daisy/ace",
+    "directory": "packages/ace-http"
   },
   "bugs": {
     "url": "https://github.com/daisy/ace/issues"
