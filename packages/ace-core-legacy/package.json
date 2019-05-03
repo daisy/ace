@@ -33,9 +33,9 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-cli": "^1.0.2",
-    "@daisy/ace-core": "^1.0.2",
-    "@daisy/ace-http": "^1.0.0"
+    "@daisy/ace-cli": "file:../ace-cli",
+    "@daisy/ace-core": "file:../ace-core",
+    "@daisy/ace-http": "file:../ace-http"
   },
   "publishConfig": {
     "access": "public"

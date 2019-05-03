@@ -19,11 +19,11 @@
   "main": "lib/index.js",
   "bin": "bin/ace.js",
   "dependencies": {
-    "@daisy/ace-axe-runner-puppeteer": "^1.0.0",
-    "@daisy/ace-config": "^1.0.0",
-    "@daisy/ace-core": "^1.0.2",
-    "@daisy/ace-logger": "^1.0.1",
-    "@daisy/ace-meta": "^1.0.3",
+    "@daisy/ace-axe-runner-puppeteer": "file:../ace-axe-runner-puppeteer",
+    "@daisy/ace-config": "file:../ace-config",
+    "@daisy/ace-core": "file:../ace-core",
+    "@daisy/ace-logger": "file:../ace-logger",
+    "@daisy/ace-meta": "file:../ace-meta",
     "meow": "^3.7.0",
     "winston": "^2.4.0"
   },
