@@ -12,6 +12,8 @@ const meow = require('meow');
 const ace = require('@daisy/ace-core');
 const logger = require('@daisy/ace-logger');
 
+const axeRunner = require('@daisy/ace-axe-runner-puppeteer');
+
 const pkg = require('@daisy/ace-meta/package');
 
 const UPLOADS = tmp.dirSync({ unsafeCleanup: true }).name;
@@ -159,7 +161,7 @@ function newJob(jobdata) {
   joblist.push(jobdata);
 
   // execute the job with Ace
-  ace(jobdata.internal.epubPath, {'jobid': jobdata.internal.id, 'outdir': jobdata.internal.outputDir, 'lang': jobdata.internal.lang})
+  ace(jobdata.internal.epubPath, {'jobid': jobdata.internal.id, 'outdir': jobdata.internal.outputDir, 'lang': jobdata.internal.lang}, axeRunner)
   .then((jobData) => {
     var jobId = jobData[0];
     var idx = joblist.findIndex(job => job.internal.id === jobId);

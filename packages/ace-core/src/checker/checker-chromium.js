@@ -4,13 +4,10 @@ const fileUrl = require('file-url');
 const fs = require('fs-extra');
 const path = require('path');
 const pMap = require('p-map');
-const puppeteer = require('puppeteer');
-const os = require('os');
 const tmp = require('tmp');
 const winston = require('winston');
 
 const axe2ace = require('@daisy/ace-report-axe');
-const utils = require('@daisy/puppeteer-utils');
 
 const { getRawResourcesForCurrentLanguage } = require('../l10n/localize').localizer;
 
@@ -25,7 +22,7 @@ const scripts = [
   require.resolve('../scripts/ace-extraction.js'),
 ];
 
-async function checkSingle(spineItem, epub, browser, lang) {
+async function checkSingle(spineItem, epub, lang, axeRunner) {
   winston.verbose(`- Processing ${spineItem.relpath}`);
   try {
     let url = spineItem.url;
@@ -41,10 +38,8 @@ async function checkSingle(spineItem, epub, browser, lang) {
       url = fileUrl(tmpFile);
       winston.debug(`checking copied file at ${url}`)
     }
-    
-    const page = await browser.newPage();
-    await page.goto(url);
 
+    const scriptContents = [];
     let localePath = "";
     try {
       winston.info(`- Axe locale: [${lang}]`);
@@ -57,7 +52,7 @@ async function checkSingle(spineItem, epub, browser, lang) {
         if (fs.existsSync(localePath)) {
           const localeStr = fs.readFileSync(localePath, { encoding: "utf8" });
           const localeScript = `window.__axeLocale__=${localeStr};`;
-          await utils.addScriptContents([localeScript], page);
+          scriptContents.push(localeScript);
         } else {
           winston.info(`- Axe locale missing? [${lang}] => ${localePath}`);
         }
@@ -76,33 +71,21 @@ async function checkSingle(spineItem, epub, browser, lang) {
           }
         }
       });
-      await utils.addScriptContents([localizedScript], page);
-      
+      scriptContents.push(localizedScript);
+
     } catch (err) {
       console.log(err);
       winston.verbose(err);
       winston.info(`- Axe locale problem? [${lang}] => ${localePath}`);
     }
 
-    await utils.addScripts(scripts, page);
-
-    const results = await page.evaluate(() => new Promise((resolve, reject) => {
-        /* eslint-disable */
-        window.daisy.ace.run((err, res) => {
-          if (err) {
-            return reject(err);
-          }
-          return resolve(res);
-        });
-        /* eslint-enable */
-    }));
-    await page.close();
+    const results = await axeRunner.run(url, scripts, scriptContents, epub.basedir);
 
     // Post-process results
     results.assertions = (results.axe != null) ? axe2ace.axe2ace(spineItem, results.axe, lang) : [];
     delete results.axe;
     winston.info(`- ${spineItem.relpath}: ${
-      (results.assertions && results.assertions.assertions.length > 0)
+      (results.assertions && results.assertions.assertions && results.assertions.assertions.length > 0)
         ? results.assertions.assertions.length
         : 'No'} issues found`);
     // Resolve path and locators for extracted data
@@ -139,16 +122,16 @@ async function checkSingle(spineItem, epub, browser, lang) {
   }
 }
 
-module.exports.check = async (epub, lang) => {
-  const args = [];
-  if (os.platform() !== 'win32' && os.platform() !== 'darwin') {
-    args.push('--no-sandbox')
-  }
-  const browser = await puppeteer.launch({ args });
+module.exports.check = async (epub, lang, axeRunner) => {
+  await axeRunner.launch();
   winston.info('Checking documents...');
-  return pMap(epub.contentDocs, doc => checkSingle(doc, epub, browser, lang), { concurrency: 4 })
+  return pMap(epub.contentDocs, doc => checkSingle(doc, epub, lang, axeRunner), { concurrency: axeRunner.concurrency })
   .then(async (results) => {
-    await browser.close();
+    await axeRunner.close();
     return results;
+  }).catch(async (err) => {
+    winston.info(`Error HTML check: ${err}`);
+    await axeRunner.close();
+    return [];
   });
 };

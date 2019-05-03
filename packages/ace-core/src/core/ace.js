@@ -16,7 +16,7 @@ const logger = require('@daisy/ace-logger');
 
 tmp.setGracefulCleanup();
 
-module.exports = function ace(epubPath, options) {
+module.exports = function ace(epubPath, options, axeRunner) {
   if (options.lang) {
     setCurrentLanguage(options.lang);
   }
@@ -69,7 +69,7 @@ module.exports = function ace(epubPath, options) {
     // initialize the report
     .then(() => new Report(epub, options.outdir, options.lang))
     // Check each Content Doc
-    .then(report => checker.check(epub, report, options.lang))
+    .then(report => checker.check(epub, report, options.lang, axeRunner))
     // Process the Results
     .then((report) => {
       if (options.outdir === undefined) {
