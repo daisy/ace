@@ -170,7 +170,13 @@ daisy.ace.run = function(done) {
     rules: [
       {
         id: 'pagebreak-label',
-        selector: '[*|type~="pagebreak"], [role~="doc-pagebreak"]',
+        // selector: '[*|type~="pagebreak"], [role~="doc-pagebreak"]',
+        matches: function matches(node, virtualNode, context) {
+          return node.hasAttribute('role')
+              && node.getAttribute('role').match(/\S+/g).includes('doc-pagebreak')
+              || node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')
+              && node.getAttributeNS('http://www.idpf.org/2007/ops', 'type').match(/\S+/g).includes('pagebreak')
+        },
         any: ['aria-label', 'non-empty-title'],
         metadata: {
           // configured from host bootstrapper page (checker-chromium)
@@ -180,7 +186,10 @@ daisy.ace.run = function(done) {
       },
       {
         id: 'epub-type-has-matching-role',
-        selector: '[*|type]',
+        // selector: '[*|type]',
+        matches: function matches(node, virtualNode, context) {
+          return node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')
+        },        
         any: ['matching-aria-role'],
         metadata: {
           // configured from host bootstrapper page (checker-chromium)
@@ -192,7 +201,7 @@ daisy.ace.run = function(done) {
       {
         id: 'landmark-one-main',
         all: [
-          "page-no-duplicate-main" // Was `has-no-more-than-one-main`, see https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19
+          "page-no-duplicate-main"
           ],
       }
     ]
@@ -202,29 +211,11 @@ daisy.ace.run = function(done) {
     {
       "rules": {
         "bypass": { enabled: false },
-
-        // https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md
-        // https://github.com/dequelabs/axe-core/compare/v2.6.1...v3.2.2#diff-666edcd06e006682440ca9e74470a171
-        // https://github.com/dequelabs/axe-core/commits/v3.2.2/doc/rule-descriptions.md
-        // https://github.com/dequelabs/axe-core/blob/v2.6.1/doc/rule-descriptions.md
-        "label-content-name-mismatch": { enabled: false },
-        "aria-hidden-focus": { enabled: false },
-        "landmark-complementary-is-top-level": { enabled: false },
-        "form-field-multiple-labels": { enabled: false },
-        "duplicate-id-active": { enabled: false },
-        "duplicate-id-aria": { enabled: false },
-        "css-orientation-lock": { enabled: false },
-        "aria-allowed-role": { enabled: false },
-        "html-xml-lang-mismatch": { enabled: false },
-        "autocomplete-valid": { enabled: false },
-        "landmark-banner-is-top-level": { enabled: false },
-        "landmark-contentinfo-is-top-level": { enabled: false },
-        "frame-tested": { enabled: false },
-        "landmark-no-duplicate-banner": { enabled: false }, // landmark-no-more-than-one-banner
-        "landmark-no-duplicate-contentinfo": { enabled: false }, // landmark-no-more-than-one-contentinfo
+        "region": { enabled: false },
         "page-has-heading-one": { enabled: false },
-        "aria-dpub-role-fallback": { enabled: false },
-        "focus-order-semantics": { enabled: false },
+        // The following newer Axe rules need to be further reviewed
+        // to see if they're useful in an EPUB context
+        "landmark-complementary-is-top-level": { enabled: false },
       }
     },
     function(axeError, axeResult) {
