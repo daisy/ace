@@ -20,7 +20,8 @@
   "homepage": "https://daisy.github.io/ace",
   "repository": {
     "type": "git",
-    "url": "https://github.com/daisy/ace"
+    "url": "https://github.com/daisy/ace",
+    "directory": "packages/ace"
   },
   "bugs": {
     "url": "https://github.com/daisy/ace/issues"
