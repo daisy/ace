@@ -3,7 +3,7 @@
         "metadataviolation": {
             "testdesc": "Vérifie que la métadonnée '{{name}}' est présente",
             "resdesc": "Ajouter la métadonnée '{{name}}' au Document de Package",
-            "ruledesc": "Les publications doivent déclarer la métadonnée '{{name}}'",
+            "ruledesc": "Toute publication doit déclarer la métadonnée '{{name}}'",
             "kbtitle": "Métadonnées d'accessibilité Schema.org"
         },
         "titleviolation": {
