@@ -12,6 +12,8 @@ const winston = require('winston');
 const axe2ace = require('@daisy/ace-report-axe');
 const utils = require('@daisy/puppeteer-utils');
 
+const { getRawResourcesForCurrentLanguage } = require('../l10n/localize').localizer;
+
 tmp.setGracefulCleanup();
 
 const scripts = [
@@ -23,7 +25,7 @@ const scripts = [
   require.resolve('../scripts/ace-extraction.js'),
 ];
 
-async function checkSingle(spineItem, epub, browser) {
+async function checkSingle(spineItem, epub, browser, lang) {
   winston.verbose(`- Processing ${spineItem.relpath}`);
   try {
     let url = spineItem.url;
@@ -42,6 +44,46 @@ async function checkSingle(spineItem, epub, browser) {
     
     const page = await browser.newPage();
     await page.goto(url);
+
+    let localePath = "";
+    try {
+      winston.info(`- Axe locale: [${lang}]`);
+
+      // https://github.com/dequelabs/axe-core#localization
+      // https://github.com/dequelabs/axe-core/tree/develop/locales
+
+      if (lang && lang !== "en" && lang.indexOf("en-") !== 0) { // default English built into Axe source code
+        localePath = path.resolve(require.resolve('axe-core'), `../locales/${lang}.json`);
+        if (fs.existsSync(localePath)) {
+          const localeStr = fs.readFileSync(localePath, { encoding: "utf8" });
+          const localeScript = `window.__axeLocale__=${localeStr};`;
+          await utils.addScriptContents([localeScript], page);
+        } else {
+          winston.info(`- Axe locale missing? [${lang}] => ${localePath}`);
+        }
+      }
+
+      let localizedScript = "";
+      const rawJson = getRawResourcesForCurrentLanguage();
+
+      ["axecheck", "axerule"].forEach((checkOrRule) => {
+        const checkOrRuleKeys = Object.keys(rawJson[checkOrRule]);
+        for (const checkOrRuleKey of checkOrRuleKeys) {
+          const msgs = Object.keys(rawJson[checkOrRule][checkOrRuleKey]);
+          for (const msg of msgs) {
+            const k = `__aceLocalize__${checkOrRule}_${checkOrRuleKey}_${msg}`;
+            localizedScript += `window['${k}']="${rawJson[checkOrRule][checkOrRuleKey][msg]}";\n`;
+          }
+        }
+      });
+      await utils.addScriptContents([localizedScript], page);
+      
+    } catch (err) {
+      console.log(err);
+      winston.verbose(err);
+      winston.info(`- Axe locale problem? [${lang}] => ${localePath}`);
+    }
+
     await utils.addScripts(scripts, page);
 
     const results = await page.evaluate(() => new Promise((resolve, reject) => {
@@ -57,7 +99,7 @@ async function checkSingle(spineItem, epub, browser) {
     await page.close();
 
     // Post-process results
-    results.assertions = (results.axe != null) ? axe2ace.axe2ace(spineItem, results.axe) : [];
+    results.assertions = (results.axe != null) ? axe2ace.axe2ace(spineItem, results.axe, lang) : [];
     delete results.axe;
     winston.info(`- ${spineItem.relpath}: ${
       (results.assertions && results.assertions.assertions.length > 0)
@@ -97,14 +139,14 @@ async function checkSingle(spineItem, epub, browser) {
   }
 }
 
-module.exports.check = async (epub) => {
+module.exports.check = async (epub, lang) => {
   const args = [];
   if (os.platform() !== 'win32' && os.platform() !== 'darwin') {
     args.push('--no-sandbox')
   }
   const browser = await puppeteer.launch({ args });
   winston.info('Checking documents...');
-  return pMap(epub.contentDocs, doc => checkSingle(doc, epub, browser), { concurrency: 4 })
+  return pMap(epub.contentDocs, doc => checkSingle(doc, epub, browser, lang), { concurrency: 4 })
   .then(async (results) => {
     await browser.close();
     return results;

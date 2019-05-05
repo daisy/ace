@@ -32,6 +32,7 @@ const cli = meow({
     -V, --verbose          display verbose output
     -s, --silent           do not display any output
 
+    -l, --lang  <language> language code for localized messages (e.g. "fr"), default is "en"
   Examples
     $ ace -o out ~/Documents/book.epub
 `,
@@ -46,9 +47,10 @@ version: pkg.version
     t: 'tempdir',
     v: 'version',
     V: 'verbose',
+    l: 'lang',
   },
   boolean: ['force', 'verbose', 'silent', 'subdir'],
-  string: ['outdir', 'tempdir'],
+  string: ['outdir', 'tempdir', 'lang'],
 });
 
 function sleep(ms) {
@@ -102,6 +104,7 @@ ${overrides.map(file => `  - ${file}`).join('\n')}
     verbose: cli.flags.verbose,
     silent: cli.flags.silent,
     jobId: '',
+    lang: cli.flags.lang,
   })
   .then((jobData) => {
     var reportJson = jobData[1];

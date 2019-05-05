@@ -4,6 +4,9 @@ const escape = require('escape-html');
 const handlebars = require('handlebars');
 const fs = require('fs');
 const path = require('path');
+const winston = require('winston');
+
+const { localize, getCurrentLanguage } = require('./l10n/localize').localizer;
 
 // generate the html report and return it as a string
 module.exports = function generateHtmlReport(reportData) {
@@ -16,8 +19,8 @@ module.exports = function generateHtmlReport(reportData) {
       'wcag2a': 'WCAG 2.0 A',
       'wcag2aa': 'WCAG 2.0 AA',
       'EPUB': 'EPUB',
-      'best-practice': 'Best Practice',
-      'other': 'Other'
+      'best-practice': localize("bestpractice"),
+      'other': localize("other")
     };
 
     // return 5 data cells for each ruleset: critical, serious, moderate, minor, total
@@ -35,12 +38,16 @@ module.exports = function generateHtmlReport(reportData) {
     handlebars.registerHelper('violationFilter', function(rule, options) {
       var filterOptions = "";
       violationFilters[rule].forEach(function(value) {
+        // winston.info("######## " + value);
+        const valueDisplay = localize(value, {ignoreMissingKey: true}); // only handles "serious", "moderate", etc. so can be missingKey, such as "EPUB/package.opf", "color-contrast", "metadata-schema-accessibilitysummary" etc. (in which case => fallback to key string)
         // use nicer labels for ruleset options
         if (rule == "ruleset") {
           filterOptions += "<option value='" + value + "'>" + rulesetTagLabels[value] + "</option>";
         }
         else {
-          filterOptions += "<option value='" + value + "'>" + value + "</option>";
+          filterOptions += "<option value='" + value + "'>" +
+          valueDisplay
+          + "</option>";
         }
       });
       return new handlebars.SafeString(filterOptions);
@@ -54,22 +61,21 @@ module.exports = function generateHtmlReport(reportData) {
     handlebars.registerHelper('violationRows', function(options) {
       var htmlStr = '';
       flatListOfViolations.forEach(function(violation) {
+        const valueDisplay = localize(violation['impact'], {ignoreMissingKey: false});
         htmlStr += `<tr>
-        <td><span class='${violation['impact']}'>${violation['impact']}</span></td>
+        <td><span class='${violation['impact']}'>${valueDisplay}</span></td>
         <td><span class='ruleset'>${rulesetTagLabels[violation['applicableRulesetTag']]}</span></td>
         <td>${violation['rule']}<br/><br/><span class='engine'>${violation['engine']}</span></td>
-        <td><em>\"${violation['fileTitle']}\"<br/><br/><code class='location'>${violation['location']}</code>`;
+        <td><em>\"${violation['fileTitle']}\"</em><br/><br/><code class='location'>${violation['location']}</code>`;
 
         if (violation.html) {
-          htmlStr +=`<br/><br/><div class='snippet'>Snippet:<code>${violation.html.trim()}</code></div>`;
+          htmlStr +=`<br/><br/><div class='snippet'>${localize("snippet")}<code>${violation.html.trim()}</code></div>`;
         }
 
         htmlStr += "</td>";
 
 
         var desc = violation["desc"];
-        desc = desc.replace("Fix all of the following:", "");
-        desc = desc.replace("Fix any of the following:", "");
 
         var detailsArr = desc.split("\n");
         var listStr = '';
@@ -81,7 +87,7 @@ module.exports = function generateHtmlReport(reportData) {
 
         htmlStr += `<td class='details'>
         <ul>${listStr}</ul>
-        <p><a href='${violation['kburl']}' target='_blank'>Learn more about ${violation['kbtitle']}</a></p>
+        <p><a href='${violation['kburl']}' target='_blank'>${localize("learnmoreabout") + " " + violation['kbtitle']}</a></p>
         </td>`;
 
         htmlStr += "</tr>";
@@ -99,6 +105,30 @@ module.exports = function generateHtmlReport(reportData) {
       else {
         return new handlebars.SafeString('');
       }
+    });
+
+    handlebars.registerHelper('generatedBy', function(options) {
+       
+      return new handlebars.SafeString(localize("generatedby", {
+        v1: (reportData['earl:assertedBy']) ? reportData['earl:assertedBy']['doap:name'] : "doap:name?",
+        v2: (reportData['earl:assertedBy'] && reportData['earl:assertedBy']['doap:release']) ? reportData['earl:assertedBy']['doap:release']['doap:revision'] : "doap:release?",
+        v3: reportData['dct:date'],
+        interpolation: { escapeValue: false }}));
+
+      // if (reportData['earl:assertedBy'].hasOwnProperty('doap:name') &&
+      //     reportData['earl:assertedBy'].hasOwnProperty('doap:release') &&
+      //     reportData['earl:assertedBy']['doap:release'].hasOwnProperty('doap:revision')) {
+      // }
+      // else {
+      //   return new handlebars.SafeString('');
+      // }
+    });
+    handlebars.registerHelper('localize', function(key, options) {
+      if (key === "__language__") {
+        return getCurrentLanguage();
+      }
+      const valueDisplay = localize(key, {ignoreMissingKey: false});
+      return new handlebars.SafeString(valueDisplay);
     });
 
     const content = fs.readFileSync(path.join(__dirname, "./report-template.handlebars")).toString();
@@ -189,7 +219,7 @@ function createFlatListOfViolations(violations) {
 
       var obj = {
         "file": filename,
-        "filetitle": filetitle,
+        "fileTitle": filetitle,
         "engine": item["earl:assertedBy"],
         "kburl": item["earl:test"]["help"]["url"],
         "kbtitle": item["earl:test"]["help"]["dct:title"],

@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-core",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Core library for Ace",
   "author": {
     "name": "DAISY developers",
@@ -18,6 +18,8 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
+    "@daisy/ace-localize": "^1.0.0",
+    "@daisy/ace-logger": "^1.0.1",
     "@daisy/ace-meta": "^1.0.3",
     "@daisy/ace-report": "^1.0.1",
     "@daisy/ace-report-axe": "^1.0.1",

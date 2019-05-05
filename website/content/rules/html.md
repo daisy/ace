@@ -76,4 +76,4 @@ Here is a list of aXe's rules used by Ace, taken from [their documentation](http
 Certain aspects of HTML accessibility checking don't apply to EPUBs, so Ace has modified aXe's default ruleset slightly.
 
 * Ace disables aXe's `bypass` rule.
-* Ace changes aXe's `landmark-one-main` rule to remove the `has-no-more-than-one-main` check.
+* Ace changes aXe's `landmark-one-main` rule to remove the `page-no-duplicate-main` check (was `has-no-more-than-one-main`, see https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19 ).

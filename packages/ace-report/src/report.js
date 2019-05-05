@@ -8,6 +8,8 @@ const builders = require('./report-builders.js');
 const a11yMetaChecker = require("./analyze-a11y-metadata.js");
 const generateHtmlReport = require("./generate-html-report.js");
 
+const { localize, setCurrentLanguage } = require('./l10n/localize').localizer;
+
 function headingsToOutline(headings) {
   const result = [];
   let level = 1;
@@ -21,7 +23,7 @@ function headingsToOutline(headings) {
       }
     } else if (hx.level > level) {
       for (let i = level + 1; i < hx.level; i += 1) {
-        result.push(`<ul><li><span class="toc-missing">Missing heading h${i}</span>`);
+        result.push(`<ul><li><span class="toc-missing">${localize("missingheading", { i, interpolation: { escapeValue: false } })}</span>`);
       }
       result.push('<ul>');
     }
@@ -39,7 +41,11 @@ function aggregateHTMLOutlines(outlines) {
 }
 
 module.exports = class Report {
-  constructor(epub, outdir) {
+  constructor(epub, outdir, lang) {
+    if (lang) {
+      setCurrentLanguage(lang);
+    }
+
     this._builder = new builders.ReportBuilder()
       .setOutdir(outdir)
       .withTestSubject(epub.path, '', '', epub.metadata, epub.links)

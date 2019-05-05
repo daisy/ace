@@ -28,6 +28,8 @@ function ace(epub, options = {}) {
   return runAce(path.join(__dirname, epub), Object.assign({
     outdir: outdir.name,
     tmp: tmpdir.name,
+    verbose: true,
+    silent: true,
   }, options))
     .then(() => {
       expect(fs.existsSync(reportPath)).toBeTruthy();

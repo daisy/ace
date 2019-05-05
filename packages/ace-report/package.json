@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-report",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Reporting utilities for Ace",
   "author": {
     "name": "DAISY developers",
@@ -19,6 +19,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@daisy/ace-config": "^1.0.0",
+    "@daisy/ace-localize": "^1.0.0",
     "@daisy/ace-meta": "^1.0.3",
     "escape-html": "^1.0.3",
     "fs-extra": "^6.0.1",
