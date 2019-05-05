@@ -1,7 +1,7 @@
 {
   "name": "@daisy/ace-localize",
   "version": "1.0.0",
-  "description": "Localization for Ace",
+  "description": "Localization utilities for Ace",
   "author": {
     "name": "DAISY developers",
     "organization": "DAISY Consortium",
