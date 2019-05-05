@@ -11,8 +11,6 @@ const axe2ace = require('@daisy/ace-report-axe');
 
 const { getRawResourcesForCurrentLanguage } = require('../l10n/localize').localizer;
 
-const { getRawResourcesForCurrentLanguage } = require('../l10n/localize').localizer;
-
 tmp.setGracefulCleanup();
 
 const scripts = [
