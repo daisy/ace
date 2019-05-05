@@ -103,23 +103,18 @@ function  axe2ace(spineItem, axeResults, lang) {
 
         let description = node.failureSummary;
 
-        // TODO translate / localize / l10n
-        // description = description.replace(localize("axe.failuresummary.none"), "");
-        // description = description.replace(localize("axe.failuresummary.any"), "");
-        // ?
-        // really annoying to duplicate hard-coded strings from Axe-Core into here,
-        // but also annoying to add localize() code and JSON resources just for this :(
         // https://github.com/dequelabs/axe-core/blob/v3.2.2/lib/core/reporters/helpers/failure-summary.js
+        // // https://github.com/dequelabs/axe-core/blob/v3.2.2/lib/misc/none-failure-summary.json#L4
+        // description = description.replace("Fix all of the following:", "");
+        // // https://github.com/dequelabs/axe-core/blob/v3.2.2/locales/fr.json#L664
+        // description = description.replace("Corriger tous les éléments suivants :", "");
+        // // https://github.com/dequelabs/axe-core/blob/v3.2.2/lib/misc/any-failure-summary.json#L4
+        // description = description.replace("Fix any of the following:", "");
+        // // https://github.com/dequelabs/axe-core/blob/v3.2.2/locales/fr.json#L656
+        // description = description.replace("Corriger l’un des éléments suivants :", "");
 
-        // https://github.com/dequelabs/axe-core/blob/v3.2.2/lib/misc/none-failure-summary.json#L4
-        description = description.replace("Fix all of the following:", "");
-        // https://github.com/dequelabs/axe-core/blob/v3.2.2/locales/fr.json#L664
-        description = description.replace("Corriger tous les éléments suivants :", "");
-        
-        // https://github.com/dequelabs/axe-core/blob/v3.2.2/lib/misc/any-failure-summary.json#L4
-        description = description.replace("Fix any of the following:", "");
-        // https://github.com/dequelabs/axe-core/blob/v3.2.2/locales/fr.json#L656
-        description = description.replace("Corriger l’un des éléments suivants :", "");
+        // regexp for the above
+        description = description.replace(/[^:]+:/, "");
 
         description = description.trim();
 
