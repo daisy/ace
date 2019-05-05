@@ -1,7 +1,7 @@
 {
     "kb": {
-        "accesskeys": "Raccourcis clavier",
-        "area-alt": "Grilles d'Image",
+        "accesskeys": "Raccourcis Clavier",
+        "area-alt": "Cartes Imagées",
         "aria-allowed-attr": "ARIA",
         "aria-hidden-body": "ARIA",
         "aria-required-attr": "ARIA",
@@ -43,7 +43,7 @@
         "pagebreak-label": "Sauts de Page",
         "radiogroup": "Formulaires",
         "scope-attr-valid": "Tableaux",
-        "server-side-image-map": "Grilles d'Image",
+        "server-side-image-map": "Cartes Imagées",
         "table-duplicate-name": "Tableaux",
         "table-fake-caption": "Tableaux",
         "td-has-header": "Tableaux",
