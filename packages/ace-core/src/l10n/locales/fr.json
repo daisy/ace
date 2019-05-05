@@ -7,7 +7,7 @@
             "kbtitle": "Métadonnées d'accessibilité Schema.org"
         },
         "titleviolation": {
-            "testdesc": "Assure que le EPUB a un titre",
+            "testdesc": "Vérifie que le EPUB a un titre",
             "resdesc": "Ajouter une métadonnée 'dc:title' au Document de Package",
             "ruledesc": "Une publication doit avoir un titre",
             "kbtitle": "Titre EPUB"
