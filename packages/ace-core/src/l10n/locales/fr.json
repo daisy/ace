@@ -30,7 +30,7 @@
             "desc": "Vérifie que les sauts de page ont un label accessible"
         },
         "epub-type-has-matching-role": {
-            "help": "Un role ARIA devrait être utilisé en plus de epub:type",
+            "help": "Un rôle ARIA devrait être spécifié en plus de l’epub:type",
             "desc": "Assure que un element a un role ARIA qui corresponde à son epub:type"
         }
     }
