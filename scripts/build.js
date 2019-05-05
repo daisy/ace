@@ -61,6 +61,7 @@ function buildFile(file, silent) {
           path.relative(PACKAGES_DIR, file) +
           chalk.green(' ⇒ ') +
           path.relative(PACKAGES_DIR, destPath) +
+          chalk.yellow(' (babel)') +
           '\n');
   }
 }
@@ -72,9 +73,11 @@ function buildPackage(pkg) {
     nodir: true,
   });
 
-  process.stdout.write(`  ${path.basename(pkg)}  ${chalk.dim('...')}`);
+  const verbose = process.env.VERBOSE;
 
-  files.forEach(file => buildFile(file, true));
+  process.stdout.write(`  ${path.basename(pkg)}  ${chalk.dim('...')}${verbose ? '\n' : ''}`);
+
+  files.forEach(file => buildFile(file, !verbose));
 
   const buildScript = path.resolve(pkg, 'scripts/build.js');
   if (fs.existsSync(buildScript)) {
