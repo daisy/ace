@@ -13,7 +13,7 @@
             "kbtitle": "Titre EPUB"
         },
         "pagesourceviolation": {
-            "testdesc": "Assure que la source des breaks de page est identifiée",
+            "testdesc": "Vérifie que la source des sauts de page est identifiée",
             "resdesc": "Ajouter la métadonnée 'dc:source' au Document de Package",
             "ruledesc": "Une publication avec des breaks de page doit déclarer la métadonnée 'dc:source'",
             "kbtitle": "Navigation de page"
