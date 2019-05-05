@@ -21,7 +21,7 @@
     },
     "axecheck": {
         "matching-aria-role": {
-            "pass": "Un element a un role ARIA qui correspond à son epub:type",
+            "pass": "L’élément a un rôle ARIA correspondant à son epub:type",
             "fail": "L’élément n’a pas de rôle ARIA correspondant à son epub:type"
         }
     },
