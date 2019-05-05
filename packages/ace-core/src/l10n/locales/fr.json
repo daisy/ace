@@ -31,7 +31,7 @@
         },
         "epub-type-has-matching-role": {
             "help": "Un rôle ARIA devrait être spécifié en plus de l’epub:type",
-            "desc": "Assure que un element a un role ARIA qui corresponde à son epub:type"
+            "desc": "Vérifie qu’un élément a un rôle ARIA correspondant à son epub:type"
         }
     }
 }
