@@ -49,7 +49,7 @@
     "name": "Nom",
     "value": "Valeur",
     "tocoutline": "Table des Matières EPUB",
-    "headsoutline": "Structure d'Entêtes",
+    "headsoutline": "Structure des titres",
     "htmloutline": "Structure HTML",
     "noimages": "Pas d'images dans cette publication.",
     "imagescaption": "Images dans l'EPUB, avec leurs descriptions",
