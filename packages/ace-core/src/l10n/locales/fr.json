@@ -8,13 +8,13 @@
         },
         "titleviolation": {
             "testdesc": "Vérifie que le EPUB a un titre",
-            "resdesc": "Ajouter une métadonnée 'dc:title' au Document de Package",
+            "resdesc": "Ajouter la métadonnée 'dc:title' au Document de Package",
             "ruledesc": "Une publication doit avoir un titre",
             "kbtitle": "Titre EPUB"
         },
         "pagesourceviolation": {
             "testdesc": "Assure que la source des breaks de page est identifiée",
-            "resdesc": "Ajouter une métadonnée 'dc:source' au Document de Package",
+            "resdesc": "Ajouter la métadonnée 'dc:source' au Document de Package",
             "ruledesc": "Une publication avec des breaks de page doit déclarer la métadonnée 'dc:source'",
             "kbtitle": "Navigation de page"
         }
