@@ -9,7 +9,7 @@
     "report-desc": "Rapport de vérification automatique de l'accessibilité EPUB",
     "via": "via",
     "doctitle": "Rapport d'accessibilité EPUB par DAISY Ace",
-    "enablejavascript": "Activer javascript pour meilleure performance.",
+    "enablejavascript": "Activer javascript pour une exécution plus performante",
     "doctopheading": "Rapport d'accessibilité EPUB",
     "generatedby": "Généré par {{v1}} ({{v2}}) le {{v3}}",
     "title": "Titre:",
