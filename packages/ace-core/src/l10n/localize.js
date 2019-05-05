@@ -1,16 +1,16 @@
 const { newLocalizer } = require('@daisy/ace-localize');
 
-const enJson = require("./locales/en");
-const frJson = require("./locales/fr");
+const enJson = require("./locales/en.json");
+const frJson = require("./locales/fr.json");
 
 export const localizer = newLocalizer({
     en: {
         name: "English",
         default: true,
-        translation: enJson.default || enJson,
+        translation: enJson,
     },
     fr: {
         name: "Français",
-        translation: frJson.default || frJson,
+        translation: frJson,
     },
 });
