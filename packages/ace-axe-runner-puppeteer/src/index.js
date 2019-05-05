@@ -18,9 +18,12 @@ module.exports = {
     close: async function() {
         await _browser.close();
     },
-    run: async function(url, scripts, basedir) {
+    run: async function(url, scripts, scriptContents, basedir) {
+
         const page = await _browser.newPage();
         await page.goto(url);
+
+        await utils.addScriptContents(scriptContents, page);
         await utils.addScripts(scripts, page);
 
         const results = await page.evaluate(() => new Promise((resolve, reject) => {

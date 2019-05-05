@@ -29,6 +29,7 @@ Ace by DAISY, an Accessibility Checker for EPUB
     -V, --verbose          display verbose output
     -s, --silent           do not display any output
 
+    -l, --lang  <language> language code for localized messages (e.g. "fr"), default is "en"
   Examples
     $ ace-http -p 3000
  ```

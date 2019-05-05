@@ -10,10 +10,22 @@ const pkg = require('@daisy/ace-meta/package');
 const EPUB = require('@daisy/epub-utils').EPUB;
 const Report = require('@daisy/ace-report').Report;
 const checker = require('../checker/checker.js');
+const { setCurrentLanguage } = require('../l10n/localize').localizer;
+
+const logger = require('@daisy/ace-logger');
 
 tmp.setGracefulCleanup();
 
 module.exports = function ace(epubPath, options, axeRunner) {
+
+  if (options.lang) {
+    setCurrentLanguage(options.lang);
+  }
+
+  if (options.initLogger) {
+    logger.initLogger({ verbose: options.verbose, silent: options.silent });
+  }
+
   return new Promise((resolve, reject) => {
     // the jobid option just gets returned in the resolve/reject
     // so the calling function can track which job finished
@@ -56,9 +68,9 @@ module.exports = function ace(epubPath, options, axeRunner) {
     epub.extract()
     .then(() => epub.parse())
     // initialize the report
-    .then(() => new Report(epub, options.outdir))
+    .then(() => new Report(epub, options.outdir, options.lang))
     // Check each Content Doc
-    .then(report => checker.check(epub, report, axeRunner))
+    .then(report => checker.check(epub, report, options.lang, axeRunner))
     // Process the Results
     .then((report) => {
       if (options.outdir === undefined) {

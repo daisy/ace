@@ -3,6 +3,8 @@
 const builders = require('@daisy/ace-report').builders;
 const winston = require('winston');
 
+const { localize } = require('../l10n/localize').localizer;
+
 const ASSERTED_BY = 'Ace';
 const MODE = 'automatic';
 const KB_BASE = 'http://kb.daisy.org/publishing/';
@@ -42,11 +44,11 @@ function newMetadataAssertion(name, impact = 'serious') {
   return newViolation({
     impact,
     title: `metadata-${name.toLowerCase().replace(':', '-')}`,
-    testDesc: `Ensures a '${name}' metadata is present`,
-    resDesc: `Add a '${name}' metadata property to the Package Document`,
+    testDesc: localize("checkepub.metadataviolation.testdesc", { name, interpolation: { escapeValue: false } }),
+    resDesc: localize("checkepub.metadataviolation.resdesc", { name, interpolation: { escapeValue: false } }),
     kbPath: 'docs/metadata/schema-org.html',
-    kbTitle: 'Schema.org Accessibility Metadata',
-    ruleDesc: `Publications must declare the '${name}' metadata`
+    kbTitle: localize("checkepub.metadataviolation.kbtitle"),
+    ruleDesc: localize("checkepub.metadataviolation.ruledesc", { name, interpolation: { escapeValue: false } })
   });
 }
 
@@ -70,11 +72,11 @@ function checkTitle(assertions, epub) {
   if (title === '') {
     assertions.withAssertions(newViolation({
       title: 'epub-title',
-      testDesc: 'Ensures the EPUB has a title',
-      resDesc: 'Add a \'dc:title\' metadata property to the Package Document',
+      testDesc: localize("checkepub.titleviolation.testdesc"),
+      resDesc: localize("checkepub.titleviolation.resdesc"),
       kbPath: '',
-      kbTitle: 'EPUB Title',
-      ruleDesc: 'Publications must have a title',
+      kbTitle: localize("checkepub.titleviolation.kbtitle"),
+      ruleDesc: localize("checkepub.titleviolation.ruledesc")
     }));
   }
 }
@@ -85,11 +87,11 @@ function checkPageSource(assertion, epub) {
     || epub.metadata['dc:source'].toString() === '')) {
     assertion.withAssertions(newViolation({
       title: 'epub-pagesource',
-      testDesc: 'Ensures the source of page breaks is identified',
-      resDesc: 'Add a \'dc:source\' metadata property to the Package Document',
+      testDesc: localize("checkepub.pagesourceviolation.testdesc"),
+      resDesc: localize("checkepub.pagesourceviolation.resdesc"),
       kbPath: 'docs/navigation/pagelist.html',
-      kbTitle: 'Page Navigation',
-      ruleDesc: 'Publications with page breaks must declare the \'dc:source\' metadata',
+      kbTitle: localize("checkepub.pagesourceviolation.kbtitle"),
+      ruleDesc: localize("checkepub.pagesourceviolation.ruledesc")
     }));
   }
 }
@@ -121,7 +123,7 @@ function check(epub, report) {
     hasBindings: epub.hasBindings,
     hasSVGContentDocuments: epub.hasSVGContentDocuments,
   });
-  
+
   winston.info(`- ${epub.packageDoc.src}: ${
     (builtAssertions.assertions && builtAssertions.assertions.length > 0)
       ? builtAssertions.assertions.length

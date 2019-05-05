@@ -8,6 +8,10 @@ daisy.epub = daisy.epub || {};
 
 daisy.epub.createCFI = function(elem) {
 
+  if (elem && elem.parentNode && elem.parentNode.nodeType && elem.parentNode.nodeType !== 1) {
+    return "/"; // HTML root element (not "/2"!)
+  }
+
   var cfi_ = undefined;
   var currentElement = elem;
 
@@ -77,13 +81,14 @@ daisy.ace.run = function(done) {
             jsonItem.targetCFI.push(cfi);
           }
         } else {
-          throw "WTF?!";
+          throw "Not ARRAY?!";
         }
       }
     }
   };
 
   window.axe.configure({
+    locale: window.__axeLocale__, // configured from host bootstrapper page (checker-chromium) can be undefined
     checks: [
       {
         id: "matching-aria-role",
@@ -149,12 +154,14 @@ daisy.ace.run = function(done) {
           impact: 'minor',
           messages: {
             pass: function anonymous(it) {
-              var out = 'Element has an ARIA role matching its epub:type';
-              return out;
+              // configured from host bootstrapper page (checker-chromium)
+              const k = "__aceLocalize__axecheck_matching-aria-role_pass";
+              return window[k] || k;
             },
             fail: function anonymous(it) {
-              var out = 'Element has no ARIA role matching its epub:type';
-              return out;
+              // configured from host bootstrapper page (checker-chromium)
+              const k = "__aceLocalize__axecheck_matching-aria-role_fail";
+              return window[k] || k;
             }
           }
         }
@@ -172,7 +179,8 @@ daisy.ace.run = function(done) {
         },
         any: ['aria-label', 'non-empty-title'],
         metadata: {
-          description: "Ensure page markers have an accessible label",
+          // configured from host bootstrapper page (checker-chromium)
+          description: (() => { const k = "__aceLocalize__axerule_pagebreak-label_desc"; return window[k] || k; })()
         },
         tags: ['cat.epub']
       },
@@ -184,8 +192,9 @@ daisy.ace.run = function(done) {
         },        
         any: ['matching-aria-role'],
         metadata: {
-          help: "ARIA role should be used in addition to epub:type",
-          description: "Ensure the element has an ARIA role matching its epub:type",
+          // configured from host bootstrapper page (checker-chromium)
+          help: (() => { const k = "__aceLocalize__axerule_epub-type-has-matching-role_help"; return window[k] || k; })(),
+          description: (() => { const k = "__aceLocalize__axerule_epub-type-has-matching-role_desc"; return window[k] || k; })()
         },
         tags: ['best-practice']
       },

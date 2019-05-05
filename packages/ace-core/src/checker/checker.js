@@ -41,8 +41,8 @@ function consolidate(results, report) {
   return report;
 }
 
-module.exports.check = function check(epub, report, axeRunner) {
+module.exports.check = function check(epub, report, lang, axeRunner) {
   return epubChecker.check(epub, report)
-    .then(() => htmlChecker.check(epub, axeRunner))
+    .then(() => htmlChecker.check(epub, lang, axeRunner))
     .then(results => consolidate(results, report));
 };

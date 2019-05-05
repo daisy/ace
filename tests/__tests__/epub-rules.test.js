@@ -28,6 +28,8 @@ function ace(epub, options = {}) {
   return runAce(path.join(__dirname, epub), Object.assign({
     outdir: outdir.name,
     tmp: tmpdir.name,
+    verbose: true,
+    silent: true, // temporarily switch to false to see the log file path in the console
   }, options))
     .then(() => {
       expect(fs.existsSync(reportPath)).toBeTruthy();
@@ -36,6 +38,7 @@ function ace(epub, options = {}) {
     .catch(err => console.log(err));
 }
 
+// yarn build && yarn test -t "nothing to report"
 test('nothing to report', async () => {
   const report = await ace('../data/base-epub-30');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');

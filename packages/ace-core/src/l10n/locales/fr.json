@@ -1,0 +1,37 @@
+{
+    "checkepub": {
+        "metadataviolation": {
+            "testdesc": "Vérifie que la métadonnée '{{name}}' est présente",
+            "resdesc": "Ajouter la métadonnée '{{name}}' au Document de Package",
+            "ruledesc": "Toute publication doit déclarer la métadonnée '{{name}}'",
+            "kbtitle": "Métadonnées d'accessibilité Schema.org"
+        },
+        "titleviolation": {
+            "testdesc": "Vérifie que le EPUB a un titre",
+            "resdesc": "Ajouter la métadonnée 'dc:title' au Document de Package",
+            "ruledesc": "Une publication doit avoir un titre",
+            "kbtitle": "Titre de l’EPUB"
+        },
+        "pagesourceviolation": {
+            "testdesc": "Vérifie que la source des sauts de page est identifiée",
+            "resdesc": "Ajouter la métadonnée 'dc:source' au Document de Package",
+            "ruledesc": "Une publication avec des sauts de page doit déclarer la métadonnée 'dc:source'",
+            "kbtitle": "Navigation par page"
+        }
+    },
+    "axecheck": {
+        "matching-aria-role": {
+            "pass": "L’élément a un rôle ARIA correspondant à son epub:type",
+            "fail": "L’élément n’a pas de rôle ARIA correspondant à son epub:type"
+        }
+    },
+    "axerule": {
+        "pagebreak-label": {
+            "desc": "Vérifie que les sauts de page ont un label accessible"
+        },
+        "epub-type-has-matching-role": {
+            "help": "Un rôle ARIA devrait être spécifié en plus de l’epub:type",
+            "desc": "Vérifie qu’un élément a un rôle ARIA correspondant à son epub:type"
+        }
+    }
+}

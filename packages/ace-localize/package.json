@@ -1,7 +1,7 @@
 {
-  "name": "@daisy/ace-report-axe",
-  "version": "1.0.3",
-  "description": "Ace report adapter for aXe",
+  "name": "@daisy/ace-localize",
+  "version": "1.0.0",
+  "description": "Localization utilities for Ace",
   "author": {
     "name": "DAISY developers",
     "organization": "DAISY Consortium",
@@ -9,18 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/daisy/ace",
-    "directory": "packages/ace-report-axe"
+    "url": "https://github.com/daisy/ace"
   },
   "bugs": {
     "url": "https://github.com/daisy/ace/issues"
   },
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "lib/localize.js",
   "dependencies": {
-    "@daisy/ace-localize": "^1.0.0",
-    "@daisy/ace-report": "^1.0.1",
-    "fs-extra": "^6.0.1",
+    "i18next": "^15.1.0",
     "winston": "^2.4.0"
   },
   "publishConfig": {
