@@ -27,7 +27,7 @@
     },
     "axerule": {
         "pagebreak-label": {
-            "desc": "Assure que les marques de page ont un label accessible"
+            "desc": "Vérifie que les sauts de page ont un label accessible"
         },
         "epub-type-has-matching-role": {
             "help": "Un role ARIA devrait être utilisé en plus de epub:type",
