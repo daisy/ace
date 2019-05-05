@@ -10,7 +10,7 @@
             "testdesc": "Vérifie que le EPUB a un titre",
             "resdesc": "Ajouter la métadonnée 'dc:title' au Document de Package",
             "ruledesc": "Une publication doit avoir un titre",
-            "kbtitle": "Titre EPUB"
+            "kbtitle": "Titre de l’EPUB"
         },
         "pagesourceviolation": {
             "testdesc": "Vérifie que la source des sauts de page est identifiée",
