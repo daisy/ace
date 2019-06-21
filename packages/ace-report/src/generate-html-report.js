@@ -232,7 +232,11 @@ function createFlatListOfViolations(violations) {
         "applicableRulesetTag": applicableRulesetTag
       };
       if (item["earl:result"]["earl:pointer"]) {
-        obj.location += "#epubcfi(" + item["earl:result"]["earl:pointer"]["cfi"] + ")";
+        var singleCfi = item["earl:result"]["earl:pointer"]["cfi"];
+        if (Array.isArray(singleCfi)) { // this should always be true (same with ["earl:result"]["earl:pointer"]["css"])
+          singleCfi = singleCfi[0];
+        }
+        obj.location += "#epubcfi(" + singleCfi + ")";
       }
       if (item["earl:result"]["html"]) {
         obj.html = escape(item["earl:result"]["html"]);
