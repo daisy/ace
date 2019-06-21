@@ -2,7 +2,7 @@
 const selfsigned = require('selfsigned');
 const uuid = require('uuid');
 
-export function generateSelfSignedData() {
+function generateSelfSignedData() {
     return new Promise((resolve, reject) => {
         const opts = {
             algorithm: "sha256",
@@ -30,3 +30,4 @@ export function generateSelfSignedData() {
         });
     });
 }
+module.exports = { generateSelfSignedData };

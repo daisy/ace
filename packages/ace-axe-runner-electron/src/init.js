@@ -9,14 +9,14 @@ const app = electron.app;
 const session = electron.session;
 const BrowserWindow = electron.BrowserWindow;
 // const webContents = electron.webContents;
-const ipcMain = electron.ipcMain;
+// const ipcMain = electron.ipcMain;
 
 const express = require('express');
 const portfinder = require('portfinder');
 // const http = require('http');
 const https = require('https');
 
-const generateSelfSignedData = require('./selfsigned');
+const generateSelfSignedData = require('./selfsigned').generateSelfSignedData;
 
 const logger = require('@daisy/ace-logger');
 logger.initLogger({ verbose: true, silent: false });
@@ -42,7 +42,7 @@ let browserWindow = undefined;
 
 const jsCache = {};
 
-export function axeRunnerInitEvents() {
+function axeRunnerInitEvents(eventEmmitter) {
 
     app.on("certificate-error", (event, webContents, u, error, certificate, callback) => {
         if (u.indexOf(`${rootUrl}/`) === 0) {
@@ -97,7 +97,9 @@ export function axeRunnerInitEvents() {
         sess.setCertificateVerifyProc(setCertificateVerifyProcCB);
     }
 
-    ipcMain.on('AXE_RUNNER_CLOSE', (event, arg) => {
+    eventEmmitter.on('AXE_RUNNER_CLOSE', (event, arg) => {
+        const payload = arg ? arg : event;
+        const sender = arg ? event.sender : eventEmmitter;
 
         if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner closing ...`);
 
@@ -119,7 +121,7 @@ export function axeRunnerInitEvents() {
                 return;
             }
             _closed = true;
-            event.sender.send("AXE_RUNNER_CLOSED");
+            sender.send("AXE_RUNNER_CLOSED");
         }
         let _done = 0;
         function done() {
@@ -163,12 +165,14 @@ export function axeRunnerInitEvents() {
         }
     });
 
-    ipcMain.on('AXE_RUNNER_RUN', (event, arg) => {
+    eventEmmitter.on('AXE_RUNNER_RUN', (event, arg) => {
+        const payload = arg ? arg : event;
+        const sender = arg ? event.sender : eventEmmitter;
 
-        const basedir = arg.basedir;
-        const uarel = arg.url;
-        const scripts = arg.scripts;
-        const scriptContents = arg.scriptContents;
+        const basedir = payload.basedir;
+        const uarel = payload.url;
+        const scripts = payload.scripts;
+        const scriptContents = payload.scriptContents;
 
         if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner running ... ${basedir} ${uarel}`);
 
@@ -204,7 +208,7 @@ new Promise((resolve, reject) => {
                         }
                         replySent = true;
 
-                        event.sender.send("AXE_RUNNER_RUN_", {
+                        sender.send("AXE_RUNNER_RUN_", {
                             ok
                         });
                     })
@@ -216,7 +220,7 @@ new Promise((resolve, reject) => {
                         }
                         replySent = true;
 
-                        event.sender.send("AXE_RUNNER_RUN_", {
+                        sender.send("AXE_RUNNER_RUN_", {
                             err
                         });
                     });
@@ -232,7 +236,7 @@ new Promise((resolve, reject) => {
                 replySent = true;
 
                 if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner timeout!`);
-                event.sender.send("AXE_RUNNER_RUN_", {
+                sender.send("AXE_RUNNER_RUN_", {
                     err: "Timeout :("
                 });
             }, 10000);
@@ -278,7 +282,7 @@ new Promise((resolve, reject) => {
                 doRun();
             }).catch((err) => {
                 console.log(err);
-                event.sender.send("AXE_RUNNER_RUN_", {
+                sender.send("AXE_RUNNER_RUN_", {
                     err: err,
                 });
             });
@@ -288,7 +292,7 @@ new Promise((resolve, reject) => {
     });
 }
 
-export function startAxeServer(basedir, scripts, scriptContents) {
+function startAxeServer(basedir, scripts, scriptContents) {
 
     return new Promise((resolve, reject) => {
 
@@ -410,3 +414,4 @@ export function startAxeServer(basedir, scripts, scriptContents) {
         });
     });
 }
+module.exports = { axeRunnerInitEvents };
