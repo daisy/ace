@@ -1,7 +1,7 @@
 {
   "name": "@daisy/ace-axe-runner-puppeteer",
   "version": "1.0.0",
-  "description": "Abstract Axe runner for Ace",
+  "description": "Puppeteer-based Axe runner for Ace",
   "author": {
     "name": "DAISY developers",
     "organization": "DAISY Consortium",
