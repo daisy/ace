@@ -25,6 +25,10 @@
     "selfsigned": "^1.10.4",
     "uuid": "^3.3.2"
   },
+  "devDependencies": {
+    "json": "^9.0.6",
+    "json-diff": "^0.5.4"
+  },
   "publishConfig": {
     "access": "public"
   }

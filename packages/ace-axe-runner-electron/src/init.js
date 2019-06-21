@@ -38,11 +38,83 @@ let ip;
 let proto;
 let rootUrl;
 
-let browserWindow = undefined;
+let httpServerStartWasRequested = false;
+let httpServerStarted = false;
+
+let browserWindows = undefined;
 
 const jsCache = {};
 
-function axeRunnerInitEvents(eventEmmitter) {
+function loadUrl(browserWindow) {
+    browserWindow.ace__loadUrlPending = undefined;
+
+    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner LOAD URL ... ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
+    browserWindow.loadURL(`${rootUrl}${browserWindow.ace__currentUrl}?${HTTP_QUERY_PARAM}=1`);
+
+    setTimeout(() => {
+        if (browserWindow.ace__replySent) {
+            return;
+        }
+        browserWindow.ace__replySent = true;
+
+        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner timeout! ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
+        browserWindow.ace__eventEmmitterSender.send("AXE_RUNNER_RUN_", {
+            err: "Timeout :(",
+            url: browserWindow.ace__currentUrlOriginal
+        });
+    }, 10000);
+}
+
+function poolCheck() {
+    for (const browserWindow of browserWindows) {
+        if (browserWindow.ace__loadUrlPending) {
+            loadUrl(browserWindow);
+        }
+    }
+}
+
+function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
+
+    browserWindows = [];
+    for (let i = 0; i < CONCURRENT_INSTANCES; i++) {
+
+        let browserWindow = new BrowserWindow({
+            show: showWindow,
+            webPreferences: {
+                devTools: isDev && showWindow,
+                title: "Axe Electron runner",
+                allowRunningInsecureContent: false,
+                contextIsolation: false,
+                nodeIntegration: false,
+                nodeIntegrationInWorker: false,
+                sandbox: false,
+                webSecurity: true,
+                webviewTag: false,
+                partition: SESSION_PARTITION
+            },
+        });
+
+        browserWindow.setSize(1024, 768);
+        browserWindow.setPosition(0, 0);
+
+        // browserWindow.maximize();
+        // let sz = browserWindow.getSize();
+        // const sz0 = sz[0];
+        // const sz1 = sz[1];
+        // browserWindow.unmaximize();
+        // browserWindow.setSize(Math.min(Math.round(sz0 * .75), 1200), Math.min(Math.round(sz1 * .85), 800));
+        // // browserWindow.setPosition(Math.round(sz[0] * .10), Math.round(sz[1] * .10));
+        // browserWindow.setPosition(Math.round(sz0 * 0.5 - browserWindow.getSize()[0] * 0.5), Math.round(sz1 * 0.5 - browserWindow.getSize()[1] * 0.5));
+        // if (showWindow) {
+        //     browserWindow.show();
+        // }
+
+        browserWindow.webContents.setAudioMuted(true);
+
+        browserWindow.ace__poolIndex = browserWindows.length;
+
+        browserWindows.push(browserWindow);
+    }
 
     app.on("certificate-error", (event, webContents, u, error, certificate, callback) => {
         if (u.indexOf(`${rootUrl}/`) === 0) {
@@ -97,16 +169,19 @@ function axeRunnerInitEvents(eventEmmitter) {
         sess.setCertificateVerifyProc(setCertificateVerifyProcCB);
     }
 
+    // ipcMain
     eventEmmitter.on('AXE_RUNNER_CLOSE', (event, arg) => {
-        const payload = arg ? arg : event;
-        const sender = arg ? event.sender : eventEmmitter;
+        // const payload = eventEmmitter.ace_notElectronIpcMainRenderer ? event : arg;
+        // const sender = eventEmmitter.ace_notElectronIpcMainRenderer ? eventEmmitter : event.sender;
 
         if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner closing ...`);
 
-        if (browserWindow) {
+        if (browserWindows) {
             if (!(isDev && showWindow)) {
-                browserWindow.close();
-                browserWindow = undefined;
+                for (let i = browserWindows.length - 1; i >= 0; i--) {
+                    browserWindows[i].close();
+                    browserWindows.splice(0, -1); // remove last
+                }
             }
         }
 
@@ -121,7 +196,7 @@ function axeRunnerInitEvents(eventEmmitter) {
                 return;
             }
             _closed = true;
-            sender.send("AXE_RUNNER_CLOSED");
+            // sender.send("AXE_RUNNER_CLOSED");
         }
         let _done = 0;
         function done() {
@@ -165,28 +240,52 @@ function axeRunnerInitEvents(eventEmmitter) {
         }
     });
 
+    // ipcMain
     eventEmmitter.on('AXE_RUNNER_RUN', (event, arg) => {
-        const payload = arg ? arg : event;
-        const sender = arg ? event.sender : eventEmmitter;
+        const payload = eventEmmitter.ace_notElectronIpcMainRenderer ? event : arg;
+        const sender = eventEmmitter.ace_notElectronIpcMainRenderer ? eventEmmitter : event.sender;
 
         const basedir = payload.basedir;
         const uarel = payload.url;
         const scripts = payload.scripts;
         const scriptContents = payload.scriptContents;
 
-        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner running ... ${basedir} ${uarel}`);
+        // windows! file://C:\aa\bb\chapter.xhtml
+        const uarelObj = url.parse(uarel.replace(/\\/g, "/"));
+        const windowsDrive = uarelObj.hostname ? `${uarelObj.hostname.toUpperCase()}:` : "";
+        const httpUrl = (windowsDrive + decodeURI(uarelObj.pathname)).replace(basedir.replace(/\\/g, "/"), "");
+ 
+        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner running ... ${basedir} --- ${uarel} => ${httpUrl}`);
 
-        function doRun() {
+        function poolPush() {
 
-             // windows! file://C:\aa\bb\chapter.xhtml
-            const uarelObj = url.parse(uarel.replace(/\\/g, "/"));
-            const windowsDrive = uarelObj.hostname ? `${uarelObj.hostname.toUpperCase()}:` : "";
-            const httpUrl = rootUrl + (windowsDrive + decodeURI(uarelObj.pathname)).replace(basedir.replace(/\\/g, "/"), "");
+            const browserWindow = browserWindows.find((bw) => {
+                if (!bw.ace__loadUrlPending &&
+                    (!bw.ace__currentUrl || (bw.ace__currentUrl && bw.ace__replySent))) {
+                    return bw;
+                }
+                return undefined;
+            });
 
-            let replySent = false;
+            if (!browserWindow) {
+                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner xxxxx no free browser window in pool?! ${uarel} --- ${httpUrl}`);
+                setTimeout(() => {
+                    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner xxxxx trying another free browser window in pool ... ${uarel} --- ${httpUrl}`);
+                    poolPush();
+                }, 1000);
+                return;
+            }
+
+            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner free browser window in pool: ${browserWindow.ace__poolIndex}`);
+
+            browserWindow.ace__eventEmmitterSender = sender;
+            browserWindow.ace__replySent = false;
+            browserWindow.ace__previousUrl = browserWindow.ace__currentUrl;
+            browserWindow.ace__currentUrlOriginal = uarel;
+            browserWindow.ace__currentUrl = httpUrl;
 
             browserWindow.webContents.once("dom-ready", () => {
-                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner DOM READY ${httpUrl}`);
+                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner DOM READY ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
 
                 const js = `
 new Promise((resolve, reject) => {
@@ -201,93 +300,62 @@ new Promise((resolve, reject) => {
 `;
                 browserWindow.webContents.executeJavaScript(js, true)
                     .then((ok) => {
-                        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner done.`);
-                        if (replySent) {
-                            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner WAS TIMEOUT!`);
+                        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner done. ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
+                        if (browserWindow.ace__replySent) {
+                            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner WAS TIMEOUT! ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
                             return;
                         }
-                        replySent = true;
+                        browserWindow.ace__replySent = true;
 
-                        sender.send("AXE_RUNNER_RUN_", {
-                            ok
+                        browserWindow.ace__eventEmmitterSender.send("AXE_RUNNER_RUN_", {
+                            ok,
+                            url: browserWindow.ace__currentUrlOriginal
                         });
                     })
                     .catch((err) => {
-                        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner fail!`);
-                        if (replySent) {
-                            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner WAS TIMEOUT!`);
+                        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner fail! ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
+                        if (browserWindow.ace__replySent) {
+                            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner WAS TIMEOUT! ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
                             return;
                         }
-                        replySent = true;
+                        browserWindow.ace__replySent = true;
 
-                        sender.send("AXE_RUNNER_RUN_", {
-                            err
+                        browserWindow.ace__eventEmmitterSender.send("AXE_RUNNER_RUN_", {
+                            err,
+                            url: browserWindow.ace__currentUrlOriginal
                         });
                     });
             });
 
-            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner LOAD URL ... ${httpUrl}`);
-            browserWindow.loadURL(`${httpUrl}?${HTTP_QUERY_PARAM}=1`);
-
-            setTimeout(() => {
-                if (replySent) {
-                    return;
-                }
-                replySent = true;
-
-                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner timeout!`);
-                sender.send("AXE_RUNNER_RUN_", {
-                    err: "Timeout :("
-                });
-            }, 10000);
+            if (httpServerStarted) {
+                loadUrl(browserWindow);
+            } else {
+                browserWindow.ace__loadUrlPending = httpUrl;
+            }
         }
 
-        if (!httpServer) { // lazy init
+        if (!httpServerStartWasRequested) { // lazy init
+            httpServerStartWasRequested = true;
+
+            poolPush();
+
+            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner starting server ...`);
+
             startAxeServer(basedir, scripts, scriptContents).then(() => {
-                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} server started`);
+                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner server started`);
+                httpServerStarted = true;
 
-                browserWindow = new BrowserWindow({
-                    show: showWindow,
-                    webPreferences: {
-                        devTools: isDev && showWindow,
-                        title: "Axe Electron runner",
-                        allowRunningInsecureContent: false,
-                        contextIsolation: false,
-                        nodeIntegration: false,
-                        nodeIntegrationInWorker: false,
-                        sandbox: false,
-                        webSecurity: true,
-                        webviewTag: false,
-                        partition: SESSION_PARTITION
-                    },
-                });
-
-                browserWindow.setSize(1024, 768);
-                browserWindow.setPosition(0, 0);
-
-                // browserWindow.maximize();
-                // let sz = browserWindow.getSize();
-                // const sz0 = sz[0];
-                // const sz1 = sz[1];
-                // browserWindow.unmaximize();
-                // browserWindow.setSize(Math.min(Math.round(sz0 * .75), 1200), Math.min(Math.round(sz1 * .85), 800));
-                // // browserWindow.setPosition(Math.round(sz[0] * .10), Math.round(sz[1] * .10));
-                // browserWindow.setPosition(Math.round(sz0 * 0.5 - browserWindow.getSize()[0] * 0.5), Math.round(sz1 * 0.5 - browserWindow.getSize()[1] * 0.5));
-                // if (showWindow) {
-                //     browserWindow.show();
-                // }
-
-                browserWindow.webContents.setAudioMuted(true);
-
-                doRun();
+                poolCheck();
             }).catch((err) => {
+                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner server error`);
                 console.log(err);
-                sender.send("AXE_RUNNER_RUN_", {
-                    err: err,
+                browserWindow.ace__eventEmmitterSender.send("AXE_RUNNER_RUN_", {
+                    err,
+                    url: browserWindow.ace__currentUrlOriginal
                 });
             });
         } else {
-            doRun();
+            poolPush();
         }
     });
 }
@@ -295,6 +363,8 @@ new Promise((resolve, reject) => {
 function startAxeServer(basedir, scripts, scriptContents) {
 
     return new Promise((resolve, reject) => {
+
+        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner startAxeServer...`);
 
         let scriptsMarkup = "";
         scriptContents.forEach((scriptCode) => {
@@ -375,7 +445,10 @@ function startAxeServer(basedir, scripts, scriptContents) {
         expressApp.use("/", express.static(basedir, staticOptions));
 
         const startHttp = function () {
+            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner generateSelfSignedData...`);
             generateSelfSignedData().then((certData) => {
+                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner generateSelfSignedData OK.`);
+
                 httpServer = https.createServer({ key: certData.private, cert: certData.cert }, expressApp).listen(port, () => {
                     const p = httpServer.address().port;
 
@@ -383,12 +456,12 @@ function startAxeServer(basedir, scripts, scriptContents) {
                     ip = "127.0.0.1";
                     proto = "https";
                     rootUrl = `${proto}://${ip}:${port}`;
-                    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} URL ${rootUrl}`);
+                    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} server URL ${rootUrl}`);
 
                     resolve();
                 });
             }).catch((err) => {
-                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} ${err}`);
+                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} generateSelfSignedData error!`);
                 if (LOG_DEBUG) console.log(err);
                 httpServer = expressApp.listen(port, () => {
                     const p = httpServer.address().port;
@@ -397,7 +470,7 @@ function startAxeServer(basedir, scripts, scriptContents) {
                     ip = "127.0.0.1";
                     proto = "http";
                     rootUrl = `${proto}://${ip}:${port}`;
-                    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} URL ${rootUrl}`);
+                    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} server URL ${rootUrl}`);
 
                     resolve();
                 });
@@ -405,13 +478,15 @@ function startAxeServer(basedir, scripts, scriptContents) {
         }
 
         portfinder.getPortPromise().then((p) => {
+            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner HTTP port ${p}`);
             port = p;
             startHttp();
         }).catch((err) => {
-            debug(err);
+            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner HTTP port error!`);
+            console.log(err);
             port = 3000;
             startHttp();
         });
     });
 }
-module.exports = { axeRunnerInitEvents };
+module.exports = { axeRunnerInit };

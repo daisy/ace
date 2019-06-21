@@ -9,13 +9,16 @@ const EventEmitter = require('events');
 class ElectronMockMainRendererEmitter extends EventEmitter {}
 const eventEmmitter = new ElectronMockMainRendererEmitter();
 eventEmmitter.send = eventEmmitter.emit;
+eventEmmitter.ace_notElectronIpcMainRenderer = true;
+
+const CONCURRENT_INSTANCES = 4; // same as the Puppeteer Axe runner
 
 const axeRunnerElectron = require('@daisy/ace-axe-runner-electron');
-const axeRunner = axeRunnerElectron.createAxeRunner(eventEmmitter);
+const axeRunner = axeRunnerElectron.createAxeRunner(eventEmmitter, CONCURRENT_INSTANCES);
 
 const cli = require('@daisy/ace-cli-shared');
 
-const axeRunnerInitEvents = require('./init').axeRunnerInitEvents;
+const axeRunnerInit = require('./init').axeRunnerInit;
 
 let isDev = process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
 
@@ -27,14 +30,7 @@ if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner launch...`);
 // let win;
 app.on('ready', () => {
     if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner app ready.`);
-    axeRunnerInitEvents(eventEmmitter);
-    // eventEmmitter.once('AXE_RUNNER_CLOSED', (event, arg) => {
-    //     const payload = arg ? arg : event;
-    //     const sender = arg ? event.sender : eventEmmitter;
-
-    //     if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner app quit...`);
-    //     app.quit();
-    // });
+    axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES);
     if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner run...`);
 
     // win = new BrowserWindow(
