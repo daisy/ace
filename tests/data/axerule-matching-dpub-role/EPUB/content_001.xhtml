@@ -3,6 +3,7 @@
 <title>Minimal EPUB</title>
 </head>
 <body>
+
 <h1>Loomings</h1>
 <p>Call me Ishmael.</p>
 
@@ -15,11 +16,17 @@
 <div id="pass2" epub:type="notice" role="doc-notice">notice</div>
 <!-- pass #3: type has no defined matching role -->
 <div id="pass3" epub:type="bridgehead">hello</div>
+<!-- pass #4-#5: types matching the implicit roles -->
+<dfn id="pass4" epub:type="glossdef">definition</dfn>
+<figure  id="pass5" epub:type="figure"></figure>
 
 <!-- Fails: -->
 <!-- fail #1: missing role -->
 <div id="fail1" epub:type="notice">notice</div>
 <!-- fail #2: non-matching role -->
 <div id="fail2" epub:type="notice" role="doc-tip">notice</div>
+<!-- fail #3: missing role for a type in a list -->
+<div id="fail3" epub:type="foo:bar notice">notice</div>
+
 </body>
 </html>

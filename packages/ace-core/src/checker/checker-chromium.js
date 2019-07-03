@@ -16,6 +16,7 @@ tmp.setGracefulCleanup();
 const scripts = [
   path.resolve(require.resolve('axe-core'), '../axe.min.js'),
   require.resolve('../scripts/vendor/outliner.min.js'),
+  require.resolve('../scripts/axe-patch-aria-roles.js'),
   require.resolve('../scripts/axe-patch-is-aria-role-allowed.js'),
   require.resolve('../scripts/axe-patch-only-list-items.js'),
   require.resolve('../scripts/ace-axe.js'),

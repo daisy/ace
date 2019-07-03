@@ -16,9 +16,9 @@
 <manifest>
   <item id="nav"  href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
   <item id="content_001"  href="content_001.xhtml" media-type="application/xhtml+xml"/>
+  <item id="cover" href="image_001.jpg" media-type="image/jpeg"/>
 </manifest>
 <spine>
-  <itemref idref="nav" />
   <itemref idref="content_001" />
 </spine>
 </package>

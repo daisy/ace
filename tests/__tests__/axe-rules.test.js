@@ -118,7 +118,21 @@ test('Checks that `epub:type` have matching ARIA roles', async() => {
       'earl:test': expect.objectContaining({ 'dct:title': 'epub-type-has-matching-role' }),
       'earl:result': expect.objectContaining({
         'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#fail1'] }),
+      }),
+    }),
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'epub-type-has-matching-role' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
         'earl:pointer': expect.objectContaining({ css: ['#fail2'] }),
+      }),
+    }),
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'epub-type-has-matching-role' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#fail3'] }),
       }),
     }),
   ]));
@@ -149,4 +163,37 @@ test('Checks that `epub:type` have matching ARIA roles', async() => {
       }),
     })
   ]));
+  expect(assertions).not.toEqual(expect.arrayContaining([
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'epub-type-has-matching-role' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#pass4'] }),
+      }),
+    })
+  ]));
+  expect(assertions).not.toEqual(expect.arrayContaining([
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'epub-type-has-matching-role' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#pass5'] }),
+      }),
+    })
+  ]));
+  const navAssertions = findAssertionsForDoc(report, 'nav.xhtml');
+  expect(navAssertions).toBeDefined();
+  expect(navAssertions).not.toEqual(expect.arrayContaining([
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'epub-type-has-matching-role' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#pass1'] }),
+      }),
+    })
+  ]));
+});
+test('Checks that `epub:type` `cover` isn’t reported has missing a matching ARIA role', async() => {
+  const report = await ace('../data/axerule-matching-dpub-role-cover');
+  expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
