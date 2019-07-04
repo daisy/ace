@@ -178,7 +178,7 @@ Getting the results You can specify the directory for Ace to store its output wi
       <guid>https://daisy.github.io/ace/docs/http-api/</guid>
       <description>Starting the server After installing Ace, run the ace-http command from the terminal:
 $ ace-http info: [ace-http] server listening on http://localhost:8000  The command line options are printed when you run ace-http --help:
-Ace by DAISY, an Accessibility Checker for EPUB Usage: ace-http [options] Options: -h, --help output usage information -v, --version output the version number -H, --host set the server&#39;s hostname (default: localhost) -p, --port set the server&#39;s port (default: 8000) -V, --verbose display verbose output -s, --silent do not display any output Examples $ ace-http -p 3000  API This API is available to client applications.</description>
+Ace by DAISY, an Accessibility Checker for EPUB Usage: ace-http [options] Options: -h, --help output usage information -v, --version output the version number -H, --host set the server&#39;s hostname (default: localhost) -p, --port set the server&#39;s port (default: 8000) -V, --verbose display verbose output -s, --silent do not display any output -l, --lang &amp;lt;language&amp;gt; language code for localized messages (e.</description>
     </item>
     
   </channel>
