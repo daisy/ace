@@ -6,6 +6,12 @@
             "ruledesc": "Toute publication doit déclarer la métadonnée '{{name}}'",
             "kbtitle": "Métadonnées d'accessibilité Schema.org"
         },
+        "metadatainvalid": {
+            "testdesc": "La valeur '{{value}}' est incorrecte pour la métadonnée '{{name}}'",
+            "resdesc": "Utiliser l’une des valeurs définie par schema.org",
+            "ruledesc": "La métadonnée '{{name}}' doit avoir une valeur parmi les valeurs prédéfinies",
+            "kbtitle": "Métadonnées d'accessibilité Schema.org"
+        },
         "titleviolation": {
             "testdesc": "Vérifie que le EPUB a un titre",
             "resdesc": "Ajouter la métadonnée 'dc:title' au Document de Package",

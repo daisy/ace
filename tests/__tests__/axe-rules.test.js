@@ -5,6 +5,7 @@ const path = require('path');
 const tmp = require('tmp');
 
 const runAce = require('../runAceJS');
+import { findAssertionsForDoc } from "../utils";
 
 tmp.setGracefulCleanup();
 
@@ -36,14 +37,6 @@ function ace(epub, options = {}) {
       return JSON.parse(fs.readFileSync(reportPath, 'utf8'));
     })
     .catch(err => console.log(err));
-}
-
-function findAssertionsForDoc(report, path) {
-  for (const assertion of report.assertions) {
-    if(assertion['earl:testSubject'].url === path) {
-      return assertion.assertions;
-    }
-  }
 }
 
 test('`bypass` rule is disabled', async () => {
