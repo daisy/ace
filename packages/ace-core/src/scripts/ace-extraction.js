@@ -178,8 +178,9 @@ ace.getImages = function() {
     }
     let describedby = img.getAttribute('aria-describedby')
     if (describedby) {
-      let elem = document.getElementById(describedby);
-      imageObj.describedby = elem.innerText || elem.textContent;
+      var describedbyID = describedby.trim().replace(/\s{2,}/g, ' ').split(' ').shift();
+      let elem = document.getElementById(describedbyID);
+      if (elem) imageObj.describedby = elem.innerText || elem.textContent;
     }
     let figure = findFigure(img);
     if (figure) {
