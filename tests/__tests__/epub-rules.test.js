@@ -78,4 +78,16 @@ describe('accessibility metadata', () => {
       }),
     ]));
   });
+  test('`printPageNumbers` is declared as a feature but the Nav Doc has no page list', async () => {
+    const report = await ace('../data/epubrules-metadata-printPageNumbers-nopagelist');
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
+    const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+    expect(assertions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'metadata-accessibilityFeature-printPageNumbers-nopagelist',
+        }),
+      }),
+    ]));
+  });
 });

@@ -124,12 +124,12 @@ function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kb
         .withHelp(
           KB_BASE + kbPath,
           kbTitle,
-          ruleDesc)
+          resDesc)
         .withRulesetTags(['EPUB'])
         .build())
     .withResult(
       new builders.ResultBuilder('fail')
-        .withDescription(resDesc)
+        .withDescription(ruleDesc)
         .build())
     .build();
 }
@@ -155,24 +155,40 @@ function checkMetadata(assertions, epub) {
       // Report missing metadata if it is required or recommended
       if (meta.required) assertions.withAssertions(newMetadataAssertion(name));
       if (meta.recommended) assertions.withAssertions(newMetadataAssertion(name, 'moderate'));
-    } else if (meta.allowedValues) {
-      // Check metadata values are allowed
-      // see https://www.w3.org/wiki/WebSchemas/Accessibility
+    } else {
       if (!Array.isArray(values)) {
         values = [values]
       }
-      values.filter(value => !meta.allowedValues.includes(value))
-      .forEach(value => {
+      // Check metadata values are allowed
+      // see https://www.w3.org/wiki/WebSchemas/Accessibility
+      if (meta.allowedValues) {
+        values.filter(value => !meta.allowedValues.includes(value))
+        .forEach(value => {
+          assertions.withAssertions(newViolation({
+            impact: 'moderate',
+            title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
+            testDesc: localize("checkepub.metadatainvalid.testdesc", { value, name, interpolation: { escapeValue: false } }),
+            resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
+            kbPath: 'docs/metadata/schema-org.html',
+            kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
+            ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
+          }))
+        });
+      }
+      // Check consistency of the printPageNumbers feature
+      if (name === 'schema:accessibilityFeature' 
+      && values.includes('printPageNumbers')
+      && !epub.navDoc.hasPageList) {
         assertions.withAssertions(newViolation({
           impact: 'moderate',
-          title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
-          testDesc: localize("checkepub.metadatainvalid.testdesc", { value, name, interpolation: { escapeValue: false } }),
-          resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
+          title: `metadata-accessibilityFeature-printPageNumbers-nopagelist`,
+          testDesc: localize("checkepub.metadataprintpagenumbers.testdesc", {}),
+          resDesc: localize("checkepub.metadataprintpagenumbers.resdesc", {}),
           kbPath: 'docs/metadata/schema-org.html',
-          kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
-          ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
+          kbTitle: localize("checkepub.metadataprintpagenumbers.kbtitle"),
+          ruleDesc: localize("checkepub.metadataprintpagenumbers.ruledesc", {})
         }))
-      });
+      }
     }
   }
 }

@@ -12,6 +12,12 @@
             "ruledesc": "La métadonnée '{{name}}' doit avoir une valeur parmi les valeurs prédéfinies",
             "kbtitle": "Métadonnées d'accessibilité Schema.org"
         },
+        "metadataprintpagenumbers": {
+            "testdesc": "La propriété d’accessibilité 'printPageNumbers' est déclarée mais aucune liste de pages n’a été trouvée",
+            "resdesc": "Ajouter une liste de pages au document de navigation",
+            "ruledesc": "Quand la propriété d’accessibilité 'printPageNumbers' est déclarée, le document de navigation doit avoir une liste de pages",
+            "kbtitle": "Schema.org Accessibility Metadata"
+        },
         "titleviolation": {
             "testdesc": "Vérifie que le EPUB a un titre",
             "resdesc": "Ajouter la métadonnée 'dc:title' au Document de Package",

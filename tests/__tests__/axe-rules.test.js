@@ -186,7 +186,7 @@ test('Checks that `epub:type` have matching ARIA roles', async() => {
     })
   ]));
 });
-test.only('Checks that `epub:type` `cover` isn’t reported has missing a matching ARIA role', async() => {
+test('Checks that `epub:type` `cover` isn’t reported has missing a matching ARIA role', async() => {
   const report = await ace('../data/axerule-matching-dpub-role-cover');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
