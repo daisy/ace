@@ -8,4 +8,4 @@ publishDir = "site"
 [params]
   description = "**[Ace](/ace)**, an accessibility checker for EPUB!  \n\
   A **[DAISY Consortium](http://daisy.org)** project. \n\
-  Latest version: v1.0.2"
+  Latest version: v1.1.0"

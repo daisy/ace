@@ -1,3 +1,24 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/daisy/ace/compare/v1.0.2...v1.1.0) (2019-07-04)
+
+
+### Bug Fixes
+
+* `aria-describedby` can be a list of IDs ([f0aef4c](https://github.com/daisy/ace/commit/f0aef4c)), closes [#209](https://github.com/daisy/ace/issues/209)
+* correct global Ace version ([#226](https://github.com/daisy/ace/issues/226)) ([822469f](https://github.com/daisy/ace/commit/822469f)), closes [#198](https://github.com/daisy/ace/issues/198)
+
+
+### Features
+
+* **new rule:** check expected values of schema.org a11y metadata ([a5452c3](https://github.com/daisy/ace/commit/a5452c3)), closes [#202](https://github.com/daisy/ace/issues/202)
+* **new rule:** check the presence of a page list when 'printPageNumbers' is declared ([6e33dbb](https://github.com/daisy/ace/commit/6e33dbb)), closes [#203](https://github.com/daisy/ace/issues/203)
+* improve epub:type / DPUB ARIA role mapping ([df3c666](https://github.com/daisy/ace/commit/df3c666)), closes [#201](https://github.com/daisy/ace/issues/201) [#214](https://github.com/daisy/ace/issues/214) [#220](https://github.com/daisy/ace/issues/220)
+* Localization, English + French ([#223](https://github.com/daisy/ace/issues/223)) ([bf8b374](https://github.com/daisy/ace/commit/bf8b374))
+* Puppeteer-based Ace Axe "runner" (AceGUI uses Electron instead) ([#227](https://github.com/daisy/ace/issues/227)) ([34c6e47](https://github.com/daisy/ace/commit/34c6e47))
+* update Axe to v3.2.2 ([#228](https://github.com/daisy/ace/issues/228)) ([acf95da](https://github.com/daisy/ace/commit/acf95da)), closes [#225](https://github.com/daisy/ace/issues/225)
+
+
+
 <a name="1.0.2"></a>
 ## [1.0.2](https://github.com/daisy/ace/compare/v1.0.1...v1.0.2) (2018-05-25)
 
