@@ -9,6 +9,100 @@ const ASSERTED_BY = 'Ace';
 const MODE = 'automatic';
 const KB_BASE = 'http://kb.daisy.org/publishing/';
 
+const A11Y_META = {
+  'schema:accessMode': {
+    required: true,
+    allowedValues: [
+      'auditory',
+      'chartOnVisual',
+      'chemOnVisual',
+      'colorDependent',
+      'diagramOnVisual',
+      'mathOnVisual',
+      'musicOnVisual',
+      'tactile',
+      'textOnVisual',
+      'textual',
+      'visual',
+    ]
+  },
+  'schema:accessModeSufficient': {
+    recommended: true,
+    allowedValues: [
+      'auditory',
+      'tactile',
+      'textual',
+      'visual',
+    ]
+  },
+  'schema:accessibilityAPI': {
+    allowedValues: [
+      'ARIA'
+    ]
+  },
+  'schema:accessibilityControl': {
+    allowedValues: [
+      'fullKeyboardControl',
+      'fullMouseControl',
+      'fullSwitchControl',
+      'fullTouchControl',
+      'fullVideoControl',
+      'fullVoiceControl',
+    ]
+  },
+  'schema:accessibilityFeature': {
+    required: true,
+    allowedValues: [
+      'alternativeText',
+      'annotations',
+      'audioDescription',
+      'bookmarks',
+      'braille',
+      'captions',
+      'ChemML',
+      'describedMath',
+      'displayTransformability',
+      'highContrastAudio',
+      'highContrastDisplay',
+      'index',
+      'largePrint',
+      'latex',
+      'longDescription',
+      'MathML',
+      'none',
+      'printPageNumbers',
+      'readingOrder',
+      'rubyAnnotations',
+      'signLanguage',
+      'structuralNavigation',
+      'synchronizedAudioText',
+      'tableOfContents',
+      'taggedPDF',
+      'tactileGraphic',
+      'tactileObject',
+      'timingControl',
+      'transcript',
+      'ttsMarkup',
+      'unlocked  ',
+    ],
+  },
+  'schema:accessibilityHazard': {
+    allowedValues: [
+      'flashing',
+      'noFlashingHazard',
+      'motionSimulation',
+      'noMotionSimulationHazard',
+      'sound',
+      'noSoundHazard',
+      'unknown',
+      'none',
+    ]
+  },
+  'schema:accessibilitySummary': {
+    required: true,
+  }
+};
+
 function asString(arrayOrString) {
   if (Array.isArray(arrayOrString) && arrayOrString.length > 0) {
     return asString(arrayOrString[0]);
@@ -30,12 +124,12 @@ function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kb
         .withHelp(
           KB_BASE + kbPath,
           kbTitle,
-          ruleDesc)
+          resDesc)
         .withRulesetTags(['EPUB'])
         .build())
     .withResult(
       new builders.ResultBuilder('fail')
-        .withDescription(resDesc)
+        .withDescription(ruleDesc)
         .build())
     .build();
 }
@@ -43,7 +137,7 @@ function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kb
 function newMetadataAssertion(name, impact = 'serious') {
   return newViolation({
     impact,
-    title: `metadata-${name.toLowerCase().replace(':', '-')}`,
+    title: `metadata-${name.toLowerCase().replace('schema:', '')}`,
     testDesc: localize("checkepub.metadataviolation.testdesc", { name, interpolation: { escapeValue: false } }),
     resDesc: localize("checkepub.metadataviolation.resdesc", { name, interpolation: { escapeValue: false } }),
     kbPath: 'docs/metadata/schema-org.html',
@@ -53,18 +147,50 @@ function newMetadataAssertion(name, impact = 'serious') {
 }
 
 function checkMetadata(assertions, epub) {
-  // Required metadata
-  [
-    'schema:accessMode',
-    'schema:accessibilityFeature',
-    'schema:accessibilitySummary',
-  ].filter(meta => epub.metadata[meta] === undefined)
-    .forEach(meta => assertions.withAssertions(newMetadataAssertion(meta)));
-  // Recommended metadata
-  [
-    'schema:accessModeSufficient',
-  ].filter(meta => epub.metadata[meta] === undefined)
-    .forEach(meta => assertions.withAssertions(newMetadataAssertion(meta, 'moderate')));
+  // Check metadata values
+  for (const name in A11Y_META) {
+    const meta = A11Y_META[name];
+    var values = epub.metadata[name];
+    if (values === undefined) {
+      // Report missing metadata if it is required or recommended
+      if (meta.required) assertions.withAssertions(newMetadataAssertion(name));
+      if (meta.recommended) assertions.withAssertions(newMetadataAssertion(name, 'moderate'));
+    } else {
+      if (!Array.isArray(values)) {
+        values = [values]
+      }
+      // Check metadata values are allowed
+      // see https://www.w3.org/wiki/WebSchemas/Accessibility
+      if (meta.allowedValues) {
+        values.filter(value => !meta.allowedValues.includes(value))
+        .forEach(value => {
+          assertions.withAssertions(newViolation({
+            impact: 'moderate',
+            title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
+            testDesc: localize("checkepub.metadatainvalid.testdesc", { value, name, interpolation: { escapeValue: false } }),
+            resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
+            kbPath: 'docs/metadata/schema-org.html',
+            kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
+            ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
+          }))
+        });
+      }
+      // Check consistency of the printPageNumbers feature
+      if (name === 'schema:accessibilityFeature' 
+      && values.includes('printPageNumbers')
+      && !epub.navDoc.hasPageList) {
+        assertions.withAssertions(newViolation({
+          impact: 'moderate',
+          title: `metadata-accessibilityFeature-printPageNumbers-nopagelist`,
+          testDesc: localize("checkepub.metadataprintpagenumbers.testdesc", {}),
+          resDesc: localize("checkepub.metadataprintpagenumbers.resdesc", {}),
+          kbPath: 'docs/metadata/schema-org.html',
+          kbTitle: localize("checkepub.metadataprintpagenumbers.kbtitle"),
+          ruleDesc: localize("checkepub.metadataprintpagenumbers.ruledesc", {})
+        }))
+      }
+    }
+  }
 }
 
 function checkTitle(assertions, epub) {

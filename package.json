@@ -31,6 +31,7 @@
   },
   "scripts": {
     "ace": "node ./packages/ace-cli/bin/ace.js",
+    "ace-electron": "electron ./packages/ace-axe-runner-electron/lib/cli.js",
     "clean": "yarn run clean-libs",
     "clean-libs": "rimraf packages/*/lib",
     "clean-node-modules": "rimraf packages/*/node_modules && rimraf node_modules",

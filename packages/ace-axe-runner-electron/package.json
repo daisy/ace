@@ -1,0 +1,35 @@
+{
+  "name": "@daisy/ace-axe-runner-electron",
+  "version": "1.0.0",
+  "description": "Electron-based Axe runner for Ace",
+  "author": {
+    "name": "DAISY developers",
+    "organization": "DAISY Consortium",
+    "url": "http://www.daisy.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daisy/ace",
+    "directory": "packages/ace-axe-runner-electron"
+  },
+  "bugs": {
+    "url": "https://github.com/daisy/ace/issues"
+  },
+  "license": "MIT",
+  "main": "lib/index.js",
+  "dependencies": {
+    "@daisy/ace-cli-shared": "^1.0.0",
+    "electron": "^5.0.0",
+    "express": "^4.16.4",
+    "portfinder": "^1.0.20",
+    "selfsigned": "^1.10.4",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "json": "^9.0.6",
+    "json-diff": "^0.5.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

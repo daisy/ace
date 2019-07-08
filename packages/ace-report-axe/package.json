@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-report-axe",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Ace report adapter for aXe",
   "author": {
     "name": "DAISY developers",

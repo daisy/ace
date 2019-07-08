@@ -16,6 +16,7 @@ tmp.setGracefulCleanup();
 const scripts = [
   path.resolve(require.resolve('axe-core'), '../axe.min.js'),
   require.resolve('../scripts/vendor/outliner.min.js'),
+  require.resolve('../scripts/axe-patch-aria-roles.js'),
   require.resolve('../scripts/axe-patch-is-aria-role-allowed.js'),
   require.resolve('../scripts/axe-patch-only-list-items.js'),
   require.resolve('../scripts/ace-axe.js'),
@@ -42,7 +43,7 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
     const scriptContents = [];
     let localePath = "";
     try {
-      winston.info(`- Axe locale: [${lang}]`);
+      winston.debug(`- Axe locale: [${lang}]`);
 
       // https://github.com/dequelabs/axe-core#localization
       // https://github.com/dequelabs/axe-core/tree/develop/locales
@@ -54,7 +55,7 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
           const localeScript = `window.__axeLocale__=${localeStr};`;
           scriptContents.push(localeScript);
         } else {
-          winston.info(`- Axe locale missing? [${lang}] => ${localePath}`);
+          winston.debug(`- Axe locale missing? [${lang}] => ${localePath}`);
         }
       }
 
@@ -76,7 +77,7 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
     } catch (err) {
       console.log(err);
       winston.verbose(err);
-      winston.info(`- Axe locale problem? [${lang}] => ${localePath}`);
+      winston.debug(`- Axe locale problem? [${lang}] => ${localePath}`);
     }
 
     const results = await axeRunner.run(url, scripts, scriptContents, epub.basedir);

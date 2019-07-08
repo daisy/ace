@@ -6,6 +6,18 @@
             "ruledesc": "Publications must declare the '{{name}}' metadata",
             "kbtitle": "Schema.org Accessibility Metadata"
         },
+        "metadatainvalid": {
+            "testdesc": "Value '{{value}}' is invalid for '{{name}}' metadata",
+            "resdesc": "Use one of the metadata values defined by schema.org",
+            "ruledesc": "'{{name}}' metadata must be set to one of the expected values",
+            "kbtitle": "Schema.org Accessibility Metadata"
+        },
+        "metadataprintpagenumbers": {
+            "testdesc": "Accessibility feature 'printPageNumbers' is declared but page list is missing",
+            "resdesc": "Add a page list to the Navigation Document",
+            "ruledesc": "When the accessibility feature 'printPageNumbers' is declared, the Navigation Document should include a page list",
+            "kbtitle": "Schema.org Accessibility Metadata"
+        },
         "titleviolation": {
             "testdesc": "Ensures the EPUB has a title",
             "resdesc": "Add a 'dc:title' metadata property to the Package Document",

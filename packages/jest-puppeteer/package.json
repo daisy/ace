@@ -1,6 +1,6 @@
 {
   "name": "@daisy/jest-puppeteer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Utilities for running Jest tests through Google Puppeteer",
   "author": {
     "name": "DAISY developers",
