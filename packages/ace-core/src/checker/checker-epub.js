@@ -83,7 +83,7 @@ const A11Y_META = {
       'timingControl',
       'transcript',
       'ttsMarkup',
-      'unlocked  ',
+      'unlocked',
     ],
   },
   'schema:accessibilityHazard': {
