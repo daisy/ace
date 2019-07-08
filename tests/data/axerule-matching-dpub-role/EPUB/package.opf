@@ -18,6 +18,7 @@
   <item id="content_001"  href="content_001.xhtml" media-type="application/xhtml+xml"/>
 </manifest>
 <spine>
+  <itemref idref="nav" />
   <itemref idref="content_001" />
 </spine>
 </package>

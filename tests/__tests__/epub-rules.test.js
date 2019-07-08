@@ -5,6 +5,7 @@ const path = require('path');
 const tmp = require('tmp');
 
 const runAce = require('../runAceJS');
+import { findAssertionsForDoc } from "../utils";
 
 tmp.setGracefulCleanup();
 
@@ -48,5 +49,45 @@ describe('page list and breaks', () => {
   test('page list correctly sourced', async () => {
     const report = await ace('../data/epubrules-pagelist');
     expect(report['earl:result']['earl:outcome']).toEqual('pass');
+  });
+});
+
+describe('accessibility metadata', () => {
+  
+  test('missing metadata is reported', async () => {
+    const report = await ace('../data/epubrules-metadata');
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
+    const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+    expect(assertions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'metadata-accessibilitysummary',
+        }),
+      }),
+    ]));
+  });
+  test('incorrect metadata value is reported', async () => {
+    const report = await ace('../data/epubrules-metadata');
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
+    const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+    expect(assertions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'metadata-accessmode-invalid',
+        }),
+      }),
+    ]));
+  });
+  test('`printPageNumbers` is declared as a feature but the Nav Doc has no page list', async () => {
+    const report = await ace('../data/epubrules-metadata-printPageNumbers-nopagelist');
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
+    const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+    expect(assertions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'metadata-accessibilityFeature-printPageNumbers-nopagelist',
+        }),
+      }),
+    ]));
   });
 });

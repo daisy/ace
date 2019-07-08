@@ -105,7 +105,6 @@ daisy.ace.run = function(done) {
             ['chapter', 'doc-chapter'],
             ['colophon', 'doc-colophon'],
             ['conclusion', 'doc-conclusion'],
-            ['cover', 'doc-cover'],
             ['credit', 'doc-credit'],
             ['credits', 'doc-credits'],
             ['dedication', 'doc-dedication'],
@@ -114,6 +113,7 @@ daisy.ace.run = function(done) {
             ['epigraph', 'doc-epigraph'],
             ['epilogue', 'doc-epilogue'],
             ['errata', 'doc-errata'],
+            ['figure', 'figure'],
             ['footnote', 'doc-footnote'],
             ['foreword', 'doc-foreword'],
             ['glossary', 'doc-glossary'],
@@ -125,8 +125,8 @@ daisy.ace.run = function(done) {
             ['introduction', 'doc-introduction'],
             ['noteref', 'doc-noteref'],
             ['notice', 'doc-notice'],
-            ['pagebreak', 'doc-pagebreak'],
             ['page-list', 'doc-pagelist'],
+            ['pagebreak', 'doc-pagebreak'],
             ['part', 'doc-part'],
             ['preface', 'doc-preface'],
             ['prologue', 'doc-prologue'],
@@ -137,16 +137,24 @@ daisy.ace.run = function(done) {
             ['tip', 'doc-tip'],
             ['toc', 'doc-toc']
           ]);
+          
           if (node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')) {
-            var type = node.getAttributeNS('http://www.idpf.org/2007/ops', 'type').trim();
-            if (mappings.has(type)) {
-              if (!node.hasAttribute('role')) {
-                return false;
-              } else {
-                var role = node.getAttribute('role').trim();
-                return role == mappings.get(type);
-              }
+            // abort if descendant of landmarks nav (nav with epub:type=landmarks)
+            if (axe.utils.matchesSelector(node, 'nav[*|type~="landmarks"] *')) {
+              return true;
             }
+
+            // iterate for each epub:type value
+            var types = axe.utils.tokenList(node.getAttributeNS('http://www.idpf.org/2007/ops', 'type'));
+            for (const type of types) {
+                // If there is a 1-1 mapping, check that the role is set (best practice)
+                if (mappings.has(type)) {
+                  // Note: using axe’s `getRole` util returns the effective role of the element
+                  // (either explicitly set with the role attribute or implicit)
+                  // So this works for types mapping to core ARIA roles (eg. glossref/glossterm).
+                  return mappings.get(type) == axe.commons.aria.getRole(node,{dpub: true});
+                }
+              }
           }
           return true;
         },

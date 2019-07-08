@@ -89,3 +89,15 @@ test('issue #182: named character references are parsed', async () => {
     })
   ]));
 });
+
+test('issue #209: `aria-describedby` can be a list of IDs', async () => {
+  const report = await ace('../data/issue-209');
+  expect(report.data).toEqual(expect.objectContaining({
+    "images": expect.arrayContaining([
+      expect.objectContaining({
+        "src": "EPUB/image_001.jpg",
+        "describedby": "description 1",
+      })
+    ])
+  }));
+});
