@@ -64,8 +64,9 @@ async function run(axeRunner, exit) {
   let timeBegin = process.hrtime();
   function quit() {
     const timeElapsed = process.hrtime(timeBegin);
-    console.log(`>>> ACE PERF: ${timeElapsed[0]} seconds + ${timeElapsed[1]} nanoseconds`);
-    exit(arguments);
+    const allowPerfReport = process.env.ACE_PERF; // !cli.flags.silent && cli.flags.verbose;
+    if (allowPerfReport) console.log(`>>> ACE PERF: ${timeElapsed[0]} seconds + ${timeElapsed[1]} nanoseconds`);
+    exit(...arguments);
   }
 
   logger.initLogger({ verbose: cli.flags.verbose, silent: cli.flags.silent });
