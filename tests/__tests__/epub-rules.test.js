@@ -77,6 +77,13 @@ describe('accessibility metadata', () => {
         }),
       }),
     ]));
+    expect(assertions).not.toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'metadata-accessmodesufficient-invalid',
+        }),
+      }),
+    ]));
   });
   test('`printPageNumbers` is declared as a feature but the Nav Doc has no page list', async () => {
     const report = await ace('../data/epubrules-metadata-printPageNumbers-nopagelist');

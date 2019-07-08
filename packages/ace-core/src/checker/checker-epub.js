@@ -83,7 +83,7 @@ const A11Y_META = {
       'timingControl',
       'transcript',
       'ttsMarkup',
-      'unlocked  ',
+      'unlocked',
     ],
   },
   'schema:accessibilityHazard': {
@@ -159,6 +159,9 @@ function checkMetadata(assertions, epub) {
       if (!Array.isArray(values)) {
         values = [values]
       }
+      // Parse list values
+      values = values.map(value => value.trim().replace(',', ' ').replace(/\s{2,}/g, ' ').split(' '))
+      values = [].concat(...values);
       // Check metadata values are allowed
       // see https://www.w3.org/wiki/WebSchemas/Accessibility
       if (meta.allowedValues) {
