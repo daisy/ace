@@ -1,3 +1,16 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/daisy/ace/compare/v1.1.0...v1.1.1) (2019-07-08)
+
+
+### Bug Fixes
+
+* allow list items as children of roles inheriting from 'list' ([a362050](https://github.com/daisy/ace/commit/a362050)), closes [#239](https://github.com/daisy/ace/issues/239)
+* allow list of values for 'accessModeSufficient' ([6cb5402](https://github.com/daisy/ace/commit/6cb5402)), closes [#238](https://github.com/daisy/ace/issues/238)
+* remove trailing whitespace after 'unlocked' value ([0f9e656](https://github.com/daisy/ace/commit/0f9e656))
+* when img copy fails, keep going ([#215](https://github.com/daisy/ace/issues/215)) ([f769b49](https://github.com/daisy/ace/commit/f769b49))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/daisy/ace/compare/v1.0.2...v1.1.0) (2019-07-04)
 
