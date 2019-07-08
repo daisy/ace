@@ -21,11 +21,11 @@ const generateSelfSignedData = require('./selfsigned').generateSelfSignedData;
 const logger = require('@daisy/ace-logger');
 logger.initLogger({ verbose: true, silent: false });
 
-let isDev = process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
+const isDev = process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
 const showWindow = false;
 
 const LOG_DEBUG = false;
-const AXE_LOG_PREFIX = "[AXE]";
+const ACE_LOG_PREFIX = "[ACE-AXE]";
 
 const SESSION_PARTITION = "persist:axe";
 
@@ -45,11 +45,15 @@ let browserWindows = undefined;
 
 const jsCache = {};
 
+let _firstTimeInit = true;
+
+let iHttpReq = 0;
+
 function loadUrl(browserWindow) {
     browserWindow.ace__loadUrlPending = undefined;
 
-    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner LOAD URL ... ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
-    browserWindow.loadURL(`${rootUrl}${browserWindow.ace__currentUrl}?${HTTP_QUERY_PARAM}=1`);
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner LOAD URL ... ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
+    browserWindow.loadURL(`${rootUrl}${browserWindow.ace__currentUrl}?${HTTP_QUERY_PARAM}=${iHttpReq++}`);
 
     setTimeout(() => {
         if (browserWindow.ace__replySent) {
@@ -57,7 +61,7 @@ function loadUrl(browserWindow) {
         }
         browserWindow.ace__replySent = true;
 
-        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner timeout! ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
+        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner timeout! ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
         browserWindow.ace__eventEmmitterSender.send("AXE_RUNNER_RUN_", {
             err: "Timeout :(",
             url: browserWindow.ace__currentUrlOriginal
@@ -74,6 +78,9 @@ function poolCheck() {
 }
 
 function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
+
+    const firstTimeInit = _firstTimeInit;
+    _firstTimeInit = false;
 
     browserWindows = [];
     for (let i = 0; i < CONCURRENT_INSTANCES; i++) {
@@ -116,17 +123,21 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         browserWindows.push(browserWindow);
     }
 
+    if (!firstTimeInit) {
+        return;
+    }
+
     app.on("certificate-error", (event, webContents, u, error, certificate, callback) => {
         if (u.indexOf(`${rootUrl}/`) === 0) {
-            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} HTTPS cert error OKAY ${u}`);
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert error OKAY ${u}`);
             callback(true);
             return;
         }
-        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} HTTPS cert error FAIL ${u}`);
+        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert error FAIL ${u}`);
         callback(false);
     });
 
-    const filter = { urls: ["*", "*://*/*"] };
+    // const filter = { urls: ["*", "*://*/*"] };
 
     // const onHeadersReceivedCB = (details, callback) => {
     //     if (!details.url) {
@@ -135,7 +146,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
     //     }
 
     //     if (details.url.indexOf(`${rootUrl}/`) === 0) {
-    //         if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} CSP ${details.url}`);
+    //         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} CSP ${details.url}`);
     //         callback({
     //             // responseHeaders: {
     //             //     ...details.responseHeaders,
@@ -144,7 +155,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
     //             // },
     //         });
     //     } else {
-    //         if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} !CSP ${details.url}`);
+    //         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} !CSP ${details.url}`);
     //         callback({});
     //     }
     // };
@@ -152,11 +163,11 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
     const setCertificateVerifyProcCB = (request, callback) => {
 
         if (request.hostname === ip) {
-            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} HTTPS cert verify OKAY ${request.hostname}`);
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert verify OKAY ${request.hostname}`);
             callback(0); // OK
             return;
         }
-        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} HTTPS cert verify FALLBACK ${request.hostname}`);
+        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert verify FALLBACK ${request.hostname}`);
         callback(-3); // Chromium
         // callback(-2); // Fail
     };
@@ -172,18 +183,26 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
     // ipcMain
     eventEmmitter.on('AXE_RUNNER_CLOSE', (event, arg) => {
         // const payload = eventEmmitter.ace_notElectronIpcMainRenderer ? event : arg;
-        // const sender = eventEmmitter.ace_notElectronIpcMainRenderer ? eventEmmitter : event.sender;
+        const sender = eventEmmitter.ace_notElectronIpcMainRenderer ? eventEmmitter : event.sender;
 
-        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner closing ...`);
+        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner closing ...`);
 
         if (browserWindows) {
             if (!(isDev && showWindow)) {
                 for (let i = browserWindows.length - 1; i >= 0; i--) {
-                    browserWindows[i].close();
+                    try {
+                        browserWindows[i].close();
+                    } catch (err) {
+                        if (LOG_DEBUG) console.log(err);
+                    }
                     browserWindows.splice(0, -1); // remove last
                 }
             }
         }
+        browserWindows = undefined;
+
+        httpServerStarted = false;
+        httpServerStartWasRequested = false;
 
         if (httpServer) {
             httpServer.close();
@@ -196,7 +215,11 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                 return;
             }
             _closed = true;
-            // sender.send("AXE_RUNNER_CLOSED");
+
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner sending closed event ...`);
+            sender.send("AXE_RUNNER_CLOSE_", {
+                ok: true
+            });
         }
         let _done = 0;
         function done() {
@@ -212,7 +235,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         const sess = session.fromPartition(SESSION_PARTITION, { cache: true }); // || session.defaultSession;
         if (sess) {
             sess.clearCache(() => {
-                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} session cache cleared`);
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} session cache cleared`);
                 done();
             });
 
@@ -234,7 +257,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                     "serviceworkers",
                 ],
             }, () => {
-                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} session storage cleared`);
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} session storage cleared`);
                 done();
             });
         }
@@ -242,6 +265,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
 
     // ipcMain
     eventEmmitter.on('AXE_RUNNER_RUN', (event, arg) => {
+
         const payload = eventEmmitter.ace_notElectronIpcMainRenderer ? event : arg;
         const sender = eventEmmitter.ace_notElectronIpcMainRenderer ? eventEmmitter : event.sender;
 
@@ -253,9 +277,11 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         // windows! file://C:\aa\bb\chapter.xhtml
         const uarelObj = url.parse(uarel.replace(/\\/g, "/"));
         const windowsDrive = uarelObj.hostname ? `${uarelObj.hostname.toUpperCase()}:` : "";
-        const httpUrl = (windowsDrive + decodeURI(uarelObj.pathname)).replace(basedir.replace(/\\/g, "/"), "");
+        const bd = basedir.replace(/\\/g, "/");
+        const full = (windowsDrive + decodeURI(uarelObj.pathname));
+        const httpUrl = full.replace(bd, "");
  
-        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner running ... ${basedir} --- ${uarel} => ${httpUrl}`);
+        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner running ... ${basedir} --- ${uarel} => ${httpUrl}`);
 
         function poolPush() {
 
@@ -268,15 +294,15 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
             });
 
             if (!browserWindow) {
-                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner xxxxx no free browser window in pool?! ${uarel} --- ${httpUrl}`);
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner xxxxx no free browser window in pool?! ${uarel} --- ${httpUrl}`);
                 setTimeout(() => {
-                    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner xxxxx trying another free browser window in pool ... ${uarel} --- ${httpUrl}`);
+                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner xxxxx trying another free browser window in pool ... ${uarel} --- ${httpUrl}`);
                     poolPush();
                 }, 1000);
                 return;
             }
 
-            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner free browser window in pool: ${browserWindow.ace__poolIndex}`);
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner free browser window in pool: ${browserWindow.ace__poolIndex}`);
 
             browserWindow.ace__eventEmmitterSender = sender;
             browserWindow.ace__replySent = false;
@@ -285,7 +311,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
             browserWindow.ace__currentUrl = httpUrl;
 
             browserWindow.webContents.once("dom-ready", () => {
-                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner DOM READY ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner DOM READY ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
 
                 const js = `
 new Promise((resolve, reject) => {
@@ -300,9 +326,10 @@ new Promise((resolve, reject) => {
 `;
                 browserWindow.webContents.executeJavaScript(js, true)
                     .then((ok) => {
-                        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner done. ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
+                        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner done. ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
+                        if (LOG_DEBUG) console.log(ok);
                         if (browserWindow.ace__replySent) {
-                            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner WAS TIMEOUT! ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
+                            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner WAS TIMEOUT! ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
                             return;
                         }
                         browserWindow.ace__replySent = true;
@@ -313,9 +340,10 @@ new Promise((resolve, reject) => {
                         });
                     })
                     .catch((err) => {
-                        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner fail! ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
+                        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner fail! ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
+                        if (LOG_DEBUG) console.log(err);
                         if (browserWindow.ace__replySent) {
-                            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner WAS TIMEOUT! ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
+                            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner WAS TIMEOUT! ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
                             return;
                         }
                         browserWindow.ace__replySent = true;
@@ -339,15 +367,15 @@ new Promise((resolve, reject) => {
 
             poolPush();
 
-            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner starting server ...`);
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner starting server ...`);
 
             startAxeServer(basedir, scripts, scriptContents).then(() => {
-                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner server started`);
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner server started`);
                 httpServerStarted = true;
 
                 poolCheck();
             }).catch((err) => {
-                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner server error`);
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner server error`);
                 console.log(err);
                 browserWindow.ace__eventEmmitterSender.send("AXE_RUNNER_RUN_", {
                     err,
@@ -364,7 +392,7 @@ function startAxeServer(basedir, scripts, scriptContents) {
 
     return new Promise((resolve, reject) => {
 
-        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner startAxeServer...`);
+        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner startAxeServer...`);
 
         let scriptsMarkup = "";
         scriptContents.forEach((scriptCode) => {
@@ -387,6 +415,7 @@ function startAxeServer(basedir, scripts, scriptContents) {
         //     next();
         // });
 
+        expressApp.basedir = basedir;
         expressApp.use("/", (req, res, next) => {
 
             for (const scriptPath of scripts) {
@@ -394,9 +423,12 @@ function startAxeServer(basedir, scripts, scriptContents) {
                 if (req.url.endsWith(`${HTTP_QUERY_PARAM}/${filename}`)) {
                     let js = jsCache[scriptPath];
                     if (!js) {
-                        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} HTTP loading ${scriptPath}`);
+                        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTP loading ${scriptPath}`);
                         js = fs.readFileSync(scriptPath, { encoding: "utf8" });
+                        // if (LOG_DEBUG) console.log(js);
                         jsCache[scriptPath] = js;
+                    } else {
+                        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTP already loaded ${scriptPath}`);
                     }
                     res.setHeader("Content-Type", "text/javascript");
                     res.send(js);
@@ -405,17 +437,26 @@ function startAxeServer(basedir, scripts, scriptContents) {
             }
 
             if (req.query[HTTP_QUERY_PARAM]) {
-                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} HTTP intercept ${req.url}`);
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTP intercept ${req.url}`);
 
-                let html = fs.readFileSync(path.join(basedir, url.parse(req.url).pathname), { encoding: "utf8" });
+                const pn = url.parse(req.url).pathname;
+                let fileSystemPath = path.join(expressApp.basedir, pn);
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} filepath to read: ${fileSystemPath}`);
+                if (!fs.existsSync(fileSystemPath)) {
+                    fileSystemPath = pn;
+                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} filepath to read (corrected): ${fileSystemPath}`);
+                }
+
+                let html = fs.readFileSync(fileSystemPath, { encoding: "utf8" });
+                // if (LOG_DEBUG) console.log(html);
 
                 if (html.match(/<\/head>/)) {
                     html = html.replace(/<\/head>/, `${scriptsMarkup}</head>`);
                 } else if (html.match(/<\/body>/)) {
-                    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} HTML no </head>? (using </body>) ${req.url}`);
+                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTML no </head>? (using </body>) ${req.url}`);
                     html = html.replace(/<\/body>/, `${scriptsMarkup}</body>`);
                 } else {
-                    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} HTML neither </head> nor </body>?! ${req.url}`);
+                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTML neither </head> nor </body>?! ${req.url}`);
                 }
 
                 res.setHeader("Content-Type", "application/xhtml+xml");
@@ -441,13 +482,13 @@ function startAxeServer(basedir, scripts, scriptContents) {
             //     setResponseCORS(res);
             // },
         };
-        if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} HTTP static path ${basedir}`);
+        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTP static path ${basedir}`);
         expressApp.use("/", express.static(basedir, staticOptions));
 
         const startHttp = function () {
-            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner generateSelfSignedData...`);
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner generateSelfSignedData...`);
             generateSelfSignedData().then((certData) => {
-                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner generateSelfSignedData OK.`);
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner generateSelfSignedData OK.`);
 
                 httpServer = https.createServer({ key: certData.private, cert: certData.cert }, expressApp).listen(port, () => {
                     const p = httpServer.address().port;
@@ -456,12 +497,12 @@ function startAxeServer(basedir, scripts, scriptContents) {
                     ip = "127.0.0.1";
                     proto = "https";
                     rootUrl = `${proto}://${ip}:${port}`;
-                    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} server URL ${rootUrl}`);
+                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} server URL ${rootUrl}`);
 
                     resolve();
                 });
             }).catch((err) => {
-                if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} generateSelfSignedData error!`);
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} generateSelfSignedData error!`);
                 if (LOG_DEBUG) console.log(err);
                 httpServer = expressApp.listen(port, () => {
                     const p = httpServer.address().port;
@@ -470,7 +511,7 @@ function startAxeServer(basedir, scripts, scriptContents) {
                     ip = "127.0.0.1";
                     proto = "http";
                     rootUrl = `${proto}://${ip}:${port}`;
-                    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} server URL ${rootUrl}`);
+                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} server URL ${rootUrl}`);
 
                     resolve();
                 });
@@ -478,11 +519,11 @@ function startAxeServer(basedir, scripts, scriptContents) {
         }
 
         portfinder.getPortPromise().then((p) => {
-            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner HTTP port ${p}`);
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner HTTP port ${p}`);
             port = p;
             startHttp();
         }).catch((err) => {
-            if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner HTTP port error!`);
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner HTTP port error!`);
             console.log(err);
             port = 3000;
             startHttp();

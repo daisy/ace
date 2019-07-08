@@ -101,3 +101,8 @@ test('issue #209: `aria-describedby` can be a list of IDs', async () => {
     ])
   }));
 });
+
+test('issue #239: `listitem` is not reported when roles inherit from list roles', async () => {
+  const report = await ace('../data/issue-239');
+  expect(report['earl:result']['earl:outcome']).toEqual('pass');
+});

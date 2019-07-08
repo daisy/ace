@@ -30,7 +30,7 @@ function ace(epub, options = {}) {
     outdir: outdir.name,
     tmp: tmpdir.name,
     verbose: true,
-    silent: true, // temporarily switch to false to see the log file path in the console
+    silent: true,
   }, options))
     .then(() => {
       expect(fs.existsSync(reportPath)).toBeTruthy();
@@ -74,6 +74,13 @@ describe('accessibility metadata', () => {
       expect.objectContaining({
         'earl:test': expect.objectContaining({
           'dct:title': 'metadata-accessmode-invalid',
+        }),
+      }),
+    ]));
+    expect(assertions).not.toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'metadata-accessmodesufficient-invalid',
         }),
       }),
     ]));
