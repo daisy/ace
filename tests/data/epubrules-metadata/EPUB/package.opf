@@ -13,7 +13,7 @@
   <meta property="schema:accessibilityHazard">noMotionSimulationHazard</meta>
   <!-- Fail #2: bad metadata value -->
   <meta property="schema:accessMode">text</meta>
-  <meta property="schema:accessModeSufficient">textual</meta>
+  <meta property="schema:accessModeSufficient">visual,textual</meta>
 </metadata>
 <manifest>
   <item id="nav"  href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
