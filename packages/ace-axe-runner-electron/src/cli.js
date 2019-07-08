@@ -13,25 +13,24 @@ eventEmmitter.ace_notElectronIpcMainRenderer = true;
 
 const CONCURRENT_INSTANCES = 4; // same as the Puppeteer Axe runner
 
-const axeRunnerElectron = require('@daisy/ace-axe-runner-electron');
-const axeRunner = axeRunnerElectron.createAxeRunner(eventEmmitter, CONCURRENT_INSTANCES);
+const axeRunnerElectronFactory = require('@daisy/ace-axe-runner-electron');
+const axeRunner = axeRunnerElectronFactory.createAxeRunner(eventEmmitter, CONCURRENT_INSTANCES);
 
 const cli = require('@daisy/ace-cli-shared');
 
-const axeRunnerInit = require('./init').axeRunnerInit;
-
-let isDev = process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
+const isDev = process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
 
 const LOG_DEBUG = false;
-const AXE_LOG_PREFIX = "[AXE]";
+const ACE_LOG_PREFIX = "[ACE-AXE]";
 
-if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner launch...`);
+if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner CLI launch...`);
 
 // let win;
-app.on('ready', () => {
-    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner app ready.`);
-    axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES);
-    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner run...`);
+
+// app.on('ready', () => {
+// app.whenReady().then(() => {
+eventEmmitter.on('AXE_RUNNER_READY', (event, arg) => {
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner CLI AXE_RUNNER_READY.`);
 
     // win = new BrowserWindow(
     //     {
@@ -60,20 +59,22 @@ app.on('ready', () => {
   
     // win.loadURL(`file://${__dirname}/index.html`);
     // win.on('closed', function () {
-    //     if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner win closed.`);
+    //     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner win closed.`);
     // });
 
-    cli.run(axeRunner, app.quit);
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner run...`);
+    cli.run(axeRunner, app.exit); // const exitCode = app.quit();
 });
+
 app.on('activate', function () {
-    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner app activate.`);
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner app activate.`);
 });
 app.on('window-all-closed', function () {
-    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner app window-all-closed.`);
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner app window-all-closed.`);
 });
 app.on('before-quit', function() {
-    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner app before-quit.`);
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner app before-quit.`);
 });
 app.on('quit', () => {
-    if (LOG_DEBUG) console.log(`${AXE_LOG_PREFIX} axeRunner app quit.`);
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner app quit.`);
 });

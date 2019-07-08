@@ -69,7 +69,11 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
           const msgs = Object.keys(rawJson[checkOrRule][checkOrRuleKey]);
           for (const msg of msgs) {
             const k = `__aceLocalize__${checkOrRule}_${checkOrRuleKey}_${msg}`;
-            localizedScript += `window['${k}']="${rawJson[checkOrRule][checkOrRuleKey][msg]}";\n`;
+            let v = rawJson[checkOrRule][checkOrRuleKey][msg];
+            if (v) {
+              v = v.replace(/"/g, '\\"');
+            }
+            localizedScript += `window['${k}']="${v}";\n`;
           }
         }
       });

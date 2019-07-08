@@ -30,7 +30,7 @@ function ace(epub, options = {}) {
     outdir: outdir.name,
     tmp: tmpdir.name,
     verbose: true,
-    silent: true, // temporarily switch to false to see the log file path in the console
+    silent: true,
   }, options))
     .then(() => {
       expect(fs.existsSync(reportPath)).toBeTruthy();
