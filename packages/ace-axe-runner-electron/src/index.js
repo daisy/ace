@@ -91,10 +91,8 @@ function createAxeRunner(eventEmmitter, CONCURRENT_INSTANCES) {
                     const payload = eventEmmitter.ace_notElectronIpcMainRenderer ? event : arg;
                     // const sender = eventEmmitter.ace_notElectronIpcMainRenderer ? eventEmmitter : event.sender;
 
-                    if (!eventEmmitter.ace_notElectronIpcMainRenderer || payload.url === url) {
-                        if (eventEmmitter.ace_notElectronIpcMainRenderer) {
-                            eventEmmitter.removeListener('AXE_RUNNER_RUN_', callback);
-                        }
+                    if (payload.url === url) {
+                        eventEmmitter.removeListener('AXE_RUNNER_RUN_', callback);
 
                         if (payload.ok !== null && typeof payload.ok !== "undefined") {
                             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner did run OK. ${url} ${payload.url}`);
@@ -108,11 +106,7 @@ function createAxeRunner(eventEmmitter, CONCURRENT_INSTANCES) {
                         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner received AXE_RUNNER_RUN_ but filter out: ${url} ${payload.url}`);
                     }
                 };
-                if (eventEmmitter.ace_notElectronIpcMainRenderer) {
-                    eventEmmitter.on('AXE_RUNNER_RUN_', callback);
-                } else {
-                    eventEmmitter.once('AXE_RUNNER_RUN_', callback);
-                }
+                eventEmmitter.on('AXE_RUNNER_RUN_', callback);
 
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner about to run ... ${url}`);
                 // ipcRenderer
