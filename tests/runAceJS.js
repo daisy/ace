@@ -16,6 +16,9 @@ if (process.env.AXE_ELECTRON_RUNNER) {
 
   const axeRunnerElectronFactory = require('@daisy/ace-axe-runner-electron');
   axeRunnerElectron = axeRunnerElectronFactory.createAxeRunner(eventEmmitter, CONCURRENT_INSTANCES);
+
+  const prepareLaunch = require('@daisy/ace-axe-runner-electron/lib/init').prepareLaunch;
+  prepareLaunch(eventEmmitter, CONCURRENT_INSTANCES);
 }
 
 function runAce(epub, {

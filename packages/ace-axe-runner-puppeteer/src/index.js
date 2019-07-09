@@ -14,9 +14,11 @@ module.exports = {
             args.push('--no-sandbox')
         }
         _browser = await puppeteer.launch({ args });
+        return Promise.resolve();
     },
     close: async function() {
         await _browser.close();
+        return Promise.resolve();
     },
     run: async function(url, scripts, scriptContents, basedir) {
 

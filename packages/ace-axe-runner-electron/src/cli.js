@@ -16,6 +16,9 @@ const CONCURRENT_INSTANCES = 4; // same as the Puppeteer Axe runner
 const axeRunnerElectronFactory = require('@daisy/ace-axe-runner-electron');
 const axeRunner = axeRunnerElectronFactory.createAxeRunner(eventEmmitter, CONCURRENT_INSTANCES);
 
+const prepareLaunch = require('./init').prepareLaunch;
+prepareLaunch(eventEmmitter, CONCURRENT_INSTANCES);
+
 const cli = require('@daisy/ace-cli-shared');
 
 const isDev = process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
@@ -26,11 +29,9 @@ const ACE_LOG_PREFIX = "[ACE-AXE]";
 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner CLI launch...`);
 
 // let win;
-
-// app.on('ready', () => {
 // app.whenReady().then(() => {
-eventEmmitter.on('AXE_RUNNER_READY', (event, arg) => {
-    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner CLI AXE_RUNNER_READY.`);
+app.on('ready', () => {
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner CLI app ready.`);
 
     // win = new BrowserWindow(
     //     {

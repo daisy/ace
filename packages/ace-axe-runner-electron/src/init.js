@@ -78,6 +78,12 @@ function poolCheck() {
 }
 
 function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunnerInit ...`);
+
+    if (!axeRunnerInit.todo) {
+        return;
+    }
+    axeRunnerInit.todo = false;
 
     const firstTimeInit = _firstTimeInit;
     _firstTimeInit = false;
@@ -186,6 +192,8 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         const sender = eventEmmitter.ace_notElectronIpcMainRenderer ? eventEmmitter : event.sender;
 
         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner closing ...`);
+
+        axeRunnerInit.todo = true;
 
         if (browserWindows) {
             if (!(isDev && showWindow)) {
@@ -387,6 +395,7 @@ new Promise((resolve, reject) => {
         }
     });
 }
+axeRunnerInit.todo = true;
 
 function startAxeServer(basedir, scripts, scriptContents) {
 
@@ -530,4 +539,20 @@ function startAxeServer(basedir, scripts, scriptContents) {
         });
     });
 }
-module.exports = { axeRunnerInit };
+
+function prepareLaunch(eventEmmitter, CONCURRENT_INSTANCES) {
+    eventEmmitter.on('AXE_RUNNER_LAUNCH', (event, arg) => {
+        // const payload = eventEmmitter.ace_notElectronIpcMainRenderer ? event : arg;
+        const sender = eventEmmitter.ace_notElectronIpcMainRenderer ? eventEmmitter : event.sender;
+    
+        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner AXE_RUNNER_LAUNCH ...`);
+    
+        axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES);
+    
+        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner sending launched event ...`);
+        sender.send("AXE_RUNNER_LAUNCH_", {
+            ok: true
+        });
+    });
+}
+module.exports = { prepareLaunch };
