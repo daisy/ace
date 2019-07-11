@@ -120,7 +120,7 @@
             </a>
             <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB!<br />
 A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project.
-Latest version: v1.1.0</p>
+Latest version: v1.1.1</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -353,7 +353,7 @@ Latest version: v1.1.0</p>
 
 <h2 id="i-receive-an-eaccess-error-when-trying-to-install-ace-as-a-super-user-with-sudo">I receive an <code>EACCESS</code> error when trying to install Ace as a super-user with <code>sudo</code></h2>
 
-<p>If you tried to install Ace as a super-user with the command <code>sudo npm install -g ace-core</code>, you may have received the following error in return:</p>
+<p>If you tried to install Ace as a super-user with the command <code>sudo npm install -g @daisy/ace</code>, you may have received the following error in return:</p>
 
 <pre><code>...
 &gt; node install.js
@@ -374,7 +374,7 @@ npm ERR! Exit status 1
 
 <p>You need to tell the installation scripts to enforce the super-user permissions. Try running instead:</p>
 
-<pre><code>sudo npm install -g ace-core --unsafe-perm=true --allow-root
+<pre><code>sudo npm install -g @daisy/ace --unsafe-perm=true --allow-root
 </code></pre>
 
 <h2 id="i-receive-an-elifecycle-error-when-trying-to-install-ace-on-windows-version-windows-nt-10-0-16299">I receive an <code>ELIFECYCLE</code> error when trying to install Ace on Windows version <code>Windows_NT 10.0.16299</code></h2>
