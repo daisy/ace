@@ -13,7 +13,7 @@ You may receive an `EACCESS` error when you try to install Ace, for instance whe
 
 ## I receive an `EACCESS` error when trying to install Ace as a super-user with `sudo`
 
-If you tried to install Ace as a super-user with the command `sudo npm install -g ace-core`, you may have received the following error in return:
+If you tried to install Ace as a super-user with the command `sudo npm install -g @daisy/ace`, you may have received the following error in return:
 
 ```
 ...
@@ -36,7 +36,7 @@ npm ERR! Exit status 1
 You need to tell the installation scripts to enforce the super-user permissions. Try running instead:
 
 ```
-sudo npm install -g ace-core --unsafe-perm=true --allow-root
+sudo npm install -g @daisy/ace --unsafe-perm=true --allow-root
 ```
 
 ## I receive an `ELIFECYCLE` error when trying to install Ace on Windows version `Windows_NT 10.0.16299`
