@@ -20,11 +20,11 @@
   "dependencies": {
     "@daisy/ace-config": "^1.1.0",
     "@daisy/ace-localize": "^1.1.0",
-    "@daisy/ace-meta": "^1.1.0",
+    "@daisy/ace-meta": "^1.1.1",
     "escape-html": "^1.0.3",
-    "fs-extra": "^6.0.1",
-    "handlebars": "^4.0.11",
-    "winston": "^2.4.0"
+    "fs-extra": "^8.1.0",
+    "handlebars": "^4.1.2",
+    "winston": "^3.2.1"
   },
   "publishConfig": {
     "access": "public"

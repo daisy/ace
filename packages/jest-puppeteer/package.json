@@ -19,7 +19,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@daisy/puppeteer-utils": "^1.1.0",
-    "jest-mock": "^21.3.0-beta.3"
+    "jest-mock": "^24.8.0"
   },
   "publishConfig": {
     "access": "public"

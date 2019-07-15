@@ -21,9 +21,9 @@
     "@daisy/ace-config": "^1.1.0",
     "@daisy/ace-core": "^1.1.1",
     "@daisy/ace-logger": "^1.1.0",
-    "@daisy/ace-meta": "^1.1.0",
-    "meow": "^3.7.0",
-    "winston": "^2.4.0"
+    "@daisy/ace-meta": "^1.1.1",
+    "meow": "^5.0.0",
+    "winston": "^3.2.1"
   },
   "publishConfig": {
     "access": "public"

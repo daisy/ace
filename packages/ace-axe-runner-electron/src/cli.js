@@ -30,7 +30,7 @@ if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner CLI launch...`);
 
 // let win;
 // app.whenReady().then(() => {
-app.on('ready', () => {
+app.on('ready', async () => {
     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner CLI app ready.`);
 
     // win = new BrowserWindow(
@@ -64,7 +64,7 @@ app.on('ready', () => {
     // });
 
     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner run...`);
-    cli.run(axeRunner, app.exit); // const exitCode = app.quit();
+    await cli.run(axeRunner, app.exit); // const exitCode = app.quit();
 });
 
 app.on('activate', function () {
