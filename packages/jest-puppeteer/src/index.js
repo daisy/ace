@@ -13,7 +13,7 @@ async function injectJestMock() {
   await utils.addScripts(
     [paths.resolve(require.resolve('jest-mock'), '../../build-es5/index.js')], global.page);
   await global.page.evaluate(() => {
-    window.mock = new window['jest-mock'].ModuleMocker();
+    window.mock = new window.jestMock.ModuleMocker(window);
   });
 }
 

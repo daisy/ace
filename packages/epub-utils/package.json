@@ -18,12 +18,12 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "extract-zip": "^1.6.5",
-    "fs-extra": "^6.0.1",
-    "tmp": "^0.0.33",
-    "winston": "^2.4.0",
+    "extract-zip": "^1.6.7",
+    "fs-extra": "^8.1.0",
+    "tmp": "^0.1.0",
+    "winston": "^3.2.1",
     "xmldom-alpha": "^0.1.28",
-    "xpath": "^0.0.24"
+    "xpath": "0.0.24"
   },
   "publishConfig": {
     "access": "public"

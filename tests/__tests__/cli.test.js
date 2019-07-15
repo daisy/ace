@@ -6,6 +6,22 @@ const stripAnsi = require('strip-ansi');
 const ace = require('../runAceCLI');
 const pkg = require('@daisy/ace-meta/package');
 
+// console.log(`##${stderr}##`);
+// console.log(`##${stripAnsi(stderr)}##`);
+// const map = {  // Special characters
+//   '\\': '\\',
+//   '\n': 'n',
+//   '\r': 'r',
+//   '\t': 't'
+// };
+// let str = stderr.replace(/[\\\n\r\t]/g, function(i) {
+//     return '\\'+map[i];
+// });
+// str = str.replace(/[^ -~]/g, function(i){
+//     return '\\u'+("000" + i.charCodeAt(0).toString(16)).slice(-4);
+// });
+// console.log(`##${str}##`);
+
 describe('Running the CLI', () => {
   test('with no input should fail', () => {
     const { stdout, stderr, status } = ace([]);

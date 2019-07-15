@@ -14,9 +14,7 @@ const cliConfig  = config.get('cli', defaults.cli);
 
 const pkg = require('@daisy/ace-meta/package');
 
-const meowHelpMessage = {
-  help:
-`
+const meowHelpMessage = `
   Usage: ace [options] <input>
 
   Options:
@@ -34,32 +32,57 @@ const meowHelpMessage = {
 
     -l, --lang  <language> language code for localized messages (e.g. "fr"), default is "en"
   Examples
-    $ ace -o out ~/Documents/book.epub
-`,
-// autoVersion: false,
-version: pkg.version
-};
+    $ ace -o out ~/Documents/book.epub`;
 const meowOptions = {
-  alias: {
-    f: 'force',
-    h: 'help',
-    o: 'outdir',
-    s: 'silent',
-    t: 'tempdir',
-    v: 'version',
-    V: 'verbose',
-    l: 'lang',
-  },
-  boolean: ['force', 'verbose', 'silent', 'subdir'],
-  string: ['outdir', 'tempdir', 'lang'],
+  autoHelp: false,
+  autoVersion: false,
+  version: pkg.version,
+  flags: {
+    force: {
+      alias: 'f',
+      type: 'boolean'
+    },
+    help: {
+      alias: 'h'
+    },
+    outdir: {
+      alias: 'o',
+      type: 'string'
+    },
+    silent: {
+      alias: 's',
+      type: 'boolean'
+    },
+    tempdir: {
+      alias: 't',
+      type: 'string'
+    },
+    version: {
+      alias: 'v'
+    },
+    verbose: {
+      alias: 'V',
+      type: 'boolean'
+    },
+    lang: {
+      alias: 'l',
+      type: 'string'
+    }
+  }
 };
 const cli = meow(meowHelpMessage, meowOptions);
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 async function run(axeRunner, exit) {
+
+  if (cli.flags.help) {
+    cli.showHelp(0);
+    return;
+  }
+
+  if (cli.flags.version) {
+    cli.showVersion(2);
+    return;
+  }
 
   let timeBegin = process.hrtime();
   function quit() {
@@ -73,12 +96,10 @@ async function run(axeRunner, exit) {
 
   // Check that an EPUB path is specified
   if (cli.input.length === 0) {
-    winston.logAndExit('error', 'Input required', () => {
-      console.log(cli.help);
-      quit(1);
-    });
-    await sleep(5000);
+    const res = await winston.logAndWaitFinish('error', 'Input required');
+    console.log(cli.help);
     quit(1);
+    return;
   }
 
   // Check that output directories can be overridden
@@ -92,7 +113,8 @@ async function run(axeRunner, exit) {
         .map(file => path.join(outdir, file))
         .filter(fs.existsSync);
       if (overrides.length > 0) {
-        winston.logAndExit('warn', `\
+        const res = await winston.logAndWaitFinish('warn',
+          `\
 Output directory is not empty.
 
   Running Ace would override the following files or directories:
@@ -100,9 +122,10 @@ Output directory is not empty.
 ${overrides.map(file => `  - ${file}`).join('\n')}
 
   Use option --force to override.
-`, 1);
-        await sleep(5000);
+`
+        );
         quit(1);
+        return;
       }
     }
   }
@@ -117,24 +140,21 @@ ${overrides.map(file => `  - ${file}`).join('\n')}
     jobId: '',
     lang: cli.flags.lang,
   }, axeRunner)
-  .then((jobData) => {
+  .then(async (jobData) => {
     var reportJson = jobData[1];
     // if there were violations from the validation process, return 2
-    if (cliConfig['return-2-on-validation-error'] &&
-    reportJson['earl:result']['earl:outcome'] === 'fail') {
-      winston.logAndExit('info', 'Closing logs.', () => {
-        quit(2);
-      });
-    } else {
-      quit(0);
-    }
+    const fail = cliConfig['return-2-on-validation-error'] && reportJson['earl:result']['earl:outcome'] === 'fail';
+    const res = await winston.logAndWaitFinish('info', 'Closing logs.');
+    quit(fail ? 2 : 0);
   })
-  .catch((err) => {
-    if (err && err.message) winston.error(err.message);
-    winston.logAndExit('info', 'Closing logs.', () => {
-      console.log('Re-run Ace using the --verbose option to enable full debug logging.');
-      quit(1);
-    });
+  .catch(async (err) => {
+    if (err && err.message) {
+      winston.error(err.message);
+    }
+    
+    const res = await winston.logAndWaitFinish('info', 'Closing logs.');
+    console.log('Re-run Ace using the --verbose option to enable full debug logging.');
+    quit(1);
   });
 }
 

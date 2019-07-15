@@ -19,9 +19,9 @@
   "main": "lib/index.js",
   "dependencies": {
     "@daisy/ace-cli-shared": "file:../ace-cli-shared",
-    "electron": "^5.0.0",
-    "express": "^4.16.4",
-    "portfinder": "^1.0.20",
+    "electron": "^5.0.6",
+    "express": "^4.17.1",
+    "portfinder": "^1.0.21",
     "selfsigned": "^1.10.4",
     "uuid": "^3.3.2"
   },

@@ -20,8 +20,8 @@
   "dependencies": {
     "@daisy/ace-localize": "file:../ace-localize",
     "@daisy/ace-report": "file:../ace-report",
-    "fs-extra": "^6.0.1",
-    "winston": "^2.4.0"
+    "fs-extra": "^8.1.0",
+    "winston": "^3.2.1"
   },
   "publishConfig": {
     "access": "public"

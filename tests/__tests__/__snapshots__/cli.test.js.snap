@@ -48,6 +48,7 @@ exports[`Running the CLI with no input should fail 2`] = `
     -l, --lang  <language> language code for localized messages (e.g. \\"fr\\"), default is \\"en\\"
   Examples
     $ ace -o out ~/Documents/book.epub
+
 "
 `;
 
@@ -73,5 +74,6 @@ exports[`Running the CLI with the -h option should print help 1`] = `
     -l, --lang  <language> language code for localized messages (e.g. \\"fr\\"), default is \\"en\\"
   Examples
     $ ace -o out ~/Documents/book.epub
+
 "
 `;

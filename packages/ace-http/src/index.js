@@ -25,9 +25,7 @@ var upload = multer({dest: UPLOADS});
 var joblist = [];
 var baseurl = "";
 
-const cli = meow({
-  help:
-`
+const meowHelpMessage = `
   Usage: ace-http [options]
 
   Options:
@@ -43,25 +41,53 @@ const cli = meow({
 
     -l, --lang  <language> language code for localized messages (e.g. "fr"), default is "en"
   Examples
-    $ ace-http -p 3000
-`,
-// autoVersion: false,
-version: pkg.version
-}, {
-  alias: {
-    h: 'help',
-    s: 'silent',
-    v: 'version',
-    V: 'verbose',
-    H: 'host',
-    p: 'port',
-    l: 'lang',
-  },
-  boolean: ['verbose', 'silent'],
-  string: ['host', 'port', 'lang'],
-});
+    $ ace-http -p 3000`;
+const meowOptions = {
+  autoHelp: false,
+  autoVersion: false,
+  version: pkg.version,
+  flags: {
+    help: {
+      alias: 'h'
+    },
+    silent: {
+      alias: 's',
+      type: 'boolean'
+    },
+    version: {
+      alias: 'v'
+    },
+    verbose: {
+      alias: 'V',
+      type: 'boolean'
+    },
+    host: {
+      alias: 'H',
+      type: 'string'
+    },
+    port: {
+      alias: 'p',
+      type: 'string'
+    },
+    lang: {
+      alias: 'l',
+      type: 'string'
+    }
+  }
+};
+const cli = meow(meowHelpMessage, meowOptions);
 
 function run() {
+  if (cli.flags.help) {
+    cli.showHelp(0);
+    return;
+  }
+
+  if (cli.flags.version) {
+    cli.showVersion(2);
+    return;
+  }
+
   logger.initLogger({verbose: cli.flags.verbose, silent: cli.flags.silent});
   server = express();
   server.use(zip());
