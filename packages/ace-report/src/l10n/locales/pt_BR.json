@@ -68,5 +68,6 @@
     "dataTable_paginateNext": "Próximo",
     "dataTable_paginatePrevious": "Anterior",
     "dataTable_ariaSortAscending": ": ativar para classificar a coluna em ordem ascendente",
-    "dataTable_ariaSortDescending": ": ativar para classificar a coluna em ordem decrescente"
+    "dataTable_ariaSortDescending": ": ativar para classificar a coluna em ordem decrescente",
+    "noMatchingViolations": "Nenhuma violação correspondente encontrada."
 }
