@@ -57,6 +57,9 @@ const meowOptions = {
       alias: 't',
       type: 'string'
     },
+    subdir: {
+      type: 'boolean'
+    },
     version: {
       alias: 'v'
     },
