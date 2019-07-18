@@ -735,24 +735,24 @@
 "@daisy/ace-axe-runner-puppeteer@file:packages/ace-axe-runner-puppeteer":
   version "1.1.0"
   dependencies:
-    "@daisy/puppeteer-utils" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-axe-runner-puppeteer-1.1.0-ab48c2a2-564b-46ed-bfaa-0ad2f1c4e4a9-1563489260586/node_modules/@daisy/puppeteer-utils"
+    "@daisy/puppeteer-utils" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-axe-runner-puppeteer-1.1.0-f1b819f8-df8c-4e3c-87c4-02eaf55adac8-1563492805143/node_modules/@daisy/puppeteer-utils"
     puppeteer "^1.18.1"
 
 "@daisy/ace-cli-shared@file:packages/ace-cli-shared":
   version "1.0.0"
   dependencies:
-    "@daisy/ace-config" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-cli-shared-1.0.0-eb3d9fe8-bc93-41c9-8989-67b783dd0dfb-1563489260584/node_modules/@daisy/ace-config"
-    "@daisy/ace-core" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-cli-shared-1.0.0-eb3d9fe8-bc93-41c9-8989-67b783dd0dfb-1563489260584/node_modules/@daisy/ace-core"
-    "@daisy/ace-logger" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-cli-shared-1.0.0-eb3d9fe8-bc93-41c9-8989-67b783dd0dfb-1563489260584/node_modules/@daisy/ace-logger"
-    "@daisy/ace-meta" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-cli-shared-1.0.0-eb3d9fe8-bc93-41c9-8989-67b783dd0dfb-1563489260584/node_modules/@daisy/ace-meta"
+    "@daisy/ace-config" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-cli-shared-1.0.0-ee5fcba3-35c2-45bf-9b9e-92d9de6418af-1563492805141/node_modules/@daisy/ace-config"
+    "@daisy/ace-core" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-cli-shared-1.0.0-ee5fcba3-35c2-45bf-9b9e-92d9de6418af-1563492805141/node_modules/@daisy/ace-core"
+    "@daisy/ace-logger" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-cli-shared-1.0.0-ee5fcba3-35c2-45bf-9b9e-92d9de6418af-1563492805141/node_modules/@daisy/ace-logger"
+    "@daisy/ace-meta" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-cli-shared-1.0.0-ee5fcba3-35c2-45bf-9b9e-92d9de6418af-1563492805141/node_modules/@daisy/ace-meta"
     meow "^5.0.0"
     winston "^3.2.1"
 
 "@daisy/ace-cli@file:packages/ace-cli":
   version "1.1.1"
   dependencies:
-    "@daisy/ace-axe-runner-puppeteer" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-cli-1.1.1-610ad9c4-b987-4f1e-b9e1-d97f69b268de-1563489260589/node_modules/@daisy/ace-axe-runner-puppeteer"
-    "@daisy/ace-cli-shared" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-cli-1.1.1-610ad9c4-b987-4f1e-b9e1-d97f69b268de-1563489260589/node_modules/@daisy/ace-cli-shared"
+    "@daisy/ace-axe-runner-puppeteer" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-cli-1.1.1-9519d46d-ed83-48a4-96a4-ada371e01d88-1563492805146/node_modules/@daisy/ace-axe-runner-puppeteer"
+    "@daisy/ace-cli-shared" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-cli-1.1.1-9519d46d-ed83-48a4-96a4-ada371e01d88-1563492805146/node_modules/@daisy/ace-cli-shared"
 
 "@daisy/ace-config@file:packages/ace-config":
   version "1.1.0"
@@ -764,12 +764,12 @@
 "@daisy/ace-core@file:packages/ace-core":
   version "1.1.1"
   dependencies:
-    "@daisy/ace-localize" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-core-1.1.1-98403b36-3329-43ec-8cf4-91dce1e55584-1563489260587/node_modules/@daisy/ace-localize"
-    "@daisy/ace-logger" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-core-1.1.1-98403b36-3329-43ec-8cf4-91dce1e55584-1563489260587/node_modules/@daisy/ace-logger"
-    "@daisy/ace-meta" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-core-1.1.1-98403b36-3329-43ec-8cf4-91dce1e55584-1563489260587/node_modules/@daisy/ace-meta"
-    "@daisy/ace-report" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-core-1.1.1-98403b36-3329-43ec-8cf4-91dce1e55584-1563489260587/node_modules/@daisy/ace-report"
-    "@daisy/ace-report-axe" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-core-1.1.1-98403b36-3329-43ec-8cf4-91dce1e55584-1563489260587/node_modules/@daisy/ace-report-axe"
-    "@daisy/epub-utils" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-core-1.1.1-98403b36-3329-43ec-8cf4-91dce1e55584-1563489260587/node_modules/@daisy/epub-utils"
+    "@daisy/ace-localize" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-core-1.1.1-9ef39480-d355-4b47-80a6-b3e1afdd4b6f-1563492805147/node_modules/@daisy/ace-localize"
+    "@daisy/ace-logger" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-core-1.1.1-9ef39480-d355-4b47-80a6-b3e1afdd4b6f-1563492805147/node_modules/@daisy/ace-logger"
+    "@daisy/ace-meta" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-core-1.1.1-9ef39480-d355-4b47-80a6-b3e1afdd4b6f-1563492805147/node_modules/@daisy/ace-meta"
+    "@daisy/ace-report" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-core-1.1.1-9ef39480-d355-4b47-80a6-b3e1afdd4b6f-1563492805147/node_modules/@daisy/ace-report"
+    "@daisy/ace-report-axe" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-core-1.1.1-9ef39480-d355-4b47-80a6-b3e1afdd4b6f-1563492805147/node_modules/@daisy/ace-report-axe"
+    "@daisy/epub-utils" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-core-1.1.1-9ef39480-d355-4b47-80a6-b3e1afdd4b6f-1563492805147/node_modules/@daisy/epub-utils"
     axe-core "^3.3.0"
     file-url "^3.0.0"
     h5o "^0.11.3"
@@ -780,10 +780,10 @@
 "@daisy/ace-http@file:packages/ace-http":
   version "1.1.1"
   dependencies:
-    "@daisy/ace-axe-runner-puppeteer" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-http-1.1.1-1b951035-f1ea-4935-9450-58928a2769de-1563489260590/node_modules/@daisy/ace-axe-runner-puppeteer"
-    "@daisy/ace-core" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-http-1.1.1-1b951035-f1ea-4935-9450-58928a2769de-1563489260590/node_modules/@daisy/ace-core"
-    "@daisy/ace-logger" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-http-1.1.1-1b951035-f1ea-4935-9450-58928a2769de-1563489260590/node_modules/@daisy/ace-logger"
-    "@daisy/ace-meta" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-http-1.1.1-1b951035-f1ea-4935-9450-58928a2769de-1563489260590/node_modules/@daisy/ace-meta"
+    "@daisy/ace-axe-runner-puppeteer" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-http-1.1.1-37b20ef1-45a2-4fa4-9e49-f0f1b1672884-1563492805149/node_modules/@daisy/ace-axe-runner-puppeteer"
+    "@daisy/ace-core" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-http-1.1.1-37b20ef1-45a2-4fa4-9e49-f0f1b1672884-1563492805149/node_modules/@daisy/ace-core"
+    "@daisy/ace-logger" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-http-1.1.1-37b20ef1-45a2-4fa4-9e49-f0f1b1672884-1563492805149/node_modules/@daisy/ace-logger"
+    "@daisy/ace-meta" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-http-1.1.1-37b20ef1-45a2-4fa4-9e49-f0f1b1672884-1563492805149/node_modules/@daisy/ace-meta"
     express "^4.17.1"
     express-easy-zip "^1.1.4"
     meow "^5.0.0"
@@ -801,7 +801,7 @@
 "@daisy/ace-logger@file:packages/ace-logger":
   version "1.1.0"
   dependencies:
-    "@daisy/ace-config" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-logger-1.1.0-b684117c-2e0b-43a4-8efb-d5cd1b492c76-1563489260589/node_modules/@daisy/ace-config"
+    "@daisy/ace-config" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-logger-1.1.0-febc106c-3948-4f0a-9403-3b9489beb345-1563492805145/node_modules/@daisy/ace-config"
     fs-extra "^8.1.0"
     winston "^3.2.1"
 
@@ -811,17 +811,17 @@
 "@daisy/ace-report-axe@file:packages/ace-report-axe":
   version "1.1.1"
   dependencies:
-    "@daisy/ace-localize" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-report-axe-1.1.1-32490b80-c599-4367-8da9-d74deab0243a-1563489260592/node_modules/@daisy/ace-localize"
-    "@daisy/ace-report" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-report-axe-1.1.1-32490b80-c599-4367-8da9-d74deab0243a-1563489260592/node_modules/@daisy/ace-report"
+    "@daisy/ace-localize" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-report-axe-1.1.1-4f926219-b2c1-4670-b311-f39391bc6083-1563492805150/node_modules/@daisy/ace-localize"
+    "@daisy/ace-report" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-report-axe-1.1.1-4f926219-b2c1-4670-b311-f39391bc6083-1563492805150/node_modules/@daisy/ace-report"
     fs-extra "^8.1.0"
     winston "^3.2.1"
 
 "@daisy/ace-report@file:packages/ace-report":
   version "1.1.1"
   dependencies:
-    "@daisy/ace-config" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-report-1.1.1-28ac5380-5379-4745-bcc6-7083c42a0a6c-1563489260590/node_modules/@daisy/ace-config"
-    "@daisy/ace-localize" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-report-1.1.1-28ac5380-5379-4745-bcc6-7083c42a0a6c-1563489260590/node_modules/@daisy/ace-localize"
-    "@daisy/ace-meta" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-report-1.1.1-28ac5380-5379-4745-bcc6-7083c42a0a6c-1563489260590/node_modules/@daisy/ace-meta"
+    "@daisy/ace-config" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-report-1.1.1-45f0481b-e491-45d8-b898-a7bb21ee519e-1563492805148/node_modules/@daisy/ace-config"
+    "@daisy/ace-localize" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-report-1.1.1-45f0481b-e491-45d8-b898-a7bb21ee519e-1563492805148/node_modules/@daisy/ace-localize"
+    "@daisy/ace-meta" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-ace-report-1.1.1-45f0481b-e491-45d8-b898-a7bb21ee519e-1563492805148/node_modules/@daisy/ace-meta"
     escape-html "^1.0.3"
     fs-extra "^8.1.0"
     handlebars "^4.1.2"
@@ -846,7 +846,7 @@
 "@daisy/jest-puppeteer@file:./packages/jest-puppeteer":
   version "1.1.0"
   dependencies:
-    "@daisy/puppeteer-utils" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-jest-puppeteer-1.1.0-ce0eb9b6-859d-4c6d-bc67-81353b07f110-1563489262575/node_modules/@daisy/puppeteer-utils"
+    "@daisy/puppeteer-utils" "file:../../../../Users/danielweck/Library/Caches/Yarn/v4/npm-@daisy-jest-puppeteer-1.1.0-a10e2c07-48c6-4e27-a119-b27bcd9dac14-1563492795839/node_modules/@daisy/puppeteer-utils"
     jest-mock "^24.8.0"
 
 "@daisy/puppeteer-utils@file:packages/puppeteer-utils":
