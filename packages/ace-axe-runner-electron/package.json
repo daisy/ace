@@ -19,7 +19,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@daisy/ace-cli-shared": "^1.0.0",
-    "electron": "^5.0.6",
+    "electron": "^5.0.7",
     "express": "^4.17.1",
     "portfinder": "^1.0.21",
     "selfsigned": "^1.10.4",
