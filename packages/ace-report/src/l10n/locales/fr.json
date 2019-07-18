@@ -68,5 +68,6 @@
     "dataTable_paginateNext": "Suivant",
     "dataTable_paginatePrevious": "Précédent",
     "dataTable_ariaSortAscending": ": activer pour trier par colonne ascendante",
-    "dataTable_ariaSortDescending": ": activer pour trier par colonne descendante"
+    "dataTable_ariaSortDescending": ": activer pour trier par colonne descendante",
+    "noMatchingViolations": "Aucune violation correspondante."
 }

@@ -68,5 +68,6 @@
     "dataTable_paginateNext": "Next",
     "dataTable_paginatePrevious": "Previous",
     "dataTable_ariaSortAscending": ": activate to sort column ascending",
-    "dataTable_ariaSortDescending": ": activate to sort column descending"
+    "dataTable_ariaSortDescending": ": activate to sort column descending",
+    "noMatchingViolations": "No matching violations found."
 }
