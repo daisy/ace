@@ -511,7 +511,7 @@
     $('#violations-table').dataTable().fnDestroy();
     $("#message").remove();
     if (violationSubset.length == 0) {
-      $("<p id='message'>No matching violations found.</p>").insertBefore("#violations .pagenav");
+      $('<p id=\'message\'>{{#localize "noMatchingViolations"}}{{/localize}}</p>').insertBefore("#violations .pagenav");
       $("#violations-table").hide();
       return;
     }
