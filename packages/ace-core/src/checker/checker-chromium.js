@@ -105,13 +105,13 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
                 if (srcItem.src !== undefined) {
                   srcItem.path = path.resolve(path.dirname(spineItem.filepath),
                                               srcItem.src.toString());
-                  srcItem.src = path.relative(epub.basedir, srcItem.path);
+                  srcItem.src = path.relative(epub.basedir, srcItem.path).replace(/\\/g, "/");
                 }
                 return srcItem;
               });
             } else {
               item.path = path.resolve(path.dirname(spineItem.filepath), item.src.toString());
-              item.src = path.relative(epub.basedir, item.path);
+              item.src = path.relative(epub.basedir, item.path).replace(/\\/g, "/");
             }
             if (item.cfi !== undefined) {
               item.location = `${spineItem.relpath}#epubcfi(${item.cfi})`;

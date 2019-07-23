@@ -29,18 +29,39 @@ async function retryUnzip(epub, error) {
     // Detect 'invalid comment length' errors
     const invalidCommentLengthMatch =  error.message.match(/invalid comment length\. expected: (\d+)\. found: (\d)/);
     if (invalidCommentLengthMatch) {
-      const tmpEPUB = tmp.fileSync({ unsafeCleanup: true }).name;
+      let tmpEPUB = tmp.fileSync({ unsafeCleanup: true, postfix: '.epub' }).name;
       const size  = fs.statSync(epub.path).size;
       const truncatedSize = size - invalidCommentLengthMatch[1];
-      fs.copySync(epub.path, tmpEPUB);
+      let needsDelete = false;
+      try {
+        fs.copySync(epub.path, tmpEPUB);
+        needsDelete = true;
+      } catch (err) {
+        winston.debug(err);
+        tmpEPUB = epub.path + ".ace.zipfix.epub";
+        try {
+          fs.copySync(epub.path, tmpEPUB);
+          needsDelete = true;
+        } catch (err2) {
+          winston.debug(err2);
+          throw err2;
+        }
+      }
       fs.truncateSync(tmpEPUB, truncatedSize);
-      return await unzip(tmpEPUB);
+      const res = await unzip(tmpEPUB);
+      if (needsDelete) {
+        process.nextTick(() => {
+          fs.unlink(tmpEPUB);
+        });
+      }
+      return res;
     } else {
       winston.error('The ZIP archive couldn’t be repaired.');
     }
-  } catch (error) {
+  } catch (err) {
     winston.error('Unzipping failed again');
-    winston.debug(error);
+    winston.debug(err);
+    throw err;
   }
   throw error;
 }

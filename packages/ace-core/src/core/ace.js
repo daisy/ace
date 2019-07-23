@@ -39,7 +39,7 @@ module.exports = function ace(epubPath, options, axeRunner) {
       winston.error(`Couldn’t find EPUB file '${epubPath}'`);
       return reject(jobId);
     }
-
+  
     // Process options
     /* eslint-disable no-param-reassign */
     if (typeof options.tmpdir === 'string') {
@@ -93,7 +93,7 @@ module.exports = function ace(epubPath, options, axeRunner) {
     .catch((err) => {
       winston.error(`Unexpected error: ${(err.message !== undefined) ? err.message : err}`);
       if (err.stack !== undefined) winston.debug(err.stack);
-      reject(jobId);
+      reject(err);
     });
   });
 };
