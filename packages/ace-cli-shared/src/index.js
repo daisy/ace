@@ -114,7 +114,8 @@ async function run(axeRunner, exit) {
     if (!cli.flags.force) {
       const overrides = ['report.json', 'report.html', 'data', 'js']
         .map(file => path.join(outdir, file))
-        .filter(fs.existsSync);
+        .filter(fs.existsSync)
+        .map(file => file.replace(/\\/g, "/"));
       if (overrides.length > 0) {
         const res = await winston.logAndWaitFinish('warn',
           `\

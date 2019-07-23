@@ -23,34 +23,60 @@ afterEach(() => {
   tmpdir.removeCallback();
 });
 
-
 function ace(epub, options = {}) {
-  return runAce(epub, Object.assign({
-    outdir: outdir.name,
-    tmp: tmpdir.name,
-    verbose: true,
-    silent: true,
-  }, options))
-    .then(() => {
-      expect(fs.existsSync(reportPath)).toBeTruthy();
-      return JSON.parse(fs.readFileSync(reportPath, 'utf8'));
-    })
-    .catch((err) => {
-      // console.log(err);
-    });
+  return new Promise((resolve, reject) => {
+    runAce(epub, Object.assign({
+      outdir: outdir.name,
+      tmp: tmpdir.name,
+      verbose: true,
+      silent: true,
+    }, options))
+      .then(() => {
+        // expect(fs.existsSync(reportPath)).toBeTruthy();
+        resolve(JSON.parse(fs.readFileSync(reportPath, 'utf8')));
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
 }
 
 test('well-formed EPUB archive is processed', async () => {
-  const report = await ace(path.join(__dirname, '../data/base-epub-30.epub'));
+  expect.assertions(2);
+  let report = undefined;
+  try {
+    report = await ace(path.join(__dirname, '../data/base-epub-30.epub'));
+  } catch (err) {
+    console.log("ERROR: " + err);
+    expect(err).toBe("ERROR?");
+    return;
+  }
+  expect(report).toBeDefined();
   expect(report['earl:result']).toBeDefined();
 });
 
 test('an EPUB archive with an extra comment length is repaired', async () => {
-const report = await ace(path.join(__dirname, '../data/zip-invalid-comment-length.epub'));
-expect(report['earl:result']).toBeDefined();
+  expect.assertions(2);
+  let report = undefined;
+  try {
+    report = await ace(path.join(__dirname, '../data/zip-invalid-comment-length.epub'));
+  } catch (err) {
+    console.log("ERROR: " + err);
+    expect(err).toBe("ERROR?");
+    return;
+  }
+  expect(report).toBeDefined();
+  expect(report['earl:result']).toBeDefined();
 });
 
 test('an EPUB archive beyond repair is rejected', async () => {
-  const report = await ace(path.join(__dirname, '../data/zip-invalid.epub'));
-  expect(report).toBeUndefined();
+  expect.assertions(2);
+  let report = undefined;
+  try {
+    report = await ace(path.join(__dirname, '../data/zip-invalid.epub'));
+  } catch (err) {
+    expect(err).toBeDefined();
+    // console.log("ERROR: " + err);
+    expect(report).toBeUndefined();
+  }
 });

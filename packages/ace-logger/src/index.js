@@ -38,8 +38,11 @@ const closeTransportAndWaitForFinish = async (transport) => {
 }
 
 module.exports.initLogger = function initLogger(options = {}) {
+
+  const disableWinstonFileTransport = (typeof process.env.JEST_TESTS !== "undefined") && process.platform === "win32";
+
   // Check logging directoy exists
-  if (!fs.existsSync(paths.log)) {
+  if (!disableWinstonFileTransport && !fs.existsSync(paths.log)) {
     fs.ensureDirSync(paths.log);
   }
 
@@ -47,12 +50,12 @@ module.exports.initLogger = function initLogger(options = {}) {
   const logfile = path.join(paths.log, logConfig.fileName);
 
   // clear old log file
-  if (fs.existsSync(logfile)) {
+  if (!disableWinstonFileTransport && fs.existsSync(logfile)) {
     fs.removeSync(logfile);
   }
 
-  const fileTransport = new winston.transports.File({ name: 'file', filename: logfile });
-  const consoleTransport = new winston.transports.Console({ name: 'console', stderrLevels: ['error'] });
+  const fileTransport = new winston.transports.File({ name: 'file', filename: logfile, silent: disableWinstonFileTransport });
+  const consoleTransport = new winston.transports.Console({ name: 'console', stderrLevels: ['error'], silent: false });
   const transports = [
     fileTransport
   ];
@@ -79,6 +82,7 @@ module.exports.initLogger = function initLogger(options = {}) {
   winston.logAndWaitFinish = async (level, msg) => {
     return new Promise(async (resolve, reject) => {
       winston.log(level, msg);
+
       for (const transport of transports) {
         try {
           await closeTransportAndWaitForFinish(transport);
