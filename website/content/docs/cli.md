@@ -195,3 +195,16 @@ $
 ```
 
 Note that the log file is not 'silent'; it contains the default level of detail about Ace's operation.
+
+### lang
+
+Use this to set the language used to localize the reports of the accessibility evaluation.
+The default is "en" (English). Currently, the only available supplementary locale is "fr" (French).
+
+Syntax: `--lang` or `-l`
+
+Example:
+```
+$ ace --lang fr ~/Documents/book.epub
+$
+```
