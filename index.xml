@@ -161,6 +161,16 @@ Getting the results You can specify the directory for Ace to store its output wi
     </item>
     
     <item>
+      <title>The Ace App</title>
+      <link>https://daisy.github.io/ace/getting-started/ace-app/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/getting-started/ace-app/</guid>
+      <description>What is the Ace by DAISY App? Ace by DAISY App is the official graphical user interface for the EPUB accessibility checker developed by the DAISY Consortium. The Ace App is available for the Windows, MacOS and Linux desktop operating systems.
+Where can I download the Ace App? The latest version of the Ace App is 1.0.0-rc.1 (first &amp;ldquo;release candidate&amp;rdquo;). The application installers are distributed via the GitHub development website.</description>
+    </item>
+    
+    <item>
       <title>Logging</title>
       <link>https://daisy.github.io/ace/docs/logging/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
