@@ -62,7 +62,7 @@
     "cross-spawn": "^6.0.5",
     "glob": "^7.1.4",
     "jest": "^24.8.0",
-    "lerna": "^3.16",
+    "lerna": "^3.16.4",
     "micromatch": "^4.0.2",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.3",
