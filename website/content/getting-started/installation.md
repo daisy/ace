@@ -3,6 +3,8 @@ title = "Installation"
 weight = 2
 +++
 
+_Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY "desktop application" (as known as the Ace App), please [visit this page]({{<relref "getting-started/ace-app.md">}})._
+
 ## Install Node.JS
 
 * Go to [Node.JS](https://nodejs.org/)
