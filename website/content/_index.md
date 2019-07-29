@@ -8,4 +8,4 @@ Read more about the Ace project on [Inclusive Publishing](http://inclusivepublis
 
 Latest version: v1.1.1.
 
-Note: We’re working on a simple GUI with an installer, to allow using Ace without having to deal with package managers and command line tools… stay tuned!
+_Note: the Ace by DAISY "desktop application" (as known as the Ace App) is a software project based on the Ace core components. For more information, please [visit this page]({{<relref "getting-started/ace-app.md">}})._
