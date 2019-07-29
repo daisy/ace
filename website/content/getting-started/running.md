@@ -3,6 +3,8 @@ title = "Running Ace"
 weight = 3
 +++
 
+_Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY "desktop application" (as known as the Ace App), please [visit this page]({{<relref "getting-started/ace-app.md">}})._
+
 ## Checking an EPUB
 
 You can check an EPUB by running the `ace` command followed by the path to the EPUB document (if the file name includes spaces, place it inside `"` marks). For example:
