@@ -43,7 +43,7 @@
     "postinstall": "yarn run build",
     "test": "jest",
     "watch": "yarn run build && node ./scripts/watch.js",
-    "i18n": "sync-i18n --files 'packages/**/src/l10n/locales/*.json' --primary en --languages fr --space 4 --finalnewline --newkeysempty",
+    "i18n": "sync-i18n --files 'packages/**/src/l10n/locales/*.json' --primary en --languages fr pt_BR --space 4 --finalnewline --newkeysempty",
     "i18n-check": "yarn run i18n --check",
     "i18n-help": "sync-i18n --help"
   },
