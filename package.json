@@ -61,6 +61,7 @@
     "cross-env": "^5.2.0",
     "cross-spawn": "^6.0.5",
     "glob": "^7.1.4",
+    "i18next-json-sync": "^2.3.1",
     "jest": "^24.8.0",
     "lerna": "^3.16.4",
     "micromatch": "^4.0.2",
@@ -75,7 +76,7 @@
     "clean": "yarn run clean-libs",
     "clean-libs": "rimraf packages/*/lib",
     "clean-node-modules": "rimraf packages/*/node_modules && rimraf node_modules",
-    "clean-all": "yarn clean-libs && yarn run clean-node-modules",
+    "clean-all": "yarn run clean-libs && yarn run clean-node-modules",
     "prebuild": "yarn run clean-libs",
     "build": "cross-env VERBOSE=1 node ./scripts/build.js",
     "docs": "echo docs script not implemented",
@@ -85,6 +86,9 @@
     "test-cli": "cross-env JEST_TESTS=1 jest --config=jest.config-common.js --runInBand --bail=1 --no-cache \"tests/__tests__/cli\"",
     "test-electron": "cross-env JEST_TESTS=1 AXE_ELECTRON_RUNNER=true jest --config=jest.config-electron.js --runInBand --bail=1 --no-cache",
     "test-electron-cli": "cross-env JEST_TESTS=1 AXE_ELECTRON_RUNNER=true jest --config=jest.config-common.js --runInBand --bail=1 --no-cache \"tests/__tests__/cli\"",
-    "watch": "yarn build && node ./scripts/watch.js"
+    "watch": "yarn build && node ./scripts/watch.js",
+    "i18n": "sync-i18n --files 'packages/**/src/l10n/locales/*.json' --primary en --languages fr pt_BR --space 4 --finalnewline --newkeysempty",
+    "i18n-check": "yarn run i18n --check",
+    "i18n-help": "sync-i18n --help"
   }
 }

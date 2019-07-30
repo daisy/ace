@@ -1,49 +1,49 @@
 {
-    "checkepub": {
-        "metadataviolation": {
-            "testdesc": "Vérifie que la métadonnée '{{name}}' est présente",
-            "resdesc": "Ajouter la métadonnée '{{name}}' au Document de Package",
-            "ruledesc": "Toute publication doit déclarer la métadonnée '{{name}}'",
-            "kbtitle": "Métadonnées d'accessibilité Schema.org"
-        },
-        "metadatainvalid": {
-            "testdesc": "La valeur '{{value}}' est incorrecte pour la métadonnée '{{name}}'",
-            "resdesc": "Utiliser l’une des valeurs définie par schema.org",
-            "ruledesc": "La métadonnée '{{name}}' doit avoir une valeur parmi les valeurs prédéfinies",
-            "kbtitle": "Métadonnées d'accessibilité Schema.org"
-        },
-        "metadataprintpagenumbers": {
-            "testdesc": "La propriété d’accessibilité 'printPageNumbers' est déclarée mais aucune liste de pages n’a été trouvée",
-            "resdesc": "Ajouter une liste de pages au document de navigation",
-            "ruledesc": "Quand la propriété d’accessibilité 'printPageNumbers' est déclarée, le document de navigation doit avoir une liste de pages",
-            "kbtitle": "Schema.org Accessibility Metadata"
-        },
-        "titleviolation": {
-            "testdesc": "Vérifie que le EPUB a un titre",
-            "resdesc": "Ajouter la métadonnée 'dc:title' au Document de Package",
-            "ruledesc": "Une publication doit avoir un titre",
-            "kbtitle": "Titre de l’EPUB"
-        },
-        "pagesourceviolation": {
-            "testdesc": "Vérifie que la source des sauts de page est identifiée",
-            "resdesc": "Ajouter la métadonnée 'dc:source' au Document de Package",
-            "ruledesc": "Une publication avec des sauts de page doit déclarer la métadonnée 'dc:source'",
-            "kbtitle": "Navigation par page"
-        }
-    },
     "axecheck": {
         "matching-aria-role": {
-            "pass": "L’élément a un rôle ARIA correspondant à son epub:type",
-            "fail": "L’élément n’a pas de rôle ARIA correspondant à son epub:type"
+            "fail": "L’élément n’a pas de rôle ARIA correspondant à son epub:type",
+            "pass": "L’élément a un rôle ARIA correspondant à son epub:type"
         }
     },
     "axerule": {
+        "epub-type-has-matching-role": {
+            "desc": "Vérifie qu’un élément a un rôle ARIA correspondant à son epub:type",
+            "help": "Un rôle ARIA devrait être spécifié en plus de l’epub:type"
+        },
         "pagebreak-label": {
             "desc": "Vérifie que les sauts de page ont un label accessible"
+        }
+    },
+    "checkepub": {
+        "metadatainvalid": {
+            "kbtitle": "Métadonnées d'accessibilité Schema.org",
+            "resdesc": "Utiliser l’une des valeurs définie par schema.org",
+            "ruledesc": "La métadonnée '{{name}}' doit avoir une valeur parmi les valeurs prédéfinies",
+            "testdesc": "La valeur '{{value}}' est incorrecte pour la métadonnée '{{name}}'"
         },
-        "epub-type-has-matching-role": {
-            "help": "Un rôle ARIA devrait être spécifié en plus de l’epub:type",
-            "desc": "Vérifie qu’un élément a un rôle ARIA correspondant à son epub:type"
+        "metadataprintpagenumbers": {
+            "kbtitle": "Schema.org Accessibility Metadata",
+            "resdesc": "Ajouter une liste de pages au document de navigation",
+            "ruledesc": "Quand la propriété d’accessibilité 'printPageNumbers' est déclarée, le document de navigation doit avoir une liste de pages",
+            "testdesc": "La propriété d’accessibilité 'printPageNumbers' est déclarée mais aucune liste de pages n’a été trouvée"
+        },
+        "metadataviolation": {
+            "kbtitle": "Métadonnées d'accessibilité Schema.org",
+            "resdesc": "Ajouter la métadonnée '{{name}}' au Document de Package",
+            "ruledesc": "Toute publication doit déclarer la métadonnée '{{name}}'",
+            "testdesc": "Vérifie que la métadonnée '{{name}}' est présente"
+        },
+        "pagesourceviolation": {
+            "kbtitle": "Navigation par page",
+            "resdesc": "Ajouter la métadonnée 'dc:source' au Document de Package",
+            "ruledesc": "Une publication avec des sauts de page doit déclarer la métadonnée 'dc:source'",
+            "testdesc": "Vérifie que la source des sauts de page est identifiée"
+        },
+        "titleviolation": {
+            "kbtitle": "Titre de l’EPUB",
+            "resdesc": "Ajouter la métadonnée 'dc:title' au Document de Package",
+            "ruledesc": "Une publication doit avoir un titre",
+            "testdesc": "Vérifie que le EPUB a un titre"
         }
     }
 }
