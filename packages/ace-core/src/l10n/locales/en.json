@@ -1,49 +1,49 @@
 {
-    "checkepub": {
-        "metadataviolation": {
-            "testdesc": "Ensures a '{{name}}' metadata is present",
-            "resdesc": "Add a '{{name}}' metadata property to the Package Document",
-            "ruledesc": "Publications must declare the '{{name}}' metadata",
-            "kbtitle": "Schema.org Accessibility Metadata"
-        },
-        "metadatainvalid": {
-            "testdesc": "Value '{{value}}' is invalid for '{{name}}' metadata",
-            "resdesc": "Use one of the metadata values defined by schema.org",
-            "ruledesc": "'{{name}}' metadata must be set to one of the expected values",
-            "kbtitle": "Schema.org Accessibility Metadata"
-        },
-        "metadataprintpagenumbers": {
-            "testdesc": "Accessibility feature 'printPageNumbers' is declared but page list is missing",
-            "resdesc": "Add a page list to the Navigation Document",
-            "ruledesc": "When the accessibility feature 'printPageNumbers' is declared, the Navigation Document should include a page list",
-            "kbtitle": "Schema.org Accessibility Metadata"
-        },
-        "titleviolation": {
-            "testdesc": "Ensures the EPUB has a title",
-            "resdesc": "Add a 'dc:title' metadata property to the Package Document",
-            "ruledesc": "Publications must have a title",
-            "kbtitle": "EPUB Title"
-        },
-        "pagesourceviolation": {
-            "testdesc": "Ensures the source of page breaks is identified",
-            "resdesc": "Add a 'dc:source' metadata property to the Package Document",
-            "ruledesc": "Publications with page breaks must declare the 'dc:source' metadata",
-            "kbtitle": "Page Navigation"
-        }
-    },
     "axecheck": {
         "matching-aria-role": {
-            "pass": "Element has an ARIA role matching its epub:type",
-            "fail": "Element has no ARIA role matching its epub:type"
+            "fail": "Element has no ARIA role matching its epub:type",
+            "pass": "Element has an ARIA role matching its epub:type"
         }
     },
     "axerule": {
+        "epub-type-has-matching-role": {
+            "desc": "Ensure the element has an ARIA role matching its epub:type",
+            "help": "ARIA role should be used in addition to epub:type"
+        },
         "pagebreak-label": {
             "desc": "Ensure page markers have an accessible label"
+        }
+    },
+    "checkepub": {
+        "metadatainvalid": {
+            "kbtitle": "Schema.org Accessibility Metadata",
+            "resdesc": "Use one of the metadata values defined by schema.org",
+            "ruledesc": "'{{name}}' metadata must be set to one of the expected values",
+            "testdesc": "Value '{{value}}' is invalid for '{{name}}' metadata"
         },
-        "epub-type-has-matching-role": {
-            "help": "ARIA role should be used in addition to epub:type",
-            "desc": "Ensure the element has an ARIA role matching its epub:type"
+        "metadataprintpagenumbers": {
+            "kbtitle": "Schema.org Accessibility Metadata",
+            "resdesc": "Add a page list to the Navigation Document",
+            "ruledesc": "When the accessibility feature 'printPageNumbers' is declared, the Navigation Document should include a page list",
+            "testdesc": "Accessibility feature 'printPageNumbers' is declared but page list is missing"
+        },
+        "metadataviolation": {
+            "kbtitle": "Schema.org Accessibility Metadata",
+            "resdesc": "Add a '{{name}}' metadata property to the Package Document",
+            "ruledesc": "Publications must declare the '{{name}}' metadata",
+            "testdesc": "Ensures a '{{name}}' metadata is present"
+        },
+        "pagesourceviolation": {
+            "kbtitle": "Page Navigation",
+            "resdesc": "Add a 'dc:source' metadata property to the Package Document",
+            "ruledesc": "Publications with page breaks must declare the 'dc:source' metadata",
+            "testdesc": "Ensures the source of page breaks is identified"
+        },
+        "titleviolation": {
+            "kbtitle": "EPUB Title",
+            "resdesc": "Add a 'dc:title' metadata property to the Package Document",
+            "ruledesc": "Publications must have a title",
+            "testdesc": "Ensures the EPUB has a title"
         }
     }
 }
