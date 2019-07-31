@@ -46,3 +46,6 @@ Some tools based on Ace are also well worth checking out:
 - [Ace plugin for Sigil](https://www.mobileread.com/forums/showthread.php?t=294678). It allows to run Ace checks directly from the Sigil EPUB editor. Check this [screencast](https://screencast-o-matic.com/watch/cF1hQNb9LX) for a quick demo.
 - [Ace plugin for Calibre](https://www.mobileread.com/forums/showthread.php?t=313848), developed by @thiagoeec. It allows to run Ace checks directly from Calibre, the ebook manager.
 
+## Language localizations
+
+Please visit [this wiki page](https://github.com/daisy/ace/wiki/Localization) to learn about translations.
