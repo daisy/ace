@@ -70,3 +70,7 @@ Some tools based on Ace are also well worth checking out:
 
 * `open node_modules/@daisy`
 * `open packages/*/node_modules`
+
+## Language localizations
+
+Please visit [this wiki page](https://github.com/daisy/ace/wiki/Localization) to learn about translations.
