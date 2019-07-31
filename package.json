@@ -87,7 +87,7 @@
     "test-electron": "cross-env JEST_TESTS=1 AXE_ELECTRON_RUNNER=true jest --config=jest.config-electron.js --runInBand --bail=1 --no-cache",
     "test-electron-cli": "cross-env JEST_TESTS=1 AXE_ELECTRON_RUNNER=true jest --config=jest.config-common.js --runInBand --bail=1 --no-cache \"tests/__tests__/cli\"",
     "watch": "yarn build && node ./scripts/watch.js",
-    "i18n": "sync-i18n --files 'packages/**/src/l10n/locales/*.json' --primary en --languages fr pt_BR --space 4 --finalnewline --newkeysempty",
+    "i18n": "sync-i18n --files 'packages/**/src/l10n/locales/*.json' --primary en --languages fr pt_BR es --space 4 --finalnewline --newkeysempty",
     "i18n-check": "yarn run i18n --check",
     "i18n-help": "sync-i18n --help"
   }
