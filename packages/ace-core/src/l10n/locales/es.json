@@ -1,0 +1,49 @@
+{
+    "axecheck": {
+        "matching-aria-role": {
+            "fail": "El elemento no tiene un rol ARIA que corresponda a su epub:type",
+            "pass": "El elemento tiene un rol ARIA que corresponde a su epub:type"
+        }
+    },
+    "axerule": {
+        "epub-type-has-matching-role": {
+            "desc": "Asegurarse de que el elemento tiene un rol ARIA que corresponda a su epub:type",
+            "help": "Debería usarse ARIA role, además de epub:type"
+        },
+        "pagebreak-label": {
+            "desc": "Garantizar que los marcadores de página tienen una etiqueta accesible"
+        }
+    },
+    "checkepub": {
+        "metadatainvalid": {
+            "kbtitle": "Metadatos de Accesibilidad Schema.org",
+            "resdesc": "Utilizar uno de los valores de metadatos definidos por schema.org",
+            "ruledesc": "Debe establecerse uno de los valores esperados para '{{name}}' en los metadatos",
+            "testdesc": "El valor '{{value}}' no es válido para '{{name}}' en los metadatos"
+        },
+        "metadataprintpagenumbers": {
+            "kbtitle": "Metadatos de Accesibilidad Schema.org",
+            "resdesc": "Añadir una lista de páginas al documento de navegación",
+            "ruledesc": "Cuando se haya declarado la función de accesibilidad 'printPageNumbers', el documento de navegación debería incluir una lista de páginas",
+            "testdesc": "La función de accesibilidad 'printPageNumbers' se ha declarado, pero la lista de páginas está ausente"
+        },
+        "metadataviolation": {
+            "kbtitle": "Metadatos de Accesibilidad Schema.org",
+            "resdesc": "Añadir una propiedad de metadatos '{{name}}' al documento package",
+            "ruledesc": "Las publicaciones deben declarar '{{name}}' en los metadatos",
+            "testdesc": "Garantiza la presencia de '{{name}}' en los metadatos"
+        },
+        "pagesourceviolation": {
+            "kbtitle": "Navegación por páginas",
+            "resdesc": "Añadir una propiedad de metadatos 'dc:source' al documento package",
+            "ruledesc": "Las publicaciones con saltos de página deben declarar 'dc:source' en los metadatos",
+            "testdesc": "Garantiza que la fuente de los saltos de página está identificada"
+        },
+        "titleviolation": {
+            "kbtitle": "Título de EPUB",
+            "resdesc": "Añadir una propiedad de metadatos 'dc:title' al documento package",
+            "ruledesc": "Las publicaciones deben tener un título",
+            "testdesc": "Garantiza que el epub tiene título"
+        }
+    }
+}
