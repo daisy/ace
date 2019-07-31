@@ -18,6 +18,7 @@
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.3.0",
     "glob": "^7.1.2",
+    "i18next-json-sync": "^2.3.1",
     "jest": "21.3.0-beta.10",
     "lerna": "2.8",
     "micromatch": "^3.1.4",
@@ -34,14 +35,17 @@
     "clean": "yarn run clean-libs",
     "clean-libs": "rimraf packages/*/lib",
     "clean-node-modules": "rimraf packages/*/node_modules && rimraf node_modules",
-    "clean-all": "yarn clean-libs && yarn run clean-node-modules",
+    "clean-all": "yarn run clean-libs && yarn run clean-node-modules",
     "prebuild": "yarn run clean-libs",
     "build": "cross-env VERBOSE=1 node ./scripts/build.js",
     "docs": "echo docs script not implemented",
     "lint": "echo lint script not implemented",
-    "postinstall": "yarn build",
+    "postinstall": "yarn run build",
     "test": "jest",
-    "watch": "yarn build && node ./scripts/watch.js"
+    "watch": "yarn run build && node ./scripts/watch.js",
+    "i18n": "sync-i18n --files 'packages/**/src/l10n/locales/*.json' --primary en --languages fr pt_BR --space 4 --finalnewline --newkeysempty",
+    "i18n-check": "yarn run i18n --check",
+    "i18n-help": "sync-i18n --help"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/tests/jest-setup.js",
