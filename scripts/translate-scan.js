@@ -75,7 +75,7 @@ glob(`${srcFolderPath}/**/*{.js,.handlebars}`, {}, function (err, files) {
     for (const file of files) {
         const fileTxt = fs.readFileSync(path.join(process.cwd(), file), { encoding: "utf8" });
 
-        // (localize\s*\(|\{\{#localize)\s*['"]([^'"]+)['"]
+        // ("__aceLocalize__|localize\s*\(\s*['"]|\{\{#localize\s*['"])([^'"]+)['"]
         const regex = new RegExp(`("__aceLocalize__|localize\\s*\\(\\s*['"]|\\{\\{#localize\\s*['"])([^'"]+)['"]`, "g");
 
         let regexMatch = regex.exec(fileTxt);
