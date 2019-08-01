@@ -66,7 +66,7 @@ function loadUrl(browserWindow) {
             err: "Timeout :(",
             url: browserWindow.ace__currentUrlOriginal
         });
-    }, 10000);
+    }, 80000);
 }
 
 function poolCheck() {
