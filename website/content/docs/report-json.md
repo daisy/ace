@@ -183,7 +183,7 @@ An example of an assertion for an individual test is shown below. Note that it i
   },
   "earl:result": {
     "earl:outcome": "fail",
-    "dct:description": "Fix all of the following:\n  Role must be one of the valid ARIA roles",
+    "dct:description": "Role must be one of the valid ARIA roles",
     "earl:pointer": {
       "cfi": [
         "/4/16/4/2"
