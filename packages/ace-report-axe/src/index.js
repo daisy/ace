@@ -120,6 +120,7 @@ function  axe2ace(spineItem, axeResults, lang) {
         description = description.replace(/[\n]+/g, "\n");
         description = description.replace(/\n/g, " --- ");
         description = description.replace(/\s+/g, " ");
+        description = description.replace(/ --- /g, "\n");
 
         let target = node.target;
         let targetCFI = node.targetCFI;
