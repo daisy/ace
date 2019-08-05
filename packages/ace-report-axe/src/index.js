@@ -105,18 +105,21 @@ function  axe2ace(spineItem, axeResults, lang) {
 
         // https://github.com/dequelabs/axe-core/blob/v3.2.2/lib/core/reporters/helpers/failure-summary.js
         // // https://github.com/dequelabs/axe-core/blob/v3.2.2/lib/misc/none-failure-summary.json#L4
-        // description = description.replace("Fix all of the following:", "");
+        // Fix all of the following:
         // // https://github.com/dequelabs/axe-core/blob/v3.2.2/locales/fr.json#L664
-        // description = description.replace("Corriger tous les éléments suivants :", "");
+        // Corriger tous les éléments suivants :
         // // https://github.com/dequelabs/axe-core/blob/v3.2.2/lib/misc/any-failure-summary.json#L4
-        // description = description.replace("Fix any of the following:", "");
+        // Fix any of the following:
         // // https://github.com/dequelabs/axe-core/blob/v3.2.2/locales/fr.json#L656
-        // description = description.replace("Corriger l’un des éléments suivants :", "");
+        // Corriger l’un des éléments suivants :
 
-        // regexp for the above
-        description = description.replace(/[^:]+:/, "");
-
+        // TODO: this is a hacky way to fix the Axe bug that forces the wrong language (en) into `failureSummary`.
+        description = description.replace(/Fix any of the following:/g, "");
+        description = description.replace(/Fix all of the following:/g, "");
         description = description.trim();
+        description = description.replace(/[\n]+/g, "\n");
+        description = description.replace(/\n/g, " --- ");
+        description = description.replace(/\s+/g, " ");
 
         let target = node.target;
         let targetCFI = node.targetCFI;
