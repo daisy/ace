@@ -101,7 +101,10 @@ describe('Running the CLI', () => {
         cwd: path.resolve(__dirname, '../data'),
       });
       const log = stripAnsi(stdout);
-      expect(/^warn:\s+Copying document with extension/m.test(log)).toBe(true);
+
+      // The Electron-based Axe runner handles .xml files just fine
+      const condition = process.env.AXE_ELECTRON_RUNNER ? true : /^warn:\s+Copying document with extension/m.test(log);
+      expect(condition).toBe(true);
     });
 
     test('when the EPUB contains SVG Content Documents', () => {
