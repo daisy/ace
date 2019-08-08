@@ -46,31 +46,6 @@ Some tools based on Ace are also well worth checking out:
 - [Ace plugin for Sigil](https://www.mobileread.com/forums/showthread.php?t=294678). It allows to run Ace checks directly from the Sigil EPUB editor. Check this [screencast](https://screencast-o-matic.com/watch/cF1hQNb9LX) for a quick demo.
 - [Ace plugin for Calibre](https://www.mobileread.com/forums/showthread.php?t=313848), developed by @thiagoeec. It allows to run Ace checks directly from Calibre, the ebook manager.
 
-## Clean slate build for Electron
-
-* `rm -rf packages/*/lib`
-* (or `yarn run clean-libs`)
-* `rm -rf node_modules`
-* `rm -rf packages/*/node_modules`
-* (or `yarn run clean-node-modules`)
-* `yarn cache clean`
-* `git branch`
-* `git status`
-* `git pull`
-* `rm yarn.lock`
-* `yarn install` (no existing `packages/*/lib`)
-
-* `rm -rf node_modules/@daisy`
-* `rm -rf packages/*/node_modules/@daisy`
-* `VERBOSE=1 yarn build`
-* `yarn upgrade` (now with existing `packages/*/lib`)
-* `rm -rf packages/*/node_modules/@daisy`
-
-* `yarn test`
-
-* `open node_modules/@daisy`
-* `open packages/*/node_modules`
-
 ## Language localizations
 
 Please visit [this wiki page](https://github.com/daisy/ace/wiki/Localization) to learn about translations.
