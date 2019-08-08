@@ -3,8 +3,6 @@
 const logger = require('@daisy/ace-logger');
 logger.initLogger({ verbose: true, silent: false });
 
-const isDev = process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
-
 const LOG_DEBUG = false;
 const ACE_LOG_PREFIX = "[ACE-AXE]";
 

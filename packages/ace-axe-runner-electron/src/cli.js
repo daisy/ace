@@ -21,8 +21,6 @@ prepareLaunch(eventEmmitter, CONCURRENT_INSTANCES);
 
 const cli = require('@daisy/ace-cli-shared');
 
-const isDev = process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
-
 const LOG_DEBUG = false;
 const ACE_LOG_PREFIX = "[ACE-AXE]";
 
