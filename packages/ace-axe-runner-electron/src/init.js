@@ -66,23 +66,48 @@ function loadUrl(browserWindow) {
     const options = {}; // { extraHeaders: 'pragma: no-cache\n' };
     browserWindow.loadURL(`${rootUrl}${browserWindow.ace__currentUrl}?${HTTP_QUERY_PARAM}=${iHttpReq++}`, options);
 
-    const MILLISECONDS = 20000;
-    browserWindow.ace__timeout = setTimeout(() => {
+    const MILLISECONDS_TIMEOUT_INITIAL = 5000; // 5s max to load the window's web contents
+    const MILLISECONDS_TIMEOUT_EXTENSION = 35000; // 40s max to load + execute Axe checkers
+    const timeoutFunc = () => {
         if (browserWindow.ace__replySent) {
+            browserWindow.ace__timeout = undefined;
+            browserWindow.ace__timeoutExtended = false;
             return;
         }
-        browserWindow.ace__replySent = true;
-        browserWindow.ace__timeout = undefined;
 
         const timeElapsed1 = process.hrtime(browserWindow.ace__TIME_loadURL);
         const timeElapsed2 = browserWindow.ace__TIME_executeJavaScript ? process.hrtime(browserWindow.ace__TIME_executeJavaScript) : [0, 0];
 
-        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner ${MILLISECONDS}ms timeout! (${timeElapsed1[0]} seconds + ${timeElapsed1[1]} nanoseconds) (${timeElapsed2[0]} seconds + ${timeElapsed2[1]} nanoseconds) ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
-        browserWindow.ace__eventEmmitterSender.send("AXE_RUNNER_RUN_", {
-            err: `Timeout :( ${MILLISECONDS}ms`,
-            url: browserWindow.ace__currentUrlOriginal
-        });
-    }, MILLISECONDS);
+        if (browserWindow.ace__timeoutExtended) {
+            browserWindow.ace__replySent = true;
+            browserWindow.ace__timeout = undefined;
+
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner ${MILLISECONDS_TIMEOUT_INITIAL + MILLISECONDS_TIMEOUT_EXTENSION}ms timeout [[FAIL]] (${timeElapsed1[0]} seconds + ${timeElapsed1[1]} nanoseconds) (${timeElapsed2[0]} seconds + ${timeElapsed2[1]} nanoseconds) ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
+            browserWindow.ace__eventEmmitterSender.send("AXE_RUNNER_RUN_", {
+                err: `Timeout :( ${MILLISECONDS_TIMEOUT_INITIAL + MILLISECONDS_TIMEOUT_EXTENSION}ms (${timeElapsed1[0]} seconds + ${timeElapsed1[1]} nanoseconds) (${timeElapsed2[0]} seconds + ${timeElapsed2[1]} nanoseconds)`,
+                url: browserWindow.ace__currentUrlOriginal
+            });
+        } else {
+
+            if (!browserWindow.ace__TIME_executeJavaScript) {
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner ${MILLISECONDS_TIMEOUT_INITIAL}ms timeout [[RELOAD]] (${timeElapsed1[0]} seconds + ${timeElapsed1[1]} nanoseconds) (${timeElapsed2[0]} seconds + ${timeElapsed2[1]} nanoseconds) ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
+                
+                browserWindow.ace__TIME_loadURL = process.hrtime();
+                browserWindow.ace__TIME_executeJavaScript = 0;
+                browserWindow.webContents.reload();
+                browserWindow.ace__timeoutExtended = false;
+                browserWindow.ace__timeout = setTimeout(timeoutFunc, MILLISECONDS_TIMEOUT_INITIAL);
+                return;
+            }
+    
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner ${MILLISECONDS_TIMEOUT_INITIAL}ms timeout [[EXTEND]] (${timeElapsed1[0]} seconds + ${timeElapsed1[1]} nanoseconds) (${timeElapsed2[0]} seconds + ${timeElapsed2[1]} nanoseconds) ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
+            
+            browserWindow.ace__timeoutExtended = true;
+            browserWindow.ace__timeout = setTimeout(timeoutFunc, MILLISECONDS_TIMEOUT_EXTENSION);
+        }
+    };
+    browserWindow.ace__timeoutExtended = false;
+    browserWindow.ace__timeout = setTimeout(timeoutFunc, MILLISECONDS_TIMEOUT_INITIAL);
 }
 
 function poolCheck() {
@@ -542,7 +567,11 @@ function startAxeServer(basedir, scripts, scriptContents) {
         
         if (isDev) { // handle WebInspector JS maps etc.
             expressApp.use("/", (req, res, next) => {
-                const filePath = path.join(basedir, req.url);
+                // const url = new URL(`https://fake.org${req.url}`);
+                // const pathname = url.pathname;
+                const pathname = url.parse(req.url).pathname;
+
+                const filePath = path.join(basedir, pathname);
                 if (filePathsExpressStaticNotExist[filePath]) {
                     res.status(404).send(filePathsExpressStaticNotExist[filePath]);
                     return;
