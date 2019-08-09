@@ -49,3 +49,7 @@ Some tools based on Ace are also well worth checking out:
 ## Language localizations
 
 Please visit [this wiki page](https://github.com/daisy/ace/wiki/Localization) to learn about translations.
+
+## Developer Workflow
+
+Please visit [this wiki page](https://github.com/daisy/ace/wiki/Developer-Workflow) for detailed developer-oriented information.
