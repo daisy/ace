@@ -23,7 +23,7 @@ module.exports = function ace(epubPath, options, axeRunner) {
   }
 
   if (options.initLogger) {
-    logger.initLogger({ verbose: options.verbose, silent: options.silent });
+    logger.initLogger({ verbose: options.verbose, silent: options.silent, fileName: options.fileName });
   }
 
   return new Promise((resolve, reject) => {
