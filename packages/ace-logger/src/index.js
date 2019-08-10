@@ -46,8 +46,9 @@ module.exports.initLogger = function initLogger(options = {}) {
     fs.ensureDirSync(paths.log);
   }
 
+  const logConfigFileName = options.fileName || logConfig.fileName;
   // OS-dependant path to log file
-  const logfile = path.join(paths.log, logConfig.fileName);
+  const logfile = path.join(paths.log, logConfigFileName);
 
   // clear old log file
   if (!disableWinstonFileTransport && fs.existsSync(logfile)) {
