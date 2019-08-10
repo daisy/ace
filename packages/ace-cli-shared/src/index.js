@@ -75,7 +75,7 @@ const meowOptions = {
 };
 const cli = meow(meowHelpMessage, meowOptions);
 
-async function run(axeRunner, exit) {
+async function run(axeRunner, exit, logFileName) {
 
   if (cli.flags.help) {
     cli.showHelp(0);
@@ -95,7 +95,7 @@ async function run(axeRunner, exit) {
     exit(...arguments);
   }
 
-  logger.initLogger({ verbose: cli.flags.verbose, silent: cli.flags.silent });
+  logger.initLogger({ verbose: cli.flags.verbose, silent: cli.flags.silent, fileName: logFileName });
 
   // Check that an EPUB path is specified
   if (cli.input.length === 0) {

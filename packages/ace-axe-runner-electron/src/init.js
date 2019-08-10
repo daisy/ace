@@ -19,9 +19,6 @@ const https = require('https');
 
 const generateSelfSignedData = require('./selfsigned').generateSelfSignedData;
 
-const logger = require('@daisy/ace-logger');
-logger.initLogger({ verbose: true, silent: false });
-
 const isDev = process && process.env && (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true');
 const showWindow = false;
 
