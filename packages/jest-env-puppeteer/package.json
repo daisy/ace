@@ -18,7 +18,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "jest-environment-node": "^24.8.0",
+    "jest-environment-node": "^24.9.0",
     "puppeteer": "^1.19.0"
   },
   "publishConfig": {
