@@ -29,6 +29,7 @@ function  axe2ace(spineItem, axeResults, lang) {
         'aria-roles': {url: 'docs/script/aria.html', title: localize("kb.aria-roles")},
         'aria-valid-attr-value': {url: 'docs/script/aria.html', title: localize("kb.aria-valid-attr-value")},
         'aria-valid-attr': {url: 'docs/script/aria.html', title: localize("kb.aria-valid-attr")},
+        'landmark-is-unique': {url: 'docs/script/aria.html', title: localize("kb.aria-roles")},
         'button-name': {url: 'docs/html/forms.html', title: localize("kb.button-name")},
         'checkboxgroup': {url: 'docs/html/forms.html', title: localize("kb.checkboxgroup")},
         'color-contrast': {url: 'docs/css/color.html', title: localize("kb.color-contrast")},
