@@ -21,11 +21,11 @@
     "@daisy/ace-cli-shared": "^1.0.0",
     "express": "^4.17.1",
     "portfinder": "^1.0.24",
-    "selfsigned": "^1.10.6",
+    "selfsigned": "^1.10.7",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "electron": "^6.0.9",
+    "electron": "^6.0.12",
     "json": "^9.0.6",
     "json-diff": "^0.5.4"
   },
