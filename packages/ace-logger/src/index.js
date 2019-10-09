@@ -63,7 +63,7 @@ module.exports.initLogger = function initLogger(options = {}) {
         // const msPer_day = msPer_hour * 24;
         // const msPer_year = msPer_day * 365;
 
-        const msMax = (options.maxMinutes || defaults.maxMinutes) * msPer_minute; // log files older than x minutes are deleted
+        const msMax = (options.maxMinutes || defaults.logging.maxMinutes) * msPer_minute; // log files older than x minutes are deleted
 
         const dirContents = fs.readdirSync(paths.log);
         dirContents.forEach((dirEntry) => {
