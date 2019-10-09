@@ -4,12 +4,16 @@ const { config, paths } = require('@daisy/ace-config');
 const fs = require('fs-extra');
 const path = require('path');
 const winston = require('winston');
+const uuid = require('uuid');
+
 const defaults = require('./defaults');
 
 const logConfig  = config.get('logging', defaults.logging);
 
+const disableWinstonFileTransport = false; // (typeof process.env.JEST_TESTS !== "undefined") && process.platform === "win32";
+
 const closeTransportAndWaitForFinish = async (transport) => {
-  if (!transport.close) {
+  if (!transport.close || disableWinstonFileTransport) {
     return Promise.resolve();
   }
   return new Promise((resolve, reject) => {
@@ -39,20 +43,58 @@ const closeTransportAndWaitForFinish = async (transport) => {
 
 module.exports.initLogger = function initLogger(options = {}) {
 
-  const disableWinstonFileTransport = (typeof process.env.JEST_TESTS !== "undefined") && process.platform === "win32";
+  const dateNow = new Date();
+  const msfromPosixEpochUntilNow = dateNow.getTime();
+  const dateNowFormatted = dateNow.toISOString().replace(/:/g, "-").replace(/\./g, "-");
 
-  // Check logging directoy exists
-  if (!disableWinstonFileTransport && !fs.existsSync(paths.log)) {
-    fs.ensureDirSync(paths.log);
+  if (!disableWinstonFileTransport) {
+
+    if (!fs.existsSync(paths.log)) {
+      try {
+        fs.ensureDirSync(paths.log);
+      } catch (err) {
+        // ignore (other process won the dir creation race?)
+      }
+    } else {
+      try {
+        const msPer_second = 1000 * 1;
+        const msPer_minute = msPer_second * 60;
+        // const msPer_hour = msPer_minute * 60;
+        // const msPer_day = msPer_hour * 24;
+        // const msPer_year = msPer_day * 365;
+
+        const msMax = (options.maxMinutes || defaults.maxMinutes) * msPer_minute; // log files older than x minutes are deleted
+
+        const dirContents = fs.readdirSync(paths.log);
+        dirContents.forEach((dirEntry) => {
+          const dirEntryPath = path.join(paths.log, dirEntry);
+          const stats = fs.statSync(dirEntryPath);
+          if (stats.isFile()) {
+            const msDiff = msfromPosixEpochUntilNow - stats.mtimeMs; // stats.mtime.getTime()
+            const doRemove = msDiff > msMax;
+            if (doRemove) {
+              // fs.removeSync(dirEntryPath);
+              fs.unlink(dirEntryPath, (_err) => {
+                // ignore (file busy / already open with read or write access?)
+              });
+            }
+          }
+        });
+      } catch (err) {
+        // ignore
+      }
+    }
   }
 
-  const logConfigFileName = options.fileName || logConfig.fileName;
-  // OS-dependant path to log file
-  const logfile = path.join(paths.log, logConfigFileName);
-
-  // clear old log file
-  if (!disableWinstonFileTransport && fs.existsSync(logfile)) {
-    fs.removeSync(logfile);
+  let logConfigFileName = options.fileName || logConfig.fileName;
+  let logfile = path.join(paths.log, logConfigFileName);
+  if (!disableWinstonFileTransport) {
+    do {
+      let uniqueID = uuid.v4();
+      const ext = path.extname(logConfigFileName);
+      const baseName = path.basename(logConfigFileName, ext && ext.length ? ext : undefined);
+      logfile = path.join(paths.log, `${baseName}_${dateNowFormatted}_${uniqueID}${ext}`);
+    } while (fs.existsSync(logfile));
   }
 
   const fileTransport = new winston.transports.File({ name: 'file', filename: logfile, silent: disableWinstonFileTransport });
