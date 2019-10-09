@@ -19,7 +19,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@daisy/puppeteer-utils": "file:../puppeteer-utils",
-    "puppeteer": "^1.19.0"
+    "puppeteer": "^1.20.0"
   },
   "publishConfig": {
     "access": "public"
