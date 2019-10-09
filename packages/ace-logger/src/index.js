@@ -13,9 +13,12 @@ const logConfig  = config.get('logging', defaults.logging);
 const disableWinstonFileTransport = false; // (typeof process.env.JEST_TESTS !== "undefined") && process.platform === "win32";
 
 const closeTransportAndWaitForFinish = async (transport) => {
-  if (!transport.close || disableWinstonFileTransport) {
+  if (!transport.close || // e.g. transport.name === 'console'
+    disableWinstonFileTransport) {
     return Promise.resolve();
   }
+  // e.g. transport.name === 'file'
+  
   return new Promise((resolve, reject) => {
     transport._doneFinish = false;
     function done() {
@@ -31,13 +34,15 @@ const closeTransportAndWaitForFinish = async (transport) => {
     const finished = () => {
       done();
     };
-    if (transport._stream) {
-      transport._stream.once('finish', finished);
-      transport._stream.end();
-    } else {
-      transport.once('finish', finished);
-      transport.close();
-    }
+
+    // if (transport._stream) {
+    //   transport._stream.once('finish', finished);
+    //   // transport._stream.end();
+    //   transport.close();
+    // }
+
+    transport.once('finish', finished);
+    transport.close();
   });
 }
 
