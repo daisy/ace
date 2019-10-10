@@ -12,39 +12,40 @@ const logConfig  = config.get('logging', defaults.logging);
 
 const disableWinstonFileTransport = false; // (typeof process.env.JEST_TESTS !== "undefined") && process.platform === "win32";
 
-const closeTransportAndWaitForFinish = async (transport) => {
-  if (!transport.close || // e.g. transport.name === 'console'
-    disableWinstonFileTransport) {
-    return Promise.resolve();
-  }
-  // e.g. transport.name === 'file'
+// const closeTransportAndWaitForFinish = async (transport) => {
+//   if (!transport.close || // e.g. transport.name === 'console'
+//     disableWinstonFileTransport) {
+//     return Promise.resolve();
+//   }
+//   // e.g. transport.name === 'file'
   
-  return new Promise((resolve, reject) => {
-    transport._doneFinish = false;
-    function done() {
-      if (transport._doneFinish) {
-        return;
-      }
-      transport._doneFinish = true;
-      resolve();
-    }
-    setTimeout(() => {
-      done();
-    }, 5000);
-    const finished = () => {
-      done();
-    };
+//   return new Promise((resolve, reject) => {
+//     transport._doneFinish = false;
+//     function done() {
+//       if (transport._doneFinish) {
+//         return;
+//       }
+//       transport._doneFinish = true;
+//       resolve();
+//     }
+//     setTimeout(() => {
+//       console.log("WINSTON TIMEOUT");
+//       done();
+//     }, 10000);
+//     const finished = () => {
+//       done();
+//     };
 
-    // if (transport._stream) {
-    //   transport._stream.once('finish', finished);
-    //   // transport._stream.end();
-    //   transport.close();
-    // }
+//     if (transport._stream) {
+//       transport._stream.once('finish', finished); // emitted too early!
+//       transport._stream.end();
+//     }
 
-    transport.once('finish', finished);
-    transport.close();
-  });
-}
+//     transport.once('finished', finished); // never emmitted!
+//     transport.once('finish', finished); // never emmitted!
+//     transport.close();
+//   });
+// }
 
 module.exports.initLogger = function initLogger(options = {}) {
 
@@ -129,16 +130,18 @@ module.exports.initLogger = function initLogger(options = {}) {
   // See https://github.com/winstonjs/winston/issues/228
   winston.logAndWaitFinish = async (level, msg) => {
     return new Promise(async (resolve, reject) => {
-      winston.log(level, msg);
+      winston.log(level, msg, () => {
+        resolve();
+      });
 
-      for (const transport of transports) {
-        try {
-          await closeTransportAndWaitForFinish(transport);
-        } catch (err) {
-          console.log(err);
-        }
-      }
-      resolve();
+      // for (const transport of transports) {
+      //   try {
+      //     await closeTransportAndWaitForFinish(transport);
+      //   } catch (err) {
+      //     console.log(err);
+      //   }
+      // }
+      // resolve();
     });
   };
 };
