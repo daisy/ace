@@ -88,7 +88,7 @@ function run() {
     return;
   }
 
-  logger.initLogger({verbose: cli.flags.verbose, silent: cli.flags.silent});
+  logger.initLogger({verbose: cli.flags.verbose, silent: cli.flags.silent, fileName: "ace-http.log"});
   server = express();
   server.use(zip());
   initRoutes();

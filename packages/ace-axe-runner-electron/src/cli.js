@@ -62,7 +62,7 @@ app.on('ready', async () => {
     // });
 
     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner run...`);
-    await cli.run(axeRunner, app.exit, "ace-cli-electron.log"); // const exitCode = app.quit();
+    await cli.run(axeRunner, app.exit, (typeof process.env.JEST_TESTS !== "undefined" ? "ace-tests-cli-electron.log" : "ace-cli-electron.log")); // const exitCode = app.quit();
 });
 
 app.on('activate', function () {

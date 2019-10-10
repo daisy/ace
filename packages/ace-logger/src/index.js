@@ -12,40 +12,43 @@ const logConfig  = config.get('logging', defaults.logging);
 
 const disableWinstonFileTransport = false; // (typeof process.env.JEST_TESTS !== "undefined") && process.platform === "win32";
 
-// const closeTransportAndWaitForFinish = async (transport) => {
-//   if (!transport.close || // e.g. transport.name === 'console'
-//     disableWinstonFileTransport) {
-//     return Promise.resolve();
-//   }
-//   // e.g. transport.name === 'file'
+// https://github.com/winstonjs/winston/blob/3.2.1/lib/winston/transports/file.js
+const closeTransportAndWaitForFinish = async (transport) => {
+  if (!transport.close || // e.g. transport.name === 'console'
+    disableWinstonFileTransport) {
+    return Promise.resolve();
+  }
+  // e.g. transport.name === 'file'
   
-//   return new Promise((resolve, reject) => {
-//     transport._doneFinish = false;
-//     function done() {
-//       if (transport._doneFinish) {
-//         return;
-//       }
-//       transport._doneFinish = true;
-//       resolve();
-//     }
-//     setTimeout(() => {
-//       console.log("WINSTON TIMEOUT");
-//       done();
-//     }, 10000);
-//     const finished = () => {
-//       done();
-//     };
+  return new Promise((resolve, reject) => {
+    transport._doneFinish = false;
+    function done(wasTimeout) {
+      if (transport._doneFinish) {
+        return;
+      }
+      transport._doneFinish = true;
+      if (!wasTimeout && transport._doneTimeoutID) {
+        clearTimeout(transport._doneTimeoutID);
+      }
+      resolve();
+    }
+    transport._doneTimeoutID = setTimeout(() => {
+      console.log("WINSTON TIMEOUT");
+      done(true);
+    }, 5000);
 
-//     if (transport._stream) {
-//       transport._stream.once('finish', finished); // emitted too early!
-//       transport._stream.end();
-//     }
-
-//     transport.once('finished', finished); // never emmitted!
-//     transport.once('finish', finished); // never emmitted!
-//     transport.close();
-//   });
-// }
+    if (transport._stream) {
+      // https://github.com/winstonjs/winston/blob/49ccdb6604ecce590eda2915b130970ee0f1b6a3/lib/winston/transports/file.js#L96
+      transport._stream.once('finish', done); // emitted too early!
+      setImmediate(() => {
+        transport._stream.end(); // https://github.com/nodejs/readable-stream/blob/4ba93f84cf8812ca2af793c7304a5c16de72088a/lib/_stream_writable.js#L547
+      });
+    } else {
+      transport.once('closed', done); // emitted too early! also 'flush', see https://github.com/winstonjs/winston/blob/49ccdb6604ecce590eda2915b130970ee0f1b6a3/lib/winston/transports/file.js#L457-L469
+      transport.close();
+    }
+  });
+}
 
 module.exports.initLogger = function initLogger(options = {}) {
 
@@ -103,6 +106,8 @@ module.exports.initLogger = function initLogger(options = {}) {
     } while (fs.existsSync(logfile));
   }
 
+  const defaultLogger = winston.clear();
+
   const fileTransport = new winston.transports.File({ name: 'file', filename: logfile, silent: disableWinstonFileTransport });
   const consoleTransport = new winston.transports.Console({ name: 'console', stderrLevels: ['error'], silent: false });
   const transports = [
@@ -112,7 +117,6 @@ module.exports.initLogger = function initLogger(options = {}) {
     transports.push(consoleTransport);
   }
 
-  // set up logger
   const level = (options.verbose) ? 'verbose' : logConfig.level;
   winston.configure({
     level,
@@ -123,25 +127,31 @@ module.exports.initLogger = function initLogger(options = {}) {
     )
   });
 
-  // winston.on('error', () => { });
-  // winston.emitErrs = false;
+  // defaultLogger.on('error', () => { });
+  // defaultLogger.emitErrs = false;
 
   // Properly wait that loggers write to file before exitting
   // See https://github.com/winstonjs/winston/issues/228
   winston.logAndWaitFinish = async (level, msg) => {
     return new Promise(async (resolve, reject) => {
-      winston.log(level, msg, () => {
-        resolve();
-      });
 
-      // for (const transport of transports) {
-      //   try {
-      //     await closeTransportAndWaitForFinish(transport);
-      //   } catch (err) {
-      //     console.log(err);
-      //   }
+      winston.log(level, msg
+      //   , () => {
+      //     resolve("LOG CALLBACK");
       // }
-      // resolve();
+      );
+      
+      // defaultLogger.once("logged", () => {});
+
+      for (const transport of transports) {
+        try {
+          await closeTransportAndWaitForFinish(transport);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      resolve();
     });
   };
 };
