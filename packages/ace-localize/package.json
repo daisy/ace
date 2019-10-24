@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-localize",
-  "version": "1.2.0-beta.2",
+  "version": "1.2.0-beta.3",
   "description": "Localization utilities for Ace",
   "author": {
     "name": "DAISY developers",
@@ -18,7 +18,7 @@
   "license": "MIT",
   "main": "lib/localize.js",
   "dependencies": {
-    "i18next": "^17.1.0",
+    "i18next": "^17.3.1",
     "winston": "^3.2.1"
   },
   "publishConfig": {
