@@ -160,7 +160,11 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         //     browserWindow.show();
         // }
 
-        browserWindow.webContents.setAudioMuted(true);
+        if (typeof browserWindow.webContents.audioMuted !== "undefined") {
+            browserWindow.webContents.audioMuted = true;
+        } else {
+            browserWindow.webContents.setAudioMuted(true);
+        }
 
         browserWindow.ace__poolIndex = browserWindows.length;
 
@@ -255,8 +259,18 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
             httpServer = undefined;
         }
 
+        let _timeOutID = setTimeout(() => {
+            _timeOutID = undefined;
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} xxxx axeRunner timeout.`);
+            closed();
+        }, 3000);
+
         let _closed = false;
         function closed() {
+            if (_timeOutID) {
+                clearTimeout(_timeOutID);
+                _timeOutID = undefined;
+            }
             if (_closed) {
                 return;
             }
@@ -274,38 +288,43 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                 closed();
             }
         }
-        setTimeout(() => {
-            closed();
-        }, 3000);
 
         const sess = session.fromPartition(SESSION_PARTITION, { cache: true }); // || session.defaultSession;
         if (sess) {
-            sess.clearCache(() => {
+            setTimeout(async () => {
+                try {
+                    sess.clearCache();
+                } catch (err) {
+                    if (LOG_DEBUG) console.log(err);
+                }
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} session cache cleared`);
                 done();
-            });
 
-            sess.clearStorageData({
-                origin: "*",
-                quotas: [
-                    "temporary",
-                    "persistent",
-                    "syncable",
-                ],
-                storages: [
-                    "appcache",
-                    "cookies",
-                    "filesystem",
-                    "indexdb",
-                    "localstorage",
-                    "shadercache",
-                    "websql",
-                    "serviceworkers",
-                ],
-            }, () => {
+                try {
+                    sess.clearStorageData({
+                        origin: "*",
+                        quotas: [
+                            "temporary",
+                            "persistent",
+                            "syncable",
+                        ],
+                        storages: [
+                            "appcache",
+                            "cookies",
+                            "filesystem",
+                            "indexdb",
+                            "localstorage",
+                            "shadercache",
+                            "websql",
+                            "serviceworkers",
+                        ],
+                    });
+                } catch (err) {
+                    if (LOG_DEBUG) console.log(err);
+                }
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} session storage cleared`);
                 done();
-            });
+            }, 0);
         }
     });
 
