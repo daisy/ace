@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-core",
-  "version": "1.2.0-beta.3",
+  "version": "1.2.0-beta.4",
   "description": "Core library for Ace",
   "author": {
     "name": "DAISY developers",
@@ -18,12 +18,12 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-localize": "^1.2.0-beta.3",
-    "@daisy/ace-logger": "^1.2.0-beta.3",
-    "@daisy/ace-meta": "^1.2.0-beta.3",
-    "@daisy/ace-report": "^1.2.0-beta.3",
-    "@daisy/ace-report-axe": "^1.2.0-beta.3",
-    "@daisy/epub-utils": "^1.2.0-beta.3",
+    "@daisy/ace-localize": "^1.2.0-beta.4",
+    "@daisy/ace-logger": "^1.2.0-beta.4",
+    "@daisy/ace-meta": "^1.2.0-beta.4",
+    "@daisy/ace-report": "^1.2.0-beta.4",
+    "@daisy/ace-report-axe": "^1.2.0-beta.4",
+    "@daisy/epub-utils": "^1.2.0-beta.4",
     "axe-core": "^3.4.0",
     "file-url": "^3.0.0",
     "h5o": "^0.11.3",
