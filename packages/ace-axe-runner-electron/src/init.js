@@ -313,7 +313,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                             "cookies",
                             "filesystem",
                             "indexdb",
-                            "localstorage",
+                            // "localstorage", BLOCKS!?
                             "shadercache",
                             "websql",
                             "serviceworkers",
