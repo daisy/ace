@@ -39,7 +39,7 @@
     "lodash.mergewith": "^4.6.2",
     "meow": "^5.0.0",
     "winston": "^3.2.1",
-    "puppeteer": "^1.20.0",
+    "puppeteer": "^2.0.0",
     "electron": "^7.0.0",
     "express": "^4.17.1",
     "portfinder": "^1.0.25",
