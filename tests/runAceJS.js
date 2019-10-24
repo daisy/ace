@@ -30,7 +30,7 @@ function runAce(epub, {
     lang = "en",
   } = {}) {
 
-  logger.initLogger({ verbose, silent, fileName: "ace-tests.log" });
+  logger.initLogger({ verbose, silent, fileName: "ace-tests.log", maxMinutes: 1 });
 
   return ace(epub, {
     cwd,

@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-cli",
-  "version": "1.1.1",
+  "version": "1.2.0-beta.2",
   "description": "Ace by DAISY, an Accessibility Checker for EPUB",
   "author": {
     "name": "DAISY developers",

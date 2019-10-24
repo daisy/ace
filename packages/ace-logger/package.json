@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-logger",
-  "version": "1.1.0",
+  "version": "1.2.0-beta.2",
   "description": "Logger bootsrap for Ace",
   "author": {
     "name": "DAISY developers",
@@ -20,6 +20,7 @@
   "dependencies": {
     "@daisy/ace-config": "file:../ace-config",
     "fs-extra": "^8.1.0",
+    "uuid": "^3.3.3",
     "winston": "^3.2.1"
   },
   "publishConfig": {
