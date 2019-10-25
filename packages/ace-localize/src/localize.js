@@ -42,6 +42,20 @@ export function newLocalizer(resources) {
         },
     });
     
+    function ensureLanguage() {
+        if (i18nextInstance.language !== _currentLanguage) {
+            // https://github.com/i18next/i18next/blob/master/CHANGELOG.md#1800
+            // i18nextInstance.language not instantly ready (because async loadResources()),
+            // but i18nextInstance.isLanguageChangingTo immediately informs which locale i18next is switching to.
+            i18nextInstance.changeLanguage(_currentLanguage).then((_t) => {
+                // noop
+            }).catch((err) => {
+                winston.info('i18next changeLanguage reject: ' + _currentLanguage);
+                winston.info(err);
+            });
+        }
+    }
+
     return {
         LANGUAGES: resources,
 
@@ -57,19 +71,19 @@ export function newLocalizer(resources) {
             for (const lang of LANGUAGE_KEYS) {
                 if (language === lang) {
                     _currentLanguage = language;
+                    // ensureLanguage();
                     return;
                 }
             }
             // fallback
             _currentLanguage = DEFAULT_LANGUAGE;
+            // ensureLanguage();
         },
         
         localize: function(msg, options) {
             const opts = options || {};
-        
-            if (i18nextInstance.language !== _currentLanguage) {
-                i18nextInstance.changeLanguage(_currentLanguage);
-            }
+
+            ensureLanguage();
         
             return i18nextInstance.t(msg, opts);
         },
