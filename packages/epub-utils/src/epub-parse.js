@@ -10,6 +10,7 @@
 
 'use strict';
 
+const fileUrl = require('file-url');
 const DOMParser = require('xmldom-alpha').DOMParser;
 const XMLSerializer = require('xmldom-alpha').XMLSerializer;
 const fs = require('fs');
@@ -104,7 +105,7 @@ function addLink(rel, href, link) {
 function parseLinks(doc, select) {
   const result = {};
   select('//opf:link[not(@refines)]', doc).forEach((link) => {
-    addLink(link.getAttribute('rel'), link.getAttribute('href'), result);
+    addLink(link.getAttribute('rel'), decodeURI(link.getAttribute('href')), result);
   });
   return result;
 }
@@ -149,10 +150,14 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
       const contentType = (manifestItem[0].getAttribute('media-type')||'').trim();
       if (this.contentDocMediaType === contentType) {
         var spineItem = new SpineItem();
-        spineItem.relpath = manifestItem[0].getAttribute('href');
+        spineItem.relpath = decodeURI(manifestItem[0].getAttribute('href'));
         spineItem.filepath = path.join(path.dirname(packageDocPath), spineItem.relpath);
         spineItem.title = this.parseContentDocTitle(spineItem.filepath);
-        spineItem.url = "file://" + spineItem.filepath;
+
+        // does encodeURI() as per https://tools.ietf.org/html/rfc3986#section-3.3 in a nutshell: encodeURI(`file://${tmpFile}`).replace(/[?#]/g, encodeURIComponent)
+        spineItem.url = fileUrl(spineItem.filepath);
+        // spineItem.url = "file://" + encodeURI(spineItem.filepath);
+
         this.contentDocs.push(spineItem);
       } else if (!this.hasSVGContentDocuments && 'image/svg+xml' === contentType) {
         winston.warn('The SVG Content Documents in this EPUB will be ignored.');
@@ -165,7 +170,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
                             + '[contains(concat(" ", normalize-space(@properties), " ")," nav ")]'
                             + '/@href', doc);
   if (navDocRef.length > 0) {
-    const navDocPath = navDocRef[0].nodeValue;
+    const navDocPath = decodeURI(navDocRef[0].nodeValue);
     const navDocFullPath = path.join(path.dirname(packageDocPath), navDocPath);
     this.navDoc = parseNavDoc(navDocFullPath, epubDir);
   }
@@ -196,7 +201,7 @@ EpubParser.prototype.calculatePackageDocPath = function(epubDir) {
   const rootfiles = select('//ocf:rootfile[@media-type="application/oebps-package+xml"]/@full-path', doc);
   // just grab the first one as we're not handling the case of multiple renditions
   if (rootfiles.length > 0) {
-    return (path.join(epubDir, rootfiles[0].nodeValue));
+    return (path.join(epubDir, decodeURI(rootfiles[0].nodeValue)));
   }
   return '';
 }

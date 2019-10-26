@@ -22,6 +22,7 @@
     "jest-mock": "^24.9.0",
     "jest-environment-node": "^24.9.0",
     "extract-zip": "^1.6.7",
+    "node-stream-zip": "^1.8.2",
     "xmldom-alpha": "^0.1.28",
     "xpath": "0.0.24",
     "escape-html": "^1.0.3",

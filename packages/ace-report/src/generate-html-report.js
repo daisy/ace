@@ -8,6 +8,8 @@ const winston = require('winston');
 
 const { localize, getCurrentLanguage } = require('./l10n/localize').localizer;
 
+const LOG_DEBUG_URLS = process.env.LOG_DEBUG_URLS === "1";
+
 // generate the html report and return it as a string
 module.exports = function generateHtmlReport(reportData) {
 
@@ -39,14 +41,14 @@ module.exports = function generateHtmlReport(reportData) {
       var filterOptions = "";
       violationFilters[rule].forEach(function(value) {
         // winston.info("######## " + value);
-        const valueDisplay = localize(value, {ignoreMissingKey: true}); // only handles "serious", "moderate", etc. so can be missingKey, such as "EPUB/package.opf", "color-contrast", "metadata-schema-accessibilitysummary" etc. (in which case => fallback to key string)
+        const valueDisplay = rule == "file" ? value : localize(value, {ignoreMissingKey: true}); // only handles "serious", "moderate", etc. so can be missingKey, such as "EPUB/package.opf", "color-contrast", "metadata-schema-accessibilitysummary" etc. (in which case => fallback to key string)
         // use nicer labels for ruleset options
         if (rule == "ruleset") {
           filterOptions += "<option value='" + value + "'>" + rulesetTagLabels[value] + "</option>";
         }
         else {
           filterOptions += "<option value='" + value + "'>" +
-          valueDisplay
+          (rule == "file" ? escape(valueDisplay) : valueDisplay)
           + "</option>";
         }
       });
@@ -66,7 +68,7 @@ module.exports = function generateHtmlReport(reportData) {
         <td><span class='${violation['impact']}'>${valueDisplay}</span></td>
         <td><span class='ruleset'>${rulesetTagLabels[violation['applicableRulesetTag']]}</span></td>
         <td>${violation['rule']}<br/><br/><span class='engine'>${violation['engine']}</span></td>
-        <td><em>\"${violation['fileTitle']}\"</em><br/><br/><code class='location'>${violation['location']}</code>`;
+        <td><em>\"${violation['fileTitle']}\"</em><br/><br/><code class='location'>${escape(violation['location'])}</code>`;
 
         if (violation.html) {
           htmlStr +=`<br/><br/><div class='snippet'>${localize("snippet")}<code>${violation.html.trim()}</code></div>`;
@@ -131,6 +133,36 @@ module.exports = function generateHtmlReport(reportData) {
       return new handlebars.SafeString(valueDisplay);
     });
 
+    handlebars.registerHelper('encodeURI', function(src, options) {
+      // console.log(JSON.stringify(options));
+
+      if (LOG_DEBUG_URLS) {
+        console.log("///// Mustache encodeURI 1");
+        console.log(src);
+      }
+      const url = escape(encodeURI(src));
+      if (LOG_DEBUG_URLS) {
+        console.log("///// Mustache encodeURI 2");
+        console.log(url);
+      }
+      return new handlebars.SafeString(url);
+    });
+
+    handlebars.registerHelper('decodeURI', function(url, options) {
+      // console.log(JSON.stringify(options));
+
+      if (LOG_DEBUG_URLS) {
+        console.log("///// Mustache decodeURI 1");
+        console.log(url);
+      }
+      const src = escape(decodeURI(url));
+      if (LOG_DEBUG_URLS) {
+        console.log("///// Mustache decodeURI 2");
+        console.log(src);
+      }
+      return new handlebars.SafeString(src);
+    });
+    
     const content = fs.readFileSync(path.join(__dirname, "./report-template.handlebars")).toString();
     var template = handlebars.compile(content);
     var result = template(reportData);

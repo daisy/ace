@@ -24,9 +24,17 @@ const scripts = [
   require.resolve('../scripts/ace-extraction.js'),
 ];
 
+const LOG_DEBUG_URLS = process.env.LOG_DEBUG_URLS === "1";
+
 async function checkSingle(spineItem, epub, lang, axeRunner) {
   winston.verbose(`- Processing ${spineItem.relpath}`);
   try {
+    if (LOG_DEBUG_URLS) {
+        console.log("....... URL 1");
+        console.log(spineItem.url);
+        console.log(spineItem.filepath);
+        console.log(spineItem.relpath);
+    }
     let url = spineItem.url;
     let ext = path.extname(spineItem.filepath);
     
@@ -39,8 +47,17 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
       const tmpdir = tmp.dirSync({ unsafeCleanup: true }).name;
       const tmpFile = path.join(tmpdir, `${path.basename(spineItem.filepath, ext)}.xhtml`)
       fs.copySync(spineItem.filepath, tmpFile);
+
+      // does encodeURI() as per https://tools.ietf.org/html/rfc3986#section-3.3 in a nutshell: encodeURI(`file://${tmpFile}`).replace(/[?#]/g, encodeURIComponent)
       url = fileUrl(tmpFile);
-      winston.debug(`checking copied file at ${url}`)
+      // url = "file://" + encodeURI(tmpFile);
+
+      winston.debug(`checking copied file at ${tmpFile}`)
+    }
+
+    if (LOG_DEBUG_URLS) {
+      console.log("....... URL 2");
+      console.log(url);
     }
 
     const scriptContents = [];
@@ -105,18 +122,50 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
             if (Array.isArray(item.src)) {
               item.src = item.src.map((srcItem) => {
                 if (srcItem.src !== undefined) {
-                  srcItem.path = path.resolve(path.dirname(spineItem.filepath),
-                                              srcItem.src.toString());
+                  if (LOG_DEBUG_URLS) {
+                    console.log("----- ITEMs SRC 1");
+                    console.log(srcItem.src);
+                  }
+                  srcItem.path = path.resolve(path.dirname(spineItem.filepath), decodeURI(srcItem.src.toString()));
+                  if (LOG_DEBUG_URLS) {
+                    console.log("----- ITEMs SRC 2");
+                    console.log(srcItem.path);
+                  }
                   srcItem.src = path.relative(epub.basedir, srcItem.path).replace(/\\/g, "/");
+                  if (LOG_DEBUG_URLS) {
+                    console.log("----- ITEMs SRC 3");
+                    console.log(srcItem.src);
+                  }
                 }
                 return srcItem;
               });
             } else {
-              item.path = path.resolve(path.dirname(spineItem.filepath), item.src.toString());
+              if (LOG_DEBUG_URLS) {
+                console.log("----- ITEM SRC 1");
+                console.log(item.src);
+              }
+              item.path = path.resolve(path.dirname(spineItem.filepath), decodeURI(item.src.toString()));
+              if (LOG_DEBUG_URLS) {
+                console.log("----- ITEM SRC 2");
+                console.log(item.path);
+              }
               item.src = path.relative(epub.basedir, item.path).replace(/\\/g, "/");
+              if (LOG_DEBUG_URLS) {
+                console.log("----- ITEM SRC 3");
+                console.log(item.src);
+              }
             }
             if (item.cfi !== undefined) {
-              item.location = `${spineItem.relpath}#epubcfi(${item.cfi})`;
+              if (LOG_DEBUG_URLS) {
+                console.log("----- CFI 1");
+                console.log(spineItem.relpath);
+                console.log(item.cfi);
+              }
+              item.location = `${encodeURI(spineItem.relpath)}#epubcfi(${encodeURI(item.cfi)})`;
+              if (LOG_DEBUG_URLS) {
+                console.log("----- CFI 2");
+                console.log(item.location);
+              }
               delete item.cfi;
             }
           }
@@ -125,6 +174,7 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
     }
     return results;
   } catch (err) {
+    console.log(err);
     winston.debug(`Error when running HTML checks: ${err}`);
     throw new Error(`Failed to check Content Document '${spineItem.relpath}'`);
   }

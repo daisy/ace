@@ -22,6 +22,8 @@ const generateSelfSignedData = require('./selfsigned').generateSelfSignedData;
 const isDev = process && process.env && (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true');
 const showWindow = false;
 
+const LOG_DEBUG_URLS = process.env.LOG_DEBUG_URLS === "1";
+
 const LOG_DEBUG = false;
 const ACE_LOG_PREFIX = "[ACE-AXE]";
 
@@ -61,7 +63,12 @@ function loadUrl(browserWindow) {
     browserWindow.ace__timeout = undefined;
     
     const options = {}; // { extraHeaders: 'pragma: no-cache\n' };
-    browserWindow.loadURL(`${rootUrl}${browserWindow.ace__currentUrl}?${HTTP_QUERY_PARAM}=${iHttpReq++}`, options);
+    const uareel = `${rootUrl}${browserWindow.ace__currentUrl}?${HTTP_QUERY_PARAM}=${iHttpReq++}`;
+    if (LOG_DEBUG_URLS) {
+        console.log("======>>>>>> URL TO LOAD");
+        console.log(uareel);
+    }
+    browserWindow.loadURL(uareel, options);
 
     const MILLISECONDS_TIMEOUT_INITIAL = 5000; // 5s max to load the window's web contents
     const MILLISECONDS_TIMEOUT_EXTENSION = 35000; // 40s max to load + execute Axe checkers
@@ -339,12 +346,37 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         const scripts = payload.scripts;
         const scriptContents = payload.scriptContents;
 
+        if (LOG_DEBUG_URLS) {
+            console.log("######## URL 1");
+            console.log(uarel);
+        }
         // windows! file://C:\aa\bb\chapter.xhtml
         const uarelObj = url.parse(uarel.replace(/\\/g, "/"));
         const windowsDrive = uarelObj.hostname ? `${uarelObj.hostname.toUpperCase()}:` : "";
+        if (LOG_DEBUG_URLS) {
+            console.log("######## URL 2");
+            console.log(windowsDrive);
+        }
         const bd = basedir.replace(/\\/g, "/");
+        if (LOG_DEBUG_URLS) {
+            console.log("######## URL 3");
+            console.log(uarelObj.pathname);
+        }
         const full = (windowsDrive + decodeURI(uarelObj.pathname));
-        const httpUrl = full.replace(bd, "");
+        if (LOG_DEBUG_URLS) {
+            console.log("######## URL 4");
+            console.log(full);
+        }
+        let httpUrl = full.replace(bd, "");
+        if (LOG_DEBUG_URLS) {
+            console.log("######## URL 5");
+            console.log(httpUrl);
+        }
+        httpUrl = encodeURI(httpUrl);
+        if (LOG_DEBUG_URLS) {
+            console.log("######## URL 6");
+            console.log(httpUrl);
+        }
  
         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner running ... ${basedir} --- ${uarel} => ${httpUrl}`);
 
@@ -553,7 +585,20 @@ function startAxeServer(basedir, scripts, scriptContents) {
             if (req.query[HTTP_QUERY_PARAM]) {
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTP intercept ${req.url}`);
 
-                const pn = url.parse(req.url).pathname;
+                if (LOG_DEBUG_URLS) {
+                    console.log(">>>>>>>>>> URL 1");
+                    console.log(req.url);
+                }
+                const ptn = url.parse(req.url).pathname;
+                if (LOG_DEBUG_URLS) {
+                    console.log(">>>>>>>>>> URL 2");
+                    console.log(ptn);
+                }
+                const pn = decodeURI(ptn);
+                if (LOG_DEBUG_URLS) {
+                    console.log(">>>>>>>>>> URL 3");
+                    console.log(pn);
+                }
                 let fileSystemPath = path.join(expressApp.basedir, pn);
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} filepath to read: ${fileSystemPath}`);
                 if (!fs.existsSync(fileSystemPath)) {
@@ -585,7 +630,7 @@ function startAxeServer(basedir, scripts, scriptContents) {
             expressApp.use("/", (req, res, next) => {
                 // const url = new URL(`https://fake.org${req.url}`);
                 // const pathname = url.pathname;
-                const pathname = url.parse(req.url).pathname;
+                const pathname = decodeURI(url.parse(req.url).pathname);
 
                 const filePath = path.join(basedir, pathname);
                 if (filePathsExpressStaticNotExist[filePath]) {
