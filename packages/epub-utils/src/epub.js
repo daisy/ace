@@ -1,6 +1,7 @@
 'use strict';
 
 const epubParse = require('./epub-parse.js');
+const StreamZip = require('node-stream-zip');
 const extractZip = require('extract-zip');
 const tmp = require('tmp');
 const fs = require('fs-extra');
@@ -9,17 +10,64 @@ const winston = require('winston');
 
 tmp.setGracefulCleanup();
 
-async function unzip(path) {
-  const tmpdir = tmp.dirSync({ unsafeCleanup: true }).name;
+const LOG_DEBUG_URLS = process.env.LOG_DEBUG_URLS === "1";
+
+async function unzip(path, useLegacyZipLib) {
+  const tmpdir = tmp.dirSync({ unsafeCleanup: true, keep: LOG_DEBUG_URLS }).name;
+  if (LOG_DEBUG_URLS) {
+    console.log(">>>>>> LOG_DEBUG_URLS");
+    console.log(path);
+    console.log(tmpdir);
+  }
   return new Promise((resolve, reject) => {
-    extractZip(path, { dir: tmpdir }, (err) => {
-      if (err) {
+    if (useLegacyZipLib) {
+      extractZip(path, { dir: tmpdir }, (err) => {
+        if (err) {
+          if (LOG_DEBUG_URLS) {
+            console.log(err);
+          }
+          reject(err);
+        } else {
+          resolve(tmpdir);
+        }
+      });
+    } else {
+      const zip = new StreamZip({
+        file: path,
+        storeEntries: true, // zip.entries() zip.entriesCount (necessary for zip.extract())
+      });
+      zip.on('error', (err) => {
+        if (LOG_DEBUG_URLS) {
+          console.log(err);
+        }
         reject(err);
-      } else {
-        resolve(tmpdir);
+      });
+      zip.on('ready', () => {
+        zip.extract(null, tmpdir, (err, count) => {
+            if (LOG_DEBUG_URLS) {
+              console.log(`ZIP COUNT ${count}`);
+            }
+            zip.close();
+            if (err) {
+              if (LOG_DEBUG_URLS) {
+                console.log(err);
+              }
+              reject(err);
+            } else {
+              resolve(tmpdir);
+            }
+        });
+      });
+      if (LOG_DEBUG_URLS) {
+        zip.on('extract', (entry, file) => {
+          console.log(`ZIP EXTRACT ${entry.name} to ${file}`);
+        });
+        zip.on('entry', (entry) => {
+          console.log(`ZIP ENTRY ${entry.name}`);
+        });
       }
-    });
-  }) 
+    }
+  }); 
 }
 
 async function retryUnzip(epub, error) {
@@ -48,7 +96,7 @@ async function retryUnzip(epub, error) {
         }
       }
       fs.truncateSync(tmpEPUB, truncatedSize);
-      const res = await unzip(tmpEPUB);
+      const res = await unzip(tmpEPUB, true);
       if (needsDelete) {
         process.nextTick(() => {
           fs.unlink(tmpEPUB);
@@ -92,12 +140,18 @@ class EPUB {
       try {
         unzippedDir = await unzip(this.path);
       } catch (error) {
-        winston.error('Failed to unzip EPUB (the ZIP archive may be corrupt).');
+        winston.error('Failed to unzip EPUB (the ZIP archive may be corrupt). TRYING LEGACY ZIP LIB ...');
         winston.debug(error);
         try {
-          unzippedDir = await retryUnzip(this, error);
+          unzippedDir = await unzip(this.path, true);
         } catch (error) {
-          throw error;
+          winston.error('Failed to unzip EPUB again (the ZIP archive may be corrupt). TRYING ZIP PATCH ...');
+          winston.debug(error);
+          try {
+            unzippedDir = await retryUnzip(this, error);
+          } catch (error) {
+            throw error;
+          }
         }
       }
       this.basedir = unzippedDir;

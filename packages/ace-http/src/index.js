@@ -16,6 +16,8 @@ const axeRunner = require('@daisy/ace-axe-runner-puppeteer');
 
 const pkg = require('@daisy/ace-meta/package');
 
+// tmp.setGracefulCleanup();
+
 const UPLOADS = tmp.dirSync({ unsafeCleanup: true }).name;
 const DEFAULTPORT = 8000;
 const DEFAULTHOST = "localhost";

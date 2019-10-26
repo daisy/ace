@@ -106,3 +106,13 @@ test('issue #239: `listitem` is not reported when roles inherit from list roles'
   const report = await ace('../data/issue-239');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
+
+test('issue #290 (unzipped): URL percent encoding', async () => {
+  const report = await ace('../data/issue-290');
+  expect(report['earl:result']['earl:outcome']).toEqual('pass');
+});
+
+test('issue #290 (zipped): URL percent encoding', async () => {
+  const report = await ace('../data/issue-290.epub');
+  expect(report['earl:result']['earl:outcome']).toEqual('pass');
+});

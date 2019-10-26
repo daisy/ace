@@ -413,8 +413,8 @@
               {{#each data.images}}
                 <tr>
                   <td class="image">
-                    <a href="data/{{src}}">
-                      <img src = "data/{{src}}"/>
+                    <a href="data/{{#encodeURI src}}{{/encodeURI}}">
+                      <img src = "data/{{#encodeURI src}}{{/encodeURI}}"/>
                     </a>
                   </td>
 
@@ -436,7 +436,7 @@
                     <td class="missing">{{#localize "na"}}{{/localize}}</td>
                   {{/if}}
 
-                  <td class="location">{{location}}</td>
+                  <td class="location">{{#decodeURI location}}{{/decodeURI}}</td>
 
                   {{#if role}}
                     <td>{{role}}</td>
