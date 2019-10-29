@@ -5,7 +5,7 @@ epub="../$1.epub"
 cd "$1"
 rm "$epub"
 echo "-----"
-ls -al1
+ls -Ral1
 echo "-----"
 zip -X "$epub" mimetype
 ls -1 | sed 's/^mimetype$//g' | grep -v "^$" | tr "\n" "\0" | xargs -0 -I{} zip -rg "$epub" "{}" -x \*.DS_Store
