@@ -36,5 +36,5 @@ sudo npm install -g @daisy/ace --unsafe-perm=true --allow-root
 
 Note that the extra arguments are required to delegate the super-user permissions to the bundled Chromium installer.
 
-Please refer to the [troubleshooting section](http://localhost:1313/ace/help/troubleshooting/) if you face any issues during the installation. As always, [we welcome any feedback or suggestion](http://localhost:1313/ace/help/contact/) to improve our tool or its documentation!
+Please refer to the [troubleshooting section]({{<relref "help/troubleshooting.md">}}) if you face any issues during the installation. As always, [we welcome any feedback or suggestion]({{<relref "help/troubleshooting.md">}}) to improve our tool or its documentation!
 {{% /note %}}
