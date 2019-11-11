@@ -39,6 +39,8 @@ You need to tell the installation scripts to enforce the super-user permissions.
 sudo npm install -g @daisy/ace --unsafe-perm=true --allow-root
 ```
 
+Note that the extra arguments are required to delegate the root permissions to the `npm` installation scripts of Ace’s dependencies (notably to the Google Chromium headless browser). See also the NPM documentation for the [`unsafe-perm` setting](https://docs.npmjs.com/misc/config#unsafe-perm).
+
 ## I receive an `ELIFECYCLE` error when trying to install Ace on Windows version `Windows_NT 10.0.16299`
 
 This seems to be a [bug in `npm`](https://github.com/npm/npm/issues/18979). You can fix it by updating to more recent Node and npm versions.

@@ -24,3 +24,17 @@ If everything went smoothly, you should now be able to run the `ace` command in 
 $ ace --version
 1.0.0
 ```
+
+{{% note %}}
+The installation process will write various files on your computer, notably to the Node modules repository (typically located in `/usr/local/lib/node_modules` on macOS and Unix). Depending on your operating system configuration, you may or may not have the permissions to write files to these locations.
+
+We recommend that you first try to run the installation command with the default permissions (i.e., as it is written in the previous instructions). If it fails, you may need to run the installation command as a super-user, with the following command:
+
+```
+sudo npm install -g @daisy/ace --unsafe-perm=true --allow-root
+```
+
+Note that the extra arguments are required to delegate the super-user permissions to the bundled Chromium installer.
+
+Please refer to the [troubleshooting section](http://localhost:1313/ace/help/troubleshooting/) if you face any issues during the installation. As always, [we welcome any feedback or suggestion](http://localhost:1313/ace/help/contact/) to improve our tool or its documentation!
+{{% /note %}}
