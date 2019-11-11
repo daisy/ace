@@ -345,6 +345,26 @@ Latest version: v1.1.1</p>
 1.0.0
 </code></pre>
 
+<aside aria-label="note" class="note">
+  <div>
+    <svg class="sign" aria-hidden="true" viewBox="0 0 41.667306 41.66729" focusable="false">
+      <use xlink:href="#info"></use>
+    </svg>
+    <p>The installation process will write various files on your computer, notably to the Node modules repository (typically located in <code>/usr/local/lib/node_modules</code> on macOS and Unix). Depending on your operating system configuration, you may or may not have the permissions to write files to these locations.</p>
+
+<p>We recommend that you first try to run the installation command with the default permissions (i.e., as it is written in the previous instructions). If it fails, you may need to run the installation command as a super-user, with the following command:</p>
+
+<pre><code>sudo npm install -g @daisy/ace --unsafe-perm=true --allow-root
+</code></pre>
+
+<p>Note that the extra arguments are required to delegate the super-user permissions to the bundled Chromium installer.</p>
+
+<p>Please refer to the <a href="http://localhost:1313/ace/help/troubleshooting/">troubleshooting section</a> if you face any issues during the installation. As always, <a href="http://localhost:1313/ace/help/contact/">we welcome any feedback or suggestion</a> to improve our tool or its documentation!</p>
+
+  </div>
+</aside>
+
+
   </main>
 
           <footer role="contentinfo">

@@ -377,6 +377,8 @@ npm ERR! Exit status 1
 <pre><code>sudo npm install -g @daisy/ace --unsafe-perm=true --allow-root
 </code></pre>
 
+<p>Note that the extra arguments are required to delegate the root permissions to the <code>npm</code> installation scripts of Ace’s dependencies (notably to the Google Chromium headless browser). See also the NPM documentation for the <a href="https://docs.npmjs.com/misc/config#unsafe-perm"><code>unsafe-perm</code> setting</a>.</p>
+
 <h2 id="i-receive-an-elifecycle-error-when-trying-to-install-ace-on-windows-version-windows-nt-10-0-16299">I receive an <code>ELIFECYCLE</code> error when trying to install Ace on Windows version <code>Windows_NT 10.0.16299</code></h2>
 
 <p>This seems to be a <a href="https://github.com/npm/npm/issues/18979">bug in <code>npm</code></a>. You can fix it by updating to more recent Node and npm versions.</p>
