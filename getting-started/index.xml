@@ -27,7 +27,8 @@ What does Ace do? Specifically, Ace:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/getting-started/installation/</guid>
-      <description>Install Node.JS  Go to Node.JS Download version 6.4.0 or higher Double-click to install  Install (or update) Ace  After installing Node, open a shell window  On Windows: Windows System-&amp;gt;Command Prompt or Start-&amp;gt;Run-&amp;gt;cmd.exe On Mac: Applications-&amp;gt;Utilities-&amp;gt;Terminal  Type npm install @daisy/ace -g to install or update Ace  If everything went smoothly, you should now be able to run the ace command in your shell. You can test it out like this:</description>
+      <description>Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please visit this page.
+Install Node.JS  Go to Node.JS Download version 6.4.0 or higher Double-click to install  Install (or update) Ace  After installing Node, open a shell window  On Windows: Windows System-&amp;gt;Command Prompt or Start-&amp;gt;Run-&amp;gt;cmd.exe On Mac: Applications-&amp;gt;Utilities-&amp;gt;Terminal  Type npm install @daisy/ace -g to install or update Ace  If everything went smoothly, you should now be able to run the ace command in your shell.</description>
     </item>
     
     <item>
@@ -36,9 +37,19 @@ What does Ace do? Specifically, Ace:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/getting-started/running/</guid>
-      <description>Checking an EPUB You can check an EPUB by running the ace command followed by the path to the EPUB document (if the file name includes spaces, place it inside &amp;quot; marks). For example:
-$ ace ~/Documents/moby-dick.epub  The above command will run the automated accessibility tests on the EPUB document and output the results.
-Getting the results You can specify the directory for Ace to store its output with the --outdir option.</description>
+      <description>Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please visit this page.
+Checking an EPUB You can check an EPUB by running the ace command followed by the path to the EPUB document (if the file name includes spaces, place it inside &amp;quot; marks). For example:
+$ ace ~/Documents/moby-dick.epub  The above command will run the automated accessibility tests on the EPUB document and output the results.</description>
+    </item>
+    
+    <item>
+      <title>The Ace App</title>
+      <link>https://daisy.github.io/ace/getting-started/ace-app/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/getting-started/ace-app/</guid>
+      <description>What is the Ace by DAISY App? Ace by DAISY App is the official graphical user interface for the EPUB accessibility checker developed by the DAISY Consortium. The Ace App is available for the Windows, MacOS and Linux desktop operating systems.
+Where can I download the Ace App? The latest version of the Ace App is 1.0.0-rc.1 (first &amp;ldquo;release candidate&amp;rdquo;). The application installers are distributed via the GitHub development website.</description>
     </item>
     
   </channel>

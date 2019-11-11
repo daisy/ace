@@ -118,9 +118,7 @@
             <a class="logo" href="https://daisy.github.io/ace" aria-label="Ace, by DAISY home page">
               <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
             </a>
-            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB!<br />
-A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project.
-Latest version: v1.1.1</p>
+            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.1.1</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -153,6 +151,12 @@ Latest version: v1.1.1</p>
                       <li class="page">
                         <a href="/ace/getting-started/running/" >
                           <span class="text">Running Ace</span>
+                        </a>
+                      </li>
+                    
+                      <li class="page">
+                        <a href="/ace/getting-started/ace-app/" >
+                          <span class="text">The Ace App</span>
                         </a>
                       </li>
                     
@@ -405,6 +409,18 @@ Latest version: v1.1.1</p>
             silent
           </a>
     
+      
+      
+        
+        
+        </li>
+        
+        
+        <li>
+          <a href="#lang">
+            lang
+          </a>
+    
     
         </li></ol>
     
@@ -605,6 +621,19 @@ $
 </code></pre>
 
 <p>Note that the log file is not &lsquo;silent&rsquo;; it contains the default level of detail about Ace&rsquo;s operation.</p>
+
+<h3 id="lang">lang</h3>
+
+<p>Use this to set the language used to localize the reports of the accessibility evaluation.
+The default is &ldquo;en&rdquo; (English). Currently, the only available supplementary locale is &ldquo;fr&rdquo; (French).</p>
+
+<p>Syntax: <code>--lang</code> or <code>-l</code></p>
+
+<p>Example:</p>
+
+<pre><code>$ ace --lang fr ~/Documents/book.epub
+$
+</code></pre>
 
   </main>
 
