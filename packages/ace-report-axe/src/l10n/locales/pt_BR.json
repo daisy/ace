@@ -11,6 +11,7 @@
         "aria-valid-attr": "ARIA",
         "aria-valid-attr-value": "ARIA",
         "button-name": "Formulários",
+        "style": "Style",
         "checkboxgroup": "Formulários",
         "color-contrast": "Cor",
         "definition-list": "Listas",
@@ -51,7 +52,8 @@
         "th-has-data-cells": "Tabelas",
         "valid-lang": "Idioma",
         "video-caption": "Vídeo",
-        "video-description": "Vídeo"
+        "video-description": "Vídeo",
+        "audio-caption": "Audio"
     },
     "nokb": "(nenhuma entrada específica)"
 }
