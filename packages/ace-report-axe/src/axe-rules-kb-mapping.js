@@ -1,3 +1,5 @@
+const { localize } = require('./l10n/localize').localizer;
+
 const kbMap = {
   'baseUrl': 'http://kb.daisy.org/publishing/',
   'map': {
