@@ -41,7 +41,7 @@
     "meow": "^5.0.0",
     "winston": "^3.2.1",
     "puppeteer": "^2.0.0",
-    "electron": "^7.1.2",
+    "electron": "^7.1.3",
     "express": "^4.17.1",
     "portfinder": "^1.0.25",
     "selfsigned": "^1.10.7",
