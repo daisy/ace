@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rules on Ace, by DAISY</title>
@@ -16,8 +16,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/rules/html/</guid>
-      <description>Under the hood, most of the accessibility checks ran by Ace are powered by aXe, an engine for automated testing of HTML. Ace uses aXe&amp;rsquo;s rules, with some modifications (described here).
-Rules Here is a list of aXe&amp;rsquo;s rules used by Ace, taken from their documentation:
+      <description>Under the hood, most of the accessibility checks ran by Ace are powered by aXe, an engine for automated testing of HTML. Ace uses aXe&#39;s rules, with some modifications (described here).
+Rules Here is a list of aXe&#39;s rules used by Ace, taken from their documentation:
    Rule Description     accesskeys Ensures every accesskey attribute value is unique.   area-alt Ensures &amp;lt;area&amp;gt; elements of image maps have alternate text.</description>
     </item>
     

@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.60.1" />
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -321,14 +321,9 @@
 
 
     
-    
-
-<p>Under the hood, most of the accessibility checks ran by Ace are powered by <a href="https://github.com/dequelabs/axe-core">aXe</a>, an engine for automated testing of HTML. Ace uses aXe&rsquo;s rules, with some modifications (described <a href="#modifications">here</a>).</p>
-
+    <p>Under the hood, most of the accessibility checks ran by Ace are powered by <a href="https://github.com/dequelabs/axe-core">aXe</a>, an engine for automated testing of HTML. Ace uses aXe's rules, with some modifications (described <a href="#modifications">here</a>).</p>
 <h2 id="rules">Rules</h2>
-
-<p>Here is a list of aXe&rsquo;s rules used by Ace, taken from <a href="https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md">their documentation</a>:</p>
-
+<p>Here is a list of aXe's rules used by Ace, taken from <a href="https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md">their documentation</a>:</p>
 <table>
 <thead>
 <tr>
@@ -336,312 +331,250 @@
 <th align="left">Description</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">accesskeys</td>
 <td align="left">Ensures every accesskey attribute value is unique.</td>
 </tr>
-
 <tr>
 <td align="left">area-alt</td>
 <td align="left">Ensures &lt;area&gt; elements of image maps have alternate text.</td>
 </tr>
-
 <tr>
 <td align="left">aria-allowed-attr</td>
-<td align="left">Ensures ARIA attributes are allowed for an element&apos;s role.</td>
+<td align="left">Ensures ARIA attributes are allowed for an element's role.</td>
 </tr>
-
 <tr>
 <td align="left">aria-hidden-body</td>
-<td align="left">Ensures aria-hidden=&apos;true&apos; is not present on the document body.</td>
+<td align="left">Ensures aria-hidden='true' is not present on the document body.</td>
 </tr>
-
 <tr>
 <td align="left">aria-required-attr</td>
 <td align="left">Ensures elements with ARIA roles have all required ARIA attributes.</td>
 </tr>
-
 <tr>
 <td align="left">aria-required-children</td>
 <td align="left">Ensures elements with an ARIA role that require child roles contain them.</td>
 </tr>
-
 <tr>
 <td align="left">aria-required-parent</td>
 <td align="left">Ensures elements with an ARIA role that require parent roles are contained by them.</td>
 </tr>
-
 <tr>
 <td align="left">aria-roles</td>
 <td align="left">Ensures all elements with a role attribute use a valid value.</td>
 </tr>
-
 <tr>
 <td align="left">aria-valid-attr-value</td>
 <td align="left">Ensures all ARIA attributes have valid values.</td>
 </tr>
-
 <tr>
 <td align="left">aria-valid-attr</td>
 <td align="left">Ensures attributes that begin with aria- are valid ARIA attributes.</td>
 </tr>
-
 <tr>
 <td align="left">audio-caption</td>
 <td align="left">Ensures &lt;audio&gt; elements have captions.</td>
 </tr>
-
 <tr>
 <td align="left">blink</td>
 <td align="left">Ensures &lt;blink&gt; elements are not used.</td>
 </tr>
-
 <tr>
 <td align="left">button-name</td>
 <td align="left">Ensures buttons have discernible text.</td>
 </tr>
-
 <tr>
 <td align="left">checkboxgroup</td>
 <td align="left">Ensures related &lt;input type=&quot;checkbox&quot;&gt; elements have a group and that that group designation is consistent.</td>
 </tr>
-
 <tr>
 <td align="left">color-contrast</td>
 <td align="left">Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds.</td>
 </tr>
-
 <tr>
 <td align="left">definition-list</td>
 <td align="left">Ensures &lt;dl&gt; elements are structured correctly.</td>
 </tr>
-
 <tr>
 <td align="left">dlitem</td>
 <td align="left">Ensures &lt;dt&gt; and &lt;dd&gt; elements are contained by a &lt;dl&gt;.</td>
 </tr>
-
 <tr>
 <td align="left">document-title</td>
 <td align="left">Ensures each HTML document contains a non-empty &lt;title&gt; element.</td>
 </tr>
-
 <tr>
 <td align="left">duplicate-id</td>
 <td align="left">Ensures every id attribute value is unique.</td>
 </tr>
-
 <tr>
 <td align="left">empty-heading</td>
 <td align="left">Ensures headings have discernible text.</td>
 </tr>
-
 <tr>
 <td align="left">focus-order-semantics</td>
 <td align="left">Ensures elements in the focus order have an appropriate role.</td>
 </tr>
-
 <tr>
 <td align="left">frame-title-unique</td>
 <td align="left">Ensures &lt;iframe&gt; and &lt;frame&gt; elements contain a unique title attribute.</td>
 </tr>
-
 <tr>
 <td align="left">frame-title</td>
 <td align="left">Ensures &lt;iframe&gt; and &lt;frame&gt; elements contain a non-empty title attribute.</td>
 </tr>
-
 <tr>
 <td align="left">heading-order</td>
 <td align="left">Ensures the order of headings is semantically correct.</td>
 </tr>
-
 <tr>
 <td align="left">hidden-content</td>
 <td align="left">Informs users about hidden content.</td>
 </tr>
-
 <tr>
 <td align="left">html-has-lang</td>
 <td align="left">Ensures every HTML document has a lang attribute.</td>
 </tr>
-
 <tr>
 <td align="left">html-lang-valid</td>
 <td align="left">Ensures the lang attribute of the &lt;html&gt; element has a valid value.</td>
 </tr>
-
 <tr>
 <td align="left">image-alt</td>
 <td align="left">Ensures &lt;img&gt; elements have alternate text or a role of none or presentation.</td>
 </tr>
-
 <tr>
 <td align="left">image-redundant-alt</td>
 <td align="left">Ensure button and link text is not repeated as image alternative.</td>
 </tr>
-
 <tr>
 <td align="left">input-image-alt</td>
 <td align="left">Ensures &lt;input type=&quot;image&quot;&gt; elements have alternate text.</td>
 </tr>
-
 <tr>
 <td align="left">label-title-only</td>
 <td align="left">Ensures that every form element is not solely labeled using the title or aria-describedby attributes.</td>
 </tr>
-
 <tr>
 <td align="left">label</td>
 <td align="left">Ensures every form element has a label.</td>
 </tr>
-
 <tr>
 <td align="left">landmark-main-is-top-level</td>
 <td align="left">The main landmark should not be contained in another landmark.</td>
 </tr>
-
 <tr>
 <td align="left">landmark-one-main</td>
 <td align="left">Ensures a navigation point to the primary content of the page. If the page contains iframes, each iframe should contain either no main landmarks or just one.</td>
 </tr>
-
 <tr>
 <td align="left">layout-table</td>
 <td align="left">Ensures presentational &lt;table&gt; elements do not use &lt;th&gt;, &lt;caption&gt; elements or the summary attribute.</td>
 </tr>
-
 <tr>
 <td align="left">link-in-text-block</td>
 <td align="left">Links can be distinguished without relying on color.</td>
 </tr>
-
 <tr>
 <td align="left">link-name</td>
 <td align="left">Ensures links have discernible text.</td>
 </tr>
-
 <tr>
 <td align="left">list</td>
 <td align="left">Ensures that lists are structured correctly.</td>
 </tr>
-
 <tr>
 <td align="left">listitem</td>
 <td align="left">Ensures &lt;li&gt; elements are used semantically.</td>
 </tr>
-
 <tr>
 <td align="left">marquee</td>
 <td align="left">Ensures &lt;marquee&gt; elements are not used.</td>
 </tr>
-
 <tr>
 <td align="left">meta-refresh</td>
 <td align="left">Ensures &lt;meta http-equiv=&quot;refresh&quot;&gt; is not used.</td>
 </tr>
-
 <tr>
 <td align="left">meta-viewport-large</td>
 <td align="left">Ensures &lt;meta name=&quot;viewport&quot;&gt; can scale a significant amount.</td>
 </tr>
-
 <tr>
 <td align="left">meta-viewport</td>
 <td align="left">Ensures &lt;meta name=&quot;viewport&quot;&gt; does not disable text scaling and zooming.</td>
 </tr>
-
 <tr>
 <td align="left">object-alt</td>
 <td align="left">Ensures &lt;object&gt; elements have alternate text.</td>
 </tr>
-
 <tr>
 <td align="left">p-as-heading</td>
 <td align="left">Ensure p elements are not used to style headings.</td>
 </tr>
-
 <tr>
 <td align="left">radiogroup</td>
 <td align="left">Ensures related &lt;input type=&quot;radio&quot;&gt; elements have a group and that the group designation is consistent.</td>
 </tr>
-
 <tr>
 <td align="left">region</td>
 <td align="left">Ensures all content is contained within a landmark region.</td>
 </tr>
-
 <tr>
 <td align="left">scope-attr-valid</td>
 <td align="left">Ensures the scope attribute is used correctly on tables.</td>
 </tr>
-
 <tr>
 <td align="left">server-side-image-map</td>
 <td align="left">Ensures that server-side image maps are not used.</td>
 </tr>
-
 <tr>
 <td align="left">skip-link</td>
 <td align="left">Ensure all skip links have a focusable target.</td>
 </tr>
-
 <tr>
 <td align="left">tabindex</td>
 <td align="left">Ensures tabindex attribute values are not greater than 0.</td>
 </tr>
-
 <tr>
 <td align="left">table-duplicate-name</td>
 <td align="left">Ensure that tables do not have the same summary and caption.</td>
 </tr>
-
 <tr>
 <td align="left">table-fake-caption</td>
 <td align="left">Ensure that tables with a caption use the &lt;caption&gt; element.</td>
 </tr>
-
 <tr>
 <td align="left">td-has-header</td>
 <td align="left">Ensure that each non-empty data cell in a large table has one or more table headers.</td>
 </tr>
-
 <tr>
 <td align="left">td-headers-attr</td>
 <td align="left">Ensure that each cell in a table using the headers refers to another cell in that table.</td>
 </tr>
-
 <tr>
 <td align="left">th-has-data-cells</td>
 <td align="left">Ensure that each table header in a data table refers to data cells.</td>
 </tr>
-
 <tr>
 <td align="left">valid-lang</td>
 <td align="left">Ensures lang attributes have valid values.</td>
 </tr>
-
 <tr>
 <td align="left">video-caption</td>
 <td align="left">Ensures &lt;video&gt; elements have captions.</td>
 </tr>
-
 <tr>
 <td align="left">video-description</td>
 <td align="left">Ensures &lt;video&gt; elements have audio descriptions.</td>
 </tr>
 </tbody>
 </table>
-
 <h2 id="modifications">Modifications</h2>
-
-<p>Certain aspects of HTML accessibility checking don&rsquo;t apply to EPUBs, so Ace has modified aXe&rsquo;s default ruleset slightly.</p>
-
+<p>Certain aspects of HTML accessibility checking don't apply to EPUBs, so Ace has modified aXe's default ruleset slightly.</p>
 <ul>
-<li>Ace disables aXe&rsquo;s <code>bypass</code> rule.</li>
-<li>Ace changes aXe&rsquo;s <code>landmark-one-main</code> rule to remove the <code>page-no-duplicate-main</code> check (was <code>has-no-more-than-one-main</code>, see <a href="https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19">https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19</a> ).</li>
+<li>Ace disables aXe's <code>bypass</code> rule.</li>
+<li>Ace changes aXe's <code>landmark-one-main</code> rule to remove the <code>page-no-duplicate-main</code> check (was <code>has-no-more-than-one-main</code>, see <a href="https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19">https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19</a> ).</li>
 </ul>
 
   </main>

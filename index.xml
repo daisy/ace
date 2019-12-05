@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ace, by DAISY</title>
@@ -17,20 +17,9 @@
       
       <guid>https://daisy.github.io/ace/docs/cli/</guid>
       <description>Overview The easiest way to run Ace is to type this on the command line:
-$ ace ~/Documents/book.epub  You&amp;rsquo;ll then see a description of Ace&amp;rsquo;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify --outdir for that).
+$ ace ~/Documents/book.epub You&#39;ll then see a description of Ace&#39;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify --outdir for that).
 Example:
 info: Processing ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub info: Parsing EPUB info: Analyzing accessibility metadata info: Checking package.</description>
-    </item>
-    
-    <item>
-      <title>HTML Rules</title>
-      <link>https://daisy.github.io/ace/rules/html/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://daisy.github.io/ace/rules/html/</guid>
-      <description>Under the hood, most of the accessibility checks ran by Ace are powered by aXe, an engine for automated testing of HTML. Ace uses aXe&amp;rsquo;s rules, with some modifications (described here).
-Rules Here is a list of aXe&amp;rsquo;s rules used by Ace, taken from their documentation:
-   Rule Description     accesskeys Ensures every accesskey attribute value is unique.   area-alt Ensures &amp;lt;area&amp;gt; elements of image maps have alternate text.</description>
     </item>
     
     <item>
@@ -43,6 +32,17 @@ Rules Here is a list of aXe&amp;rsquo;s rules used by Ace, taken from their docu
 Submitting an issue You can first check the issue tracker to see if someone already reported the issue. Don’t forget to included the closed issues in your search in case we fixed it already!
 If you can’t find any mention of your issue in our tracker, please file a new issue!
 When filing an issue, please provide the following details:</description>
+    </item>
+    
+    <item>
+      <title>HTML Rules</title>
+      <link>https://daisy.github.io/ace/rules/html/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daisy.github.io/ace/rules/html/</guid>
+      <description>Under the hood, most of the accessibility checks ran by Ace are powered by aXe, an engine for automated testing of HTML. Ace uses aXe&#39;s rules, with some modifications (described here).
+Rules Here is a list of aXe&#39;s rules used by Ace, taken from their documentation:
+   Rule Description     accesskeys Ensures every accesskey attribute value is unique.   area-alt Ensures &amp;lt;area&amp;gt; elements of image maps have alternate text.</description>
     </item>
     
     <item>
@@ -103,7 +103,7 @@ What does Ace do? Specifically, Ace:
       
       <guid>https://daisy.github.io/ace/docs/report-html/</guid>
       <description>Ace outputs a human-readable report in HTML format, containing information about which automated tests failed, as well as extracted data visualizations, to highlight potential problem areas and to assist in manual checking.
-Note that the report looks best with javascript enabled, though it&amp;rsquo;s not required.
+Note that the report looks best with javascript enabled, though it&#39;s not required.
 After the header, which contains the Ace version, report date, and publication title, there are four sections, detailed below.
 Violations Summary of Violations This table lists statistics for the violations, in terms of severity: Critical, Serious, Moderate, or Minor; and by ruleset category: WCAG 2.</description>
     </item>
@@ -115,7 +115,7 @@ Violations Summary of Violations This table lists statistics for the violations,
       
       <guid>https://daisy.github.io/ace/getting-started/installation/</guid>
       <description>Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please visit this page.
-Install Node.JS  Go to Node.JS Download version 6.4.0 or higher Double-click to install  Install (or update) Ace  After installing Node, open a shell window  On Windows: Windows System-&amp;gt;Command Prompt or Start-&amp;gt;Run-&amp;gt;cmd.exe On Mac: Applications-&amp;gt;Utilities-&amp;gt;Terminal  Type npm install @daisy/ace -g to install or update Ace  If everything went smoothly, you should now be able to run the ace command in your shell.</description>
+Install Node.JS  Go to Node.JS Download version 6.4.0 or higher Double-click to install  Install (or update) Ace  After installing Node, open a shell window  On Windows: Windows System-&amp;gt;Command Prompt or Start-&amp;gt;Run-&amp;gt;cmd.exe On Mac: Applications-&amp;gt;Utilities-&amp;gt;Terminal   Type npm install @daisy/ace -g to install or update Ace  If everything went smoothly, you should now be able to run the ace command in your shell.</description>
     </item>
     
     <item>
@@ -134,7 +134,7 @@ Headless browser During the evaluation of an EPUB, Ace loads each HTML content d
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/docs/report-json/</guid>
-      <description>Ace&amp;rsquo;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of EARL (Evaluation and Reporting Language), Dublin Core, and custom terms.
+      <description>Ace&#39;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of EARL (Evaluation and Reporting Language), Dublin Core, and custom terms.
 Document structure Each example piece of the report shown below appears in order, in one JSON file.
  Header information Outlines Data Properties earl:testSubject for this EPUB file Accessibility metadata summary Assertions  Header information This gives basic information about Ace and when the report was created.</description>
     </item>
@@ -147,7 +147,7 @@ Document structure Each example piece of the report shown below appears in order
       <guid>https://daisy.github.io/ace/getting-started/running/</guid>
       <description>Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please visit this page.
 Checking an EPUB You can check an EPUB by running the ace command followed by the path to the EPUB document (if the file name includes spaces, place it inside &amp;quot; marks). For example:
-$ ace ~/Documents/moby-dick.epub  The above command will run the automated accessibility tests on the EPUB document and output the results.</description>
+$ ace ~/Documents/moby-dick.epub The above command will run the automated accessibility tests on the EPUB document and output the results.</description>
     </item>
     
     <item>
@@ -158,7 +158,7 @@ $ ace ~/Documents/moby-dick.epub  The above command will run the automated acces
       <guid>https://daisy.github.io/ace/docs/config/</guid>
       <description>Overview Ace can be configured through a config.json file located in an OS-specific directory:
  on Windows in &amp;quot;%HOME%\AppData\Local\DAISY Ace\Config\&amp;quot; on macOS in &amp;quot;~/Library/Preferences/DAISY\ Ace/&amp;quot; on Linux in &amp;quot;~/.config/DAISY Ace/&amp;quot;  Defaults The defaults for Ace configuration are:
-{ &amp;quot;cli&amp;quot;: { &amp;quot;return-2-on-validation-error&amp;quot;: false }, &amp;quot;logging&amp;quot;: { &amp;quot;fileName&amp;quot;: &amp;quot;ace.log&amp;quot;, &amp;quot;level&amp;quot;: &amp;quot;info&amp;quot; }, &amp;quot;output&amp;quot;: { &amp;quot;force&amp;quot;: false, &amp;quot;subdir&amp;quot;: false }, &amp;quot;report&amp;quot;: { &amp;quot;use-relative-paths&amp;quot;: true }, &amp;quot;runtime&amp;quot;: { &amp;quot;concurrencyLevel&amp;quot;: 4 } }  Reference cli.</description>
+{ &amp;#34;cli&amp;#34;: { &amp;#34;return-2-on-validation-error&amp;#34;: false }, &amp;#34;logging&amp;#34;: { &amp;#34;fileName&amp;#34;: &amp;#34;ace.log&amp;#34;, &amp;#34;level&amp;#34;: &amp;#34;info&amp;#34; }, &amp;#34;output&amp;#34;: { &amp;#34;force&amp;#34;: false, &amp;#34;subdir&amp;#34;: false }, &amp;#34;report&amp;#34;: { &amp;#34;use-relative-paths&amp;#34;: true }, &amp;#34;runtime&amp;#34;: { &amp;#34;concurrencyLevel&amp;#34;: 4 } } Reference cli.</description>
     </item>
     
     <item>
@@ -168,7 +168,7 @@ $ ace ~/Documents/moby-dick.epub  The above command will run the automated acces
       
       <guid>https://daisy.github.io/ace/getting-started/ace-app/</guid>
       <description>What is the Ace by DAISY App? Ace by DAISY App is the official graphical user interface for the EPUB accessibility checker developed by the DAISY Consortium. The Ace App is available for the Windows, MacOS and Linux desktop operating systems.
-Where can I download the Ace App? The latest version of the Ace App is 1.0.0-rc.1 (first &amp;ldquo;release candidate&amp;rdquo;). The application installers are distributed via the GitHub development website.</description>
+Where can I download the Ace App? The latest version of the Ace App is 1.0.0. The application installers are distributed via the GitHub development website. Here are convenient download links:</description>
     </item>
     
     <item>
@@ -188,7 +188,7 @@ Where can I download the Ace App? The latest version of the Ace App is 1.0.0-rc.
       
       <guid>https://daisy.github.io/ace/docs/http-api/</guid>
       <description>Starting the server After installing Ace, run the ace-http command from the terminal:
-$ ace-http info: [ace-http] server listening on http://localhost:8000  The command line options are printed when you run ace-http --help:
+$ ace-http info: [ace-http] server listening on http://localhost:8000 The command line options are printed when you run ace-http --help:
 Ace by DAISY, an Accessibility Checker for EPUB Usage: ace-http [options] Options: -h, --help output usage information -v, --version output the version number -H, --host set the server&#39;s hostname (default: localhost) -p, --port set the server&#39;s port (default: 8000) -V, --verbose display verbose output -s, --silent do not display any output -l, --lang &amp;lt;language&amp;gt; language code for localized messages (e.</description>
     </item>
     

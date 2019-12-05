@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -11,11 +11,11 @@
   </url>
   
   <url>
-    <loc>https://daisy.github.io/ace/rules/html/</loc>
+    <loc>https://daisy.github.io/ace/contributing/contributing/</loc>
   </url>
   
   <url>
-    <loc>https://daisy.github.io/ace/contributing/contributing/</loc>
+    <loc>https://daisy.github.io/ace/rules/html/</loc>
   </url>
   
   <url>
@@ -96,12 +96,10 @@
   
   <url>
     <loc>https://daisy.github.io/ace/categories/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daisy.github.io/ace/tags/</loc>
-    <priority>0</priority>
   </url>
   
 </urlset>

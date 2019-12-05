@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.60.1" />
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -321,35 +321,33 @@
 
 
     
-    
-
-<p><em>Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &ldquo;desktop application&rdquo; (as known as the Ace App), please <a href="/ace/getting-started/ace-app/">visit this page</a>.</em></p>
-
-<h2 id="install-node-js">Install Node.JS</h2>
-
+    <p><em>Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &ldquo;desktop application&rdquo; (as known as the Ace App), please <a href="/ace/getting-started/ace-app/">visit this page</a>.</em></p>
+<h2 id="install-nodejs">Install Node.JS</h2>
 <ul>
 <li>Go to <a href="https://nodejs.org/">Node.JS</a></li>
 <li>Download version 6.4.0 or higher</li>
 <li>Double-click to install</li>
 </ul>
-
 <h2 id="install-or-update-ace">Install (or update) Ace</h2>
-
 <ul>
 <li>After installing Node, open a shell window
-
 <ul>
 <li>On Windows: <code>Windows System-&gt;Command Prompt</code> <em>or</em> <code>Start-&gt;Run-&gt;cmd.exe</code></li>
 <li>On Mac: <code>Applications-&gt;Utilities-&gt;Terminal</code></li>
-</ul></li>
+</ul>
+</li>
 <li>Type <code>npm install @daisy/ace -g</code> to install or update Ace</li>
 </ul>
-
 <p>If everything went smoothly, you should now be able to run the <code>ace</code> command in your shell. You can test it out like this:</p>
-
 <pre><code>$ ace --version
 1.0.0
-</code></pre>
+</code></pre><!-- raw HTML omitted -->
+<p>The installation process will write various files on your computer, notably to the Node modules repository (typically located in <code>/usr/local/lib/node_modules</code> on macOS and Unix). Depending on your operating system configuration, you may or may not have the permissions to write files to these locations.</p>
+<p>We recommend that you first try to run the installation command with the default permissions (i.e., as it is written in the previous instructions). If it fails, you may need to run the installation command as a super-user, with the following command:</p>
+<pre><code>sudo npm install -g @daisy/ace --unsafe-perm=true --allow-root
+</code></pre><p>Note that the extra arguments are required to delegate the super-user permissions to the bundled Chromium installer.</p>
+<p>Please refer to the <a href="/ace/help/troubleshooting/">troubleshooting section</a> if you face any issues during the installation. As always, <a href="/ace/help/troubleshooting/">we welcome any feedback or suggestion</a> to improve our tool or its documentation!</p>
+<!-- raw HTML omitted -->
 
   </main>
 

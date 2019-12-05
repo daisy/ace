@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.60.1" />
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -419,85 +419,55 @@
 
 
     
-    
-
-<h2 id="overview">Overview</h2>
-
+    <h2 id="overview">Overview</h2>
 <p>Ace can be configured through a <code>config.json</code> file located in an OS-specific directory:</p>
-
 <ul>
 <li>on Windows in <code>&quot;%HOME%\AppData\Local\DAISY Ace\Config\&quot;</code></li>
 <li>on macOS in <code>&quot;~/Library/Preferences/DAISY\ Ace/&quot;</code></li>
 <li>on Linux in <code>&quot;~/.config/DAISY Ace/&quot;</code></li>
 </ul>
-
 <h2 id="defaults">Defaults</h2>
-
 <p>The defaults for Ace configuration are:</p>
-
-<pre><code class="language-json">{
-  &quot;cli&quot;: {
-    &quot;return-2-on-validation-error&quot;: false
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;cli&#34;</span>: {
+    <span style="color:#f92672">&#34;return-2-on-validation-error&#34;</span>: <span style="color:#66d9ef">false</span>
   },
-  &quot;logging&quot;: {
-    &quot;fileName&quot;: &quot;ace.log&quot;,
-    &quot;level&quot;: &quot;info&quot;
+  <span style="color:#f92672">&#34;logging&#34;</span>: {
+    <span style="color:#f92672">&#34;fileName&#34;</span>: <span style="color:#e6db74">&#34;ace.log&#34;</span>,
+    <span style="color:#f92672">&#34;level&#34;</span>: <span style="color:#e6db74">&#34;info&#34;</span>
   },
-  &quot;output&quot;: {
-    &quot;force&quot;: false,
-    &quot;subdir&quot;: false
+  <span style="color:#f92672">&#34;output&#34;</span>: {
+    <span style="color:#f92672">&#34;force&#34;</span>: <span style="color:#66d9ef">false</span>,
+    <span style="color:#f92672">&#34;subdir&#34;</span>: <span style="color:#66d9ef">false</span>
   },
-  &quot;report&quot;: {
-    &quot;use-relative-paths&quot;: true
+  <span style="color:#f92672">&#34;report&#34;</span>: {
+    <span style="color:#f92672">&#34;use-relative-paths&#34;</span>: <span style="color:#66d9ef">true</span>
   },
-  &quot;runtime&quot;: {
-    &quot;concurrencyLevel&quot;: 4
+  <span style="color:#f92672">&#34;runtime&#34;</span>: {
+    <span style="color:#f92672">&#34;concurrencyLevel&#34;</span>: <span style="color:#ae81ff">4</span>
   }
 }
-</code></pre>
-
-<h2 id="reference">Reference</h2>
-
-<h3 id="cli-return-2-on-validation-error"><code>cli.return-2-on-validation-error</code></h3>
-
-<p>Default: &ldquo;<code>false</code>&ldquo;</p>
-
+</code></pre></div><h2 id="reference">Reference</h2>
+<h3 id="clireturn2onvalidationerror"><code>cli.return-2-on-validation-error</code></h3>
+<p>Default: &ldquo;<code>false</code>&rdquo;</p>
 <p>Indicates whether the CLI should return with the error code <code>2</code> if any violations were found in the input publication.</p>
-
-<h3 id="logging-filename"><code>logging.fileName</code></h3>
-
-<p>Default: &ldquo;<code>info</code>&ldquo;</p>
-
+<h3 id="loggingfilename"><code>logging.fileName</code></h3>
+<p>Default: &ldquo;<code>info</code>&rdquo;</p>
 <p>The name of the file used by Ace to print a log of runtime messages. This file will reside in an OS-specific directory, as described in the <a href="https://daisy.github.io/ace/docs/logging/">logging documentation</a>.</p>
-
-<h3 id="logging-level"><code>logging.level</code></h3>
-
-<p>Default: &ldquo;<code>info</code>&ldquo;</p>
-
+<h3 id="logginglevel"><code>logging.level</code></h3>
+<p>Default: &ldquo;<code>info</code>&rdquo;</p>
 <p>Indicates the severity level above which a runtime message is logged. Accepted values are <code>error</code>, <code>warn</code>, <code>info</code>, <code>verbose</code> and <code>debug</code>.</p>
-
-<h3 id="output-force"><code>output.force</code></h3>
-
-<p>Default: &ldquo;<code>false</code>&ldquo;</p>
-
+<h3 id="outputforce"><code>output.force</code></h3>
+<p>Default: &ldquo;<code>false</code>&rdquo;</p>
 <p>Indicates whether to overwrite any files in the output directory when Ace saves a report in the file system.</p>
-
-<h3 id="output-subdir"><code>output.subdir</code></h3>
-
-<p>Default: &ldquo;<code>false</code>&ldquo;</p>
-
+<h3 id="outputsubdir"><code>output.subdir</code></h3>
+<p>Default: &ldquo;<code>false</code>&rdquo;</p>
 <p>Indicates whether to save reports in a subdirectory of the output directory. If set to <code>true</code>, the subdirectory will be named after the input EPUB document.</p>
-
-<h3 id="report-use-relative-paths"><code>report.use-relative-paths</code></h3>
-
-<p>Default: &ldquo;<code>true</code>&ldquo;</p>
-
+<h3 id="reportuserelativepaths"><code>report.use-relative-paths</code></h3>
+<p>Default: &ldquo;<code>true</code>&rdquo;</p>
 <p>Indicates whether the report uses relative or absolute paths.</p>
-
-<h3 id="runtime-concurrencylevel"><code>runtime.concurrencyLevel</code></h3>
-
-<p>Default: &ldquo;<code>4</code>&ldquo;</p>
-
+<h3 id="runtimeconcurrencylevel"><code>runtime.concurrencyLevel</code></h3>
+<p>Default: &ldquo;<code>4</code>&rdquo;</p>
 <p>The number of concurrent headless browser instances used to check HTML content.</p>
 
   </main>
