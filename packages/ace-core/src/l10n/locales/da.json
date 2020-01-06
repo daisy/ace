@@ -17,7 +17,7 @@
     "checkepub": {
         "metadatainvalid": {
             "kbtitle": "Metadata for tilgængelighed fra Schema.org",
-            "resdesc": "Brug en af metadata-værdierne defineret af schema.org",
+            "resdesc": "Brug en af metadata-værdierne defineret af Schema.org",
             "ruledesc": "'{{name}}' metadata-feltet skal have en tilladt værdi",
             "testdesc": "Værdien '{{value}}' er ikke tilladt for '{{name}}' metadata-feltet"
         },
