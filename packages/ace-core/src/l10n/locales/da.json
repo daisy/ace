@@ -24,13 +24,13 @@
         "metadataprintpagenumbers": {
             "kbtitle": "Metadata for tilgængelighed fra Schema.org",
             "resdesc": "Tilføj en liste over sider til navigations-dokumentet",
-            "ruledesc": "Når tilgængeligheds-egenskaben 'printPageNumbers' bruges, bør navigations dokumentet indeholde en liste over sider",
+            "ruledesc": "Når tilgængeligheds-egenskaben 'printPageNumbers' bruges, bør navigations-dokumentet indeholde en liste over sider",
             "testdesc": "Tilgængeligheds-egenskaben 'printPageNumbers' bruges, men ingen liste over sider er angivet"
         },
         "metadataviolation": {
             "kbtitle": "Metadata for tilgængelighed fra Schema.org",
             "resdesc": "Tilføj et '{{name}}' metadata-element til pakke-dokumentet",
-            "ruledesc": "Publikationen skal angive et '{{name}}' metadata element",
+            "ruledesc": "Publikationen skal angive et '{{name}}' metadata-element",
             "testdesc": "Sikrer at '{{name}}' metadata-elementet er til stede"
         },
         "pagesourceviolation": {
@@ -40,7 +40,7 @@
             "testdesc": "Sikrer at kilden til sideskift er identificeret"
         },
         "titleviolation": {
-            "kbtitle": "EPUB Titel",
+            "kbtitle": "EPUB titel",
             "resdesc": "Tilføj et 'dc:title' metadata-element til pakke-dokumentet",
             "ruledesc": "Publikationer skal have en titel",
             "testdesc": "Sikrer at EPUB'en har en titel"
