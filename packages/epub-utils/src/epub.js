@@ -12,8 +12,8 @@ tmp.setGracefulCleanup();
 
 const LOG_DEBUG_URLS = process.env.LOG_DEBUG_URLS === "1";
 
-async function unzip(path, useLegacyZipLib) {
-  const tmpdir = tmp.dirSync({ unsafeCleanup: true, keep: LOG_DEBUG_URLS }).name;
+async function unzip(unzipDir, path, useLegacyZipLib) {
+  const tmpdir = unzipDir || tmp.dirSync({ unsafeCleanup: true, keep: LOG_DEBUG_URLS }).name;
   if (LOG_DEBUG_URLS) {
     console.log(">>>>>> LOG_DEBUG_URLS");
     console.log(path);
@@ -70,7 +70,7 @@ async function unzip(path, useLegacyZipLib) {
   }); 
 }
 
-async function retryUnzip(epub, error) {
+async function retryUnzip(unzipDir, epub, error) {
   if (error.message === undefined) throw error;
   winston.info('Trying to repair the archive and unzip again...');
   try {
@@ -96,7 +96,7 @@ async function retryUnzip(epub, error) {
         }
       }
       fs.truncateSync(tmpEPUB, truncatedSize);
-      const res = await unzip(tmpEPUB, true);
+      const res = await unzip(unzipDir, unzipDirtmpEPUB, true);
       if (needsDelete) {
         process.nextTick(() => {
           fs.unlink(tmpEPUB);
@@ -127,7 +127,7 @@ class EPUB {
     return fs.statSync(this.path).isDirectory();
   }
 
-  async extract() {
+  async extract(unzipDir) {
     if (this.basedir !== undefined) {
       return this;
     } else if (this.expanded) {
@@ -138,17 +138,17 @@ class EPUB {
       winston.verbose('Extracting EPUB');
       let unzippedDir;
       try {
-        unzippedDir = await unzip(this.path);
+        unzippedDir = await unzip(unzipDir, this.path);
       } catch (error) {
         winston.error('Failed to unzip EPUB (the ZIP archive may be corrupt). TRYING LEGACY ZIP LIB ...');
         winston.debug(error);
         try {
-          unzippedDir = await unzip(this.path, true);
+          unzippedDir = await unzip(unzipDir, this.path, true);
         } catch (error) {
           winston.error('Failed to unzip EPUB again (the ZIP archive may be corrupt). TRYING ZIP PATCH ...');
           winston.debug(error);
           try {
-            unzippedDir = await retryUnzip(this, error);
+            unzippedDir = await retryUnzip(unzipDir, this, error);
           } catch (error) {
             throw error;
           }
