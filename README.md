@@ -16,7 +16,7 @@ Ace is a tool to run automated accessibility checks for EPUB Publications, in or
 
 It is important to keep in mind that only a limited portion of accessibility checks can be automated, and therefore __Ace is just a helper tool to assist in a broader, human-driven, evaluation process__.
 
-Under the hood, Ace currently runs the [aXe engine for automated testing of HTML](https://github.com/dequelabs/axe-core), developed by the good folks at Deque Systems.
+Under the hood, Ace currently runs the [axe engine for automated testing of HTML](https://github.com/dequelabs/axe-core), developed by the good folks at Deque Systems.
 
 ## Getting started
 
