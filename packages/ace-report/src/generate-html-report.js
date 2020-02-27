@@ -119,6 +119,17 @@ module.exports = function generateHtmlReport(reportData) {
         return new handlebars.SafeString('');
       }
     });
+    handlebars.registerHelper('insertCertifierCredentialRow', function(options) {
+      if (reportData['earl:testSubject'].hasOwnProperty('links') &&
+          reportData['earl:testSubject']['links'].hasOwnProperty('a11y:certifierCredential')) {
+            var certifierCredential = reportData['earl:testSubject']['links']['a11y:certifierCredential'];
+        return new handlebars.SafeString(`<tr><td>a11y:certifierCredential</td>
+          <td><a href="${certifierCredential}" target="_blank">${certifierCredential}</a></td></tr>`);
+      }
+      else {
+        return new handlebars.SafeString('');
+      }
+    });
 
     handlebars.registerHelper('generatedBy', function(options) {
        
