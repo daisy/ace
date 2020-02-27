@@ -1,7 +1,7 @@
 const common = require('./jest.config-common');
 module.exports = {
   ...common,
-  testPathIgnorePatterns: [
-    'tests/__tests__/cli'
-  ]
+  testPathIgnorePatterns: common.testPathIgnorePatterns.concat([
+    '<rootDir>/tests/__tests__/cli',
+  ]),
 };

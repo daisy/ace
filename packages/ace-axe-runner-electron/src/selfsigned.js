@@ -1,6 +1,6 @@
 
 const selfsigned = require('selfsigned');
-const uuid = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 function generateSelfSignedData() {
     return new Promise((resolve, reject) => {
@@ -17,7 +17,7 @@ function generateSelfSignedData() {
                 name: "subjectAltName",
             }],
         };
-        const rand = uuid.v4();
+        const rand = uuidv4();
         const attributes = [{ name: "commonName", value: "KB insecure server " + rand }];
 
         selfsigned.generate(attributes, opts, (err, keys) => {
