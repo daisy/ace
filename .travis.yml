@@ -14,8 +14,8 @@ script:
 #  - yarn snyk test
   - xvfb-run yarn test --runInBand
   - xvfb-run yarn test-cli --runInBand
-  - xvfb-run yarn test-electron --runInBand
-  - xvfb-run yarn test-electron-cli --runInBand
+#  - xvfb-run yarn test-electron --runInBand
+#  - xvfb-run yarn test-electron-cli --runInBand
 branches:
   only:
     - master
