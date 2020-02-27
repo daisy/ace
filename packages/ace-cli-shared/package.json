@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-cli-shared",
-  "version": "1.2.0-beta.6",
+  "version": "1.2.0-beta.7",
   "description": "Ace by DAISY, an Accessibility Checker for EPUB",
   "author": {
     "name": "DAISY developers",
@@ -22,7 +22,7 @@
     "@daisy/ace-core": "file:../ace-core",
     "@daisy/ace-logger": "file:../ace-logger",
     "@daisy/ace-meta": "file:../ace-meta",
-    "meow": "^5.0.0",
+    "meow": "^6.0.1",
     "winston": "^3.2.1"
   },
   "publishConfig": {

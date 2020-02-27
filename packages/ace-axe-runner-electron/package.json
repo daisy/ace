@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-axe-runner-electron",
-  "version": "1.2.0-beta.6",
+  "version": "1.2.0-beta.7",
   "description": "Electron-based Axe runner for Ace",
   "author": {
     "name": "DAISY developers",
@@ -22,10 +22,10 @@
     "express": "^4.17.1",
     "portfinder": "^1.0.25",
     "selfsigned": "^1.10.7",
-    "uuid": "^3.3.3"
+    "uuid": "^7.0.1"
   },
   "devDependencies": {
-    "electron": "^7.1.3",
+    "electron": "^8.0.2",
     "json": "^9.0.6",
     "json-diff": "^0.5.4"
   },

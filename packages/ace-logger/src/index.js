@@ -4,7 +4,7 @@ const { config, paths } = require('@daisy/ace-config');
 const fs = require('fs-extra');
 const path = require('path');
 const winston = require('winston');
-const uuid = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 const defaults = require('./defaults');
 
@@ -99,7 +99,7 @@ module.exports.initLogger = function initLogger(options = {}) {
   let logfile = path.join(paths.log, logConfigFileName);
   if (!disableWinstonFileTransport) {
     do {
-      let uniqueID = uuid.v4();
+      let uniqueID = uuidv4();
       const ext = path.extname(logConfigFileName);
       const baseName = path.basename(logConfigFileName, ext && ext.length ? ext : undefined);
       logfile = path.join(paths.log, `${baseName}_${dateNowFormatted}_${uniqueID}${ext}`);
