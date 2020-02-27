@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const uuidv4 = require('uuid/v4');
+const { v4: uuidv4 } = require('uuid');
 const multer = require('multer');
 const fs = require('fs');
 const zip = require('express-easy-zip');
