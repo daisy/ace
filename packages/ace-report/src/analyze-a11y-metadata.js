@@ -22,7 +22,9 @@ const a11yMeta = [
 "schema:accessibilityAPI",
 "schema:accessibilityControl",
 "a11y:certifiedBy",
-"dcterms:conformsTo"
+"a11y:certifierCredential",
+"a11y:certifierReport", //(link in EPUB3)
+"dcterms:conformsTo" //(link in EPUB3)
 ];
 
 
@@ -33,10 +35,11 @@ module.exports = {
     var results = {"missing": [], "empty": [], "present": []};
     a11yMeta.forEach(function(property) {
       if (metadata != undefined && property in metadata) {
+        const val = metadata[property];
         if (
-          (typeof metadata[property] === 'string' && metadata[property].trim().length > 0)
+          (typeof val === 'string' && val.trim().length > 0)
           ||
-          (Array.isArray(metadata[property]) && metadata[property].length > 0)
+          (Array.isArray(val) && val.length > 0)
           ){
           results["present"].push(property);
         }
@@ -45,10 +48,11 @@ module.exports = {
         }
       }
       else if (links != undefined && property in links) {
+        const val = links[property];
         if (
-          (typeof links[property] === 'string' && links[property].trim().length > 0)
+          (typeof val === 'string' && val.trim().length > 0)
           ||
-          (Array.isArray(links[property]) && links[property].length > 0)
+          (Array.isArray(val) && val.length > 0)
           ){
           results["present"].push(property);
         }
