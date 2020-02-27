@@ -108,6 +108,17 @@ module.exports = function generateHtmlReport(reportData) {
         return new handlebars.SafeString('');
       }
     });
+    handlebars.registerHelper('insertCertifierReportRow', function(options) {
+      if (reportData['earl:testSubject'].hasOwnProperty('links') &&
+          reportData['earl:testSubject']['links'].hasOwnProperty('a11y:certifierReport')) {
+            var certifierReport = reportData['earl:testSubject']['links']['a11y:certifierReport'];
+        return new handlebars.SafeString(`<tr><td>a11y:certifierReport</td>
+          <td><a href="${certifierReport}" target="_blank">${certifierReport}</a></td></tr>`);
+      }
+      else {
+        return new handlebars.SafeString('');
+      }
+    });
 
     handlebars.registerHelper('generatedBy', function(options) {
        
@@ -249,6 +260,14 @@ function createFlatListOfViolations(violations) {
         }
       });
 
+      let desc = item["earl:result"]["dct:description"];
+      if (item["earl:test"] && item["earl:test"]["dct:description"]) {
+        desc = `${desc} \n ${item["earl:test"]["dct:description"]}`;
+      }
+      if (item["earl:test"] && item["earl:test"]["help"] && item["earl:test"]["help"]["dct:description"]) {
+        desc = `${desc} \n ${item["earl:test"]["help"]["dct:description"]}`;
+      }
+
       var obj = {
         "file": filename,
         "fileTitle": filetitle,
@@ -256,7 +275,7 @@ function createFlatListOfViolations(violations) {
         "kburl": item["earl:test"]["help"]["url"],
         "kbtitle": item["earl:test"]["help"]["dct:title"],
         "rule": item["earl:test"]["dct:title"],
-        "desc": escape(item["earl:result"]["dct:description"]),
+        "desc": escape(desc),
         "pointer": item["earl:result"]["earl:pointer"],
         "impact": item["earl:test"]["earl:impact"],
         "location": filename,

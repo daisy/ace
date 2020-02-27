@@ -87,7 +87,18 @@ function parseMetadata(doc, select) {
     addMeta(`dc:${dcElem.localName}`, dcElem.textContent, result);
   });
   select('//opf:meta[not(@refines)]', doc).forEach((meta) => {
-    addMeta(meta.getAttribute('property'), meta.textContent, result);
+    const prop = meta.getAttribute('property');
+    if (prop) {
+      if (meta.textContent) {
+        addMeta(prop, meta.textContent, result);
+      }
+    } else {
+      const name = meta.getAttribute('name');
+      const content = meta.getAttribute('content');
+      if (name && content) {
+        addMeta(name, content, result);
+      }
+    }
   });
   return result;
 }
@@ -105,7 +116,7 @@ function addLink(rel, href, link) {
 function parseLinks(doc, select) {
   const result = {};
   select('//opf:link[not(@refines)]', doc).forEach((link) => {
-    addLink(link.getAttribute('rel'), decodeURI(link.getAttribute('href')), result);
+    addLink(link.getAttribute('rel') || link.getAttribute('property'), decodeURI(link.getAttribute('href')), result);
   });
   return result;
 }
