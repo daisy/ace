@@ -22,11 +22,10 @@ const a11yMeta = [
 "schema:accessibilityAPI",
 "schema:accessibilityControl",
 "a11y:certifiedBy",
-"a11y:certifierCredential",
+"a11y:certifierCredential", //(MAY BE link in EPUB3)
 "a11y:certifierReport", //(link in EPUB3)
 "dcterms:conformsTo" //(link in EPUB3)
 ];
-
 
 module.exports = {
   // each report is content doc level
