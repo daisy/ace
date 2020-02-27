@@ -83,10 +83,10 @@ function addMeta(name, value, meta) {
 }
 function parseMetadata(doc, select) {
   const result = {};
-  select('//dc:*', doc).forEach((dcElem) => {
+  select('/opf:package/opf:metadata/dc:*', doc).forEach((dcElem) => {
     addMeta(`dc:${dcElem.localName}`, dcElem.textContent, result);
   });
-  select('//opf:meta[not(@refines)]', doc).forEach((meta) => {
+  select('/opf:package/opf:metadata/opf:meta[not(@refines)]', doc).forEach((meta) => {
     const prop = meta.getAttribute('property');
     if (prop) {
       if (meta.textContent) {
@@ -115,7 +115,7 @@ function addLink(rel, href, link) {
 }
 function parseLinks(doc, select) {
   const result = {};
-  select('//opf:link[not(@refines)]', doc).forEach((link) => {
+  select('/opf:package/opf:metadata/opf:link[not(@refines)]', doc).forEach((link) => {
     addLink(link.getAttribute('rel') || link.getAttribute('property'), decodeURI(link.getAttribute('href')), result);
   });
   return result;
@@ -154,9 +154,9 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
   this.metadata = parseMetadata(doc, select);
   this.links = parseLinks(doc, select);
 
-  const spineItemIdrefs = select('//opf:itemref/@idref', doc);
+  const spineItemIdrefs = select('/opf:package/opf:spine/opf:itemref/@idref', doc);
   spineItemIdrefs.forEach((idref) => {
-    const manifestItem = select(`//opf:item[@id='${idref.nodeValue}']`, doc);
+    const manifestItem = select(`/opf:package/opf:manifest/opf:item[@id='${idref.nodeValue}']`, doc);
     if (manifestItem.length > 0) {
       const contentType = (manifestItem[0].getAttribute('media-type')||'').trim();
       if (this.contentDocMediaType === contentType) {
@@ -177,7 +177,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
     }
   });
 
-  const navDocRef = select('//opf:item'
+  const navDocRef = select('/opf:package/opf:manifest/opf:item'
                             + '[contains(concat(" ", normalize-space(@properties), " ")," nav ")]'
                             + '/@href', doc);
   if (navDocRef.length > 0) {
@@ -186,8 +186,9 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
     this.navDoc = parseNavDoc(navDocFullPath, epubDir);
   }
 
-  this.hasBindings = select('//opf:bindings', doc).length > 0;
-  this.hasManifestFallbacks = select('//opf:item[@fallback]', doc).length > 0;
+  this.hasGuide = select('/opf:package/opf:guide', doc).length > 0;
+  this.hasBindings = select('/opf:package/opf:bindings', doc).length > 0;
+  this.hasManifestFallbacks = select('/opf:package/opf:manifest/opf:item[@fallback]', doc).length > 0;
 };
 
 EpubParser.prototype.parseContentDocTitle = function(filepath) {
@@ -195,7 +196,7 @@ EpubParser.prototype.parseContentDocTitle = function(filepath) {
   //FIXME hack to workaround xmldom-alpha regex test
   const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml');
   const select = xpath.useNamespaces({html: "http://www.w3.org/1999/xhtml", epub: "http://www.idpf.org/2007/ops"});
-  const title = select('//html:title/text()', doc);
+  const title = select('/html:html/html:head/html:title/text()', doc);
   if (title.length > 0) {
     return title[0].nodeValue;
   }
@@ -209,7 +210,7 @@ EpubParser.prototype.calculatePackageDocPath = function(epubDir) {
   const content = fs.readFileSync(containerFilePath).toString();
   const doc = new DOMParser({errorHandler}).parseFromString(content);
   const select = xpath.useNamespaces({ ocf: 'urn:oasis:names:tc:opendocument:xmlns:container' });
-  const rootfiles = select('//ocf:rootfile[@media-type="application/oebps-package+xml"]/@full-path', doc);
+  const rootfiles = select('/ocf:container/ocf:rootfiles/ocf:rootfile[@media-type="application/oebps-package+xml"]/@full-path', doc);
   // just grab the first one as we're not handling the case of multiple renditions
   if (rootfiles.length > 0) {
     return (path.join(epubDir, decodeURI(rootfiles[0].nodeValue)));
