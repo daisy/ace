@@ -14,16 +14,16 @@ const A11Y_META = {
     required: true,
     allowedValues: [
       'auditory',
+      'tactile',
+      'textual',
+      'visual',
       'chartOnVisual',
       'chemOnVisual',
       'colorDependent',
       'diagramOnVisual',
       'mathOnVisual',
       'musicOnVisual',
-      'tactile',
       'textOnVisual',
-      'textual',
-      'visual',
     ]
   },
   'schema:accessModeSufficient': {
@@ -33,6 +33,13 @@ const A11Y_META = {
       'tactile',
       'textual',
       'visual',
+      'chartOnVisual',
+      'chemOnVisual',
+      'colorDependent',
+      'diagramOnVisual',
+      'mathOnVisual',
+      'musicOnVisual',
+      'textOnVisual',
     ]
   },
   'schema:accessibilityAPI': {
@@ -47,6 +54,7 @@ const A11Y_META = {
       'fullSwitchControl',
       'fullTouchControl',
       'fullVideoControl',
+      'fullAudioControl',
       'fullVoiceControl',
     ]
   },
