@@ -70,8 +70,8 @@ function loadUrl(browserWindow) {
     }
     browserWindow.loadURL(uareel, options);
 
-    const MILLISECONDS_TIMEOUT_INITIAL = 5000; // 5s max to load the window's web contents
-    const MILLISECONDS_TIMEOUT_EXTENSION = 35000; // 40s max to load + execute Axe checkers
+    const MILLISECONDS_TIMEOUT_INITIAL = 10000; // 10s max to load the window's web contents
+    const MILLISECONDS_TIMEOUT_EXTENSION = 240000; // 240s (4mn) max to load + execute Axe checkers
     const timeoutFunc = () => {
         if (browserWindow.ace__replySent) {
             browserWindow.ace__timeout = undefined;
