@@ -137,8 +137,8 @@ ace.getHeadings = function() {
 
   hxElems.forEach(function(hx) {
     let level = +hx.localName.slice(1);
-    if (Number.isNaN(level)) level = hx.getAttribute('aria-level');
-    if (Number.isNaN(level)) level = 2; // NOTE aria-level fallback value per ARIA spec
+    if (Number.isNaN(level)) level = +hx.getAttribute('aria-level');
+    if (level === 0) level = 2; // NOTE null coerced to 0; aria-level fallback value per ARIA spec is 2
     headings.push({
       html: hx.textContent,
       level: level
