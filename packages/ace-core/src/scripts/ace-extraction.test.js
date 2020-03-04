@@ -215,6 +215,20 @@ describe('extracting headings', () => {
     expect(results[0].html).toBe('title 1');
     expect(results[0].level).toBe(2);
   });
+
+  test('role=heading with negative aria-level', async () => {
+    const results = await run('getHeadings', '<div role="heading" aria-level="-1">title 1</div>');
+    expect(results.length).toBe(1);
+    expect(results[0].html).toBe('title 1');
+    expect(results[0].level).toBe(2);
+  });
+
+  test('role=heading with infinite aria-level', async () => {
+    const results = await run('getHeadings', '<div role="heading" aria-level="Infinity">title 1</div>');
+    expect(results.length).toBe(1);
+    expect(results[0].html).toBe('title 1');
+    expect(results[0].level).toBe(2);
+  });
 });
 
 describe('extracting iframes', () => {
