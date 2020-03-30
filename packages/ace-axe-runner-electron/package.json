@@ -22,10 +22,10 @@
     "express": "^4.17.1",
     "portfinder": "^1.0.25",
     "selfsigned": "^1.10.7",
-    "uuid": "^7.0.1"
+    "uuid": "^7.0.2"
   },
   "devDependencies": {
-    "electron": "^8.0.2",
+    "electron": "^8.2.0",
     "json": "^9.0.6",
     "json-diff": "^0.5.4"
   },

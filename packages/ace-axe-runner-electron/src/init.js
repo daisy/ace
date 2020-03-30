@@ -182,6 +182,8 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         return;
     }
 
+    app.allowRendererProcessReuse = false;
+
     app.on("certificate-error", (event, webContents, u, error, certificate, callback) => {
         if (u.indexOf(`${rootUrl}/`) === 0) {
             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert error OKAY ${u}`);

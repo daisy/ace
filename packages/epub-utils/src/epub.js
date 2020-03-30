@@ -21,15 +21,15 @@ async function unzip(unzipDir, path, useLegacyZipLib) {
   }
   return new Promise((resolve, reject) => {
     if (useLegacyZipLib) {
-      extractZip(path, { dir: tmpdir }, (err) => {
-        if (err) {
-          if (LOG_DEBUG_URLS) {
-            console.log(err);
-          }
-          reject(err);
-        } else {
-          resolve(tmpdir);
+      extractZip(path, { dir: tmpdir })
+      .then(() => {
+        resolve(tmpdir);
+      })
+      .catch((err) => {
+        if (LOG_DEBUG_URLS) {
+          console.log(err);
         }
+        reject(err);
       });
     } else {
       const zip = new StreamZip({

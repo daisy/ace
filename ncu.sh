@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ncu
+
 for relativefilepath in packages/*; do
     filename=`basename "${relativefilepath}"`
     echo "${filename} (${relativefilepath})"
