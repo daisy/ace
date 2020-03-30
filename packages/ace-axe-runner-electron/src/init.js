@@ -182,8 +182,6 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         return;
     }
 
-    app.allowRendererProcessReuse = true;
-
     app.on("certificate-error", (event, webContents, u, error, certificate, callback) => {
         if (u.indexOf(`${rootUrl}/`) === 0) {
             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert error OKAY ${u}`);
@@ -751,6 +749,7 @@ function startAxeServer(basedir, scripts, scriptContents) {
 }
 
 function prepareLaunch(eventEmmitter, CONCURRENT_INSTANCES) {
+
     eventEmmitter.on('AXE_RUNNER_LAUNCH', (event, arg) => {
         // const payload = eventEmmitter.ace_notElectronIpcMainRenderer ? event : arg;
         const sender = eventEmmitter.ace_notElectronIpcMainRenderer ? eventEmmitter : event.sender;

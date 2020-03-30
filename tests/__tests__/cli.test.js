@@ -72,7 +72,7 @@ describe('Running the CLI', () => {
       cwd: path.resolve(__dirname, '../data'),
     });
     expect(status).toBe(0);
-    expect(stderr).toBe(process.env.AXE_ELECTRON_RUNNER ? `(electron) The default value of app.allowRendererProcessReuse is deprecated, it is currently "false".  It will change to be "true" in Electron 9.  For more information please check https://github.com/electron/electron/issues/18397
+    expect(stderr).toBe(false && process.env.AXE_ELECTRON_RUNNER ? `(electron) The default value of app.allowRendererProcessReuse is deprecated, it is currently "false".  It will change to be "true" in Electron 9.  For more information please check https://github.com/electron/electron/issues/18397
 ` : '');
     expect(() => JSON.parse(stdout)).not.toThrow(SyntaxError);
     const res = JSON.parse(stdout);
