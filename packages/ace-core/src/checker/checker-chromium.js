@@ -107,8 +107,13 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
     const results = await axeRunner.run(url, scripts, scriptContents, epub.basedir);
 
     // Post-process results
-    results.assertions = (results.axe != null) ? axe2ace.axe2ace(spineItem, results.axe, lang) : [];
-    delete results.axe;
+    if (!results.axe) {
+      results.assertions = [];
+    } else {
+      results.assertions = await axe2ace.axe2ace(spineItem, results.axe, lang);
+      delete results.axe;
+    }
+
     winston.info(`- ${spineItem.relpath}: ${
       (results.assertions && results.assertions.assertions && results.assertions.assertions.length > 0)
         ? results.assertions.assertions.length
