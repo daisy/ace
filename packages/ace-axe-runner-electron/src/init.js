@@ -182,7 +182,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         return;
     }
 
-    app.allowRendererProcessReuse = false;
+    app.allowRendererProcessReuse = true;
 
     app.on("certificate-error", (event, webContents, u, error, certificate, callback) => {
         if (u.indexOf(`${rootUrl}/`) === 0) {
