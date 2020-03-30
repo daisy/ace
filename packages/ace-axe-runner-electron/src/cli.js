@@ -5,6 +5,10 @@ const app = electron.app;
 // const ipcMain = electron.ipcMain;
 // const ipcRenderer = electron.ipcRenderer;
 
+// Removes the deprecation warning message in the console
+// https://github.com/electron/electron/issues/18397
+app.allowRendererProcessReuse = true;
+
 const EventEmitter = require('events');
 class ElectronMockMainRendererEmitter extends EventEmitter {}
 const eventEmmitter = new ElectronMockMainRendererEmitter();
