@@ -11,8 +11,8 @@
 'use strict';
 
 const fileUrl = require('file-url');
-const DOMParser = require('xmldom-alpha').DOMParser;
-const XMLSerializer = require('xmldom-alpha').XMLSerializer;
+const DOMParser = require('xmldom').DOMParser;
+const XMLSerializer = require('xmldom').XMLSerializer;
 const fs = require('fs');
 const path = require('path');
 const xpath = require('xpath');
@@ -41,7 +41,10 @@ function EpubParser() {
 
 function parseNavDoc(fullpath, epubDir) {
   const content = fs.readFileSync(fullpath).toString();
-  //FIXME hack to workaround xmldom-alpha regex test
+  // not application/xhtml+xml because:
+  // https://github.com/jindw/xmldom/pull/208
+  // https://github.com/jindw/xmldom/pull/242
+  // https://github.com/xmldom/xmldom/blob/3db6ccf3f7ecbde73608490d71f96c727abdd69a/lib/dom-parser.js#L12
   const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml');
 
   // Remove all links
@@ -193,7 +196,10 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
 
 EpubParser.prototype.parseContentDocTitle = function(filepath) {
   const content = fs.readFileSync(filepath).toString();
-  //FIXME hack to workaround xmldom-alpha regex test
+  // not application/xhtml+xml because:
+  // https://github.com/jindw/xmldom/pull/208
+  // https://github.com/jindw/xmldom/pull/242
+  // https://github.com/xmldom/xmldom/blob/3db6ccf3f7ecbde73608490d71f96c727abdd69a/lib/dom-parser.js#L12
   const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml');
   const select = xpath.useNamespaces({html: "http://www.w3.org/1999/xhtml", epub: "http://www.idpf.org/2007/ops"});
   const title = select('/html:html/html:head/html:title/text()', doc);

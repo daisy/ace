@@ -23,7 +23,7 @@
     "jest-environment-node": "^25.2.4",
     "extract-zip": "^2.0.0",
     "node-stream-zip": "^1.9.1",
-    "xmldom-alpha": "^0.1.28",
+    "xmldom": "^0.3.0",
     "xpath": "^0.0.27",
     "escape-html": "^1.0.3",
     "handlebars": "^4.7.3",

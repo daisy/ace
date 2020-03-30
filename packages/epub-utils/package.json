@@ -24,7 +24,7 @@
     "node-stream-zip": "^1.9.1",
     "tmp": "^0.1.0",
     "winston": "^3.2.1",
-    "xmldom-alpha": "^0.1.28",
+    "xmldom": "^0.3.0",
     "xpath": "^0.0.27"
   },
   "publishConfig": {
