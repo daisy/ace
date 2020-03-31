@@ -51,6 +51,6 @@
     "i18n-scan": "npm run i18n-scan-ace-report && npm run i18n-scan-ace-report-axe && npm run i18n-scan-ace-core",
     "i18n-check": "sync-i18n --files 'packages/**/src/l10n/locales/*.json' --primary en --languages fr pt_BR es da --space 4 --finalnewline --newkeysempty",
     "clean-node-modules-daisy": "rimraf packages/*/node_modules/@daisy && rimraf node_modules/@daisy",
-    "ace-app-prepare": "yarn clean-all && rimraf yarn.lock && yarn install && yarn clean-node-modules-daisy && yarn build"
+    "ace-app-prepare": "rimraf yarn.lock && yarn clean-all && yarn install && yarn clean-node-modules-daisy && yarn build"
   }
 }
