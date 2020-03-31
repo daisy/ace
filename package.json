@@ -41,7 +41,7 @@
     "patchElectronJestRunner": "echo ';_electron.app.allowRendererProcessReuse = true;' >> './node_modules/@jest-runner/electron/build/electron_process_injected_code.js'",
     "test": "cross-env JEST_TESTS=1 jest --config=jest.config-puppeteer.js --runInBand --bail=1 --no-cache",
     "test-cli": "cross-env JEST_TESTS=1 jest --config=jest.config-cli.js --runInBand --bail=1 --no-cache",
-    "test-electron": "cross-env JEST_TESTS=1 AXE_ELECTRON_RUNNER=true jest --confighttps://github.com/daisy/ace/pull/316https://github.com/daisy/ace/pull/316https://github.com/daisy/ace/pull/316https://github.com/daisy/ace/pull/316=jest.config-electron.js --runInBand --bail=1 --no-cache",
+    "test-electron": "cross-env JEST_TESTS=1 AXE_ELECTRON_RUNNER=true jest --config=jest.config-electron.js --runInBand --bail=1 --no-cache",
     "test-electron-cli": "cross-env JEST_TESTS=1 AXE_ELECTRON_RUNNER=true jest --config=jest.config-cli.js --runInBand --bail=1 --no-cache",
     "watch": "yarn build && node ./scripts/watch.js",
     "i18n-sort": "node ./scripts/locales-sort.js",

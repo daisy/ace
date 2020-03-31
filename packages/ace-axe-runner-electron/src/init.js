@@ -2,7 +2,6 @@
 
 const path = require('path');
 const fs = require('fs');
-const fsOriginal = require('original-fs');
 const url = require('url');
 
 const electron = require('electron');
@@ -11,6 +10,8 @@ const session = electron.session;
 const BrowserWindow = electron.BrowserWindow;
 // const webContents = electron.webContents;
 // const ipcMain = electron.ipcMain;
+
+const fsOriginal = require('original-fs');
 
 const express = require('express');
 const portfinder = require('portfinder');
