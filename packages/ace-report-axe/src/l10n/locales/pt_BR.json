@@ -10,8 +10,8 @@
         "aria-roles": "ARIA",
         "aria-valid-attr": "ARIA",
         "aria-valid-attr-value": "ARIA",
+        "audio-caption": "Audio",
         "button-name": "Formulários",
-        "style": "Style",
         "checkboxgroup": "Formulários",
         "color-contrast": "Cor",
         "definition-list": "Listas",
@@ -45,6 +45,7 @@
         "radiogroup": "Formulários",
         "scope-attr-valid": "Tabelas",
         "server-side-image-map": "Mapas de Imagem",
+        "style": "Style",
         "table-duplicate-name": "Tabelas",
         "table-fake-caption": "Tabelas",
         "td-has-header": "Tabelas",
@@ -52,8 +53,7 @@
         "th-has-data-cells": "Tabelas",
         "valid-lang": "Idioma",
         "video-caption": "Vídeo",
-        "video-description": "Vídeo",
-        "audio-caption": "Audio"
+        "video-description": "Vídeo"
     },
     "nokb": "(nenhuma entrada específica)"
 }

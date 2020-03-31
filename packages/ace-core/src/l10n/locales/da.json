@@ -1,0 +1,49 @@
+{
+    "axecheck": {
+        "matching-aria-role": {
+            "fail": "Elementet har ingen ARIA rolle, som matcher 'epub:type'",
+            "pass": "Elementet har en ARIA rolle, som matcher 'epub:type'"
+        }
+    },
+    "axerule": {
+        "epub-type-has-matching-role": {
+            "desc": "Sikrer at elementet har en ARIA rolle, som matcher 'epub:type'",
+            "help": "ARIA rolle skal være til stede og matche den angivne 'epub:type'"
+        },
+        "pagebreak-label": {
+            "desc": "Sikrer at sidemarkører har en tilgængelig etiket ('label')"
+        }
+    },
+    "checkepub": {
+        "metadatainvalid": {
+            "kbtitle": "Metadata for tilgængelighed fra Schema.org",
+            "resdesc": "Brug en af metadata-værdierne defineret af Schema.org",
+            "ruledesc": "'{{name}}' metadata-feltet skal have en tilladt værdi",
+            "testdesc": "Værdien '{{value}}' er ikke tilladt for '{{name}}' metadata-feltet"
+        },
+        "metadataprintpagenumbers": {
+            "kbtitle": "Metadata for tilgængelighed fra Schema.org",
+            "resdesc": "Tilføj en liste over sider til navigations-dokumentet",
+            "ruledesc": "Når tilgængeligheds-egenskaben 'printPageNumbers' bruges, bør navigations-dokumentet indeholde en liste over sider",
+            "testdesc": "Tilgængeligheds-egenskaben 'printPageNumbers' bruges, men ingen liste over sider er angivet"
+        },
+        "metadataviolation": {
+            "kbtitle": "Metadata for tilgængelighed fra Schema.org",
+            "resdesc": "Tilføj et '{{name}}' metadata-element til pakke-dokumentet",
+            "ruledesc": "Publikationen skal angive et '{{name}}' metadata-element",
+            "testdesc": "Sikrer at '{{name}}' metadata-elementet er til stede"
+        },
+        "pagesourceviolation": {
+            "kbtitle": "Sidenavigation",
+            "resdesc": "Tilføj et 'dc:source' metadata-element til pakke-dokumentet",
+            "ruledesc": "Publikationer med sideskift skal angive et 'dc:source' metadata-element",
+            "testdesc": "Sikrer at kilden til sideskift er identificeret"
+        },
+        "titleviolation": {
+            "kbtitle": "EPUB titel",
+            "resdesc": "Tilføj et 'dc:title' metadata-element til pakke-dokumentet",
+            "ruledesc": "Publikationer skal have en titel",
+            "testdesc": "Sikrer at EPUB'en har en titel"
+        }
+    }
+}
