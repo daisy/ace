@@ -10,8 +10,8 @@
         "aria-roles": "ARIA",
         "aria-valid-attr": "ARIA",
         "aria-valid-attr-value": "ARIA",
+        "audio-caption": "Audio",
         "button-name": "Formulaires",
-        "style": "Style",
         "checkboxgroup": "Formulaires",
         "color-contrast": "Couleur",
         "definition-list": "Listes",
@@ -45,6 +45,7 @@
         "radiogroup": "Formulaires",
         "scope-attr-valid": "Tableaux",
         "server-side-image-map": "Cartes Imagées",
+        "style": "Style",
         "table-duplicate-name": "Tableaux",
         "table-fake-caption": "Tableaux",
         "td-has-header": "Tableaux",
@@ -52,8 +53,7 @@
         "th-has-data-cells": "Tableaux",
         "valid-lang": "Langue",
         "video-caption": "Vidéo",
-        "video-description": "Vidéo",
-        "audio-caption": "Audio"
+        "video-description": "Vidéo"
     },
     "nokb": "(pas d'entrée spécifique)"
 }
