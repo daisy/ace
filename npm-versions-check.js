@@ -103,10 +103,21 @@ for (const dir of dirs) {
     }
 
     p(chalk.italic(`> node_modules:`)); newline();
-    const subModulesFolderPath = path.join("packages", dir, "node_modules");
+    const subModulesFolderPath = dir === "." ? "node_modules" : path.join("packages", dir, "node_modules");
     if (fs.existsSync(subModulesFolderPath)) {
-        const subDirs = getDirectories(subModulesFolderPath).filter(folderName => folderName !== ".bin");
-        for (const subDir of subDirs) {
+        const subDirsAll = getDirectories(subModulesFolderPath);
+        const subDirs = subDirsAll.filter(folderName => folderName !== ".bin" && folderName !== "@daisy" && !folderName.startsWith("@"));
+        const subDirsScoped = subDirsAll.filter(folderName => folderName !== "@daisy" && folderName.startsWith("@"));
+        for (const subDirScoped of subDirsScoped) {
+            const subDirScopedPackFolders = getDirectories(path.join(subModulesFolderPath, subDirScoped));
+            // p(subDirScoped);
+            // p(JSON.stringify(subDirScopedPackFolder, null, 4)); newline();
+            for (const subDirScopedPackFolder of subDirScopedPackFolders) {
+                subDirs.push(`${subDirScoped}/${subDirScopedPackFolder}`);
+            }
+        }
+        const subDirsDirect = subDirs.filter(packName => packageJsonsChecked[packName]);
+        for (const subDir of subDirsDirect) {
             const subPackJson = path.join(subModulesFolderPath, subDir, "package.json");
             const json = JSON.parse(fs.readFileSync(subPackJson, 'utf8'));
             p(chalk.reset.bold.magenta(`\u2022 ${subDir}`));
