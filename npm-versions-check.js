@@ -5,13 +5,12 @@ const chalk = require('chalk');
 const getDirectories = dirPath =>
     fs.readdirSync(dirPath, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name)
-    .filter(dirname => dirname !== "ace-core-legacy");
+    .map(dirent => dirent.name);
 
 const p = (...args) => process.stdout.write(...args);
 const newline = () => p("\n");
 
-const dirs = getDirectories("packages");
+const dirs = getDirectories("packages").filter(dirname => dirname !== "ace-core-legacy");
 
 p(JSON.stringify(dirs, null, 4)); newline();
 
@@ -25,10 +24,12 @@ for (const dir of dirs) {
 dirs.push(".");
 packageJsons["."] = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json"), 'utf8'));
 
+const lineStr = "=".repeat(50);
+
 for (const dir of dirs) {
-    p(chalk.yellow("=".repeat(50))); newline();
+    p(chalk.yellow(lineStr)); newline();
     p(chalk.inverse(`${dir}`)); newline();
-    p(chalk.yellow("=".repeat(50))); newline();
+    p(chalk.yellow(lineStr)); newline();
     const packageJson = packageJsons[dir];
 
     for (const depType of depTypes) {
@@ -64,7 +65,7 @@ for (const dir of dirs) {
                         if (packVersion !== verFixed) {
                             p(chalk.reset.bold.red(` TOP DIFF (${packVersion})`));
                         } else {
-                            p(chalk.reset.bold.greenBright(` TOP OK`));
+                            p(chalk.reset.bold.green(` TOP OK`));
                         }
                     } else {
                         p(chalk.reset.bold.yellow(` TOP NOPE`));
@@ -86,7 +87,7 @@ for (const dir of dirs) {
                             if (packVersion_ !== verFixed) {
                                 p(chalk.reset.bold.red(` SUB DIFF (${packVersion_})`));
                             } else {
-                                p(chalk.reset.bold.greenBright(` SUB OK`));
+                                p(chalk.reset.bold.green(` SUB OK`));
                             }
                         } else {
                             p(chalk.reset.bold.yellow(` SUB NOPE`));
@@ -98,6 +99,20 @@ for (const dir of dirs) {
                     newline();
                 }
             }
+        }
+    }
+
+    p(chalk.italic(`> node_modules:`)); newline();
+    const subModulesFolderPath = path.join("packages", dir, "node_modules");
+    if (fs.existsSync(subModulesFolderPath)) {
+        const subDirs = getDirectories(subModulesFolderPath).filter(folderName => folderName !== ".bin");
+        for (const subDir of subDirs) {
+            const subPackJson = path.join(subModulesFolderPath, subDir, "package.json");
+            const json = JSON.parse(fs.readFileSync(subPackJson, 'utf8'));
+            p(chalk.reset.bold.magenta(`\u2022 ${subDir}`));
+            p(chalk.dim(" ⇒ "));
+            p(chalk.reset.bold.gray(`${json.version}`));
+            newline();
         }
     }
 }
