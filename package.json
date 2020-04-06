@@ -37,7 +37,7 @@
     "docs": "echo docs script not implemented",
     "lint": "echo lint script not implemented",
     "postinstall": "yarn npmVersionsCheck && yarn build && yarn patchElectronJestRunner",
-    "npmVersionsCheck": "node ./npm-versions-check.js",
+    "npmVersionsCheck": "node ./scripts/npm-versions-check.js",
     "patchElectronJestRunner": "echo ';_electron.app.allowRendererProcessReuse = true;' >> './node_modules/@jest-runner/electron/build/electron_process_injected_code.js'",
     "test": "cross-env JEST_TESTS=1 jest --config=jest.config-puppeteer.js --runInBand --bail=1 --no-cache",
     "test-cli": "cross-env JEST_TESTS=1 jest --config=jest.config-cli.js --runInBand --bail=1 --no-cache",
