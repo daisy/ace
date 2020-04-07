@@ -152,9 +152,8 @@ ${overrides.map(file => `  - ${file}`).join('\n')}
     quit(fail ? 2 : 0);
   })
   .catch(async (err) => {
-    if (err && err.message) {
-      winston.error(err.message);
-    }
+    winston.error(err.message ? err.message : err);
+    if (err.stack) winston.debug(err.stack);
     
     const res = await winston.logAndWaitFinish('info', 'Closing logs.');
     console.log('Re-run Ace using the --verbose option to enable full debug logging.');

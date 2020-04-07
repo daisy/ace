@@ -90,8 +90,8 @@ module.exports = function ace(epubPath, options, axeRunner) {
         resolve([jobId, report.json]);
       })
       .catch((err) => {
-        winston.error(`Unexpected error: ${(err.message !== undefined) ? err.message : err}`);
-        if (err.stack !== undefined) winston.debug(err.stack);
+        winston.error(`Ace processing error: ${err.message ? err.message : err}`);
+        if (err.stack) winston.debug(err.stack);
         reject(err);
       });
     }
