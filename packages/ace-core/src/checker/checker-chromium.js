@@ -180,8 +180,10 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
     return results;
   } catch (err) {
     console.log(err);
-    winston.debug(`Error when running HTML checks: ${err}`);
-    throw new Error(`Failed to check Content Document '${spineItem.relpath}'`);
+    winston.debug(`Error when running HTML checks: ${err.message ? err.message : err}`);
+    if (err.stack) winston.debug(err.stack);
+
+    throw new Error(`Failed to check Content Document '${spineItem.relpath}': ${err.message ? err.message : err}`);
   }
 }
 
@@ -193,8 +195,11 @@ module.exports.check = async (epub, lang, axeRunner) => {
     await axeRunner.close();
     return results;
   }).catch(async (err) => {
-    winston.info(`Error HTML check: ${err}`);
+    winston.error(`Ace HTML check error: ${err.message ? err.message : err}`);
+    if (err.stack) winston.debug(err.stack);
+
     await axeRunner.close();
-    return [];
+
+    throw new Error(err);
   });
 };
