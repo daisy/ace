@@ -127,7 +127,7 @@ ace.getHTMLOutline = function() {
 }
 
 ace.getHeadings = function() {
-  let hxElems = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  let hxElems = document.querySelectorAll('h1, h2, h3, h4, h5, h6, [role="heading"]');
   let headings = [];
   // FIXME filter headings in sectioning roots
   // function findSectioningRoot (el, cls) {
@@ -136,9 +136,12 @@ ace.getHeadings = function() {
   // }
 
   hxElems.forEach(function(hx) {
+    let level = +hx.localName.slice(1);
+    if (Number.isNaN(level)) level = +hx.getAttribute('aria-level');
+    if (!Number.isInteger(level) || level < 1) level = 2; // NOTE aria-level fallback value per ARIA spec is 2 (and avoid Infinity)
     headings.push({
       html: hx.textContent,
-      level: +hx.localName.slice(1)
+      level: level
     });
   });
 
