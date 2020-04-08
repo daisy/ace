@@ -217,7 +217,7 @@ function checkMetadata(assertions, epub) {
               assertions.withAssertions(newViolation({
                 impact: 'moderate',
                 title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
-                testDesc: localize("checkepub.metadatainvalid.testdesc", { splitValue, name, interpolation: { escapeValue: false } }),
+                testDesc: localize("checkepub.metadatainvalid.testdesc", { value: splitValue, name, interpolation: { escapeValue: false } }),
                 resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
                 kbPath: 'docs/metadata/schema-org.html',
                 kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
