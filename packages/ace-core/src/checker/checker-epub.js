@@ -206,7 +206,10 @@ function checkMetadata(assertions, epub) {
           // comma-separated only! (not space-separated)
           // regexp note: /\s\s+/g === /\s{2,}/g
           // no whitespace collapsing, individual items can contain (incorrect) whitespaces, which will be reported
-          const splitValues = value.trim().split(',').map(item => item.trim()).filter(item => item.length);
+          const splitValues =
+            name === 'schema:accessModeSufficient' ?
+              value.trim().split(',').map(item => item.trim()).filter(item => item.length) :
+              [value];
 
           if (meta.allowedValues) {
             splitValues.filter(splitValue => !meta.allowedValues.includes(splitValue))

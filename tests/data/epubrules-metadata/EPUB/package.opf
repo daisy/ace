@@ -13,6 +13,8 @@
   <meta property="schema:accessibilityHazard">noMotionSimulationHazard</meta>
   <!-- Fail #2: bad metadata value -->
   <meta property="schema:accessMode">text</meta>
+  <!-- Fail #3: good metadata values, but not allowed to combine (unlike accessModeSufficient) -->
+  <meta property="schema:accessibilityControl">fullKeyboardControl,fullMouseControl</meta>
   <meta property="schema:accessModeSufficient">visual,textual</meta>
 </metadata>
 <manifest>
