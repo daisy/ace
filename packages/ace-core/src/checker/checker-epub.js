@@ -9,8 +9,11 @@ const ASSERTED_BY = 'Ace';
 const MODE = 'automatic';
 const KB_BASE = 'http://kb.daisy.org/publishing/';
 
+// http://kb.daisy.org/publishing/docs/metadata/schema-org.html
+// http://kb.daisy.org/publishing/docs/metadata/evaluation.html
+
 const A11Y_META = {
-  'schema:accessMode': {
+  'schema:accessMode': { // single value, no comma-separated combinations (can be repeated though)
     required: true,
     allowedValues: [
       'auditory',
@@ -26,7 +29,7 @@ const A11Y_META = {
       'textOnVisual',
     ]
   },
-  'schema:accessModeSufficient': {
+  'schema:accessModeSufficient': { // the only one that can combine comma-separated values (can be repeated)
     recommended: true,
     allowedValues: [
       'auditory',
@@ -42,12 +45,12 @@ const A11Y_META = {
       'textOnVisual',
     ]
   },
-  'schema:accessibilityAPI': {
+  'schema:accessibilityAPI': { // single value, no comma-separated combinations (can be repeated though)
     allowedValues: [
       'ARIA'
     ]
   },
-  'schema:accessibilityControl': {
+  'schema:accessibilityControl': { // single value, no comma-separated combinations (can be repeated though)
     allowedValues: [
       'fullKeyboardControl',
       'fullMouseControl',
@@ -58,7 +61,7 @@ const A11Y_META = {
       'fullVoiceControl',
     ]
   },
-  'schema:accessibilityFeature': {
+  'schema:accessibilityFeature': { // single value, no comma-separated combinations (can be repeated though)
     required: true,
     allowedValues: [
       'alternativeText',
@@ -94,7 +97,7 @@ const A11Y_META = {
       'unlocked',
     ],
   },
-  'schema:accessibilityHazard': {
+  'schema:accessibilityHazard': { // single value, no comma-separated combinations (can be repeated though)
     allowedValues: [
       'flashing',
       'noFlashingHazard',
@@ -106,7 +109,7 @@ const A11Y_META = {
       'none',
     ]
   },
-  'schema:accessibilitySummary': {
+  'schema:accessibilitySummary': { // this should not be repeated? See "metadatamultiple" below
     required: true,
   }
 };
@@ -153,6 +156,17 @@ function newMetadataAssertion(name, impact = 'serious') {
     ruleDesc: localize("checkepub.metadataviolation.ruledesc", { name, interpolation: { escapeValue: false } })
   });
 }
+// newMetadataAssertion =>
+// "metadataviolation"
+//   "Add a '{{name}}' metadata property to the Package Document",
+//   "Publications must declare the '{{name}}' metadata",
+//   "Ensures a '{{name}}' metadata is present"
+
+// otherwise custom newViolation() =>
+// "metadatainvalid"
+//   "Use one of the metadata values defined by schema.org",
+//   "'{{name}}' metadata must be set to one of the expected values",
+//   "Value '{{value}}' is invalid for '{{name}}' metadata"
 
 function checkMetadata(assertions, epub) {
   // Check metadata values
@@ -167,38 +181,64 @@ function checkMetadata(assertions, epub) {
       if (!Array.isArray(values)) {
         values = [values]
       }
-      // Parse list values
-      values = values.map(value => value.trim().replace(',', ' ').replace(/\s{2,}/g, ' ').split(' '))
-      values = [].concat(...values);
-      // Check metadata values are allowed
-      // see https://www.w3.org/wiki/WebSchemas/Accessibility
-      if (meta.allowedValues) {
-        values.filter(value => !meta.allowedValues.includes(value))
-        .forEach(value => {
-          assertions.withAssertions(newViolation({
-            impact: 'moderate',
-            title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
-            testDesc: localize("checkepub.metadatainvalid.testdesc", { value, name, interpolation: { escapeValue: false } }),
-            resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
-            kbPath: 'docs/metadata/schema-org.html',
-            kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
-            ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
-          }))
+
+      // TODO?
+      // "metadatamultiple" would be new localizable label for this kind of error!
+      //   "A single occurence of schema.org metadata is expected",
+      //   "Metadata '{{name}}' should not appear more than once",
+      //   "Metadata '{{name}}' with value '{{value}}' is defined several times"
+      // if (name === 'schema:accessibilitySummary' && values.length > 1) {
+      //   assertions.withAssertions(newViolation({
+      //     impact: 'minor',
+      //     title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
+      //     testDesc: localize("checkepub.metadatamultiple.testdesc", { value, name, interpolation: { escapeValue: false } }),
+      //     resDesc: localize("checkepub.metadatamultiple.resdesc", { name, interpolation: { escapeValue: false } }),
+      //     kbPath: 'docs/metadata/schema-org.html',
+      //     kbTitle: localize("checkepub.metadatamultiple.kbtitle"),
+      //     ruleDesc: localize("checkepub.metadatamultiple.ruledesc", { name, interpolation: { escapeValue: false } })
+      //   }))
+      // }
+
+      if (meta.allowedValues) { // effectively excludes schema:accessibilitySummary
+
+        values.forEach(value => {
+
+          // comma-separated only! (not space-separated)
+          // regexp note: /\s\s+/g === /\s{2,}/g
+          // no whitespace collapsing, individual items can contain (incorrect) whitespaces, which will be reported
+          const splitValues = value.trim().split(',').map(item => item.trim()).filter(item => item.length);
+
+          if (meta.allowedValues) {
+            splitValues.filter(splitValue => !meta.allowedValues.includes(splitValue))
+            .forEach(splitValue => {
+              assertions.withAssertions(newViolation({
+                impact: 'moderate',
+                title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
+                testDesc: localize("checkepub.metadatainvalid.testdesc", { splitValue, name, interpolation: { escapeValue: false } }),
+                resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
+                kbPath: 'docs/metadata/schema-org.html',
+                kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
+                ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
+              }))
+            });
+          }
+  
+          // Check consistency of the printPageNumbers feature
+          if (name === 'schema:accessibilityFeature'
+            && splitValues.includes('printPageNumbers')
+            && !epub.navDoc.hasPageList) {
+    
+            assertions.withAssertions(newViolation({
+              impact: 'moderate',
+              title: `metadata-accessibilityFeature-printPageNumbers-nopagelist`,
+              testDesc: localize("checkepub.metadataprintpagenumbers.testdesc", {}),
+              resDesc: localize("checkepub.metadataprintpagenumbers.resdesc", {}),
+              kbPath: 'docs/metadata/schema-org.html',
+              kbTitle: localize("checkepub.metadataprintpagenumbers.kbtitle"),
+              ruleDesc: localize("checkepub.metadataprintpagenumbers.ruledesc", {})
+            }))
+          }
         });
-      }
-      // Check consistency of the printPageNumbers feature
-      if (name === 'schema:accessibilityFeature' 
-      && values.includes('printPageNumbers')
-      && !epub.navDoc.hasPageList) {
-        assertions.withAssertions(newViolation({
-          impact: 'moderate',
-          title: `metadata-accessibilityFeature-printPageNumbers-nopagelist`,
-          testDesc: localize("checkepub.metadataprintpagenumbers.testdesc", {}),
-          resDesc: localize("checkepub.metadataprintpagenumbers.resdesc", {}),
-          kbPath: 'docs/metadata/schema-org.html',
-          kbTitle: localize("checkepub.metadataprintpagenumbers.kbtitle"),
-          ruleDesc: localize("checkepub.metadataprintpagenumbers.ruledesc", {})
-        }))
       }
     }
   }
