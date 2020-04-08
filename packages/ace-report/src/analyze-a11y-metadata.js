@@ -14,6 +14,7 @@
 const winston = require('winston');
 
 const a11yMeta = [
+// http://kb.daisy.org/publishing/docs/metadata/schema-org.html
 "schema:accessMode",
 "schema:accessibilityFeature",
 "schema:accessibilityHazard",
@@ -21,6 +22,9 @@ const a11yMeta = [
 "schema:accessModeSufficient",
 "schema:accessibilityAPI",
 "schema:accessibilityControl",
+// (see A11Y_META in ace-core)
+
+// http://kb.daisy.org/publishing/docs/metadata/evaluation.html
 "a11y:certifiedBy",
 "a11y:certifierCredential", //(MAY BE link in EPUB3)
 "a11y:certifierReport", //(link in EPUB3)
