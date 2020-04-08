@@ -5,114 +5,11 @@ const winston = require('winston');
 
 const { localize } = require('../l10n/localize').localizer;
 
+const a11yMetadata = require('../core/a11y-metadata');
+
 const ASSERTED_BY = 'Ace';
 const MODE = 'automatic';
 const KB_BASE = 'http://kb.daisy.org/publishing/';
-
-// http://kb.daisy.org/publishing/docs/metadata/schema-org.html
-// http://kb.daisy.org/publishing/docs/metadata/evaluation.html
-
-const A11Y_META = {
-  'schema:accessMode': { // single value, no comma-separated combinations (can be repeated though)
-    required: true,
-    allowedValues: [
-      'auditory',
-      'tactile',
-      'textual',
-      'visual',
-      'chartOnVisual',
-      'chemOnVisual',
-      'colorDependent',
-      'diagramOnVisual',
-      'mathOnVisual',
-      'musicOnVisual',
-      'textOnVisual',
-    ]
-  },
-  'schema:accessModeSufficient': { // the only one that can combine comma-separated values (can be repeated)
-    recommended: true,
-    allowedValues: [
-      'auditory',
-      'tactile',
-      'textual',
-      'visual',
-      'chartOnVisual',
-      'chemOnVisual',
-      'colorDependent',
-      'diagramOnVisual',
-      'mathOnVisual',
-      'musicOnVisual',
-      'textOnVisual',
-    ]
-  },
-  'schema:accessibilityAPI': { // single value, no comma-separated combinations (can be repeated though)
-    allowedValues: [
-      'ARIA'
-    ]
-  },
-  'schema:accessibilityControl': { // single value, no comma-separated combinations (can be repeated though)
-    allowedValues: [
-      'fullKeyboardControl',
-      'fullMouseControl',
-      'fullSwitchControl',
-      'fullTouchControl',
-      'fullVideoControl',
-      'fullAudioControl',
-      'fullVoiceControl',
-    ]
-  },
-  'schema:accessibilityFeature': { // single value, no comma-separated combinations (can be repeated though)
-    required: true,
-    allowedValues: [
-      'alternativeText',
-      'annotations',
-      'audioDescription',
-      'bookmarks',
-      'braille',
-      'captions',
-      'ChemML',
-      'describedMath',
-      'displayTransformability',
-      'highContrastAudio',
-      'highContrastDisplay',
-      'index',
-      'largePrint',
-      'latex',
-      'longDescription',
-      'MathML',
-      'none',
-      'printPageNumbers',
-      'readingOrder',
-      'rubyAnnotations',
-      'signLanguage',
-      'structuralNavigation',
-      'synchronizedAudioText',
-      'tableOfContents',
-      'taggedPDF',
-      'tactileGraphic',
-      'tactileObject',
-      'timingControl',
-      'transcript',
-      'ttsMarkup',
-      'unlocked',
-    ],
-  },
-  'schema:accessibilityHazard': { // single value, no comma-separated combinations (can be repeated though)
-    allowedValues: [
-      'flashing',
-      'noFlashingHazard',
-      'motionSimulation',
-      'noMotionSimulationHazard',
-      'sound',
-      'noSoundHazard',
-      'unknown',
-      'none',
-    ]
-  },
-  'schema:accessibilitySummary': { // this should not be repeated? See "metadatamultiple" below
-    required: true,
-  }
-};
 
 function asString(arrayOrString) {
   if (Array.isArray(arrayOrString) && arrayOrString.length > 0) {
@@ -170,8 +67,8 @@ function newMetadataAssertion(name, impact = 'serious') {
 
 function checkMetadata(assertions, epub) {
   // Check metadata values
-  for (const name in A11Y_META) {
-    const meta = A11Y_META[name];
+  for (const name in a11yMetadata.A11Y_META) {
+    const meta = a11yMetadata.A11Y_META[name];
     var values = epub.metadata[name];
     if (values === undefined) {
       // Report missing metadata if it is required or recommended
