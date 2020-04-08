@@ -13,6 +13,8 @@
 
 const winston = require('winston');
 
+// duplicate of /ace-core/a11y-metadata.js :(
+// (circular dependency reference)
 const a11yMeta = [
 // http://kb.daisy.org/publishing/docs/metadata/schema-org.html
 "schema:accessMode",
@@ -22,7 +24,7 @@ const a11yMeta = [
 "schema:accessModeSufficient",
 "schema:accessibilityAPI",
 "schema:accessibilityControl",
-// (see A11Y_META in ace-core)
+// (see a11yMetadata.A11Y_META in ace-core)
 
 // http://kb.daisy.org/publishing/docs/metadata/evaluation.html
 "a11y:certifiedBy",
