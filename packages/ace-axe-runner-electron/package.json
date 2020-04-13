@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-axe-runner-electron",
-  "version": "1.2.0-beta.7",
+  "version": "1.2.0-beta.8",
   "description": "Electron-based Axe runner for Ace",
   "author": {
     "name": "DAISY developers",

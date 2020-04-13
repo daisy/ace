@@ -1,6 +1,6 @@
 # `ace-report-axe`
 
-[aXe](https://github.com/dequelabs/axe-core)-specific reporting utilities for Ace.
+[axe](https://github.com/dequelabs/axe-core)-specific reporting utilities for Ace.
 
 ## What is Ace?
 

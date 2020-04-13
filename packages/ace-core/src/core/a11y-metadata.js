@@ -2,6 +2,7 @@
 
 // http://kb.daisy.org/publishing/docs/metadata/schema-org.html
 // http://kb.daisy.org/publishing/docs/metadata/evaluation.html
+// https://www.w3.org/wiki/WebSchemas/Accessibility
 
 const conformsToURLs = [
     "http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-a",
@@ -86,7 +87,17 @@ const A11Y_META = {
             'ChemML',
             'describedMath',
             'displayTransformability',
+            'displayTransformability/font-size',
+            'displayTransformability/font-family',
+            'displayTransformability/line-height',
+            'displayTransformability/word-spacing',
+            'displayTransformability/letter-spacing',
+            'displayTransformability/color',
+            'displayTransformability/background-color',
             'highContrastAudio',
+            'highContrastAudio/noBackground',
+            'highContrastAudio/reducedBackground',
+            'highContrastAudio/switchableBackground',
             'highContrastDisplay',
             'index',
             'largePrint',
