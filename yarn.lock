@@ -1996,13 +1996,13 @@
     once "^1.4.0"
 
 "@octokit/request@^5.2.0":
-  version "5.3.4"
-  resolved "https://registry.yarnpkg.com/@octokit/request/-/request-5.3.4.tgz#fbc950bf785d59da3b0399fc6d042c8cf52e2905"
-  integrity sha512-qyj8G8BxQyXjt9Xu6NvfvOr1E0l35lsXtwm3SopsYg/JWXjlsnwqLc8rsD2OLguEL/JjLfBvrXr4az7z8Lch2A==
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/@octokit/request/-/request-5.4.0.tgz#52382c830f0cf3295b5a03e308872ac0f5ccba9b"
+  integrity sha512-uAJO6GI8z8VHBqtY7VTL9iFy1Y+UTp5ShpI97tY5z0qBfYKE9rZCRsCm23VmF00x+IoNJ7a0nuVITs/+wS9/mg==
   dependencies:
     "@octokit/endpoint" "^6.0.0"
     "@octokit/request-error" "^2.0.0"
-    "@octokit/types" "^2.0.0"
+    "@octokit/types" "^2.8.2"
     deprecation "^2.0.0"
     is-plain-object "^3.0.0"
     node-fetch "^2.3.0"
@@ -2031,10 +2031,10 @@
     once "^1.4.0"
     universal-user-agent "^4.0.0"
 
-"@octokit/types@^2.0.0", "@octokit/types@^2.0.1":
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-2.8.1.tgz#935ba46c3abb745e913b1110b87f1ca75f2a3792"
-  integrity sha512-1fzZcYTvPkrJsS9MX7oTMun447Q/tJo5XOtXQsKqmbTbwQV1f+R58pDmjDbzeFbQ7KzMJaDN7Sq4bCh/WHmgLg==
+"@octokit/types@^2.0.0", "@octokit/types@^2.0.1", "@octokit/types@^2.8.2":
+  version "2.8.2"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-2.8.2.tgz#08d1165354637ef32c3134b4b39b7f17bdc17aef"
+  integrity sha512-8cs4DjRAzFoGo1ieUhDyrTdPK016V3JD/H00nbnojSCUYfOXnnJ1owUaAT/3OebTzp/tgdTG6M+8PdCTJzI+/w==
   dependencies:
     "@types/node" ">= 8"
 
@@ -3491,9 +3491,9 @@ camelcase@^5.0.0, camelcase@^5.3.1:
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
 caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30001038:
-  version "1.0.30001040"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001040.tgz#103fc8e6eb1d7397e95134cd0e996743353d58ea"
-  integrity sha512-Ep0tEPeI5wCvmJNrXjE3etgfI+lkl1fTDU6Y3ZH1mhrjkPlVI9W4pcKbMo+BQLpEWKVYYp2EmYaRsqpPC3k7lQ==
+  version "1.0.30001041"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001041.tgz#c2ea138dafc6fe03877921ddcddd4a02a14daf76"
+  integrity sha512-fqDtRCApddNrQuBxBS7kEiSGdBsgO4wiVw4G/IClfqzfhW45MbTumfN4cuUJGTM0YGFNn97DCXPJ683PS6zwvA==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -3803,10 +3803,10 @@ concat-stream@^2.0.0:
     readable-stream "^3.0.2"
     typedarray "^0.0.6"
 
-conf@^6.2.3:
-  version "6.2.3"
-  resolved "https://registry.yarnpkg.com/conf/-/conf-6.2.3.tgz#0c0611f0fca25174d72c7b633ff6af9173a55f62"
-  integrity sha512-xwce2fuN77kiXiUq0tQImwJM0SXkGKt1/uZYyiQ9OWUKUQmF6gzIMyCL0idlpgQelKomSFMkAGn2QK7JJ2c1Cg==
+conf@^6.2.4:
+  version "6.2.4"
+  resolved "https://registry.yarnpkg.com/conf/-/conf-6.2.4.tgz#49d23c4e21ef2ac2860f7b5ed25b7b7e484f769f"
+  integrity sha512-GjgyPRLo1qK1LR9RWAdUagqo+DP18f5HWCFk4va7GS+wpxQTOzfuKTwKOvGW2c01/YXNicAyyoyuSddmdkBzZQ==
   dependencies:
     ajv "^6.10.2"
     debounce-fn "^3.0.1"
@@ -4534,9 +4534,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.390, electron-to-chromium@^1.3.47:
-  version "1.3.402"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.402.tgz#9ad93c0c8ea2e571431739e0d76bd6bc9788a846"
-  integrity sha512-gaCDfX7IUH0s3JmBiHCDPrvVcdnTTP1r4WLJc2dHkYYbLmXZ2XHiJCcGQ9Balf91aKTvuCKCyu2JjJYRykoI1w==
+  version "1.3.403"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.403.tgz#c8bab4e2e72bf78bc28bad1cc355c061f9cc1918"
+  integrity sha512-JaoxV4RzdBAZOnsF4dAlZ2ijJW72MbqO5lNfOBHUWiBQl3Rwe+mk2RCUMrRI3rSClLJ8HSNQNqcry12H+0ZjFw==
 
 electron@^8.2.1:
   version "8.2.1"
