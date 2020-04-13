@@ -321,7 +321,7 @@
           {{#each earl:testSubject.metadata}}
           <tr>
             <td>{{@key}}</td>
-            <td>{{this}}</td>
+            <td>{{#formatMetadataValue}}{{/formatMetadataValue}}</td>
           </tr>
           {{/each}}
           {{!-- handlebars was complaining about an #if statement here so it was replaced with a helper --}}

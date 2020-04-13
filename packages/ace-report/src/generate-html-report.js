@@ -97,12 +97,34 @@ module.exports = function generateHtmlReport(reportData) {
       return new handlebars.SafeString(htmlStr);
     });
 
+    handlebars.registerHelper('formatMetadataValue', function(options) {
+      var vals = this;
+      if (!Array.isArray(vals)) {
+        vals = [vals];
+      }
+      const valsHTML = vals.reduce((pv, cv, i, arr) => {
+        const suffix = i < (arr.length - 1) ? " | " : "";
+        cv = cv.trim();
+        if (/^http[s]?:\/\//.test(cv)) {
+          return pv + `<a href="${cv}" target="_blank">${cv}</a>${suffix}`;
+        }
+        return pv + `${cv}${suffix}`;
+      }
+      , "");
+
+      return new handlebars.SafeString(valsHTML);
+    });
     handlebars.registerHelper('insertConformsToRow', function(options) {
       if (reportData['earl:testSubject'].hasOwnProperty('links') &&
           reportData['earl:testSubject']['links'].hasOwnProperty('dcterms:conformsTo')) {
-            var conformsTo = reportData['earl:testSubject']['links']['dcterms:conformsTo'];
-        return new handlebars.SafeString(`<tr><td>dcterms:conformsTo</td>
-          <td><a href="${conformsTo}" target="_blank">${conformsTo}</a></td></tr>`);
+        var vals = reportData['earl:testSubject']['links']['dcterms:conformsTo'];
+        if (!Array.isArray(vals)) {
+          vals = [vals];
+        }
+        const valsHTML = vals.reduce((pv, cv, i, arr) =>
+          (pv + `<a href="${cv}" target="_blank">${cv}</a>${i < (arr.length - 1) ? " | " : ""}`)
+        , "");
+        return new handlebars.SafeString(`<tr><td>dcterms:conformsTo</td><td>${valsHTML}</td></tr>`);
       }
       else {
         return new handlebars.SafeString('');
@@ -111,9 +133,14 @@ module.exports = function generateHtmlReport(reportData) {
     handlebars.registerHelper('insertCertifierReportRow', function(options) {
       if (reportData['earl:testSubject'].hasOwnProperty('links') &&
           reportData['earl:testSubject']['links'].hasOwnProperty('a11y:certifierReport')) {
-            var certifierReport = reportData['earl:testSubject']['links']['a11y:certifierReport'];
-        return new handlebars.SafeString(`<tr><td>a11y:certifierReport</td>
-          <td><a href="${certifierReport}" target="_blank">${certifierReport}</a></td></tr>`);
+        var vals = reportData['earl:testSubject']['links']['a11y:certifierReport'];
+        if (!Array.isArray(vals)) {
+          vals = [vals];
+        }
+        const valsHTML = vals.reduce((pv, cv, i, arr) =>
+        (pv + `<a href="${cv}" target="_blank">${cv}</a>${i < (arr.length - 1) ? " | " : ""}`)
+        , "");
+        return new handlebars.SafeString(`<tr><td>a11y:certifierReport</td><td>${valsHTML}</td></tr>`);
       }
       else {
         return new handlebars.SafeString('');
@@ -122,9 +149,14 @@ module.exports = function generateHtmlReport(reportData) {
     handlebars.registerHelper('insertCertifierCredentialRow', function(options) {
       if (reportData['earl:testSubject'].hasOwnProperty('links') &&
           reportData['earl:testSubject']['links'].hasOwnProperty('a11y:certifierCredential')) {
-            var certifierCredential = reportData['earl:testSubject']['links']['a11y:certifierCredential'];
-        return new handlebars.SafeString(`<tr><td>a11y:certifierCredential</td>
-          <td><a href="${certifierCredential}" target="_blank">${certifierCredential}</a></td></tr>`);
+        var vals = reportData['earl:testSubject']['links']['a11y:certifierCredential'];
+        if (!Array.isArray(vals)) {
+          vals = [vals];
+        }
+        const valsHTML = vals.reduce((pv, cv, i, arr) =>
+        (pv + `<a href="${cv}" target="_blank">${cv}</a>${i < (arr.length - 1) ? " | " : ""}`)
+        , "");
+        return new handlebars.SafeString(`<tr><td>a11y:certifierCredential</td><td>${valsHTML}</td></tr>`);
       }
       else {
         return new handlebars.SafeString('');
