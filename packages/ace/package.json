@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace",
-  "version": "1.2.0-beta.8",
+  "version": "1.2.0-beta.9",
   "description": "Ace by DAISY, an Accessibility Checker for EPUB",
   "keywords": [
     "a11y",
