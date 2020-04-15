@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-axe-runner-electron",
-  "version": "1.2.0-beta.8",
+  "version": "1.2.0-beta.9",
   "description": "Electron-based Axe runner for Ace",
   "author": {
     "name": "DAISY developers",
@@ -18,7 +18,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-cli-shared": "^1.2.0-beta.8",
+    "@daisy/ace-cli-shared": "^1.2.0-beta.9",
     "express": "^4.17.1",
     "portfinder": "^1.0.25",
     "selfsigned": "^1.10.7",
