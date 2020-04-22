@@ -9,7 +9,7 @@
     "@daisy/jest-puppeteer": "file:./packages/jest-puppeteer",
     "@jest-runner/electron": "^2.0.3",
     "babel-core": "^6.26.3",
-    "babel-jest": "^25.3.0",
+    "babel-jest": "^25.4.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "chalk": "^4.0.0",
@@ -17,7 +17,7 @@
     "cross-spawn": "^7.0.2",
     "glob": "^7.1.6",
     "i18next-json-sync": "^2.3.1",
-    "jest": "^25.3.0",
+    "jest": "^25.4.0",
     "lerna": "^3.20.2",
     "micromatch": "^4.0.2",
     "mkdirp": "^1.0.4",
@@ -38,7 +38,9 @@
     "lint": "echo lint script not implemented",
     "postinstall": "yarn npmVersionsCheck && yarn build && yarn patchElectronJestRunner",
     "npmVersionsCheck": "node ./scripts/npm-versions-check.js",
-    "patchElectronJestRunner": "echo ';_electron.app.allowRendererProcessReuse = true;' >> './node_modules/@jest-runner/electron/build/electron_process_injected_code.js'",
+    "patchElectronJestRunner": "yarn patchElectronJestRunner1 && yarn patchElectronJestRunner2",
+    "patchElectronJestRunner1": "echo ';_electron.app.allowRendererProcessReuse = true;' >> './node_modules/@jest-runner/electron/build/electron_process_injected_code.js'",
+    "patchElectronJestRunner2": "node scripts/replace-in-file.js './node_modules/@jest/core/node_modules/jest-jasmine2/build/index.js' 'const esm = runtime.unstable_shouldLoadAsEsm' 'const esm = false; // runtime.unstable_shouldLoadAsEsm'",
     "test": "cross-env JEST_TESTS=1 jest --config=jest.config-puppeteer.js --runInBand --bail=1 --no-cache",
     "test-cli": "cross-env JEST_TESTS=1 jest --config=jest.config-cli.js --runInBand --bail=1 --no-cache",
     "test-electron": "cross-env JEST_TESTS=1 AXE_ELECTRON_RUNNER=true jest --config=jest.config-electron.js --runInBand --bail=1 --no-cache",
@@ -51,6 +53,6 @@
     "i18n-scan-ace-core": "node ./scripts/translate-scan.js \"packages/ace-core/src\" \"packages/ace-core/src/l10n/locales/temp.json\" && sync-i18n --files 'packages/ace-core/src/l10n/locales/*.json' --primary temp --languages en fr pt_BR es da --space 4 --finalnewline --newkeysempty && rimraf \"packages/ace-core/src/l10n/locales/temp.json\"",
     "i18n-scan": "npm run i18n-scan-ace-report && npm run i18n-scan-ace-report-axe && npm run i18n-scan-ace-core",
     "i18n-check": "sync-i18n --files 'packages/**/src/l10n/locales/*.json' --primary en --languages fr pt_BR es da --space 4 --finalnewline --newkeysempty",
-    "ace-app-prepare": "rm -f yarn.lock && rm -rf packages/*/lib && rm -rf packages/*/node_modules && rm -rf node_modules && yarn install && rm -rf packages/*/node_modules/@daisy && rm -rf node_modules/@daisy && yarn build && yarn upgrade && yarn patchElectronJestRunner && yarn npmVersionsCheck && git status && git --no-pager diff"
+    "ace-app-prepare": "rm -f yarn.lock && rm -rf packages/*/lib && rm -rf packages/*/node_modules && rm -rf node_modules && yarn install && rm -rf packages/*/node_modules/@daisy && rm -rf node_modules/@daisy && yarn build && yarn upgrade && yarn patchElectronJestRunner && yarn patchElectronJestRunner2 && yarn npmVersionsCheck && git status && git --no-pager diff"
   }
 }
