@@ -19,7 +19,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "jest-environment-node": "^25.4.0",
-    "puppeteer": "^3.0.0"
+    "puppeteer": "^3.0.1"
   },
   "publishConfig": {
     "access": "public"
