@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-report-axe",
-  "version": "1.2.0-beta.11",
+  "version": "1.2.0-beta.12",
   "description": "Ace report adapter for aXe",
   "author": {
     "name": "DAISY developers",
@@ -18,8 +18,8 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-localize": "^1.2.0-beta.11",
-    "@daisy/ace-report": "^1.2.0-beta.11",
+    "@daisy/ace-localize": "^1.2.0-beta.12",
+    "@daisy/ace-report": "^1.2.0-beta.12",
     "fs-extra": "^9.0.0",
     "winston": "^3.2.1"
   },

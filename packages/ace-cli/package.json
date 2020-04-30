@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-cli",
-  "version": "1.2.0-beta.11",
+  "version": "1.2.0-beta.12",
   "description": "Ace by DAISY, an Accessibility Checker for EPUB",
   "author": {
     "name": "DAISY developers",
@@ -19,8 +19,8 @@
   "main": "lib/index.js",
   "bin": "bin/ace.js",
   "dependencies": {
-    "@daisy/ace-axe-runner-puppeteer": "^1.2.0-beta.11",
-    "@daisy/ace-cli-shared": "^1.2.0-beta.11"
+    "@daisy/ace-axe-runner-puppeteer": "^1.2.0-beta.12",
+    "@daisy/ace-cli-shared": "^1.2.0-beta.12"
   },
   "publishConfig": {
     "access": "public"
