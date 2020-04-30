@@ -1,6 +1,6 @@
 'use strict';
 
-// http://kb.daisy.org/publishing/docs/metadata/schema-org.html
+// http://kb.daisy.org/publishing/docs/metadata/schema.org/index.html
 // http://kb.daisy.org/publishing/docs/metadata/evaluation.html
 // https://www.w3.org/wiki/WebSchemas/Accessibility
 
