@@ -48,7 +48,7 @@ function newMetadataAssertion(name, impact = 'serious') {
     title: `metadata-${name.toLowerCase().replace('schema:', '')}`,
     testDesc: localize("checkepub.metadataviolation.testdesc", { name, interpolation: { escapeValue: false } }),
     resDesc: localize("checkepub.metadataviolation.resdesc", { name, interpolation: { escapeValue: false } }),
-    kbPath: 'docs/metadata/schema-org.html',
+    kbPath: 'docs/metadata/schema.org/index.html',
     kbTitle: localize("checkepub.metadataviolation.kbtitle"),
     ruleDesc: localize("checkepub.metadataviolation.ruledesc", { name, interpolation: { escapeValue: false } })
   });
@@ -90,7 +90,7 @@ function checkMetadata(assertions, epub) {
       //     title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
       //     testDesc: localize("checkepub.metadatamultiple.testdesc", { value, name, interpolation: { escapeValue: false } }),
       //     resDesc: localize("checkepub.metadatamultiple.resdesc", { name, interpolation: { escapeValue: false } }),
-      //     kbPath: 'docs/metadata/schema-org.html',
+      //     kbPath: 'docs/metadata/schema.org/index.html',
       //     kbTitle: localize("checkepub.metadatamultiple.kbtitle"),
       //     ruleDesc: localize("checkepub.metadatamultiple.ruledesc", { name, interpolation: { escapeValue: false } })
       //   }))
@@ -116,7 +116,7 @@ function checkMetadata(assertions, epub) {
                 title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
                 testDesc: localize("checkepub.metadatainvalid.testdesc", { value: splitValue, name, interpolation: { escapeValue: false } }),
                 resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
-                kbPath: 'docs/metadata/schema-org.html',
+                kbPath: 'docs/metadata/schema.org/index.html',
                 kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
                 ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
               }))
@@ -133,7 +133,7 @@ function checkMetadata(assertions, epub) {
               title: `metadata-accessibilityFeature-printPageNumbers-nopagelist`,
               testDesc: localize("checkepub.metadataprintpagenumbers.testdesc", {}),
               resDesc: localize("checkepub.metadataprintpagenumbers.resdesc", {}),
-              kbPath: 'docs/metadata/schema-org.html',
+              kbPath: 'docs/metadata/schema.org/index.html',
               kbTitle: localize("checkepub.metadataprintpagenumbers.kbtitle"),
               ruleDesc: localize("checkepub.metadataprintpagenumbers.ruledesc", {})
             }))
