@@ -12,7 +12,7 @@ Ace by DAISY App is the official graphical user interface for the EPUB accessibi
 The latest version of the Ace App is 1.1.1. The application installers are distributed via the GitHub development website. Here are convenient download links:
 
 * **MacOS**: download the [DMG file](https://github.com/daisy/ace-gui/releases/download/v1.1.1/Ace.by.DAISY-1.1.1.dmg), open it, and drag the `Ace by DAISY.app` file into your Applications folder.
-* **Windows**: download the [NSIS installer](https://github.com/daisy/ace-gui/releases/download/v1.1.1/Ace.by.DAISY.Setup.1.1.1.exe), and follow the step-by-step instructions. Please ignore the security warning messages, they are due to the application [not being signed yet](https://github.com/daisy/ace-gui/issues/15).
+* **Windows**: download the [NSIS installer](https://github.com/daisy/ace-gui/releases/download/v1.1.1/Ace.by.DAISY.Setup.1.1.1.exe), and follow the step-by-step instructions.
 * **Linux**: download the [AppImage file](https://github.com/daisy/ace-gui/releases/download/v1.1.1/Ace.by.DAISY-1.1.1.AppImage), and double-click the icon to immediately start using the application. Alternatively, you may download the [Debian package](https://github.com/daisy/ace-gui/releases/download/v1.1.1/ace-gui_1.1.1_amd64.deb) to install the app via your package manager (e.g. `sudo apt install ace-gui_1.1.1_amd64.deb`).
 
 ## How can I obtain further information?
