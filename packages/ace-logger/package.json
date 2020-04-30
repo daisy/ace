@@ -20,7 +20,7 @@
   "dependencies": {
     "@daisy/ace-config": "^1.2.0-beta.10",
     "fs-extra": "^9.0.0",
-    "uuid": "^7.0.3",
+    "uuid": "^8.0.0",
     "winston": "^3.2.1"
   },
   "publishConfig": {

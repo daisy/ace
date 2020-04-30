@@ -20,12 +20,12 @@
   "dependencies": {
     "@daisy/ace-cli-shared": "^1.2.0-beta.10",
     "express": "^4.17.1",
-    "portfinder": "^1.0.25",
+    "portfinder": "^1.0.26",
     "selfsigned": "^1.10.7",
-    "uuid": "^7.0.3"
+    "uuid": "^8.0.0"
   },
   "devDependencies": {
-    "electron": "^8.2.3",
+    "electron": "^8.2.4",
     "json": "^9.0.6",
     "json-diff": "^0.5.4"
   },
