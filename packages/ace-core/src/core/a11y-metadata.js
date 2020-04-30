@@ -15,13 +15,14 @@ const a11yMeta_links = [
     "dcterms:conformsTo", //(link in EPUB3)
 ];
 const a11yMeta = [
-    "schema:accessMode",
-    "schema:accessibilityFeature",
-    "schema:accessibilityHazard",
-    "schema:accessibilitySummary",
-    "schema:accessModeSufficient",
-    "schema:accessibilityAPI",
-    "schema:accessibilityControl",
+    "schema:accessMode", // required
+    "schema:accessibilityFeature", // required
+    "schema:accessibilityHazard", // required
+    "schema:accessibilitySummary", // required
+    "schema:accessModeSufficient", // recommended
+    "schema:accessibilityAPI", // optional
+    "schema:accessibilityControl", // optional
+
     "a11y:certifiedBy",
     "a11y:certifierCredential", //(MAY BE link in EPUB3)
 ].concat(a11yMeta_links);
@@ -122,6 +123,7 @@ const A11Y_META = {
         ],
     },
     'schema:accessibilityHazard': {
+        required: true,
         allowedValues: [
             'flashing',
             'noFlashingHazard',

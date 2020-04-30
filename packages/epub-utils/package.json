@@ -1,6 +1,6 @@
 {
   "name": "@daisy/epub-utils",
-  "version": "1.2.0-beta.9",
+  "version": "1.2.0-beta.11",
   "description": "EPUB parser and model, used by Ace",
   "author": {
     "name": "DAISY developers",
@@ -21,8 +21,8 @@
     "extract-zip": "^2.0.0",
     "file-url": "^3.0.0",
     "fs-extra": "^9.0.0",
-    "node-stream-zip": "^1.9.1",
-    "tmp": "^0.1.0",
+    "node-stream-zip": "^1.9.2",
+    "tmp": "^0.2.1",
     "winston": "^3.2.1",
     "xmldom": "^0.3.0",
     "xpath": "^0.0.27"
