@@ -13,13 +13,13 @@ console.log("REGEXP: ", arg1);
 const regex = new RegExp(arg1, "g");
 console.log("...WITH: ", arg2);
 if (!regex.test(fileStr)) {
-    console.log("### NOT FOUND 1??");
-    process.exit(1);
+    console.log("######################## NOT FOUND 2??");
+    // process.exit(1);
 }
 fileStr = fileStr.replace(regex, arg2);
 if (fileStr.indexOf(arg2) < 0) {
-    console.log("### NOT FOUND 2??");
-    process.exit(1);
+    console.log("######################## NOT FOUND 2??");
+    // process.exit(1);
 }
 // console.log(fileStr.substr(0, 100));
 fs.writeFileSync(filePath, fileStr, { encoding: "utf8" });
