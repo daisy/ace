@@ -119,7 +119,7 @@ function addLink(rel, href, link) {
 function parseLinks(doc, select) {
   const result = {};
   select('/opf:package/opf:metadata/opf:link[not(@refines)]', doc).forEach((link) => {
-    addLink(link.getAttribute('rel') || link.getAttribute('property'), decodeURI(link.getAttribute('href')), result);
+    addLink(link.getAttribute('rel'), decodeURI(link.getAttribute('href')), result);
   });
   return result;
 }
