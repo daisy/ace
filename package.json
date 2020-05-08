@@ -22,7 +22,6 @@
     "micromatch": "^4.0.2",
     "mkdirp": "^1.0.4",
     "rimraf": "^3.0.2",
-    "standard-version": "^7.1.0",
     "strip-ansi": "^6.0.0"
   },
   "scripts": {
