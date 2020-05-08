@@ -42,7 +42,7 @@ When filing an issue, please provide the following details:</description>
       <guid>https://daisy.github.io/ace/rules/html/</guid>
       <description>Under the hood, most of the accessibility checks ran by Ace are powered by aXe, an engine for automated testing of HTML. Ace uses aXe&#39;s rules, with some modifications (described here).
 Rules Here is a list of aXe&#39;s rules used by Ace, taken from their documentation:
-   Rule Description     accesskeys Ensures every accesskey attribute value is unique.   area-alt Ensures &amp;lt;area&amp;gt; elements of image maps have alternate text.</description>
+   Rule Description     accesskeys Ensures every accesskey attribute value is unique   area-alt Ensures &amp;lt;area&amp;gt; elements of image maps have alternate text   aria-allowed-attr Ensures ARIA attributes are allowed for an element&#39;s role   aria-allowed-role Ensures role attribute has an appropriate value for the element   aria-dpub-role-fallback Ensures unsupported DPUB roles are only used on elements with implicit fallback roles   aria-hidden-body Ensures aria-hidden=&#39;true&#39; is not present on the document body.</description>
     </item>
     
     <item>
@@ -168,7 +168,7 @@ $ ace ~/Documents/moby-dick.epub The above command will run the automated access
       
       <guid>https://daisy.github.io/ace/getting-started/ace-app/</guid>
       <description>What is the Ace by DAISY App? Ace by DAISY App is the official graphical user interface for the EPUB accessibility checker developed by the DAISY Consortium. The Ace App is available for the Windows, MacOS and Linux desktop operating systems.
-Where can I download the Ace App? The latest version of the Ace App is 1.1.1. The application installers are distributed via the GitHub development website. Here are convenient download links:</description>
+Where can I download the Ace App? The latest version of the Ace App is 1.1.2. The application installers are distributed via the GitHub development website. Here are convenient download links:</description>
     </item>
     
     <item>

@@ -18,7 +18,7 @@
       <guid>https://daisy.github.io/ace/rules/html/</guid>
       <description>Under the hood, most of the accessibility checks ran by Ace are powered by aXe, an engine for automated testing of HTML. Ace uses aXe&#39;s rules, with some modifications (described here).
 Rules Here is a list of aXe&#39;s rules used by Ace, taken from their documentation:
-   Rule Description     accesskeys Ensures every accesskey attribute value is unique.   area-alt Ensures &amp;lt;area&amp;gt; elements of image maps have alternate text.</description>
+   Rule Description     accesskeys Ensures every accesskey attribute value is unique   area-alt Ensures &amp;lt;area&amp;gt; elements of image maps have alternate text   aria-allowed-attr Ensures ARIA attributes are allowed for an element&#39;s role   aria-allowed-role Ensures role attribute has an appropriate value for the element   aria-dpub-role-fallback Ensures unsupported DPUB roles are only used on elements with implicit fallback roles   aria-hidden-body Ensures aria-hidden=&#39;true&#39; is not present on the document body.</description>
     </item>
     
     <item>
