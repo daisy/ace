@@ -10,17 +10,29 @@ const $ = require('@daisy/jest-puppeteer');
 beforeAll(async () => {
   await $.loadXHTMLPage();
   await $.injectScripts([require.resolve('./ace-extraction.js')]);
-  await $.injectJestMock();
+
+  // https://jestjs.io/docs/en/puppeteer
+  // https://github.com/smooth-code/jest-puppeteer
+  // await $.injectJestMock();
   await global.page.evaluate(() => {
-    const mockH5O = window.mock.fn();
-    mockH5O.mockReturnValue({
-      asHTML: window.mock.fn(),
-    });
-    window.HTML5Outline = mockH5O;
-    window.daisy.epub = {
-      createCFI: window.mock.fn(),
+    // const mockH5O = window.mock.fn();
+    // mockH5O.mockReturnValue({
+    //   asHTML: window.mock.fn(),
+    // });
+    // window.HTML5Outline = mockH5O;
+    // window.daisy.epub = {
+    //   createCFI: window.mock.fn(),
+    // };
+    // window.daisy.epub.createCFI.mockReturnValue('42');
+
+    window.HTML5Outline = () => {
+      return {
+        asHTML: () => { return; }
+      }
     };
-    window.daisy.epub.createCFI.mockReturnValue('42');
+    window.daisy.epub = {
+      createCFI: () => 42,
+    };
   });
 });
 
