@@ -35,7 +35,7 @@
     "build": "cross-env VERBOSE=1 node ./scripts/build.js",
     "docs": "echo docs script not implemented",
     "lint": "echo lint script not implemented",
-    "postinstall": "yarn npmVersionsCheck && yarn build && yarn patchElectronJestRunner && yarn testTravis",
+    "postinstall": "yarn npmVersionsCheck && yarn build && yarn patchElectronJestRunner && yarn debugTravis",
     "debugTravis": "node scripts/replace-in-file.js node_modules/jest-environment-node/build/index.js \"this.fakeTimers = new \\(_fakeTimers\\(\\).LegacyFakeTimers\\)\\({\" \"const lft = _fakeTimers().LegacyFakeTimers; console.log(lft); process.stdout.write(JSON.stringify(lft)); process.stderr.write(JSON.stringify(lft)); console.log(require('util').inspect(lft, { colors: false, depth: null, compact: false })); this.fakeTimers = new (lft)({\"",
     "npmVersionsCheck": "node ./scripts/npm-versions-check.js",
     "patchElectronJestRunner": "yarn patchElectronJestRunner1",
