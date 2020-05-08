@@ -2,13 +2,24 @@ const path = require('path');
 const fs = require('fs');
 
 const args = process.argv.slice(2);
-console.log("REPLACE IN FILE: ", args[0]);
-const filePath = path.join(process.cwd(), args[0]);
+const arg0 = args[0]; // .replace(/^'/, "").replace(/'$/, "");
+const arg1 = args[1];
+const arg2 = args[2];
+console.log("REPLACE IN FILE: ", arg0);
+const filePath = path.join(process.cwd(), arg0);
 let fileStr = fs.readFileSync(filePath, { encoding: "utf8" });
 // console.log(fileStr.substr(0, 100));
-console.log("REGEXP: ", args[1]);
-const regex = new RegExp(args[1], "g");
-console.log("...WITH: ", args[2]);
-fileStr = fileStr.replace(regex, args[2]);
+console.log("REGEXP: ", arg1);
+const regex = new RegExp(arg1, "g");
+console.log("...WITH: ", arg2);
+if (!regex.test(fileStr)) {
+    console.log("### NOT FOUND 1??");
+    process.exit(1);
+}
+fileStr = fileStr.replace(regex, arg2);
+if (fileStr.indexOf(arg2) < 0) {
+    console.log("### NOT FOUND 2??");
+    process.exit(1);
+}
 // console.log(fileStr.substr(0, 100));
 fs.writeFileSync(filePath, fileStr, { encoding: "utf8" });
