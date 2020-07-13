@@ -25,7 +25,7 @@
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.1",
     "snyk": "^1.56.0",
-    "standard-version": "^4.2.0",
+    "standard-version": "^8.0.1",
     "strip-ansi": "^4.0.0",
     "uglify-js": "^3.0.8",
     "watch": "^1.0.2"
