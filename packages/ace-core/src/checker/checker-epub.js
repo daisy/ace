@@ -160,7 +160,7 @@ function checkMetadata(assertions, epub) {
         values = [values]
       }
       // Parse list values
-      values = values.map(value => value.trim().replace(',', ' ').replace(/\s{2,}/g, ' ').split(' '))
+      values = values.map(value => value.trim().replace(/,/g, ' ').replace(/\s{2,}/g, ' ').split(' '))
       values = [].concat(...values);
       // Check metadata values are allowed
       // see https://www.w3.org/wiki/WebSchemas/Accessibility
