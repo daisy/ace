@@ -207,6 +207,7 @@ daisy.ace.run = function(done) {
         tags: ['best-practice']
       },
       {
+        // overrides AXE's own rule
         id: 'landmark-one-main',
         all: [
           "page-no-duplicate-main"
@@ -227,6 +228,7 @@ daisy.ace.run = function(done) {
       }
     },
     function(axeError, axeResult) {
+
       if (axeError)  {
         done(axeError, null);
       }

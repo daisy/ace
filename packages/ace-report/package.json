@@ -22,9 +22,9 @@
     "@daisy/ace-localize": "^1.2.0-beta.13",
     "@daisy/ace-meta": "^1.2.0-beta.13",
     "escape-html": "^1.0.3",
-    "fs-extra": "^9.0.0",
+    "fs-extra": "^9.0.1",
     "handlebars": "^4.7.6",
-    "winston": "^3.2.1"
+    "winston": "^3.3.3"
   },
   "publishConfig": {
     "access": "public"

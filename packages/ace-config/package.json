@@ -18,7 +18,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "conf": "^6.2.4",
+    "conf": "^7.1.2",
     "env-paths": "^2.2.0",
     "lodash.mergewith": "^4.6.2"
   },

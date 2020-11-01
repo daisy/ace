@@ -42,7 +42,7 @@ async function loadXHTMLPage() {
 }
 
 function redirectConsole() {
-  global.page.on('console', msg => console.log(msg.text));
+  global.page.on('console', msg => console.log(msg.text()));
 }
 
 
