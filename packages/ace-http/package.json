@@ -25,10 +25,10 @@
     "@daisy/ace-meta": "^1.2.0-beta.13",
     "express": "^4.17.1",
     "express-easy-zip": "^1.1.5",
-    "meow": "^8.0.0",
+    "meow": "^9.0.0",
     "multer": "^1.4.2",
     "tmp": "^0.2.1",
-    "uuid": "^8.3.1",
+    "uuid": "^8.3.2",
     "winston": "^3.3.3"
   },
   "publishConfig": {

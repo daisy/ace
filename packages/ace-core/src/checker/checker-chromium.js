@@ -17,7 +17,7 @@ const scripts = [
   // require.resolve('../scripts/function-bind-bound-object.js'),
   require.resolve('../scripts/vendor/outliner.min.js'),
   path.resolve(require.resolve('axe-core'), '../axe.js'),
-  require.resolve('../scripts/axe-patch-aria-roles.js'),
+  // require.resolve('../scripts/axe-patch-aria-roles.js'),
   // require.resolve('../scripts/axe-patch-is-aria-role-allowed.js'),
   // require.resolve('../scripts/axe-patch-only-list-items.js'),
   // require.resolve('../scripts/axe-patch-listitem.js'),

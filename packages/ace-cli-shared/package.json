@@ -22,7 +22,7 @@
     "@daisy/ace-core": "^1.2.0-beta.13",
     "@daisy/ace-logger": "^1.2.0-beta.13",
     "@daisy/ace-meta": "^1.2.0-beta.13",
-    "meow": "^8.0.0",
+    "meow": "^9.0.0",
     "winston": "^3.3.3"
   },
   "publishConfig": {
