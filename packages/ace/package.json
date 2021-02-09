@@ -29,10 +29,12 @@
   "license": "MIT",
   "bin": {
     "ace": "./bin/ace.js",
-    "ace-http": "./bin/ace-http.js"
+    "ace-http": "./bin/ace-http.js",
+    "ace-electron": "./bin/ace-electron.js"
   },
   "main": "lib/index.js",
   "dependencies": {
+    "@daisy/ace-axe-runner-electron": "^1.2.0-beta.13",
     "@daisy/ace-cli": "^1.2.0-beta.13",
     "@daisy/ace-core": "^1.2.0-beta.13",
     "@daisy/ace-http": "^1.2.0-beta.13"
