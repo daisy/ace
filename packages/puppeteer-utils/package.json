@@ -1,6 +1,6 @@
 {
   "name": "@daisy/puppeteer-utils",
-  "version": "1.2.0-beta.13",
+  "version": "1.2.0-beta.14",
   "description": "Utilities for Google Puppeteer",
   "author": {
     "name": "DAISY developers",

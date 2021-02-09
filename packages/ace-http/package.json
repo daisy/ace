@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-http",
-  "version": "1.2.0-beta.13",
+  "version": "1.2.0-beta.14",
   "description": "HTTP API for Ace",
   "author": {
     "name": "DAISY developers",
@@ -19,10 +19,10 @@
   "main": "lib/index.js",
   "bin": "bin/ace-http.js",
   "dependencies": {
-    "@daisy/ace-axe-runner-puppeteer": "^1.2.0-beta.13",
-    "@daisy/ace-core": "^1.2.0-beta.13",
-    "@daisy/ace-logger": "^1.2.0-beta.13",
-    "@daisy/ace-meta": "^1.2.0-beta.13",
+    "@daisy/ace-axe-runner-puppeteer": "^1.2.0-beta.14",
+    "@daisy/ace-core": "^1.2.0-beta.14",
+    "@daisy/ace-logger": "^1.2.0-beta.14",
+    "@daisy/ace-meta": "^1.2.0-beta.14",
     "express": "^4.17.1",
     "express-easy-zip": "^1.1.5",
     "meow": "^9.0.0",
