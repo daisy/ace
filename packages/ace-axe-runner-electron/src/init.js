@@ -156,6 +156,27 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         browserWindow.setSize(1024, 768);
         browserWindow.setPosition(0, 0);
 
+        browserWindow.webContents.session.webRequest.onBeforeRequest({
+            urls: [],
+        }, (details, callback) => {
+            if (details.url
+                && /^https?:\/\//.test(details.url)
+                && ((rootUrl && !details.url.startsWith(rootUrl)) || (!rootUrl && !/^https?:\/\/127.0.0.1/.test(details.url)))
+            ) {
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} onBeforeRequest BLOCK: ${details.url} (${rootUrl})`);
+
+                // causes ERR_BLOCKED_BY_CLIENT -20 did-fail-load
+                callback({
+                    cancel: true,
+                    // redirectURL: "about:blank",
+                });
+                return;
+            }
+
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} onBeforeRequest OKAY: ${details.url}`);
+            callback({ cancel: false });
+          });
+
         // browserWindow.maximize();
         // let sz = browserWindow.getSize();
         // const sz0 = sz[0];
@@ -301,7 +322,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         if (sess) {
             setTimeout(async () => {
                 try {
-                    sess.clearCache();
+                    await sess.clearCache();
                 } catch (err) {
                     if (LOG_DEBUG) console.log(err);
                 }
@@ -309,7 +330,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                 done();
 
                 try {
-                    sess.clearStorageData({
+                    await sess.clearStorageData({
                         origin: "*",
                         quotas: [
                             "temporary",
@@ -416,9 +437,13 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
             //     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner did-stop-loading ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
             // });
             browserWindow.webContents.once("did-fail-load", (event, errorCode, errorDescription, validatedURL, isMainFrame, frameProcessId, frameRoutingId) => {
-                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner did-fail-load ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
-                if (LOG_DEBUG) console.log(`${errorCode} - ${errorDescription} - ${validatedURL} - ${isMainFrame} - ${frameProcessId} - ${frameRoutingId}`);
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner did-fail-load ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`, "\n", `${errorCode} - ${errorDescription} - ${validatedURL} - ${isMainFrame} - ${frameProcessId} - ${frameRoutingId}`);
+
                 // https://cs.chromium.org/chromium/src/net/base/net_error_list.h
+                if (errorCode == -20) { // ERR_BLOCKED_BY_CLIENT
+                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner ERR_BLOCKED_BY_CLIENT (ignore) ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
+                    return;
+                }
 
                 if (browserWindow.ace__replySent) {
                     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner WAS TIMEOUT! ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
