@@ -30,6 +30,20 @@ module.exports = {
             page.on('console', msg => console.log(msg.text()));
         }
 
+        await page.setRequestInterception(true);
+
+        page.on('request', (request) => {
+            const url = request.url();
+            if (url && /^https?:\/\//.test(url)) {
+                if (isDev) {
+                    console.log(`============> RequestInterception URL abort: ${url}`);
+                }
+                request.abort();
+                return;
+            }
+            request.continue();
+        });
+      
         await page.goto(url);
 
         await utils.addScriptContents(scriptContents, page);
