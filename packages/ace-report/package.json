@@ -23,7 +23,7 @@
     "@daisy/ace-meta": "^1.2.0-beta.14",
     "escape-html": "^1.0.3",
     "fs-extra": "^9.1.0",
-    "handlebars": "^4.7.6",
+    "handlebars": "^4.7.7",
     "winston": "^3.3.3"
   },
   "publishConfig": {
