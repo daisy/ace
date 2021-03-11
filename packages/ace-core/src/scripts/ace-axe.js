@@ -89,131 +89,131 @@ daisy.ace.run = function(done) {
 
   window.axe.configure({
     locale: window.__axeLocale__, // configured from host bootstrapper page (checker-chromium) can be undefined
-    checks: [
-      {
-        id: "matching-aria-role",
-        evaluate: function evaluate(node, options) {
-          var mappings = new Map([
-            ['abstract', 'doc-abstract'],
-            ['acknowledgments', 'doc-acknowledgments'],
-            ['afterword', 'doc-afterword'],
-            ['appendix', 'doc-appendix'],
-            ['backlink', 'doc-backlink'],
-            ['biblioentry', 'doc-biblioentry'],
-            ['bibliography', 'doc-bibliography'],
-            ['biblioref', 'doc-biblioref'],
-            ['chapter', 'doc-chapter'],
-            ['colophon', 'doc-colophon'],
-            ['conclusion', 'doc-conclusion'],
-            ['credit', 'doc-credit'],
-            ['credits', 'doc-credits'],
-            ['dedication', 'doc-dedication'],
-            ['endnote', 'doc-endnote'],
-            ['endnotes', 'doc-endnotes'],
-            ['epigraph', 'doc-epigraph'],
-            ['epilogue', 'doc-epilogue'],
-            ['errata', 'doc-errata'],
-            ['figure', 'figure'],
-            ['footnote', 'doc-footnote'],
-            ['foreword', 'doc-foreword'],
-            ['glossary', 'doc-glossary'],
-            ['glossdef', 'definition'],
-            ['glossref', 'doc-glossref'],
-            ['glossterm', 'term'],
-            ['help', 'doc-tip'],
-            ['index', 'doc-index'],
-            ['introduction', 'doc-introduction'],
-            ['noteref', 'doc-noteref'],
-            ['notice', 'doc-notice'],
-            ['page-list', 'doc-pagelist'],
-            ['pagebreak', 'doc-pagebreak'],
-            ['part', 'doc-part'],
-            ['preface', 'doc-preface'],
-            ['prologue', 'doc-prologue'],
-            ['pullquote', 'doc-pullquote'],
-            ['qna', 'doc-qna'],
-            ['referrer', 'doc-backlink'],
-            ['subtitle', 'doc-subtitle'],
-            ['tip', 'doc-tip'],
-            ['toc', 'doc-toc']
-          ]);
+    // checks: [
+    //   {
+    //     id: "matching-aria-role",
+    //     evaluate: function evaluate(node, options) {
+    //       var mappings = new Map([
+    //         ['abstract', 'doc-abstract'],
+    //         ['acknowledgments', 'doc-acknowledgments'],
+    //         ['afterword', 'doc-afterword'],
+    //         ['appendix', 'doc-appendix'],
+    //         ['backlink', 'doc-backlink'],
+    //         ['biblioentry', 'doc-biblioentry'],
+    //         ['bibliography', 'doc-bibliography'],
+    //         ['biblioref', 'doc-biblioref'],
+    //         ['chapter', 'doc-chapter'],
+    //         ['colophon', 'doc-colophon'],
+    //         ['conclusion', 'doc-conclusion'],
+    //         ['credit', 'doc-credit'],
+    //         ['credits', 'doc-credits'],
+    //         ['dedication', 'doc-dedication'],
+    //         ['endnote', 'doc-endnote'],
+    //         ['endnotes', 'doc-endnotes'],
+    //         ['epigraph', 'doc-epigraph'],
+    //         ['epilogue', 'doc-epilogue'],
+    //         ['errata', 'doc-errata'],
+    //         ['figure', 'figure'],
+    //         ['footnote', 'doc-footnote'],
+    //         ['foreword', 'doc-foreword'],
+    //         ['glossary', 'doc-glossary'],
+    //         ['glossdef', 'definition'],
+    //         ['glossref', 'doc-glossref'],
+    //         ['glossterm', 'term'],
+    //         ['help', 'doc-tip'],
+    //         ['index', 'doc-index'],
+    //         ['introduction', 'doc-introduction'],
+    //         ['noteref', 'doc-noteref'],
+    //         ['notice', 'doc-notice'],
+    //         ['page-list', 'doc-pagelist'],
+    //         ['pagebreak', 'doc-pagebreak'],
+    //         ['part', 'doc-part'],
+    //         ['preface', 'doc-preface'],
+    //         ['prologue', 'doc-prologue'],
+    //         ['pullquote', 'doc-pullquote'],
+    //         ['qna', 'doc-qna'],
+    //         ['referrer', 'doc-backlink'],
+    //         ['subtitle', 'doc-subtitle'],
+    //         ['tip', 'doc-tip'],
+    //         ['toc', 'doc-toc']
+    //       ]);
           
-          if (node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')) {
-            // abort if descendant of landmarks nav (nav with epub:type=landmarks)
-            if (axe.utils.matchesSelector(node, 'nav[*|type~="landmarks"] *')) {
-              return true;
-            }
+    //       if (node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')) {
+    //         // abort if descendant of landmarks nav (nav with epub:type=landmarks)
+    //         if (axe.utils.matchesSelector(node, 'nav[*|type~="landmarks"] *')) {
+    //           return true;
+    //         }
 
-            // iterate for each epub:type value
-            var types = axe.utils.tokenList(node.getAttributeNS('http://www.idpf.org/2007/ops', 'type'));
-            for (const type of types) {
-                // If there is a 1-1 mapping, check that the role is set (best practice)
-                if (mappings.has(type)) {
-                  // Note: using axe’s `getRole` util returns the effective role of the element
-                  // (either explicitly set with the role attribute or implicit)
-                  // So this works for types mapping to core ARIA roles (eg. glossref/glossterm).
-                  return mappings.get(type) == axe.commons.aria.getRole(node,{dpub: true});
-                }
-              }
-          }
-          return true;
-        },
-        metadata: {
-          impact: 'minor',
-          messages: {
-            pass: function anonymous(it) {
-              // configured from host bootstrapper page (checker-chromium)
-              const k = "__aceLocalize__axecheck_matching-aria-role_pass";
-              return window[k] || k;
-            },
-            fail: function anonymous(it) {
-              // configured from host bootstrapper page (checker-chromium)
-              const k = "__aceLocalize__axecheck_matching-aria-role_fail";
-              return window[k] || k;
-            }
-          }
-        }
-      }
-    ],
-    rules: [
-      {
-        id: 'pagebreak-label',
-        // selector: '[*|type~="pagebreak"], [role~="doc-pagebreak"]',
-        matches: function matches(node, virtualNode, context) {
-          return node.hasAttribute('role')
-              && node.getAttribute('role').match(/\S+/g).includes('doc-pagebreak')
-              || node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')
-              && node.getAttributeNS('http://www.idpf.org/2007/ops', 'type').match(/\S+/g).includes('pagebreak')
-        },
-        any: ['aria-label', 'non-empty-title'],
-        metadata: {
-          // configured from host bootstrapper page (checker-chromium)
-          description: (() => { const k = "__aceLocalize__axerule_pagebreak-label_desc"; return window[k] || k; })()
-        },
-        tags: ['cat.epub']
-      },
-      {
-        id: 'epub-type-has-matching-role',
-        // selector: '[*|type]',
-        matches: function matches(node, virtualNode, context) {
-          return node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')
-        },        
-        any: ['matching-aria-role'],
-        metadata: {
-          // configured from host bootstrapper page (checker-chromium)
-          help: (() => { const k = "__aceLocalize__axerule_epub-type-has-matching-role_help"; return window[k] || k; })(),
-          description: (() => { const k = "__aceLocalize__axerule_epub-type-has-matching-role_desc"; return window[k] || k; })()
-        },
-        tags: ['best-practice']
-      },
-      {
-        // overrides AXE's own rule
-        id: 'landmark-one-main',
-        all: [
-          "page-no-duplicate-main"
-          ],
-      }
-    ]
+    //         // iterate for each epub:type value
+    //         var types = axe.utils.tokenList(node.getAttributeNS('http://www.idpf.org/2007/ops', 'type'));
+    //         for (const type of types) {
+    //             // If there is a 1-1 mapping, check that the role is set (best practice)
+    //             if (mappings.has(type)) {
+    //               // Note: using axe’s `getRole` util returns the effective role of the element
+    //               // (either explicitly set with the role attribute or implicit)
+    //               // So this works for types mapping to core ARIA roles (eg. glossref/glossterm).
+    //               return mappings.get(type) == axe.commons.aria.getRole(node,{dpub: true});
+    //             }
+    //           }
+    //       }
+    //       return true;
+    //     },
+    //     metadata: {
+    //       impact: 'minor',
+    //       messages: {
+    //         pass: function anonymous(it) {
+    //           // configured from host bootstrapper page (checker-chromium)
+    //           const k = "__aceLocalize__axecheck_matching-aria-role_pass";
+    //           return window[k] || k;
+    //         },
+    //         fail: function anonymous(it) {
+    //           // configured from host bootstrapper page (checker-chromium)
+    //           const k = "__aceLocalize__axecheck_matching-aria-role_fail";
+    //           return window[k] || k;
+    //         }
+    //       }
+    //     }
+    //   }
+    // ],
+    // rules: [
+    //   {
+    //     id: 'pagebreak-label',
+    //     // selector: '[*|type~="pagebreak"], [role~="doc-pagebreak"]',
+    //     matches: function matches(node, virtualNode, context) {
+    //       return node.hasAttribute('role')
+    //           && node.getAttribute('role').match(/\S+/g).includes('doc-pagebreak')
+    //           || node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')
+    //           && node.getAttributeNS('http://www.idpf.org/2007/ops', 'type').match(/\S+/g).includes('pagebreak')
+    //     },
+    //     any: ['aria-label', 'non-empty-title'],
+    //     metadata: {
+    //       // configured from host bootstrapper page (checker-chromium)
+    //       description: (() => { const k = "__aceLocalize__axerule_pagebreak-label_desc"; return window[k] || k; })()
+    //     },
+    //     tags: ['cat.epub']
+    //   },
+    //   {
+    //     id: 'epub-type-has-matching-role',
+    //     // selector: '[*|type]',
+    //     matches: function matches(node, virtualNode, context) {
+    //       return node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')
+    //     },        
+    //     any: ['matching-aria-role'],
+    //     metadata: {
+    //       // configured from host bootstrapper page (checker-chromium)
+    //       help: (() => { const k = "__aceLocalize__axerule_epub-type-has-matching-role_help"; return window[k] || k; })(),
+    //       description: (() => { const k = "__aceLocalize__axerule_epub-type-has-matching-role_desc"; return window[k] || k; })()
+    //     },
+    //     tags: ['best-practice']
+    //   },
+    //   // {
+    //   //   // overrides AXE's own rule
+    //   //   id: 'landmark-one-main',
+    //   //   all: [
+    //   //     "page-no-duplicate-main"
+    //   //     ],
+    //   // }
+    // ]
   });
 
   window.axe.run(

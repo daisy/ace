@@ -822,8 +822,8 @@ const kbMap = {
 
     // {
     //   "ruleId": "landmark-one-main",
-    //   "description": "Ensures the document has a main landmark",
-    //   "help": "Document must have one main landmark",
+    //   "description": "Ensures the document has a unique main landmark",
+    //   "help": "Document must have one unique main landmark",
     //   "helpUrl": "https://dequeuniversity.com/rules/axe/4.1/landmark-one-main?application=axeAPI",
     //   "tags": [
     //     "cat.semantics",
@@ -1962,8 +1962,8 @@ module.exports.kbMap = kbMap;
 //   },
 //   {
 //       "ruleId": "landmark-one-main",
-//       "description": "Ensures the document has a main landmark",
-//       "help": "Document must have one main landmark",
+//       "description": "Ensures the document has a unique main landmark",
+//       "help": "Document must have one unique main landmark",
 //       "helpUrl": "https://dequeuniversity.com/rules/axe/4.1/landmark-one-main?application=axeAPI",
 //       "tags": [
 //           "cat.semantics",

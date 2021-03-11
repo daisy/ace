@@ -83,7 +83,7 @@ Here is a list of aXe's rules used by Ace, taken from [their documentation](http
 | [landmark-no-duplicate-banner](https://dequeuniversity.com/rules/axe/4.1/landmark-no-duplicate-banner?application=RuleDescription)               | Ensures the document has at most one banner landmark                                                       |
 | [landmark-no-duplicate-contentinfo](https://dequeuniversity.com/rules/axe/4.1/landmark-no-duplicate-contentinfo?application=RuleDescription)     | Ensures the document has at most one contentinfo landmark                                                  |
 | [landmark-no-duplicate-main](https://dequeuniversity.com/rules/axe/4.1/landmark-no-duplicate-main?application=RuleDescription)                   | Ensures the document has at most one main landmark                                                         |
-| [landmark-one-main](https://dequeuniversity.com/rules/axe/4.1/landmark-one-main?application=RuleDescription)                                     | Ensures the document has a main landmark                                                                   |
+| [landmark-one-main](https://dequeuniversity.com/rules/axe/4.1/landmark-one-main?application=RuleDescription)                                     | Ensures the document has a unique main landmark                                                                   |
 | [landmark-unique](https://dequeuniversity.com/rules/axe/4.1/landmark-unique?application=RuleDescription)                                         | Landmarks must have a unique role or role/label/title (i.e. accessible name) combination                   |
 | [meta-viewport-large](https://dequeuniversity.com/rules/axe/4.1/meta-viewport-large?application=RuleDescription)                                 | Ensures &lt;meta name=&quot;viewport&quot;&gt; can scale a significant amount                              |
 | [meta-viewport](https://dequeuniversity.com/rules/axe/4.1/meta-viewport?application=RuleDescription)                                             | Ensures &lt;meta name=&quot;viewport&quot;&gt; does not disable text scaling and zooming                   |
@@ -102,4 +102,5 @@ Developer note: regular expression replace all: `(\| .+? \| .+? \|) .+? \| .+? \
 Certain aspects of HTML accessibility checking don't apply to EPUBs, so Ace has modified aXe's default ruleset slightly.
 
 * Ace disables aXe's `bypass`, `region`, `page-has-heading-one`, and `landmark-complementary-is-top-level` rules.
-* Ace changes aXe's `landmark-one-main` rule to remove the `page-no-duplicate-main` check (was `has-no-more-than-one-main`, see https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19 ).
+* Ace changes aXe's `landmark-one-main` rule to add the `page-no-duplicate-main` check (was `has-no-more-than-one-main`, see https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19 ).
+* DAISY Axe fork: https://github.com/daisy/axe-core/pull/3
