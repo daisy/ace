@@ -170,6 +170,15 @@ test('Checks that `epub:type` have matching ARIA roles', async() => {
       'earl:test': expect.objectContaining({ 'dct:title': 'epub-type-has-matching-role' }),
       'earl:result': expect.objectContaining({
         'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#pass4a'] }),
+      }),
+    })
+  ]));
+  expect(assertions).not.toEqual(expect.arrayContaining([
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'epub-type-has-matching-role' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
         'earl:pointer': expect.objectContaining({ css: ['#pass5'] }),
       }),
     })
