@@ -80,24 +80,24 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
         }
       }
 
-      let localizedScript = "";
-      const rawJson = getRawResourcesForCurrentLanguage();
+      // let localizedScript = "";
+      // const rawJson = getRawResourcesForCurrentLanguage();
 
-      ["axecheck", "axerule"].forEach((checkOrRule) => {
-        const checkOrRuleKeys = Object.keys(rawJson[checkOrRule]);
-        for (const checkOrRuleKey of checkOrRuleKeys) {
-          const msgs = Object.keys(rawJson[checkOrRule][checkOrRuleKey]);
-          for (const msg of msgs) {
-            const k = `__aceLocalize__${checkOrRule}_${checkOrRuleKey}_${msg}`;
-            let v = rawJson[checkOrRule][checkOrRuleKey][msg];
-            if (v) {
-              v = v.replace(/"/g, '\\"');
-            }
-            localizedScript += `window['${k}']="${v}";\n`;
-          }
-        }
-      });
-      scriptContents.push(localizedScript);
+      // ["axecheck", "axerule"].forEach((checkOrRule) => {
+      //   const checkOrRuleKeys = Object.keys(rawJson[checkOrRule]);
+      //   for (const checkOrRuleKey of checkOrRuleKeys) {
+      //     const msgs = Object.keys(rawJson[checkOrRule][checkOrRuleKey]);
+      //     for (const msg of msgs) {
+      //       const k = `__aceLocalize__${checkOrRule}_${checkOrRuleKey}_${msg}`;
+      //       let v = rawJson[checkOrRule][checkOrRuleKey][msg];
+      //       if (v) {
+      //         v = v.replace(/"/g, '\\"');
+      //       }
+      //       localizedScript += `window['${k}']="${v}";\n`;
+      //     }
+      //   }
+      // });
+      // scriptContents.push(localizedScript);
 
     } catch (err) {
       console.log(err);
