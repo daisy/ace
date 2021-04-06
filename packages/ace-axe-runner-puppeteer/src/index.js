@@ -27,7 +27,10 @@ module.exports = {
         const page = await _browser.newPage();
 
         if (isDev) {
-            page.on('console', msg => console.log(msg.text()));
+            page.on('console', msg => {
+                console.log(msg.text());
+                // process.stdout.write(msg.text());
+            });
         }
 
         await page.setRequestInterception(true);
