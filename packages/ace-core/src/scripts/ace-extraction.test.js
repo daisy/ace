@@ -8,6 +8,7 @@
 const $ = require('@daisy/jest-puppeteer');
 
 beforeAll(async () => {
+  // $.redirectConsole();
   await $.loadXHTMLPage();
   await $.injectScripts([require.resolve('./ace-extraction.js')]);
 
