@@ -209,7 +209,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
       spi.title = this.parseContentDocTitle(spi.filepath);
       spi.url = fileUrl(spi.filepath);
 
-      // this.contentDocs.push(spi);
+      this.contentDocs.push(spi);
     }
   }
 
