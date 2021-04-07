@@ -37,13 +37,13 @@ for (const dir of dirs) {
         if (packageJson[depType]) {
             for (const dep in packageJson[depType]) {
                 const ver = packageJson[depType][dep];
-                const verFixed = ver.replace(/[^]/, "");
+                const verFixed = ver.replace(/[\^]/, "");
 
                 p(chalk.reset.bold.cyan(`\u2022 ${dep}`));
                 p(chalk.dim(" ⇒ "));
                 p(chalk.reset.bold.gray(`${ver}`));
                 // newline();
-                if (dep.startsWith("@daisy/")) {
+                if (dep.startsWith("@daisy/") && dep !== "@daisy/axe-core-for-ace") {
                     const packDir = dep.substr("@daisy/".length);
                     const packVersion = packageJsons[packDir].version;
                     if (packVersion !== verFixed) {
@@ -63,7 +63,7 @@ for (const dir of dirs) {
                     const packVersion = packageJsons[packDir] ? packageJsons[packDir].version : undefined;
                     if (packVersion) {
                         if (packVersion !== verFixed) {
-                            p(chalk.reset.bold.red(` TOP DIFF (${packVersion})`));
+                            p(chalk.reset.bold.red(` TOP DIFF (${packVersion}) !== [${verFixed}]`));
                         } else {
                             p(chalk.reset.bold.green(` TOP OK`));
                         }

@@ -24,7 +24,7 @@
     "@daisy/ace-report": "^1.2.0-beta.14",
     "@daisy/ace-report-axe": "^1.2.0-beta.14",
     "@daisy/epub-utils": "^1.2.0-beta.14",
-    "axe-core": "^4.1.4",
+    "@daisy/axe-core-for-ace": "4.1.4-canary.1",
     "file-url": "^3.0.0",
     "h5o": "^0.11.3",
     "p-map": "^4.0.0",
