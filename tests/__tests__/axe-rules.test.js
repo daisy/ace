@@ -48,6 +48,72 @@ test('DPUB ARIA roles are allowed', async () => {
   const report = await ace('../data/axerule-dpubroles');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
+test('DPUB ARIA landmark unique', async () => {
+  const report = await ace('../data/axerule-landmark-unique');
+  expect(report['earl:result']['earl:outcome']).toEqual('fail');
+  const assertions = findAssertionsForDoc(report, 'content_001.xhtml');
+  expect(assertions).toBeDefined();
+  expect(assertions).toEqual(expect.arrayContaining([
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-allowed-role' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#pass-epi'] }),
+      }),
+    }),
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-allowed-role' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#pass-biblio'] }),
+      }),
+    }),
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-allowed-role' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#header-notes'] }),
+      }),
+    }),
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-allowed-role' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#pass-aside-endnotes1'] }),
+      }),
+    }),
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-allowed-role' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#pass-aside-endnotes2'] }),
+      }),
+    }),
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'landmark-unique' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#header-notes', '#pass-aside-endnotes1', '#pass-aside-endnotes2'] }),
+      }),
+    }),
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'landmark-unique' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#pass-aside-footnote1', '#pass-aside-footnote3'] }),
+      }),
+    }),
+  ]));
+  expect(assertions).not.toEqual(expect.arrayContaining([
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'landmark-unique' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#pass-aside-footnote2'] }),
+      }),
+    }),
+  ]));
+});
 
 test('Ensure page breaks have labels', async () => {
   const report = await ace('../data/axerule-pagebreak-label');

@@ -231,6 +231,7 @@ daisy.ace.run = function(done) {
 
       if (axeError)  {
         done(axeError, null);
+        return;
       }
 
       addCFIs(axeResult);

@@ -30,3 +30,5 @@ website/site
 .DS_Store
 ._*
 Thumbs.db
+
+.history
