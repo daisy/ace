@@ -927,10 +927,10 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@daisy/axe-core-for-ace@4.1.4-canary.1":
-  version "4.1.4-canary.1"
-  resolved "https://registry.yarnpkg.com/@daisy/axe-core-for-ace/-/axe-core-for-ace-4.1.4-canary.1.tgz#5edc813b459343a7f3c97a695e8ca80511008703"
-  integrity sha512-hpfGZa8bD1HCnKvfxJVNIpVVTUvq6H/lk9h8lAWvqliLeMgGdmAluzFZLk2SsgRoPGjOXku0ddABRgqUzw+x/w==
+"@daisy/axe-core-for-ace@4.1.4-canary.2":
+  version "4.1.4-canary.2"
+  resolved "https://registry.yarnpkg.com/@daisy/axe-core-for-ace/-/axe-core-for-ace-4.1.4-canary.2.tgz#6c1d09ee1288cb7ea8e6f76de330182f6613bcb1"
+  integrity sha512-SEuhKzP/QBgxVMCDw0Gr+/Rx0DH7v1yrJDelcVXtW4+Df6nMAik71TSMguVEdpgTUDDyaxKeYVtYp7w6kVrAiQ==
 
 "@electron/get@^1.0.1":
   version "1.12.4"
