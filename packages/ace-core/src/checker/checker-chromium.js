@@ -16,7 +16,7 @@ tmp.setGracefulCleanup();
 const scripts = [
   // require.resolve('../scripts/function-bind-bound-object.js'),
   require.resolve('../scripts/vendor/outliner.min.js'),
-  path.resolve(require.resolve('axe-core'), '../axe.js'),
+  path.resolve(require.resolve('@daisy/axe-core-for-ace'), '../axe.js'),
   // require.resolve('../scripts/axe-patch-aria-roles.js'),
   // require.resolve('../scripts/axe-patch-is-aria-role-allowed.js'),
   // require.resolve('../scripts/axe-patch-only-list-items.js'),
@@ -70,7 +70,7 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
       // https://github.com/dequelabs/axe-core/tree/develop/locales
 
       if (lang && lang !== "en" && lang.indexOf("en-") !== 0) { // default English built into Axe source code
-        localePath = path.resolve(require.resolve('axe-core'), `../locales/${lang}.json`);
+        localePath = path.resolve(require.resolve('@daisy/axe-core-for-ace'), `../locales/${lang}.json`);
         if (fs.existsSync(localePath)) {
           const localeStr = fs.readFileSync(localePath, { encoding: "utf8" });
           const localeScript = `window.__axeLocale__=${localeStr};`;
