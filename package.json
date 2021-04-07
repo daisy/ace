@@ -26,7 +26,7 @@
     "strip-ansi": "^6.0.0"
   },
   "scripts": {
-    "axe-dev": "cpy \"../axe-core_DAISY/axe.js\" \"node_modules/axe-core/\" && cpy \"../axe-core_DAISY/axe.min.js\" \"node_modules/axe-core/\" && cpy \"../axe-core_DAISY/axe.d.ts\" \"node_modules/axe-core/\" && cpy \"../axe-core_DAISY/locales/*.*\" \"node_modules/axe-core/locales/\" && cpy \"../axe-core_DAISY/package.json\" \"node_modules/axe-core/\"",
+    "axe-dev": "cpy \"../axe-core_DAISY/axe.js\" \"node_modules/@daisy/axe-core-for-ace/\" && cpy \"../axe-core_DAISY/axe.min.js\" \"node_modules/@daisy/axe-core-for-ace/\" && cpy \"../axe-core_DAISY/axe.d.ts\" \"node_modules/@daisy/axe-core-for-ace/\" && cpy \"../axe-core_DAISY/locales/*.*\" \"node_modules/@daisy/axe-core-for-ace/locales/\" && cpy \"../axe-core_DAISY/package.json\" \"node_modules/@daisy/axe-core-for-ace/\"",
     "ace": "node ./packages/ace-cli/bin/ace.js",
     "ace-electron": "electron ./packages/ace-axe-runner-electron/lib/cli.js",
     "clean": "yarn clean-libs",

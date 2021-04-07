@@ -185,6 +185,7 @@ test('Checks that `epub:type` have matching ARIA roles', async() => {
   ]));
   const navAssertions = findAssertionsForDoc(report, 'nav.xhtml');
   expect(navAssertions).toBeDefined();
+  expect(navAssertions).toEqual([]);
   expect(navAssertions).not.toEqual(expect.arrayContaining([
     expect.objectContaining({
       'earl:test': expect.objectContaining({ 'dct:title': 'epub-type-has-matching-role' }),

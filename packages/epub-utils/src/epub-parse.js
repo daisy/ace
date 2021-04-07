@@ -157,12 +157,14 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
   this.metadata = parseMetadata(doc, select);
   this.links = parseLinks(doc, select);
 
+  var spineContainsNavDoc = undefined;
   const spineItemIdrefs = select('/opf:package/opf:spine/opf:itemref/@idref', doc);
   spineItemIdrefs.forEach((idref) => {
     const manifestItem = select(`/opf:package/opf:manifest/opf:item[@id='${idref.nodeValue}']`, doc);
     if (manifestItem.length > 0) {
       const contentType = (manifestItem[0].getAttribute('media-type')||'').trim();
       if (this.contentDocMediaType === contentType) {
+
         var spineItem = new SpineItem();
         spineItem.relpath = decodeURI(manifestItem[0].getAttribute('href'));
         spineItem.filepath = path.join(path.dirname(packageDocPath), spineItem.relpath);
@@ -173,6 +175,13 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
         // spineItem.url = "file://" + encodeURI(spineItem.filepath);
 
         this.contentDocs.push(spineItem);
+
+        if (!spineContainsNavDoc) {
+          const props = (manifestItem[0].getAttribute('properties')||'').trim().replace(/\s\s+/g, ' ').split(' ');
+          if (props.includes('nav')) {
+            spineContainsNavDoc = spineItem;
+          }
+        }
       } else if (!this.hasSVGContentDocuments && 'image/svg+xml' === contentType) {
         winston.warn('The SVG Content Documents in this EPUB will be ignored.');
         this.hasSVGContentDocuments = true;
@@ -187,6 +196,21 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
     const navDocPath = decodeURI(navDocRef[0].nodeValue);
     const navDocFullPath = path.join(path.dirname(packageDocPath), navDocPath);
     this.navDoc = parseNavDoc(navDocFullPath, epubDir);
+
+    if (spineContainsNavDoc) {
+      if (spineContainsNavDoc.filepath !== navDocFullPath) {
+        console.log("Nav Doc Spine DIFF PATHS!?", spineContainsNavDoc.filepath, navDocFullPath);
+      }
+    } else {
+      var spi = new SpineItem();
+
+      spi.relpath = navDocPath;
+      spi.filepath = navDocFullPath;
+      spi.title = this.parseContentDocTitle(spi.filepath);
+      spi.url = fileUrl(spi.filepath);
+
+      // this.contentDocs.push(spi);
+    }
   }
 
   this.hasGuide = select('/opf:package/opf:guide', doc).length > 0;
