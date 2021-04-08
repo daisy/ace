@@ -8,7 +8,7 @@ _Note: this documentation applies to the Ace by DAISY command line tool. For mor
 ## Install Node.JS
 
 * Go to [Node.JS](https://nodejs.org/)
-* Download version 6.4.0 or higher
+* Download version 10 or higher
 * Double-click to install
 
 ## Install (or update) Ace
@@ -22,7 +22,7 @@ If everything went smoothly, you should now be able to run the `ace` command in 
 
 ```
 $ ace --version
-1.0.0
+1.2.0
 ```
 
 {{% note %}}
