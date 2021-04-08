@@ -169,7 +169,7 @@ An example of an assertion for an individual test is shown below. Note that it i
 ```
 {
   "@type": "earl:assertion",
-  "earl:assertedBy": "aXe",
+  "earl:assertedBy": "axe",
   "earl:mode": "automatic",
   "earl:test": {
     "earl:impact": "critical",

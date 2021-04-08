@@ -21,7 +21,7 @@ This table details each violation and provides information about:
 
 * `Impact`: the severity of the violation
 * `Ruleset`: the category that this rule is in
-* `Rule`: identifier for the rule, as well as the underlying engine that checks for it (e.g. _aXe_ or _Ace_)
+* `Rule`: identifier for the rule, as well as the underlying engine that checks for it (e.g. _axe_ or _Ace_)
 * `Location`: where in the book the violation occurred, as well as an HTML code snippet of the relevant portion.
 * `Details`: suggestions on how to fix the problem, as well as a link to the relevant topic page in our online knowledge base.
 

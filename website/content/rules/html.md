@@ -3,11 +3,11 @@ title = "HTML Rules"
 weight = 1
 +++
 
-Under the hood, most of the accessibility checks ran by Ace are powered by [aXe](https://github.com/dequelabs/axe-core), an engine for automated testing of HTML. Ace uses aXe's rules, with some modifications (described [here](#modifications)).
+Under the hood, most of the accessibility checks ran by Ace are powered by [Deque axe](https://github.com/dequelabs/axe-core), an engine for automated testing of HTML. Ace uses axe's rules, with some modifications (described [here](#modifications)).
 
 ## Rules
 
-Here is a list of aXe's rules used by Ace, taken from [their documentation](https://github.com/dequelabs/axe-core/blob/v4.1.1/doc/rule-descriptions.md):
+Here is a list of axe's rules used by Ace (see the full up to date documentation [in GitHub](https://github.com/daisy/axe-core/blob/v4.1.4_DAISY/doc/rule-descriptions.md) ):
 
 | Rule ID                                                                                                                          | Description                                                                                                   |
 | :------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ |
@@ -99,8 +99,8 @@ Developer note: regular expression replace all: `(\| .+? \| .+? \|) .+? \| .+? \
 
 ## Modifications
 
-Certain aspects of HTML accessibility checking don't apply to EPUBs, so Ace has modified aXe's default ruleset slightly.
+Certain aspects of HTML accessibility checking don't apply to EPUBs, so Ace has modified axe's default ruleset slightly.
 
-* Ace disables aXe's `bypass`, `region`, `page-has-heading-one`, and `landmark-complementary-is-top-level` rules.
-* Ace changes aXe's `landmark-one-main` rule to add the `page-no-duplicate-main` check (was `has-no-more-than-one-main`, see https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19 ).
-* DAISY Axe fork: https://github.com/daisy/axe-core/pull/3
+* Ace disables axe's `bypass`, `region`, `page-has-heading-one`, and `landmark-complementary-is-top-level` rules.
+* Ace changes axe's `landmark-one-main` rule to add the `page-no-duplicate-main` check (was `has-no-more-than-one-main`, see https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19 ).
+* DAISY Axe fork: https://github.com/daisy/axe-core/pull/4
