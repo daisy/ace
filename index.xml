@@ -111,7 +111,7 @@ Violations Summary of Violations This table lists statistics for the violations,
       
       <guid>https://daisy.github.io/ace/getting-started/installation/</guid>
       <description>Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please visit this page.
-Install Node.JS  Go to Node.JS Download version 6.4.0 or higher Double-click to install  Install (or update) Ace  After installing Node, open a shell window  On Windows: Windows System-&amp;gt;Command Prompt or Start-&amp;gt;Run-&amp;gt;cmd.exe On Mac: Applications-&amp;gt;Utilities-&amp;gt;Terminal   Type npm install @daisy/ace -g to install or update Ace  If everything went smoothly, you should now be able to run the ace command in your shell.</description>
+Install Node.JS  Go to Node.JS Download version 10 or higher Double-click to install  Install (or update) Ace  After installing Node, open a shell window  On Windows: Windows System-&amp;gt;Command Prompt or Start-&amp;gt;Run-&amp;gt;cmd.exe On Mac: Applications-&amp;gt;Utilities-&amp;gt;Terminal   Type npm install @daisy/ace -g to install or update Ace  If everything went smoothly, you should now be able to run the ace command in your shell.</description>
     </item>
     
     <item>
