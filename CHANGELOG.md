@@ -1,3 +1,18 @@
+<a name="1.2.0"></a>
+## [1.2.0](https://github.com/daisy/ace/compare/v1.1.1...v1.2.0) (2021-04-08)
+
+Major internal update (see https://github.com/daisy/ace/pull/314 ).
+
+### Summary:
+
+* Based on DAISY's own fork of Deque's Axe (latest v4 version), instead of patching Axe's distributed Javascript bundles (see https://github.com/daisy/axe-core/pull/4 )
+* Better localization tooling for Axe, integration of Axe translations
+* Two Axe "runners": Puppeteer (default for Ace CLI), and Electron (can be used in CLI, and used by Ace App), Chromium web browser engine is used in both cases, but Electron runner uses a HTTP server to simulate a typical reading system environment. Unit tests plumbing for both platforms (Continuous Integration server only executes the Puppeteer ones, for faster builds). Runtime performance is near-identical (there is a developer script to check this).
+* NodeJS >=10 requirement
+* NPM package dependencies updated to latest versions (except where NodeJS requirement is higher). Added developer scripts to facilitate version checking and incremental updates at regular intervals (i.e. `package.json` exact references and `yarn.lock` maintenance)
+* All Ace sub-packages (`@daisy/` organisation scope on NPM) have exact same semantic version (easier deployment with developer script that automates NPM publish)
+* Fixes bugs that couldn't easily be fixed in Ace 1.1.1 (the last of v1), due to older Axe (v3 instead of v4) and due to older NPM package dependencies that were necessary for compatibility with legacy NodeJS requirement (now deprecated / deemed unsecure).
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/daisy/ace/compare/v1.1.0...v1.1.1) (2019-07-08)
 

@@ -1,10 +1,10 @@
 {
   "name": "@daisy/ace-meta",
-  "version": "1.2.0-beta.15",
+  "version": "1.2.0",
   "engines": {
     "node": ">=10.0.0",
-    "yarn": "^1.22.5",
-    "npm": ">=6.14.12"
+    "yarn": "^1.22.0",
+    "npm": ">=6.0.0"
   },
   "description": "Meta version information for Ace",
   "author": {

@@ -1,10 +1,10 @@
 {
   "name": "ace-core",
-  "version": "1.2.0-beta.15",
+  "version": "1.2.0",
   "engines": {
     "node": ">=10.0.0",
-    "yarn": "^1.22.5",
-    "npm": ">=6.14.12"
+    "yarn": "^1.22.0",
+    "npm": ">=6.0.0"
   },
   "description": "Ace by DAISY, an Accessibility Checker for EPUB",
   "keywords": [
@@ -38,9 +38,9 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-cli": "^1.2.0-beta.15",
-    "@daisy/ace-core": "^1.2.0-beta.15",
-    "@daisy/ace-http": "^1.2.0-beta.15"
+    "@daisy/ace-cli": "^1.2.0",
+    "@daisy/ace-core": "^1.2.0",
+    "@daisy/ace-http": "^1.2.0"
   },
   "publishConfig": {
     "access": "public"
