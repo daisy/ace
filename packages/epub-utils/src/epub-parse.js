@@ -10,8 +10,9 @@
 
 'use strict';
 
-const DOMParser = require('xmldom-alpha').DOMParser;
-const XMLSerializer = require('xmldom-alpha').XMLSerializer;
+const fileUrl = require('file-url');
+const DOMParser = require('xmldom').DOMParser;
+const XMLSerializer = require('xmldom').XMLSerializer;
 const fs = require('fs');
 const path = require('path');
 const xpath = require('xpath');
@@ -40,7 +41,10 @@ function EpubParser() {
 
 function parseNavDoc(fullpath, epubDir) {
   const content = fs.readFileSync(fullpath).toString();
-  //FIXME hack to workaround xmldom-alpha regex test
+  // not application/xhtml+xml because:
+  // https://github.com/jindw/xmldom/pull/208
+  // https://github.com/jindw/xmldom/pull/242
+  // https://github.com/xmldom/xmldom/blob/3db6ccf3f7ecbde73608490d71f96c727abdd69a/lib/dom-parser.js#L12
   const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml');
 
   // Remove all links
@@ -82,11 +86,22 @@ function addMeta(name, value, meta) {
 }
 function parseMetadata(doc, select) {
   const result = {};
-  select('//dc:*', doc).forEach((dcElem) => {
+  select('/opf:package/opf:metadata/dc:*', doc).forEach((dcElem) => {
     addMeta(`dc:${dcElem.localName}`, dcElem.textContent, result);
   });
-  select('//opf:meta[not(@refines)]', doc).forEach((meta) => {
-    addMeta(meta.getAttribute('property'), meta.textContent, result);
+  select('/opf:package/opf:metadata/opf:meta[not(@refines)]', doc).forEach((meta) => {
+    const prop = meta.getAttribute('property');
+    if (prop) {
+      if (meta.textContent) {
+        addMeta(prop, meta.textContent, result);
+      }
+    } else {
+      const name = meta.getAttribute('name');
+      const content = meta.getAttribute('content');
+      if (name && content) {
+        addMeta(name, content, result);
+      }
+    }
   });
   return result;
 }
@@ -103,8 +118,8 @@ function addLink(rel, href, link) {
 }
 function parseLinks(doc, select) {
   const result = {};
-  select('//opf:link[not(@refines)]', doc).forEach((link) => {
-    addLink(link.getAttribute('rel'), link.getAttribute('href'), result);
+  select('/opf:package/opf:metadata/opf:link[not(@refines)]', doc).forEach((link) => {
+    addLink(link.getAttribute('rel'), decodeURI(link.getAttribute('href')), result);
   });
   return result;
 }
@@ -142,18 +157,31 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
   this.metadata = parseMetadata(doc, select);
   this.links = parseLinks(doc, select);
 
-  const spineItemIdrefs = select('//opf:itemref/@idref', doc);
+  var spineContainsNavDoc = undefined;
+  const spineItemIdrefs = select('/opf:package/opf:spine/opf:itemref/@idref', doc);
   spineItemIdrefs.forEach((idref) => {
-    const manifestItem = select(`//opf:item[@id='${idref.nodeValue}']`, doc);
+    const manifestItem = select(`/opf:package/opf:manifest/opf:item[@id='${idref.nodeValue}']`, doc);
     if (manifestItem.length > 0) {
       const contentType = (manifestItem[0].getAttribute('media-type')||'').trim();
       if (this.contentDocMediaType === contentType) {
+
         var spineItem = new SpineItem();
-        spineItem.relpath = manifestItem[0].getAttribute('href');
+        spineItem.relpath = decodeURI(manifestItem[0].getAttribute('href'));
         spineItem.filepath = path.join(path.dirname(packageDocPath), spineItem.relpath);
         spineItem.title = this.parseContentDocTitle(spineItem.filepath);
-        spineItem.url = "file://" + spineItem.filepath;
+
+        // does encodeURI() as per https://tools.ietf.org/html/rfc3986#section-3.3 in a nutshell: encodeURI(`file://${tmpFile}`).replace(/[?#]/g, encodeURIComponent)
+        spineItem.url = fileUrl(spineItem.filepath);
+        // spineItem.url = "file://" + encodeURI(spineItem.filepath);
+
         this.contentDocs.push(spineItem);
+
+        if (!spineContainsNavDoc) {
+          const props = (manifestItem[0].getAttribute('properties')||'').trim().replace(/\s\s+/g, ' ').split(' ');
+          if (props.includes('nav')) {
+            spineContainsNavDoc = spineItem;
+          }
+        }
       } else if (!this.hasSVGContentDocuments && 'image/svg+xml' === contentType) {
         winston.warn('The SVG Content Documents in this EPUB will be ignored.');
         this.hasSVGContentDocuments = true;
@@ -161,25 +189,44 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
     }
   });
 
-  const navDocRef = select('//opf:item'
+  const navDocRef = select('/opf:package/opf:manifest/opf:item'
                             + '[contains(concat(" ", normalize-space(@properties), " ")," nav ")]'
                             + '/@href', doc);
   if (navDocRef.length > 0) {
-    const navDocPath = navDocRef[0].nodeValue;
+    const navDocPath = decodeURI(navDocRef[0].nodeValue);
     const navDocFullPath = path.join(path.dirname(packageDocPath), navDocPath);
     this.navDoc = parseNavDoc(navDocFullPath, epubDir);
+
+    if (spineContainsNavDoc) {
+      if (spineContainsNavDoc.filepath !== navDocFullPath) {
+        console.log("Nav Doc Spine DIFF PATHS!?", spineContainsNavDoc.filepath, navDocFullPath);
+      }
+    } else {
+      var spi = new SpineItem();
+
+      spi.relpath = navDocPath;
+      spi.filepath = navDocFullPath;
+      spi.title = this.parseContentDocTitle(spi.filepath);
+      spi.url = fileUrl(spi.filepath);
+
+      this.contentDocs.push(spi);
+    }
   }
 
-  this.hasBindings = select('//opf:bindings', doc).length > 0;
-  this.hasManifestFallbacks = select('//opf:item[@fallback]', doc).length > 0;
+  this.hasGuide = select('/opf:package/opf:guide', doc).length > 0;
+  this.hasBindings = select('/opf:package/opf:bindings', doc).length > 0;
+  this.hasManifestFallbacks = select('/opf:package/opf:manifest/opf:item[@fallback]', doc).length > 0;
 };
 
 EpubParser.prototype.parseContentDocTitle = function(filepath) {
   const content = fs.readFileSync(filepath).toString();
-  //FIXME hack to workaround xmldom-alpha regex test
+  // not application/xhtml+xml because:
+  // https://github.com/jindw/xmldom/pull/208
+  // https://github.com/jindw/xmldom/pull/242
+  // https://github.com/xmldom/xmldom/blob/3db6ccf3f7ecbde73608490d71f96c727abdd69a/lib/dom-parser.js#L12
   const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml');
   const select = xpath.useNamespaces({html: "http://www.w3.org/1999/xhtml", epub: "http://www.idpf.org/2007/ops"});
-  const title = select('//html:title/text()', doc);
+  const title = select('/html:html/html:head/html:title/text()', doc);
   if (title.length > 0) {
     return title[0].nodeValue;
   }
@@ -193,10 +240,10 @@ EpubParser.prototype.calculatePackageDocPath = function(epubDir) {
   const content = fs.readFileSync(containerFilePath).toString();
   const doc = new DOMParser({errorHandler}).parseFromString(content);
   const select = xpath.useNamespaces({ ocf: 'urn:oasis:names:tc:opendocument:xmlns:container' });
-  const rootfiles = select('//ocf:rootfile[@media-type="application/oebps-package+xml"]/@full-path', doc);
+  const rootfiles = select('/ocf:container/ocf:rootfiles/ocf:rootfile[@media-type="application/oebps-package+xml"]/@full-path', doc);
   // just grab the first one as we're not handling the case of multiple renditions
   if (rootfiles.length > 0) {
-    return (path.join(epubDir, rootfiles[0].nodeValue));
+    return (path.join(epubDir, decodeURI(rootfiles[0].nodeValue)));
   }
   return '';
 }

@@ -3,14 +3,20 @@
 <title>Minimal Nav</title>
 </head>
 <body>
-<nav epub:type="toc">
+<div id="txt">Page List</div>
+<nav epub:type="toc" role="doc-toc" data-aria-label="Table Of Contents">
 <ol>
 <li><a href="content_001.xhtml">content 001</a></li>
 </ol>
 </nav>
-<nav epub:type="page-list">
+<nav epub:type="page-list" role="doc-pagelist" aria-labelledby="txt">
 <ol>
 <li><a href="content_001.xhtml#p1">page 1</a></li>
+</ol>
+</nav>
+<nav epub:type="landmarks"  title="Generic Landmarks">
+<ol>
+<li><a href="content_001.xhtml#p2">page 2</a></li>
 </ol>
 </nav>
 </body>

@@ -41,15 +41,29 @@ function aggregateHTMLOutlines(outlines) {
 }
 
 module.exports = class Report {
-  constructor(epub, outdir, lang) {
-    if (lang) {
-      setCurrentLanguage(lang);
-    }
 
-    this._builder = new builders.ReportBuilder()
-      .setOutdir(outdir)
-      .withTestSubject(epub.path, '', '', epub.metadata, epub.links)
-      .withA11yMeta(a11yMetaChecker.analyze(epub.metadata, epub.links))
+  constructor(epub, outdir, lang) {
+    this.epub = epub;
+    this.outdir = outdir;
+    this.lang = lang;
+  }
+
+  async init() {
+    return new Promise((resolve, reject) => {
+      const l10nDoneCallback = () => {
+        this._builder = new builders.ReportBuilder()
+        .setOutdir(this.outdir)
+        .withTestSubject(this.epub.path, '', '', this.epub.metadata, this.epub.links)
+        .withA11yMeta(a11yMetaChecker.analyze(this.epub.metadata, this.epub.links));
+
+        resolve(this); // Report instance
+      }
+      if (this.lang) {
+        setCurrentLanguage(this.lang, l10nDoneCallback);
+      } else {
+        l10nDoneCallback();
+      }
+    });
   }
 
   get json() {

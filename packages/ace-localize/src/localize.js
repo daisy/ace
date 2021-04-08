@@ -24,6 +24,7 @@ export function newLocalizer(resources) {
     const i18nextInstance = i18n.createInstance();
     // https://www.i18next.com/overview/configuration-options
     i18nextInstance.init({
+        ignoreJSONStructure: false,
         debug: false,
         resources: resources,
         // lng: undefined,
@@ -42,6 +43,27 @@ export function newLocalizer(resources) {
         },
     });
     
+    function ensureLanguage(doneCallback) {
+        if (i18nextInstance.language !== _currentLanguage) {
+            // https://github.com/i18next/i18next/blob/master/CHANGELOG.md#1800
+            // i18nextInstance.language not instantly ready (because async loadResources()),
+            // but i18nextInstance.isLanguageChangingTo immediately informs which locale i18next is switching to.
+            i18nextInstance.changeLanguage(_currentLanguage).then((_t) => {
+                if (doneCallback) {
+                    doneCallback();
+                }
+            }).catch((err) => {
+                winston.info('i18next changeLanguage reject: ' + _currentLanguage);
+                winston.info(err);
+                if (doneCallback) {
+                    doneCallback();
+                }
+            });
+        } else {
+            doneCallback();
+        }
+    }
+
     return {
         LANGUAGES: resources,
 
@@ -52,24 +74,24 @@ export function newLocalizer(resources) {
         getCurrentLanguage: function() {
             return _currentLanguage;
         },
-        setCurrentLanguage: function(language) {
+        setCurrentLanguage: function(language, doneCallback) {
             
             for (const lang of LANGUAGE_KEYS) {
                 if (language === lang) {
                     _currentLanguage = language;
+                    ensureLanguage(doneCallback);
                     return;
                 }
             }
             // fallback
             _currentLanguage = DEFAULT_LANGUAGE;
+            ensureLanguage(doneCallback);
         },
         
         localize: function(msg, options) {
             const opts = options || {};
-        
-            if (i18nextInstance.language !== _currentLanguage) {
-                i18nextInstance.changeLanguage(_currentLanguage);
-            }
+
+            // ensureLanguage();
         
             return i18nextInstance.t(msg, opts);
         },

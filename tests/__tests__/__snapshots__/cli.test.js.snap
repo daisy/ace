@@ -7,6 +7,7 @@ Re-run Ace using the --verbose option to enable full debug logging."
 
 exports[`Running the CLI on a non-existant document should fail 2`] = `
 "[31merror[39m:   Couldn’t find EPUB file 'unexisting.epub'
+[31merror[39m:   
 "
 `;
 
@@ -48,6 +49,7 @@ exports[`Running the CLI with no input should fail 2`] = `
     -l, --lang  <language> language code for localized messages (e.g. \\"fr\\"), default is \\"en\\"
   Examples
     $ ace -o out ~/Documents/book.epub
+
 "
 `;
 
@@ -73,5 +75,6 @@ exports[`Running the CLI with the -h option should print help 1`] = `
     -l, --lang  <language> language code for localized messages (e.g. \\"fr\\"), default is \\"en\\"
   Examples
     $ ace -o out ~/Documents/book.epub
+
 "
 `;

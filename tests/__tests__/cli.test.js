@@ -6,6 +6,22 @@ const stripAnsi = require('strip-ansi');
 const ace = require('../runAceCLI');
 const pkg = require('@daisy/ace-meta/package');
 
+// console.log(`##${stderr}##`);
+// console.log(`##${stripAnsi(stderr)}##`);
+// const map = {  // Special characters
+//   '\\': '\\',
+//   '\n': 'n',
+//   '\r': 'r',
+//   '\t': 't'
+// };
+// let str = stderr.replace(/[\\\n\r\t]/g, function(i) {
+//     return '\\'+map[i];
+// });
+// str = str.replace(/[^ -~]/g, function(i){
+//     return '\\u'+("000" + i.charCodeAt(0).toString(16)).slice(-4);
+// });
+// console.log(`##${str}##`);
+
 describe('Running the CLI', () => {
   test('with no input should fail', () => {
     const { stdout, stderr, status } = ace([]);
@@ -56,7 +72,8 @@ describe('Running the CLI', () => {
       cwd: path.resolve(__dirname, '../data'),
     });
     expect(status).toBe(0);
-    expect(stderr).toBe('');
+    expect(stderr).toBe(false && process.env.AXE_ELECTRON_RUNNER ? `(electron) The default value of app.allowRendererProcessReuse is deprecated, it is currently "false".  It will change to be "true" in Electron 9.  For more information please check https://github.com/electron/electron/issues/18397
+` : '');
     expect(() => JSON.parse(stdout)).not.toThrow(SyntaxError);
     const res = JSON.parse(stdout);
     expect(res).toMatchObject({ '@type': 'earl:report' });
@@ -85,7 +102,10 @@ describe('Running the CLI', () => {
         cwd: path.resolve(__dirname, '../data'),
       });
       const log = stripAnsi(stdout);
-      expect(/^warn:\s+Copying document with extension/m.test(log)).toBe(true);
+
+      // The Electron-based Axe runner handles .xml files just fine
+      const condition = process.env.AXE_ELECTRON_RUNNER ? true : /^warn:\s+Copying document with extension/m.test(log);
+      expect(condition).toBe(true);
     });
 
     test('when the EPUB contains SVG Content Documents', () => {

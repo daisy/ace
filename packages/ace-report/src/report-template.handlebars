@@ -321,12 +321,14 @@
           {{#each earl:testSubject.metadata}}
           <tr>
             <td>{{@key}}</td>
-            <td>{{this}}</td>
+            <td>{{#formatMetadataValue}}{{/formatMetadataValue}}</td>
           </tr>
           {{/each}}
           {{!-- handlebars was complaining about an #if statement here so it was replaced with a helper --}}
-          {{!-- dcterms:conformsTo is a special case metadata item (actually it lives in the links section) --}}
+          {{!-- dcterms:conformsTo and a11y:certifierReport are special cases metadata items (actually live in the links section) --}}
           {{#insertConformsToRow}}{{/insertConformsToRow}}
+          {{#insertCertifierReportRow}}{{/insertCertifierReportRow}}
+          {{#insertCertifierCredentialRow}}{{/insertCertifierCredentialRow}}
         </tbody>
       </table>
 
@@ -413,8 +415,8 @@
               {{#each data.images}}
                 <tr>
                   <td class="image">
-                    <a href="data/{{src}}">
-                      <img src = "data/{{src}}"/>
+                    <a href="data/{{#encodeURI src}}{{/encodeURI}}">
+                      <img src = "data/{{#encodeURI src}}{{/encodeURI}}"/>
                     </a>
                   </td>
 
@@ -436,7 +438,7 @@
                     <td class="missing">{{#localize "na"}}{{/localize}}</td>
                   {{/if}}
 
-                  <td class="location">{{location}}</td>
+                  <td class="location">{{#decodeURI location}}{{/decodeURI}}</td>
 
                   {{#if role}}
                     <td>{{role}}</td>

@@ -9,7 +9,13 @@ test('config store is defined', () => {
 
 test('config file default name', () => {
   expect(path.basename(config.path)).toEqual('config.json');
-  expect(path.basename(path.dirname(config.path))).toEqual('DAISY Ace');
+  if (process.platform === "win32") {
+    // https://github.com/sindresorhus/env-paths/blob/5944db4b2f8c635e8b39a363f6bdff40825be16e/index.js#L28
+    expect(path.basename(path.dirname(path.dirname(config.path)))).toEqual('DAISY Ace');
+    expect(path.basename(path.dirname(config.path))).toEqual('Config');
+  } else {
+    expect(path.basename(path.dirname(config.path))).toEqual('DAISY Ace');
+  }
 });
 
 test('paths are defined', () => {

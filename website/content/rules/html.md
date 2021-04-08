@@ -7,73 +7,100 @@ Under the hood, most of the accessibility checks ran by Ace are powered by [aXe]
 
 ## Rules
 
-Here is a list of aXe's rules used by Ace, taken from [their documentation](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md):
+Here is a list of aXe's rules used by Ace, taken from [their documentation](https://github.com/dequelabs/axe-core/blob/v4.1.1/doc/rule-descriptions.md):
 
-| Rule | Description |
-| :------- | :------- |
-| accesskeys | Ensures every accesskey attribute value is unique. |
-| area-alt | Ensures &lt;area&gt; elements of image maps have alternate text. |
-| aria-allowed-attr | Ensures ARIA attributes are allowed for an element&apos;s role. |
-| aria-hidden-body | Ensures aria-hidden=&apos;true&apos; is not present on the document body. |
-| aria-required-attr | Ensures elements with ARIA roles have all required ARIA attributes. |
-| aria-required-children | Ensures elements with an ARIA role that require child roles contain them. |
-| aria-required-parent | Ensures elements with an ARIA role that require parent roles are contained by them. |
-| aria-roles | Ensures all elements with a role attribute use a valid value. |
-| aria-valid-attr-value | Ensures all ARIA attributes have valid values. |
-| aria-valid-attr | Ensures attributes that begin with aria- are valid ARIA attributes. |
-| audio-caption | Ensures &lt;audio&gt; elements have captions. |
-| blink | Ensures &lt;blink&gt; elements are not used. |
-| button-name | Ensures buttons have discernible text. |
-| checkboxgroup | Ensures related &lt;input type=&quot;checkbox&quot;&gt; elements have a group and that that group designation is consistent. |
-| color-contrast | Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds. |
-| definition-list | Ensures &lt;dl&gt; elements are structured correctly. |
-| dlitem | Ensures &lt;dt&gt; and &lt;dd&gt; elements are contained by a &lt;dl&gt;. |
-| document-title | Ensures each HTML document contains a non-empty &lt;title&gt; element. |
-| duplicate-id | Ensures every id attribute value is unique. |
-| empty-heading | Ensures headings have discernible text. |
-| focus-order-semantics | Ensures elements in the focus order have an appropriate role. |
-| frame-title-unique | Ensures &lt;iframe&gt; and &lt;frame&gt; elements contain a unique title attribute. |
-| frame-title | Ensures &lt;iframe&gt; and &lt;frame&gt; elements contain a non-empty title attribute. |
-| heading-order | Ensures the order of headings is semantically correct. |
-| hidden-content | Informs users about hidden content. |
-| html-has-lang | Ensures every HTML document has a lang attribute. |
-| html-lang-valid | Ensures the lang attribute of the &lt;html&gt; element has a valid value. |
-| image-alt | Ensures &lt;img&gt; elements have alternate text or a role of none or presentation. |
-| image-redundant-alt | Ensure button and link text is not repeated as image alternative. |
-| input-image-alt | Ensures &lt;input type=&quot;image&quot;&gt; elements have alternate text. |
-| label-title-only | Ensures that every form element is not solely labeled using the title or aria-describedby attributes. |
-| label | Ensures every form element has a label. |
-| landmark-main-is-top-level | The main landmark should not be contained in another landmark. |
-| landmark-one-main | Ensures a navigation point to the primary content of the page. If the page contains iframes, each iframe should contain either no main landmarks or just one. |
-| layout-table | Ensures presentational &lt;table&gt; elements do not use &lt;th&gt;, &lt;caption&gt; elements or the summary attribute. |
-| link-in-text-block | Links can be distinguished without relying on color. |
-| link-name | Ensures links have discernible text. |
-| list | Ensures that lists are structured correctly. |
-| listitem | Ensures &lt;li&gt; elements are used semantically. |
-| marquee | Ensures &lt;marquee&gt; elements are not used. |
-| meta-refresh | Ensures &lt;meta http-equiv=&quot;refresh&quot;&gt; is not used. |
-| meta-viewport-large | Ensures &lt;meta name=&quot;viewport&quot;&gt; can scale a significant amount. |
-| meta-viewport | Ensures &lt;meta name=&quot;viewport&quot;&gt; does not disable text scaling and zooming. |
-| object-alt | Ensures &lt;object&gt; elements have alternate text. |
-| p-as-heading | Ensure p elements are not used to style headings. |
-| radiogroup | Ensures related &lt;input type=&quot;radio&quot;&gt; elements have a group and that the group designation is consistent. |
-| region | Ensures all content is contained within a landmark region. |
-| scope-attr-valid | Ensures the scope attribute is used correctly on tables. |
-| server-side-image-map | Ensures that server-side image maps are not used. |
-| skip-link | Ensure all skip links have a focusable target. |
-| tabindex | Ensures tabindex attribute values are not greater than 0. |
-| table-duplicate-name | Ensure that tables do not have the same summary and caption. |
-| table-fake-caption | Ensure that tables with a caption use the &lt;caption&gt; element. |
-| td-has-header | Ensure that each non-empty data cell in a large table has one or more table headers. |
-| td-headers-attr | Ensure that each cell in a table using the headers refers to another cell in that table. |
-| th-has-data-cells | Ensure that each table header in a data table refers to data cells. |
-| valid-lang | Ensures lang attributes have valid values. |
-| video-caption | Ensures &lt;video&gt; elements have captions. |
-| video-description | Ensures &lt;video&gt; elements have audio descriptions. |
+| Rule ID                                                                                                                          | Description                                                                                                   |
+| :------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| [area-alt](https://dequeuniversity.com/rules/axe/4.1/area-alt?application=RuleDescription)                                       | Ensures &lt;area&gt; elements of image maps have alternate text                                               |
+| [aria-allowed-attr](https://dequeuniversity.com/rules/axe/4.1/aria-allowed-attr?application=RuleDescription)                     | Ensures ARIA attributes are allowed for an element&apos;s role                                                |
+| [aria-command-name](https://dequeuniversity.com/rules/axe/4.1/aria-command-name?application=RuleDescription)                     | Ensures every ARIA button, link and menuitem has an accessible name                                           |
+| [aria-hidden-body](https://dequeuniversity.com/rules/axe/4.1/aria-hidden-body?application=RuleDescription)                       | Ensures aria-hidden=&apos;true&apos; is not present on the document body.                                     |
+| [aria-hidden-focus](https://dequeuniversity.com/rules/axe/4.1/aria-hidden-focus?application=RuleDescription)                     | Ensures aria-hidden elements do not contain focusable elements                                                |
+| [aria-input-field-name](https://dequeuniversity.com/rules/axe/4.1/aria-input-field-name?application=RuleDescription)             | Ensures every ARIA input field has an accessible name                                                         |
+| [aria-meter-name](https://dequeuniversity.com/rules/axe/4.1/aria-meter-name?application=RuleDescription)                         | Ensures every ARIA meter node has an accessible name                                                          |
+| [aria-progressbar-name](https://dequeuniversity.com/rules/axe/4.1/aria-progressbar-name?application=RuleDescription)             | Ensures every ARIA progressbar node has an accessible name                                                    |
+| [aria-required-attr](https://dequeuniversity.com/rules/axe/4.1/aria-required-attr?application=RuleDescription)                   | Ensures elements with ARIA roles have all required ARIA attributes                                            |
+| [aria-required-children](https://dequeuniversity.com/rules/axe/4.1/aria-required-children?application=RuleDescription)           | Ensures elements with an ARIA role that require child roles contain them                                      |
+| [aria-required-parent](https://dequeuniversity.com/rules/axe/4.1/aria-required-parent?application=RuleDescription)               | Ensures elements with an ARIA role that require parent roles are contained by them                            |
+| [aria-roledescription](https://dequeuniversity.com/rules/axe/4.1/aria-roledescription?application=RuleDescription)               | Ensure aria-roledescription is only used on elements with an implicit or explicit role                        |
+| [aria-roles](https://dequeuniversity.com/rules/axe/4.1/aria-roles?application=RuleDescription)                                   | Ensures all elements with a role attribute use a valid value                                                  |
+| [aria-toggle-field-name](https://dequeuniversity.com/rules/axe/4.1/aria-toggle-field-name?application=RuleDescription)           | Ensures every ARIA toggle field has an accessible name                                                        |
+| [aria-tooltip-name](https://dequeuniversity.com/rules/axe/4.1/aria-tooltip-name?application=RuleDescription)                     | Ensures every ARIA tooltip node has an accessible name                                                        |
+| [aria-valid-attr-value](https://dequeuniversity.com/rules/axe/4.1/aria-valid-attr-value?application=RuleDescription)             | Ensures all ARIA attributes have valid values                                                                 |
+| [aria-valid-attr](https://dequeuniversity.com/rules/axe/4.1/aria-valid-attr?application=RuleDescription)                         | Ensures attributes that begin with aria- are valid ARIA attributes                                            |
+| [audio-caption](https://dequeuniversity.com/rules/axe/4.1/audio-caption?application=RuleDescription)                             | Ensures &lt;audio&gt; elements have captions                                                                  |
+| [blink](https://dequeuniversity.com/rules/axe/4.1/blink?application=RuleDescription)                                             | Ensures &lt;blink&gt; elements are not used                                                                   |
+| [button-name](https://dequeuniversity.com/rules/axe/4.1/button-name?application=RuleDescription)                                 | Ensures buttons have discernible text                                                                         |
+| [bypass](https://dequeuniversity.com/rules/axe/4.1/bypass?application=RuleDescription)                                           | Ensures each page has at least one mechanism for a user to bypass navigation and jump straight to the content |
+| [color-contrast](https://dequeuniversity.com/rules/axe/4.1/color-contrast?application=RuleDescription)                           | Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds       |
+| [definition-list](https://dequeuniversity.com/rules/axe/4.1/definition-list?application=RuleDescription)                         | Ensures &lt;dl&gt; elements are structured correctly                                                          |
+| [dlitem](https://dequeuniversity.com/rules/axe/4.1/dlitem?application=RuleDescription)                                           | Ensures &lt;dt&gt; and &lt;dd&gt; elements are contained by a &lt;dl&gt;                                      |
+| [document-title](https://dequeuniversity.com/rules/axe/4.1/document-title?application=RuleDescription)                           | Ensures each HTML document contains a non-empty &lt;title&gt; element                                         |
+| [duplicate-id-active](https://dequeuniversity.com/rules/axe/4.1/duplicate-id-active?application=RuleDescription)                 | Ensures every id attribute value of active elements is unique                                                 |
+| [duplicate-id-aria](https://dequeuniversity.com/rules/axe/4.1/duplicate-id-aria?application=RuleDescription)                     | Ensures every id attribute value used in ARIA and in labels is unique                                         |
+| [duplicate-id](https://dequeuniversity.com/rules/axe/4.1/duplicate-id?application=RuleDescription)                               | Ensures every id attribute value is unique                                                                    |
+| [form-field-multiple-labels](https://dequeuniversity.com/rules/axe/4.1/form-field-multiple-labels?application=RuleDescription)   | Ensures form field does not have multiple label elements                                                      |
+| [frame-title](https://dequeuniversity.com/rules/axe/4.1/frame-title?application=RuleDescription)                                 | Ensures &lt;iframe&gt; and &lt;frame&gt; elements contain a non-empty title attribute                         |
+| [html-has-lang](https://dequeuniversity.com/rules/axe/4.1/html-has-lang?application=RuleDescription)                             | Ensures every HTML document has a lang attribute                                                              |
+| [html-lang-valid](https://dequeuniversity.com/rules/axe/4.1/html-lang-valid?application=RuleDescription)                         | Ensures the lang attribute of the &lt;html&gt; element has a valid value                                      |
+| [html-xml-lang-mismatch](https://dequeuniversity.com/rules/axe/4.1/html-xml-lang-mismatch?application=RuleDescription)           | Ensure that HTML elements with both valid lang and xml:lang attributes agree on the base language of the page |
+| [image-alt](https://dequeuniversity.com/rules/axe/4.1/image-alt?application=RuleDescription)                                     | Ensures &lt;img&gt; elements have alternate text or a role of none or presentation                            |
+| [input-button-name](https://dequeuniversity.com/rules/axe/4.1/input-button-name?application=RuleDescription)                     | Ensures input buttons have discernible text                                                                   |
+| [input-image-alt](https://dequeuniversity.com/rules/axe/4.1/input-image-alt?application=RuleDescription)                         | Ensures &lt;input type=&quot;image&quot;&gt; elements have alternate text                                     |
+| [label](https://dequeuniversity.com/rules/axe/4.1/label?application=RuleDescription)                                             | Ensures every form element has a label                                                                        |
+| [link-name](https://dequeuniversity.com/rules/axe/4.1/link-name?application=RuleDescription)                                     | Ensures links have discernible text                                                                           |
+| [list](https://dequeuniversity.com/rules/axe/4.1/list?application=RuleDescription)                                               | Ensures that lists are structured correctly                                                                   |
+| [listitem](https://dequeuniversity.com/rules/axe/4.1/listitem?application=RuleDescription)                                       | Ensures &lt;li&gt; elements are used semantically                                                             |
+| [marquee](https://dequeuniversity.com/rules/axe/4.1/marquee?application=RuleDescription)                                         | Ensures &lt;marquee&gt; elements are not used                                                                 |
+| [meta-refresh](https://dequeuniversity.com/rules/axe/4.1/meta-refresh?application=RuleDescription)                               | Ensures &lt;meta http-equiv=&quot;refresh&quot;&gt; is not used                                               |
+| [object-alt](https://dequeuniversity.com/rules/axe/4.1/object-alt?application=RuleDescription)                                   | Ensures &lt;object&gt; elements have alternate text                                                           |
+| [role-img-alt](https://dequeuniversity.com/rules/axe/4.1/role-img-alt?application=RuleDescription)                               | Ensures [role=&apos;img&apos;] elements have alternate text                                                   |
+| [scrollable-region-focusable](https://dequeuniversity.com/rules/axe/4.1/scrollable-region-focusable?application=RuleDescription) | Elements that have scrollable content should be accessible by keyboard                                        |
+| [select-name](https://dequeuniversity.com/rules/axe/4.1/select-name?application=RuleDescription)                                 | Ensures select element has an accessible name                                                                 |
+| [server-side-image-map](https://dequeuniversity.com/rules/axe/4.1/server-side-image-map?application=RuleDescription)             | Ensures that server-side image maps are not used                                                              |
+| [svg-img-alt](https://dequeuniversity.com/rules/axe/4.1/svg-img-alt?application=RuleDescription)                                 | Ensures svg elements with an img, graphics-document or graphics-symbol role have an accessible text           |
+| [td-headers-attr](https://dequeuniversity.com/rules/axe/4.1/td-headers-attr?application=RuleDescription)                         | Ensure that each cell in a table using the headers refers to another cell in that table                       |
+| [th-has-data-cells](https://dequeuniversity.com/rules/axe/4.1/th-has-data-cells?application=RuleDescription)                     | Ensure that each table header in a data table refers to data cells                                            |
+| [valid-lang](https://dequeuniversity.com/rules/axe/4.1/valid-lang?application=RuleDescription)                                   | Ensures lang attributes have valid values                                                                     |
+| [video-caption](https://dequeuniversity.com/rules/axe/4.1/video-caption?application=RuleDescription)                             | Ensures &lt;video&gt; elements have captions                                                                  |
+| [autocomplete-valid](https://dequeuniversity.com/rules/axe/4.1/autocomplete-valid?application=RuleDescription)     | Ensure the autocomplete attribute is correct and suitable for the form field                  |
+| [avoid-inline-spacing](https://dequeuniversity.com/rules/axe/4.1/avoid-inline-spacing?application=RuleDescription) | Ensure that text spacing set through style attributes can be adjusted with custom stylesheets |
+| [accesskeys](https://dequeuniversity.com/rules/axe/4.1/accesskeys?application=RuleDescription)                                                   | Ensures every accesskey attribute value is unique                                                          |
+| [aria-allowed-role](https://dequeuniversity.com/rules/axe/4.1/aria-allowed-role?application=RuleDescription)                                     | Ensures role attribute has an appropriate value for the element                                            |
+| [aria-dialog-name](https://dequeuniversity.com/rules/axe/4.1/aria-dialog-name?application=RuleDescription)                                       | Ensures every ARIA dialog and alertdialog node has an accessible name                                      |
+| [aria-treeitem-name](https://dequeuniversity.com/rules/axe/4.1/aria-treeitem-name?application=RuleDescription)                                   | Ensures every ARIA treeitem node has an accessible name                                                    |
+| [empty-heading](https://dequeuniversity.com/rules/axe/4.1/empty-heading?application=RuleDescription)                                             | Ensures headings have discernible text                                                                     |
+| [frame-tested](https://dequeuniversity.com/rules/axe/4.1/frame-tested?application=RuleDescription)                                               | Ensures &lt;iframe&gt; and &lt;frame&gt; elements contain the axe-core script                              |
+| [frame-title-unique](https://dequeuniversity.com/rules/axe/4.1/frame-title-unique?application=RuleDescription)                                   | Ensures &lt;iframe&gt; and &lt;frame&gt; elements contain a unique title attribute                         |
+| [heading-order](https://dequeuniversity.com/rules/axe/4.1/heading-order?application=RuleDescription)                                             | Ensures the order of headings is semantically correct                                                      |
+| [identical-links-same-purpose](https://dequeuniversity.com/rules/axe/4.1/identical-links-same-purpose?application=RuleDescription)               | Ensure that links with the same accessible name serve a similar purpose                                    |
+| [image-redundant-alt](https://dequeuniversity.com/rules/axe/4.1/image-redundant-alt?application=RuleDescription)                                 | Ensure image alternative is not repeated as text                                                           |
+| [label-title-only](https://dequeuniversity.com/rules/axe/4.1/label-title-only?application=RuleDescription)                                       | Ensures that every form element is not solely labeled using the title or aria-describedby attributes       |
+| [landmark-banner-is-top-level](https://dequeuniversity.com/rules/axe/4.1/landmark-banner-is-top-level?application=RuleDescription)               | Ensures the banner landmark is at top level                                                                |
+| [landmark-complementary-is-top-level](https://dequeuniversity.com/rules/axe/4.1/landmark-complementary-is-top-level?application=RuleDescription) | Ensures the complementary landmark or aside is at top level                                                |
+| [landmark-contentinfo-is-top-level](https://dequeuniversity.com/rules/axe/4.1/landmark-contentinfo-is-top-level?application=RuleDescription)     | Ensures the contentinfo landmark is at top level                                                           |
+| [landmark-main-is-top-level](https://dequeuniversity.com/rules/axe/4.1/landmark-main-is-top-level?application=RuleDescription)                   | Ensures the main landmark is at top level                                                                  |
+| [landmark-no-duplicate-banner](https://dequeuniversity.com/rules/axe/4.1/landmark-no-duplicate-banner?application=RuleDescription)               | Ensures the document has at most one banner landmark                                                       |
+| [landmark-no-duplicate-contentinfo](https://dequeuniversity.com/rules/axe/4.1/landmark-no-duplicate-contentinfo?application=RuleDescription)     | Ensures the document has at most one contentinfo landmark                                                  |
+| [landmark-no-duplicate-main](https://dequeuniversity.com/rules/axe/4.1/landmark-no-duplicate-main?application=RuleDescription)                   | Ensures the document has at most one main landmark                                                         |
+| [landmark-one-main](https://dequeuniversity.com/rules/axe/4.1/landmark-one-main?application=RuleDescription)                                     | Ensures the document has a unique main landmark                                                                   |
+| [landmark-unique](https://dequeuniversity.com/rules/axe/4.1/landmark-unique?application=RuleDescription)                                         | Landmarks must have a unique role or role/label/title (i.e. accessible name) combination                   |
+| [meta-viewport-large](https://dequeuniversity.com/rules/axe/4.1/meta-viewport-large?application=RuleDescription)                                 | Ensures &lt;meta name=&quot;viewport&quot;&gt; can scale a significant amount                              |
+| [meta-viewport](https://dequeuniversity.com/rules/axe/4.1/meta-viewport?application=RuleDescription)                                             | Ensures &lt;meta name=&quot;viewport&quot;&gt; does not disable text scaling and zooming                   |
+| [page-has-heading-one](https://dequeuniversity.com/rules/axe/4.1/page-has-heading-one?application=RuleDescription)                               | Ensure that the page, or at least one of its frames contains a level-one heading                           |
+| [presentation-role-conflict](https://dequeuniversity.com/rules/axe/4.1/presentation-role-conflict?application=RuleDescription)                   | Flags elements whose role is none or presentation and which cause the role conflict resolution to trigger. |
+| [region](https://dequeuniversity.com/rules/axe/4.1/region?application=RuleDescription)                                                           | Ensures all page content is contained by landmarks                                                         |
+| [scope-attr-valid](https://dequeuniversity.com/rules/axe/4.1/scope-attr-valid?application=RuleDescription)                                       | Ensures the scope attribute is used correctly on tables                                                    |
+| [skip-link](https://dequeuniversity.com/rules/axe/4.1/skip-link?application=RuleDescription)                                                     | Ensure all skip links have a focusable target                                                              |
+| [tabindex](https://dequeuniversity.com/rules/axe/4.1/tabindex?application=RuleDescription)                                                       | Ensures tabindex attribute values are not greater than 0                                                   |
+| [table-duplicate-name](https://dequeuniversity.com/rules/axe/4.1/table-duplicate-name?application=RuleDescription)                               | Ensure that tables do not have the same summary and caption                                                |
+
+Developer note: regular expression replace all: `(\| .+? \| .+? \|) .+? \| .+? \| .+? \|` => `$1`
 
 ## Modifications
 
 Certain aspects of HTML accessibility checking don't apply to EPUBs, so Ace has modified aXe's default ruleset slightly.
 
-* Ace disables aXe's `bypass` rule.
-* Ace changes aXe's `landmark-one-main` rule to remove the `page-no-duplicate-main` check (was `has-no-more-than-one-main`, see https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19 ).
+* Ace disables aXe's `bypass`, `region`, `page-has-heading-one`, and `landmark-complementary-is-top-level` rules.
+* Ace changes aXe's `landmark-one-main` rule to add the `page-no-duplicate-main` check (was `has-no-more-than-one-main`, see https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19 ).
+* DAISY Axe fork: https://github.com/daisy/axe-core/pull/3

@@ -56,6 +56,7 @@ test('issue #57: Failed to execute \'matches\' on \'Element\': \'m:annotation-xm
 test('issue #85: failed to detect page markers from `epub:type`', async () => {
   const report = await ace('../data/issue-85');
   expect(report.properties.hasPageBreaks).toBe(true);
+  expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
 
 test('issue #108: HTML5Outline is not defined (RequireJS conflict)', async () => {
@@ -104,5 +105,15 @@ test('issue #209: `aria-describedby` can be a list of IDs', async () => {
 
 test('issue #239: `listitem` is not reported when roles inherit from list roles', async () => {
   const report = await ace('../data/issue-239');
+  expect(report['earl:result']['earl:outcome']).toEqual('pass');
+});
+
+test('issue #290 (unzipped): URL percent encoding', async () => {
+  const report = await ace('../data/issue-290');
+  expect(report['earl:result']['earl:outcome']).toEqual('pass');
+});
+
+test('issue #290 (zipped): URL percent encoding', async () => {
+  const report = await ace('../data/issue-290.epub');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });

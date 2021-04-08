@@ -5,103 +5,11 @@ const winston = require('winston');
 
 const { localize } = require('../l10n/localize').localizer;
 
+const a11yMetadata = require('../core/a11y-metadata');
+
 const ASSERTED_BY = 'Ace';
 const MODE = 'automatic';
 const KB_BASE = 'http://kb.daisy.org/publishing/';
-
-const A11Y_META = {
-  'schema:accessMode': {
-    required: true,
-    allowedValues: [
-      'auditory',
-      'chartOnVisual',
-      'chemOnVisual',
-      'colorDependent',
-      'diagramOnVisual',
-      'mathOnVisual',
-      'musicOnVisual',
-      'tactile',
-      'textOnVisual',
-      'textual',
-      'visual',
-    ]
-  },
-  'schema:accessModeSufficient': {
-    recommended: true,
-    allowedValues: [
-      'auditory',
-      'tactile',
-      'textual',
-      'visual',
-    ]
-  },
-  'schema:accessibilityAPI': {
-    allowedValues: [
-      'ARIA'
-    ]
-  },
-  'schema:accessibilityControl': {
-    allowedValues: [
-      'fullKeyboardControl',
-      'fullMouseControl',
-      'fullSwitchControl',
-      'fullTouchControl',
-      'fullVideoControl',
-      'fullVoiceControl',
-    ]
-  },
-  'schema:accessibilityFeature': {
-    required: true,
-    allowedValues: [
-      'alternativeText',
-      'annotations',
-      'audioDescription',
-      'bookmarks',
-      'braille',
-      'captions',
-      'ChemML',
-      'describedMath',
-      'displayTransformability',
-      'highContrastAudio',
-      'highContrastDisplay',
-      'index',
-      'largePrint',
-      'latex',
-      'longDescription',
-      'MathML',
-      'none',
-      'printPageNumbers',
-      'readingOrder',
-      'rubyAnnotations',
-      'signLanguage',
-      'structuralNavigation',
-      'synchronizedAudioText',
-      'tableOfContents',
-      'taggedPDF',
-      'tactileGraphic',
-      'tactileObject',
-      'timingControl',
-      'transcript',
-      'ttsMarkup',
-      'unlocked',
-    ],
-  },
-  'schema:accessibilityHazard': {
-    allowedValues: [
-      'flashing',
-      'noFlashingHazard',
-      'motionSimulation',
-      'noMotionSimulationHazard',
-      'sound',
-      'noSoundHazard',
-      'unknown',
-      'none',
-    ]
-  },
-  'schema:accessibilitySummary': {
-    required: true,
-  }
-};
 
 function asString(arrayOrString) {
   if (Array.isArray(arrayOrString) && arrayOrString.length > 0) {
@@ -140,16 +48,27 @@ function newMetadataAssertion(name, impact = 'serious') {
     title: `metadata-${name.toLowerCase().replace('schema:', '')}`,
     testDesc: localize("checkepub.metadataviolation.testdesc", { name, interpolation: { escapeValue: false } }),
     resDesc: localize("checkepub.metadataviolation.resdesc", { name, interpolation: { escapeValue: false } }),
-    kbPath: 'docs/metadata/schema-org.html',
+    kbPath: 'docs/metadata/schema.org/index.html',
     kbTitle: localize("checkepub.metadataviolation.kbtitle"),
     ruleDesc: localize("checkepub.metadataviolation.ruledesc", { name, interpolation: { escapeValue: false } })
   });
 }
+// newMetadataAssertion =>
+// "metadataviolation"
+//   "Add a '{{name}}' metadata property to the Package Document",
+//   "Publications must declare the '{{name}}' metadata",
+//   "Ensures a '{{name}}' metadata is present"
+
+// otherwise custom newViolation() =>
+// "metadatainvalid"
+//   "Use one of the metadata values defined by schema.org",
+//   "'{{name}}' metadata must be set to one of the expected values",
+//   "Value '{{value}}' is invalid for '{{name}}' metadata"
 
 function checkMetadata(assertions, epub) {
   // Check metadata values
-  for (const name in A11Y_META) {
-    const meta = A11Y_META[name];
+  for (const name in a11yMetadata.A11Y_META) {
+    const meta = a11yMetadata.A11Y_META[name];
     var values = epub.metadata[name];
     if (values === undefined) {
       // Report missing metadata if it is required or recommended
@@ -159,38 +78,67 @@ function checkMetadata(assertions, epub) {
       if (!Array.isArray(values)) {
         values = [values]
       }
-      // Parse list values
-      values = values.map(value => value.trim().replace(',', ' ').replace(/\s{2,}/g, ' ').split(' '))
-      values = [].concat(...values);
-      // Check metadata values are allowed
-      // see https://www.w3.org/wiki/WebSchemas/Accessibility
-      if (meta.allowedValues) {
-        values.filter(value => !meta.allowedValues.includes(value))
-        .forEach(value => {
-          assertions.withAssertions(newViolation({
-            impact: 'moderate',
-            title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
-            testDesc: localize("checkepub.metadatainvalid.testdesc", { value, name, interpolation: { escapeValue: false } }),
-            resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
-            kbPath: 'docs/metadata/schema-org.html',
-            kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
-            ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
-          }))
+
+      // TODO?
+      // "metadatamultiple" would be new localizable label for this kind of error!
+      //   "A single occurence of schema.org metadata is expected",
+      //   "Metadata '{{name}}' should not appear more than once",
+      //   "Metadata '{{name}}' with value '{{value}}' is defined several times"
+      // if (name === 'schema:accessibilitySummary' && values.length > 1) {
+      //   assertions.withAssertions(newViolation({
+      //     impact: 'minor',
+      //     title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
+      //     testDesc: localize("checkepub.metadatamultiple.testdesc", { value, name, interpolation: { escapeValue: false } }),
+      //     resDesc: localize("checkepub.metadatamultiple.resdesc", { name, interpolation: { escapeValue: false } }),
+      //     kbPath: 'docs/metadata/schema.org/index.html',
+      //     kbTitle: localize("checkepub.metadatamultiple.kbtitle"),
+      //     ruleDesc: localize("checkepub.metadatamultiple.ruledesc", { name, interpolation: { escapeValue: false } })
+      //   }))
+      // }
+
+      if (meta.allowedValues) { // effectively excludes schema:accessibilitySummary
+
+        values.forEach(value => {
+
+          // comma-separated only! (not space-separated)
+          // regexp note: /\s\s+/g === /\s{2,}/g
+          // no whitespace collapsing, individual items can contain (incorrect) whitespaces, which will be reported
+          const splitValues =
+            name === 'schema:accessModeSufficient' ?
+              value.trim().split(',').map(item => item.trim()).filter(item => item.length) :
+              [value];
+
+          if (meta.allowedValues) {
+            splitValues.filter(splitValue => !meta.allowedValues.includes(splitValue))
+            .forEach(splitValue => {
+              assertions.withAssertions(newViolation({
+                impact: 'moderate',
+                title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
+                testDesc: localize("checkepub.metadatainvalid.testdesc", { value: splitValue, name, interpolation: { escapeValue: false } }),
+                resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
+                kbPath: 'docs/metadata/schema.org/index.html',
+                kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
+                ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
+              }))
+            });
+          }
+  
+          // Check consistency of the printPageNumbers feature
+          if (name === 'schema:accessibilityFeature'
+            && splitValues.includes('printPageNumbers')
+            && !epub.navDoc.hasPageList) {
+    
+            assertions.withAssertions(newViolation({
+              impact: 'moderate',
+              title: `metadata-accessibilityFeature-printPageNumbers-nopagelist`,
+              testDesc: localize("checkepub.metadataprintpagenumbers.testdesc", {}),
+              resDesc: localize("checkepub.metadataprintpagenumbers.resdesc", {}),
+              kbPath: 'docs/metadata/schema.org/index.html',
+              kbTitle: localize("checkepub.metadataprintpagenumbers.kbtitle"),
+              ruleDesc: localize("checkepub.metadataprintpagenumbers.ruledesc", {})
+            }))
+          }
         });
-      }
-      // Check consistency of the printPageNumbers feature
-      if (name === 'schema:accessibilityFeature' 
-      && values.includes('printPageNumbers')
-      && !epub.navDoc.hasPageList) {
-        assertions.withAssertions(newViolation({
-          impact: 'moderate',
-          title: `metadata-accessibilityFeature-printPageNumbers-nopagelist`,
-          testDesc: localize("checkepub.metadataprintpagenumbers.testdesc", {}),
-          resDesc: localize("checkepub.metadataprintpagenumbers.resdesc", {}),
-          kbPath: 'docs/metadata/schema-org.html',
-          kbTitle: localize("checkepub.metadataprintpagenumbers.kbtitle"),
-          ruleDesc: localize("checkepub.metadataprintpagenumbers.ruledesc", {})
-        }))
       }
     }
   }

@@ -38,3 +38,5 @@ Note that the extra arguments are required to delegate the super-user permission
 
 Please refer to the [troubleshooting section]({{<relref "help/troubleshooting.md">}}) if you face any issues during the installation. As always, [we welcome any feedback or suggestion]({{<relref "help/troubleshooting.md">}}) to improve our tool or its documentation!
 {{% /note %}}
+
+Note that the 'beta' version is published with the ["next" NPM tag](https://www.npmjs.com/package/@daisy/ace/v/next), so can be installed with `npm install @daisy/ace@next -g`.

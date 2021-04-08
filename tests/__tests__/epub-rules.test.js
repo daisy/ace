@@ -30,7 +30,7 @@ function ace(epub, options = {}) {
     outdir: outdir.name,
     tmp: tmpdir.name,
     verbose: true,
-    silent: true, // temporarily switch to false to see the log file path in the console
+    silent: true,
   }, options))
     .then(() => {
       expect(fs.existsSync(reportPath)).toBeTruthy();
@@ -77,10 +77,75 @@ describe('accessibility metadata', () => {
         }),
       }),
     ]));
-    expect(assertions).not.toEqual(expect.arrayContaining([
+  });
+  test('accessibilityControl metadata is multiple correct items but only single value is allowed', async () => {
+    const report = await ace('../data/epubrules-metadata');
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
+    const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+    expect(assertions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'metadata-accessibilitycontrol-invalid',
+        }),
+      }),
+    ]));
+  });
+  test('accessModeSufficient metadata is missing', async () => {
+    const report = await ace('../data/epubrules-metadata-accessModeSufficient-missing');
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
+    const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+    expect(assertions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'metadata-accessmodesufficient',
+        }),
+      }),
+    ]));
+  });
+  test('accessModeSufficient metadata is valid', async () => {
+    const report = await ace('../data/epubrules-metadata-accessModeSufficient-valid');
+    expect(report['earl:result']['earl:outcome']).toEqual('pass');
+    // const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+    // expect(assertions).not.toEqual(expect.arrayContaining([
+    //   expect.objectContaining({
+    //     'earl:test': expect.objectContaining({
+    //       'dct:title': 'metadata-accessmodesufficient-invalid',
+    //     }),
+    //   }),
+    // ]));
+  });
+  test('accessModeSufficient metadata invalid separator', async () => {
+    const report = await ace('../data/epubrules-metadata-accessModeSufficient-invalid-separator');
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
+    const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+    expect(assertions).toEqual(expect.arrayContaining([
       expect.objectContaining({
         'earl:test': expect.objectContaining({
           'dct:title': 'metadata-accessmodesufficient-invalid',
+        }),
+      }),
+    ]));
+  });
+  test('accessModeSufficient metadata invalid item', async () => {
+    const report = await ace('../data/epubrules-metadata-accessModeSufficient-invalid-item');
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
+    const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+    expect(assertions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'metadata-accessmodesufficient-invalid',
+        }),
+      }),
+    ]));
+  });
+  test('accessibilityFeature case-sensitivity', async () => {
+    const report = await ace('../data/epubrules-metadata-accessibilityFeature-case-sensitive');
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
+    const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+    expect(assertions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'metadata-accessibilityfeature-invalid',
         }),
       }),
     ]));

@@ -13,7 +13,10 @@
 
 const winston = require('winston');
 
+// duplicate of /ace-core/a11y-metadata.js :(
+// (circular dependency reference)
 const a11yMeta = [
+// http://kb.daisy.org/publishing/docs/metadata/schema.org/index.html
 "schema:accessMode",
 "schema:accessibilityFeature",
 "schema:accessibilityHazard",
@@ -21,10 +24,14 @@ const a11yMeta = [
 "schema:accessModeSufficient",
 "schema:accessibilityAPI",
 "schema:accessibilityControl",
-"a11y:certifiedBy",
-"dcterms:conformsTo"
-];
+// (see a11yMetadata.A11Y_META in ace-core)
 
+// http://kb.daisy.org/publishing/docs/metadata/evaluation.html
+"a11y:certifiedBy",
+"a11y:certifierCredential", //(MAY BE link in EPUB3)
+"a11y:certifierReport", //(link in EPUB3)
+"dcterms:conformsTo" //(link in EPUB3)
+];
 
 module.exports = {
   // each report is content doc level
@@ -33,10 +40,11 @@ module.exports = {
     var results = {"missing": [], "empty": [], "present": []};
     a11yMeta.forEach(function(property) {
       if (metadata != undefined && property in metadata) {
+        const val = metadata[property];
         if (
-          (typeof metadata[property] === 'string' && metadata[property].trim().length > 0)
+          (typeof val === 'string' && val.trim().length > 0)
           ||
-          (Array.isArray(metadata[property]) && metadata[property].length > 0)
+          (Array.isArray(val) && val.length > 0)
           ){
           results["present"].push(property);
         }
@@ -45,10 +53,11 @@ module.exports = {
         }
       }
       else if (links != undefined && property in links) {
+        const val = links[property];
         if (
-          (typeof links[property] === 'string' && links[property].trim().length > 0)
+          (typeof val === 'string' && val.trim().length > 0)
           ||
-          (Array.isArray(links[property]) && links[property].length > 0)
+          (Array.isArray(val) && val.length > 0)
           ){
           results["present"].push(property);
         }

@@ -1,19 +1,4 @@
 {
-    "axecheck": {
-        "matching-aria-role": {
-            "fail": "Element has no ARIA role matching its epub:type",
-            "pass": "Element has an ARIA role matching its epub:type"
-        }
-    },
-    "axerule": {
-        "epub-type-has-matching-role": {
-            "desc": "Ensure the element has an ARIA role matching its epub:type",
-            "help": "ARIA role should be used in addition to epub:type"
-        },
-        "pagebreak-label": {
-            "desc": "Ensure page markers have an accessible label"
-        }
-    },
     "checkepub": {
         "metadatainvalid": {
             "kbtitle": "Schema.org Accessibility Metadata",

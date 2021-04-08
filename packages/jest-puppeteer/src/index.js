@@ -9,13 +9,15 @@ async function closePage() {
   await global.page.close();
 }
 
-async function injectJestMock() {
-  await utils.addScripts(
-    [paths.resolve(require.resolve('jest-mock'), '../../build-es5/index.js')], global.page);
-  await global.page.evaluate(() => {
-    window.mock = new window['jest-mock'].ModuleMocker();
-  });
-}
+// https://jestjs.io/docs/en/puppeteer
+// https://github.com/smooth-code/jest-puppeteer
+// async function injectJestMock() {
+//   await utils.addScripts(
+//     [paths.resolve(require.resolve('jest-mock'), '../../build/index.js')], global.page);
+//   await global.page.evaluate(() => {
+//     window.mock = new window.jestMock.ModuleMocker(window);
+//   });
+// }
 
 async function injectScripts(scripts) {
   await utils.addScripts(scripts, global.page);
@@ -40,13 +42,16 @@ async function loadXHTMLPage() {
 }
 
 function redirectConsole() {
-  global.page.on('console', msg => console.log(msg.text));
+  global.page.on('console', msg => {
+    console.log(msg.text());
+    // process.stdout.write(msg.text());
+  });
 }
 
 
 module.exports = {
   closePage,
-  injectJestMock,
+  // injectJestMock,
   injectScripts,
   insertBody,
   loadXHTMLPage,

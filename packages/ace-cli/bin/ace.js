@@ -1,3 +1,5 @@
 #!/usr/bin/env node
 
-require('../lib').run();
+(async () => {
+    await require('../lib').run();
+})();
