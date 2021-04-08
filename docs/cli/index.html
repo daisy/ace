@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="generator" content="Hugo 0.82.0" />
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -118,7 +118,7 @@
             <a class="logo" href="https://daisy.github.io/ace" aria-label="Ace, by DAISY home page">
               <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
             </a>
-            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.1.1 (and v1.2.0 &lsquo;beta&rsquo;)</p>
+            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -434,7 +434,7 @@
     <h2 id="overview">Overview</h2>
 <p>The easiest way to run Ace is to type this on the command line:</p>
 <pre><code>$ ace ~/Documents/book.epub
-</code></pre><p>You'll then see a description of Ace's actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify <a href="#outdir"><code>--outdir</code></a> for that).</p>
+</code></pre><p>You&rsquo;ll then see a description of Ace&rsquo;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify <a href="#outdir"><code>--outdir</code></a> for that).</p>
 <p>Example:</p>
 <pre><code>info:    Processing ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
 info:    Parsing EPUB
@@ -460,7 +460,7 @@ info:    Consolidating results...
   ...
 }
 info:   Done
-</code></pre><p>Ace will exit with a return code of <code>0</code> when complete, or <code>1</code> if there was an error that prevented Ace from successfully executing. Note that these return codes do not indicate whether there were violations in the publication; for that, you need to first edit Ace's <a href="https://daisy.github.io/ace/docs/config/">configuration</a>.</p>
+</code></pre><p>Ace will exit with a return code of <code>0</code> when complete, or <code>1</code> if there was an error that prevented Ace from successfully executing. Note that these return codes do not indicate whether there were violations in the publication; for that, you need to first edit Ace&rsquo;s <a href="https://daisy.github.io/ace/docs/config/">configuration</a>.</p>
 <h2 id="options">Options</h2>
 <p>Ace includes a simple set of options, detailed below.</p>
 <h3 id="help">help</h3>
@@ -496,7 +496,7 @@ Ace by DAISY, an Accessibility Checker for EPUB
 <pre><code>$ ace --version
 1.0.0
 </code></pre><h3 id="outdir">outdir</h3>
-<p>Specify a path to save Ace's reports to.</p>
+<p>Specify a path to save Ace&rsquo;s reports to.</p>
 <p>Syntax: <code>--outdir</code> or <code>-o</code>, followed by the path</p>
 <p>Example:</p>
 <pre><code>$ ace --outdir results ~/Documents/book.epub
@@ -535,7 +535,7 @@ info:    Done.
 <pre><code>$ ace --subdir --outdir results ~/Documents/my-book.epub
 </code></pre><p>This creates as the output directory a subdirectory named <code>my-book</code> within <code>results</code>.</p>
 <h3 id="verbose">verbose</h3>
-<p>Output more detail when running Ace. This option is useful to use before sending a bug report as it tells us which version of Ace you're running, as well as your OS and Node versions.</p>
+<p>Output more detail when running Ace. This option is useful to use before sending a bug report as it tells us which version of Ace you&rsquo;re running, as well as your OS and Node versions.</p>
 <p>Syntax: <code>--verbose</code> or <code>-V</code></p>
 <p>Example:</p>
 <pre><code>$ ace --verbose ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
@@ -554,7 +554,7 @@ info:    Analyzing accessibility metadata
 <p>Example:</p>
 <pre><code>$ ace --silent ~/Documents/book.epub
 $
-</code></pre><p>Note that the log file is not &lsquo;silent&rsquo;; it contains the default level of detail about Ace's operation.</p>
+</code></pre><p>Note that the log file is not &lsquo;silent&rsquo;; it contains the default level of detail about Ace&rsquo;s operation.</p>
 <h3 id="lang">lang</h3>
 <p>Use this to set the language used to localize the reports of the accessibility evaluation.
 The default is &ldquo;en&rdquo; (English). Currently, the only available supplementary locale is &ldquo;fr&rdquo; (French).</p>

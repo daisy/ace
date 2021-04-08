@@ -5,11 +5,7 @@
     <link>https://daisy.github.io/ace/getting-started/</link>
     <description>Recent content in Getting started on Ace, by DAISY</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://daisy.github.io/ace/getting-started/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="https://daisy.github.io/ace/getting-started/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why Ace?</title>
       <link>https://daisy.github.io/ace/getting-started/why-ace/</link>
@@ -18,7 +14,7 @@
       <guid>https://daisy.github.io/ace/getting-started/why-ace/</guid>
       <description>What is Ace? Ace is a tool to run automated accessibility checks for EPUB Publications, in order to assist in the evaluation of conformance to the EPUB Accessibility specification.
 What does Ace do? Specifically, Ace:
- runs automated accessibility tests on EPUB content documents extracts the publication metadata, and checks accessibility-related metadata extracts various document outlines (the ToC, headings, and HTML structure) for side-by-side comparison extracts all the EPUBs images and graphics and their associated accessibility descriptions in a consolidated table, for easier review extracts other various content features to facilitate human-driven accessibility audits can be run as a command line tool, or integrated as a Javascript node module, or driven by an HTTP API  Under the hood, Ace currently runs aXe, an engine for automated testing of HTML developed by the good folks at Deque Systems.</description>
+ runs automated accessibility tests on EPUB content documents extracts the publication metadata, and checks accessibility-related metadata extracts various document outlines (the ToC, headings, and HTML structure) for side-by-side comparison extracts all the EPUBs images and graphics and their associated accessibility descriptions in a consolidated table, for easier review extracts other various content features to facilitate human-driven accessibility audits can be run as a command line tool, or integrated as a Javascript node module, or driven by an HTTP API  Under the hood, Ace currently runs axe, an engine for automated testing of HTML developed by the good folks at Deque Systems.</description>
     </item>
     
     <item>

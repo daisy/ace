@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="generator" content="Hugo 0.82.0" />
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -118,7 +118,7 @@
             <a class="logo" href="https://daisy.github.io/ace" aria-label="Ace, by DAISY home page">
               <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
             </a>
-            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.1.1 (and v1.2.0 &lsquo;beta&rsquo;)</p>
+            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -435,7 +435,7 @@
 
 
     
-    <p>Ace's outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of <a href="https://www.w3.org/TR/EARL10-Schema/">EARL</a> (Evaluation and Reporting Language), Dublin Core, and custom terms.</p>
+    <p>Ace&rsquo;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of <a href="https://www.w3.org/TR/EARL10-Schema/">EARL</a> (Evaluation and Reporting Language), Dublin Core, and custom terms.</p>
 <h2 id="document-structure">Document structure</h2>
 <p>Each example piece of the report shown below appears in order, in one JSON file.</p>
 <ul>
@@ -475,7 +475,7 @@
     &quot;html&quot;: // outline view of heading and sectioning content
   },
 </code></pre><h3 id="data">Data</h3>
-<p>The fields under <code>data</code> contain extracted <code>images</code>, <code>audios</code>, <code>canvases</code>, <code>embeds</code>, <code>epub-triggers</code>, <code>epub-switches</code>, <code>iframes</code>, <code>maps</code>, <code>scripts</code>, and <code>videos</code>. The example here shows information about the publication's <code>images</code> and <code>iframes</code>:</p>
+<p>The fields under <code>data</code> contain extracted <code>images</code>, <code>audios</code>, <code>canvases</code>, <code>embeds</code>, <code>epub-triggers</code>, <code>epub-switches</code>, <code>iframes</code>, <code>maps</code>, <code>scripts</code>, and <code>videos</code>. The example here shows information about the publication&rsquo;s <code>images</code> and <code>iframes</code>:</p>
 <pre><code>  &quot;data&quot;: {
     &quot;images&quot;: [
       {
@@ -540,7 +540,7 @@
   },
 </code></pre><h3 id="assertions">Assertions</h3>
 <p>The <code>assertions</code> section of the report, found as a top-level term, contains a list of <code>earl:assertion</code> items, each for a different document in the EPUB. Those assertion items, in turn, contain assertions for tests that failed.</p>
-<h4 id="documentlevel-assertions">Document-level assertions</h4>
+<h4 id="document-level-assertions">Document-level assertions</h4>
 <p>An <code>assertion</code> for a document looks like this. A document may be a package document, content document, or the whole EPUB itself. Note that in this example, <code>earl:testSubject</code> points to the package document, and <code>earl:result</code> does not include a pointer to a location within the document (as individual test assertions do), because this assertion is for the entire document.</p>
 <pre><code>{
  &quot;@type&quot;: &quot;earl:assertion&quot;,
@@ -556,12 +556,12 @@
    &quot;earl:outcome&quot;: &quot;fail&quot;
  }
 }
-</code></pre><p>Where <code>earl:outcome</code> is based on the results for the individual tests. If any test failed, then the document is given a <code>fail</code> outcome. The <code>earl:result</code> property belongs to its parent <code>earl:assertion</code> and is relevant to that assertion's <code>earl:testSubject</code>.</p>
-<h4 id="testlevel-assertions">Test-level assertions</h4>
+</code></pre><p>Where <code>earl:outcome</code> is based on the results for the individual tests. If any test failed, then the document is given a <code>fail</code> outcome. The <code>earl:result</code> property belongs to its parent <code>earl:assertion</code> and is relevant to that assertion&rsquo;s <code>earl:testSubject</code>.</p>
+<h4 id="test-level-assertions">Test-level assertions</h4>
 <p>An example of an assertion for an individual test is shown below. Note that it includes a location reference, a test description, and suggestions for remedying the issue (including a link to the relevant section of the <a href="http://kb.daisy.org/publishing">Accessible Publishing Knowledge Base</a>).</p>
 <pre><code>{
   &quot;@type&quot;: &quot;earl:assertion&quot;,
-  &quot;earl:assertedBy&quot;: &quot;aXe&quot;,
+  &quot;earl:assertedBy&quot;: &quot;axe&quot;,
   &quot;earl:mode&quot;: &quot;automatic&quot;,
   &quot;earl:test&quot;: {
     &quot;earl:impact&quot;: &quot;critical&quot;,
@@ -589,7 +589,7 @@
 </code></pre><h2 id="caveats">Caveats</h2>
 <ul>
 <li>Ace does not report assertions for tests that passed</li>
-<li>Paths in this report are relative or absolute as specified in Ace's <a href="https://daisy.github.io/ace/docs/config/">configuration</a>.</li>
+<li>Paths in this report are relative or absolute as specified in Ace&rsquo;s <a href="https://daisy.github.io/ace/docs/config/">configuration</a>.</li>
 </ul>
 
   </main>

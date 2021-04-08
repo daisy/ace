@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="generator" content="Hugo 0.82.0" />
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -118,7 +118,7 @@
             <a class="logo" href="https://daisy.github.io/ace" aria-label="Ace, by DAISY home page">
               <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
             </a>
-            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.1.1 (and v1.2.0 &lsquo;beta&rsquo;)</p>
+            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -349,7 +349,7 @@
 <p>Erm… you probably just hit a bug in Ace. Follow the <a href="/ace/contributing/contributing/#submitting-an-issue">guidelines for submitting an issue</a>. You may also <a href="https://daisy.github.io/ace/help/contact/">contact us</a>.</p>
 <h2 id="i-receive-an-eaccess-error-when-trying-to-install-ace">I receive an <code>EACCESS</code> error when trying to install Ace</h2>
 <p>You may receive an <code>EACCESS</code> error when you try to install Ace, for instance when installing the <code>puppeteer</code> dependency. This indicates the you do not have write permissions to the <code>npm</code> installation directories. You can fix this by following the <a href="https://docs.npmjs.com/getting-started/fixing-npm-permissions">instructions in the <code>npm</code> documentation</a>.</p>
-<h2 id="i-receive-an-eaccess-error-when-trying-to-install-ace-as-a-superuser-with-sudo">I receive an <code>EACCESS</code> error when trying to install Ace as a super-user with <code>sudo</code></h2>
+<h2 id="i-receive-an-eaccess-error-when-trying-to-install-ace-as-a-super-user-with-sudo">I receive an <code>EACCESS</code> error when trying to install Ace as a super-user with <code>sudo</code></h2>
 <p>If you tried to install Ace as a super-user with the command <code>sudo npm install -g @daisy/ace</code>, you may have received the following error in return:</p>
 <pre><code>...
 &gt; node install.js
@@ -369,7 +369,7 @@ npm ERR! Exit status 1
 </code></pre><p>You need to tell the installation scripts to enforce the super-user permissions. Try running instead:</p>
 <pre><code>sudo npm install -g @daisy/ace --unsafe-perm=true --allow-root
 </code></pre><p>Note that the extra arguments are required to delegate the root permissions to the <code>npm</code> installation scripts of Ace’s dependencies (notably to the Google Chromium headless browser). See also the NPM documentation for the <a href="https://docs.npmjs.com/misc/config#unsafe-perm"><code>unsafe-perm</code> setting</a>.</p>
-<h2 id="i-receive-an-elifecycle-error-when-trying-to-install-ace-on-windows-version-windowsnt-10016299">I receive an <code>ELIFECYCLE</code> error when trying to install Ace on Windows version <code>Windows_NT 10.0.16299</code></h2>
+<h2 id="i-receive-an-elifecycle-error-when-trying-to-install-ace-on-windows-version-windows_nt-10016299">I receive an <code>ELIFECYCLE</code> error when trying to install Ace on Windows version <code>Windows_NT 10.0.16299</code></h2>
 <p>This seems to be a <a href="https://github.com/npm/npm/issues/18979">bug in <code>npm</code></a>. You can fix it by updating to more recent Node and npm versions.</p>
 
   </main>

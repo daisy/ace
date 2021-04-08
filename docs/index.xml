@@ -5,11 +5,7 @@
     <link>https://daisy.github.io/ace/docs/</link>
     <description>Recent content in Reference on Ace, by DAISY</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://daisy.github.io/ace/docs/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="https://daisy.github.io/ace/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Command line interface</title>
       <link>https://daisy.github.io/ace/docs/cli/</link>
@@ -17,7 +13,7 @@
       
       <guid>https://daisy.github.io/ace/docs/cli/</guid>
       <description>Overview The easiest way to run Ace is to type this on the command line:
-$ ace ~/Documents/book.epub You&#39;ll then see a description of Ace&#39;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify --outdir for that).
+$ ace ~/Documents/book.epub You&amp;rsquo;ll then see a description of Ace&amp;rsquo;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify --outdir for that).
 Example:
 info: Processing ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub info: Parsing EPUB info: Analyzing accessibility metadata info: Checking package.</description>
     </item>
@@ -29,7 +25,7 @@ info: Processing ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub inf
       
       <guid>https://daisy.github.io/ace/docs/report-html/</guid>
       <description>Ace outputs a human-readable report in HTML format, containing information about which automated tests failed, as well as extracted data visualizations, to highlight potential problem areas and to assist in manual checking.
-Note that the report looks best with javascript enabled, though it&#39;s not required.
+Note that the report looks best with javascript enabled, though it&amp;rsquo;s not required.
 After the header, which contains the Ace version, report date, and publication title, there are four sections, detailed below.
 Violations Summary of Violations This table lists statistics for the violations, in terms of severity: Critical, Serious, Moderate, or Minor; and by ruleset category: WCAG 2.</description>
     </item>
@@ -40,7 +36,7 @@ Violations Summary of Violations This table lists statistics for the violations,
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daisy.github.io/ace/docs/report-json/</guid>
-      <description>Ace&#39;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of EARL (Evaluation and Reporting Language), Dublin Core, and custom terms.
+      <description>Ace&amp;rsquo;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of EARL (Evaluation and Reporting Language), Dublin Core, and custom terms.
 Document structure Each example piece of the report shown below appears in order, in one JSON file.
  Header information Outlines Data Properties earl:testSubject for this EPUB file Accessibility metadata summary Assertions  Header information This gives basic information about Ace and when the report was created.</description>
     </item>
