@@ -1,6 +1,11 @@
 {
   "name": "@daisy/ace-report",
-  "version": "1.2.0-beta.14",
+  "version": "1.2.0-beta.15",
+  "engines": {
+    "node": ">=10.0.0",
+    "yarn": "^1.22.5",
+    "npm": ">=6.14.12"
+  },
   "description": "Reporting utilities for Ace",
   "author": {
     "name": "DAISY developers",
@@ -18,9 +23,9 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-config": "^1.2.0-beta.14",
-    "@daisy/ace-localize": "^1.2.0-beta.14",
-    "@daisy/ace-meta": "^1.2.0-beta.14",
+    "@daisy/ace-config": "^1.2.0-beta.15",
+    "@daisy/ace-localize": "^1.2.0-beta.15",
+    "@daisy/ace-meta": "^1.2.0-beta.15",
     "escape-html": "^1.0.3",
     "fs-extra": "^9.1.0",
     "handlebars": "^4.7.7",

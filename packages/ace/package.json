@@ -1,6 +1,11 @@
 {
   "name": "@daisy/ace",
-  "version": "1.2.0-beta.14",
+  "version": "1.2.0-beta.15",
+  "engines": {
+    "node": ">=10.0.0",
+    "yarn": "^1.22.5",
+    "npm": ">=6.14.12"
+  },
   "description": "Ace by DAISY, an Accessibility Checker for EPUB",
   "keywords": [
     "a11y",
@@ -34,10 +39,10 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-axe-runner-electron": "^1.2.0-beta.14",
-    "@daisy/ace-cli": "^1.2.0-beta.14",
-    "@daisy/ace-core": "^1.2.0-beta.14",
-    "@daisy/ace-http": "^1.2.0-beta.14"
+    "@daisy/ace-axe-runner-electron": "^1.2.0-beta.15",
+    "@daisy/ace-cli": "^1.2.0-beta.15",
+    "@daisy/ace-core": "^1.2.0-beta.15",
+    "@daisy/ace-http": "^1.2.0-beta.15"
   },
   "publishConfig": {
     "access": "public"
