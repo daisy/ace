@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-config",
-  "version": "1.2.0-beta.13",
+  "version": "1.2.0-beta.14",
   "description": "Config utilities for Ace",
   "author": {
     "name": "DAISY developers",
@@ -18,8 +18,8 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "conf": "^6.2.4",
-    "env-paths": "^2.2.0",
+    "conf": "^9.0.2",
+    "env-paths": "^2.2.1",
     "lodash.mergewith": "^4.6.2"
   },
   "publishConfig": {

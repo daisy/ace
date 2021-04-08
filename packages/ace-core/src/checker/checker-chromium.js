@@ -14,12 +14,13 @@ const { getRawResourcesForCurrentLanguage } = require('../l10n/localize').locali
 tmp.setGracefulCleanup();
 
 const scripts = [
-  path.resolve(require.resolve('axe-core'), '../axe.min.js'),
+  // require.resolve('../scripts/function-bind-bound-object.js'),
   require.resolve('../scripts/vendor/outliner.min.js'),
-  require.resolve('../scripts/axe-patch-aria-roles.js'),
-  require.resolve('../scripts/axe-patch-is-aria-role-allowed.js'),
-  require.resolve('../scripts/axe-patch-only-list-items.js'),
-  require.resolve('../scripts/axe-patch-listitem.js'),
+  path.resolve(require.resolve('@daisy/axe-core-for-ace'), '../axe.js'),
+  // require.resolve('../scripts/axe-patch-aria-roles.js'),
+  // require.resolve('../scripts/axe-patch-is-aria-role-allowed.js'),
+  // require.resolve('../scripts/axe-patch-only-list-items.js'),
+  // require.resolve('../scripts/axe-patch-listitem.js'),
   require.resolve('../scripts/ace-axe.js'),
   require.resolve('../scripts/ace-extraction.js'),
 ];
@@ -69,7 +70,7 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
       // https://github.com/dequelabs/axe-core/tree/develop/locales
 
       if (lang && lang !== "en" && lang.indexOf("en-") !== 0) { // default English built into Axe source code
-        localePath = path.resolve(require.resolve('axe-core'), `../locales/${lang}.json`);
+        localePath = path.resolve(require.resolve('@daisy/axe-core-for-ace'), `../locales/${lang}.json`);
         if (fs.existsSync(localePath)) {
           const localeStr = fs.readFileSync(localePath, { encoding: "utf8" });
           const localeScript = `window.__axeLocale__=${localeStr};`;
@@ -79,24 +80,24 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
         }
       }
 
-      let localizedScript = "";
-      const rawJson = getRawResourcesForCurrentLanguage();
+      // let localizedScript = "";
+      // const rawJson = getRawResourcesForCurrentLanguage();
 
-      ["axecheck", "axerule"].forEach((checkOrRule) => {
-        const checkOrRuleKeys = Object.keys(rawJson[checkOrRule]);
-        for (const checkOrRuleKey of checkOrRuleKeys) {
-          const msgs = Object.keys(rawJson[checkOrRule][checkOrRuleKey]);
-          for (const msg of msgs) {
-            const k = `__aceLocalize__${checkOrRule}_${checkOrRuleKey}_${msg}`;
-            let v = rawJson[checkOrRule][checkOrRuleKey][msg];
-            if (v) {
-              v = v.replace(/"/g, '\\"');
-            }
-            localizedScript += `window['${k}']="${v}";\n`;
-          }
-        }
-      });
-      scriptContents.push(localizedScript);
+      // ["axecheck", "axerule"].forEach((checkOrRule) => {
+      //   const checkOrRuleKeys = Object.keys(rawJson[checkOrRule]);
+      //   for (const checkOrRuleKey of checkOrRuleKeys) {
+      //     const msgs = Object.keys(rawJson[checkOrRule][checkOrRuleKey]);
+      //     for (const msg of msgs) {
+      //       const k = `__aceLocalize__${checkOrRule}_${checkOrRuleKey}_${msg}`;
+      //       let v = rawJson[checkOrRule][checkOrRuleKey][msg];
+      //       if (v) {
+      //         v = v.replace(/"/g, '\\"');
+      //       }
+      //       localizedScript += `window['${k}']="${v}";\n`;
+      //     }
+      //   }
+      // });
+      // scriptContents.push(localizedScript);
 
     } catch (err) {
       console.log(err);

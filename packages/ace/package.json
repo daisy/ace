@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace",
-  "version": "1.2.0-beta.13",
+  "version": "1.2.0-beta.14",
   "description": "Ace by DAISY, an Accessibility Checker for EPUB",
   "keywords": [
     "a11y",
@@ -29,10 +29,12 @@
   "license": "MIT",
   "bin": {
     "ace": "./bin/ace.js",
-    "ace-http": "./bin/ace-http.js"
+    "ace-http": "./bin/ace-http.js",
+    "ace-electron": "./bin/ace-electron.js"
   },
   "main": "lib/index.js",
   "dependencies": {
+    "@daisy/ace-axe-runner-electron": "file:../ace-axe-runner-electron",
     "@daisy/ace-cli": "file:../ace-cli",
     "@daisy/ace-core": "file:../ace-core",
     "@daisy/ace-http": "file:../ace-http"

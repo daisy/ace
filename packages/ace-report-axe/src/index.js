@@ -25,6 +25,7 @@ async function axe2ace(spineItem, axeResults, lang) {
         .withSubAssertions()
         .withTestSubject(spineItem.relpath, spineItem.title);
       // process axe's individual checks for a single content document
+      // console.log("axe2ace ------- ", JSON.stringify(axeResults, null, 4));
       axeResults.violations.forEach((violation) => {
   
         const kbURL = (kbMap.map.hasOwnProperty(violation.id))

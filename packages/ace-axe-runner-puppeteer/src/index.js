@@ -6,6 +6,8 @@ const utils = require('@daisy/puppeteer-utils');
 
 let _browser = undefined;
 
+const isDev = process && process.env && (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true');
+
 module.exports = {
     concurrency: 4,
     launch: async function() {
@@ -23,6 +25,28 @@ module.exports = {
     run: async function(url, scripts, scriptContents, basedir) {
 
         const page = await _browser.newPage();
+
+        if (isDev) {
+            page.on('console', msg => {
+                console.log(msg.text());
+                // process.stdout.write(msg.text());
+            });
+        }
+
+        await page.setRequestInterception(true);
+
+        page.on('request', (request) => {
+            const url = request.url();
+            if (url && /^https?:\/\//.test(url)) {
+                if (isDev) {
+                    console.log(`============> RequestInterception URL abort: ${url}`);
+                }
+                request.abort();
+                return;
+            }
+            request.continue();
+        });
+      
         await page.goto(url);
 
         await utils.addScriptContents(scriptContents, page);

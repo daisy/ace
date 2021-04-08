@@ -24,6 +24,7 @@ export function newLocalizer(resources) {
     const i18nextInstance = i18n.createInstance();
     // https://www.i18next.com/overview/configuration-options
     i18nextInstance.init({
+        ignoreJSONStructure: false,
         debug: false,
         resources: resources,
         // lng: undefined,

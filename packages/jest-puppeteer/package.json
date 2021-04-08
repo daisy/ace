@@ -1,6 +1,6 @@
 {
   "name": "@daisy/jest-puppeteer",
-  "version": "1.2.0-beta.13",
+  "version": "1.2.0-beta.14",
   "description": "Utilities for running Jest tests through Google Puppeteer",
   "author": {
     "name": "DAISY developers",
@@ -19,7 +19,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@daisy/puppeteer-utils": "file:../puppeteer-utils",
-    "jest-mock": "^26.0.1"
+    "jest-mock": "^26.6.2"
   },
   "publishConfig": {
     "access": "public"
