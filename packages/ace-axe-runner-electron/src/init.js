@@ -69,7 +69,16 @@ function loadUrl(browserWindow) {
         console.log("======>>>>>> URL TO LOAD");
         console.log(uareel);
     }
-    browserWindow.loadURL(uareel, options);
+
+    try {
+        browserWindow.loadURL(uareel, options);
+    } catch (ex) {
+        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner failed loadURL??! ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
+        browserWindow.ace__replySent = true;
+        browserWindow.ace__timeout = undefined;
+        browserWindow.ace__timeoutExtended = false;
+        return;
+    }
 
     const MILLISECONDS_TIMEOUT_INITIAL = 10000; // 10s max to load the window's web contents
     const MILLISECONDS_TIMEOUT_EXTENSION = 480000; // 480s (8mn) max to load + execute Axe checkers
@@ -99,7 +108,18 @@ function loadUrl(browserWindow) {
                 
                 browserWindow.ace__TIME_loadURL = process.hrtime();
                 browserWindow.ace__TIME_executeJavaScript = 0;
-                browserWindow.webContents.reload();
+                try {
+                    browserWindow.webContents.reload();
+                } catch (ex) {
+                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner failed [[RELOAD]] ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
+                    // TODO: a better way to detect stale Electron BrowserWindows?
+                    // this can happen is a single document in the window pool triggered a total abort
+                    // ... then pending timeouts wake up, only to find that the windows have been closed.
+                    browserWindow.ace__replySent = true;
+                    browserWindow.ace__timeout = undefined;
+                    browserWindow.ace__timeoutExtended = false;
+                    return;
+                }
                 browserWindow.ace__timeoutExtended = false;
                 browserWindow.ace__timeout = setTimeout(timeoutFunc, MILLISECONDS_TIMEOUT_INITIAL);
                 return;
@@ -473,21 +493,45 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
 
                 const js = `
 new Promise((resolve, reject) => {
-    window.daisy.ace.run((err, res) => {
-        if (err) {
-            reject(err);
-            return;
-        }
-        resolve(res);
-    });
-}).then(res => res).catch(err => { throw err; });
+    try {
+        window.tryAceAxe = () => {
+            if (!window.daisy ||
+                !window.daisy.ace ||
+                !window.daisy.ace.run ||
+                !window.daisy.ace.createReport
+                || !window.axe) {
+
+                window.tryAceAxeN++;
+                if (window.tryAceAxeN < 10) {
+                    setTimeout(window.tryAceAxe, 200);
+                    return;
+                }
+
+                reject("window.tryAceAxe " + window.tryAceAxeN);
+                return;
+            }
+
+            window.daisy.ace.run((err, res) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(res);
+            });
+        };
+        window.tryAceAxeN = 0;
+        window.tryAceAxe();
+    } catch (exc) {
+        reject(exc);
+    }
+}).then(res => res).catch(err => { throw err; });
 `;
                 browserWindow.webContents.executeJavaScript(js, true)
                     .then((ok) => {
                         const timeElapsed = process.hrtime(browserWindow.ace__TIME_executeJavaScript);
                 
                         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner done. (${timeElapsed[0]} seconds + ${timeElapsed[1]} nanoseconds) ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
-                        // if (LOG_DEBUG) console.log(ok);
+                        // if (LOG_DEBUG && ok.axe.violations.length) console.log(ok.axe.url, JSON.stringify(ok, null, 4));
                         if (browserWindow.ace__replySent) {
                             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner WAS TIMEOUT! ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
                             return;

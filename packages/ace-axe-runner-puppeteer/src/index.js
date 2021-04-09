@@ -54,12 +54,37 @@ module.exports = {
 
         const results = await page.evaluate(() => new Promise((resolve, reject) => {
             /* eslint-disable */
-            window.daisy.ace.run((err, res) => {
-            if (err) {
-                return reject(err);
+            try {
+                window.tryAceAxe = () => {
+                    if (!window.daisy ||
+                        !window.daisy.ace ||
+                        !window.daisy.ace.run ||
+                        !window.daisy.ace.createReport
+                        || !window.axe) {
+        
+                        window.tryAceAxeN++;
+                        if (window.tryAceAxeN < 10) {
+                            setTimeout(window.tryAceAxe, 200);
+                            return;
+                        }
+        
+                        reject("window.tryAceAxe " + window.tryAceAxeN);
+                        return;
+                    }
+        
+                    window.daisy.ace.run((err, res) => {
+                        if (err) {
+                            reject(err);
+                            return;
+                        }
+                        resolve(res);
+                    });
+                };
+                window.tryAceAxeN = 0;
+                window.tryAceAxe();
+            } catch (exc) {
+                reject(exc);
             }
-            return resolve(res);
-            });
             /* eslint-enable */
         }));
         await page.close();
