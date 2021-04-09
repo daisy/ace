@@ -1,3 +1,13 @@
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/daisy/ace/compare/v1.2.0...v1.2.1) (2021-04-09)
+
+### Bugfixes:
+
+* The Puppeteer Axe "runner" wasn't handling XML / XHTML correctly with `.html` or `.htm` file extensions (the Electron runner was ok already)
+* The HTTPS self-signed certificate validation procedure for the DAISY Knowledge Base was colliding with the HTTP server used in Ace with the Electron Axe runner.
+* There was a random possibility of the Axe script not being ready in time for Ace.
+* In case a single publication document causes a fatal error, the whole pool of concurrent validation windows is torn down, which caused timers to fire after disposal and attempt to reload now-defunct windows.
+
 <a name="1.2.0"></a>
 ## [1.2.0](https://github.com/daisy/ace/compare/v1.1.1...v1.2.0) (2021-04-08)
 

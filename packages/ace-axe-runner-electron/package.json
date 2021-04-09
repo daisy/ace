@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-axe-runner-electron",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "engines": {
     "node": ">=10.0.0",
     "yarn": "^1.22.0",
@@ -23,7 +23,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-cli-shared": "^1.2.0",
+    "@daisy/ace-cli-shared": "^1.2.1",
     "express": "^4.17.1",
     "portfinder": "^1.0.28",
     "selfsigned": "^1.10.8",
