@@ -169,29 +169,85 @@ ace.getImages = function() {
     return el;
   }
 
-  let imgElems = document.querySelectorAll('img');
   let images = [];
-  imgElems.forEach(function(img) {
-    let imageObj = {
-      src: img.getAttribute('src'),
-      alt: img.getAttribute('alt'),
-      role: img.getAttribute('role'),
-      cfi: window.daisy.epub.createCFI(img),
-      html: img.outerHTML,
+
+  let imgElems = document.querySelectorAll('img');
+  if (imgElems) {
+    imgElems.forEach(function(img) {
+      let imageObj = {
+        src: img.getAttribute('src'),
+        alt: img.getAttribute('alt'),
+        role: img.getAttribute('role'),
+        cfi: window.daisy.epub.createCFI(img),
+        html: img.outerHTML,
+      }
+      let describedby = img.getAttribute('aria-describedby')
+      if (describedby) {
+        var describedbyID = describedby.trim().replace(/\s{2,}/g, ' ').split(' ').shift();
+        let elem = document.getElementById(describedbyID);
+        if (elem) imageObj.describedby = elem.innerText || elem.textContent;
+        if (imageObj.describedby) {
+          imageObj.describedby = imageObj.describedby.trim().replace(/\s\s+/g, " ");
+        }
+      }
+      let figure = findFigure(img);
+      if (figure) {
+        let figcaption = figure.getElementsByTagNameNS("http://www.w3.org/1999/xhtml", "figcaption");
+        if (figcaption.length > 0) imageObj.figcaption = figcaption[0].innerText || figcaption[0].textContent;
+        if (imageObj.figcaption) {
+          imageObj.figcaption = imageObj.figcaption.trim().replace(/\s\s+/g, " ");
+        }
+      }
+      images.push(imageObj);
+    });
+  }
+
+  // let svgimgElems = document.querySelectorAll('image');
+  let svgimgElems = document.body.getElementsByTagNameNS("http://www.w3.org/2000/svg", "image");
+  if (svgimgElems) {
+    const len = svgimgElems.length;
+    for (let i = 0; i < len; i += 1) {
+      const img = svgimgElems[i];
+      
+      if (img.parentElement && img.parentElement.getAttribute && img.parentElement.localName === "svg" && img.parentElement.namespaceURI === 'http://www.w3.org/2000/svg') {
+        let title = img.parentElement.getAttribute("title");
+        if (title) {
+          title = title.trim().replace(/\s\s+/g, " ");
+        }
+
+        const role = img.parentElement.getAttribute("role");
+
+        if (!title && img.firstElementChild && img.firstElementChild.localName === "title") {
+          title = img.firstElementChild.innerText || img.firstElementChild.textContent;
+          if (title) {
+            title = title.trim().replace(/\s\s+/g, " ");
+          }
+        }
+        if (!title) {
+          title = undefined;
+        }
+    
+        let imageObj = {
+          src: img.getAttributeNS('http://www.w3.org/1999/xlink', 'href'),
+          alt: title,
+          role: role,
+          cfi: window.daisy.epub.createCFI(img.parentElement),
+          html: img.parentElement.outerHTML,
+        }
+        let describedby = img.parentElement.getAttribute('aria-describedby')
+        if (describedby) {
+          var describedbyID = describedby.trim().replace(/\s{2,}/g, ' ').split(' ').shift();
+          let elem = document.getElementById(describedbyID);
+          if (elem) imageObj.describedby = elem.innerText || elem.textContent;
+          if (imageObj.describedby) {
+            imageObj.describedby = imageObj.describedby.trim().replace(/\s\s+/g, " ");
+          }
+        }
+        images.push(imageObj);
+      }
     }
-    let describedby = img.getAttribute('aria-describedby')
-    if (describedby) {
-      var describedbyID = describedby.trim().replace(/\s{2,}/g, ' ').split(' ').shift();
-      let elem = document.getElementById(describedbyID);
-      if (elem) imageObj.describedby = elem.innerText || elem.textContent;
-    }
-    let figure = findFigure(img);
-    if (figure) {
-      let figcaption = figure.getElementsByTagNameNS("http://www.w3.org/1999/xhtml", "figcaption");
-      if (figcaption.length > 0) imageObj.figcaption = figcaption[0].innerText || figcaption[0].textContent;
-    }
-    images.push(imageObj);
-  });
+  }
+
   return images;
 }
 

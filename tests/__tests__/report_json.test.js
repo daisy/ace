@@ -181,6 +181,34 @@ describe('check data', () => {
     });
   });
 
+  test('extract SVG images', async () => {
+    const report = await ace(path.join(__dirname, '../data/feat-svg-image'));
+    // console.log(JSON.stringify(report.data.images, null, 4));
+    expect(report.data).toMatchObject({
+      images: [{
+        src: 'EPUB/image_001.jpg',
+        alt: "title alt1",
+        role: "presentation",
+        html: "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" role=\"presentation\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" version=\"1.1\" viewBox=\"0 0 1400 1600\" width=\"100%\">\n    <image height=\"1600\" width=\"1400\" xlink:href=\"./image_001.jpg\">\n        <title>\n            title    alt1  \n        </title>\n    </image>\n</svg>",
+        location: "content_001.xhtml#epubcfi(/4/6)"
+      },
+      {
+        src: 'EPUB/image_002.jpg',
+        alt: "title alt2",
+        role: null,
+        html: "<vec:svg xmlns:vec=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" title=\"title alt2\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" version=\"1.1\" viewBox=\"0 0 1400 1600\" width=\"100%\">\n    <vec:image height=\"1600\" width=\"1400\" xlink:href=\"./image_002.jpg\"/>\n</vec:svg>",
+        location: "content_001.xhtml#epubcfi(/4/8)"
+      },
+      {
+        src: 'EPUB/image_003.jpg',
+        role: "img",
+        html: "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" role=\"img\" aria-describedby=\"txt\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" version=\"1.1\" viewBox=\"0 0 1400 1600\" width=\"100%\"><image height=\"1600\" width=\"1400\" xlink:href=\"./image_003.jpg\"/></svg>",
+        describedby: "this is text",
+        location: "content_001.xhtml#epubcfi(/4/12)"
+      }],
+    });
+  });
+
   test('extract links', async () => {
     const report = await ace(path.join(__dirname, '../data/feat-links'));
     expect(report['earl:testSubject']).toMatchObject({
