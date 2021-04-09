@@ -502,8 +502,8 @@ new Promise((resolve, reject) => {
                 || !window.axe) {
 
                 window.tryAceAxeN++;
-                if (window.tryAceAxeN < 10) {
-                    setTimeout(window.tryAceAxe, 200);
+                if (window.tryAceAxeN < 15) {
+                    setTimeout(window.tryAceAxe, 400);
                     return;
                 }
 
