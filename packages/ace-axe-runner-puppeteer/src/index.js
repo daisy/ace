@@ -1,8 +1,10 @@
 'use strict';
 
 const os = require('os');
+const fs = require('fs');
 const puppeteer = require('puppeteer');
 const utils = require('@daisy/puppeteer-utils');
+// const { fstat } = require('fs');
 
 let _browser = undefined;
 
@@ -36,6 +38,7 @@ module.exports = {
         await page.setRequestInterception(true);
 
         page.on('request', (request) => {
+
             const url = request.url();
             if (url && /^https?:\/\//.test(url)) {
                 if (isDev) {
@@ -44,8 +47,43 @@ module.exports = {
                 request.abort();
                 return;
             }
+
+            if (request.resourceType() === "document" && url && /^file:\//.test(url) && /\.html?$/.test(url)) {
+                // console.log("REQUEST HTML: ", url, " ==> ", JSON.stringify(request.headers(), null, 4), request.resourceType());
+
+                // let xhtml = "";
+                try {
+                    // https://github.com/nodejs/node/blob/7df0fc5c5c074ef9fe342b47eceb6437311aeab8/lib/internal/url.js#L1368-L1376
+                    const urlURL = new URL(url);
+                    // xhtml = fs.readFileSync(urlURL, 'utf8');
+                    fs.readFile(urlURL, 'utf8', (err, xhtml) => {
+                        if (err) {
+                            console.log("REQUEST HTML FAIL: ", err, url, " ==> ", JSON.stringify(request.headers(), null, 4), request.resourceType());
+                            request.continue();
+                            return;
+                        }
+                        request.respond({
+                            status: 200,
+                            contentType: 'application/xhtml+xml',
+                            // headers : {
+                            //     "content-type": 'application/xhtml+xml'.
+                            // },
+                            body: xhtml,
+                        });
+                    });
+                    return;
+
+                } catch (ex) {
+                    console.log("REQUEST HTML FAIL: ", ex, url, " ==> ", JSON.stringify(request.headers(), null, 4), request.resourceType());
+                }
+            }
+
             request.continue();
         });
+      
+        // page.on('response', (resp) => {
+        //     console.log("RESPONSE: ", resp.url(), " ==> ", JSON.stringify(resp.headers(), null, 4), resp.status());
+        // });
       
         await page.goto(url);
 

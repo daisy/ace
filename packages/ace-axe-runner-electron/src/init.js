@@ -678,20 +678,28 @@ function startAxeServer(basedir, scripts, scriptContents) {
                     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} filepath to read (corrected): ${fileSystemPath}`);
                 }
 
-                let html = fs.readFileSync(fileSystemPath, { encoding: "utf8" });
-                // if (LOG_DEBUG) console.log(html);
+                // let html = fs.readFileSync(fileSystemPath, { encoding: "utf8" });
+                fs.readFile(fileSystemPath, { encoding: "utf8" }, (err, html) => {
+                    if (err) {
+                        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTML file load??! ${req.url}`);
+                        res.status(404).end();
+                        return;
+                    }
 
-                if (html.match(/<\/head>/)) {
-                    html = html.replace(/<\/head>/, `${scriptsMarkup}</head>`);
-                } else if (html.match(/<\/body>/)) {
-                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTML no </head>? (using </body>) ${req.url}`);
-                    html = html.replace(/<\/body>/, `${scriptsMarkup}</body>`);
-                } else {
-                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTML neither </head> nor </body>?! ${req.url}`);
-                }
+                    // if (LOG_DEBUG) console.log(html);
 
-                res.setHeader("Content-Type", "application/xhtml+xml");
-                res.send(html);
+                    if (html.match(/<\/head>/)) {
+                        html = html.replace(/<\/head>/, `${scriptsMarkup}</head>`);
+                    } else if (html.match(/<\/body>/)) {
+                        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTML no </head>? (using </body>) ${req.url}`);
+                        html = html.replace(/<\/body>/, `${scriptsMarkup}</body>`);
+                    } else {
+                        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTML neither </head> nor </body>?! ${req.url}`);
+                    }
+
+                    res.setHeader("Content-Type", "application/xhtml+xml");
+                    res.send(html);
+                });
                 return;
             }
 
