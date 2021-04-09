@@ -143,12 +143,14 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                 devTools: isDev && showWindow,
                 title: "Axe Electron runner",
                 allowRunningInsecureContent: false,
+                backgroundThrottling: false,
                 contextIsolation: false,
                 nodeIntegration: false,
                 nodeIntegrationInWorker: false,
                 sandbox: false,
                 webSecurity: true,
                 webviewTag: false,
+                enableRemoteModule: false,
                 partition: SESSION_PARTITION
             },
         });
