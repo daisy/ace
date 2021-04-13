@@ -160,8 +160,12 @@ function checkTitle(assertions, epub) {
 
 function checkPageSource(assertion, epub) {
   if (epub.navDoc.hasPageList
-    && (epub.metadata['dc:source'] === undefined
-    || epub.metadata['dc:source'].toString() === '')) {
+    && (
+      (!epub.metadata['dc:source'] || epub.metadata['dc:source'].toString() === '')
+      &&
+      (!epub.metadata['rendition:layout'] || epub.metadata['rendition:layout'].toString() !== "pre-paginated")
+    )
+  ) {
     assertion.withAssertions(newViolation({
       title: 'epub-pagesource',
       testDesc: localize("checkepub.pagesourceviolation.testdesc"),

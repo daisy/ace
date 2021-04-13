@@ -52,6 +52,13 @@ describe('page list and breaks', () => {
   });
 });
 
+describe('page list and breaks FXL', () => {
+  test('page list correctly sourced FXL', async () => {
+    const report = await ace('../data/epubrules-pagelist-FXL');
+    expect(report['earl:result']['earl:outcome']).toEqual('pass');
+  });
+});
+
 describe('accessibility metadata', () => {
   
   test('missing metadata is reported', async () => {
