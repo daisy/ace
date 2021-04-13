@@ -1,3 +1,13 @@
+<a name="1.2.2"></a>
+## [1.2.2](https://github.com/daisy/ace/compare/v1.2.1...v1.2.2) (2021-04-13)
+
+### Bugfixes:
+
+* Fixed layout EPUB publications can have `pagelist` in Navigation Document without `dc:source` metadata in OPF package.
+* Increase tolerance for Ace + Axe script loading lag (longer time window)
+* SVG images are now reported
+* NPM package updates (minor semantic version increments)
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/daisy/ace/compare/v1.2.0...v1.2.1) (2021-04-09)
 
