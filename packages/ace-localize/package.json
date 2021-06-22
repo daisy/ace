@@ -1,8 +1,8 @@
 {
   "name": "@daisy/ace-localize",
-  "version": "1.2.2",
+  "version": "1.2.3-beta.1",
   "engines": {
-    "node": ">=10.0.0",
+    "node": ">=12.0.0",
     "yarn": "^1.22.0",
     "npm": ">=6.0.0"
   },
@@ -23,7 +23,7 @@
   "license": "MIT",
   "main": "lib/localize.js",
   "dependencies": {
-    "i18next": "^20.2.1",
+    "i18next": "^20.3.2",
     "winston": "^3.3.3"
   },
   "publishConfig": {

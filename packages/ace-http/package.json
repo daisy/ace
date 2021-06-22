@@ -1,8 +1,8 @@
 {
   "name": "@daisy/ace-http",
-  "version": "1.2.2",
+  "version": "1.2.3-beta.1",
   "engines": {
-    "node": ">=10.0.0",
+    "node": ">=12.0.0",
     "yarn": "^1.22.0",
     "npm": ">=6.0.0"
   },
@@ -24,10 +24,10 @@
   "main": "lib/index.js",
   "bin": "bin/ace-http.js",
   "dependencies": {
-    "@daisy/ace-axe-runner-puppeteer": "^1.2.2",
-    "@daisy/ace-core": "^1.2.2",
-    "@daisy/ace-logger": "^1.2.2",
-    "@daisy/ace-meta": "^1.2.2",
+    "@daisy/ace-axe-runner-puppeteer": "^1.2.3-beta.1",
+    "@daisy/ace-core": "^1.2.3-beta.1",
+    "@daisy/ace-logger": "^1.2.3-beta.1",
+    "@daisy/ace-meta": "^1.2.3-beta.1",
     "express": "^4.17.1",
     "express-easy-zip": "^1.1.5",
     "meow": "^9.0.0",
