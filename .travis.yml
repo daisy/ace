@@ -24,6 +24,7 @@ branches:
     - master
 cache:
   yarn: true
+
 #deploy:
 #  provider: npm
 #  email: rdeltour@gmail.com
