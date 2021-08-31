@@ -6,7 +6,7 @@
 * NodeJS v12+ requirement (LTS Long Term Support version is v14, v12 is now in maintenance mode, see https://nodejs.org/en/about/releases/ )
 * NPM package updates (minor non-breaking semantic version increments)
 * Notably: Deque Axe v4.3.3 (DAISY fork: https://github.com/daisy/axe-core/pull/6 )
-* Migrated Continuous Integration service (automated tests): from Travis to GitHub Actions
+* Migrated Continuous Integration runtime (automated tests) to new Travis service
 
 <a name="1.2.2"></a>
 ## [1.2.2](https://github.com/daisy/ace/compare/v1.2.1...v1.2.2) (2021-04-13)
