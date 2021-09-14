@@ -7,7 +7,8 @@ const app = electron.app;
 
 // Removes the deprecation warning message in the console
 // https://github.com/electron/electron/issues/18397
-app.allowRendererProcessReuse = true;
+// app.allowRendererProcessReuse = true;
+// https://www.electronjs.org/releases/stable#breaking-changes-1400
 
 const EventEmitter = require('events');
 class ElectronMockMainRendererEmitter extends EventEmitter {}
@@ -46,6 +47,7 @@ app.on('ready', async () => {
     //             sandbox: false,
     //             webSecurity: true,
     //             webviewTag: false,
+    //             nativeWindowOpen: false, // The default of nativeWindowOpen is deprecated and will be changing from false to true in Electron 15. See https://github.com/electron/electron/issues/28511
     //         }
     //     }
     // );

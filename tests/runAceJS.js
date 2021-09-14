@@ -10,6 +10,7 @@ if (process.env.AXE_ELECTRON_RUNNER) {
   // https://github.com/electron/electron/issues/18397
   // require('electron').app.allowRendererProcessReuse = true;
   // done in patching ./node_modules/@jest-runner/electron/build/electron_process_injected_code.js
+  // https://www.electronjs.org/releases/stable#breaking-changes-1400
 
   const EventEmitter = require('events');
   class ElectronMockMainRendererEmitter extends EventEmitter {}
