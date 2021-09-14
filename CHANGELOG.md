@@ -1,3 +1,11 @@
+<a name="1.2.4"></a>
+## [1.2.4](https://github.com/daisy/ace/compare/v1.2.3...v1.2.4) (2021-09-14)
+
+### Updates:
+
+* NPM package updates, minor non-breaking semantic version increments + Electron v14 (was v13)
+* Also updated the DAISY fork of Deque Axe v4.3.3 ( https://github.com/daisy/axe-core/pull/6 ) to include a bugfix for https://github.com/daisy/ace/issues/358 (null origin with file:// in Puppeteer, did not affect Ace's Electron Axe "runner")
+
 <a name="1.2.3"></a>
 ## [1.2.3](https://github.com/daisy/ace/compare/v1.2.2...v1.2.3) (2021-08-30)
 
