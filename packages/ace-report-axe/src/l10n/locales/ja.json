@@ -10,13 +10,14 @@
         "aria-roles": "ARIA",
         "aria-valid-attr": "ARIA",
         "aria-valid-attr-value": "ARIA",
+        "audio-caption": "オーディオ",
         "button-name": "フォーム",
         "checkboxgroup": "フォーム",
-        "color-contrast": "色",
+        "color-contrast": "カラー",
         "definition-list": "リスト",
         "dlitem": "リスト",
         "document-title": "ページタイトル",
-        "duplicate-id": "識別子",
+        "duplicate-id": "識別子（ID）",
         "empty-heading": "見出し",
         "epub-type-has-matching-role": "ARIA role",
         "frame-title": "インラインフレーム",
@@ -44,6 +45,7 @@
         "radiogroup": "フォーム",
         "scope-attr-valid": "テーブル",
         "server-side-image-map": "画像マップ",
+        "style": "スタイル",
         "table-duplicate-name": "テーブル",
         "table-fake-caption": "テーブル",
         "td-has-header": "テーブル",
@@ -51,9 +53,7 @@
         "th-has-data-cells": "テーブル",
         "valid-lang": "言語",
         "video-caption": "ビデオ",
-        "video-description": "ビデオ",
-        "audio-caption": "オーディオ",
-        "style": "スタイル"
+        "video-description": "ビデオ"
     },
     "nokb": "（特定のエントリなし）"
 }
