@@ -1,3 +1,11 @@
+<a name="1.2.5"></a>
+## [1.2.5](https://github.com/daisy/ace/compare/v1.2.4...v1.2.5) (2021-11-04)
+
+### Updates:
+
+* NPM package updates, notably Electron v15 and Puppeteer v11 (both major increments, non-breaking)
+* Also updated the DAISY fork of Deque Axe v4.3.5 ( https://github.com/daisy/axe-core/pull/7 )
+
 <a name="1.2.4"></a>
 ## [1.2.4](https://github.com/daisy/ace/compare/v1.2.3...v1.2.4) (2021-09-14)
 
