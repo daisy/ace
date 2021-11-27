@@ -30,7 +30,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "electron": "^15.3.0",
+    "electron": "^16.0.2",
     "json": "^11.0.0",
     "json-diff": "^0.5.4"
   },
