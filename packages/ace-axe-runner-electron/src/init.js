@@ -458,8 +458,8 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         // NO_HTTP_ADD
         _streamProtocolHandler = undefined;
 
-        httpServerStartWasRequested = false;
         httpServerStarted = false;
+        httpServerStartWasRequested = false;
 
         // NO_HTTP_REMOVE
         // if (httpServer) {
