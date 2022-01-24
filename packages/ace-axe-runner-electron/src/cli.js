@@ -5,6 +5,9 @@ const app = electron.app;
 // const ipcMain = electron.ipcMain;
 // const ipcRenderer = electron.ipcRenderer;
 
+// NO_HTTP_ADD
+const protocol = electron.protocol;
+
 // Removes the deprecation warning message in the console
 // https://github.com/electron/electron/issues/18397
 // app.allowRendererProcessReuse = true;
@@ -30,6 +33,22 @@ const LOG_DEBUG = false;
 const ACE_LOG_PREFIX = "[ACE-AXE]";
 
 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner CLI launch...`);
+
+// NO_HTTP_ADD
+const ACE_ELECTRON_HTTP_PROTOCOL = "acehttps";
+// app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required");
+protocol.registerSchemesAsPrivileged([{
+    privileges: {
+        allowServiceWorkers: false,
+        bypassCSP: false,
+        corsEnabled: true,
+        secure: true,
+        standard: true,
+        stream: true,
+        supportFetchAPI: true,
+    },
+    scheme: ACE_ELECTRON_HTTP_PROTOCOL,
+}]);
 
 // let win;
 // app.whenReady().then(() => {

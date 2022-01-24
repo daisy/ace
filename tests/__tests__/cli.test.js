@@ -22,6 +22,18 @@ const pkg = require('@daisy/ace-meta/package');
 // });
 // console.log(`##${str}##`);
 
+const cleanupElectronJestStderr = (str) => {
+  const s = str;
+  if (s) {
+    // [4250:0124/120235.963909:ERROR:mach_port_rendezvous.cc(202)] mach_msg send: (ipc/send) invalid port right (0x1000000a)
+    // [4252:0124/120235.964624:ERROR:child_thread_impl.cc(231)] Invalid PlatformChannel receive right
+    s = s.replace(/^.+:ERROR:mach_port_rendezvous\.cc.+$/g, '');
+    s = s.replace(/^.+:ERROR:child_thread_impl\.cc.+$/g, '');
+    s = s.trim();
+  }
+  return s;
+};
+
 describe('Running the CLI', () => {
   test('with no input should fail', () => {
     const { stdout, stderr, status } = ace([]);
@@ -33,21 +45,21 @@ describe('Running the CLI', () => {
   test('with the -h option should print help', () => {
     const { stdout, stderr, status } = ace(['-h']);
     expect(status).toBe(0);
-    expect(stderr).toBe('');
+    expect(cleanupElectronJestStderr(stderr)).toBe('');
     expect(stdout).toMatchSnapshot();
   });
 
   test('with the -v option should print the version number', () => {
     const { stdout, stderr, status } = ace(['-v']);
     expect(status).toBe(0);
-    expect(stderr).toBe('');
+    expect(cleanupElectronJestStderr(stderr)).toBe('');
     expect(stdout.trim()).toBe(pkg.version);
   });
 
   test('with the --version option should print the version number', () => {
     const { stdout, stderr, status } = ace(['--version']);
     expect(status).toBe(0);
-    expect(stderr).toBe('');
+    expect(cleanupElectronJestStderr(stderr)).toBe('');
     expect(stdout.trim()).toBe(pkg.version);
   });
 
@@ -63,7 +75,7 @@ describe('Running the CLI', () => {
       cwd: path.resolve(__dirname, '../data'),
     });
     expect(status).toBe(1);
-    expect(stderr).toBe('');
+    expect(cleanupElectronJestStderr(stderr)).toBe('');
     expect(stdout).toMatchSnapshot();
   });
 

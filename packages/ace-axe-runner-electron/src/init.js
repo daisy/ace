@@ -1,8 +1,31 @@
 'use strict';
 
+// TOO LATE FOR JEST RUNNER DUE TO AFTER ELECTRON APP.READY!
+// (see package.json patcher script "patchElectronJestRunner3")
+// // NO_HTTP_ADD
+// const electron = require('electron');
+// const protocol = electron.protocol;
+// const ACE_ELECTRON_HTTP_PROTOCOL = "acehttps";
+// // app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required");
+// protocol.registerSchemesAsPrivileged([{
+//     privileges: {
+//         allowServiceWorkers: false,
+//         bypassCSP: false,
+//         corsEnabled: true,
+//         secure: true,
+//         standard: true,
+//         stream: true,
+//         supportFetchAPI: true,
+//     },
+//     scheme: ACE_ELECTRON_HTTP_PROTOCOL,
+// }]);
+
+const mime = require('mime-types');
+
+const nodeStream = require('stream');
+
 const path = require('path');
 const fs = require('fs');
-const url = require('url');
 
 const electron = require('electron');
 const app = electron.app;
@@ -25,6 +48,8 @@ const SESSION_PARTITION = "persist:axe";
 
 const HTTP_QUERY_PARAM = "AXE_RUNNER";
 
+const ACE_ELECTRON_HTTP_PROTOCOL = "acehttps";
+
 // NO_HTTP_REMOVE
 // const express = require('express');
 // const portfinder = require('portfinder');
@@ -39,7 +64,10 @@ const HTTP_QUERY_PARAM = "AXE_RUNNER";
 // let httpServerStarted = false;
 let httpServerStartWasRequested = false;
 
-let rootUrl;
+// NO_HTTP_REMOVE
+// let rootUrl;
+// NO_HTTP_ADD
+const rootUrl = `${ACE_ELECTRON_HTTP_PROTOCOL}://0.0.0.0`;
 
 let browserWindows = undefined;
 
@@ -48,6 +76,126 @@ const jsCache = {};
 let _firstTimeInit = true;
 
 let iHttpReq = 0;
+
+// NO_HTTP_ADD
+class BufferReadableStream extends nodeStream.Readable {
+    constructor(buffer) {
+        super();
+        this.buffer = buffer;
+        this.alreadyRead = 0;
+    }
+    _read(size) {
+        if (this.alreadyRead >= this.buffer.length) {
+            this.push(null);
+            return;
+        }
+
+        let chunk = this.alreadyRead ?
+            this.buffer.slice(this.alreadyRead) :
+            this.buffer;
+
+        if (size) {
+            let l = size;
+            if (size > chunk.length) {
+                l = chunk.length;
+            }
+
+            chunk = chunk.slice(0, l);
+        }
+
+        this.alreadyRead += chunk.length;
+        this.push(chunk);
+    }
+}
+function bufferToStream(buffer) {
+    return new BufferReadableStream(buffer);
+}
+
+let _streamProtocolHandler = undefined;
+const streamProtocolHandler = async (
+    req,
+    callback) => {
+
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} streamProtocolHandler req.url: ${req.url}`);
+    const u = new URL(req.url);
+    
+    if (LOG_DEBUG) {
+        Object.keys(req.headers).forEach((header) => {
+            const val = req.headers[header];
+
+            console.log(`${ACE_LOG_PREFIX} streamProtocolHandler req.header: ${header} => ${val}`);
+
+            // if (val) {
+            //     headers[header] = val;
+            // }
+        });
+    }
+
+    let ref = u.origin;
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} streamProtocolHandler u.origin: ${ref}`);
+    if (req.referrer && req.referrer.trim()) {
+        ref = req.referrer;
+        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} streamProtocolHandler req.referrer: ${ref}`);
+    }
+
+    const headers = {};
+
+    if (ref && ref !== "null" && !/^https?:\/\/localhost.+/.test(ref) && !/^https?:\/\/127\.0\.0\.1.+/.test(ref)) {
+        headers.referer = ref;
+    } else {
+        headers.referer = `${ACE_ELECTRON_HTTP_PROTOCOL}://0.0.0.0/`;
+    }
+
+    // CORS everything!
+    headers["Access-Control-Allow-Origin"] = "*";
+    headers["Access-Control-Allow-Methods"] = "GET, HEAD, OPTIONS"; // POST, DELETE, PUT, PATCH
+    // tslint:disable-next-line:max-line-length
+    headers["Access-Control-Allow-Headers"] = "Content-Type, Content-Length, Accept-Ranges, Content-Range, Range, Link, Transfer-Encoding, X-Requested-With, Authorization, Accept, Origin, User-Agent, DNT, Cache-Control, Keep-Alive, If-Modified-Since";
+    // tslint:disable-next-line:max-line-length
+    headers["Access-Control-Expose-Headers"] = "Content-Type, Content-Length, Accept-Ranges, Content-Range, Range, Link, Transfer-Encoding, X-Requested-With, Authorization, Accept, Origin, User-Agent, DNT, Cache-Control, Keep-Alive, If-Modified-Since";
+
+    if (!_streamProtocolHandler) {
+        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} !? _streamProtocolHandler`);
+
+        const buff = Buffer.from("<html><body><p>Internal Server Error</p><p>!_streamProtocolHandler</p></body></html>");
+        headers["Content-Length"] = buff.length.toString();
+        callback({
+            data: bufferToStream(buff),
+            headers,
+            statusCode: 500,
+        });
+        return;
+    }
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} BEFORE _streamProtocolHandler ${req.url}`);
+    await _streamProtocolHandler(req, callback, headers);
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} AFTER _streamProtocolHandler ${req.url}`);
+};
+app.whenReady().then(async () => {
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} Electron app ready`);
+
+    // try {
+    //     await clearSessions();
+    // } catch (err) {
+    //     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} clearSessions fail?`);
+    // }
+
+    // if (session.defaultSession) {
+    //     session.defaultSession.protocol.registerStreamProtocol(
+    //         ACE_ELECTRON_HTTP_PROTOCOL,
+    //         streamProtocolHandler);
+    // }
+    const sess = session.fromPartition(SESSION_PARTITION, { cache: true });
+    if (sess) {
+        sess.protocol.registerStreamProtocol(
+            ACE_ELECTRON_HTTP_PROTOCOL,
+            streamProtocolHandler);
+
+        sess.setPermissionRequestHandler((wc, permission, callback) => {
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} setPermissionRequestHandler ${wc.getURL()} => ${permission}`);
+            callback(true);
+        });
+    }
+});
 
 function loadUrl(browserWindow) {
     browserWindow.ace__loadUrlPending = undefined;
@@ -340,6 +488,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
             }
         }
 
+        // clearSessions()
         const sess = session.fromPartition(SESSION_PARTITION, { cache: true }); // || session.defaultSession;
         if (sess) {
             setTimeout(async () => {
@@ -395,7 +544,8 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
             console.log(uarel);
         }
         // windows! file://C:\aa\bb\chapter.xhtml
-        const uarelObj = url.parse(uarel.replace(/\\/g, "/"));
+
+        const uarelObj = new URL(uarel.replace(/\\/g, "/"));
         const windowsDrive = uarelObj.hostname ? `${uarelObj.hostname.toUpperCase()}:` : "";
         if (LOG_DEBUG_URLS) {
             console.log("######## URL 2");
@@ -443,8 +593,6 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                 return;
             }
 
-            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner free browser window in pool: ${browserWindow.ace__poolIndex}`);
-
             browserWindow.ace__eventEmmitterSender = sender;
             browserWindow.ace__replySent = false;
             browserWindow.ace__timeout = undefined;
@@ -452,13 +600,15 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
             browserWindow.ace__currentUrlOriginal = uarel;
             browserWindow.ace__currentUrl = httpUrl;
 
+            if (LOG_DEBUG) console.log(`\n\n${ACE_LOG_PREFIX} axeRunner free browser window in pool: ${browserWindow.ace__poolIndex} ${browserWindow.ace__previousUrl} ${browserWindow.ace__currentUrlOriginal} ${browserWindow.ace__currentUrl}\n\n`);
+
             browserWindow.webContents.once("did-start-loading", () => {
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner did-start-loading ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
             });
             // browserWindow.webContents.once("did-stop-loading", () => {
             //     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner did-stop-loading ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
             // });
-            browserWindow.webContents.once("did-fail-load", (event, errorCode, errorDescription, validatedURL, isMainFrame, frameProcessId, frameRoutingId) => {
+            const didFailLoadHandler = (event, errorCode, errorDescription, validatedURL, isMainFrame, frameProcessId, frameRoutingId) => {
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner did-fail-load ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`, "\n", `${errorCode} - ${errorDescription} - ${validatedURL} - ${isMainFrame} - ${frameProcessId} - ${frameRoutingId}`);
 
                 // https://cs.chromium.org/chromium/src/net/base/net_error_list.h
@@ -482,11 +632,16 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                     err: `did-fail-load: ${errorCode} - ${errorDescription} - ${validatedURL} - ${isMainFrame} - ${frameProcessId} - ${frameRoutingId}`,
                     url: browserWindow.ace__currentUrlOriginal
                 });
-            });
+            };
+            browserWindow.webContents.once("did-fail-load", didFailLoadHandler);
             // browserWindow.webContents.once("dom-ready", () => { // occurs early
             //     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner dom-ready ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
             // });
             browserWindow.webContents.once("did-finish-load", () => {
+                // browserWindow.webContents.setMaxListeners(11+) ?
+                // (node:5505) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 did-fail-load listeners added to [EventEmitter]. Use emitter.setMaxListeners() to increase limit
+                browserWindow.webContents.removeListener("did-fail-load", didFailLoadHandler);
+
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner did-finish-load ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
 
                 browserWindow.ace__TIME_executeJavaScript = process.hrtime();
@@ -631,15 +786,12 @@ function startAxeServer(basedir, scripts, scriptContents) {
             scriptsMarkup += `<script data-ace="" src="/${HTTP_QUERY_PARAM}/${filename}"> </script>`;
         });
 
-        // NO_HTTP_REMOVE
-        // expressApp = express();
-        // // expressApp.enable('strict routing');
-        // // expressApp.use("/", (req, res, next) => {
-        // //     if (LOG_DEBUG) console.log("HTTP: " + req.url);
-        // //     next();
-        // // });
-        // expressApp.basedir = basedir;
-        expressApp.use("/", (req, res, next) => {
+        // NO_HTTP_ADD
+        _streamProtocolHandler = async (
+            req,
+            callback,
+            headers) => {
+            const u = new URL(req.url);
 
             for (const scriptPath of scripts) {
                 const filename = path.basename(scriptPath);
@@ -651,22 +803,29 @@ function startAxeServer(basedir, scripts, scriptContents) {
                         // if (LOG_DEBUG) console.log(js);
                         jsCache[scriptPath] = js;
                     } else {
-                        // if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTP already loaded ${scriptPath}`);
+                        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTP already loaded ${scriptPath}`);
                     }
-                    res.setHeader("Content-Type", "text/javascript");
-                    res.send(js);
+                    const buff = Buffer.from(js);
+                    headers["Content-Length"] = buff.length.toString();
+                    headers["Content-Type"] = "text/javascript";
+                    callback({
+                        data: bufferToStream(buff),
+                        headers,
+                        statusCode: 200,
+                    });
                     return;
                 }
             }
 
-            if (req.query[HTTP_QUERY_PARAM]) {
+            const queryParam = u.searchParams.get(HTTP_QUERY_PARAM) || undefined;
+            if (queryParam) {
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTP intercept ${req.url}`);
 
                 if (LOG_DEBUG_URLS) {
                     console.log(">>>>>>>>>> URL 1");
                     console.log(req.url);
                 }
-                const ptn = url.parse(req.url).pathname;
+                const ptn = u.pathname;
                 if (LOG_DEBUG_URLS) {
                     console.log(">>>>>>>>>> URL 2");
                     console.log(ptn);
@@ -677,8 +836,6 @@ function startAxeServer(basedir, scripts, scriptContents) {
                     console.log(pn);
                 }
 
-                // NO_HTTP_ADD
-                // expressApp.basedir
                 let fileSystemPath = path.join(basedir, pn);
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} filepath to read: ${fileSystemPath}`);
                 if (!fs.existsSync(fileSystemPath)) {
@@ -690,7 +847,11 @@ function startAxeServer(basedir, scripts, scriptContents) {
                 fs.readFile(fileSystemPath, { encoding: "utf8" }, (err, html) => {
                     if (err) {
                         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTML file load??! ${req.url}`);
-                        res.status(404).end();
+                        callback({
+                            data: null,
+                            headers,
+                            statusCode: 404,
+                        });
                         return;
                     }
 
@@ -705,24 +866,86 @@ function startAxeServer(basedir, scripts, scriptContents) {
                         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTML neither </head> nor </body>?! ${req.url}`);
                     }
 
-                    res.setHeader("Content-Type", "application/xhtml+xml");
-                    res.send(html);
+                    const buff = Buffer.from(html);
+                    headers["Content-Length"] = buff.length.toString();
+                    headers["Content-Type"] = "application/xhtml+xml";
+                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} CALLBACK HEADERS ${req.url} ${JSON.stringify(headers)}`);
+                    callback({
+                        data: bufferToStream(buff),
+                        headers,
+                        statusCode: 200,
+                    });
+                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} POST-CALLBACK ${req.url}`);
                 });
                 return;
             }
 
-            next();
-        });
-        
-        if (isDev) { // handle WebInspector JS maps etc.
-            expressApp.use("/", (req, res, next) => {
+            // equivalent to Express static:
+
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} Express static emulate: ${req.url}`);
+
+            if (LOG_DEBUG_URLS) {
+                console.log(">>>>>>>>>>- URL 1");
+                console.log(req.url);
+            }
+            const ptn = u.pathname;
+            if (LOG_DEBUG_URLS) {
+                console.log(">>>>>>>>>>- URL 2");
+                console.log(ptn);
+            }
+            const pn = decodeURI(ptn);
+            if (LOG_DEBUG_URLS) {
+                console.log(">>>>>>>>>>- URL 3");
+                console.log(pn);
+            }
+            let fileSystemPath = path.join(basedir, pn);
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} --filepath to read: ${fileSystemPath}`);
+            if (!fs.existsSync(fileSystemPath)) {
+                fileSystemPath = pn;
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} --filepath to read (corrected): ${fileSystemPath}`);
+            }
+            try {
+                let mediaType = mime.lookup(fileSystemPath) || "stream/octet";
+                const stats = fs.statSync(fileSystemPath);
+                headers["Content-Length"] = stats.size;
+                headers["Content-Type"] = mediaType;
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} --CALLBACK HEADERS ${req.url} ${JSON.stringify(headers)}`);
+                const steam = fs.createReadStream(fileSystemPath);
+                callback({
+                    data: steam,
+                    headers,
+                    statusCode: 200,
+                });
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} --POST-CALLBACK ${req.url}`);
+            } catch (fsErr) {
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} --fsErr ${fsErr}`);
+
+                const buff = Buffer.from(`<html><body><p>Internal Server Error</p><p>fsErr: ${fsErr}</p></body></html>`);
+                headers["Content-Length"] = buff.length.toString();
+                callback({
+                    data: bufferToStream(buff),
+                    headers,
+                    statusCode: 500,
+                });
+            }
+
+            if (isDev) { // handle WebInspector JS maps etc.
+
                 // const url = new URL(`https://fake.org${req.url}`);
                 // const pathname = url.pathname;
-                const pathname = decodeURI(url.parse(req.url).pathname);
+                const pathname = decodeURI(u.pathname);
 
                 const filePath = path.join(basedir, pathname);
                 if (filePathsExpressStaticNotExist[filePath]) {
-                    res.status(404).send(filePathsExpressStaticNotExist[filePath]);
+
+                    const buff = Buffer.from(filePathsExpressStaticNotExist[filePath]);
+                    headers["Content-Length"] = buff.length.toString();
+                    headers["Content-Type"] = "plain/text";
+                    callback({
+                        data: bufferToStream(buff),
+                        headers,
+                        statusCode: 404,
+                    });
                     return;
                 }
                 fsOriginal.exists(filePath, (exists) => {
@@ -733,13 +956,23 @@ function startAxeServer(basedir, scripts, scriptContents) {
                                     console.log(`${ACE_LOG_PREFIX} HTTP FAIL fsOriginal.exists && ERR ${basedir} + ${req.url} => ${filePath}`, err);
                                 }
                                 filePathsExpressStaticNotExist[filePath] = err.toString();
-                                res.status(404).send(filePathsExpressStaticNotExist[filePath]);
+                                const buff = Buffer.from(filePathsExpressStaticNotExist[filePath]);
+                                headers["Content-Length"] = buff.length.toString();
+                                headers["Content-Type"] = "plain/text";
+                                callback({
+                                    data: bufferToStream(buff),
+                                    headers,
+                                    statusCode: 404,
+                                });
                             } else {
                                 // if (LOG_DEBUG) {
                                 //     console.log(`${ACE_LOG_PREFIX} HTTP OK fsOriginal.exists ${basedir} + ${req.url} => ${filePath}`);
                                 // }
-                                next();
-                                // res.send(data);
+                                callback({
+                                    data: null,
+                                    headers,
+                                    statusCode: 500,
+                                });
                             }
                         });
                     } else {
@@ -751,30 +984,60 @@ function startAxeServer(basedir, scripts, scriptContents) {
                                             console.log(`${ACE_LOG_PREFIX} HTTP FAIL !fsOriginal.exists && fs.exists && ERR ${basedir} + ${req.url} => ${filePath}`, err);
                                         }
                                         filePathsExpressStaticNotExist[filePath] = err.toString();
-                                        res.status(404).send(filePathsExpressStaticNotExist[filePath]);
+                                        const buff = Buffer.from(filePathsExpressStaticNotExist[filePath]);
+                                        headers["Content-Length"] = buff.length.toString();
+                                        headers["Content-Type"] = "plain/text";
+                                        callback({
+                                            data: bufferToStream(buff),
+                                            headers,
+                                            statusCode: 404,
+                                        });
                                     } else {
                                         if (LOG_DEBUG) {
                                             console.log(`${ACE_LOG_PREFIX} HTTP OK !fsOriginal.exists && fs.exists ${basedir} + ${req.url} => ${filePath}`);
                                         }
-                                        next();
-                                        // res.send(data);
+                                        callback({
+                                            data: null,
+                                            headers,
+                                            statusCode: 500,
+                                        });
                                     }
                                 });
                             } else {
                                 if (LOG_DEBUG) {
                                     console.log(`${ACE_LOG_PREFIX} HTTP FAIL !fsOriginal.exists && !fs.exists ${basedir} + ${req.url} => ${filePath}`);
                                 }
-                                res.status(404).end();
+                                callback({
+                                    data: null,
+                                    headers,
+                                    statusCode: 404,
+                                });
                             }
                         });
                     }
                 });
-            });
-        }
+            }
+        };
 
         // NO_HTTP_ADD
         resolve();
+
         // NO_HTTP_REMOVE
+        // expressApp = express();
+        // // expressApp.enable('strict routing');
+        // // expressApp.use("/", (req, res, next) => {
+        // //     if (LOG_DEBUG) console.log("HTTP: " + req.url);
+        // //     next();
+        // // });
+        // expressApp.basedir = basedir;
+        // expressApp.use("/", (req, res, next) => {
+        //     next();
+        // });
+        // if (isDev) { // handle WebInspector JS maps etc.
+        //     expressApp.use("/", (req, res, next) => {
+        //     });
+        // }
+
         // // https://expressjs.com/en/4x/api.html#express.static
         // const staticOptions = {
         //     dotfiles: "ignore",
@@ -840,7 +1103,6 @@ function startAxeServer(basedir, scripts, scriptContents) {
 }
 
 function prepareLaunch(eventEmmitter, CONCURRENT_INSTANCES) {
-
     eventEmmitter.on('AXE_RUNNER_LAUNCH', (event, arg) => {
         // const payload = eventEmmitter.ace_notElectronIpcMainRenderer ? event : arg;
         const sender = eventEmmitter.ace_notElectronIpcMainRenderer ? eventEmmitter : event.sender;
