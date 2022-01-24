@@ -61,8 +61,8 @@ const ACE_ELECTRON_HTTP_PROTOCOL = "acehttps";
 // let port;
 // let ip;
 // let proto;
-let httpServerStarted = false;
 let httpServerStartWasRequested = false;
+let httpServerStarted = false;
 
 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner ELECTRON MODULE INSTANCE`);
 
