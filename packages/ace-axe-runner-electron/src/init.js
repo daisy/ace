@@ -333,8 +333,17 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
             urls: [],
         }, (details, callback) => {
             if (details.url
-                && /^https?:\/\//.test(details.url)
-                && ((rootUrl && !details.url.startsWith(rootUrl)) || (!rootUrl && !/^https?:\/\/127.0.0.1/.test(details.url)))
+                &&
+                (
+                /^file:\/\//.test(details.url)
+                ||
+                /^https?:\/\//.test(details.url)
+                // && (
+                //     (rootUrl && !details.url.startsWith(rootUrl))
+                //     ||
+                //     (!rootUrl && !/^https?:\/\/127.0.0.1/.test(details.url))
+                //    )
+                )
             ) {
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} onBeforeRequest BLOCK: ${details.url} (${rootUrl})`);
 
@@ -780,7 +789,7 @@ new Promise((resolve, reject) => {
 }
 axeRunnerInit.todo = true;
 
-const filePathsExpressStaticNotExist = {};
+// const filePathsExpressStaticNotExist = {};
 function startAxeServer(basedir, scripts, scriptContents) {
 
     // NO_HTTP_REMOVE
@@ -856,6 +865,18 @@ function startAxeServer(basedir, scripts, scriptContents) {
                 if (!fs.existsSync(fileSystemPath)) {
                     fileSystemPath = pn;
                     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} filepath to read (corrected): ${fileSystemPath}`);
+                    if (!fs.existsSync(fileSystemPath)) {
+                        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} FILE DOES NOT EXIST!! ${fileSystemPath}`);
+
+                        const buff = Buffer.from(`<html><body><p>Internal Server Error</p><p>404?! ${fileSystemPath}</p></body></html>`);
+                        headers["Content-Length"] = buff.length.toString();
+                        callback({
+                            data: bufferToStream(buff),
+                            headers,
+                            statusCode: 404,
+                        });
+                        return;
+                    }
                 }
 
                 // let html = fs.readFileSync(fileSystemPath, { encoding: "utf8" });
@@ -918,6 +939,18 @@ function startAxeServer(basedir, scripts, scriptContents) {
             if (!fs.existsSync(fileSystemPath)) {
                 fileSystemPath = pn;
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} --filepath to read (corrected): ${fileSystemPath}`);
+                if (!fs.existsSync(fileSystemPath)) {
+                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} --FILE DOES NOT EXIST!! ${fileSystemPath}`);
+
+                    const buff = Buffer.from(`<html><body><p>Internal Server Error</p><p>404?! ${fileSystemPath}</p></body></html>`);
+                    headers["Content-Length"] = buff.length.toString();
+                    callback({
+                        data: bufferToStream(buff),
+                        headers,
+                        statusCode: 404,
+                    });
+                    return;
+                }
             }
             try {
                 let mediaType = mime.lookup(fileSystemPath) || "stream/octet";
@@ -944,94 +977,94 @@ function startAxeServer(basedir, scripts, scriptContents) {
                 });
             }
 
-            if (isDev) { // handle WebInspector JS maps etc.
+            // if (isDev) { // handle WebInspector JS maps etc.
 
-                // const url = new URL(`https://fake.org${req.url}`);
-                // const pathname = url.pathname;
-                const pathname = decodeURI(u.pathname);
+            //     // const url = new URL(`https://fake.org${req.url}`);
+            //     // const pathname = url.pathname;
+            //     const pathname = decodeURI(u.pathname);
 
-                const filePath = path.join(basedir, pathname);
-                if (filePathsExpressStaticNotExist[filePath]) {
+            //     const filePath = path.join(basedir, pathname);
+            //     if (filePathsExpressStaticNotExist[filePath]) {
 
-                    const buff = Buffer.from(filePathsExpressStaticNotExist[filePath]);
-                    headers["Content-Length"] = buff.length.toString();
-                    headers["Content-Type"] = "plain/text";
-                    callback({
-                        data: bufferToStream(buff),
-                        headers,
-                        statusCode: 404,
-                    });
-                    return;
-                }
-                fsOriginal.exists(filePath, (exists) => {
-                    if (exists) {
-                        fsOriginal.readFile(filePath, undefined, (err, data) => {
-                            if (err) {
-                                if (LOG_DEBUG) {
-                                    console.log(`${ACE_LOG_PREFIX} HTTP FAIL fsOriginal.exists && ERR ${basedir} + ${req.url} => ${filePath}`, err);
-                                }
-                                filePathsExpressStaticNotExist[filePath] = err.toString();
-                                const buff = Buffer.from(filePathsExpressStaticNotExist[filePath]);
-                                headers["Content-Length"] = buff.length.toString();
-                                headers["Content-Type"] = "plain/text";
-                                callback({
-                                    data: bufferToStream(buff),
-                                    headers,
-                                    statusCode: 404,
-                                });
-                            } else {
-                                // if (LOG_DEBUG) {
-                                //     console.log(`${ACE_LOG_PREFIX} HTTP OK fsOriginal.exists ${basedir} + ${req.url} => ${filePath}`);
-                                // }
-                                callback({
-                                    data: null,
-                                    headers,
-                                    statusCode: 500,
-                                });
-                            }
-                        });
-                    } else {
-                        fs.exists(filePath, (exists) => {
-                            if (exists) {
-                                fs.readFile(filePath, undefined, (err, data) => {
-                                    if (err) {
-                                        if (LOG_DEBUG) {
-                                            console.log(`${ACE_LOG_PREFIX} HTTP FAIL !fsOriginal.exists && fs.exists && ERR ${basedir} + ${req.url} => ${filePath}`, err);
-                                        }
-                                        filePathsExpressStaticNotExist[filePath] = err.toString();
-                                        const buff = Buffer.from(filePathsExpressStaticNotExist[filePath]);
-                                        headers["Content-Length"] = buff.length.toString();
-                                        headers["Content-Type"] = "plain/text";
-                                        callback({
-                                            data: bufferToStream(buff),
-                                            headers,
-                                            statusCode: 404,
-                                        });
-                                    } else {
-                                        if (LOG_DEBUG) {
-                                            console.log(`${ACE_LOG_PREFIX} HTTP OK !fsOriginal.exists && fs.exists ${basedir} + ${req.url} => ${filePath}`);
-                                        }
-                                        callback({
-                                            data: null,
-                                            headers,
-                                            statusCode: 500,
-                                        });
-                                    }
-                                });
-                            } else {
-                                if (LOG_DEBUG) {
-                                    console.log(`${ACE_LOG_PREFIX} HTTP FAIL !fsOriginal.exists && !fs.exists ${basedir} + ${req.url} => ${filePath}`);
-                                }
-                                callback({
-                                    data: null,
-                                    headers,
-                                    statusCode: 404,
-                                });
-                            }
-                        });
-                    }
-                });
-            }
+            //         const buff = Buffer.from(filePathsExpressStaticNotExist[filePath]);
+            //         headers["Content-Length"] = buff.length.toString();
+            //         headers["Content-Type"] = "plain/text";
+            //         callback({
+            //             data: bufferToStream(buff),
+            //             headers,
+            //             statusCode: 404,
+            //         });
+            //         return;
+            //     }
+            //     fsOriginal.exists(filePath, (exists) => {
+            //         if (exists) {
+            //             fsOriginal.readFile(filePath, undefined, (err, data) => {
+            //                 if (err) {
+            //                     if (LOG_DEBUG) {
+            //                         console.log(`${ACE_LOG_PREFIX} HTTP FAIL fsOriginal.exists && ERR ${basedir} + ${req.url} => ${filePath}`, err);
+            //                     }
+            //                     filePathsExpressStaticNotExist[filePath] = err.toString();
+            //                     const buff = Buffer.from(filePathsExpressStaticNotExist[filePath]);
+            //                     headers["Content-Length"] = buff.length.toString();
+            //                     headers["Content-Type"] = "plain/text";
+            //                     callback({
+            //                         data: bufferToStream(buff),
+            //                         headers,
+            //                         statusCode: 404,
+            //                     });
+            //                 } else {
+            //                     // if (LOG_DEBUG) {
+            //                     //     console.log(`${ACE_LOG_PREFIX} HTTP OK fsOriginal.exists ${basedir} + ${req.url} => ${filePath}`);
+            //                     // }
+            //                     callback({
+            //                         data: null,
+            //                         headers,
+            //                         statusCode: 500,
+            //                     });
+            //                 }
+            //             });
+            //         } else {
+            //             fs.exists(filePath, (exists) => {
+            //                 if (exists) {
+            //                     fs.readFile(filePath, undefined, (err, data) => {
+            //                         if (err) {
+            //                             if (LOG_DEBUG) {
+            //                                 console.log(`${ACE_LOG_PREFIX} HTTP FAIL !fsOriginal.exists && fs.exists && ERR ${basedir} + ${req.url} => ${filePath}`, err);
+            //                             }
+            //                             filePathsExpressStaticNotExist[filePath] = err.toString();
+            //                             const buff = Buffer.from(filePathsExpressStaticNotExist[filePath]);
+            //                             headers["Content-Length"] = buff.length.toString();
+            //                             headers["Content-Type"] = "plain/text";
+            //                             callback({
+            //                                 data: bufferToStream(buff),
+            //                                 headers,
+            //                                 statusCode: 404,
+            //                             });
+            //                         } else {
+            //                             if (LOG_DEBUG) {
+            //                                 console.log(`${ACE_LOG_PREFIX} HTTP OK !fsOriginal.exists && fs.exists ${basedir} + ${req.url} => ${filePath}`);
+            //                             }
+            //                             callback({
+            //                                 data: null,
+            //                                 headers,
+            //                                 statusCode: 500,
+            //                             });
+            //                         }
+            //                     });
+            //                 } else {
+            //                     if (LOG_DEBUG) {
+            //                         console.log(`${ACE_LOG_PREFIX} HTTP FAIL !fsOriginal.exists && !fs.exists ${basedir} + ${req.url} => ${filePath}`);
+            //                     }
+            //                     callback({
+            //                         data: null,
+            //                         headers,
+            //                         statusCode: 404,
+            //                     });
+            //                 }
+            //             });
+            //         }
+            //     });
+            // }
         };
 
         // NO_HTTP_REMOVE
