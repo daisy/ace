@@ -28,13 +28,13 @@
     "@daisy/ace-core": "^1.2.6-alpha.1",
     "@daisy/ace-logger": "^1.2.6-alpha.1",
     "@daisy/ace-meta": "^1.2.6-alpha.1",
-    "express": "^4.17.1",
+    "express": "^4.17.2",
     "express-easy-zip": "^1.1.5",
     "meow": "^9.0.0",
-    "multer": "^1.4.3",
+    "multer": "^1.4.4",
     "tmp": "^0.2.1",
     "uuid": "^8.3.2",
-    "winston": "^3.3.3"
+    "winston": "^3.4.0"
   },
   "publishConfig": {
     "access": "public"

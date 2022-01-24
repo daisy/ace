@@ -13,13 +13,6 @@ const BrowserWindow = electron.BrowserWindow;
 
 const fsOriginal = require('original-fs');
 
-const express = require('express');
-const portfinder = require('portfinder');
-// const http = require('http');
-const https = require('https');
-
-const generateSelfSignedData = require('./selfsigned').generateSelfSignedData;
-
 const isDev = process && process.env && (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true');
 const showWindow = false;
 
@@ -32,15 +25,21 @@ const SESSION_PARTITION = "persist:axe";
 
 const HTTP_QUERY_PARAM = "AXE_RUNNER";
 
-let expressApp;
-let httpServer;
-let port;
-let ip;
-let proto;
-let rootUrl;
-
+// NO_HTTP_REMOVE
+// const express = require('express');
+// const portfinder = require('portfinder');
+// // const http = require('http');
+// const https = require('https');
+// const generateSelfSignedData = require('./selfsigned').generateSelfSignedData;
+// let expressApp;
+// let httpServer;
+// let port;
+// let ip;
+// let proto;
+// let httpServerStarted = false;
 let httpServerStartWasRequested = false;
-let httpServerStarted = false;
+
+let rootUrl;
 
 let browserWindows = undefined;
 
@@ -227,15 +226,16 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         return;
     }
 
-    app.on("certificate-error", (event, webContents, u, error, certificate, callback) => {
-        if (u.indexOf(`${rootUrl}/`) === 0) {
-            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert error OKAY ${u}`);
-            callback(true);
-            return;
-        }
-        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert error FAIL ${u}`);
-        callback(false);
-    });
+    // NO_HTTP_REMOVE
+    // app.on("certificate-error", (event, webContents, u, error, certificate, callback) => {
+    //     if (u.indexOf(`${rootUrl}/`) === 0) {
+    //         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert error OKAY ${u}`);
+    //         callback(true);
+    //         return;
+    //     }
+    //     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert error FAIL ${u}`);
+    //     callback(false);
+    // });
 
     // const filter = { urls: ["*", "*://*/*"] };
 
@@ -260,25 +260,23 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
     //     }
     // };
 
-    const setCertificateVerifyProcCB = (request, callback) => {
-
-        if (request.hostname === ip) {
-            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert verify OKAY ${request.hostname}`);
-            callback(0); // OK
-            return;
-        }
-        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert verify FALLBACK ${request.hostname}`);
-        callback(-3); // Chromium
-        // callback(-2); // Fail
-    };
-
-    const sess = session.fromPartition(SESSION_PARTITION, { cache: true }); // || session.defaultSession;
-
-    if (sess) {
-        // sess.webRequest.onHeadersReceived(filter, onHeadersReceivedCB);
-        // sess.webRequest.onBeforeSendHeaders(filter, onBeforeSendHeadersCB);
-        sess.setCertificateVerifyProc(setCertificateVerifyProcCB);
-    }
+    // NO_HTTP_REMOVE
+    // const setCertificateVerifyProcCB = (request, callback) => {
+    //     if (request.hostname === ip) {
+    //         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert verify OKAY ${request.hostname}`);
+    //         callback(0); // OK
+    //         return;
+    //     }
+    //     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTPS cert verify FALLBACK ${request.hostname}`);
+    //     callback(-3); // Chromium
+    //     // callback(-2); // Fail
+    // };
+    // const sess = session.fromPartition(SESSION_PARTITION, { cache: true }); // || session.defaultSession;
+    // if (sess) {
+    //     // sess.webRequest.onHeadersReceived(filter, onHeadersReceivedCB);
+    //     // sess.webRequest.onBeforeSendHeaders(filter, onBeforeSendHeadersCB);
+    //     sess.setCertificateVerifyProc(setCertificateVerifyProcCB);
+    // }
 
     // ipcMain
     eventEmmitter.on('AXE_RUNNER_CLOSE', (event, arg) => {
@@ -303,13 +301,14 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         }
         browserWindows = undefined;
 
-        httpServerStarted = false;
-        httpServerStartWasRequested = false;
 
-        if (httpServer) {
-            httpServer.close();
-            httpServer = undefined;
-        }
+        httpServerStartWasRequested = false;
+        // NO_HTTP_REMOVE
+        // httpServerStarted = false;
+        // if (httpServer) {
+        //     httpServer.close();
+        //     httpServer = undefined;
+        // }
 
         let _timeOutID = setTimeout(() => {
             _timeOutID = undefined;
@@ -573,11 +572,14 @@ new Promise((resolve, reject) => {
                     });
             });
 
-            if (httpServerStarted) {
-                loadUrl(browserWindow);
-            } else {
-                browserWindow.ace__loadUrlPending = httpUrl;
-            }
+            // NO_HTTP_ADD
+            loadUrl(browserWindow);
+            // NO_HTTP_REMOVE
+            // if (httpServerStarted) {
+            //     loadUrl(browserWindow);
+            // } else {
+            //     browserWindow.ace__loadUrlPending = httpUrl;
+            // }
         }
 
         if (!httpServerStartWasRequested) { // lazy init
@@ -589,7 +591,9 @@ new Promise((resolve, reject) => {
 
             startAxeServer(basedir, scripts, scriptContents).then(() => {
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner server started`);
-                httpServerStarted = true;
+
+                // NO_HTTP_REMOVE
+                // httpServerStarted = true;
 
                 poolCheck();
             }).catch((err) => {
@@ -627,15 +631,14 @@ function startAxeServer(basedir, scripts, scriptContents) {
             scriptsMarkup += `<script data-ace="" src="/${HTTP_QUERY_PARAM}/${filename}"> </script>`;
         });
 
-        expressApp = express();
-        // expressApp.enable('strict routing');
-
-        // expressApp.use("/", (req, res, next) => {
-        //     if (LOG_DEBUG) console.log("HTTP: " + req.url);
-        //     next();
-        // });
-
-        expressApp.basedir = basedir;
+        // NO_HTTP_REMOVE
+        // expressApp = express();
+        // // expressApp.enable('strict routing');
+        // // expressApp.use("/", (req, res, next) => {
+        // //     if (LOG_DEBUG) console.log("HTTP: " + req.url);
+        // //     next();
+        // // });
+        // expressApp.basedir = basedir;
         expressApp.use("/", (req, res, next) => {
 
             for (const scriptPath of scripts) {
@@ -673,7 +676,10 @@ function startAxeServer(basedir, scripts, scriptContents) {
                     console.log(">>>>>>>>>> URL 3");
                     console.log(pn);
                 }
-                let fileSystemPath = path.join(expressApp.basedir, pn);
+
+                // NO_HTTP_ADD
+                // expressApp.basedir
+                let fileSystemPath = path.join(basedir, pn);
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} filepath to read: ${fileSystemPath}`);
                 if (!fs.existsSync(fileSystemPath)) {
                     fileSystemPath = pn;
@@ -766,67 +772,70 @@ function startAxeServer(basedir, scripts, scriptContents) {
             });
         }
 
-        // https://expressjs.com/en/4x/api.html#express.static
-        const staticOptions = {
-            dotfiles: "ignore",
-            etag: true,
-            // fallthrough: false,
-            immutable: true,
-            // index: "index.html",
-            maxAge: "1d",
-            redirect: false,
-            // extensions: ["css", "otf"],
-            // setHeaders: (res, _path, _stat) => {
-            //     //   res.set('x-timestamp', Date.now())
-            //     setResponseCORS(res);
-            // },
-        };
-        if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTP static path ${basedir}`);
-        expressApp.use("/", express.static(basedir, staticOptions));
+        // NO_HTTP_ADD
+        resolve();
+        // NO_HTTP_REMOVE
+        // // https://expressjs.com/en/4x/api.html#express.static
+        // const staticOptions = {
+        //     dotfiles: "ignore",
+        //     etag: true,
+        //     // fallthrough: false,
+        //     immutable: true,
+        //     // index: "index.html",
+        //     maxAge: "1d",
+        //     redirect: false,
+        //     // extensions: ["css", "otf"],
+        //     // setHeaders: (res, _path, _stat) => {
+        //     //     //   res.set('x-timestamp', Date.now())
+        //     //     setResponseCORS(res);
+        //     // },
+        // };
+        // if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} HTTP static path ${basedir}`);
+        // expressApp.use("/", express.static(basedir, staticOptions));
 
-        const startHttp = function () {
-            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner generateSelfSignedData...`);
-            generateSelfSignedData().then((certData) => {
-                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner generateSelfSignedData OK.`);
+        // const startHttp = function () {
+        //     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner generateSelfSignedData...`);
+        //     generateSelfSignedData().then((certData) => {
+        //         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner generateSelfSignedData OK.`);
 
-                httpServer = https.createServer({ key: certData.private, cert: certData.cert }, expressApp).listen(port, () => {
-                    const p = httpServer.address().port;
+        //         httpServer = https.createServer({ key: certData.private, cert: certData.cert }, expressApp).listen(port, () => {
+        //             const p = httpServer.address().port;
 
-                    port = p;
-                    ip = "127.0.0.1";
-                    proto = "https";
-                    rootUrl = `${proto}://${ip}:${port}`;
-                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} server URL ${rootUrl}`);
+        //             port = p;
+        //             ip = "127.0.0.1";
+        //             proto = "https";
+        //             rootUrl = `${proto}://${ip}:${port}`;
+        //             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} server URL ${rootUrl}`);
 
-                    resolve();
-                });
-            }).catch((err) => {
-                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} generateSelfSignedData error!`);
-                if (LOG_DEBUG) console.log(err);
-                httpServer = expressApp.listen(port, () => {
-                    const p = httpServer.address().port;
+        //             resolve();
+        //         });
+        //     }).catch((err) => {
+        //         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} generateSelfSignedData error!`);
+        //         if (LOG_DEBUG) console.log(err);
+        //         httpServer = expressApp.listen(port, () => {
+        //             const p = httpServer.address().port;
 
-                    port = p;
-                    ip = "127.0.0.1";
-                    proto = "http";
-                    rootUrl = `${proto}://${ip}:${port}`;
-                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} server URL ${rootUrl}`);
+        //             port = p;
+        //             ip = "127.0.0.1";
+        //             proto = "http";
+        //             rootUrl = `${proto}://${ip}:${port}`;
+        //             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} server URL ${rootUrl}`);
 
-                    resolve();
-                });
-            });
-        }
+        //             resolve();
+        //         });
+        //     });
+        // }
 
-        portfinder.getPortPromise().then((p) => {
-            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner HTTP port ${p}`);
-            port = p;
-            startHttp();
-        }).catch((err) => {
-            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner HTTP port error!`);
-            console.log(err);
-            port = 3000;
-            startHttp();
-        });
+        // portfinder.getPortPromise().then((p) => {
+        //     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner HTTP port ${p}`);
+        //     port = p;
+        //     startHttp();
+        // }).catch((err) => {
+        //     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner HTTP port error!`);
+        //     console.log(err);
+        //     port = 3000;
+        //     startHttp();
+        // });
     });
 }
 
