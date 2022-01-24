@@ -23,13 +23,12 @@ const pkg = require('@daisy/ace-meta/package');
 // console.log(`##${str}##`);
 
 const cleanupElectronJestStderr = (str) => {
-  const s = str;
+  let s = str;
   if (s) {
     // [4250:0124/120235.963909:ERROR:mach_port_rendezvous.cc(202)] mach_msg send: (ipc/send) invalid port right (0x1000000a)
     // [4252:0124/120235.964624:ERROR:child_thread_impl.cc(231)] Invalid PlatformChannel receive right
-    s = s.replace(/^.+:ERROR:mach_port_rendezvous\.cc.+$/g, '');
-    s = s.replace(/^.+:ERROR:child_thread_impl\.cc.+$/g, '');
-    s = s.trim();
+    s = s.replace(/^.+(mach_port_rendezvous|child_thread_impl)\.cc.+$/gm, '');
+    s = s.replace(/\n/gm, ' ').trim();
   }
   return s;
 };
