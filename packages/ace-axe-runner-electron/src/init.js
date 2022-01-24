@@ -61,8 +61,10 @@ const ACE_ELECTRON_HTTP_PROTOCOL = "acehttps";
 // let port;
 // let ip;
 // let proto;
-// let httpServerStarted = false;
+let httpServerStarted = false;
 let httpServerStartWasRequested = false;
+
+if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner ELECTRON MODULE INSTANCE`);
 
 // NO_HTTP_REMOVE
 // let rootUrl;
@@ -298,6 +300,8 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
     }
     axeRunnerInit.todo = false;
 
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunnerInit TODO ...`);
+
     const firstTimeInit = _firstTimeInit;
     _firstTimeInit = false;
 
@@ -374,6 +378,8 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         return;
     }
 
+    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunnerInit firstTimeInit ...`);
+
     // NO_HTTP_REMOVE
     // app.on("certificate-error", (event, webContents, u, error, certificate, callback) => {
     //     if (u.indexOf(`${rootUrl}/`) === 0) {
@@ -449,10 +455,13 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         }
         browserWindows = undefined;
 
+        // NO_HTTP_ADD
+        _streamProtocolHandler = undefined;
 
         httpServerStartWasRequested = false;
+        httpServerStarted = false;
+
         // NO_HTTP_REMOVE
-        // httpServerStarted = false;
         // if (httpServer) {
         //     httpServer.close();
         //     httpServer = undefined;
@@ -727,15 +736,12 @@ new Promise((resolve, reject) => {
                     });
             });
 
-            // NO_HTTP_ADD
-            loadUrl(browserWindow);
-            // NO_HTTP_REMOVE
-            // if (httpServerStarted) {
-            //     loadUrl(browserWindow);
-            // } else {
-            //     browserWindow.ace__loadUrlPending = httpUrl;
-            // }
-        }
+            if (httpServerStarted) {
+                loadUrl(browserWindow);
+            } else {
+                browserWindow.ace__loadUrlPending = httpUrl;
+            }
+        } // poolPush()
 
         if (!httpServerStartWasRequested) { // lazy init
             httpServerStartWasRequested = true;
@@ -744,21 +750,30 @@ new Promise((resolve, reject) => {
 
             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner starting server ...`);
 
-            startAxeServer(basedir, scripts, scriptContents).then(() => {
-                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner server started`);
-
-                // NO_HTTP_REMOVE
-                // httpServerStarted = true;
-
-                poolCheck();
-            }).catch((err) => {
+            // NO_HTTP_ADD
+            try {
+                startAxeServer(basedir, scripts, scriptContents);
+            } catch (err) {
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner server error`);
                 console.log(err);
                 browserWindow.ace__eventEmmitterSender.send("AXE_RUNNER_RUN_", {
                     err,
                     url: browserWindow.ace__currentUrlOriginal
                 });
-            });
+                return;
+            }
+
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner server started`);
+            httpServerStarted = true;
+            poolCheck();
+
+            // NO_HTTP_REMOVE
+            // startAxeServer(basedir, scripts, scriptContents).then(() => {
+            //     // ...
+            //     httpServerStarted = true;
+            // }).catch((err) => {
+            //     // ...
+            // });
         } else {
             poolPush();
         }
@@ -769,7 +784,8 @@ axeRunnerInit.todo = true;
 const filePathsExpressStaticNotExist = {};
 function startAxeServer(basedir, scripts, scriptContents) {
 
-    return new Promise((resolve, reject) => {
+    // NO_HTTP_REMOVE
+    // return new Promise((resolve, reject) => {
 
         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner startAxeServer...`);
 
@@ -1019,9 +1035,6 @@ function startAxeServer(basedir, scripts, scriptContents) {
             }
         };
 
-        // NO_HTTP_ADD
-        resolve();
-
         // NO_HTTP_REMOVE
         // expressApp = express();
         // // expressApp.enable('strict routing');
@@ -1099,7 +1112,7 @@ function startAxeServer(basedir, scripts, scriptContents) {
         //     port = 3000;
         //     startHttp();
         // });
-    });
+    // });
 }
 
 function prepareLaunch(eventEmmitter, CONCURRENT_INSTANCES) {
