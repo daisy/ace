@@ -322,7 +322,8 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                 webviewTag: false,
                 enableRemoteModule: false,
                 partition: SESSION_PARTITION,
-                nativeWindowOpen: false, // The default of nativeWindowOpen is deprecated and will be changing from false to true in Electron 15. See https://github.com/electron/electron/issues/28511
+                // (electron) Deprecation Warning: Disabling nativeWindowOpen is deprecated. The nativeWindowOpen option will be removed in Electron 18.
+                // nativeWindowOpen: false, // The default of nativeWindowOpen is deprecated and will be changing from false to true in Electron 15. See https://github.com/electron/electron/issues/28511
             },
         });
 

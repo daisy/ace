@@ -46,7 +46,39 @@ test('`bypass` rule is disabled', async () => {
 
 test('DPUB ARIA roles are allowed', async () => {
   const report = await ace('../data/axerule-dpubroles');
-  expect(report['earl:result']['earl:outcome']).toEqual('pass');
+  expect(report['earl:result']['earl:outcome']).toEqual('fail');
+  const assertions = findAssertionsForDoc(report, 'content_001.xhtml');
+  expect(assertions).toBeDefined();
+  expect(assertions).toEqual(expect.arrayContaining([
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-roles', 'earl:impact': 'minor', }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#deprecated1'] }),
+      }),
+    }),
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-roles', 'earl:impact': 'minor', }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#deprecated2'] }),
+      }),
+    }),
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-roles', 'earl:impact': 'minor', }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#deprecated3'] }),
+      }),
+    }),
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-roles', 'earl:impact': 'minor', }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#deprecated4'] }),
+      }),
+    }),
+  ]));
 });
 test('DPUB ARIA landmark unique', async () => {
   const report = await ace('../data/axerule-landmark-unique');
