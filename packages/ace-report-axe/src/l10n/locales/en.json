@@ -12,7 +12,6 @@
         "aria-valid-attr-value": "ARIA",
         "audio-caption": "Audio",
         "button-name": "Forms",
-        "checkboxgroup": "Forms",
         "color-contrast": "Color",
         "definition-list": "Lists",
         "dlitem": "Lists",
@@ -31,7 +30,6 @@
         "input-image-alt": "Images",
         "label": "Forms",
         "label-title-only": "Forms",
-        "layout-table": "Tables",
         "link-in-text-block": "Links",
         "link-name": "Links",
         "list": "Lists",
@@ -42,7 +40,6 @@
         "object-alt": "Object",
         "p-as-heading": "Headings",
         "pagebreak-label": "Page Breaks",
-        "radiogroup": "Forms",
         "scope-attr-valid": "Tables",
         "server-side-image-map": "Image Maps",
         "style": "Style",
@@ -52,8 +49,7 @@
         "td-headers-attr": "Tables",
         "th-has-data-cells": "Tables",
         "valid-lang": "Language",
-        "video-caption": "Video",
-        "video-description": "Video"
+        "video-caption": "Video"
     },
     "nokb": "(no specific entry)"
 }

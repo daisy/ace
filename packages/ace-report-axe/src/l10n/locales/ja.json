@@ -12,7 +12,6 @@
         "aria-valid-attr-value": "ARIA",
         "audio-caption": "オーディオ",
         "button-name": "フォーム",
-        "checkboxgroup": "フォーム",
         "color-contrast": "カラー",
         "definition-list": "リスト",
         "dlitem": "リスト",
@@ -31,7 +30,6 @@
         "input-image-alt": "画像",
         "label": "フォーム",
         "label-title-only": "フォーム",
-        "layout-table": "テーブル",
         "link-in-text-block": "リンク",
         "link-name": "リンク",
         "list": "リスト",
@@ -42,7 +40,6 @@
         "object-alt": "オブジェクト",
         "p-as-heading": "見出し",
         "pagebreak-label": "改ページ",
-        "radiogroup": "フォーム",
         "scope-attr-valid": "テーブル",
         "server-side-image-map": "画像マップ",
         "style": "スタイル",
@@ -52,8 +49,7 @@
         "td-headers-attr": "テーブル",
         "th-has-data-cells": "テーブル",
         "valid-lang": "言語",
-        "video-caption": "ビデオ",
-        "video-description": "ビデオ"
+        "video-caption": "ビデオ"
     },
     "nokb": "（特定のエントリなし）"
 }
