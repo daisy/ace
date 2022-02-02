@@ -163,12 +163,12 @@ daisy.ace.run = function(done) {
     //       messages: {
     //         pass: function anonymous(it) {
     //           // configured from host bootstrapper page (checker-chromium)
-    //           const k = "__aceLocalize__axecheck_matching-aria-role_pass";
+    //           const k = "_xx_aceLocalize__axecheck_matching-aria-role_pass";
     //           return window[k] || k;
     //         },
     //         fail: function anonymous(it) {
     //           // configured from host bootstrapper page (checker-chromium)
-    //           const k = "__aceLocalize__axecheck_matching-aria-role_fail";
+    //           const k = "_xx_aceLocalize__axecheck_matching-aria-role_fail";
     //           return window[k] || k;
     //         }
     //       }
@@ -188,7 +188,7 @@ daisy.ace.run = function(done) {
     //     any: ['aria-label', 'non-empty-title'],
     //     metadata: {
     //       // configured from host bootstrapper page (checker-chromium)
-    //       description: (() => { const k = "__aceLocalize__axerule_pagebreak-label_desc"; return window[k] || k; })()
+    //       description: (() => { const k = "_xx_aceLocalize__axerule_pagebreak-label_desc"; return window[k] || k; })()
     //     },
     //     tags: ['cat.epub']
     //   },
@@ -201,8 +201,8 @@ daisy.ace.run = function(done) {
     //     any: ['matching-aria-role'],
     //     metadata: {
     //       // configured from host bootstrapper page (checker-chromium)
-    //       help: (() => { const k = "__aceLocalize__axerule_epub-type-has-matching-role_help"; return window[k] || k; })(),
-    //       description: (() => { const k = "__aceLocalize__axerule_epub-type-has-matching-role_desc"; return window[k] || k; })()
+    //       help: (() => { const k = "_xx_aceLocalize__axerule_epub-type-has-matching-role_help"; return window[k] || k; })(),
+    //       description: (() => { const k = "_xx_aceLocalize__axerule_epub-type-has-matching-role_desc"; return window[k] || k; })()
     //     },
     //     tags: ['best-practice']
     //   },
