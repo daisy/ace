@@ -59,11 +59,10 @@
     "test-all": "yarn test && yarn test-cli && yarn test-electron && yarn test-electron-cli",
     "watch": "yarn build && node ./scripts/watch.js",
     "i18n-sort": "node ./scripts/locales-sort.js",
-    "i18n-scan-ace-report": "node ./scripts/translate-scan.js \"packages/ace-report/src\" \"packages/ace-report/src/l10n/locales/temp.json\" && sync-i18n --files 'packages/ace-report/src/l10n/locales/*.json' --primary temp --languages en fr pt_BR es da --space 4 --finalnewline --newkeysempty && rimraf \"packages/ace-report/src/l10n/locales/temp.json\"",
-    "i18n-scan-ace-report-axe": "node ./scripts/translate-scan.js \"packages/ace-report-axe/src\" \"packages/ace-report-axe/src/l10n/locales/temp.json\" && sync-i18n --files 'packages/ace-report-axe/src/l10n/locales/*.json' --primary temp --languages en fr pt_BR es da --space 4 --finalnewline --newkeysempty && rimraf \"packages/ace-report-axe/src/l10n/locales/temp.json\"",
-    "i18n-scan-ace-core": "node ./scripts/translate-scan.js \"packages/ace-core/src\" \"packages/ace-core/src/l10n/locales/temp.json\" && sync-i18n --files 'packages/ace-core/src/l10n/locales/*.json' --primary temp --languages en fr pt_BR es da --space 4 --finalnewline --newkeysempty && rimraf \"packages/ace-core/src/l10n/locales/temp.json\"",
+    "i18n-scan-ace-report": "node ./scripts/translate-scan.js \"packages/ace-report/src\" \"packages/ace-report/src/l10n/locales/temp.json\" && sync-i18n --files 'packages/ace-report/src/l10n/locales/*.json' --primary temp --languages en fr pt_BR es da ja --space 4 --finalnewline --newkeysempty && rimraf \"packages/ace-report/src/l10n/locales/temp.json\"",
+    "i18n-scan-ace-report-axe": "node ./scripts/translate-scan.js \"packages/ace-report-axe/src\" \"packages/ace-report-axe/src/l10n/locales/temp.json\" && sync-i18n --files 'packages/ace-report-axe/src/l10n/locales/*.json' --primary temp --languages en fr pt_BR es da ja --space 4 --finalnewline --newkeysempty && rimraf \"packages/ace-report-axe/src/l10n/locales/temp.json\"",
+    "i18n-scan-ace-core": "node ./scripts/translate-scan.js \"packages/ace-core/src\" \"packages/ace-core/src/l10n/locales/temp.json\" && sync-i18n --files 'packages/ace-core/src/l10n/locales/*.json' --primary temp --languages en fr pt_BR es da ja --space 4 --finalnewline --newkeysempty && rimraf \"packages/ace-core/src/l10n/locales/temp.json\"",
     "i18n-scan": "npm run i18n-scan-ace-report && npm run i18n-scan-ace-report-axe && npm run i18n-scan-ace-core",
-    "i18n-check": "sync-i18n --files 'packages/**/src/l10n/locales/*.json' --primary en --languages fr pt_BR es da --space 4 --finalnewline --newkeysempty",
-    "ace-app-prepare": "rm -f yarn.lock && rm -rf packages/*/lib && rm -rf packages/*/node_modules && rm -rf node_modules && yarn install && rm -rf packages/*/node_modules/@daisy && rm -rf node_modules/@daisy && yarn build && yarn upgrade && yarn patchElectronJestRunner && yarn npmVersionsCheck && git status && git --no-pager diff"
+    "i18n-check": "sync-i18n --files 'packages/**/src/l10n/locales/*.json' --primary en --languages fr pt_BR es da ja --space 4 --finalnewline --newkeysempty"
   }
 }

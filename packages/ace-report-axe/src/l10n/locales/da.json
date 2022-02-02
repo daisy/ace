@@ -12,7 +12,6 @@
         "aria-valid-attr-value": "ARIA",
         "audio-caption": "Lyd",
         "button-name": "Formularer",
-        "checkboxgroup": "Formularer",
         "color-contrast": "Farve",
         "definition-list": "Lister",
         "dlitem": "Lister",
@@ -31,7 +30,6 @@
         "input-image-alt": "Billeder",
         "label": "Formularer",
         "label-title-only": "Formularer",
-        "layout-table": "Tabeller",
         "link-in-text-block": "Links",
         "link-name": "Links",
         "list": "Lister",
@@ -42,7 +40,6 @@
         "object-alt": "Objekt",
         "p-as-heading": "Overskrifter",
         "pagebreak-label": "Sideskift",
-        "radiogroup": "Formularer",
         "scope-attr-valid": "Tabeller",
         "server-side-image-map": "Billede-maps",
         "style": "Styling",
@@ -52,8 +49,7 @@
         "td-headers-attr": "Tabeller",
         "th-has-data-cells": "Tabeller",
         "valid-lang": "Sprog",
-        "video-caption": "Video",
-        "video-description": "Video"
+        "video-caption": "Video"
     },
     "nokb": "(ingen specifik side)"
 }

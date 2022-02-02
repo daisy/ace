@@ -88,11 +88,11 @@ function checkMetadata(assertions, epub) {
       //   assertions.withAssertions(newViolation({
       //     impact: 'minor',
       //     title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
-      //     testDesc: localize("checkepub.metadatamultiple.testdesc", { value, name, interpolation: { escapeValue: false } }),
-      //     resDesc: localize("checkepub.metadatamultiple.resdesc", { name, interpolation: { escapeValue: false } }),
+      //     testDesc: lxxocalize("checkepub.metadatamultiple.testdesc", { value, name, interpolation: { escapeValue: false } }),
+      //     resDesc: lxxocalize("checkepub.metadatamultiple.resdesc", { name, interpolation: { escapeValue: false } }),
       //     kbPath: 'docs/metadata/schema.org/index.html',
-      //     kbTitle: localize("checkepub.metadatamultiple.kbtitle"),
-      //     ruleDesc: localize("checkepub.metadatamultiple.ruledesc", { name, interpolation: { escapeValue: false } })
+      //     kbTitle: lxxocalize("checkepub.metadatamultiple.kbtitle"),
+      //     ruleDesc: lxxocalize("checkepub.metadatamultiple.ruledesc", { name, interpolation: { escapeValue: false } })
       //   }))
       // }
 

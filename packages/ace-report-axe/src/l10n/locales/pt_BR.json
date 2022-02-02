@@ -12,7 +12,6 @@
         "aria-valid-attr-value": "ARIA",
         "audio-caption": "Audio",
         "button-name": "Formulários",
-        "checkboxgroup": "Formulários",
         "color-contrast": "Cor",
         "definition-list": "Listas",
         "dlitem": "Listas",
@@ -31,7 +30,6 @@
         "input-image-alt": "Imagens",
         "label": "Formulários",
         "label-title-only": "Formulários",
-        "layout-table": "Tabelas",
         "link-in-text-block": "Links",
         "link-name": "Links",
         "list": "Listas",
@@ -42,7 +40,6 @@
         "object-alt": "Objeto",
         "p-as-heading": "Títulos",
         "pagebreak-label": "Quebras de Página",
-        "radiogroup": "Formulários",
         "scope-attr-valid": "Tabelas",
         "server-side-image-map": "Mapas de Imagem",
         "style": "Style",
@@ -52,8 +49,7 @@
         "td-headers-attr": "Tabelas",
         "th-has-data-cells": "Tabelas",
         "valid-lang": "Idioma",
-        "video-caption": "Vídeo",
-        "video-description": "Vídeo"
+        "video-caption": "Vídeo"
     },
     "nokb": "(nenhuma entrada específica)"
 }
