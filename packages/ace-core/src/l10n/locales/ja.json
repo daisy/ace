@@ -1,0 +1,34 @@
+{
+    "checkepub": {
+        "metadatainvalid": {
+            "kbtitle": "Schema.orgアクセシビリティメタデータ",
+            "resdesc": "schema.orgで定義されたメタデータ値のいずれかを使用します",
+            "ruledesc": "'{{name}}'メタデータは、予期される値のいずれかに設定する必要があります",
+            "testdesc": "値 '{{value}}'は '{{name}}'メタデータに対して無効です"
+        },
+        "metadataprintpagenumbers": {
+            "kbtitle": "Schema.orgアクセシビリティメタデータ",
+            "resdesc": "ナビゲーションドキュメントにページリストを追加する",
+            "ruledesc": "アクセシビリティ機能「printPageNumbers」が宣言されている場合、ナビゲーションドキュメントにページリストを含める必要があります",
+            "testdesc": "アクセシビリティ機能「printPageNumbers」は宣言されていますが、ページリストがありません"
+        },
+        "metadataviolation": {
+            "kbtitle": "Schema.orgアクセシビリティメタデータ",
+            "resdesc": "「{{name}}」メタデータプロパティをパッケージドキュメントに追加します",
+            "ruledesc": "出版物は「{{name}}」メタデータを宣言する必要があります",
+            "testdesc": "「{{name}}」メタデータが存在することを確認します"
+        },
+        "pagesourceviolation": {
+            "kbtitle": "ページナビゲーション",
+            "resdesc": "「dc：source」メタデータプロパティをパッケージドキュメントに追加する",
+            "ruledesc": "改ページのある出版物は、「dc：source」メタデータを宣言する必要があります",
+            "testdesc": "改ページのソースが特定されていることを確認します"
+        },
+        "titleviolation": {
+            "kbtitle": "EPUBタイトル",
+            "resdesc": "「dc：title」メタデータプロパティをパッケージドキュメントに追加する",
+            "ruledesc": "出版物にはタイトルが必要です",
+            "testdesc": "EPUBにタイトルがあることを確認します"
+        }
+    }
+}
