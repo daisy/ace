@@ -160,6 +160,7 @@ const streamProtocolHandler = async (
 
         const buff = Buffer.from("<html><body><p>Internal Server Error</p><p>!_streamProtocolHandler</p></body></html>");
         headers["Content-Length"] = buff.length.toString();
+        headers["Content-Type"] = "text/html";
         callback({
             data: bufferToStream(buff),
             headers,
@@ -864,20 +865,21 @@ function startAxeServer(basedir, scripts, scriptContents) {
                 let fileSystemPath = path.join(basedir, pn);
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} filepath to read: ${fileSystemPath}`);
                 if (!fs.existsSync(fileSystemPath)) {
-                    fileSystemPath = pn;
-                    if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} filepath to read (corrected): ${fileSystemPath}`);
-                    if (!fs.existsSync(fileSystemPath)) {
+                    // fileSystemPath = pn;
+                    // if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} filepath to read (corrected): ${fileSystemPath}`);
+                    // if (!fs.existsSync(fileSystemPath)) {
                         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} FILE DOES NOT EXIST!! ${fileSystemPath}`);
 
                         const buff = Buffer.from(`<html><body><p>Internal Server Error</p><p>404?! ${fileSystemPath}</p></body></html>`);
                         headers["Content-Length"] = buff.length.toString();
+                        headers["Content-Type"] = "text/html";
                         callback({
                             data: bufferToStream(buff),
                             headers,
                             statusCode: 404,
                         });
                         return;
-                    }
+                    // }
                 }
 
                 // let html = fs.readFileSync(fileSystemPath, { encoding: "utf8" });
@@ -938,20 +940,21 @@ function startAxeServer(basedir, scripts, scriptContents) {
             let fileSystemPath = path.join(basedir, pn);
             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} --filepath to read: ${fileSystemPath}`);
             if (!fs.existsSync(fileSystemPath)) {
-                fileSystemPath = pn;
-                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} --filepath to read (corrected): ${fileSystemPath}`);
-                if (!fs.existsSync(fileSystemPath)) {
+                // fileSystemPath = pn;
+                // if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} --filepath to read (corrected): ${fileSystemPath}`);
+                // if (!fs.existsSync(fileSystemPath)) {
                     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} --FILE DOES NOT EXIST!! ${fileSystemPath}`);
 
                     const buff = Buffer.from(`<html><body><p>Internal Server Error</p><p>404?! ${fileSystemPath}</p></body></html>`);
                     headers["Content-Length"] = buff.length.toString();
+                    headers["Content-Type"] = "text/html";
                     callback({
                         data: bufferToStream(buff),
                         headers,
                         statusCode: 404,
                     });
                     return;
-                }
+                // }
             }
             try {
                 let mediaType = mime.lookup(fileSystemPath) || "stream/octet";
@@ -971,6 +974,7 @@ function startAxeServer(basedir, scripts, scriptContents) {
 
                 const buff = Buffer.from(`<html><body><p>Internal Server Error</p><p>fsErr: ${fsErr}</p></body></html>`);
                 headers["Content-Length"] = buff.length.toString();
+                headers["Content-Type"] = "text/html";
                 callback({
                     data: bufferToStream(buff),
                     headers,
