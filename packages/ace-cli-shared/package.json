@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-cli-shared",
-  "version": "1.2.6-alpha.5",
+  "version": "1.2.6",
   "engines": {
     "node": ">=12.0.0",
     "yarn": "^1.22.0",
@@ -23,10 +23,10 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-config": "^1.2.6-alpha.5",
-    "@daisy/ace-core": "^1.2.6-alpha.5",
-    "@daisy/ace-logger": "^1.2.6-alpha.5",
-    "@daisy/ace-meta": "^1.2.6-alpha.5",
+    "@daisy/ace-config": "^1.2.6",
+    "@daisy/ace-core": "^1.2.6",
+    "@daisy/ace-logger": "^1.2.6",
+    "@daisy/ace-meta": "^1.2.6",
     "meow": "^9.0.0",
     "winston": "^3.5.1"
   },

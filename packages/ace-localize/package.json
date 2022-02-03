@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-localize",
-  "version": "1.2.6-alpha.5",
+  "version": "1.2.6",
   "engines": {
     "node": ">=12.0.0",
     "yarn": "^1.22.0",

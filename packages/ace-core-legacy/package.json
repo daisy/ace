@@ -1,6 +1,6 @@
 {
   "name": "ace-core",
-  "version": "1.2.6-alpha.5",
+  "version": "1.2.6",
   "engines": {
     "node": ">=12.0.0",
     "yarn": "^1.22.0",
@@ -38,9 +38,9 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-cli": "^1.2.6-alpha.5",
-    "@daisy/ace-core": "^1.2.6-alpha.5",
-    "@daisy/ace-http": "^1.2.6-alpha.5"
+    "@daisy/ace-cli": "^1.2.6",
+    "@daisy/ace-core": "^1.2.6",
+    "@daisy/ace-http": "^1.2.6"
   },
   "publishConfig": {
     "access": "public"

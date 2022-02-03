@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-report-axe",
-  "version": "1.2.6-alpha.5",
+  "version": "1.2.6",
   "engines": {
     "node": ">=12.0.0",
     "yarn": "^1.22.0",
@@ -23,8 +23,8 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-localize": "^1.2.6-alpha.5",
-    "@daisy/ace-report": "^1.2.6-alpha.5",
+    "@daisy/ace-localize": "^1.2.6",
+    "@daisy/ace-report": "^1.2.6",
     "fs-extra": "^10.0.0",
     "winston": "^3.5.1"
   },

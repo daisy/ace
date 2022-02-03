@@ -1,3 +1,16 @@
+<a name="1.2.6"></a>
+## [1.2.6](https://github.com/daisy/ace/compare/v1.2.5...v1.2.6) (2022-02-03)
+
+### Updates:
+
+* Removed the HTTP server which could cause firewall issues (this does not affect the Ace command line which uses Puppeteer, it affects Ace App which uses Electron to run Deque Axe under the hood)
+* Upgraded the DAISY fork of Deque Axe, version 4.4.0 which includes DPUB ARIA 1.1 updates, as well as many other improved checker rules ( https://github.com/daisy/axe-core/pull/8 )
+* The Ace evaluation report (JSON and HTML) now contains information about Ace App (GUI) in addition to the version of the core / command line tool.
+* The metadata properties accessibilityControl and accessibilityAPI are now discouraged. Ace reports them as "present", but not as "missing", and does not check their values syntax.
+* The HTML report now references local JS and CSS dependencies (they were external links before)
+* Added Japanese localisation (many thanks to the translators!)
+* Updated several key NPM package dependencies, notably Electron v17 and Puppeteer v13 (both major increments, but non-breaking)
+
 <a name="1.2.5"></a>
 ## [1.2.5](https://github.com/daisy/ace/compare/v1.2.4...v1.2.5) (2021-11-04)
 
