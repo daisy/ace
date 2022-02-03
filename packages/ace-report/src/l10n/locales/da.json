@@ -30,7 +30,7 @@
     "doctopheading": "Rapport over EPUB Tilgængelighed",
     "enablejavascript": "Slå venligst javascript til for den bedste oplevelse.",
     "file": "Fil",
-    "generatedby": "Genereret af {{v1}} ({{v2}}), {{v3}}",
+    "generatedby": "Genereret af {{v1}} ({{v2}}), {{v3}}{{v4}}",
     "goto": "Gå til:",
     "headsoutline": "Overskrifter",
     "htmloutline": "HTML",

@@ -96,6 +96,7 @@ class ReportBuilder {
       'earl:assertedBy': {
         '@type': 'earl:software',
         'doap:name': 'DAISY Ace',
+        // "doap:shortdesc": "Ace App (GUI) vx.x.x",
         'doap:description': localize("ace-description"),
         'doap:homepage': 'http://daisy.github.io/ace',
         'doap:created': '2017-07-01', // TODO is this date correct?
@@ -105,6 +106,9 @@ class ReportBuilder {
       data: {},
       properties: {},
     };
+    if (process && process.env && process.env.ACE_APP_GUI_LAUNCHER) {
+      this._json['earl:assertedBy']["doap:shortdesc"] = process.env.ACE_APP_GUI_LAUNCHER;
+    }
   }
   build() {
     return this._json;

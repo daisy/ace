@@ -167,8 +167,9 @@ module.exports = function generateHtmlReport(reportData) {
        
       return new handlebars.SafeString(localize("generatedby", {
         v1: (reportData['earl:assertedBy']) ? reportData['earl:assertedBy']['doap:name'] : "doap:name?",
-        v2: (reportData['earl:assertedBy'] && reportData['earl:assertedBy']['doap:release']) ? reportData['earl:assertedBy']['doap:release']['doap:revision'] : "doap:release?",
+        v2: (reportData['earl:assertedBy'] && reportData['earl:assertedBy']['doap:release']) ? reportData['earl:assertedBy']['doap:release']['doap:revision'] : "doap:release/revision?",
         v3: reportData['dct:date'],
+        v4: (reportData['earl:assertedBy'] && reportData['earl:assertedBy']['doap:shortdesc']) ? " [" + reportData['earl:assertedBy']['doap:shortdesc'] + "] " : "",
         interpolation: { escapeValue: false }}));
 
       // if (reportData['earl:assertedBy'].hasOwnProperty('doap:name') &&

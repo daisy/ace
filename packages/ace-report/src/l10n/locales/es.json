@@ -30,7 +30,7 @@
     "doctopheading": "Informe sobre accesibilidad de EPUB",
     "enablejavascript": "Por favor, activar javascript para un mejor rendimiento.",
     "file": "Archivo",
-    "generatedby": "Generado por {{v1}} ({{v2}}) en {{v3}}",
+    "generatedby": "Generado por {{v1}} ({{v2}}) en {{v3}}{{v4}}",
     "goto": "Ir a",
     "headsoutline": "Estructura de encabezados",
     "htmloutline": "Estructura HTML",

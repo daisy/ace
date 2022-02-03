@@ -30,7 +30,7 @@
     "doctopheading": "EPUBアクセシビリティレポート",
     "enablejavascript": "最高のパフォーマンスを得るには、javascriptを有効にしてください。",
     "file": "ファイル",
-    "generatedby": "{{v3}}で{{v1}}（{{v2}}）によって生成",
+    "generatedby": "{{v3}}で{{v1}}（{{v2}}）によって生成{{v4}}",
     "goto": "移動：",
     "headsoutline": "見出しの概要",
     "htmloutline": "HTMLアウトライン",

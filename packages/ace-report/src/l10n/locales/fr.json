@@ -30,7 +30,7 @@
     "doctopheading": "Rapport d'accessibilité EPUB",
     "enablejavascript": "Activer javascript pour une exécution plus performante",
     "file": "Fichier",
-    "generatedby": "Généré par {{v1}} ({{v2}}) le {{v3}}",
+    "generatedby": "Généré par {{v1}} ({{v2}}) le {{v3}}{{v4}}",
     "goto": "Aller à:",
     "headsoutline": "Structure des titres",
     "htmloutline": "Structure HTML",
