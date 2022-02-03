@@ -85,14 +85,19 @@ describe('accessibility metadata', () => {
       }),
     ]));
   });
-  test('accessibilityControl metadata is multiple correct items but only single value is allowed', async () => {
+  test('accessmode and accessibilitysummary metadata are incorrect', async () => {
     const report = await ace('../data/epubrules-metadata');
     expect(report['earl:result']['earl:outcome']).toEqual('fail');
     const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
     expect(assertions).toEqual(expect.arrayContaining([
       expect.objectContaining({
         'earl:test': expect.objectContaining({
-          'dct:title': 'metadata-accessibilitycontrol-invalid',
+          'dct:title': 'metadata-accessmode-invalid',
+        }),
+      }),
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'metadata-accessibilitysummary',
         }),
       }),
     ]));

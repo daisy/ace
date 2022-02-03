@@ -30,8 +30,6 @@ const aceReportData = {
       "schema:accessibilityHazard",
       "schema:accessibilitySummary",
       "schema:accessModeSufficient",
-      "schema:accessibilityAPI",
-      "schema:accessibilityControl",
       "a11y:certifiedBy"
     ],
     "empty": [],

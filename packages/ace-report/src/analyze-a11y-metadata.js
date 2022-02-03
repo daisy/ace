@@ -22,6 +22,7 @@ const a11yMeta = [
 "schema:accessibilityHazard",
 "schema:accessibilitySummary",
 "schema:accessModeSufficient",
+
 "schema:accessibilityAPI",
 "schema:accessibilityControl",
 // (see a11yMetadata.A11Y_META in ace-core)
@@ -65,7 +66,8 @@ module.exports = {
           results["empty"].push(property);
         }
       }
-      else {
+      // discouraged: true
+      else if (property !== "schema:accessibilityAPI" && property !== "schema:accessibilityControl") {
         results["missing"].push(property);
       }
     });

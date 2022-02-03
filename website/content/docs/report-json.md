@@ -129,12 +129,13 @@ The accessibility metadata properties are organized by whether they are `missing
       "schema:accessibilityHazard",
       "schema:accessibilitySummary",
       "schema:accessModeSufficient",
-      "schema:accessibilityAPI",
-      "schema:accessibilityControl",
       "a11y:certifiedBy"
     ],
     "empty": [],
-    "present": []
+    "present": [
+      "schema:accessibilityAPI",
+      "schema:accessibilityControl"
+    ]
   },
 ```
 ### Assertions

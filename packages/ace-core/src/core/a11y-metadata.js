@@ -20,8 +20,11 @@ const a11yMeta = [
     "schema:accessibilityHazard", // required
     "schema:accessibilitySummary", // required
     "schema:accessModeSufficient", // recommended
-    "schema:accessibilityAPI", // optional
-    "schema:accessibilityControl", // optional
+
+    // http://kb.daisy.org/publishing/docs/metadata/schema.org/accessibilityAPI
+    "schema:accessibilityAPI", // discouraged
+    // http://kb.daisy.org/publishing/docs/metadata/schema.org/accessibilityControl
+    "schema:accessibilityControl", // discouraged
 
     "a11y:certifiedBy",
     "a11y:certifierCredential", //(MAY BE link in EPUB3)
@@ -60,12 +63,17 @@ const A11Y_META = {
             'textOnVisual',
         ]
     },
+
+    // http://kb.daisy.org/publishing/docs/metadata/schema.org/accessibilityAPI
     'schema:accessibilityAPI': {
+        discouraged: true,
         allowedValues: [
             'ARIA'
         ]
     },
+    // http://kb.daisy.org/publishing/docs/metadata/schema.org/accessibilityControl
     'schema:accessibilityControl': {
+        discouraged: true,
         allowedValues: [
             'fullKeyboardControl',
             'fullMouseControl',
@@ -76,6 +84,7 @@ const A11Y_META = {
             'fullVoiceControl',
         ]
     },
+
     'schema:accessibilityFeature': {
         required: true,
         allowedValues: [

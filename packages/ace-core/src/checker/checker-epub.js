@@ -96,7 +96,8 @@ function checkMetadata(assertions, epub) {
       //   }))
       // }
 
-      if (meta.allowedValues) { // effectively excludes schema:accessibilitySummary
+      if (meta.allowedValues // effectively excludes schema:accessibilitySummary
+        && !meta.discouraged) {
 
         values.forEach(value => {
 
