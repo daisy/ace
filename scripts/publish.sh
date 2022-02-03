@@ -6,7 +6,7 @@ for relativefilepath in packages/*; do
     cd "${relativefilepath}"
     if [ "${filename}" != "ace-core-legacy" ]; then
         # --dry-run
-        npm publish --access public --tag=latest .
+        npm publish --access public --tag=next .
     fi
     cd - &> /dev/null
 done

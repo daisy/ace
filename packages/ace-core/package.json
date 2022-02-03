@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-core",
-  "version": "1.2.6",
+  "version": "1.2.7-alpha.1",
   "engines": {
     "node": ">=12.0.0",
     "yarn": "^1.22.0",
@@ -23,12 +23,12 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-localize": "^1.2.6",
-    "@daisy/ace-logger": "^1.2.6",
-    "@daisy/ace-meta": "^1.2.6",
-    "@daisy/ace-report": "^1.2.6",
-    "@daisy/ace-report-axe": "^1.2.6",
-    "@daisy/epub-utils": "^1.2.6",
+    "@daisy/ace-localize": "^1.2.7-alpha.1",
+    "@daisy/ace-logger": "^1.2.7-alpha.1",
+    "@daisy/ace-meta": "^1.2.7-alpha.1",
+    "@daisy/ace-report": "^1.2.7-alpha.1",
+    "@daisy/ace-report-axe": "^1.2.7-alpha.1",
+    "@daisy/epub-utils": "^1.2.7-alpha.1",
     "@daisy/axe-core-for-ace": "4.4.0-canary.1",
     "file-url": "^3.0.0",
     "h5o": "^0.11.3",
