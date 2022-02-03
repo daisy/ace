@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.82.0" />
+    <meta name="generator" content="Hugo 0.92.1" />
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -118,7 +118,7 @@
             <a class="logo" href="https://daisy.github.io/ace" aria-label="Ace, by DAISY home page">
               <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
             </a>
-            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2</p>
+            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2.6</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -449,7 +449,7 @@
 </ul>
 <h3 id="header-information">Header information</h3>
 <p>This gives basic information about Ace and when the report was created.</p>
-<pre><code>{
+<pre tabindex="0"><code>{
   &quot;@type&quot;: &quot;earl:report&quot;,
   &quot;@context&quot;: &quot;http://daisy.github.io/ace/ace-report-1.0.jsonld&quot;,
   &quot;dct:title&quot;: &quot;Ace Report&quot;,
@@ -467,7 +467,7 @@
   },
 </code></pre><h3 id="outlines">Outlines</h3>
 <p>This is the structural data that Ace extracts.</p>
-<pre><code>  &quot;outlines&quot;: {
+<pre tabindex="0"><code>  &quot;outlines&quot;: {
     &quot;toc&quot;: // HTML fragment representing an extracted view of the table of contents
     ,
     &quot;headings&quot;: // HTML fragment representing an extracted view of the headings
@@ -476,7 +476,7 @@
   },
 </code></pre><h3 id="data">Data</h3>
 <p>The fields under <code>data</code> contain extracted <code>images</code>, <code>audios</code>, <code>canvases</code>, <code>embeds</code>, <code>epub-triggers</code>, <code>epub-switches</code>, <code>iframes</code>, <code>maps</code>, <code>scripts</code>, and <code>videos</code>. The example here shows information about the publication&rsquo;s <code>images</code> and <code>iframes</code>:</p>
-<pre><code>  &quot;data&quot;: {
+<pre tabindex="0"><code>  &quot;data&quot;: {
     &quot;images&quot;: [
       {
         &quot;src&quot;: &quot;EPUB/images/daisy.png&quot;,
@@ -497,7 +497,7 @@
   },
 </code></pre><h3 id="properties">Properties</h3>
 <p>These publication-wide properties describe different aspects of the EPUB as being present or absent.</p>
-<pre><code>  &quot;properties&quot;: {
+<pre tabindex="0"><code>  &quot;properties&quot;: {
     &quot;hasManifestFallbacks&quot;: false,
     &quot;hasBindings&quot;: false,
     &quot;hasSVGContentDocuments&quot;: false,
@@ -507,7 +507,7 @@
   },
 </code></pre><h3 id="earltestsubject-for-this-epub-file">earl:testSubject for this EPUB file</h3>
 <p>This formally states that the test subject of this report is the given publication, and includes some basic metadata.</p>
-<pre><code>&quot;earl:testSubject&quot;: {
+<pre tabindex="0"><code>&quot;earl:testSubject&quot;: {
   &quot;url&quot;: &quot;../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub&quot;,
   &quot;metadata&quot;: {
     &quot;dc:identifier&quot;: &quot;com.github.epub-a11y-checker.epub-a11y-tests-001&quot;,
@@ -524,25 +524,26 @@
 },
 </code></pre><h3 id="accessibility-metadata-summary">Accessibility metadata summary</h3>
 <p>The accessibility metadata properties are organized by whether they are <code>missing</code>, <code>empty</code> (blank), or <code>present</code> in the publication.</p>
-<pre><code>  &quot;a11y-metadata&quot;: {
+<pre tabindex="0"><code>  &quot;a11y-metadata&quot;: {
     &quot;missing&quot;: [
       &quot;schema:accessMode&quot;,
       &quot;schema:accessibilityFeature&quot;,
       &quot;schema:accessibilityHazard&quot;,
       &quot;schema:accessibilitySummary&quot;,
       &quot;schema:accessModeSufficient&quot;,
-      &quot;schema:accessibilityAPI&quot;,
-      &quot;schema:accessibilityControl&quot;,
       &quot;a11y:certifiedBy&quot;
     ],
     &quot;empty&quot;: [],
-    &quot;present&quot;: []
+    &quot;present&quot;: [
+      &quot;schema:accessibilityAPI&quot;,
+      &quot;schema:accessibilityControl&quot;
+    ]
   },
 </code></pre><h3 id="assertions">Assertions</h3>
 <p>The <code>assertions</code> section of the report, found as a top-level term, contains a list of <code>earl:assertion</code> items, each for a different document in the EPUB. Those assertion items, in turn, contain assertions for tests that failed.</p>
 <h4 id="document-level-assertions">Document-level assertions</h4>
 <p>An <code>assertion</code> for a document looks like this. A document may be a package document, content document, or the whole EPUB itself. Note that in this example, <code>earl:testSubject</code> points to the package document, and <code>earl:result</code> does not include a pointer to a location within the document (as individual test assertions do), because this assertion is for the entire document.</p>
-<pre><code>{
+<pre tabindex="0"><code>{
  &quot;@type&quot;: &quot;earl:assertion&quot;,
  &quot;assertions&quot;: [
    // list of assertions for tests
@@ -559,7 +560,7 @@
 </code></pre><p>Where <code>earl:outcome</code> is based on the results for the individual tests. If any test failed, then the document is given a <code>fail</code> outcome. The <code>earl:result</code> property belongs to its parent <code>earl:assertion</code> and is relevant to that assertion&rsquo;s <code>earl:testSubject</code>.</p>
 <h4 id="test-level-assertions">Test-level assertions</h4>
 <p>An example of an assertion for an individual test is shown below. Note that it includes a location reference, a test description, and suggestions for remedying the issue (including a link to the relevant section of the <a href="http://kb.daisy.org/publishing">Accessible Publishing Knowledge Base</a>).</p>
-<pre><code>{
+<pre tabindex="0"><code>{
   &quot;@type&quot;: &quot;earl:assertion&quot;,
   &quot;earl:assertedBy&quot;: &quot;axe&quot;,
   &quot;earl:mode&quot;: &quot;automatic&quot;,

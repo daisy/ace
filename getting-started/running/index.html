@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.82.0" />
+    <meta name="generator" content="Hugo 0.92.1" />
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -118,7 +118,7 @@
             <a class="logo" href="https://daisy.github.io/ace" aria-label="Ace, by DAISY home page">
               <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
             </a>
-            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2</p>
+            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2.6</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -324,11 +324,11 @@
     <p><em>Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &ldquo;desktop application&rdquo; (as known as the Ace App), please <a href="/ace/getting-started/ace-app/">visit this page</a>.</em></p>
 <h2 id="checking-an-epub">Checking an EPUB</h2>
 <p>You can check an EPUB by running the <code>ace</code> command followed by the path to the EPUB document (if the file name includes spaces, place it inside <code>&quot;</code> marks). For example:</p>
-<pre><code>$ ace ~/Documents/moby-dick.epub
+<pre tabindex="0"><code>$ ace ~/Documents/moby-dick.epub
 </code></pre><p>The above command will run the automated accessibility tests on the EPUB document and output the results.</p>
 <h2 id="getting-the-results">Getting the results</h2>
 <p>You can specify the directory for Ace to store its output with the <code>--outdir</code> option. For example:</p>
-<pre><code>$ ace --outdir ~/Documents/moby-dick-report ~/Documents/moby-dick.epub
+<pre tabindex="0"><code>$ ace --outdir ~/Documents/moby-dick-report ~/Documents/moby-dick.epub
 </code></pre><p><em>Note that if you do not specify a directory with <code>--outdir</code>, no reports get saved. You would only see output in the shell.</em></p>
 <p>If the specified directory does not exist, it will be created. In this example, two versions of the results report will be found under the <code>~/Documents/moby-dick-report</code> directory:</p>
 <ul>

@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.82.0" />
+    <meta name="generator" content="Hugo 0.92.1" />
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -118,7 +118,7 @@
             <a class="logo" href="https://daisy.github.io/ace" aria-label="Ace, by DAISY home page">
               <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
             </a>
-            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2</p>
+            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2.6</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -323,7 +323,7 @@
     
     <p>Under the hood, most of the accessibility checks ran by Ace are powered by <a href="https://github.com/dequelabs/axe-core">Deque axe</a>, an engine for automated testing of HTML. Ace uses axe&rsquo;s rules, with some modifications (described <a href="#modifications">here</a>).</p>
 <h2 id="rules">Rules</h2>
-<p>Here is a list of axe&rsquo;s rules used by Ace (see the full up to date documentation <a href="https://github.com/daisy/axe-core/blob/v4.1.4_DAISY/doc/rule-descriptions.md">in GitHub</a> ):</p>
+<p>Here is a list of axe&rsquo;s rules used by Ace (see the full up to date documentation <a href="https://github.com/daisy/axe-core/blob/v4.3.3_DAISY/doc/rule-descriptions.md">in GitHub</a> ):</p>
 <table>
 <thead>
 <tr>
@@ -333,346 +333,138 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/area-alt?application=RuleDescription">area-alt</a></td>
-<td style="text-align:left">Ensures &lt;area&gt; elements of image maps have alternate text</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-allowed-attr?application=RuleDescription">aria-allowed-attr</a></td>
-<td style="text-align:left">Ensures ARIA attributes are allowed for an element's role</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-command-name?application=RuleDescription">aria-command-name</a></td>
-<td style="text-align:left">Ensures every ARIA button, link and menuitem has an accessible name</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-hidden-body?application=RuleDescription">aria-hidden-body</a></td>
-<td style="text-align:left">Ensures aria-hidden='true' is not present on the document body.</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-hidden-focus?application=RuleDescription">aria-hidden-focus</a></td>
-<td style="text-align:left">Ensures aria-hidden elements do not contain focusable elements</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-input-field-name?application=RuleDescription">aria-input-field-name</a></td>
-<td style="text-align:left">Ensures every ARIA input field has an accessible name</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-meter-name?application=RuleDescription">aria-meter-name</a></td>
-<td style="text-align:left">Ensures every ARIA meter node has an accessible name</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-progressbar-name?application=RuleDescription">aria-progressbar-name</a></td>
-<td style="text-align:left">Ensures every ARIA progressbar node has an accessible name</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-required-attr?application=RuleDescription">aria-required-attr</a></td>
-<td style="text-align:left">Ensures elements with ARIA roles have all required ARIA attributes</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-required-children?application=RuleDescription">aria-required-children</a></td>
-<td style="text-align:left">Ensures elements with an ARIA role that require child roles contain them</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-required-parent?application=RuleDescription">aria-required-parent</a></td>
-<td style="text-align:left">Ensures elements with an ARIA role that require parent roles are contained by them</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-roledescription?application=RuleDescription">aria-roledescription</a></td>
-<td style="text-align:left">Ensure aria-roledescription is only used on elements with an implicit or explicit role</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-roles?application=RuleDescription">aria-roles</a></td>
-<td style="text-align:left">Ensures all elements with a role attribute use a valid value</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-toggle-field-name?application=RuleDescription">aria-toggle-field-name</a></td>
-<td style="text-align:left">Ensures every ARIA toggle field has an accessible name</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-tooltip-name?application=RuleDescription">aria-tooltip-name</a></td>
-<td style="text-align:left">Ensures every ARIA tooltip node has an accessible name</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-valid-attr-value?application=RuleDescription">aria-valid-attr-value</a></td>
-<td style="text-align:left">Ensures all ARIA attributes have valid values</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-valid-attr?application=RuleDescription">aria-valid-attr</a></td>
-<td style="text-align:left">Ensures attributes that begin with aria- are valid ARIA attributes</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/audio-caption?application=RuleDescription">audio-caption</a></td>
-<td style="text-align:left">Ensures &lt;audio&gt; elements have captions</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/blink?application=RuleDescription">blink</a></td>
-<td style="text-align:left">Ensures &lt;blink&gt; elements are not used</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/button-name?application=RuleDescription">button-name</a></td>
-<td style="text-align:left">Ensures buttons have discernible text</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/bypass?application=RuleDescription">bypass</a></td>
-<td style="text-align:left">Ensures each page has at least one mechanism for a user to bypass navigation and jump straight to the content</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/color-contrast?application=RuleDescription">color-contrast</a></td>
-<td style="text-align:left">Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/definition-list?application=RuleDescription">definition-list</a></td>
-<td style="text-align:left">Ensures &lt;dl&gt; elements are structured correctly</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/dlitem?application=RuleDescription">dlitem</a></td>
-<td style="text-align:left">Ensures &lt;dt&gt; and &lt;dd&gt; elements are contained by a &lt;dl&gt;</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/document-title?application=RuleDescription">document-title</a></td>
-<td style="text-align:left">Ensures each HTML document contains a non-empty &lt;title&gt; element</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/duplicate-id-active?application=RuleDescription">duplicate-id-active</a></td>
-<td style="text-align:left">Ensures every id attribute value of active elements is unique</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/duplicate-id-aria?application=RuleDescription">duplicate-id-aria</a></td>
-<td style="text-align:left">Ensures every id attribute value used in ARIA and in labels is unique</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/duplicate-id?application=RuleDescription">duplicate-id</a></td>
-<td style="text-align:left">Ensures every id attribute value is unique</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/form-field-multiple-labels?application=RuleDescription">form-field-multiple-labels</a></td>
-<td style="text-align:left">Ensures form field does not have multiple label elements</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/frame-title?application=RuleDescription">frame-title</a></td>
-<td style="text-align:left">Ensures &lt;iframe&gt; and &lt;frame&gt; elements contain a non-empty title attribute</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/html-has-lang?application=RuleDescription">html-has-lang</a></td>
-<td style="text-align:left">Ensures every HTML document has a lang attribute</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/html-lang-valid?application=RuleDescription">html-lang-valid</a></td>
-<td style="text-align:left">Ensures the lang attribute of the &lt;html&gt; element has a valid value</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/html-xml-lang-mismatch?application=RuleDescription">html-xml-lang-mismatch</a></td>
-<td style="text-align:left">Ensure that HTML elements with both valid lang and xml:lang attributes agree on the base language of the page</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/image-alt?application=RuleDescription">image-alt</a></td>
-<td style="text-align:left">Ensures &lt;img&gt; elements have alternate text or a role of none or presentation</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/input-button-name?application=RuleDescription">input-button-name</a></td>
-<td style="text-align:left">Ensures input buttons have discernible text</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/input-image-alt?application=RuleDescription">input-image-alt</a></td>
-<td style="text-align:left">Ensures &lt;input type=&quot;image&quot;&gt; elements have alternate text</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/label?application=RuleDescription">label</a></td>
-<td style="text-align:left">Ensures every form element has a label</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/link-name?application=RuleDescription">link-name</a></td>
-<td style="text-align:left">Ensures links have discernible text</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/list?application=RuleDescription">list</a></td>
-<td style="text-align:left">Ensures that lists are structured correctly</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/listitem?application=RuleDescription">listitem</a></td>
-<td style="text-align:left">Ensures &lt;li&gt; elements are used semantically</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/marquee?application=RuleDescription">marquee</a></td>
-<td style="text-align:left">Ensures &lt;marquee&gt; elements are not used</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/meta-refresh?application=RuleDescription">meta-refresh</a></td>
-<td style="text-align:left">Ensures &lt;meta http-equiv=&quot;refresh&quot;&gt; is not used</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/object-alt?application=RuleDescription">object-alt</a></td>
-<td style="text-align:left">Ensures &lt;object&gt; elements have alternate text</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/role-img-alt?application=RuleDescription">role-img-alt</a></td>
-<td style="text-align:left">Ensures [role='img'] elements have alternate text</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/scrollable-region-focusable?application=RuleDescription">scrollable-region-focusable</a></td>
-<td style="text-align:left">Elements that have scrollable content should be accessible by keyboard</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/select-name?application=RuleDescription">select-name</a></td>
-<td style="text-align:left">Ensures select element has an accessible name</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/server-side-image-map?application=RuleDescription">server-side-image-map</a></td>
-<td style="text-align:left">Ensures that server-side image maps are not used</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/svg-img-alt?application=RuleDescription">svg-img-alt</a></td>
-<td style="text-align:left">Ensures svg elements with an img, graphics-document or graphics-symbol role have an accessible text</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/td-headers-attr?application=RuleDescription">td-headers-attr</a></td>
-<td style="text-align:left">Ensure that each cell in a table using the headers refers to another cell in that table</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/th-has-data-cells?application=RuleDescription">th-has-data-cells</a></td>
-<td style="text-align:left">Ensure that each table header in a data table refers to data cells</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/valid-lang?application=RuleDescription">valid-lang</a></td>
-<td style="text-align:left">Ensures lang attributes have valid values</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/video-caption?application=RuleDescription">video-caption</a></td>
-<td style="text-align:left">Ensures &lt;video&gt; elements have captions</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/autocomplete-valid?application=RuleDescription">autocomplete-valid</a></td>
-<td style="text-align:left">Ensure the autocomplete attribute is correct and suitable for the form field</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/avoid-inline-spacing?application=RuleDescription">avoid-inline-spacing</a></td>
-<td style="text-align:left">Ensure that text spacing set through style attributes can be adjusted with custom stylesheets</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/accesskeys?application=RuleDescription">accesskeys</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/accesskeys?application=RuleDescription">accesskeys</a></td>
 <td style="text-align:left">Ensures every accesskey attribute value is unique</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-allowed-role?application=RuleDescription">aria-allowed-role</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/aria-allowed-role?application=RuleDescription">aria-allowed-role</a></td>
 <td style="text-align:left">Ensures role attribute has an appropriate value for the element</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-dialog-name?application=RuleDescription">aria-dialog-name</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/aria-dialog-name?application=RuleDescription">aria-dialog-name</a></td>
 <td style="text-align:left">Ensures every ARIA dialog and alertdialog node has an accessible name</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/aria-treeitem-name?application=RuleDescription">aria-treeitem-name</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/aria-text?application=RuleDescription">aria-text</a></td>
+<td style="text-align:left">Ensures &quot;role=text&quot; is used on elements with no focusable descendants</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/aria-treeitem-name?application=RuleDescription">aria-treeitem-name</a></td>
 <td style="text-align:left">Ensures every ARIA treeitem node has an accessible name</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/empty-heading?application=RuleDescription">empty-heading</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/empty-heading?application=RuleDescription">empty-heading</a></td>
 <td style="text-align:left">Ensures headings have discernible text</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/frame-tested?application=RuleDescription">frame-tested</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/epub-type-has-matching-role?application=RuleDescription">epub-type-has-matching-role</a></td>
+<td style="text-align:left">Ensure the element has an ARIA role matching its epub:type</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/frame-tested?application=RuleDescription">frame-tested</a></td>
 <td style="text-align:left">Ensures &lt;iframe&gt; and &lt;frame&gt; elements contain the axe-core script</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/frame-title-unique?application=RuleDescription">frame-title-unique</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/frame-title-unique?application=RuleDescription">frame-title-unique</a></td>
 <td style="text-align:left">Ensures &lt;iframe&gt; and &lt;frame&gt; elements contain a unique title attribute</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/heading-order?application=RuleDescription">heading-order</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/heading-order?application=RuleDescription">heading-order</a></td>
 <td style="text-align:left">Ensures the order of headings is semantically correct</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/identical-links-same-purpose?application=RuleDescription">identical-links-same-purpose</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/identical-links-same-purpose?application=RuleDescription">identical-links-same-purpose</a></td>
 <td style="text-align:left">Ensure that links with the same accessible name serve a similar purpose</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/image-redundant-alt?application=RuleDescription">image-redundant-alt</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/image-redundant-alt?application=RuleDescription">image-redundant-alt</a></td>
 <td style="text-align:left">Ensure image alternative is not repeated as text</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/label-title-only?application=RuleDescription">label-title-only</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/label-title-only?application=RuleDescription">label-title-only</a></td>
 <td style="text-align:left">Ensures that every form element is not solely labeled using the title or aria-describedby attributes</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/landmark-banner-is-top-level?application=RuleDescription">landmark-banner-is-top-level</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/landmark-banner-is-top-level?application=RuleDescription">landmark-banner-is-top-level</a></td>
 <td style="text-align:left">Ensures the banner landmark is at top level</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/landmark-complementary-is-top-level?application=RuleDescription">landmark-complementary-is-top-level</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/landmark-complementary-is-top-level?application=RuleDescription">landmark-complementary-is-top-level</a></td>
 <td style="text-align:left">Ensures the complementary landmark or aside is at top level</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/landmark-contentinfo-is-top-level?application=RuleDescription">landmark-contentinfo-is-top-level</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/landmark-contentinfo-is-top-level?application=RuleDescription">landmark-contentinfo-is-top-level</a></td>
 <td style="text-align:left">Ensures the contentinfo landmark is at top level</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/landmark-main-is-top-level?application=RuleDescription">landmark-main-is-top-level</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/landmark-main-is-top-level?application=RuleDescription">landmark-main-is-top-level</a></td>
 <td style="text-align:left">Ensures the main landmark is at top level</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/landmark-no-duplicate-banner?application=RuleDescription">landmark-no-duplicate-banner</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/landmark-no-duplicate-banner?application=RuleDescription">landmark-no-duplicate-banner</a></td>
 <td style="text-align:left">Ensures the document has at most one banner landmark</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/landmark-no-duplicate-contentinfo?application=RuleDescription">landmark-no-duplicate-contentinfo</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/landmark-no-duplicate-contentinfo?application=RuleDescription">landmark-no-duplicate-contentinfo</a></td>
 <td style="text-align:left">Ensures the document has at most one contentinfo landmark</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/landmark-no-duplicate-main?application=RuleDescription">landmark-no-duplicate-main</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/landmark-no-duplicate-main?application=RuleDescription">landmark-no-duplicate-main</a></td>
 <td style="text-align:left">Ensures the document has at most one main landmark</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/landmark-one-main?application=RuleDescription">landmark-one-main</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/landmark-one-main?application=RuleDescription">landmark-one-main</a></td>
 <td style="text-align:left">Ensures the document has a unique main landmark</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/landmark-unique?application=RuleDescription">landmark-unique</a></td>
-<td style="text-align:left">Landmarks must have a unique role or role/label/title (i.e. accessible name) combination</td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/landmark-unique?application=RuleDescription">landmark-unique</a></td>
+<td style="text-align:left">Landmarks should have a unique role or role/label/title (i.e. accessible name) combination</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/meta-viewport-large?application=RuleDescription">meta-viewport-large</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/meta-viewport-large?application=RuleDescription">meta-viewport-large</a></td>
 <td style="text-align:left">Ensures &lt;meta name=&quot;viewport&quot;&gt; can scale a significant amount</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/meta-viewport?application=RuleDescription">meta-viewport</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/meta-viewport?application=RuleDescription">meta-viewport</a></td>
 <td style="text-align:left">Ensures &lt;meta name=&quot;viewport&quot;&gt; does not disable text scaling and zooming</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/page-has-heading-one?application=RuleDescription">page-has-heading-one</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/page-has-heading-one?application=RuleDescription">page-has-heading-one</a></td>
 <td style="text-align:left">Ensure that the page, or at least one of its frames contains a level-one heading</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/presentation-role-conflict?application=RuleDescription">presentation-role-conflict</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/presentation-role-conflict?application=RuleDescription">presentation-role-conflict</a></td>
 <td style="text-align:left">Flags elements whose role is none or presentation and which cause the role conflict resolution to trigger.</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/region?application=RuleDescription">region</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/region?application=RuleDescription">region</a></td>
 <td style="text-align:left">Ensures all page content is contained by landmarks</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/scope-attr-valid?application=RuleDescription">scope-attr-valid</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/scope-attr-valid?application=RuleDescription">scope-attr-valid</a></td>
 <td style="text-align:left">Ensures the scope attribute is used correctly on tables</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/skip-link?application=RuleDescription">skip-link</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/skip-link?application=RuleDescription">skip-link</a></td>
 <td style="text-align:left">Ensure all skip links have a focusable target</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/tabindex?application=RuleDescription">tabindex</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/tabindex?application=RuleDescription">tabindex</a></td>
 <td style="text-align:left">Ensures tabindex attribute values are not greater than 0</td>
 </tr>
 <tr>
-<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.1/table-duplicate-name?application=RuleDescription">table-duplicate-name</a></td>
+<td style="text-align:left"><a href="https://dequeuniversity.com/rules/axe/4.3/table-duplicate-name?application=RuleDescription">table-duplicate-name</a></td>
 <td style="text-align:left">Ensure that tables do not have the same summary and caption</td>
 </tr>
 </tbody>
 </table>
-<p>Developer note: regular expression replace all: <code>(\| .+? \| .+? \|) .+? \| .+? \| .+? \|</code> =&gt; <code>$1</code></p>
+<p>Developer note: regular expression replace all: <code>(\| .+? \| .+? \|) .+? \| .+? \| .+? \| .+? \|</code> =&gt; <code>$1</code></p>
 <h2 id="modifications">Modifications</h2>
 <p>Certain aspects of HTML accessibility checking don&rsquo;t apply to EPUBs, so Ace has modified axe&rsquo;s default ruleset slightly.</p>
 <ul>
 <li>Ace disables axe&rsquo;s <code>bypass</code>, <code>region</code>, <code>page-has-heading-one</code>, and <code>landmark-complementary-is-top-level</code> rules.</li>
 <li>Ace changes axe&rsquo;s <code>landmark-one-main</code> rule to add the <code>page-no-duplicate-main</code> check (was <code>has-no-more-than-one-main</code>, see <a href="https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19">https://github.com/dequelabs/axe-core/blob/develop/CHANGELOG.md#300-2018-03-19</a> ).</li>
-<li>DAISY Axe fork: <a href="https://github.com/daisy/axe-core/pull/4">https://github.com/daisy/axe-core/pull/4</a></li>
+<li>DAISY Axe fork: <a href="https://github.com/daisy/axe-core/pull/6">https://github.com/daisy/axe-core/pull/6</a></li>
 </ul>
 
   </main>

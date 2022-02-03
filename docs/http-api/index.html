@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.82.0" />
+    <meta name="generator" content="Hugo 0.92.1" />
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -118,7 +118,7 @@
             <a class="logo" href="https://daisy.github.io/ace" aria-label="Ace, by DAISY home page">
               <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
             </a>
-            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2</p>
+            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2.6</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -425,10 +425,10 @@
     
     <h2 id="starting-the-server">Starting the server</h2>
 <p>After <a href="/ace/getting-started/installation/">installing Ace</a>, run the <code>ace-http</code> command from the terminal:</p>
-<pre><code>$ ace-http
+<pre tabindex="0"><code>$ ace-http
 info:    [ace-http] server listening on http://localhost:8000
 </code></pre><p>The command line options are printed when you run <code>ace-http --help</code>:</p>
-<pre><code>Ace by DAISY, an Accessibility Checker for EPUB
+<pre tabindex="0"><code>Ace by DAISY, an Accessibility Checker for EPUB
 
   Usage: ace-http [options]
 
@@ -463,7 +463,7 @@ info:    [ace-http] server listening on http://localhost:8000
 </ul>
 <h3 id="job-information">Job information</h3>
 <p>This is returned by calling <code>GET /job/:jobid/</code> with the ID of a job.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">  {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">  {
     <span style="color:#960050;background-color:#1e0010">job:</span> <span style="color:#960050;background-color:#1e0010">URL</span> <span style="color:#960050;background-color:#1e0010">for</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">job</span> <span style="color:#960050;background-color:#1e0010">information</span>
     <span style="color:#960050;background-color:#1e0010">status:</span> <span style="color:#960050;background-color:#1e0010">A</span> <span style="color:#960050;background-color:#1e0010">job</span> <span style="color:#960050;background-color:#1e0010">status</span> <span style="color:#960050;background-color:#1e0010">code</span>
     <span style="color:#960050;background-color:#1e0010">report:</span> <span style="color:#960050;background-color:#1e0010">{</span>
@@ -473,15 +473,15 @@ info:    [ace-http] server listening on http://localhost:8000
   <span style="color:#960050;background-color:#1e0010">}</span>
 </code></pre></div><h2 id="examples">Examples</h2>
 <h3 id="submit-a-job">Submit a job</h3>
-<pre><code>~ ❯❯❯ curl --form &quot;epub=@/Users/marisa/dev/epub-a11y-checker/samples/build/epub-a11y-tests-001.epub&quot; http://localhost:8000/jobs/
+<pre tabindex="0"><code>~ ❯❯❯ curl --form &quot;epub=@/Users/marisa/dev/epub-a11y-checker/samples/build/epub-a11y-tests-001.epub&quot; http://localhost:8000/jobs/
 
 {&quot;job&quot;:&quot;http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1&quot;,&quot;status&quot;:1,&quot;report&quot;:{}}%
 </code></pre><h3 id="check-job-status">Check job status</h3>
-<pre><code>~ ❯❯❯ curl http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1
+<pre tabindex="0"><code>~ ❯❯❯ curl http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1
 
 {&quot;job&quot;:&quot;http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1&quot;,&quot;status&quot;:0,&quot;report&quot;:{&quot;zip&quot;:&quot;http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1/report/?type=zip&quot;,&quot;json&quot;:&quot;http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1/report/?type=json&quot;}}%
 </code></pre><h3 id="get-the-report">Get the report</h3>
-<pre><code>~ ❯❯❯ curl 'http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1/report/?type=zip' -o ~/out.zip
+<pre tabindex="0"><code>~ ❯❯❯ curl 'http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1/report/?type=zip' -o ~/out.zip
 
    % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -493,7 +493,7 @@ Archive:  /Users/marisa/out.zip
   inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/report.html
   inflating: ace-report-38fb458a-37a2-4e5c-874c-5cf387bf86c1/report.json
 </code></pre><h3 id="get-only-the-json-report">Get only the JSON report</h3>
-<pre><code>~ ❯❯❯ curl 'http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1/report/?type=json' -o ~/out.json
+<pre tabindex="0"><code>~ ❯❯❯ curl 'http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1/report/?type=json' -o ~/out.json
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100 24972  100 24972    0     0  3482k      0 --:--:-- --:--:-- --:--:-- 4064k
@@ -502,7 +502,7 @@ Archive:  /Users/marisa/out.zip
 ...
 </code></pre><h3 id="list-all-the-jobs">List all the jobs</h3>
 <p>(after having added several jobs)</p>
-<pre><code>~ ❯❯❯ curl http://localhost:8000/jobs/
+<pre tabindex="0"><code>~ ❯❯❯ curl http://localhost:8000/jobs/
 [{&quot;job&quot;:&quot;http://localhost:8000/jobs/8198e049-2e81-4be8-b889-ace01978dabc&quot;,&quot;status&quot;:-1,&quot;report&quot;:{}},{&quot;job&quot;:&quot;http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1&quot;,&quot;status&quot;:0,&quot;report&quot;:{&quot;zip&quot;:&quot;http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1/report/?type=zip&quot;,&quot;json&quot;:&quot;http://localhost:8000/jobs/38fb458a-37a2-4e5c-874c-5cf387bf86c1/report/?type=json&quot;}},{&quot;job&quot;:&quot;http://localhost:8000/jobs/107df1e7-deff-436f-811e-2a8473b20237&quot;,&quot;status&quot;:0,&quot;report&quot;:{&quot;zip&quot;:&quot;http://localhost:8000/jobs/107df1e7-deff-436f-811e-2a8473b20237/report/?type=zip&quot;,&quot;json&quot;:&quot;http://localhost:8000/jobs/107df1e7-deff-436f-811e-2a8473b20237/report/?type=json&quot;}},{&quot;job&quot;:&quot;http://localhost:8000/jobs/d62bb7c7-4eea-4f0b-bd73-b45f28630ebe&quot;,&quot;status&quot;:0,&quot;report&quot;:{&quot;zip&quot;:&quot;http://localhost:8000/jobs/d62bb7c7-4eea-4f0b-bd73-b45f28630ebe/report/?type=zip&quot;,&quot;json&quot;:&quot;http://localhost:8000/jobs/d62bb7c7-4eea-4f0b-bd73-b45f28630ebe/report/?type=json&quot;}},{&quot;job&quot;:&quot;http://localhost:8000/jobs/4363a917-c422-486f-98c0-bd98cc423fc0&quot;,&quot;status&quot;:0,&quot;report&quot;:{&quot;zip&quot;:&quot;http://localhost:8000/jobs/4363a917-c422-486f-98c0-bd98cc423fc0/report/?type=zip&quot;,&quot;json&quot;:&quot;http://localhost:8000/jobs/4363a917-c422-486f-98c0-bd98cc423fc0/report/?type=json&quot;}}]%
 </code></pre>
   </main>

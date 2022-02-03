@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.82.0" />
+    <meta name="generator" content="Hugo 0.92.1" />
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -118,7 +118,7 @@
             <a class="logo" href="https://daisy.github.io/ace" aria-label="Ace, by DAISY home page">
               <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
             </a>
-            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2</p>
+            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2.6</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -433,10 +433,10 @@
     
     <h2 id="overview">Overview</h2>
 <p>The easiest way to run Ace is to type this on the command line:</p>
-<pre><code>$ ace ~/Documents/book.epub
+<pre tabindex="0"><code>$ ace ~/Documents/book.epub
 </code></pre><p>You&rsquo;ll then see a description of Ace&rsquo;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify <a href="#outdir"><code>--outdir</code></a> for that).</p>
 <p>Example:</p>
-<pre><code>info:    Processing ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
+<pre tabindex="0"><code>info:    Processing ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
 info:    Parsing EPUB
 info:    Analyzing accessibility metadata
 info:    Checking package...
@@ -467,7 +467,7 @@ info:   Done
 <p>Displays the usage information and exits.</p>
 <p>Syntax: <code>--help</code> or <code>-h</code></p>
 <p>Example:</p>
-<pre><code>$ ace --help
+<pre tabindex="0"><code>$ ace --help
 
 Ace by DAISY, an Accessibility Checker for EPUB
 
@@ -493,13 +493,13 @@ Ace by DAISY, an Accessibility Checker for EPUB
 <p>Displays the version of Ace and exits.</p>
 <p>Syntax: <code>--version</code> or <code>-v</code></p>
 <p>Example:</p>
-<pre><code>$ ace --version
+<pre tabindex="0"><code>$ ace --version
 1.0.0
 </code></pre><h3 id="outdir">outdir</h3>
 <p>Specify a path to save Ace&rsquo;s reports to.</p>
 <p>Syntax: <code>--outdir</code> or <code>-o</code>, followed by the path</p>
 <p>Example:</p>
-<pre><code>$ ace --outdir results ~/Documents/book.epub
+<pre tabindex="0"><code>$ ace --outdir results ~/Documents/book.epub
 info:    Processing ~/Documents/book.epub
 ...
 info:    Consolidating results...
@@ -513,13 +513,13 @@ info:    Done.
 <p>Specify a custom path to save temporary files in.</p>
 <p>Syntax: <code>--tempdir</code> or <code>-t</code>, followed by the path</p>
 <p>Example:</p>
-<pre><code>$ ace --tempdir acetemp ~/Documents/book.epub
+<pre tabindex="0"><code>$ ace --tempdir acetemp ~/Documents/book.epub
 </code></pre><p>This will store temporary files in a <code>acetemp</code> subdirectory of your current working directory. If the subdirectory does not exist, it will be created.</p>
 <h3 id="force">force</h3>
 <p>Overwrite any files in the directory specified by <code>--outdir</code>.</p>
 <p>Syntax: <code>--force</code> or <code>-f</code></p>
 <p>If the output directory is not empty, and you do not specify <code>--force</code>, Ace will display a warning and exit:</p>
-<pre><code>warn:    Output directory is not empty.
+<pre tabindex="0"><code>warn:    Output directory is not empty.
 
   Running Ace would override the following files or directories:
 
@@ -532,13 +532,13 @@ info:    Done.
 <p>Output reports to a subdirectory named after the input EPUB. To be used in conjunction with <a href="#outdir"><code>--outdir</code></a>.</p>
 <p>Syntax: <code>--subdir</code></p>
 <p>Example:</p>
-<pre><code>$ ace --subdir --outdir results ~/Documents/my-book.epub
+<pre tabindex="0"><code>$ ace --subdir --outdir results ~/Documents/my-book.epub
 </code></pre><p>This creates as the output directory a subdirectory named <code>my-book</code> within <code>results</code>.</p>
 <h3 id="verbose">verbose</h3>
 <p>Output more detail when running Ace. This option is useful to use before sending a bug report as it tells us which version of Ace you&rsquo;re running, as well as your OS and Node versions.</p>
 <p>Syntax: <code>--verbose</code> or <code>-V</code></p>
 <p>Example:</p>
-<pre><code>$ ace --verbose ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
+<pre tabindex="0"><code>$ ace --verbose ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub
 
 verbose: Ace 1.0.0, Node v9.4.0, Darwin 17.3.0
 verbose: Options: cwd=/Users/marisa/dev/ace, outdir=undefined, tmpdir=undefined, verbose=true, silent=false, jobId=
@@ -552,7 +552,7 @@ info:    Analyzing accessibility metadata
 <p>This produces no output on the command line.</p>
 <p>Syntax: <code>--silent</code> or <code>-s</code></p>
 <p>Example:</p>
-<pre><code>$ ace --silent ~/Documents/book.epub
+<pre tabindex="0"><code>$ ace --silent ~/Documents/book.epub
 $
 </code></pre><p>Note that the log file is not &lsquo;silent&rsquo;; it contains the default level of detail about Ace&rsquo;s operation.</p>
 <h3 id="lang">lang</h3>
@@ -560,7 +560,7 @@ $
 The default is &ldquo;en&rdquo; (English). Currently, the only available supplementary locale is &ldquo;fr&rdquo; (French).</p>
 <p>Syntax: <code>--lang</code> or <code>-l</code></p>
 <p>Example:</p>
-<pre><code>$ ace --lang fr ~/Documents/book.epub
+<pre tabindex="0"><code>$ ace --lang fr ~/Documents/book.epub
 $
 </code></pre>
   </main>
