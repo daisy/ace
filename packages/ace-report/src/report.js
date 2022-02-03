@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs-extra');
+const fsNode = require('fs');
 const path = require('path');
 const winston = require('winston');
 
@@ -155,7 +156,21 @@ module.exports = class Report {
     winston.info("Saving HTML report");
 
     generateHtmlReport(this.json)
-    .then((result) => fs.writeFileSync(path.join(outdir, 'report.html'), result, 'UTF-8'))
+    .then((result) => {
+      fs.writeFileSync(path.join(outdir, 'report.html'), result, 'UTF-8');
+      const assetDirIn = path.join(__dirname, 'report-template-assets');
+      const assetDirOut = path.join(outdir, 'report-html-files');
+      if (!fsNode.existsSync(assetDirOut)) {
+        fs.ensureDirSync(assetDirOut);
+      }
+      fsNode.readdirSync(assetDirIn).map(file => path.resolve(assetDirIn, file)).filter(file => fsNode.lstatSync(file).isFile()).forEach(f => {
+        const dest = path.join(assetDirOut, path.basename(f));
+        fs.writeFileSync(dest, fsNode.readFileSync(f, { encoding: "utf8" }), { encoding: "utf8" });
+        // fsNode.createReadStream(f).pipe(
+        //   fsNode.createWriteStream(dest)
+        // );
+      });
+    })
     .catch(err => winston.error(err));
   }
 }

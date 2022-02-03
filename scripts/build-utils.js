@@ -8,7 +8,7 @@ const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 const config = {
   srcDir: 'src',
   buildDir: 'lib',
-  jsPattern: '**/*.js',
+  jsPattern: '**/!(report-template-assets)/*.js',
   ignorePattern: '**/*.test.js',
 };
 
