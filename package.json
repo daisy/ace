@@ -11,8 +11,8 @@
     "npm": ">=6.0.0"
   },
   "devDependencies": {
-    "@daisy/jest-env-puppeteer": "file:./../jest-env-puppeteer",
-    "@daisy/jest-puppeteer": "file:./../jest-puppeteer",
+    "@daisy/jest-env-puppeteer": "file:./packages/jest-env-puppeteer",
+    "@daisy/jest-puppeteer": "file:./packages/jest-puppeteer",
     "@jest-runner/electron": "^3.0.1",
     "babel-core": "^6.26.3",
     "babel-jest": "^26.6.3",
