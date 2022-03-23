@@ -6,7 +6,7 @@ const pt_BRJson = require("./locales/pt_BR.json");
 const esJson = require("./locales/es.json");
 const daJson = require("./locales/da.json");
 const jaJson = require("./locales/ja.json");
-
+const deJson = require("./locales/de.json");
 
 const localizer = newLocalizer({
     en: {
@@ -14,6 +14,10 @@ const localizer = newLocalizer({
         default: true,
         translation: enJson,
     },
+    // de: {
+    //     name: "Deutsch",
+    //     translation: deJson,
+    // },
     fr: {
         name: "Français",
         translation: frJson,
