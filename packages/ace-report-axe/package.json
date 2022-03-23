@@ -23,8 +23,8 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-localize": "^1.2.7-alpha.1",
-    "@daisy/ace-report": "^1.2.7-alpha.1",
+    "@daisy/ace-localize": "file:./../ace-localize",
+    "@daisy/ace-report": "file:./../ace-report",
     "fs-extra": "^10.0.0",
     "winston": "^3.5.1"
   },

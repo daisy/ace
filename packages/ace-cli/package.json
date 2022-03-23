@@ -24,7 +24,7 @@
   "main": "lib/index.js",
   "bin": "bin/ace.js",
   "dependencies": {
-    "@daisy/ace-axe-runner-puppeteer": "^1.2.7-alpha.1",
+    "@daisy/ace-axe-runner-puppeteer": "file:./../ace-axe-runner-puppeteer",
     "@daisy/ace-cli-shared": "^1.2.7-alpha.1"
   },
   "publishConfig": {
