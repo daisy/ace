@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-report-axe",
-  "version": "1.2.7-alpha.1",
+  "version": "1.2.7-alpha.2",
   "engines": {
     "node": ">=12.0.0",
     "yarn": "^1.22.0",
@@ -26,7 +26,7 @@
     "@daisy/ace-localize": "file:./../ace-localize",
     "@daisy/ace-report": "file:./../ace-report",
     "fs-extra": "^10.0.1",
-    "winston": "^3.6.0"
+    "winston": "^3.7.1"
   },
   "publishConfig": {
     "access": "public"

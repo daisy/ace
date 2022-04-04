@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-cli",
-  "version": "1.2.7-alpha.1",
+  "version": "1.2.7-alpha.2",
   "engines": {
     "node": ">=12.0.0",
     "yarn": "^1.22.0",
@@ -25,7 +25,7 @@
   "bin": "bin/ace.js",
   "dependencies": {
     "@daisy/ace-axe-runner-puppeteer": "file:./../ace-axe-runner-puppeteer",
-    "@daisy/ace-cli-shared": "^1.2.7-alpha.1"
+    "@daisy/ace-cli-shared": "file:./../ace-cli-shared"
   },
   "publishConfig": {
     "access": "public"
