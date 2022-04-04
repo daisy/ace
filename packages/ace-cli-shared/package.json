@@ -28,7 +28,7 @@
     "@daisy/ace-logger": "^1.2.7-alpha.1",
     "@daisy/ace-meta": "^1.2.7-alpha.1",
     "meow": "^9.0.0",
-    "winston": "^3.5.1"
+    "winston": "^3.6.0"
   },
   "publishConfig": {
     "access": "public"
