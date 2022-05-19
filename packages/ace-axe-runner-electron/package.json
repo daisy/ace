@@ -28,9 +28,9 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "electron": "^18.0.1",
+    "electron": "^18.2.4",
     "json": "^11.0.0",
-    "json-diff": "^0.7.3"
+    "json-diff": "^0.7.4"
   },
   "publishConfig": {
     "access": "public"

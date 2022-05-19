@@ -24,7 +24,7 @@
   "main": "lib/localize.js",
   "dependencies": {
     "i18next": "^20.6.1",
-    "winston": "^3.7.1"
+    "winston": "^3.7.2"
   },
   "publishConfig": {
     "access": "public"
