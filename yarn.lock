@@ -990,6 +990,7 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
+<<<<<<< HEAD
 "@daisy/ace-axe-runner-electron@file:./packages/ace-axe-runner-electron":
   version "1.2.7-alpha.2"
   dependencies:
@@ -1093,10 +1094,13 @@
     handlebars "^4.7.7"
     winston "^3.7.2"
 
+=======
+>>>>>>> master
 "@daisy/axe-core-for-ace@4.4.2-canary.1":
   version "4.4.2-canary.1"
   resolved "https://registry.yarnpkg.com/@daisy/axe-core-for-ace/-/axe-core-for-ace-4.4.2-canary.1.tgz#5f6b04d19ad268fbca9e3215704609c6243164fe"
   integrity sha512-81iOCgQvtuS2Pl36wZG9QXTpS1rPk7QYoiFGkotu4K8YbrbvVr/SZ6TOf4bl8H7tX4y7Iy3A4Ek6+oA+TZDFiw==
+<<<<<<< HEAD
 
 "@daisy/epub-utils@file:./packages/epub-utils":
   version "1.2.7-alpha.2"
@@ -1124,6 +1128,8 @@
 
 "@daisy/puppeteer-utils@file:./packages/puppeteer-utils":
   version "1.2.7-alpha.2"
+=======
+>>>>>>> master
 
 "@electron/get@^1.13.0":
   version "1.14.1"
