@@ -1,0 +1,37 @@
+Dockerfile
+.git*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+lerna-debug.log
+yarn-debug.log*
+yarn-error.log*
+
+# Build
+/node_modules
+/packages/*/lib/
+/packages/*/node_modules/
+
+# Website build directory
+website/site
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# VS Code files
+.vscode
+
+# Yarn Integrity file
+.yarn-integrity
+
+# OS files
+.DS_Store
+._*
+Thumbs.db
+
+.history
