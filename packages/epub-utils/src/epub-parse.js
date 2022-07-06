@@ -76,6 +76,8 @@ function parseNavDoc(fullpath, epubDir) {
 
 
 function addMeta(name, value, meta) {
+  name = name.trim();
+  value = value.trim();
   if (!meta[name]) {
     meta[name] = value;
   } else if (!(meta[name] instanceof Array)) {
@@ -108,6 +110,8 @@ function parseMetadata(doc, select) {
 
 
 function addLink(rel, href, link) {
+  rel = rel.trim();
+  href = href.trim();
   if (!link[rel]) {
     link[rel] = href;
   } else if (!(link[rel] instanceof Array)) {
