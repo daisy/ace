@@ -158,6 +158,21 @@ function checkMetadata(assertions, epub) {
   }
 }
 
+function checkReadingOrder(assertions, epub) {
+  // console.log(JSON.stringify(epub, null, 4));
+  
+  // if (title === '') {
+  //   assertions.withAssertions(newViolation({
+  //     title: 'epub-toc-order',
+  //     testDesc: localize("checkepub.titleviolation.testdesc"),
+  //     resDesc: localize("checkepub.titleviolation.resdesc"),
+  //     kbPath: '',
+  //     kbTitle: localize("checkepub.titleviolation.kbtitle"),
+  //     ruleDesc: localize("checkepub.titleviolation.ruledesc")
+  //   }));
+  // }
+}
+
 function checkTitle(assertions, epub) {
   const title = asString(epub.metadata['dc:title']);
   if (title === '') {
@@ -208,6 +223,8 @@ function check(epub, report) {
       ruleDesc: localize("checkepub.langmissing.ruledesc")
     }));
   }
+
+  checkReadingOrder(assertion, epub);
 
   // Check a11y metadata
   checkMetadata(assertion, epub);

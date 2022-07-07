@@ -47,6 +47,30 @@ function parseNavDoc(fullpath, epubDir) {
   // https://github.com/xmldom/xmldom/blob/3db6ccf3f7ecbde73608490d71f96c727abdd69a/lib/dom-parser.js#L12
   const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml');
 
+  // Select the ToC
+  const select = xpath.useNamespaces({
+    html: 'http://www.w3.org/1999/xhtml',
+    epub: 'http://www.idpf.org/2007/ops',
+  });
+
+  const sPageList = select('//html:nav[@epub:type="page-list"]', doc);
+  const hasPageList = sPageList.length > 0;
+
+  let pageListHrefs = undefined;
+  if (hasPageList) {
+    const arr1 = select('descendant::html:a/@href', sPageList[0]);
+    pageListHrefs = arr1.map((o) => o.nodeValue);
+    // console.log(arr1.length, JSON.stringify(pageListHrefs, null, 4));
+  }
+  
+  let tocHrefs = undefined;
+  const sTOC = select('//html:nav[@epub:type="toc"]/html:ol', doc);
+  if (sTOC[0]) {
+    const arr2 = select('descendant::html:a/@href', sTOC[0]);
+    tocHrefs = arr2.map((o) => o.nodeValue);
+    // console.log(arr2.length, JSON.stringify(tocHrefs, null, 4));
+  }
+
   // Remove all links
   const aElems = doc.getElementsByTagNameNS('http://www.w3.org/1999/xhtml', 'a');
   const len = aElems.length;
@@ -55,20 +79,14 @@ function parseNavDoc(fullpath, epubDir) {
     while (a.firstChild) a.parentNode.insertBefore(a.firstChild, a);
     a.parentNode.removeChild(a);
   }
-
-  // Select the ToC
-  const select = xpath.useNamespaces({
-    html: 'http://www.w3.org/1999/xhtml',
-    epub: 'http://www.idpf.org/2007/ops',
-  });
-  const toc = select('//html:nav'
-                        + '[@epub:type="toc"]/html:ol', doc);
-  const tocHTML = new XMLSerializer().serializeToString(toc[0]);
-  const hasPageList = select('//html:nav'
-                        + '[@epub:type="page-list"]', doc).length > 0;
+  
+  const tocHTML = new XMLSerializer().serializeToString(sTOC[0]);
+  // console.log(tocHTML);
 
   return {
     src: path.relative(epubDir, fullpath),
+    pageListHrefs,
+    tocHrefs,
     tocHTML,
     hasPageList,
   };
@@ -181,7 +199,10 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
         var spineItem = new SpineItem();
         spineItem.relpath = decodeURI(manifestItem[0].getAttribute('href'));
         spineItem.filepath = path.join(path.dirname(packageDocPath), spineItem.relpath);
-        spineItem.title = this.parseContentDocTitle(spineItem.filepath);
+
+        const o = this.parseContentDocTitleAndIds(spineItem.filepath);
+        spineItem.title = o.titleText;
+        spineItem.targetIDs = o.docIds;
 
         // does encodeURI() as per https://tools.ietf.org/html/rfc3986#section-3.3 in a nutshell: encodeURI(`file://${tmpFile}`).replace(/[?#]/g, encodeURIComponent)
         spineItem.url = fileUrl(spineItem.filepath);
@@ -210,6 +231,10 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
     const navDocFullPath = path.join(path.dirname(packageDocPath), navDocPath);
     this.navDoc = parseNavDoc(navDocFullPath, epubDir);
 
+    this.navDoc.relpath = navDocPath;
+    this.navDoc.filepath = navDocFullPath;
+    this.navDoc.url = fileUrl(this.navDoc.filepath);
+
     if (spineContainsNavDoc) {
       if (spineContainsNavDoc.filepath !== navDocFullPath) {
         console.log("Nav Doc Spine DIFF PATHS!?", spineContainsNavDoc.filepath, navDocFullPath);
@@ -219,8 +244,14 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
 
       spi.relpath = navDocPath;
       spi.filepath = navDocFullPath;
-      spi.title = this.parseContentDocTitle(spi.filepath);
+
+      const o = this.parseContentDocTitleAndIds(spi.filepath);
+      spi.title = o.titleText;
+      spi.targetIDs = o.docIds;
+
       spi.url = fileUrl(spi.filepath);
+
+      spi.notInReadingOrder = true;
 
       this.contentDocs.push(spi);
     }
@@ -231,7 +262,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
   this.hasManifestFallbacks = select('/opf:package/opf:manifest/opf:item[@fallback]', doc).length > 0;
 };
 
-EpubParser.prototype.parseContentDocTitle = function(filepath) {
+EpubParser.prototype.parseContentDocTitleAndIds = function(filepath) {
   const content = fs.readFileSync(filepath).toString();
   // not application/xhtml+xml because:
   // https://github.com/jindw/xmldom/pull/208
@@ -240,12 +271,15 @@ EpubParser.prototype.parseContentDocTitle = function(filepath) {
   const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml');
   const select = xpath.useNamespaces({html: "http://www.w3.org/1999/xhtml", epub: "http://www.idpf.org/2007/ops"});
   const title = select('/html:html/html:head/html:title/text()', doc);
-  if (title.length > 0) {
-    return title[0].nodeValue;
-  }
-  else {
-    return "";
-  }
+  let titleText = title.length > 0 ? title[0].nodeValue : "";
+
+  const arr = select('//*/@id', doc);
+  let docIds = arr.map((o) => o.nodeValue);
+  // console.log(arr.length, JSON.stringify(docIds, null, 4));
+
+  return {
+    titleText, docIds
+  };
 }
 
 EpubParser.prototype.calculatePackageDocPath = function(epubDir) {

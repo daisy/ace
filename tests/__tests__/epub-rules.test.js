@@ -45,6 +45,20 @@ test('nothing to report', async () => {
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
 
+describe('page list and TOC reading order PASS', () => {
+  test('page list and TOC correctly ordered', async () => {
+    const report = await ace('../data/epubrules-pagelist-toc-order-pass');
+    expect(report['earl:result']['earl:outcome']).toEqual('pass');
+  });
+});
+
+describe('page list and TOC reading order FAIL', () => {
+  test('page list and TOC correctly ordered', async () => {
+    const report = await ace('../data/epubrules-pagelist-toc-order-fail');
+    expect(report['earl:result']['earl:outcome']).toEqual('pass');
+  });
+});
+
 describe('page list and breaks', () => {
   test('page list correctly sourced', async () => {
     const report = await ace('../data/epubrules-pagelist');
