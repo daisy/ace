@@ -59,6 +59,22 @@ describe('page list and breaks FXL', () => {
   });
 });
 
+describe('package lang', () => {
+  test('xml:lang is present in OPF', async () => {
+    const report = await ace('../data/epubrules-package-lang');
+    // console.log(JSON.stringify(report, null, 4));
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
+    const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+    expect(assertions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'epub-lang',
+        }),
+      }),
+    ]));
+  });
+});
+
 describe('accessibility metadata', () => {
 
   test('accessibilityAPI and accessibilityControl metadata are ignored when present', async () => {

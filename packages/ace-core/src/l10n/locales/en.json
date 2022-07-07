@@ -1,10 +1,16 @@
 {
     "checkepub": {
+        "langmissing": {
+            "kbtitle": "Language",
+            "resdesc": "Add the missing OPF xml:lang attribute",
+            "ruledesc": "The language must be specified (xml:lang in OPF package)",
+            "testdesc": "Ensures the OPF XML language is provided"
+        },
         "metadatadeprecated": {
             "kbtitle": "Schema.org Accessibility Metadata",
-            "resdesc": "The metadata is deprecated",
+            "resdesc": "Avoid using '{{name}}' deprecated metadata",
             "ruledesc": "'{{name}}' metadata usage is discouraged",
-            "testdesc": "Avoid using '{{name}}' metadata"
+            "testdesc": "Checks that no deprecated metadata is used"
         },
         "metadatainvalid": {
             "kbtitle": "Schema.org Accessibility Metadata",

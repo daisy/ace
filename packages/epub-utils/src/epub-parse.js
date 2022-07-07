@@ -157,7 +157,13 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
   const doc = new DOMParser({errorHandler}).parseFromString(content);
   const select = xpath.useNamespaces(
     { opf: 'http://www.idpf.org/2007/opf',
-      dc: 'http://purl.org/dc/elements/1.1/'});
+      dc: 'http://purl.org/dc/elements/1.1/',
+      xml: 'http://www.w3.org/XML/1998/namespace'
+  });
+
+  const langAttr = select('/opf:package/@xml:lang', doc)[0];
+  this.opfLang = langAttr ? langAttr.nodeValue : undefined;
+
   this.metadata = parseMetadata(doc, select);
   this.links = parseLinks(doc, select);
 

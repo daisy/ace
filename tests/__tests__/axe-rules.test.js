@@ -83,7 +83,7 @@ test('DPUB ARIA roles are allowed', async () => {
 });
 test('DPUB ARIA roles are allowed (with epub:type deprecated)', async () => {
   const report = await ace('../data/axerule-dpubroles-matching');
-  console.log(JSON.stringify(report, null, 4));
+  // console.log(JSON.stringify(report, null, 4));
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
 

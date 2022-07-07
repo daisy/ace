@@ -197,6 +197,18 @@ function check(epub, report) {
     .withSubAssertions()
     .withTestSubject(epub.packageDoc.src, asString(epub.metadata['dc:title']));
 
+  if (!epub.opfLang) {
+    assertion.withAssertions(newViolation({
+      // impact: 'serious', DEFAULT
+      title: 'epub-lang',
+      testDesc: localize("checkepub.langmissing.testdesc"),
+      resDesc: localize("checkepub.langmissing.resdesc"),
+      kbPath: 'docs/epub/language.html',
+      kbTitle: localize("checkepub.langmissing.kbtitle"),
+      ruleDesc: localize("checkepub.langmissing.ruledesc")
+    }));
+  }
+
   // Check a11y metadata
   checkMetadata(assertion, epub);
 
