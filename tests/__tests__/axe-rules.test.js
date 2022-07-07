@@ -357,3 +357,15 @@ test('Checks that `epub:type` `cover` isn’t reported has missing a matching AR
   const report = await ace('../data/axerule-matching-dpub-role-cover');
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
+
+test('Checks cover ARIA role with no alt', async() => {
+  const report = await ace('../data/axerule-matching-dpub-role-cover-no-alt');
+  // console.log(JSON.stringify(report, null, 4));
+  expect(report['earl:result']['earl:outcome']).toEqual('fail');
+});
+
+test('Checks cover ARIA role with empty alt', async() => {
+  const report = await ace('../data/axerule-matching-dpub-role-cover-empty-alt');
+  // console.log(JSON.stringify(report, null, 4));
+  expect(report['earl:result']['earl:outcome']).toEqual('fail');
+});
