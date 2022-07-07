@@ -44,7 +44,7 @@ const kbMap = {
     //     "wcag412"
     //   ]
     // },
-    'aria-allowed-attr': {url: 'docs/script/aria.html', title: localize("kb.aria-allowed-attr")},
+    'aria-allowed-attr': {url: 'docs/html/roles.html', title: localize("kb.aria-allowed-attr")},
 
     // {
     //   "ruleId": "aria-allowed-role",
@@ -56,7 +56,7 @@ const kbMap = {
     //     "best-practice"
     //   ]
     // },
-    'aria-allowed-role': {url: 'docs/script/aria.html', title: localize("kb.aria-allowed-attr")},
+    'aria-allowed-role': {url: 'docs/html/roles.html', title: localize("kb.aria-allowed-attr")},
 
     // {
     //   "ruleId": "aria-command-name",
@@ -161,7 +161,7 @@ const kbMap = {
     //     "wcag412"
     //   ]
     // },
-    'aria-required-attr': {url: 'docs/script/aria.html', title: localize("kb.aria-required-attr")},
+    'aria-required-attr': {url: 'docs/html/roles.html', title: localize("kb.aria-required-attr")},
 
     // {
     //   "ruleId": "aria-required-children",
@@ -174,7 +174,7 @@ const kbMap = {
     //     "wcag131"
     //   ]
     // },
-    'aria-required-children': {url: 'docs/script/aria.html', title: localize("kb.aria-required-children")},
+    'aria-required-children': {url: 'docs/html/roles.html', title: localize("kb.aria-required-children")},
 
     // {
     //   "ruleId": "aria-required-parent",
@@ -187,7 +187,7 @@ const kbMap = {
     //     "wcag131"
     //   ]
     // },
-    'aria-required-parent': {url: 'docs/script/aria.html', title: localize("kb.aria-required-parent")},
+    'aria-required-parent': {url: 'docs/html/roles.html', title: localize("kb.aria-required-parent")},
 
     // {
     //   "ruleId": "aria-roledescription",
@@ -200,7 +200,7 @@ const kbMap = {
     //     "wcag412"
     //   ]
     // },
-    'aria-roledescription': {url: 'docs/script/aria.html', title: localize("kb.aria-required-parent")},
+    'aria-roledescription': {url: 'docs/html/roles.html', title: localize("kb.aria-required-parent")},
 
     // {
     //   "ruleId": "aria-roles",
@@ -213,7 +213,7 @@ const kbMap = {
     //     "wcag412"
     //   ]
     // },
-    'aria-roles': {url: 'docs/script/aria.html', title: localize("kb.aria-roles")},
+    'aria-roles': {url: 'docs/html/roles.html', title: localize("kb.aria-roles")},
 
     // {
     //   "ruleId": "aria-toggle-field-name",
@@ -746,7 +746,7 @@ const kbMap = {
     //     "best-practice"
     //   ]
     // },
-    'landmark-banner-is-top-level': {url: 'docs/script/aria.html', title: localize("kb.aria-valid-attr")},
+    'landmark-banner-is-top-level': {url: 'docs/html/landmarks.html', title: localize("kb.aria-valid-attr")},
 
     // {
     //   "ruleId": "landmark-complementary-is-top-level",
@@ -758,7 +758,7 @@ const kbMap = {
     //     "best-practice"
     //   ]
     // },
-    'landmark-complementary-is-top-level': {url: 'docs/script/aria.html', title: localize("kb.aria-valid-attr")},
+    'landmark-complementary-is-top-level': {url: 'docs/html/landmarks.html', title: localize("kb.aria-valid-attr")},
 
     // {
     //   "ruleId": "landmark-contentinfo-is-top-level",
@@ -770,7 +770,7 @@ const kbMap = {
     //     "best-practice"
     //   ]
     // },
-    'landmark-contentinfo-is-top-level': {url: 'docs/script/aria.html', title: localize("kb.aria-valid-attr")},
+    'landmark-contentinfo-is-top-level': {url: 'docs/html/landmarks.html', title: localize("kb.aria-valid-attr")},
 
     // {
     //   "ruleId": "landmark-main-is-top-level",
@@ -782,7 +782,7 @@ const kbMap = {
     //     "best-practice"
     //   ]
     // },
-    'landmark-main-is-top-level': {url: 'docs/script/aria.html', title: localize("kb.aria-valid-attr")},
+    'landmark-main-is-top-level': {url: 'docs/html/landmarks.html', title: localize("kb.aria-valid-attr")},
 
     // {
     //   "ruleId": "landmark-no-duplicate-banner",
@@ -794,7 +794,7 @@ const kbMap = {
     //     "best-practice"
     //   ]
     // },
-    'landmark-no-duplicate-banner': {url: 'docs/script/aria.html', title: localize("kb.aria-valid-attr")},
+    'landmark-no-duplicate-banner': {url: 'docs/html/landmarks.html', title: localize("kb.aria-valid-attr")},
 
     // {
     //   "ruleId": "landmark-no-duplicate-contentinfo",
@@ -806,7 +806,7 @@ const kbMap = {
     //     "best-practice"
     //   ]
     // },
-    'landmark-no-duplicate-contentinfo': {url: 'docs/script/aria.html', title: localize("kb.aria-valid-attr")},
+    'landmark-no-duplicate-contentinfo': {url: 'docs/html/landmarks.html', title: localize("kb.aria-valid-attr")},
 
     // {
     //   "ruleId": "landmark-no-duplicate-main",
@@ -818,7 +818,7 @@ const kbMap = {
     //     "best-practice"
     //   ]
     // },
-    'landmark-no-duplicate-main': {url: 'docs/script/aria.html', title: localize("kb.aria-valid-attr")},
+    'landmark-no-duplicate-main': {url: 'docs/html/landmarks.html', title: localize("kb.aria-valid-attr")},
 
     // {
     //   "ruleId": "landmark-one-main",
@@ -830,7 +830,7 @@ const kbMap = {
     //     "best-practice"
     //   ]
     // },
-    'landmark-one-main': {url: 'docs/script/aria.html', title: localize("kb.aria-valid-attr")},
+    'landmark-one-main': {url: 'docs/html/landmarks.html', title: localize("kb.aria-valid-attr")},
 
     // {
     //   "ruleId": "landmark-unique",
@@ -842,7 +842,7 @@ const kbMap = {
     //     "best-practice"
     //   ]
     // },
-    'landmark-unique': {url: 'docs/script/aria.html', title: localize("kb.aria-valid-attr")},
+    'landmark-unique': {url: 'docs/html/landmarks.html', title: localize("kb.aria-valid-attr")},
 
     // {
     //   "ruleId": "link-in-text-block",
@@ -1020,7 +1020,7 @@ const kbMap = {
     //     "best-practice"
     //   ]
     // },
-    'presentation-role-conflict': {url: 'docs/script/aria.html', title: localize("kb.aria-allowed-attr")},
+    'presentation-role-conflict': {url: 'docs/html/roles.html', title: localize("kb.aria-allowed-attr")},
 
     // {
     //   "ruleId": "region",
@@ -1032,7 +1032,7 @@ const kbMap = {
     //     "best-practice"
     //   ]
     // },
-    'region': {url: 'docs/script/aria.html', title: localize("kb.aria-valid-attr")},
+    'region': {url: 'docs/html/roles.html', title: localize("kb.aria-valid-attr")},
 
     // {
     //   "ruleId": "role-img-alt",
