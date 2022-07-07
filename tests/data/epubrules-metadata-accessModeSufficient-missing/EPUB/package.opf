@@ -11,6 +11,11 @@
   <meta property="schema:accessibilityHazard">noSoundHazard</meta>
   <meta property="schema:accessibilityHazard">noMotionSimulationHazard</meta>
   <meta property="schema:accessMode">visual</meta>
+  
+  <meta property="schema:accessModeSufficient">
+  <!-- empty string will trigger missing metadata value -->
+  </meta>
+
 </metadata>
 <manifest>
   <item id="nav"  href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>

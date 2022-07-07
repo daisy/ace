@@ -197,6 +197,7 @@ describe('accessibility metadata', () => {
   });
   test('accessModeSufficient metadata is missing', async () => {
     const report = await ace('../data/epubrules-metadata-accessModeSufficient-missing');
+    // console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']['earl:outcome']).toEqual('fail');
     const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
     expect(assertions).toEqual(expect.arrayContaining([

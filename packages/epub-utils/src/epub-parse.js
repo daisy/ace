@@ -78,6 +78,9 @@ function parseNavDoc(fullpath, epubDir) {
 function addMeta(name, value, meta) {
   name = name.trim();
   value = value.trim();
+  if (!name || !value) { // empty strings => bail out
+    return;
+  }
   if (!meta[name]) {
     meta[name] = value;
   } else if (!(meta[name] instanceof Array)) {
