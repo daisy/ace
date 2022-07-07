@@ -1,5 +1,11 @@
 {
     "checkepub": {
+        "metadatadeprecated": {
+            "kbtitle": "Schema.org Accessibility Metadata",
+            "resdesc": "The metadata is deprecated",
+            "ruledesc": "'{{name}}' metadata usage is discouraged",
+            "testdesc": "Avoid using '{{name}}' metadata"
+        },
         "metadatainvalid": {
             "kbtitle": "Schema.org Accessibility Metadata",
             "resdesc": "Use one of the metadata values defined by schema.org",

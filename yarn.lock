@@ -990,10 +990,10 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@daisy/axe-core-for-ace@4.4.2-canary.1":
-  version "4.4.2-canary.1"
-  resolved "https://registry.yarnpkg.com/@daisy/axe-core-for-ace/-/axe-core-for-ace-4.4.2-canary.1.tgz#5f6b04d19ad268fbca9e3215704609c6243164fe"
-  integrity sha512-81iOCgQvtuS2Pl36wZG9QXTpS1rPk7QYoiFGkotu4K8YbrbvVr/SZ6TOf4bl8H7tX4y7Iy3A4Ek6+oA+TZDFiw==
+"@daisy/axe-core-for-ace@4.4.2-canary.2":
+  version "4.4.2-canary.2"
+  resolved "https://registry.yarnpkg.com/@daisy/axe-core-for-ace/-/axe-core-for-ace-4.4.2-canary.2.tgz#e612c8966681b5ba0a530fb88ed78efad2bcd711"
+  integrity sha512-ETZjId0bVBYoYnTxlA3GU7NzBudHJEq/tNo+AiX6uza8EXxHSm/k3CF3t/NdKT6XcOSDlgduBRKvFRsULyAHyA==
 
 "@electron/get@^1.13.0":
   version "1.14.1"

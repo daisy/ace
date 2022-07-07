@@ -74,7 +74,20 @@ function checkMetadata(assertions, epub) {
       // Report missing metadata if it is required or recommended
       if (meta.required) assertions.withAssertions(newMetadataAssertion(name));
       if (meta.recommended) assertions.withAssertions(newMetadataAssertion(name, 'moderate'));
-    } else {
+    }
+    // This causes a "earl:outcome" FAIL (not PASS), even with MINOR "earl:impact" :(
+    // else if (meta.discouraged) {
+    //   assertions.withAssertions(newViolation({
+    //     impact: 'minor',
+    //     title: `metadata-${name.toLowerCase().replace('schema:', '')}-deprecated`,
+    //     testDesc: localize("checkepub.metadatadeprecated.testdesc", { name, interpolation: { escapeValue: false } }),
+    //     resDesc: localize("checkepub.metadatadeprecated.resdesc", { name, interpolation: { escapeValue: false } }),
+    //     kbPath: 'docs/metadata/schema.org/index.html',
+    //     kbTitle: localize("checkepub.metadatadeprecated.kbtitle"),
+    //     ruleDesc: localize("checkepub.metadatadeprecated.ruledesc", { name, interpolation: { escapeValue: false } })
+    //   }));
+    // }
+    else {
       if (!Array.isArray(values)) {
         values = [values]
       }
