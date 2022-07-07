@@ -126,7 +126,7 @@ function checkMetadata(assertions, epub) {
             splitValues.filter(splitValue => !meta.allowedValues.includes(splitValue))
             .forEach(splitValue => {
               assertions.withAssertions(newViolation({
-                impact: 'moderate',
+                impact: 'minor',
                 title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
                 testDesc: localize("checkepub.metadatainvalid.testdesc", { value: splitValue, name, interpolation: { escapeValue: false } }),
                 resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
