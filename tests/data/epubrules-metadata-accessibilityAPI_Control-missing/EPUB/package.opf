@@ -8,7 +8,7 @@
 
   <meta property="schema:accessMode">textual</meta>
   
-  <meta property="schema:accessibilityFeature">structuralNavigation</meta>
+  <meta property="schema:accessibilityFeature">ARIA</meta>
   
   <meta property="schema:accessibilityHazard">noFlashingHazard</meta>
   
