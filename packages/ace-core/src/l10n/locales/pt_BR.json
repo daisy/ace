@@ -1,5 +1,23 @@
 {
     "checkepub": {
+        "langmissing": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "mediaoverlaypagebreakviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "metadatadeprecated": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
         "metadatainvalid": {
             "kbtitle": "Metadados de Acessibilidade Schema.org",
             "resdesc": "Use um dos valores de metadados definidos pelo schema.org",
@@ -17,6 +35,24 @@
             "resdesc": "Adicione o metadado '{{name}}' ao arquivo OPF",
             "ruledesc": "Publicações devem declarar o metadado '{{name}}'",
             "testdesc": "Certifique-se de que o metadado '{{name}}' está presente"
+        },
+        "missingpagebreakviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "orderpagelistviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "ordertocviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
         },
         "pagesourceviolation": {
             "kbtitle": "Navegação de Páginas",

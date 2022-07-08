@@ -6,6 +6,12 @@
             "ruledesc": "The language must be specified (xml:lang in OPF package)",
             "testdesc": "Ensures the OPF XML language is provided"
         },
+        "mediaoverlaypagebreakviolation": {
+            "kbtitle": "Page Navigation",
+            "resdesc": "Add epub:type pagebreak in SMIL par ({{ref}})",
+            "ruledesc": "SMIL must correctly reference page breaks ({{ref}})",
+            "testdesc": "Ensures that the Media Overlays reference page breaks ({{ref}})"
+        },
         "metadatadeprecated": {
             "kbtitle": "Schema.org Accessibility Metadata",
             "resdesc": "Avoid using '{{name}}' deprecated metadata",
@@ -35,12 +41,6 @@
             "resdesc": "Ensure page list includes all page breaks ({{ref}})",
             "ruledesc": "Publication page list must reference all page breaks ({{ref}})",
             "testdesc": "Check that all page breaks are included in the page list ({{ref}})"
-        },
-        "mediaoverlaypagebreakviolation": {
-            "kbtitle": "Page Navigation",
-            "resdesc": "Add epub:type pagebreak in SMIL par ({{ref}})",
-            "ruledesc": "SMIL must correctly reference page breaks ({{ref}})",
-            "testdesc": "Ensures that the Media Overlays reference page breaks ({{ref}})"
         },
         "orderpagelistviolation": {
             "kbtitle": "Page Navigation",

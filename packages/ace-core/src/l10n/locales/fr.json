@@ -1,5 +1,23 @@
 {
     "checkepub": {
+        "langmissing": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "mediaoverlaypagebreakviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "metadatadeprecated": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
         "metadatainvalid": {
             "kbtitle": "Métadonnées d'accessibilité Schema.org",
             "resdesc": "Utiliser l’une des valeurs définie par schema.org",
@@ -17,6 +35,24 @@
             "resdesc": "Ajouter la métadonnée '{{name}}' au Document de Package",
             "ruledesc": "Toute publication doit déclarer la métadonnée '{{name}}'",
             "testdesc": "Vérifie que la métadonnée '{{name}}' est présente"
+        },
+        "missingpagebreakviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "orderpagelistviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "ordertocviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
         },
         "pagesourceviolation": {
             "kbtitle": "Navigation par page",

@@ -1,5 +1,23 @@
 {
     "checkepub": {
+        "langmissing": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "mediaoverlaypagebreakviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "metadatadeprecated": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
         "metadatainvalid": {
             "kbtitle": "Metadata for tilgængelighed fra Schema.org",
             "resdesc": "Brug en af metadata-værdierne defineret af Schema.org",
@@ -17,6 +35,24 @@
             "resdesc": "Tilføj et '{{name}}' metadata-element til pakke-dokumentet",
             "ruledesc": "Publikationen skal angive et '{{name}}' metadata-element",
             "testdesc": "Sikrer at '{{name}}' metadata-elementet er til stede"
+        },
+        "missingpagebreakviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "orderpagelistviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "ordertocviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
         },
         "pagesourceviolation": {
             "kbtitle": "Sidenavigation",

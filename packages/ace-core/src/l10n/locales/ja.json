@@ -1,5 +1,23 @@
 {
     "checkepub": {
+        "langmissing": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "mediaoverlaypagebreakviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "metadatadeprecated": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
         "metadatainvalid": {
             "kbtitle": "Schema.orgアクセシビリティメタデータ",
             "resdesc": "schema.orgで定義されたメタデータ値のいずれかを使用します",
@@ -17,6 +35,24 @@
             "resdesc": "「{{name}}」メタデータプロパティをパッケージドキュメントに追加します",
             "ruledesc": "出版物は「{{name}}」メタデータを宣言する必要があります",
             "testdesc": "「{{name}}」メタデータが存在することを確認します"
+        },
+        "missingpagebreakviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "orderpagelistviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
+        },
+        "ordertocviolation": {
+            "kbtitle": "",
+            "resdesc": "",
+            "ruledesc": "",
+            "testdesc": ""
         },
         "pagesourceviolation": {
             "kbtitle": "ページナビゲーション",
