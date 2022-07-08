@@ -187,8 +187,9 @@ function checkReadingOrder(assertions, epub) {
   }
   // console.log("SPINE", JSON.stringify(docs, null, 4));
 
-  if (epub.navDoc.pageListHrefs) {
-    const pageListFilePathsAndTargetIDs = epub.navDoc.pageListHrefs.map((href) => {
+  const pageListHrefs = epub.navDoc.pageListHrefs ? epub.navDoc.pageListHrefs : []; // triggers the "missing page break" error for completely absent navdoc/pagelist
+  if (pageListHrefs) { // always truthy (empty array included)
+    const pageListFilePathsAndTargetIDs = pageListHrefs.map((href) => {
       const arr = href.split("#");
       const filePath = path.join(path.dirname(epub.navDoc.filepath), arr[0]);
       const targetID = arr[1];

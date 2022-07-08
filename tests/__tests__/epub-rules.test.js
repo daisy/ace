@@ -46,12 +46,26 @@ test('nothing to report', async () => {
 });
 
 describe('page list and TOC reading order', () => {
+  test('TOC correctly ordered PASS but missing page list for page breaks', async () => {
+    const report = await ace('../data/epubrules-pagelist-missing-pagebreak');
+    console.log(JSON.stringify(report, null, 4));
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
+    const assertions = findAssertionsForDoc(report, '/EPUB/nav.xhtml');
+    // console.log(JSON.stringify(assertions, null, 4));
+    expect(assertions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'epub-pagelist-missing-pagebreak',
+        }),
+      }),
+    ]));
+  });
   test('page list and TOC correctly ordered PASS', async () => {
     const report = await ace('../data/epubrules-pagelist-toc-order-pass');
     // console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']['earl:outcome']).toEqual('pass');
   });
-  test('page list and TOC correctly ordered FAIL', async () => {
+  test('page list and TOC correctly ordered FAIL, with missing pagebreak references', async () => {
     const report = await ace('../data/epubrules-pagelist-toc-order-fail');
     // console.log(JSON.stringify(report, null, 4));
     const assertions = findAssertionsForDoc(report, '/EPUB/nav.xhtml');
