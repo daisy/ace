@@ -48,7 +48,7 @@ test('nothing to report', async () => {
 describe('page list and TOC reading order', () => {
   test('TOC correctly ordered PASS but missing page list for page breaks', async () => {
     const report = await ace('../data/epubrules-pagelist-missing-pagebreak');
-    console.log(JSON.stringify(report, null, 4));
+    // console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']['earl:outcome']).toEqual('fail');
     const assertions = findAssertionsForDoc(report, '/EPUB/nav.xhtml');
     // console.log(JSON.stringify(assertions, null, 4));
@@ -56,6 +56,29 @@ describe('page list and TOC reading order', () => {
       expect.objectContaining({
         'earl:test': expect.objectContaining({
           'dct:title': 'epub-pagelist-missing-pagebreak',
+        }),
+      }),
+    ]));
+  });
+  test('page list and TOC correctly ordered PASS, but SMIL missing pagebreak epub:type', async () => {
+    const report = await ace('../data/epubrules-pagelist-smil-pagebreak');
+    // console.log(JSON.stringify(report, null, 4));
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
+    const assertions1 = findAssertionsForDoc(report, 'content_001.smil');
+    // console.log(JSON.stringify(assertions1, null, 4));
+    expect(assertions1).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'epub-pagelist-mediaoverlays',
+        }),
+      }),
+    ]));
+    const assertions2 = findAssertionsForDoc(report, 'content_002.smil');
+    // console.log(JSON.stringify(assertions2, null, 4));
+    expect(assertions2).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'epub-pagelist-mediaoverlays',
         }),
       }),
     ]));

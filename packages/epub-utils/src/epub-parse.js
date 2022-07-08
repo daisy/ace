@@ -218,6 +218,17 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
             spineContainsNavDoc = spineItem;
           }
         }
+
+        const moAttr = manifestItem[0].getAttribute('media-overlay');
+        const smilManifestItem = select(`/opf:package/opf:manifest/opf:item[@id='${moAttr}']`, doc);
+        if (smilManifestItem.length > 0) {
+          spineItem.mediaOverlay = {};
+          spineItem.mediaOverlay.smilRelPath = decodeURI(smilManifestItem[0].getAttribute('href'));
+          spineItem.mediaOverlay.smilFilePath = path.join(path.dirname(packageDocPath), spineItem.mediaOverlay.smilRelPath );
+          // spineItem.mediaOverlay.smilUrl = fileUrl(spineItem.mediaOverlay.smilFilePath);
+          spineItem.mediaOverlay.smilRefs = this.parseSmilRefs(spineItem.mediaOverlay.smilFilePath);
+        }
+
       } else if (!this.hasSVGContentDocuments && 'image/svg+xml' === contentType) {
         winston.warn('The SVG Content Documents in this EPUB will be ignored.');
         this.hasSVGContentDocuments = true;
@@ -264,6 +275,32 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
   this.hasManifestFallbacks = select('/opf:package/opf:manifest/opf:item[@fallback]', doc).length > 0;
 };
 
+EpubParser.prototype.parseSmilRefs = function(filepath) {
+  const content = fs.readFileSync(filepath).toString();
+  const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xml');
+  const select = xpath.useNamespaces({smil: "http://www.w3.org/ns/SMIL", epub: "http://www.idpf.org/2007/ops"});
+  
+  const arr = select('//smil:text[@src]', doc);
+  let smilRefs = arr.map((o) => {
+    let epubType = o.parentNode ? o.parentNode.getAttributeNS('http://www.idpf.org/2007/ops', 'type') : undefined;
+    if (epubType) {
+      epubType = epubType.trim();
+    }
+    if (!epubType) {
+      epubType = undefined;
+    }
+
+    const src = o.getAttribute("src");
+    return {
+      src,
+      full: path.join(path.dirname(filepath), src),
+      epubType
+    };
+  });
+  // console.log(arr.length, JSON.stringify(smilRefs, null, 4));
+
+  return smilRefs;
+}
 EpubParser.prototype.parseContentDocTitleAndIds = function(filepath) {
   const content = fs.readFileSync(filepath).toString();
   // not application/xhtml+xml because:
@@ -277,9 +314,16 @@ EpubParser.prototype.parseContentDocTitleAndIds = function(filepath) {
 
   const arr = select('//*[@id]', doc);
   let docIds = arr.map((o) => {
+    let epubType = o.getAttributeNS('http://www.idpf.org/2007/ops', 'type');
+    if (epubType) {
+      epubType = epubType.trim();
+    }
+    if (!epubType) {
+      epubType = undefined;
+    }
    return {
     id: o.getAttribute("id"),
-    epubType: o.getAttributeNS('http://www.idpf.org/2007/ops', 'type')
+    epubType
    };
   });
   // console.log(arr.length, JSON.stringify(docIds, null, 4));

@@ -36,6 +36,12 @@
             "ruledesc": "Publication page list must reference all page breaks ({{ref}})",
             "testdesc": "Check that all page breaks are included in the page list ({{ref}})"
         },
+        "mediaoverlaypagebreakviolation": {
+            "kbtitle": "Page Navigation",
+            "resdesc": "Add epub:type pagebreak in SMIL par ({{ref}})",
+            "ruledesc": "SMIL must correctly reference page breaks ({{ref}})",
+            "testdesc": "Ensures that the Media Overlays reference page breaks ({{ref}})"
+        },
         "orderpagelistviolation": {
             "kbtitle": "Page Navigation",
             "resdesc": "Order page list items to match page breaks ({{ref}})",

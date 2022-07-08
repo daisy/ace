@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="en">
+<head>
+<title>Minimal Nav</title>
+</head>
+<body>
+
+<a href="dummyHREF1">DUMMY 1</a>
+
+<nav epub:type="toc" role="doc-toc">
+<ol>
+    <li><a href="./content_001.xhtml">content 001</a></li>
+    <li><ol>
+        <li><a href="content_001.xhtml#p1">page 1</a></li>
+        <li><a href="content_001.xhtml#sec">section</a></li>
+        <li><a href="content_001.xhtml#p2">page 2</a></li>
+        </ol>
+    </li>
+    <li><a href="../EPUB/content_002.xhtml">content 002</a></li>
+    <li><ol>
+        <li><a href="content_002.xhtml#p1">x page 1</a></li>
+        <li><a href="../EPUB/./content_002.xhtml#sec">x section</a></li>
+        <li><a href="content_002.xhtml#p2">x page 2</a></li>
+        </ol>
+    </li>
+</ol>
+</nav>
+<nav epub:type="page-list" role="doc-pagelist">
+<ol>
+    <li><a href="content_001.xhtml#p1">p1</a></li>
+    <li><a href="content_001.xhtml#p1a">p1a</a></li>
+    <li><a href="content_001.xhtml#p2">p2</a></li>
+    <li><a href="content_001.xhtml#p2a">p2a</a></li>
+
+    <li><a href="content_002.xhtml#p1">x p1</a></li>
+    <li><a href="content_002.xhtml#p1a">x p1a</a></li>
+    <li><a href="content_002.xhtml#p2">x p2</a></li>
+    <li><a href="content_002.xhtml#p2a">x p2a</a></li>
+</ol>
+</nav>
+
+<a href="dummyHREF2">DUMMY2</a>
+
+</body>
+</html>
