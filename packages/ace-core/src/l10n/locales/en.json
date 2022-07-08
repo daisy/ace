@@ -34,7 +34,7 @@
             "kbtitle": "Page Navigation",
             "resdesc": "Ensure page list includes all page breaks ({{ref}})",
             "ruledesc": "Publication page list must reference all page breaks ({{ref}})",
-            "testdesc": "Ensures the page list is ordered relative to page breaks ({{ref}})"
+            "testdesc": "Check that all page breaks are included in the page list ({{ref}})"
         },
         "orderpagelistviolation": {
             "kbtitle": "Page Navigation",
