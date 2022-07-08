@@ -55,6 +55,7 @@ test('issue #57: Failed to execute \'matches\' on \'Element\': \'m:annotation-xm
 
 test('issue #85: failed to detect page markers from `epub:type`', async () => {
   const report = await ace('../data/issue-85');
+  // console.log(JSON.stringify(report, null, 4));
   expect(report.properties.hasPageBreaks).toBe(true);
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });

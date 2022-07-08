@@ -61,6 +61,7 @@ describe('check assertions', () => {
   });
   test('with violations', async () => {
     const report = await ace(path.join(__dirname, '../data/has-violations'));
+    // console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']).toBeDefined();
     expect(report['earl:result']).toEqual({ 'earl:outcome': 'fail' });
     expect(Array.isArray(report.assertions)).toBe(true);

@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const builders = require('@daisy/ace-report').builders;
 const winston = require('winston');
 
@@ -159,18 +160,141 @@ function checkMetadata(assertions, epub) {
 }
 
 function checkReadingOrder(assertions, epub) {
-  // console.log(JSON.stringify(epub, null, 4));
+  if (!epub.navDoc || !epub.contentDocs) {
+    return;
+  }
+  // console.log("EPUB", JSON.stringify(epub, null, 4));
   
-  // if (title === '') {
-  //   assertions.withAssertions(newViolation({
-  //     title: 'epub-toc-order',
-  //     testDesc: localize("checkepub.titleviolation.testdesc"),
-  //     resDesc: localize("checkepub.titleviolation.resdesc"),
-  //     kbPath: '',
-  //     kbTitle: localize("checkepub.titleviolation.kbtitle"),
-  //     ruleDesc: localize("checkepub.titleviolation.ruledesc")
-  //   }));
-  // }
+  const docs = [];
+  for (const doc of epub.contentDocs) {
+    if (doc.notInReadingOrder) { // NavDoc artificially appended
+      continue;
+    }
+    docs.push({
+      full: doc.filepath,
+      relative: doc.relpath
+    });
+    if (!doc.targetIDs) {
+      continue;
+    }
+    for (const o of doc.targetIDs) {
+      docs.push({
+        full: doc.filepath + "#" + o.id,
+        relative: doc.relpath + "#" + o.id,
+        epubType: o.epubType
+      });
+    }
+  }
+  // console.log("SPINE", JSON.stringify(docs, null, 4));
+
+  if (epub.navDoc.pageListHrefs) {
+    const pageListFilePathsAndTargetIDs = epub.navDoc.pageListHrefs.map((href) => {
+      const arr = href.split("#");
+      const filePath = path.join(path.dirname(epub.navDoc.filepath), arr[0]);
+      const targetID = arr[1];
+      const full = filePath + (targetID ? "#" + targetID : "");
+      return {
+        full,
+        relative: href
+      };
+    });
+    // console.log("PAGES", JSON.stringify(pageListFilePathsAndTargetIDs, null, 4));
+
+    let pos = -1;
+    let failed = undefined;
+    for (const page of pageListFilePathsAndTargetIDs) {
+      const found = docs.findIndex((doc) => page.full === doc.full);
+      if (found === -1) {
+        failed = page;
+        failed.noTargetID = true;
+        // console.log("PAGE FAIL 1", JSON.stringify(failed, null, 4));
+      } else {
+        const epubType = docs[found].epubType;
+        const notPageBreak = !epubType || !epubType.includes("pagebreak");
+        if (notPageBreak || pos >= 0 && found < pos) {
+          failed = page;
+          failed.notPageBreak = notPageBreak;
+          // console.log("PAGE FAIL 2", found, pos, JSON.stringify(failed, null, 4));
+        }
+        pos = found;
+      }
+
+      if (failed) {
+        const ref = failed.relative + (failed.notPageBreak ? " [epub:type=\"pagebreak\"!?]" : (failed.noTargetID ? " [id!?]" : ""));
+        assertions.withAssertions(newViolation({
+          title: 'epub-pagelist-order',
+          testDesc: localize("checkepub.orderpagelistviolation.testdesc", { ref, interpolation: { escapeValue: false } }),
+          resDesc: localize("checkepub.orderpagelistviolation.resdesc", { ref, interpolation: { escapeValue: false } }),
+          kbPath: 'docs/navigation/pagelist.html',
+          kbTitle: localize("checkepub.orderpagelistviolation.kbtitle"),
+          ruleDesc: localize("checkepub.orderpagelistviolation.ruledesc", { ref, interpolation: { escapeValue: false } })
+        }));
+        break;
+      }
+    }
+    for (const doc of docs) {
+      const epubType = doc.epubType;
+      const isPageBreak = epubType && epubType.includes("pagebreak");
+      if (!isPageBreak) {
+        continue;
+      }
+      const foundPage = pageListFilePathsAndTargetIDs.find((p) => p.full === doc.full);
+      if (!foundPage) {
+        const ref = doc.relative;
+        assertions.withAssertions(newViolation({
+          title: 'epub-pagelist-missing-pagebreak',
+          testDesc: localize("checkepub.missingpagebreakviolation.testdesc", { ref, interpolation: { escapeValue: false } }),
+          resDesc: localize("checkepub.missingpagebreakviolation.resdesc", { ref, interpolation: { escapeValue: false } }),
+          kbPath: 'docs/navigation/pagelist.html',
+          kbTitle: localize("checkepub.missingpagebreakviolation.kbtitle"),
+          ruleDesc: localize("checkepub.missingpagebreakviolation.ruledesc", { ref, interpolation: { escapeValue: false } })
+        }));
+      }
+    }
+  }
+  if (epub.navDoc.tocHrefs) {
+    const tocFilePathsAndTargetIDs = epub.navDoc.tocHrefs.map((href) => {
+      const arr = href.split("#");
+      const filePath = path.join(path.dirname(epub.navDoc.filepath), arr[0]);
+      const targetID = arr[1];
+      const full = filePath + (targetID ? "#" + targetID : "");
+      return {
+        full,
+        relative: href
+      };
+    });
+    // console.log("TOC", JSON.stringify(tocFilePathsAndTargetIDs, null, 4));
+
+    let pos = -1;
+    let failed = undefined;
+    for (const toc of tocFilePathsAndTargetIDs) {
+      const found = docs.findIndex((doc) => toc.full === doc.full);
+      if (found === -1) {
+        failed = toc;
+        failed.noTargetID = true;
+        // console.log("TOC FAIL 1", JSON.stringify(failed, null, 4));
+      } else {
+        if (pos >= 0 && found < pos) {
+          failed = toc;
+          // console.log("TOC FAIL 2", found, pos, JSON.stringify(failed, null, 4));
+        }
+        pos = found;
+      }
+
+      if (failed) {
+        const ref = failed.relative + (failed.noTargetID ? " [id!?]" : "");
+        assertions.withAssertions(newViolation({
+          title: 'epub-toc-order',
+          testDesc: localize("checkepub.ordertocviolation.testdesc", { ref, interpolation: { escapeValue: false } }),
+          resDesc: localize("checkepub.ordertocviolation.resdesc", { ref, interpolation: { escapeValue: false } }),
+          kbPath: 'docs/navigation/toc.html',
+          kbTitle: localize("checkepub.ordertocviolation.kbtitle"),
+          ruleDesc: localize("checkepub.ordertocviolation.ruledesc", { ref, interpolation: { escapeValue: false } })
+        }));
+        break;
+      }
+    }
+  }
 }
 
 function checkTitle(assertions, epub) {
@@ -212,6 +336,25 @@ function check(epub, report) {
     .withSubAssertions()
     .withTestSubject(epub.packageDoc.src, asString(epub.metadata['dc:title']));
 
+  let resPath = "NO NavDoc?!";
+  if (epub.navDoc) {
+    // Axe generates its own assertions for individual HTML files, including the NavDoc,
+    // but the subject filepath is only the filename, not the complete relative path inside the EPUB,
+    // so to ensure no collision we use a slash prefix (hacky! :( )
+    // TODO: merge assertions?
+    // const i = epub.navDoc.src.lastIndexOf("/");
+    // if (i >= 0) {
+    //   resPath = epub.navDoc.src.substring(i+1);
+    // } else {
+    //   resPath = epub.navDoc.src;
+    // }
+
+    resPath = "/" + epub.navDoc.src;
+  }
+  const assertion2 = new builders.AssertionBuilder()
+    .withSubAssertions()
+    .withTestSubject(resPath, "");
+
   if (!epub.opfLang) {
     assertion.withAssertions(newViolation({
       // impact: 'serious', DEFAULT
@@ -224,7 +367,7 @@ function check(epub, report) {
     }));
   }
 
-  checkReadingOrder(assertion, epub);
+  checkReadingOrder(assertion2, epub);
 
   // Check a11y metadata
   checkMetadata(assertion, epub);
@@ -234,6 +377,9 @@ function check(epub, report) {
 
   // Check page list is sourced
   checkPageSource(assertion, epub);
+
+  var builtAssertions2 = assertion2.build();
+  report.addAssertions(builtAssertions2);
 
   var builtAssertions = assertion.build();
   report.addAssertions(builtAssertions);

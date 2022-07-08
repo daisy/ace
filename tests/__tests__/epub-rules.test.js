@@ -45,17 +45,44 @@ test('nothing to report', async () => {
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });
 
-describe('page list and TOC reading order PASS', () => {
-  test('page list and TOC correctly ordered', async () => {
+describe('page list and TOC reading order', () => {
+  test('page list and TOC correctly ordered PASS', async () => {
     const report = await ace('../data/epubrules-pagelist-toc-order-pass');
+    // console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']['earl:outcome']).toEqual('pass');
   });
-});
-
-describe('page list and TOC reading order FAIL', () => {
-  test('page list and TOC correctly ordered', async () => {
+  test('page list and TOC correctly ordered FAIL', async () => {
     const report = await ace('../data/epubrules-pagelist-toc-order-fail');
-    expect(report['earl:result']['earl:outcome']).toEqual('pass');
+    // console.log(JSON.stringify(report, null, 4));
+    const assertions = findAssertionsForDoc(report, '/EPUB/nav.xhtml');
+    // console.log(JSON.stringify(assertions, null, 4));
+    expect(assertions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'epub-pagelist-order',
+        }),
+      }),
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'epub-pagelist-missing-pagebreak',
+        }),
+      }),
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'epub-toc-order',
+        }),
+      }),
+    ]));
+    const assertions2 = findAssertionsForDoc(report, 'nav.xhtml');
+    // console.log(JSON.stringify(assertions2, null, 4));
+    expect(assertions2).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'epub-type-has-matching-role',
+        }),
+      }),
+    ]));
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
   });
 });
 

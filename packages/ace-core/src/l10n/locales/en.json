@@ -30,6 +30,24 @@
             "ruledesc": "Publications must declare the '{{name}}' metadata",
             "testdesc": "Ensures a '{{name}}' metadata is present"
         },
+        "missingpagebreakviolation": {
+            "kbtitle": "Page Navigation",
+            "resdesc": "Ensure page list includes all page breaks ({{ref}})",
+            "ruledesc": "Publication page list must reference all page breaks ({{ref}})",
+            "testdesc": "Ensures the page list is ordered relative to page breaks ({{ref}})"
+        },
+        "orderpagelistviolation": {
+            "kbtitle": "Page Navigation",
+            "resdesc": "Order page list items to match page breaks ({{ref}})",
+            "ruledesc": "Publication page list must be in the same order as page breaks ({{ref}})",
+            "testdesc": "Ensures the page list is ordered relative to page breaks ({{ref}})"
+        },
+        "ordertocviolation": {
+            "kbtitle": "Table of Contents",
+            "resdesc": "Order the Table Of Contents items ({{ref}})",
+            "ruledesc": "TOC must match the publication reading order ({{ref}})",
+            "testdesc": "Ensures the publication TOC is ordered ({{ref}})"
+        },
         "pagesourceviolation": {
             "kbtitle": "Page Navigation",
             "resdesc": "Add a 'dc:source' metadata property to the Package Document",

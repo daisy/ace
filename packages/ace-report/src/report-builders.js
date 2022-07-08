@@ -26,7 +26,7 @@ function calculateResult(assertions) {
 // add an assertion and recalc the top-level result
 function withAssertions(obj, assertions) {
   if (!('assertions' in obj)) obj.assertions = [];
-  obj.assertions = obj.assertions.concat(assertions);
+  obj.assertions = obj.assertions.concat(assertions); // TODO: merge assertions with same subject (e.g. NavDoc HTML which can be Axe or Ace -generated)
   obj['earl:result'] = calculateResult(obj.assertions);
   return obj;
 }

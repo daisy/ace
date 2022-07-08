@@ -59,7 +59,7 @@ function parseNavDoc(fullpath, epubDir) {
   let pageListHrefs = undefined;
   if (hasPageList) {
     const arr1 = select('descendant::html:a/@href', sPageList[0]);
-    pageListHrefs = arr1.map((o) => o.nodeValue);
+    pageListHrefs = arr1.map((o) => decodeURI(o.nodeValue));
     // console.log(arr1.length, JSON.stringify(pageListHrefs, null, 4));
   }
   
@@ -67,7 +67,7 @@ function parseNavDoc(fullpath, epubDir) {
   const sTOC = select('//html:nav[@epub:type="toc"]/html:ol', doc);
   if (sTOC[0]) {
     const arr2 = select('descendant::html:a/@href', sTOC[0]);
-    tocHrefs = arr2.map((o) => o.nodeValue);
+    tocHrefs = arr2.map((o) => decodeURI(o.nodeValue));
     // console.log(arr2.length, JSON.stringify(tocHrefs, null, 4));
   }
 
@@ -164,9 +164,11 @@ EpubParser.prototype.parse = function(epubDir) {
     if (packageDocPath === '') {
       winston.error('Package document not found.');
       reject(new Error("Package document not found."));
+      return;
     }
     this.packageDoc = {
       src: path.relative(epubDir, packageDocPath),
+      path: packageDocPath,
     };
     this.parseData(packageDocPath, epubDir);
     resolve(this);
@@ -273,8 +275,13 @@ EpubParser.prototype.parseContentDocTitleAndIds = function(filepath) {
   const title = select('/html:html/html:head/html:title/text()', doc);
   let titleText = title.length > 0 ? title[0].nodeValue : "";
 
-  const arr = select('//*/@id', doc);
-  let docIds = arr.map((o) => o.nodeValue);
+  const arr = select('//*[@id]', doc);
+  let docIds = arr.map((o) => {
+   return {
+    id: o.getAttribute("id"),
+    epubType: o.getAttributeNS('http://www.idpf.org/2007/ops', 'type')
+   };
+  });
   // console.log(arr.length, JSON.stringify(docIds, null, 4));
 
   return {
