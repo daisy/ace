@@ -245,6 +245,8 @@ function checkReadingOrder(epub) {
     return undefined;
   }
 
+  const isFXL = epub.metadata['rendition:layout'] === "pre-paginated";
+
   const resPath = "/" + epub.navDoc.src;
   // Axe generates its own assertions for individual HTML files, including the NavDoc,
   // but the subject filepath is only the filename, not the complete relative path inside the EPUB,
@@ -310,7 +312,7 @@ function checkReadingOrder(epub) {
       } else {
         const epubType = docs[found].epubType;
         const notPageBreak = !epubType || !epubType.includes("pagebreak");
-        if (notPageBreak || pos >= 0 && found < pos) {
+        if (notPageBreak && !isFXL || pos >= 0 && found < pos) {
           failed = page;
           failed.notPageBreak = notPageBreak;
           // console.log("PAGE FAIL 2", found, pos, JSON.stringify(failed, null, 4));
@@ -331,23 +333,25 @@ function checkReadingOrder(epub) {
         break;
       }
     }
-    for (const doc of docs) {
-      const epubType = doc.epubType;
-      const isPageBreak = epubType && epubType.includes("pagebreak");
-      if (!isPageBreak) {
-        continue;
-      }
-      const foundPage = pageListFilePathsAndTargetIDs.find((p) => p.full === doc.full);
-      if (!foundPage) {
-        const ref = doc.relative;
-        assertions.withAssertions(newViolation({
-          title: 'epub-pagelist-missing-pagebreak',
-          testDesc: localize("checkepub.missingpagebreakviolation.testdesc", { ref, interpolation: { escapeValue: false } }),
-          resDesc: localize("checkepub.missingpagebreakviolation.resdesc", { ref, interpolation: { escapeValue: false } }),
-          kbPath: 'docs/navigation/pagelist.html',
-          kbTitle: localize("checkepub.missingpagebreakviolation.kbtitle"),
-          ruleDesc: localize("checkepub.missingpagebreakviolation.ruledesc", { ref, interpolation: { escapeValue: false } })
-        }));
+    if (!isFXL) {
+      for (const doc of docs) {
+        const epubType = doc.epubType;
+        const isPageBreak = epubType && epubType.includes("pagebreak");
+        if (!isPageBreak) {
+          continue;
+        }
+        const foundPage = pageListFilePathsAndTargetIDs.find((p) => p.full === doc.full);
+        if (!foundPage) {
+          const ref = doc.relative;
+          assertions.withAssertions(newViolation({
+            title: 'epub-pagelist-missing-pagebreak',
+            testDesc: localize("checkepub.missingpagebreakviolation.testdesc", { ref, interpolation: { escapeValue: false } }),
+            resDesc: localize("checkepub.missingpagebreakviolation.resdesc", { ref, interpolation: { escapeValue: false } }),
+            kbPath: 'docs/navigation/pagelist.html',
+            kbTitle: localize("checkepub.missingpagebreakviolation.kbtitle"),
+            ruleDesc: localize("checkepub.missingpagebreakviolation.ruledesc", { ref, interpolation: { escapeValue: false } })
+          }));
+        }
       }
     }
   }

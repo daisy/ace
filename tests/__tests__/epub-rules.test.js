@@ -88,6 +88,11 @@ describe('page list and TOC reading order', () => {
     // console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']['earl:outcome']).toEqual('pass');
   });
+  test('page list and TOC correctly ordered PASS FXL', async () => {
+    const report = await ace('../data/epubrules-pagelist-toc-order-pass-FXL');
+    // console.log(JSON.stringify(report, null, 4));
+    expect(report['earl:result']['earl:outcome']).toEqual('pass');
+  });
   test('page list and TOC correctly ordered FAIL, with missing pagebreak references', async () => {
     const report = await ace('../data/epubrules-pagelist-toc-order-fail');
     // console.log(JSON.stringify(report, null, 4));
