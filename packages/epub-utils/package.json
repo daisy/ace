@@ -28,7 +28,7 @@
     "fs-extra": "^10.1.0",
     "node-stream-zip": "^1.15.0",
     "tmp": "^0.2.1",
-    "winston": "^3.7.2",
+    "winston": "^3.8.1",
     "xmldom": "^0.6.0",
     "xpath": "^0.0.32"
   },

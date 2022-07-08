@@ -26,7 +26,7 @@
     "@daisy/ace-config": "^1.2.7-alpha.3",
     "fs-extra": "^10.1.0",
     "uuid": "^8.3.2",
-    "winston": "^3.7.2"
+    "winston": "^3.8.1"
   },
   "publishConfig": {
     "access": "public"

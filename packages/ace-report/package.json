@@ -29,7 +29,7 @@
     "escape-html": "^1.0.3",
     "fs-extra": "^10.1.0",
     "handlebars": "^4.7.7",
-    "winston": "^3.7.2"
+    "winston": "^3.8.1"
   },
   "publishConfig": {
     "access": "public"
