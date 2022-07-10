@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-axe-runner-puppeteer",
-  "version": "1.2.7-alpha.5",
+  "version": "1.2.7",
   "engines": {
     "node": ">=12.0.0",
     "yarn": "^1.22.0",
@@ -23,7 +23,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/puppeteer-utils": "^1.2.7-alpha.5",
+    "@daisy/puppeteer-utils": "^1.2.7",
     "puppeteer": "^15.3.2"
   },
   "publishConfig": {
