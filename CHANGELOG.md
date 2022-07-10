@@ -1,3 +1,13 @@
+<a name="1.2.7"></a>
+## [1.2.7](https://github.com/daisy/ace/compare/v1.2.6...v1.2.7) (2022-07-10)
+
+### Updates:
+
+* Support for the EPUB Accessibility 1.1 specification "Conformance and Discoverability Requirements for EPUB publications" (W3C Candidate Recommendation Draft dated 07 June 2022)
+* Upgraded the DAISY fork of Deque Axe to latest version 4.4.2
+* Fixed links to the DAISY Knowledge Base
+* Other internal maintenance items, upgraded various NPM package dependencies (notably the latest versions of Electron and Puppeteer which run the in-webview tests under the hood)
+
 <a name="1.2.6"></a>
 ## [1.2.6](https://github.com/daisy/ace/compare/v1.2.5...v1.2.6) (2022-02-03)
 
