@@ -22,7 +22,7 @@ If everything went smoothly, you should now be able to run the `ace` command in 
 
 ```
 $ ace --version
-1.2.6
+1.2.7
 ```
 
 {{% note %}}
