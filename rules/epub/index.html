@@ -118,7 +118,7 @@
             <a class="logo" href="https://daisy.github.io/ace" aria-label="Ace, by DAISY home page">
               <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
             </a>
-            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2.6</p>
+            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.2.7</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -313,6 +313,26 @@
 <tr>
 <td style="text-align:left">pagebreak-label</td>
 <td style="text-align:left">Ensures that page markers have an accessible label.</td>
+</tr>
+<tr>
+<td style="text-align:left">epub-pagelist-mediaoverlays</td>
+<td style="text-align:left">Ensures EPUB Media Overlays SMIL contain epub:type pagebreak where expected</td>
+</tr>
+<tr>
+<td style="text-align:left">epub-pagelist-missing-pagebreak</td>
+<td style="text-align:left">Ensures all HTML epub:type pagebreak elements are referenced from the EPUB Navigation Document&rsquo;s pagelist</td>
+</tr>
+<tr>
+<td style="text-align:left">epub-toc-order</td>
+<td style="text-align:left">Ensures the EPUB Navigation Document&rsquo;s Table of Contents is ordered correctly to match the spine reading order</td>
+</tr>
+<tr>
+<td style="text-align:left">epub-pagelist-order</td>
+<td style="text-align:left">Ensures the EPUB Navigation Document&rsquo;s page list is ordered correctly to match the spine reading order, and points to epub:type pagebreak elements</td>
+</tr>
+<tr>
+<td style="text-align:left">epub-lang</td>
+<td style="text-align:left">Ensures package OPF has xml:lang</td>
 </tr>
 </tbody>
 </table>
