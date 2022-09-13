@@ -34,9 +34,9 @@ const a11yMeta = [
     // https://www.w3.org/TR/2022/NOTE-epub-a11y-tech-11-20220610/#meta-004
     "schema:accessibilityHazard", // required
 
-    // https://www.w3.org/2021/a11y-discov-vocab/latest/CG-FINAL-a11y-discov-vocab-20220610.html#accessibilitySummary
-    // https://www.w3.org/TR/2022/NOTE-epub-a11y-tech-11-20220610/#meta-005
-    "schema:accessibilitySummary", // required
+    // https://www.w3.org/TR/2022/CRD-epub-a11y-11-20220908/#sec-disc-package
+    // https://www.w3.org/TR/2022/NOTE-epub-a11y-tech-11-20220827/#meta-005
+    "schema:accessibilitySummary", // recommended
 
     // https://www.w3.org/2021/a11y-discov-vocab/latest/CG-FINAL-a11y-discov-vocab-20220610.html#accessModeSufficient
     // https://www.w3.org/TR/2022/NOTE-epub-a11y-tech-11-20220610/#meta-002
@@ -187,7 +187,8 @@ const A11Y_META = {
         ]
     },
     'schema:accessibilitySummary': {
-        required: true,
+        // required: true,
+        recommended: true, // https://github.com/daisy/ace/issues/378
     }
 };
 

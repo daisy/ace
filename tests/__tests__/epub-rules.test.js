@@ -237,42 +237,46 @@ describe('accessibility metadata', () => {
     });
   });
 
-  test('missing metadata is reported', async () => {
-    const report = await ace('../data/epubrules-metadata');
-    expect(report['earl:result']['earl:outcome']).toEqual('fail');
-    const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
-    expect(assertions).toEqual(expect.arrayContaining([
-      expect.objectContaining({
-        'earl:test': expect.objectContaining({
-          'dct:title': 'metadata-accessibilitysummary',
-        }),
-      }),
-    ]));
-  });
-  test('incorrect metadata value is reported', async () => {
-    const report = await ace('../data/epubrules-metadata');
-    expect(report['earl:result']['earl:outcome']).toEqual('fail');
-    const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
-    expect(assertions).toEqual(expect.arrayContaining([
-      expect.objectContaining({
-        'earl:test': expect.objectContaining({
-          'dct:title': 'metadata-accessmode-invalid',
-        }),
-      }),
-    ]));
-  });
+  // duplicate, see below
+  // test('missing metadata is reported', async () => {
+  //   const report = await ace('../data/epubrules-metadata');
+  //   expect(report['earl:result']['earl:outcome']).toEqual('fail');
+  //   const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+  //   expect(assertions).toEqual(expect.arrayContaining([
+  //     expect.objectContaining({
+  //       'earl:test': expect.objectContaining({
+  //         'dct:title': 'metadata-accessibilitysummary',
+  //       }),
+  //     }),
+  //   ]));
+  // });
+  // test('incorrect metadata value is reported', async () => {
+  //   const report = await ace('../data/epubrules-metadata');
+  //   expect(report['earl:result']['earl:outcome']).toEqual('fail');
+  //   const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+  //   expect(assertions).toEqual(expect.arrayContaining([
+  //     expect.objectContaining({
+  //       'earl:test': expect.objectContaining({
+  //         'dct:title': 'metadata-accessmode-invalid',
+  //       }),
+  //     }),
+  //   ]));
+  // });
   test('accessmode and accessibilitysummary metadata are incorrect', async () => {
     const report = await ace('../data/epubrules-metadata');
     expect(report['earl:result']['earl:outcome']).toEqual('fail');
     const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+    // console.log(JSON.stringify(assertions, null, 4))
     expect(assertions).toEqual(expect.arrayContaining([
       expect.objectContaining({
         'earl:test': expect.objectContaining({
+          "earl:impact": "minor",
           'dct:title': 'metadata-accessmode-invalid',
         }),
       }),
       expect.objectContaining({
         'earl:test': expect.objectContaining({
+          "earl:impact": "moderate",
           'dct:title': 'metadata-accessibilitysummary',
         }),
       }),
