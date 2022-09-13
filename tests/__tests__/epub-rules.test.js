@@ -93,7 +93,7 @@ describe('page list and TOC reading order', () => {
     // console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']['earl:outcome']).toEqual('pass');
   });
-  test('page list and TOC correctly ordered FAIL, with missing pagebreak references', async () => {
+  test('page list and TOC (ordered) FAIL, with missing pagebreak references', async () => {
     const report = await ace('../data/epubrules-pagelist-toc-order-fail');
     // console.log(JSON.stringify(report, null, 4));
     const assertions = findAssertionsForDoc(report, '/EPUB/nav.xhtml');
@@ -101,7 +101,7 @@ describe('page list and TOC reading order', () => {
     expect(assertions).toEqual(expect.arrayContaining([
       expect.objectContaining({
         'earl:test': expect.objectContaining({
-          'dct:title': 'epub-pagelist-order',
+          'dct:title': 'epub-pagelist-broken',
         }),
       }),
       expect.objectContaining({

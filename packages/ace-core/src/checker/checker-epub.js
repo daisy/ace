@@ -301,7 +301,8 @@ function checkReadingOrder(epub) {
     });
     // console.log("PAGES", JSON.stringify(pageListFilePathsAndTargetIDs, null, 4));
 
-    let pos = -1;
+    // we ignore order! (unlike table of contents check)
+    // let pos = -1;
     let failed = undefined;
     for (const page of pageListFilePathsAndTargetIDs) {
       const found = docs.findIndex((doc) => page.full === doc.full);
@@ -312,25 +313,27 @@ function checkReadingOrder(epub) {
       } else {
         const epubType = docs[found].epubType;
         const notPageBreak = !epubType || !epubType.includes("pagebreak");
-        if (notPageBreak && !isFXL || pos >= 0 && found < pos) {
+        if (notPageBreak && !isFXL
+          // || pos >= 0 && found < pos
+          ) {
           failed = page;
           failed.notPageBreak = notPageBreak;
           // console.log("PAGE FAIL 2", found, pos, JSON.stringify(failed, null, 4));
         }
-        pos = found;
+        // pos = found;
       }
 
       if (failed) {
         const ref = failed.relative + (failed.notPageBreak ? " [epub:type=\"pagebreak\"!?]" : (failed.noTargetID ? " [id!?]" : ""));
         assertions.withAssertions(newViolation({
-          title: 'epub-pagelist-order',
-          testDesc: localize("checkepub.orderpagelistviolation.testdesc", { ref, interpolation: { escapeValue: false } }),
-          resDesc: localize("checkepub.orderpagelistviolation.resdesc", { ref, interpolation: { escapeValue: false } }),
+          title: 'epub-pagelist-broken',
+          testDesc: localize("checkepub.pagelistbrokenviolation.testdesc", { ref, interpolation: { escapeValue: false } }),
+          resDesc: localize("checkepub.pagelistbrokenviolation.resdesc", { ref, interpolation: { escapeValue: false } }),
           kbPath: 'docs/navigation/pagelist.html',
-          kbTitle: localize("checkepub.orderpagelistviolation.kbtitle"),
-          ruleDesc: localize("checkepub.orderpagelistviolation.ruledesc", { ref, interpolation: { escapeValue: false } })
+          kbTitle: localize("checkepub.pagelistbrokenviolation.kbtitle"),
+          ruleDesc: localize("checkepub.pagelistbrokenviolation.ruledesc", { ref, interpolation: { escapeValue: false } })
         }));
-        break;
+        // break;
       }
     }
     if (!isFXL) {

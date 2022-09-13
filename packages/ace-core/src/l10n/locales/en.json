@@ -42,11 +42,11 @@
             "ruledesc": "Publication page list must reference all page breaks ({{ref}})",
             "testdesc": "Check that all page breaks are included in the page list ({{ref}})"
         },
-        "orderpagelistviolation": {
+        "pagelistbrokenviolation": {
             "kbtitle": "Page Navigation",
-            "resdesc": "Order page list items to match page breaks ({{ref}})",
-            "ruledesc": "Publication page list must be in the same order as page breaks ({{ref}})",
-            "testdesc": "Ensures the page list is ordered relative to page breaks ({{ref}})"
+            "resdesc": "Make sure that page list items point to epub:type page breaks ({{ref}})",
+            "ruledesc": "Publication page list must reference page breaks ({{ref}})",
+            "testdesc": "Ensures the page list links to page breaks ({{ref}})"
         },
         "ordertocviolation": {
             "kbtitle": "Table of Contents",

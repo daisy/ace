@@ -15,5 +15,5 @@ In addition to the [HTML rules]({{<ref "html.md">}}), Ace has a set of rules tha
 | epub-pagelist-mediaoverlays | Ensures EPUB Media Overlays SMIL contain epub:type pagebreak where expected |
 | epub-pagelist-missing-pagebreak | Ensures all HTML epub:type pagebreak elements are referenced from the EPUB Navigation Document's pagelist |
 | epub-toc-order | Ensures the EPUB Navigation Document's Table of Contents is ordered correctly to match the spine reading order |
-| epub-pagelist-order | Ensures the EPUB Navigation Document's page list is ordered correctly to match the spine reading order, and points to epub:type pagebreak elements |
+| epub-pagelist-broken | Ensures the EPUB Navigation Document's page list points to epub:type pagebreak elements (order is ignored) |
 | epub-lang | Ensures package OPF has xml:lang |

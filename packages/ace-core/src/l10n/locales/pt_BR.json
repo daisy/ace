@@ -42,7 +42,7 @@
             "ruledesc": "",
             "testdesc": ""
         },
-        "orderpagelistviolation": {
+        "pagelistbrokenviolation": {
             "kbtitle": "",
             "resdesc": "",
             "ruledesc": "",
