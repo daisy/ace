@@ -19,9 +19,13 @@
 
   <meta property="schema:accessibilityControl">fullKeyboardControl</meta>
   
-  <meta property="schema:accessibilityAPI">AndroidAcessibility</meta>
+  <meta property="schema:accessibilityAPI" refines=" # ">AndroidAcessibility</meta>
   
-  <meta property="dcterms:conformsTo">EPUB-A11Y-11_WCAG-21-AA</meta>
+  <meta property="dcterms:conformsTo" id="conf">EPUB-A11Y-11_WCAG-21-AA</meta>
+  <!-- meta property="dcterms:conformsTo" id="conf">EPUB Accessibility 1.1 - WCAG 2.1 Level AA</meta -->
+
+  <meta property="a11y:certifiedBy" id="certifier" refines="#conf">Benetech</meta>
+  <link rel="a11y:certifierCredential" href="http://GCA" refines="#certifier" />
 </metadata>
 <manifest>
   <item id="nav"  href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>

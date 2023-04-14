@@ -112,14 +112,35 @@ function parseMetadata(doc, select) {
   select('/opf:package/opf:metadata/dc:*', doc).forEach((dcElem) => {
     addMeta(`dc:${dcElem.localName}`, dcElem.textContent, result);
   });
-  select('/opf:package/opf:metadata/opf:meta[not(@refines)]', doc).forEach((meta) => {
+  select('/opf:package/opf:metadata/opf:meta', doc).forEach((meta) => {
     const prop = meta.getAttribute('property');
+    const name = meta.getAttribute('name');
+    const md = prop || name;
+
+    let refines = meta.getAttribute('refines');
+    if (refines) {
+      refines = refines.trim();
+      if (refines.startsWith("#")) {
+        refines = refines.substring(1);
+      }
+      refines = refines.trim();
+      if (refines) {
+        // we exclude most refined metadata such as audio duration for individual spine items, or title-type=subtitle for dc:title, etc.
+        // ... but we preserve known global metadata:
+        // here, this accessibility metadata can typically associated with a particular dcterms:conformsTo statement
+        // (unfortunately in this simplified metadata parsing model, we lose refine semantics completely,
+        // so multiple dcterms:conformsTo statements will not be explicitly linked to their associated a11y:cert* declarations)
+        if (md !== "a11y:certifiedBy" && md !== "a11y:certifierCredential" && md !== "a11y:certifierReport") {
+          return;
+        }
+      }
+    }
+
     if (prop) {
       if (meta.textContent) {
         addMeta(prop, meta.textContent, result);
       }
     } else {
-      const name = meta.getAttribute('name');
       const content = meta.getAttribute('content');
       if (name && content) {
         addMeta(name, content, result);
@@ -143,8 +164,31 @@ function addLink(rel, href, link) {
 }
 function parseLinks(doc, select) {
   const result = {};
-  select('/opf:package/opf:metadata/opf:link[not(@refines)]', doc).forEach((link) => {
-    addLink(link.getAttribute('rel'), decodeURI(link.getAttribute('href')), result);
+  select('/opf:package/opf:metadata/opf:link', doc).forEach((link) => {
+
+    const rel = link.getAttribute('rel');
+
+    let refines = link.getAttribute('refines');
+    if (refines) {
+      refines = refines.trim();
+      if (refines.startsWith("#")) {
+        refines = refines.substring(1);
+      }
+      refines = refines.trim();
+      if (refines) {
+        // we exclude most refined metadata such as audio duration for individual spine items, or title-type=subtitle for dc:title, etc.
+        // ... but we preserve known global metadata:
+        // here, this accessibility metadata can typically associated with a particular dcterms:conformsTo statement
+        // (unfortunately in this simplified metadata parsing model, we lose refine semantics completely,
+        // so multiple dcterms:conformsTo statements will not be explicitly linked to their associated a11y:cert* declarations)
+        if ( // rel !== "a11y:certifiedBy" &&
+          rel !== "a11y:certifierCredential" && rel !== "a11y:certifierReport") {
+          return;
+        }
+      }
+    }
+
+    addLink(rel, decodeURI(link.getAttribute('href')), result);
   });
   return result;
 }

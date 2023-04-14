@@ -165,8 +165,6 @@ describe('accessibility metadata', () => {
     // console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']['earl:outcome']).toEqual('pass');
     expect(report['a11y-metadata']['missing']).toEqual([
-      "a11y:certifiedBy",
-      "a11y:certifierCredential",
       "a11y:certifierReport"
     ]);
     expect(report['a11y-metadata']['present']).toEqual([
@@ -177,11 +175,14 @@ describe('accessibility metadata', () => {
       "schema:accessModeSufficient",
       "schema:accessibilityAPI",
       "schema:accessibilityControl",
+      "a11y:certifiedBy",
+      "a11y:certifierCredential",
       "dcterms:conformsTo"
     ]);
     expect(report['earl:testSubject']['metadata']).toEqual({
       "dc:title": "Minimal EPUB 3.0",
       "dc:language": "en",
+      "a11y:certifiedBy": "Benetech",
       "dc:identifier": "NOID",
       "dcterms:modified": "2017-01-01T00:00:01Z",
       "schema:accessMode": "textual",
@@ -193,7 +194,9 @@ describe('accessibility metadata', () => {
       "schema:accessibilityAPI": "AndroidAcessibility",
       "dcterms:conformsTo": "EPUB-A11Y-11_WCAG-21-AA"
     });
-    expect(report['earl:testSubject']['links']).toEqual({});
+    expect(report['earl:testSubject']['links']).toEqual({
+      "a11y:certifierCredential": "http://GCA",
+    });
   });
   test('accessibilityAPI and accessibilityControl metadata are ignored when missing', async () => {
     const report = await ace('../data/epubrules-metadata-accessibilityAPI_Control-missing');
