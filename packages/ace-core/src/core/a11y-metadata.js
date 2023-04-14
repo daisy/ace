@@ -13,13 +13,18 @@ const conformsToURLs = [
     "http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-aa",
     "http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-aaa",
 ];
+const conformsToStrings = [
+    "EPUB Accessibility 1.1 - WCAG 2.0 Level A",
+    "EPUB Accessibility 1.1 - WCAG 2.0 Level AA",
+    "EPUB Accessibility 1.1 - WCAG 2.0 Level AAA",
+    "EPUB Accessibility 1.1 - WCAG 2.1 Level A",
+    "EPUB Accessibility 1.1 - WCAG 2.1 Level AA",
+    "EPUB Accessibility 1.1 - WCAG 2.1 Level AAA",
+];
 
 const a11yMeta_links = [
     // https://www.w3.org/TR/2022/CRD-epub-a11y-11-20220607/#sec-evaluator-report
     "a11y:certifierReport", //(link in EPUB3)
-
-    // https://www.w3.org/TR/2022/CRD-epub-a11y-11-20220607/#sec-conf-reporting-pub
-    "dcterms:conformsTo", //(link in EPUB3)
 ];
 const a11yMeta = [
     // https://www.w3.org/2021/a11y-discov-vocab/latest/CG-FINAL-a11y-discov-vocab-20220610.html#accessMode
@@ -57,6 +62,9 @@ const a11yMeta = [
 
     // https://www.w3.org/TR/2022/CRD-epub-a11y-11-20220607/#sec-evaluator-credentials
     "a11y:certifierCredential", //(MAY BE link in EPUB3)
+
+    // https://www.w3.org/TR/2022/CRD-epub-a11y-11-20220607/#sec-conf-reporting-pub
+    "dcterms:conformsTo", //(MAY BE link in EPUB3)
 ].concat(a11yMeta_links);
 
 const A11Y_META = {
@@ -193,6 +201,7 @@ const A11Y_META = {
 };
 
 module.exports = {
+    conformsToStrings,
     conformsToURLs,
     a11yMeta_links,
     a11yMeta,
