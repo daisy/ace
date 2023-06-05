@@ -1,3 +1,17 @@
+<a name="1.2.8"></a>
+## [1.2.8](https://github.com/daisy/ace/compare/v1.2.7...v1.2.8) (2023-06-05)
+
+### Updates:
+
+* Support for the EPUB Accessibility 1.1 specification "Conformance and Discoverability Requirements for EPUB publications" (W3C Recommendation dated 25 May 2023)
+* Fixed ordering rule/check in page list.
+* accessibilitySummary metadata is now recommended (SHOULD), not required (MUST). The impact/severity is downgraded from serious to moderate.
+* conformsTo metadata is a link in the a11y spec. 1.0 (IDPF WCAG URLs), but can be string label in 1.1
+* metadata "refines" is not filtered out for a11y properties that are globally hoisted to the level of the publication (unlike say, media overlays duration for individual spine items, or dc:title subtitle title-type refine)
+* Updated Electron Axe "runner" to latest version, includes recent Chromium browser engine revision (matches Ace App GUI 1.1.6).
+* Deprecated Puppeteer Axe "runner" in favour of the Electron one, which runs faster and is overall a better option as it delivers an experience consistent with Ace App (GUI). The Chromium version is now the same between Ace and Ace App. This alignment of technologies eliminates incorrectly-reported colour contrast violations (this was a notable discrepancy).
+* Upgraded the DAISY fork of Deque Axe to latest version 4.7.2 (this brings many fixes and alignments with the latest ARIA specifications) See https://github.com/daisy/axe-core/pull/11
+
 <a name="1.2.7"></a>
 ## [1.2.7](https://github.com/daisy/ace/compare/v1.2.6...v1.2.7) (2022-07-10)
 
