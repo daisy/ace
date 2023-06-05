@@ -1,5 +1,5 @@
-<a name="1.2.8"></a>
-## [1.2.8](https://github.com/daisy/ace/compare/v1.2.7...v1.2.8) (2023-06-05)
+<a name="1.3.0"></a>
+## [1.3.0](https://github.com/daisy/ace/compare/v1.2.7...v1.3.0) (2023-06-05)
 
 ### Updates:
 
