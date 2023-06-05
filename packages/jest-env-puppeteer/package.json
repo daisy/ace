@@ -24,7 +24,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "jest-environment-node": "^26.6.2",
-    "puppeteer": "^15.3.2"
+    "puppeteer": "^17.1.3"
   },
   "publishConfig": {
     "access": "public"

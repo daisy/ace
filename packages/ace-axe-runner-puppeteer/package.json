@@ -23,8 +23,8 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/puppeteer-utils": "^1.2.8-alpha.1",
-    "puppeteer": "^15.3.2"
+    "@daisy/puppeteer-utils": "1.2.8-alpha.1",
+    "puppeteer": "^17.1.3"
   },
   "publishConfig": {
     "access": "public"

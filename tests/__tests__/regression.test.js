@@ -106,7 +106,14 @@ test('issue #209: `aria-describedby` can be a list of IDs', async () => {
 
 test('issue #239: `listitem` is not reported when roles inherit from list roles', async () => {
   const report = await ace('../data/issue-239');
-  expect(report['earl:result']['earl:outcome']).toEqual('pass');
+  // console.log(JSON.stringify(report, null, 4));
+  expect(report['earl:result']['earl:outcome']).toEqual('fail');
+  expect(report['assertions'][0]['earl:result']['earl:outcome']).toEqual('pass');
+  expect(report['assertions'][1]['earl:result']['earl:outcome']).toEqual('pass');
+  expect(report['assertions'][3]['earl:result']['earl:outcome']).toEqual('pass');
+  expect(report['assertions'][2]['earl:result']['earl:outcome']).toEqual('fail');
+  expect(report['assertions'][2]['assertions'][0]['earl:result']['earl:outcome']).toEqual('fail');
+  expect(report['assertions'][2]['assertions'][0]['earl:result']['dct:description']).toEqual('The role used is deprecated: directory');
 });
 
 test('issue #290 (unzipped): URL percent encoding', async () => {

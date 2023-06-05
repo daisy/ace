@@ -39,10 +39,10 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-axe-runner-electron": "^1.2.8-alpha.1",
-    "@daisy/ace-cli": "^1.2.8-alpha.1",
-    "@daisy/ace-core": "^1.2.8-alpha.1",
-    "@daisy/ace-http": "^1.2.8-alpha.1"
+    "@daisy/ace-axe-runner-electron": "1.2.8-alpha.1",
+    "@daisy/ace-cli": "1.2.8-alpha.1",
+    "@daisy/ace-core": "1.2.8-alpha.1",
+    "@daisy/ace-http": "1.2.8-alpha.1"
   },
   "publishConfig": {
     "access": "public"
