@@ -35,7 +35,7 @@ When filing an issue, please provide the following details:</description>
       
       <guid>https://daisy.github.io/ace/contributing/notes/</guid>
       <description>HTML checker Under the hood, most of the HTML checks are powered by axe, an engine for automated testing of HTML from Deque Systems.
-Headless browser During the evaluation of an EPUB, Ace loads each HTML content document in a headless browser, using headless Chrome via Puppeteer.</description>
+Headless browser During the evaluation of an EPUB, Ace loads each HTML content document in a &amp;ldquo;headless&amp;rdquo; web browser window (i.e. invisible from the point of view of the user of the command line tool, but nonetheless using a real rendering engine). Ace was originally based on Puppeteer but it is now using Electron by default.</description>
     </item>
     
   </channel>

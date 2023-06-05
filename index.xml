@@ -121,7 +121,7 @@ Install Node.JS  Go to Node.JS Download version 10 or higher Double-click to ins
       
       <guid>https://daisy.github.io/ace/contributing/notes/</guid>
       <description>HTML checker Under the hood, most of the HTML checks are powered by axe, an engine for automated testing of HTML from Deque Systems.
-Headless browser During the evaluation of an EPUB, Ace loads each HTML content document in a headless browser, using headless Chrome via Puppeteer.</description>
+Headless browser During the evaluation of an EPUB, Ace loads each HTML content document in a &amp;ldquo;headless&amp;rdquo; web browser window (i.e. invisible from the point of view of the user of the command line tool, but nonetheless using a real rendering engine). Ace was originally based on Puppeteer but it is now using Electron by default.</description>
     </item>
     
     <item>
@@ -164,7 +164,7 @@ $ ace ~/Documents/moby-dick.epub The above command will run the automated access
       
       <guid>https://daisy.github.io/ace/getting-started/ace-app/</guid>
       <description>What is the Ace by DAISY App? Ace by DAISY App is the official graphical user interface for the EPUB accessibility checker developed by the DAISY Consortium. The Ace App is available for the Windows, MacOS and Linux desktop operating systems.
-Where can I download the Ace App? The latest version of the Ace App is 1.1.5. The application installers are distributed via the GitHub development website. Here are convenient download links:</description>
+Where can I download the Ace App? The latest version of the Ace App is 1.3.0. The application installers are distributed via the GitHub development website. Here are convenient download links:</description>
     </item>
     
     <item>
