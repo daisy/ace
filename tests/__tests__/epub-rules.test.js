@@ -348,7 +348,6 @@ describe('accessibility metadata', () => {
   });
   test('accessibilityFeature none unknown', async () => {
     const report = await ace('../data/epubrules-metadata-accessibilityFeature-none-unknown');
-    console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']['earl:outcome']).toEqual('fail');
     const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
     expect(assertions).toEqual(expect.arrayContaining([
