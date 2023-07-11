@@ -113,6 +113,67 @@ function checkMetadata(assertions, epub) {
       if (meta.allowedValues // effectively excludes schema:accessibilitySummary
         && !meta.discouraged) {
 
+        if (values.length > 1 && (name === 'schema:accessibilityFeature' || name === 'schema:accessibilityHazard')) {
+
+          if (values.includes('unknown')) {
+            assertions.withAssertions(newViolation({
+              impact: 'moderate',
+              title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
+              testDesc: localize("checkepub.metadatainvalid.testdesc", { value: 'unknown/...', name, interpolation: { escapeValue: false } }),
+              resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
+              kbPath: 'docs/metadata/schema.org/index.html',
+              kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
+              ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
+            }))
+          }
+          if (values.includes('none')) {
+            assertions.withAssertions(newViolation({
+              impact: 'moderate',
+              title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
+              testDesc: localize("checkepub.metadatainvalid.testdesc", { value: 'none/...', name, interpolation: { escapeValue: false } }),
+              resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
+              kbPath: 'docs/metadata/schema.org/index.html',
+              kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
+              ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
+            }))
+          }
+          if (name === 'schema:accessibilityHazard') {
+            if (values.includes('flashing') && values.includes('noFlashingHazard')) {
+              assertions.withAssertions(newViolation({
+                impact: 'moderate',
+                title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
+                testDesc: localize("checkepub.metadatainvalid.testdesc", { value: 'flashing/noFlashingHazard', name, interpolation: { escapeValue: false } }),
+                resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
+                kbPath: 'docs/metadata/schema.org/index.html',
+                kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
+                ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
+              }))
+            }
+            if (values.includes('motionSimulation') && values.includes('noMotionSimulationHazard')) {
+              assertions.withAssertions(newViolation({
+                impact: 'moderate',
+                title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
+                testDesc: localize("checkepub.metadatainvalid.testdesc", { value: 'motionSimulation/noMotionSimulationHazard', name, interpolation: { escapeValue: false } }),
+                resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
+                kbPath: 'docs/metadata/schema.org/index.html',
+                kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
+                ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
+              }))
+            }
+            if (values.includes('sound') && values.includes('noSoundHazard')) {
+              assertions.withAssertions(newViolation({
+                impact: 'moderate',
+                title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
+                testDesc: localize("checkepub.metadatainvalid.testdesc", { value: 'sound/noSoundHazard', name, interpolation: { escapeValue: false } }),
+                resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
+                kbPath: 'docs/metadata/schema.org/index.html',
+                kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
+                ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
+              }))
+            }
+          }
+        }
+
         values.forEach(value => {
 
           // comma-separated only! (not space-separated)
@@ -140,7 +201,7 @@ function checkMetadata(assertions, epub) {
   
           // Check consistency of the printPageNumbers feature
           if (name === 'schema:accessibilityFeature'
-            && splitValues.includes('printPageNumbers')
+            && (splitValues.includes('printPageNumbers') || splitValues.includes('pageBreakMarkers'))
             && !epub.navDoc.hasPageList) {
     
             assertions.withAssertions(newViolation({

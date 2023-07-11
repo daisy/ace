@@ -27,8 +27,8 @@
         "metadataprintpagenumbers": {
             "kbtitle": "Metadados de Acessibilidade Schema.org",
             "resdesc": "Adicione uma lista de páginas ao Documento de Navegação",
-            "ruledesc": "Quando o recurso de acessibilidade 'printPageNumbers' é declarado, o Documento de Navegação deve incluir uma lista de páginas",
-            "testdesc": "O recurso de acessibilidade 'printPageNumbers' foi declarado mas a lista de páginas está ausente"
+            "ruledesc": "Quando o recurso de acessibilidade 'printPageNumbers'/'pageBreakMarkers' é declarado, o Documento de Navegação deve incluir uma lista de páginas",
+            "testdesc": "O recurso de acessibilidade 'printPageNumbers'/'pageBreakMarkers' foi declarado mas a lista de páginas está ausente"
         },
         "metadataviolation": {
             "kbtitle": "Metadados de Acessibilidade Schema.org",

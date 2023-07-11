@@ -27,8 +27,8 @@
         "metadataprintpagenumbers": {
             "kbtitle": "Schema.org Accessibility Metadata",
             "resdesc": "Add a page list to the Navigation Document",
-            "ruledesc": "When the accessibility feature 'printPageNumbers' is declared, the Navigation Document should include a page list",
-            "testdesc": "Accessibility feature 'printPageNumbers' is declared but page list is missing"
+            "ruledesc": "When the accessibility feature 'printPageNumbers'/'pageBreakMarkers' is declared, the Navigation Document should include a page list",
+            "testdesc": "Accessibility feature 'printPageNumbers'/'pageBreakMarkers' is declared but page list is missing"
         },
         "metadataviolation": {
             "kbtitle": "Schema.org Accessibility Metadata",

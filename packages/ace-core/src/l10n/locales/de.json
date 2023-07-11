@@ -27,8 +27,8 @@
         "metadataprintpagenumbers": {
             "kbtitle": "Schema.org Barrierefreiheitsmetadaten",
             "resdesc": "Eine Seitenübersicht zum Navigationsdokument hinzufügen",
-            "ruledesc": "Wenn die Barrierefreiheitsfunktion 'printPageNumbers' angegeben ist, sollte das Navigationsdokument eine Seitenübersicht enthalten",
-            "testdesc": "Barrierefreiheitsfunktion 'printPageNumbers' ist angegeben aber die Seitenübersicht fehlt"
+            "ruledesc": "Wenn die Barrierefreiheitsfunktion 'printPageNumbers'/'pageBreakMarkers' angegeben ist, sollte das Navigationsdokument eine Seitenübersicht enthalten",
+            "testdesc": "Barrierefreiheitsfunktion 'printPageNumbers'/'pageBreakMarkers' ist angegeben aber die Seitenübersicht fehlt"
         },
         "metadataviolation": {
             "kbtitle": "Schema.org Barrierefreiheitsmetadaten",
