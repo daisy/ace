@@ -229,8 +229,21 @@ function loadUrl(browserWindow) {
         return;
     }
 
-    const MILLISECONDS_TIMEOUT_INITIAL = 10000; // 10s max to load the window's web contents
-    const MILLISECONDS_TIMEOUT_EXTENSION = 480000; // 480s (8mn) max to load + execute Axe checkers
+    let _MILLISECONDS_TIMEOUT_INITIAL = 0;
+    try {
+        _MILLISECONDS_TIMEOUT_INITIAL = process.env.ACE_TIMEOUT_INITIAL ? parseInt(process.env.ACE_TIMEOUT_INITIAL, 10) : 0;
+    } catch(_e) {
+        // ignore
+    }
+    let _MILLISECONDS_TIMEOUT_EXTENSION = 0;
+    try {
+        _MILLISECONDS_TIMEOUT_EXTENSION = process.env.ACE_TIMEOUT_EXTENSION ? parseInt(process.env.ACE_TIMEOUT_EXTENSION, 10) : 0;
+    } catch(_e) {
+        // ignore
+    }
+    const MILLISECONDS_TIMEOUT_INITIAL = _MILLISECONDS_TIMEOUT_INITIAL || 10000; // 10s max to load the window's web contents
+    const MILLISECONDS_TIMEOUT_EXTENSION = _MILLISECONDS_TIMEOUT_EXTENSION || 480000; // 480s (8mn) max to load + execute Axe checkers
+
     const timeoutFunc = () => {
         if (browserWindow.ace__replySent) {
             browserWindow.ace__timeout = undefined;
