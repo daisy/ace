@@ -1,3 +1,18 @@
+<a name="1.3.2"></a>
+## [1.3.2](https://github.com/daisy/ace/compare/v1.3.1...v1.3.2) (2023-07-11)
+
+### Updates:
+
+* Fix: aligned with the metadata properties defined in the W3C Community Report, notably missing schema accessibility features pageNavigation, printPageNumbers synonym pageBreakMarkers.
+* Feature: added timeout configuration via environment variables, to override the Electron Axe runner processing logic: `ACE_TIMEOUT_INITIAL` (default `10000`, which provides a 10s time allowance for the web window to load its document and contents) and `ACE_TIMEOUT_EXTENSION` (default `480000` which provides a 480s / 8mn time allowance for the Axe checkers to execute inside the loaded document).
+
+<a name="1.3.1"></a>
+## [1.3.1](https://github.com/daisy/ace/compare/v1.3.0...v1.3.1) (2023-06-05)
+
+### Updates:
+
+* Hotfix for Ace App (GUI): moved Electron NPM package to devDependencies
+
 <a name="1.3.0"></a>
 ## [1.3.0](https://github.com/daisy/ace/compare/v1.2.7...v1.3.0) (2023-06-05)
 
