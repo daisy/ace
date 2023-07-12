@@ -5,10 +5,28 @@ weight = 2
 
 _Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY "desktop application" (as known as the Ace App), please [visit this page]({{<relref "getting-started/ace-app.md">}})._
 
+
+## Minimum System Requirements
+
+Operating systems: Microsoft Windows 10+, Apple MacOS High Sierra 10.13+, Linux 64-bit Ubuntu 14.04+, Debian 8+, openSUSE 13.3+, or Fedora Linux 24+
+
+Ace is a NodeJS / Javascript program that launches either Electron or Puppeteer to execute the accessibility tests in headless Chromium webviews, see 
+[implementation notes]({{<relref "contributing/notes.md">}}). Ace has other software dependencies that require a modern NodeJS runtime, for security and performance reasons. NodeJS version 16+ is required, and NodeJS 18+ is recommended as v16 is scheduled to exit maintenance phase by the end of 2023.
+
+Further information:
+
+* https://github.com/nodejs/release#release-schedule
+* https://support.google.com/chrome/answer/95346
+* https://support.google.com/chrome/thread/185534985/sunsetting-support-for-windows-7-8-8-1-in-early-2023
+* https://support.google.com/chrome/a/thread/185534987
+* https://www.electronjs.org/blog/windows-7-to-8-1-deprecation-notice
+* https://www.electronjs.org/docs/latest/breaking-changes
+* https://developer.chrome.com/docs/puppeteer/get-started/#usage
+
 ## Install Node.JS
 
 * Go to [Node.JS](https://nodejs.org/)
-* Download version 10 or higher
+* Download version 16+
 * Double-click to install
 
 ## Install (or update) Ace
