@@ -24,7 +24,8 @@ What does Ace do? Specifically, Ace:
       
       <guid>https://daisy.github.io/ace/getting-started/installation/</guid>
       <description>Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please visit this page.
-Install Node.JS  Go to Node.JS Download version 10 or higher Double-click to install  Install (or update) Ace  After installing Node, open a shell window  On Windows: Windows System-&amp;gt;Command Prompt or Start-&amp;gt;Run-&amp;gt;cmd.exe On Mac: Applications-&amp;gt;Utilities-&amp;gt;Terminal   Type npm install @daisy/ace -g to install or update Ace  If everything went smoothly, you should now be able to run the ace command in your shell.</description>
+Minimum System Requirements Operating systems: Microsoft Windows 10+, Apple MacOS High Sierra 10.13+, Linux 64-bit Ubuntu 14.04+, Debian 8+, openSUSE 13.3+, or Fedora Linux 24+
+Ace is a NodeJS / Javascript program that launches either Electron or Puppeteer to execute the accessibility tests in headless Chromium webviews, see implementation notes.</description>
     </item>
     
     <item>
