@@ -1,22 +1,22 @@
 {
     "checkepub": {
         "langmissing": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Language",
+            "resdesc": "Add the missing OPF xml:lang attribute",
+            "ruledesc": "The language must be specified (xml:lang in OPF package)",
+            "testdesc": "Ensures the OPF XML language is provided"
         },
         "mediaoverlaypagebreakviolation": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Page Navigation",
+            "resdesc": "Add epub:type pagebreak in SMIL par ({{ref}})",
+            "ruledesc": "SMIL must correctly reference page breaks ({{ref}})",
+            "testdesc": "Ensures that the Media Overlays reference page breaks ({{ref}})"
         },
         "metadatadeprecated": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Schema.org Accessibility Metadata",
+            "resdesc": "Avoid using '{{name}}' deprecated metadata",
+            "ruledesc": "'{{name}}' metadata usage is discouraged",
+            "testdesc": "Checks that no deprecated metadata is used"
         },
         "metadatainvalid": {
             "kbtitle": "Schema.orgアクセシビリティメタデータ",
@@ -37,22 +37,22 @@
             "testdesc": "「{{name}}」メタデータが存在することを確認します"
         },
         "missingpagebreakviolation": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Page Navigation",
+            "resdesc": "Ensure page list includes all page breaks ({{ref}})",
+            "ruledesc": "Publication page list must reference all page breaks ({{ref}})",
+            "testdesc": "Check that all page breaks are included in the page list ({{ref}})"
         },
         "ordertocviolation": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Table of Contents",
+            "resdesc": "Order the Table Of Contents items ({{ref}})",
+            "ruledesc": "TOC must match the publication reading order ({{ref}})",
+            "testdesc": "Ensures the publication TOC is ordered ({{ref}})"
         },
         "pagelistbrokenviolation": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Page Navigation",
+            "resdesc": "Make sure that page list items point to epub:type page breaks ({{ref}})",
+            "ruledesc": "Publication page list must reference page breaks ({{ref}})",
+            "testdesc": "Ensures the page list links to page breaks ({{ref}})"
         },
         "pagesourceviolation": {
             "kbtitle": "ページナビゲーション",
