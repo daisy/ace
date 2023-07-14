@@ -3,17 +3,17 @@ title = "EPUB Rules"
 weight = 2
 +++
 
-In addition to the [HTML rules]({{<ref "html.md">}}), Ace has a set of rules that are EPUB-specific:
+In addition to the [HTML rules]({{<ref "html.md">}}), Ace implements EPUB-specific checks. The "impact" property indicates the severity of each violation ("minor", "moderate", "serious", or "critical"), as per Deque axe's definition described in their documentation ( https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/issue_impact.md ).
 
-| Rule | Description |
-| :------- | :------- |
-| epub-pagesource | Ensures that if the content has page breaks, the print source is identified in the Package Document metadata with `dc:source`. |
-| epub-title  | Ensures that the EPUB’s title is defined in the Package Document. |
-| epub-type-has-matching-role | Ensures that the element has an ARIA role matching its `epub:type`. |
-| metadata-* <br/> (e.g. `metadata-schema-accessmode`)| Ensures that [schema.org accessibility metadata](http://kb.daisy.org/publishing/docs/metadata/schema.org/index.html) is defined in the Package Document.|
-| pagebreak-label | Ensures that page markers have an accessible label. |
-| epub-pagelist-mediaoverlays | Ensures EPUB Media Overlays SMIL contain epub:type pagebreak where expected |
-| epub-pagelist-missing-pagebreak | Ensures all HTML epub:type pagebreak elements are referenced from the EPUB Navigation Document's pagelist |
-| epub-toc-order | Ensures the EPUB Navigation Document's Table of Contents is ordered correctly to match the spine reading order |
-| epub-pagelist-broken | Ensures the EPUB Navigation Document's page list points to epub:type pagebreak elements (order is ignored) |
-| epub-lang | Ensures package OPF has xml:lang |
+* Missing metadata (impact = "serious"): `metadata-accessmode`, `metadata-accessibilityfeature`, `metadata-accessibilityhazard`
+* Missing metadata (impact = "moderate"): `metadata-accessibilitysummary`, `metadata-accessModesufficient`
+* Incorrect metadata values (impact = "moderate"): `metadata-accessibilityfeature-invalid`, `metadata-accessibilityhazard-invalid` (mixed positive and negative terms (e.g. `noFlashingHazard` and `flashing`), `unknown` mixed with `none` or other vocabulary values, or usage of terms not defined by the specification)
+* Incorrect metadata values (impact = "minor"): `metadata-accessmode-invalid`, `metadata-accessmodesufficient-invalid` (usage of terms not defined by the specification)
+* Missing authored page list when metadata `printPageNumbers`/`pageBreakMarkers` is present (impact = "moderate"): `metadata-accessibilityFeature-printPageNumbers-nopagelist`
+* Mismatched page breaks in SMIL and in HTML documents (impact = "serious"): `epub-pagelist-mediaoverlays`
+* Authored page list references elements in HTML documents that are not page breaks or do not exist (impact = "serious"): `epub-pagelist-broken`
+* Authored page list does not reference all elements that are page breaks in HTML documents (impact = serious): `epub-pagelist-missing-pagebreak`
+* Mismatched authored table of contents and reading order of elements inside HTML documents (impact = "serious"): `epub-toc-order`
+* Missing publication title metadata (impact = "serious"): `epub-title`
+* Missing OPF lang attribute (impact = "serious"): `epub-lang`
+* Missing `dc:source` publication metadata when reflowable EPUB has authored page list (impact = "serious"): `epub-pagesource`
