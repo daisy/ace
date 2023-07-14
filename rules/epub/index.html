@@ -285,57 +285,21 @@
 
 
     
-    <p>In addition to the <a href="https://daisy.github.io/ace/rules/html/">HTML rules</a>, Ace has a set of rules that are EPUB-specific:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Rule</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">epub-pagesource</td>
-<td style="text-align:left">Ensures that if the content has page breaks, the print source is identified in the Package Document metadata with <code>dc:source</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left">epub-title</td>
-<td style="text-align:left">Ensures that the EPUB’s title is defined in the Package Document.</td>
-</tr>
-<tr>
-<td style="text-align:left">epub-type-has-matching-role</td>
-<td style="text-align:left">Ensures that the element has an ARIA role matching its <code>epub:type</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left">metadata-* <!-- raw HTML omitted --> (e.g. <code>metadata-schema-accessmode</code>)</td>
-<td style="text-align:left">Ensures that <a href="http://kb.daisy.org/publishing/docs/metadata/schema.org/index.html">schema.org accessibility metadata</a> is defined in the Package Document.</td>
-</tr>
-<tr>
-<td style="text-align:left">pagebreak-label</td>
-<td style="text-align:left">Ensures that page markers have an accessible label.</td>
-</tr>
-<tr>
-<td style="text-align:left">epub-pagelist-mediaoverlays</td>
-<td style="text-align:left">Ensures EPUB Media Overlays SMIL contain epub:type pagebreak where expected</td>
-</tr>
-<tr>
-<td style="text-align:left">epub-pagelist-missing-pagebreak</td>
-<td style="text-align:left">Ensures all HTML epub:type pagebreak elements are referenced from the EPUB Navigation Document&rsquo;s pagelist</td>
-</tr>
-<tr>
-<td style="text-align:left">epub-toc-order</td>
-<td style="text-align:left">Ensures the EPUB Navigation Document&rsquo;s Table of Contents is ordered correctly to match the spine reading order</td>
-</tr>
-<tr>
-<td style="text-align:left">epub-pagelist-broken</td>
-<td style="text-align:left">Ensures the EPUB Navigation Document&rsquo;s page list points to epub:type pagebreak elements (order is ignored)</td>
-</tr>
-<tr>
-<td style="text-align:left">epub-lang</td>
-<td style="text-align:left">Ensures package OPF has xml:lang</td>
-</tr>
-</tbody>
-</table>
+    <p>In addition to the <a href="https://daisy.github.io/ace/rules/html/">HTML rules</a>, Ace implements EPUB-specific checks. The &ldquo;impact&rdquo; property indicates the severity of each violation (&ldquo;minor&rdquo;, &ldquo;moderate&rdquo;, &ldquo;serious&rdquo;, or &ldquo;critical&rdquo;), as per Deque axe&rsquo;s definition described in their documentation ( <a href="https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/issue_impact.md">https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/issue_impact.md</a> ).</p>
+<ul>
+<li>Missing metadata (impact = &ldquo;serious&rdquo;): <code>metadata-accessmode</code>, <code>metadata-accessibilityfeature</code>, <code>metadata-accessibilityhazard</code></li>
+<li>Missing metadata (impact = &ldquo;moderate&rdquo;): <code>metadata-accessibilitysummary</code>, <code>metadata-accessModesufficient</code></li>
+<li>Incorrect metadata values (impact = &ldquo;moderate&rdquo;): <code>metadata-accessibilityfeature-invalid</code>, <code>metadata-accessibilityhazard-invalid</code> (mixed positive and negative terms (e.g. <code>noFlashingHazard</code> and <code>flashing</code>), <code>unknown</code> mixed with <code>none</code> or other vocabulary values, or usage of terms not defined by the specification)</li>
+<li>Incorrect metadata values (impact = &ldquo;minor&rdquo;): <code>metadata-accessmode-invalid</code>, <code>metadata-accessmodesufficient-invalid</code> (usage of terms not defined by the specification)</li>
+<li>Missing authored page list when metadata <code>printPageNumbers</code>/<code>pageBreakMarkers</code> is present (impact = &ldquo;moderate&rdquo;): <code>metadata-accessibilityFeature-printPageNumbers-nopagelist</code></li>
+<li>Mismatched page breaks in SMIL and in HTML documents (impact = &ldquo;serious&rdquo;): <code>epub-pagelist-mediaoverlays</code></li>
+<li>Authored page list references elements in HTML documents that are not page breaks or do not exist (impact = &ldquo;serious&rdquo;): <code>epub-pagelist-broken</code></li>
+<li>Authored page list does not reference all elements that are page breaks in HTML documents (impact = serious): <code>epub-pagelist-missing-pagebreak</code></li>
+<li>Mismatched authored table of contents and reading order of elements inside HTML documents (impact = &ldquo;serious&rdquo;): <code>epub-toc-order</code></li>
+<li>Missing publication title metadata (impact = &ldquo;serious&rdquo;): <code>epub-title</code></li>
+<li>Missing OPF lang attribute (impact = &ldquo;serious&rdquo;): <code>epub-lang</code></li>
+<li>Missing <code>dc:source</code> publication metadata when reflowable EPUB has authored page list (impact = &ldquo;serious&rdquo;): <code>epub-pagesource</code></li>
+</ul>
 
   </main>
 
