@@ -36,3 +36,6 @@ Thumbs.db
 # Yarn v2 Settings
 .yarn/*
 .yarnrc.yml
+
+# PNP state file
+.pnp.*
