@@ -34,8 +34,8 @@
   "license": "MIT",
   "bin": {
     "ace": "./bin/ace.js",
-    "ace-electron": "./bin/ace-electron.js",
     "ace-http": "./bin/ace-http.js",
+    "ace-electron": "./bin/ace-electron.js",
     "ace-puppeteer": "./bin/ace-puppeteer.js"
   },
   "main": "lib/index.js",
