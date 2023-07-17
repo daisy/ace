@@ -1,22 +1,22 @@
 {
     "checkepub": {
         "langmissing": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Idioma",
+            "resdesc": "Adicione o atributo OPF xml:lang ausente",
+            "ruledesc": "O idioma deve ser especificado (xml:lang no elemento package do OPF)",
+            "testdesc": "Certifique-se de que o idioma XML do OPF seja fornecido"
         },
         "mediaoverlaypagebreakviolation": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Navegação de Páginas",
+            "resdesc": "Adicione a quebra de página epub:type no elemento par do SMIL ({{ref}})",
+            "ruledesc": "SMIL deve refenciar corretamente as quebras de página ({{ref}})",
+            "testdesc": "Certifique-se de que Media Overlays referenciem as quebras de página ({{ref}})"
         },
         "metadatadeprecated": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Metadados de Acessibilidade Schema.org",
+            "resdesc": "Evite usar o metadado obsoleto '{{name}}'",
+            "ruledesc": "O uso do metadado '{{name}}' é desencorajado",
+            "testdesc": "Verique se nenhum metadado obsoleto foi utilizado"
         },
         "metadatainvalid": {
             "kbtitle": "Metadados de Acessibilidade Schema.org",
@@ -37,22 +37,22 @@
             "testdesc": "Certifique-se de que o metadado '{{name}}' está presente"
         },
         "missingpagebreakviolation": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Navegação de Páginas",
+            "resdesc": "Certifique-se de que a lista de páginas inclua todas as quebras de página ({{ref}})",
+            "ruledesc": "A lista de páginas da publicação deve referenciar todas as quebras de página ({{ref}})",
+            "testdesc": "Verifique se todas as quebras de página estão incluídas na lista de páginas ({{ref}})"
         },
         "ordertocviolation": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Sumário",
+            "resdesc": "Ordene os itens do Sumário ({{ref}})",
+            "ruledesc": "O Sumário deve corresponder à ordem de leitura da publicação ({{ref}})",
+            "testdesc": "Certifique-se de que o Sumário da publicação esteja ordenado ({{ref}})"
         },
         "pagelistbrokenviolation": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Navegação de Páginas",
+            "resdesc": "Certifique-se de que os itens da lista de páginas apontem para quebras de página epub:type ({{ref}})",
+            "ruledesc": "A lista de páginas da publicação deve referenciar as quebras de página ({{ref}})",
+            "testdesc": "Certifique-se de que a lista de páginas apontem para quebras de página ({{ref}})"
         },
         "pagesourceviolation": {
             "kbtitle": "Navegação de Páginas",
