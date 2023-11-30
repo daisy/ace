@@ -1,22 +1,22 @@
 {
     "checkepub": {
         "langmissing": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Sprog",
+            "resdesc": "Tilføj den manglende OPF xml:lang attribut",
+            "ruledesc": "Sprog skal angives (xml:lang i OPF pakken)",
+            "testdesc": "Sikrer at OPF XML sprog-attributten er angivet"
         },
         "mediaoverlaypagebreakviolation": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Sidenavigation",
+            "resdesc": "Tilføj epub:type sideskift i SMIL par elementet ({{ref}})",
+            "ruledesc": "SMIL filen skal referere til sideskift ({{ref}})",
+            "testdesc": "Sikrer at Media Overlays har referencer til fysiske sideskift ({{ref}})"
         },
         "metadatadeprecated": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Metadata for tilgængelighed fra Schema.org",
+            "resdesc": "Undgå at bruge '{{name}}', det er forældet metadata",
+            "ruledesc": "Brug af '{{name}}' metadata frarådes",
+            "testdesc": "Tjekker at der ikke er brugt forældet metadata"
         },
         "metadatainvalid": {
             "kbtitle": "Metadata for tilgængelighed fra Schema.org",
@@ -37,22 +37,22 @@
             "testdesc": "Sikrer at '{{name}}' metadata-elementet er til stede"
         },
         "missingpagebreakviolation": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Sidenavigation",
+            "resdesc": "Sikrer at sidelisten indeholder alle sideskift ({{ref}})",
+            "ruledesc": "Publikationens sideliste skal indeholde referencer til at alle sideskift ({{ref}})",
+            "testdesc": "Tjek at alle sideskift er med i sidelisten ({{ref}})"
         },
         "ordertocviolation": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Indholdsfortegnelse",
+            "resdesc": "Rækkefølge for elementer i indholdsfortegnelsen ({{ref}})",
+            "ruledesc": "Indholdsfortegnelse skal være magen til læserækkefølgen ({{ref}})",
+            "testdesc": "Sikrer at publikationens indholdsfortegnelse er i korrekt rækkefølge ({{ref}})"
         },
         "pagelistbrokenviolation": {
-            "kbtitle": "",
-            "resdesc": "",
-            "ruledesc": "",
-            "testdesc": ""
+            "kbtitle": "Sidenavigation",
+            "resdesc": "Sørg for at alle elementer på sidelisten peger på epub:type sideskift ({{ref}})",
+            "ruledesc": "Publikationens sideliste skal referere til sideskift ({{ref}})",
+            "testdesc": "Sikrer at sidelisten refererer til sideskift ({{ref}})"
         },
         "pagesourceviolation": {
             "kbtitle": "Sidenavigation",
