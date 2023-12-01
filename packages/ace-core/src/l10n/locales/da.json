@@ -38,19 +38,19 @@
         },
         "missingpagebreakviolation": {
             "kbtitle": "Sidenavigation",
-            "resdesc": "Sikrer at sidelisten indeholder alle sideskift ({{ref}})",
+            "resdesc": "Sørg for at sidelisten indeholder alle sideskift ({{ref}})",
             "ruledesc": "Publikationens sideliste skal indeholde referencer til at alle sideskift ({{ref}})",
-            "testdesc": "Tjek at alle sideskift er med i sidelisten ({{ref}})"
+            "testdesc": "Tjekker at alle sideskift er med i sidelisten ({{ref}})"
         },
         "ordertocviolation": {
             "kbtitle": "Indholdsfortegnelse",
             "resdesc": "Rækkefølge for elementer i indholdsfortegnelsen ({{ref}})",
-            "ruledesc": "Indholdsfortegnelse skal være magen til læserækkefølgen ({{ref}})",
+            "ruledesc": "Indholdsfortegnelsen skal være magen til læserækkefølgen ({{ref}})",
             "testdesc": "Sikrer at publikationens indholdsfortegnelse er i korrekt rækkefølge ({{ref}})"
         },
         "pagelistbrokenviolation": {
             "kbtitle": "Sidenavigation",
-            "resdesc": "Sørg for at alle elementer på sidelisten peger på epub:type sideskift ({{ref}})",
+            "resdesc": "Sørg for at alle elementer i sidelisten peger på epub:type sideskift ({{ref}})",
             "ruledesc": "Publikationens sideliste skal referere til sideskift ({{ref}})",
             "testdesc": "Sikrer at sidelisten refererer til sideskift ({{ref}})"
         },
