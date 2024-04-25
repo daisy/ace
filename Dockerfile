@@ -1,3 +1,4 @@
+
 # Jammy Jellyfish
 # GLIBC 2.32
 # FROM ubuntu:22.04
@@ -75,36 +76,32 @@ RUN cd /ACE/ &&\
 RUN cd /ACE/ &&\
     ./node_modules/electron/dist/electron --no-sandbox --version &&\
     ./node_modules/electron/dist/electron --no-sandbox --abi &&\
+    ./node_modules/.bin/ace-electron --no-sandbox --headless --help &&\
     ./node_modules/.bin/ace-puppeteer --help &&\
-    ./node_modules/.bin/ace-puppeteer -V -f -o /ACE -t /ACE --subdir book.epub
-
-RUN cd /ACE/ &&\
+    ./node_modules/.bin/ace-puppeteer -V -f -o /ACE -t /ACE --subdir book.epub &&\
     ls -als . &&\
     ls -als /tmp &&\
-    ls -als .config &&\
-    ls -als .local
+    ls -als ".config/DAISY Ace" &&\
+    ls -als ".local/state/DAISY Ace" &&\
+    cat .local/state/DAISY\ Ace/*.log
 
 USER root
 
 RUN apt-get update -y &&\
-    apt-get install xvfb -yq --no-install-suggests --no-install-recommends &&\
+    apt-get install xauth xvfb -yq --no-install-suggests --no-install-recommends &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 USER notroot
 
-ENV DISPLAY :99.0
+#ENV DISPLAY :99.0
 
 RUN cd /ACE/ &&\
-    ./node_modules/.bin/ace-electron --no-sandbox --headless --help &&\
-    export DISPLAY=:99.0 &&\
-    echo $DISPLAY &&\
-    ls -als . &&\
-    (Xvfb :99 -ac -screen 0 1024x768x16 &> /ACE/xvfb.log &) &&\
-    ./node_modules/.bin/ace-electron --no-sandbox --disable-gpu -V -f -o /ACE -t /ACE --subdir book.epub
+#    export DISPLAY=:99.0 &&\
+#    echo $DISPLAY &&\
+#    (Xvfb :99 -ac -screen 0 1024x768x16 &> /ACE/xvfb.log &) &&\
+    xvfb-run ./node_modules/.bin/ace-electron --no-sandbox --disable-gpu -V -f -o /ACE -t /ACE --subdir book.epub &&\
 # --disable-setuid-sandbox
-
-RUN cd /ACE/ &&\
     ls -als . &&\
     ls -als /tmp &&\
     ls -als ".config/DAISY Ace" &&\
