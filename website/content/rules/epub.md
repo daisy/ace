@@ -11,7 +11,7 @@ In addition to the [HTML rules]({{<ref "html.md">}}), Ace implements EPUB-specif
 * Incorrect metadata values (impact = "minor"): `metadata-accessmode-invalid`, `metadata-accessmodesufficient-invalid` (usage of terms not defined by the specification)
 * Missing authored page list when metadata `printPageNumbers`/`pageBreakMarkers` is present (impact = "moderate"): `metadata-accessibilityFeature-printPageNumbers-nopagelist`
 * Mismatched page breaks in SMIL and in HTML documents (impact = "serious"): `epub-pagelist-mediaoverlays`
-* Authored page list references elements in HTML documents that are not page breaks or do not exist (impact = "serious"): `epub-pagelist-broken`
+* Authored page list references elements in HTML documents that are not page breaks (impact = "minor") or do not exist (impact = "serious"): `epub-pagelist-broken`
 * Authored page list does not reference all elements that are page breaks in HTML documents (impact = serious): `epub-pagelist-missing-pagebreak`
 * Mismatched authored table of contents and reading order of elements inside HTML documents (impact = "serious"): `epub-toc-order`
 * Missing publication title metadata (impact = "serious"): `epub-title`

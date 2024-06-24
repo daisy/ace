@@ -387,6 +387,7 @@ function checkReadingOrder(epub) {
       if (failed) {
         const ref = failed.relative + (failed.notPageBreak ? " [epub:type=\"pagebreak\"!?]" : (failed.noTargetID ? " [id!?]" : ""));
         assertions.withAssertions(newViolation({
+          impact: failed.notPageBreak ? 'minor' : 'serious',
           title: 'epub-pagelist-broken',
           testDesc: localize("checkepub.pagelistbrokenviolation.testdesc", { ref, interpolation: { escapeValue: false } }),
           resDesc: localize("checkepub.pagelistbrokenviolation.resdesc", { ref, interpolation: { escapeValue: false } }),

@@ -46,7 +46,7 @@ test('nothing to report', async () => {
 });
 
 describe('page list and TOC reading order', () => {
-  test('TOC correctly ordered PASS but missing page list for page breaks', async () => {
+  test('TOC correctly ordered PASS but missing page list item for a page break', async () => {
     const report = await ace('../data/epubrules-pagelist-missing-pagebreak');
     // console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']['earl:outcome']).toEqual('fail');
@@ -56,6 +56,15 @@ describe('page list and TOC reading order', () => {
       expect.objectContaining({
         'earl:test': expect.objectContaining({
           'dct:title': 'epub-pagelist-missing-pagebreak',
+          "earl:impact": "serious",
+          "dct:description": expect.stringMatching(/.+content_001\.xhtml#p2.+/),
+        }),
+      }),
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'epub-pagelist-missing-pagebreak',
+          "earl:impact": "serious",
+          "dct:description": expect.stringMatching(/.+content_002\.xhtml#p3.+/),
         }),
       }),
     ]));
@@ -102,16 +111,29 @@ describe('page list and TOC reading order', () => {
       expect.objectContaining({
         'earl:test': expect.objectContaining({
           'dct:title': 'epub-pagelist-broken',
+          "earl:impact": "minor",
+          "dct:description": expect.stringMatching(/.+content_002\.xhtml#p7 \[epub:type="pagebreak"!\?\].+/),
+        }),
+      }),
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'epub-pagelist-broken',
+          "earl:impact": "serious",
+          "dct:description": expect.stringMatching(/.+content_002\.xhtml#p8 \[id!\?\].+/),
         }),
       }),
       expect.objectContaining({
         'earl:test': expect.objectContaining({
           'dct:title': 'epub-pagelist-missing-pagebreak',
+          "earl:impact": "serious",
+          "dct:description": expect.stringMatching(/.+content_002\.xhtml#p6.+/),
         }),
       }),
       expect.objectContaining({
         'earl:test': expect.objectContaining({
           'dct:title': 'epub-toc-order',
+          "earl:impact": "serious",
+          "dct:description": expect.stringMatching(/.+content_001\.xhtml.+/),
         }),
       }),
     ]));
@@ -121,6 +143,30 @@ describe('page list and TOC reading order', () => {
       expect.objectContaining({
         'earl:test': expect.objectContaining({
           'dct:title': 'epub-type-has-matching-role',
+        }),
+      }),
+    ]));
+    const assertions3 = findAssertionsForDoc(report, 'content_002.xhtml');
+    // console.log(JSON.stringify(assertions3, null, 4));
+    expect(assertions3).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:result': expect.objectContaining({
+          "earl:pointer": expect.objectContaining({
+            'css': expect.arrayContaining(["#p6"]),
+          }),
+        }),
+        'earl:test': expect.objectContaining({
+          'dct:title': 'epub-type-has-matching-role',
+          "earl:impact": "minor",
+        }),
+      }),
+    ]));
+    expect(assertions3).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:result': expect.objectContaining({
+          "earl:pointer": expect.objectContaining({
+            'css': expect.not.arrayContaining(["#p7"]),
+          }),
         }),
       }),
     ]));
