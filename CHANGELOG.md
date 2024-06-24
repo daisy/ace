@@ -1,3 +1,13 @@
+<a name="1.3.3-alpha.1"></a>
+## [1.3.3-alpha.1](https://github.com/daisy/ace/compare/v1.3.2...v1.3.3-alpha.1) (2024-06-24)
+
+### Updates:
+
+* Fix: navigation document page list can reference non-pagebreaks
+* Fix: removed useless HTML outline
+* Translations: added Chinese and German locales, updated Japanese and Danish and Portuguese (Brazil)
+* Feature: added Docker script to launch Ace Electron in "headless" mode (via virtual buffer)
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://github.com/daisy/ace/compare/v1.3.1...v1.3.2) (2023-07-11)
 
