@@ -15,10 +15,10 @@ const localizer = newLocalizer({
         default: true,
         translation: enJson,
     },
-    // de: {
-    //     name: "Deutsch",
-    //     translation: deJson,
-    // },
+    de: {
+        name: "Deutsch",
+        translation: deJson,
+    },
     fr: {
         name: "Français",
         translation: frJson,
