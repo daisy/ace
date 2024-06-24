@@ -26,11 +26,11 @@ beforeAll(async () => {
     // };
     // window.daisy.epub.createCFI.mockReturnValue('42');
 
-    window.HTML5Outline = () => {
-      return {
-        asHTML: () => { return; }
-      }
-    };
+    // window.HTML5Outline = () => {
+    //   return {
+    //     asHTML: () => { return; }
+    //   }
+    // };
     window.daisy.epub = {
       createCFI: () => 42,
     };

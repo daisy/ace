@@ -687,7 +687,8 @@ new Promise((resolve, reject) => {
                 !window.daisy.ace.run ||
                 !window.daisy.ace.createReport
                 || !window.axe
-                || !window.HTML5Outline) {
+                // || !window.HTML5Outline
+                ) {
 
                 window.tryAceAxeN++;
                 if (window.tryAceAxeN < 15) {

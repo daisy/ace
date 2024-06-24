@@ -123,7 +123,8 @@ ace.getEPUBTriggers = function() {
 }
 
 ace.getHTMLOutline = function() {
-  return HTML5Outline(document.body).asHTML();
+  return undefined;
+  // return HTML5Outline(document.body).asHTML();
 }
 
 ace.getHeadings = function() {
