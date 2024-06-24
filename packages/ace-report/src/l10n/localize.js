@@ -7,6 +7,7 @@ const esJson = require("./locales/es.json");
 const daJson = require("./locales/da.json");
 const jaJson = require("./locales/ja.json");
 const deJson = require("./locales/de.json");
+const zh_TWJson = require("./locales/zh_TW.json");
 
 const localizer = newLocalizer({
     en: {
@@ -37,6 +38,10 @@ const localizer = newLocalizer({
     ja: {
       name: "Japanese",
       translation: jaJson,
+    },
+    zh_TW: {
+        name: "Traditional Chinese",
+        translation: zh_TWJson,
     },
 });
 module.exports = { localizer };

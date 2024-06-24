@@ -1,0 +1,70 @@
+{
+    "checkepub": {
+        "langmissing": {
+            "kbtitle": "語言屬性",
+            "resdesc": "在OPF中提供所缺少的xml:lang屬性",
+            "ruledesc": "必須指定語言（即OPF包裝中的xml:lang）",
+            "testdesc": "確保在OPF中提供XML的語言屬性"
+        },
+        "mediaoverlaypagebreakviolation": {
+            "kbtitle": "頁面導覽",
+            "resdesc": "在SMIL par ( {{ref}} )中設定epub:type為pagebreak",
+            "ruledesc": "SMIL必須正確參照換頁位置 ( {{ref}} )",
+            "testdesc": "確保媒體層疊可正確參照換頁位置 ( {{ref}} )"
+        },
+        "metadatadeprecated": {
+            "kbtitle": "Schema.org可及性詮釋資料",
+            "resdesc": "避免使用不再推薦的詮釋資料「 {{name}} 」",
+            "ruledesc": "不推薦使用詮釋資料「 {{name}} 」",
+            "testdesc": "檢查沒有使用不再推薦的詮釋資料"
+        },
+        "metadatainvalid": {
+            "kbtitle": "Schema.org可及性詮釋資料",
+            "resdesc": "使用由schema.org定義的詮釋資料之值",
+            "ruledesc": "詮釋資料「 {{name}} 」必須設定為預設值",
+            "testdesc": "詮釋資料「 {{name}} 」的值「 {{value}} 」無效"
+        },
+        "metadataprintpagenumbers": {
+            "kbtitle": "Schema.org可及性詮釋資料",
+            "resdesc": "在導覽文件中加入頁面列表",
+            "ruledesc": "當宣告可及性功能「printPageNumbers」/「pageBreakMarkers」時，導覽文件中應該包含一份頁面列表",
+            "testdesc": "可及性功能中宣告了「printPageNumbers」/「pageBreakMarkers」，但未包含頁面列表"
+        },
+        "metadataviolation": {
+            "kbtitle": "Schema.org可及性詮釋資料",
+            "resdesc": "在包裝文件中加入詮釋資料「 {{name}} 」特性",
+            "ruledesc": "出版品必須宣告詮釋資料「 {{name}} 」",
+            "testdesc": "確保具有詮釋資料「 {{name}} 」"
+        },
+        "missingpagebreakviolation": {
+            "kbtitle": "頁面導覽",
+            "resdesc": "頁面列表須包含所有的換頁位置( {{ref}} )",
+            "ruledesc": "出版品的頁面列表必須參照所有的換頁位置( {{ref}} )",
+            "testdesc": "確保在頁面列表中包含所有的換頁位置( {{ref}} )"
+        },
+        "ordertocviolation": {
+            "kbtitle": "目次",
+            "resdesc": "目次中項目的順序( {{ref}} )",
+            "ruledesc": "目次中各項目的順序必須與出版品的閱讀順序一致 ( {{ref}} )",
+            "testdesc": "確保出版品目次排序正確 ( {{ref}} )"
+        },
+        "pagelistbrokenviolation": {
+            "kbtitle": "頁面導覽",
+            "resdesc": "確認頁面列表中的項目指向epub:type的換頁位置( {{ref}} )",
+            "ruledesc": "出版品的頁面列表必須參照換頁位置( {{ref}} )",
+            "testdesc": "確保可由頁面列表連結到換頁位置( {{ref}} )"
+        },
+        "pagesourceviolation": {
+            "kbtitle": "頁面導覽",
+            "resdesc": "在包裝文件中提供詮釋資料「dc:source」特性",
+            "ruledesc": "具備頁面列表的出版品，必須在詮釋資料中宣告「dc:source」",
+            "testdesc": "確保能識別換頁位置的來源"
+        },
+        "titleviolation": {
+            "kbtitle": "EPUB標題",
+            "resdesc": "在包裝文件中提供詮釋資料「dc:title」特性",
+            "ruledesc": "出版品必須要有書名",
+            "testdesc": "確保EPUB有書名"
+        }
+    }
+}
