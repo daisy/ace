@@ -1,70 +1,70 @@
 {
-    "checkepub": {
-        "langmissing": {
-            "kbtitle": "言語属性",
-            "resdesc": "OPFに xml:lang 属性を追加します",
-            "ruledesc": "出版物は言語属性を指定する必要があります（OPFパッケージのxml:lang）",
-            "testdesc": "OPFパッケージに言語属性が設定されていることを確認する"
-        },
-        "mediaoverlaypagebreakviolation": {
-            "kbtitle": "ページナビゲーション",
-            "resdesc": "SMIL par ({{ref}})にepub:typeのpagebreakを設定します ",
-            "ruledesc": "SMILは改ページを正しく参照する必要があります ({{ref}})",
-            "testdesc": "メディア・オーバーレイの改ページが正しく参照されるようにする ({{ref}})"
-        },
-        "metadatadeprecated": {
-            "kbtitle": "Schema.orgアクセシビリティメタデータ",
-            "resdesc": "非推奨のメタデータ '{{name}}' の使用を避ける",
-            "ruledesc": "'{{name}}' メタデータの使用は推奨されません",
-            "testdesc": "非推奨のメタデータが使用されていないことを確認する"
-        },
-        "metadatainvalid": {
-            "kbtitle": "Schema.orgアクセシビリティメタデータ",
-            "resdesc": "schema.orgで定義されたメタデータ値のいずれかを使用します",
-            "ruledesc": "'{{name}}'メタデータは、予期される値のいずれかに設定する必要があります",
-            "testdesc": "値 '{{value}}'は '{{name}}'メタデータに対して無効です"
-        },
-        "metadataprintpagenumbers": {
-            "kbtitle": "Schema.orgアクセシビリティメタデータ",
-            "resdesc": "ナビゲーションドキュメントにページリストを追加する",
-            "ruledesc": "アクセシビリティ機能「printPageNumbers」/「pageBreakMarkers」が宣言されている場合、ナビゲーションドキュメントにページリストを含める必要があります",
-            "testdesc": "アクセシビリティ機能「printPageNumbers」/「pageBreakMarkers」は宣言されていますが、ページリストがありません"
-        },
-        "metadataviolation": {
-            "kbtitle": "Schema.orgアクセシビリティメタデータ",
-            "resdesc": "「{{name}}」メタデータプロパティをパッケージドキュメントに追加します",
-            "ruledesc": "出版物は「{{name}}」メタデータを宣言する必要があります",
-            "testdesc": "「{{name}}」メタデータが存在することを確認する"
-        },
-        "missingpagebreakviolation": {
-            "kbtitle": "ページナビゲーション",
-            "resdesc": "ページリストがすべての改ページを含むようにする ({{ref}})",
-            "ruledesc": "出版物のページリストは、すべての改ページを参照する必要があります ({{ref}})",
-            "testdesc": "すべての改ページがページリストに含まれていることを確認する ({{ref}})"
-        },
-        "ordertocviolation": {
-            "kbtitle": "目次(TOC)",
-            "resdesc": "ページの順番と目次の並び順を揃える ({{ref}})",
-            "ruledesc": "目次（TOC）は出版物の読み順と一致している必要があります ({{ref}})",
-            "testdesc": "出版物の目次（TOC）が、読み順と一致していることを確認する ({{ref}})"
-        },
-        "pagelistbrokenviolation": {
-            "kbtitle": "ページナビゲーション",
-            "resdesc": "ページリストの項目がepub:typeの改ページを指していることを確認する ({{ref}})",
-            "ruledesc": "出版物のページリストは改ページを参照している必要があります ({{ref}})",
-            "testdesc": "ページリストから改ページへのリンクを確認する ({{ref}})"
-        },
-        "pagesourceviolation": {
-            "kbtitle": "ページナビゲーション",
-            "resdesc": "「dc:source」メタデータプロパティをパッケージドキュメントに追加する",
-            "ruledesc": "改ページのある出版物は、「dc:source」メタデータを宣言する必要があります",
-            "testdesc": "改ページのソースが特定されていることを確認する"
-        },
-        "titleviolation": {
-            "kbtitle": "EPUBタイトル",
-            "resdesc": "「dc:title」メタデータプロパティをパッケージドキュメントに追加する",
-            "ruledesc": "出版物にはタイトルが必要です",
-            "testdesc": "EPUBにタイトルがあることを確認する"
-        }
+  "checkepub": {
+    "langmissing": {
+      "kbtitle": "言語属性",
+      "resdesc": "OPFに xml:lang 属性を追加します",
+      "ruledesc": "出版物は言語属性を指定する必要があります（OPFパッケージのxml:lang）",
+      "testdesc": "OPFパッケージに言語属性が設定されていることを確認する"
+    },
+    "mediaoverlaypagebreakviolation": {
+      "kbtitle": "ページナビゲーション",
+      "resdesc": "SMIL par ({{ref}})にepub:typeのpagebreakを設定します ",
+      "ruledesc": "SMILは改ページを正しく参照する必要があります ({{ref}})",
+      "testdesc": "メディア オーバーレイの改ページが正しく参照されるようにする ({{ref}})"
+    },
+    "metadatadeprecated": {
+      "kbtitle": "Schema.orgアクセシビリティメタデータ",
+      "resdesc": "非推奨のメタデータ '{{name}}' の使用を避ける",
+      "ruledesc": "'{{name}}' メタデータの使用は推奨されません",
+      "testdesc": "非推奨のメタデータが使用されていないことを確認する"
+    },
+    "metadatainvalid": {
+      "kbtitle": "Schema.orgアクセシビリティメタデータ",
+      "resdesc": "schema.orgで定義されたメタデータ値のいずれかを使用します",
+      "ruledesc": "'{{name}}'メタデータは、予期される値のいずれかに設定する必要があります",
+      "testdesc": "値 '{{value}}'は '{{name}}'メタデータに対して無効です"
+    },
+    "metadataprintpagenumbers": {
+      "kbtitle": "Schema.orgアクセシビリティメタデータ",
+      "resdesc": "ナビゲーションドキュメントにページリストを追加する",
+      "ruledesc": "アクセシビリティ機能「printPageNumbers」/「pageBreakMarkers」が宣言されている場合、ナビゲーションドキュメントにページリストを含める必要があります",
+      "testdesc": "アクセシビリティ機能「printPageNumbers」/「pageBreakMarkers」は宣言されていますが、ページリストがありません"
+    },
+    "metadataviolation": {
+      "kbtitle": "Schema.orgアクセシビリティメタデータ",
+      "resdesc": "「{{name}}」メタデータプロパティをパッケージドキュメントに追加します",
+      "ruledesc": "出版物は「{{name}}」メタデータを宣言する必要があります",
+      "testdesc": "「{{name}}」メタデータが存在することを確認する"
+    },
+    "missingpagebreakviolation": {
+      "kbtitle": "ページナビゲーション",
+      "resdesc": "ページリストがすべての改ページを含むようにする ({{ref}})",
+      "ruledesc": "出版物のページリストは、すべての改ページを参照する必要があります ({{ref}})",
+      "testdesc": "すべての改ページがページリストに含まれていることを確認する ({{ref}})"
+    },
+    "ordertocviolation": {
+      "kbtitle": "目次(TOC)",
+      "resdesc": "ページの順番と目次の並び順を揃える ({{ref}})",
+      "ruledesc": "目次（TOC）は出版物の読み順と一致している必要があります ({{ref}})",
+      "testdesc": "出版物の目次（TOC）が、読み順と一致していることを確認する ({{ref}})"
+    },
+    "pagelistbrokenviolation": {
+      "kbtitle": "ページナビゲーション",
+      "resdesc": "ページリストの項目がepub:typeの改ページを指していることを確認する ({{ref}})",
+      "ruledesc": "出版物のページリストは改ページを参照している必要があります ({{ref}})",
+      "testdesc": "ページリストから改ページへのリンクを確認する ({{ref}})"
+    },
+    "pagesourceviolation": {
+      "kbtitle": "ページナビゲーション",
+      "resdesc": "「dc:source」メタデータプロパティをパッケージドキュメントに追加する",
+      "ruledesc": "改ページのある出版物は、「dc:source」メタデータを宣言する必要があります",
+      "testdesc": "改ページのソースが特定されていることを確認する"
+    },
+    "titleviolation": {
+      "kbtitle": "EPUBタイトル",
+      "resdesc": "「dc:title」メタデータプロパティをパッケージドキュメントに追加する",
+      "ruledesc": "出版物にはタイトルが必要です",
+      "testdesc": "EPUBにタイトルがあることを確認する"
     }
+  }
 }
