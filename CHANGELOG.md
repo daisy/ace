@@ -1,5 +1,5 @@
-<a name="1.3.3-alpha.1"></a>
-## [1.3.3-alpha.1](https://github.com/daisy/ace/compare/v1.3.2...v1.3.3-alpha.1) (2024-06-24)
+<a name="1.3.3-alpha.2"></a>
+## [1.3.3-alpha.2](https://github.com/daisy/ace/compare/v1.3.2...v1.3.3-alpha.2) (2024-06-25)
 
 ### Updates:
 
