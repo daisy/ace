@@ -36,6 +36,7 @@ function SpineItem() {
 function EpubParser() {
   this.contentDocs = [];
   this.metadata = {};
+  this.opfLang = undefined;
   this.contentDocMediaType = "application/xhtml+xml";
 }
 
@@ -230,6 +231,9 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
 
   const langAttr = select('/opf:package/@xml:lang', doc)[0];
   this.opfLang = langAttr ? langAttr.nodeValue : undefined;
+
+  const versionAttr = select('/opf:package/@version', doc)[0];
+  this.version = versionAttr ? versionAttr.nodeValue : undefined;
 
   this.metadata = parseMetadata(doc, select);
   this.links = parseLinks(doc, select);

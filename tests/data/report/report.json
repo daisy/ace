@@ -16,6 +16,7 @@
   "dct:description": "Accessibility Checker Report",
   "earl:testSubject": {
     "url": "base-epub-30.epub",
+    "epubVersion": "3.0",
     "metadata": {
       "dc:title": "Minimal EPUB 3.0",
       "dc:language": "en",

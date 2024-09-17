@@ -211,8 +211,17 @@ describe('report builder', () => {
         'dct:title': 'title',
       })
     });
+    test('with version', () => {
+      expect(report.withTestSubject('https://example.com', '', '3.0')).toBeDefined();
+      const testSubject = report.build()['earl:testSubject'];
+      expect(testSubject).toBeDefined();
+      expect(testSubject).toEqual({
+        url: 'https://example.com',
+        epubVersion: '3.0',
+      })
+    });
     test('with identifier', () => {
-      expect(report.withTestSubject('https://example.com', '', 'uid')).toBeDefined();
+      expect(report.withTestSubject('https://example.com', '', null, 'uid')).toBeDefined();
       const testSubject = report.build()['earl:testSubject'];
       expect(testSubject).toBeDefined();
       expect(testSubject).toEqual({
@@ -221,7 +230,7 @@ describe('report builder', () => {
       })
     });
     test('with metadata null', () => {
-      expect(report.withTestSubject('https://example.com', '', '', null)).toBeDefined();
+      expect(report.withTestSubject('https://example.com', '', undefined, '', null)).toBeDefined();
       const testSubject = report.build()['earl:testSubject'];
       expect(testSubject).toBeDefined();
       expect(testSubject).toEqual({
@@ -229,7 +238,7 @@ describe('report builder', () => {
       })
     });
     test('with metadata', () => {
-      expect(report.withTestSubject('https://example.com', '', '', { foo: 'bar' })).toBeDefined();
+      expect(report.withTestSubject('https://example.com', '', '', '', { foo: 'bar' })).toBeDefined();
       const testSubject = report.build()['earl:testSubject'];
       expect(testSubject).toBeDefined();
       expect(testSubject).toEqual({
@@ -239,19 +248,21 @@ describe('report builder', () => {
     });
 
     test('with link null', () => {
-      expect(report.withTestSubject('https://example.com', '', '', null, null)).toBeDefined();
+      expect(report.withTestSubject('https://example.com', '', 'VERSION', '', null, null)).toBeDefined();
       const testSubject = report.build()['earl:testSubject'];
       expect(testSubject).toBeDefined();
       expect(testSubject).toEqual({
         url: 'https://example.com',
+        epubVersion: 'VERSION',
       })
     });
     test('with links', () => {
-      expect(report.withTestSubject('https://example.com', '', '', null, { foo: 'bar' })).toBeDefined();
+      expect(report.withTestSubject('https://example.com', '', [0], '', null, { foo: 'bar' })).toBeDefined();
       const testSubject = report.build()['earl:testSubject'];
       expect(testSubject).toBeDefined();
       expect(testSubject).toEqual({
         url: 'https://example.com',
+        // epubVersion: [0],
         links: { foo: 'bar' }
       })
     });

@@ -54,7 +54,7 @@ module.exports = class Report {
       const l10nDoneCallback = () => {
         this._builder = new builders.ReportBuilder()
         .setOutdir(this.outdir)
-        .withTestSubject(this.epub.path, '', '', this.epub.metadata, this.epub.links)
+        .withTestSubject(this.epub.path, '', this.epub.version, '', this.epub.metadata, this.epub.links)
         .withA11yMeta(a11yMetaChecker.analyze(this.epub.metadata, this.epub.links));
 
         resolve(this); // Report instance

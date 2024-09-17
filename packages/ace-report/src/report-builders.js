@@ -31,12 +31,13 @@ function withAssertions(obj, assertions) {
   return obj;
 }
 
-function withTestSubject(obj, url, title = '', identifier = '', metadata = null, links = null) {
+function withTestSubject(obj, url, title = '', version='', identifier = '', metadata = null, links = null) {
   const testSubject = { url };
   if (title.length > 0) testSubject['dct:title'] = title;
   if (identifier.length > 0) testSubject['dct:identifier'] = identifier;
   if (metadata !== undefined && metadata != null) testSubject.metadata = metadata;
   if (links !== undefined && links != null) testSubject.links = links;
+  if (version && typeof version === "string" && version.length > 0) testSubject.epubVersion = version;
   obj['earl:testSubject'] = testSubject;
   return obj;
 }
@@ -168,12 +169,12 @@ class ReportBuilder {
     });
     return this;
   }
-  withTestSubject(url, title, identifier, metadata, links) {
+  withTestSubject(url, title, version, identifier, metadata, links) {
     var url_ = url;
     if (this.outdir !== undefined && this.outdir != "" && reportConfig["use-relative-paths"]) {
       url_ = path.relative(this.outdir, url);
     }
-    withTestSubject(this._json, url_, title, identifier, metadata, links);
+    withTestSubject(this._json, url_, title, version, identifier, metadata, links);
     return this;
   }
 }
