@@ -365,9 +365,18 @@ EpubParser.prototype.parseContentDocTitleAndIds = function(filepath) {
     if (!epubType) {
       epubType = undefined;
     }
+
+    let role = o.getAttribute('role');
+    if (role) {
+      role = role.trim();
+    }
+    if (!role) {
+      role = undefined;
+    }
    return {
     id: o.getAttribute("id"),
-    epubType
+    epubType,
+    role
    };
   });
   // console.log(arr.length, JSON.stringify(docIds, null, 4));

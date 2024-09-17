@@ -108,13 +108,13 @@ describe('page list and TOC reading order', () => {
     const assertions = findAssertionsForDoc(report, '/EPUB/nav.xhtml');
     // console.log(JSON.stringify(assertions, null, 4));
     expect(assertions).toEqual(expect.arrayContaining([
-      expect.objectContaining({
-        'earl:test': expect.objectContaining({
-          'dct:title': 'epub-pagelist-broken',
-          "earl:impact": "minor",
-          "dct:description": expect.stringMatching(/.+content_002\.xhtml#p7 \[epub:type="pagebreak"!\?\].+/),
-        }),
-      }),
+      // expect.objectContaining({
+      //   'earl:test': expect.objectContaining({
+      //     'dct:title': 'epub-pagelist-broken',
+      //     "earl:impact": "minor",
+      //     "dct:description": expect.stringMatching(/.+content_002\.xhtml#p7 \[epub:type="pagebreak"!\?\].+/),
+      //   }),
+      // }),
       expect.objectContaining({
         'earl:test': expect.objectContaining({
           'dct:title': 'epub-pagelist-broken',

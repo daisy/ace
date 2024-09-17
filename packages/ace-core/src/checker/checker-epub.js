@@ -240,14 +240,16 @@ function checkMediaOverlays(epub) {
     }
     for (const o of doc.targetIDs) {
       const epubType = o.epubType;
-      const isPageBreak = epubType && epubType.includes("pagebreak");
+      const role = o.role;
+      const isPageBreak = epubType && epubType.includes("pagebreak") || role && role.includes("doc-pagebreak");
       if (!isPageBreak) {
         continue;
       }
       docs.push({
         full: doc.filepath + "#" + o.id,
         relative: doc.relpath + "#" + o.id,
-        epubType
+        epubType,
+        role
       });
     }
   }
@@ -342,7 +344,8 @@ function checkReadingOrder(epub) {
       docs.push({
         full: doc.filepath + "#" + o.id,
         relative: doc.relpath + "#" + o.id,
-        epubType: o.epubType
+        epubType: o.epubType,
+        role: o.role
       });
     }
   }
@@ -354,10 +357,11 @@ function checkReadingOrder(epub) {
       const arr = href.split("#");
       const filePath = path.join(path.dirname(epub.navDoc.filepath), arr[0]);
       const targetID = arr[1];
-      const full = filePath + (targetID ? "#" + targetID : "");
+      const full = filePath + (!!targetID ? "#" + targetID : "");
       return {
         full,
-        relative: href
+        relative: href,
+        hasID: !!targetID,
       };
     });
     // console.log("PAGES", JSON.stringify(pageListFilePathsAndTargetIDs, null, 4));
@@ -373,8 +377,9 @@ function checkReadingOrder(epub) {
         // console.log("PAGE FAIL 1", JSON.stringify(failed, null, 4));
       } else {
         const epubType = docs[found].epubType;
-        const notPageBreak = !epubType || !epubType.includes("pagebreak");
-        if (notPageBreak && !isFXL
+        const role = docs[found].role;
+        const notPageBreak = !(epubType && epubType.includes("pagebreak") || role && role.includes("doc-pagebreak"));
+        if (notPageBreak && !isFXL && page.hasID
           // || pos >= 0 && found < pos
           ) {
           failed = page;
@@ -401,7 +406,8 @@ function checkReadingOrder(epub) {
     if (!isFXL) {
       for (const doc of docs) {
         const epubType = doc.epubType;
-        const isPageBreak = epubType && epubType.includes("pagebreak");
+        const role = doc.role;
+        const isPageBreak = epubType && epubType.includes("pagebreak") || role && role.includes("doc-pagebreak");
         if (!isPageBreak) {
           continue;
         }
