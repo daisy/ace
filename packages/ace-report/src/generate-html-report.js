@@ -20,13 +20,21 @@ module.exports = function generateHtmlReport(reportData) {
     var rulesetTagLabels = {
       'wcag2a': 'WCAG 2.0 A',
       'wcag2aa': 'WCAG 2.0 AA',
+      'wcag2aaa': 'WCAG 2.0 AAA',
+      'wcag21a': 'WCAG 2.1 A',
+      'wcag21aa': 'WCAG 2.1 AA',
+      'wcag21aaa': 'WCAG 2.1 AAA',
+      'wcag22a': 'WCAG 2.2 A',
+      'wcag22aa': 'WCAG 2.2 AA',
+      'wcag22aaa': 'WCAG 2.2 AAA',
       'EPUB': 'EPUB',
       'best-practice': localize("bestpractice"),
       'other': localize("other")
     };
 
     // return 5 data cells for each ruleset: critical, serious, moderate, minor, total
-    // a ruleset can be "wcag2a", "wcag2aa", "EPUB", "other", or "total" (all rulesets)
+    // a ruleset can be "wcag2a", "wcag2aa", "wcag2aaa", "wcag21a", "wcag21aa", "wcag21aaa", "wcag22a", "wcag22aa", "wcag22aaa", "EPUB", "other", or "total" (all rulesets)
+    // https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#axe-core-tags
     handlebars.registerHelper('violationStats', function(rule, options) {
       var str = "<td>" + violationStats[rule]['critical'] + "</td>"
                 + "<td>" + violationStats[rule]['serious'] + "</td>"
@@ -228,11 +236,18 @@ module.exports = function generateHtmlReport(reportData) {
 
 // summarize the violation ruleset and impact data
 function collectViolationStats(flatListOfViolations) {
-  var rulesetTags = ['wcag2a', 'wcag2aa', 'EPUB', 'best-practice'];
+  var rulesetTags = ['wcag2a', 'wcag2aa', 'wcag2aaa', 'wcag21a', 'wcag21aa', 'wcag21aaa', 'wcag22a', 'wcag22aa', 'wcag22aaa', 'EPUB', 'best-practice'];
 
   var summaryData = {
     'wcag2a': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
     'wcag2aa': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
+    'wcag2aaa': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
+    'wcag21a': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
+    'wcag21aa': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
+    'wcag21aaa': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
+    'wcag22a': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
+    'wcag22aa': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
+    'wcag22aaa': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
     'EPUB': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
     'best-practice': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
     'other': {'critical': 0, 'serious': 0, 'moderate': 0, 'minor': 0, 'total': 0},
@@ -255,8 +270,16 @@ function collectViolationStats(flatListOfViolations) {
   });
 
   Object.keys(summaryData['total']).forEach(function(key) {
-    summaryData['total'][key] += summaryData['wcag2a'][key]
+    summaryData['total'][key] +=
+        summaryData['wcag2a'][key]
       + summaryData['wcag2aa'][key]
+      + summaryData['wcag2aaa'][key]
+      + summaryData['wcag21a'][key]
+      + summaryData['wcag21aa'][key]
+      + summaryData['wcag21aaa'][key]
+      + summaryData['wcag22a'][key]
+      + summaryData['wcag22aa'][key]
+      + summaryData['wcag22aaa'][key]
       + summaryData['EPUB'][key]
       + summaryData['best-practice'][key]
       + summaryData['other'][key];
@@ -288,7 +311,7 @@ function createViolationFilters(violations) {
 // we're using 'assertion' and 'violation' somewhat interchangeably
 function createFlatListOfViolations(violations) {
   var flatData = [];
-  var rulesetTags = ['wcag2a', 'wcag2aa', 'EPUB', 'best-practice']; // applicable ruleset tags
+  var rulesetTags = ['wcag2a', 'wcag2aa', 'wcag2aaa', 'wcag21a', 'wcag21aa', 'wcag21aaa', 'wcag22a', 'wcag22aa', 'wcag22aaa', 'EPUB', 'best-practice']; // applicable ruleset tags
 
   violations.forEach(function(assertion) {
     var filename = assertion["earl:testSubject"]["url"];

@@ -43,7 +43,7 @@ async function axe2ace(spineItem, axeResults, lang) {
           .withTitle(violation.id)
           .withDescription(violation.description)
           .withHelp(kbURL, kbTitle, violation.help)
-          .withRulesetTags(violation.tags)
+          .withRulesetTags(violation.tags) // .map(t => t.replace("wcag2a", "wcag21a")) TO TEST TAG FILTERING IN HTML REPORT
           .build();
   
         violation.nodes.forEach((node) => {

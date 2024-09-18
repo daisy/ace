@@ -266,6 +266,34 @@
             {{#violationStats "wcag2aa"}}{{/violationStats}}
           </tr>
           <tr>
+            <th scope="row">WCAG 2.0 AAA</th>
+            {{#violationStats "wcag2aaa"}}{{/violationStats}}
+          </tr>
+          <tr>
+            <th scope="row">WCAG 2.1 A</th>
+            {{#violationStats "wcag21a"}}{{/violationStats}}
+          </tr>
+          <tr>
+            <th scope="row">WCAG 2.1 AA</th>
+            {{#violationStats "wcag21aa"}}{{/violationStats}}
+          </tr>
+          <tr>
+            <th scope="row">WCAG 2.1 AAA</th>
+            {{#violationStats "wcag21aaa"}}{{/violationStats}}
+          </tr>
+          <tr>
+            <th scope="row">WCAG 2.2 A</th>
+            {{#violationStats "wcag22a"}}{{/violationStats}}
+          </tr>
+          <tr>
+            <th scope="row">WCAG 2.2 AA</th>
+            {{#violationStats "wcag22aa"}}{{/violationStats}}
+          </tr>
+          <tr>
+            <th scope="row">WCAG 2.2 AAA</th>
+            {{#violationStats "wcag22aaa"}}{{/violationStats}}
+          </tr>
+          <tr>
             <th scope="row">EPUB</th>
             {{#violationStats "EPUB"}}{{/violationStats}}
           </tr>
@@ -525,6 +553,13 @@
     var rulesetTagLabels = {
       'wcag2a': 'WCAG 2.0 A',
       'wcag2aa': 'WCAG 2.0 AA',
+      'wcag2aaa': 'WCAG 2.0 AAA',
+      'wcag21a': 'WCAG 2.1 A',
+      'wcag21aa': 'WCAG 2.1 AA',
+      'wcag21aaa': 'WCAG 2.1 AAA',
+      'wcag22a': 'WCAG 2.2 A',
+      'wcag22aa': 'WCAG 2.2 AA',
+      'wcag22aaa': 'WCAG 2.2 AAA',
       'EPUB': 'EPUB',
       'best-practice': '{{#localize "bestpractice"}}{{/localize}}',
       'other': '{{#localize "other"}}{{/localize}}'

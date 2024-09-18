@@ -20,6 +20,9 @@ const conformsToStrings = [
     "EPUB Accessibility 1.1 - WCAG 2.1 Level A",
     "EPUB Accessibility 1.1 - WCAG 2.1 Level AA",
     "EPUB Accessibility 1.1 - WCAG 2.1 Level AAA",
+    "EPUB Accessibility 1.1 - WCAG 2.2 Level A",
+    "EPUB Accessibility 1.1 - WCAG 2.2 Level AA",
+    "EPUB Accessibility 1.1 - WCAG 2.2 Level AAA",
 ];
 
 const a11yMeta_links = [
