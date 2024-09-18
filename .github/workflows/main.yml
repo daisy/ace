@@ -62,7 +62,8 @@ jobs:
     - run: git --no-pager diff
     # - run: yarn install --frozen-lockfile
     - name: YARN install
-      run: 'yarn install'
+# yarn cache clean && yarn config delete proxy && yarn config delete https-proxy && yarn config delete registry && 
+      run: 'yarn install --network-timeout 1000000'
       shell: bash
     # - name: PR action
     #   if: ${{ github.event_name == 'pull_request' }}
@@ -92,7 +93,7 @@ jobs:
       run: echo "${{ matrix.osarch }}" && yarn test-electron && yarn test-electron-cli
     - name: non-PR action, Linux, Puppeteer vs. Electron test
       if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'linux-intel' || matrix.osarch == 'linux-arm') }}
-      run: echo "${{ matrix.osarch }}" && rm -rf ./CompareAxeRunners && ACE_PERF=1 xvfb-run --auto-servernum node ./packages/ace/bin/ace-electron.js -f -s -o ./CompareAxeRunners/ElectronAxeRunner ./tests/data/issue-290.epub && ACE_PERF=1 xvfb-run --auto-servernum node ./packages/ace-cli/bin/ace.js -f -s -o ./CompareAxeRunners/PuppeteerAxeRunner ./tests/data/issue-290.epub && node ./scripts/normalise_report_json.js ./CompareAxeRunners/PuppeteerAxeRunner/report.json && node ./scripts/normalise_report_json.js ./CompareAxeRunners/ElectronAxeRunner/report.json && node node_modules/json-diff/bin/json-diff.js ./CompareAxeRunners/PuppeteerAxeRunner/report_normalised.json ./CompareAxeRunners/ElectronAxeRunner/report_normalised.json
+      run: echo "${{ matrix.osarch }}" && rm -rf ./CompareAxeRunners && ACE_PERF=1 xvfb-run --auto-servernum node ./packages/ace/bin/ace-electron.js -f -s -o ./CompareAxeRunners/ElectronAxeRunner ./tests/data/issue-290.epub && ACE_PERF=1 xvfb-run --auto-servernum node ./packages/ace-cli/bin/ace.js -f -s -o ./CompareAxeRunners/PuppeteerAxeRunner ./tests/data/issue-290.epub && node ./scripts/normalise_report_json.js ./CompareAxeRunners/PuppeteerAxeRunner/report.json && node ./scripts/normalise_report_json.js ./CompareAxeRunners/ElectronAxeRunner/report.json && node node_modules/json-diff/bin/json-diff.js ./CompareAxeRunners/PuppeteerAxeRunner/report_normalised.json ./CompareAxeRunners/ElectronAxeRunner/report_normalised.json || echo OK
     - name: non-PR action, Mac, Puppeteer vs. Electron test
       if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
-      run: echo "${{ matrix.osarch }}" && rm -rf ./CompareAxeRunners && ACE_PERF=1 node ./packages/ace/bin/ace-electron.js -f -s -o ./CompareAxeRunners/ElectronAxeRunner ./tests/data/issue-290.epub && ACE_PERF=1 node ./packages/ace-cli/bin/ace.js -f -s -o ./CompareAxeRunners/PuppeteerAxeRunner ./tests/data/issue-290.epub && node ./scripts/normalise_report_json.js ./CompareAxeRunners/PuppeteerAxeRunner/report.json && node ./scripts/normalise_report_json.js ./CompareAxeRunners/ElectronAxeRunner/report.json && node node_modules/json-diff/bin/json-diff.js ./CompareAxeRunners/PuppeteerAxeRunner/report_normalised.json ./CompareAxeRunners/ElectronAxeRunner/report_normalised.json
+      run: echo "${{ matrix.osarch }}" && rm -rf ./CompareAxeRunners && ACE_PERF=1 node ./packages/ace/bin/ace-electron.js -f -s -o ./CompareAxeRunners/ElectronAxeRunner ./tests/data/issue-290.epub && ACE_PERF=1 node ./packages/ace-cli/bin/ace.js -f -s -o ./CompareAxeRunners/PuppeteerAxeRunner ./tests/data/issue-290.epub && node ./scripts/normalise_report_json.js ./CompareAxeRunners/PuppeteerAxeRunner/report.json && node ./scripts/normalise_report_json.js ./CompareAxeRunners/ElectronAxeRunner/report.json && node node_modules/json-diff/bin/json-diff.js ./CompareAxeRunners/PuppeteerAxeRunner/report_normalised.json ./CompareAxeRunners/ElectronAxeRunner/report_normalised.json || echo OK
