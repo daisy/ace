@@ -78,7 +78,7 @@ jobs:
       shell: cmd
     - name: non-PR action, Windows, ELECTRON CHECK
       if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
-      run: echo "${{ matrix.osarch }}" && cat node_modules/electron/package.json | grep -i VERSION && ls -als packages/ace-axe-runner-electron/node_modules && cat packages/ace-axe-runner-electron/node_modules/electron/package.json | grep -i VERSION
+      run: echo "${{ matrix.osarch }}" && cat node_modules/electron/package.json | grep -i VERSION # && ls -als packages/ace-axe-runner-electron/node_modules && cat packages/ace-axe-runner-electron/node_modules/electron/package.json | grep -i VERSION
       shell: bash
     - name: non-PR action, Linux, Puppeteer vs. Electron test
       if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'linux-intel' || matrix.osarch == 'linux-arm') }}
