@@ -32,6 +32,9 @@ jobs:
             runson: ubuntu-20.04
           - osarch: linux-arm
             runson: ubuntu-20.04
+    env:
+      DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
+      DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
     steps:
     - run: 'echo "GITHUB_RUN_NUMBER: ${{ github.run_number }}"'
     - run: 'echo "GITHUB_RUN_ID: ${{ github.run_id }}"'
@@ -77,7 +80,7 @@ jobs:
       #   run: yarn test-electron && yarn test-electron-cli
       #   working-directory: ./
       #   # options:
-      run: echo "${{ matrix.osarch }}" && xvfb-run yarn test-electron && xvfb-run yarn test-electron-cli
+      run: echo "${{ matrix.osarch }}" && xvfb-run --auto-servernum yarn test-electron-cli && xvfb-run --auto-servernum yarn test-electron
     - name: non-PR action, Mac, Puppeteer
       if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
       run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
