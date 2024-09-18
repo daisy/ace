@@ -10,11 +10,13 @@ class HeadlessChromeEnvironment extends NodeEnvironment {
 
   setup() {
     const args = [];
-    if (os.platform() !== 'win32' && os.platform() !== 'darwin') {
-      args.push('--no-sandbox')
-    }
+    // if (os.platform() !== 'win32' && os.platform() !== 'darwin') {
+    //   args.push('--no-sandbox')
+    // }
+    args.push('--no-sandbox');
+    args.push('--disable-setuid-sandbox');
     return super.setup().then(() =>
-      puppeteer.launch({ args }).then((browser) => {
+      puppeteer.launch({ args, headless: true }).then((browser) => {
         this.global.browser = browser;
       }));
   }

@@ -14,10 +14,15 @@ module.exports = {
     concurrency: 4,
     launch: async function() {
         const args = [];
-        if (os.platform() !== 'win32' && os.platform() !== 'darwin') {
-            args.push('--no-sandbox')
-        }
-        _browser = await puppeteer.launch({ args });
+        // if (os.platform() !== 'win32' && os.platform() !== 'darwin') {
+        //     args.push('--no-sandbox')
+        // }
+        args.push('--no-sandbox');
+        args.push('--disable-setuid-sandbox');
+        _browser = await puppeteer.launch({
+            args,
+            headless: true,
+        });
         return Promise.resolve();
     },
     close: async function() {
