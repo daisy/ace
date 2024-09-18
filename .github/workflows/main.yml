@@ -61,9 +61,26 @@ jobs:
     # - name: PR action
     #   if: ${{ github.event_name == 'pull_request' }}
     #   run: echo PR
-    - name: non-PR action, Windows
+    - name: non-PR action, Windows, Puppeteer
       if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
-      run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli && yarn test-electron && yarn test-electron-cli
-    - name: non-PR action, non-Windows
-      if: ${{ github.event_name != 'pull_request' && matrix.osarch != 'windows-intel' && matrix.osarch != 'windows-arm' }}
-      run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli && yarn test-electron && yarn test-electron-cli
+      run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
+    - name: non-PR action, Windows, Electron
+      if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
+      run: echo "${{ matrix.osarch }}" && yarn test-electron && yarn test-electron-cli
+    - name: non-PR action, Linux, Puppeteer
+      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'linux-intel' || matrix.osarch == 'linux-arm') }}
+      run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
+    - name: non-PR action, Linux, Electron
+      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'linux-intel' || matrix.osarch == 'linux-arm') }}
+      uses: coactions/setup-xvfb@v1
+      with:
+        run: yarn test-electron && yarn test-electron-cli
+        working-directory: ./
+        # options:
+# run: echo "${{ matrix.osarch }}" && xvfb-run yarn test-electron && xvfb-run yarn test-electron-cli
+    - name: non-PR action, Mac, Puppeteer
+      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'mac-intel' || matrix.osarch == 'mac-arm') }}
+      run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
+    - name: non-PR action, Mac, Electron
+      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'mac-intel' || matrix.osarch == 'mac-arm') }}
+      run: echo "${{ matrix.osarch }}" && yarn test-electron && yarn test-electron-cli
