@@ -547,7 +547,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                             "indexdb",
                             // "localstorage", BLOCKS!?
                             "shadercache",
-                            "websql",
+                            // "websql",
                             "serviceworkers",
                         ],
                     });

@@ -8,10 +8,21 @@ const app = electron.app;
 // NO_HTTP_ADD
 const protocol = electron.protocol;
 
+// REMEMBER to keep package.json patchElectronJestRunner* tasks up to date!
+
 // Removes the deprecation warning message in the console
 // https://github.com/electron/electron/issues/18397
 // app.allowRendererProcessReuse = true;
 // https://www.electronjs.org/releases/stable#breaking-changes-1400
+
+// https://github.com/electron/electron/issues/43415#issuecomment-2308352266
+// https://github.com/electron/electron/issues/28164
+// https://github.com/electron/electron/issues/20702
+// --in-process-gpu ?
+// app.commandLine.appendSwitch("in-process-gpu");
+app.commandLine.appendSwitch("disable-gpu");
+app.disableHardwareAcceleration();
+app.commandLine.appendSwitch("disable-software-rasterizer");
 
 const EventEmitter = require('events');
 class ElectronMockMainRendererEmitter extends EventEmitter {}
