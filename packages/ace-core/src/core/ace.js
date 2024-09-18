@@ -46,7 +46,7 @@ module.exports = function ace(epubPath, options, axeRunner) {
         if (!fs.existsSync(options.tmpdir)) {
           fs.ensureDirSync(options.tmpdir);
         }
-      } else if (options.tmpdir === undefined) {
+      } else if (!options.tmpdir) {
         options.tmpdir = tmp.dirSync({ unsafeCleanup: true }).name;
       }
       if (typeof options.outdir === 'string') {
@@ -72,7 +72,7 @@ module.exports = function ace(epubPath, options, axeRunner) {
       .then(report => checker.check(epub, report, options.lang, axeRunner))
       // Process the Results
       .then((report) => {
-        if (options.outdir === undefined) {
+        if (!options.outdir) {
           report.cleanData();
           process.stdout.write(`${JSON.stringify(report.json, null, '  ')}\n`);
           return report;

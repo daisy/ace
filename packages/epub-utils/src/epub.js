@@ -71,7 +71,7 @@ async function unzip(unzipDir, path, useLegacyZipLib) {
 }
 
 async function retryUnzip(unzipDir, epub, error) {
-  if (error.message === undefined) throw error;
+  if (!error.message) throw error;
   winston.info('Trying to repair the archive and unzip again...');
   try {
     // Detect 'invalid comment length' errors
@@ -128,7 +128,7 @@ class EPUB {
   }
 
   async extract(unzipDir) {
-    if (this.basedir !== undefined) {
+    if (this.basedir) {
       return this;
     } else if (this.expanded) {
       winston.verbose('EPUB is already unpacked');

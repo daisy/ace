@@ -15,7 +15,7 @@ const KB_BASE = 'http://kb.daisy.org/publishing/';
 function asString(arrayOrString) {
   if (Array.isArray(arrayOrString) && arrayOrString.length > 0) {
     return asString(arrayOrString[0]);
-  } else if (arrayOrString !== undefined) {
+  } else if (arrayOrString) {
     return arrayOrString.toString().trim();
   }
   return '';
@@ -71,7 +71,7 @@ function checkMetadata(assertions, epub) {
   for (const name in a11yMetadata.A11Y_META) {
     const meta = a11yMetadata.A11Y_META[name];
     var values = epub.metadata[name];
-    if (values === undefined) {
+    if (!values) {
       // Report missing metadata if it is required or recommended
       if (meta.required) assertions.withAssertions(newMetadataAssertion(name));
       if (meta.recommended) assertions.withAssertions(newMetadataAssertion(name, 'moderate'));

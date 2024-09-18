@@ -111,7 +111,7 @@ module.exports = class Report {
   }
   copyData(outdir) {
     winston.info("Copying data");
-    if (this.json.data === null) return Promise.resolve();
+    if (!this.json.data) return Promise.resolve();
     return fs.pathExists(outdir)
         .then((exists) => {
           if (!exists) return fs.ensureDirSync(outdir);

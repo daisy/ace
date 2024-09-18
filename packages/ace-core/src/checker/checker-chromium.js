@@ -124,10 +124,10 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
       Object.getOwnPropertyNames(results.data).forEach((key) => {
         if (!Array.isArray(results.data[key])) return;
         results.data[key].forEach((item) => {
-          if (item.src !== undefined) {
+          if (item.src) {
             if (Array.isArray(item.src)) {
               item.src = item.src.map((srcItem) => {
-                if (srcItem.src !== undefined) {
+                if (srcItem.src) {
                   if (LOG_DEBUG_URLS) {
                     console.log("----- ITEMs SRC 1");
                     console.log(srcItem.src);
@@ -161,7 +161,7 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
                 console.log(item.src);
               }
             }
-            if (item.cfi !== undefined) {
+            if (item.cfi) {
               if (LOG_DEBUG_URLS) {
                 console.log("----- CFI 1");
                 console.log(spineItem.relpath);

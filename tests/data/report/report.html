@@ -138,17 +138,17 @@
       tr.append(tdImage);
 
 
-      var tdAlt = (image.alt === undefined) ?
+      var tdAlt = !image.alt ?
       $('<td class="missing">N/A</td>')
        : $('<td>' + image.alt + '</td>');
       tr.append(tdAlt);
 
-      var tdDescribedby = (image.describedby === undefined) ?
+      var tdDescribedby = !image.describedby ?
       $('<td class="missing">N/A</td>')
        : $('<td>' + image.describedby + '</td>');
       tr.append(tdDescribedby);
 
-      var tdFigcaption = (image.figcaption === undefined) ?
+      var tdFigcaption = !image.figcaption ?
       $('<td class="missing">N/A</td>')
        : $('<td>' + image.figcaption + '</td>');
       tr.append(tdFigcaption);

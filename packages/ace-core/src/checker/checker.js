@@ -26,7 +26,7 @@ function consolidate(results, report) {
       }
       return undefined;
     }))
-    .filter(e => e !== undefined);
+    .filter(e => e);
   report.addHeadings(headings);
   // Aggregated array of the HTML outlines
   const htmlOutlines = []
@@ -36,7 +36,7 @@ function consolidate(results, report) {
       }
       return undefined;
     }))
-    .filter(e => e !== undefined);
+    .filter(e => e);
   report.addHTMLOutlines(htmlOutlines);
   return report;
 }

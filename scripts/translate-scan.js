@@ -8,7 +8,7 @@ const srcFolderPath = args[0];
 const jsonFilePath = args[1];
 
 function isNullOrUndefined(val) {
-    return val === undefined && val === null;
+    return val === undefined || val === null;
 }
 
 function sortObject(obj) {

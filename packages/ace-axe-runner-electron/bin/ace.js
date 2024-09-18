@@ -18,9 +18,10 @@ var args = [].concat(path.resolve(__dirname, "../lib/cli.js"), process.argv.slic
 
 var child = proc.spawn(electron, args, { stdio: 'inherit', windowsHide: false })
 child.on('close', function (code, signal) {
-  if (code === null) {
+  if (code === null || code === undefined) {
     console.error(electron, 'exited with signal', signal)
     process.exit(1)
+    return;
   }
   process.exit(code)
 })

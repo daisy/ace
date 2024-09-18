@@ -115,7 +115,7 @@ function initRoutes() {
 // return the job information
 function getJob(req, res, next) {
   var jobdata = joblist.find(jobdata => jobdata.internal.id === req.params.jobid);
-  if (jobdata == undefined || jobdata == null) {
+  if (!jobdata) {
     res.sendStatus(404); // not found
   }
   else {
@@ -135,7 +135,7 @@ function getJobs(req, res, next) {
 
 // return the job information
 function postJob(req, res, next) {
-  if (req.file == undefined) {
+  if (!req.file) {
     res.sendStatus(400); // bad request
   }
   else {
@@ -164,7 +164,7 @@ function postJob(req, res, next) {
 // return the report as either a zipfile or a json object, depending on what was specifically requested
 function getReport(req, res) {
   var jobdata = joblist.find(jobdata => jobdata.internal.id === req.params.jobid);
-  if (jobdata == undefined || jobdata == null) {
+  if (!jobdata) {
     res.sendStatus(404); // not found
   }
   else {

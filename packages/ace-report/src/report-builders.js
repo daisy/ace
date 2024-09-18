@@ -35,8 +35,8 @@ function withTestSubject(obj, url, title = '', version='', identifier = '', meta
   const testSubject = { url };
   if (title.length > 0) testSubject['dct:title'] = title;
   if (identifier.length > 0) testSubject['dct:identifier'] = identifier;
-  if (metadata !== undefined && metadata != null) testSubject.metadata = metadata;
-  if (links !== undefined && links != null) testSubject.links = links;
+  if (metadata) testSubject.metadata = metadata;
+  if (links) testSubject.links = links;
   if (version && typeof version === "string" && version.length > 0) testSubject.epubVersion = version;
   obj['earl:testSubject'] = testSubject;
   return obj;
@@ -91,8 +91,8 @@ class ReportBuilder {
     this._json = {
       '@type': 'earl:report',
       '@context': 'http://daisy.github.io/ace/ace-report-1.0.jsonld',
-      'dct:title': (title == null) ? '' : title.toString(),
-      'dct:description': (title == null) ? '' : description.toString(),
+      'dct:title': !title ? '' : title.toString(),
+      'dct:description': !description ? '' : description.toString(),
       'dct:date': new Date().toLocaleString(),
       'earl:assertedBy': {
         '@type': 'earl:software',
@@ -171,7 +171,7 @@ class ReportBuilder {
   }
   withTestSubject(url, title, version, identifier, metadata, links) {
     var url_ = url;
-    if (this.outdir !== undefined && this.outdir != "" && reportConfig["use-relative-paths"]) {
+    if (this.outdir && reportConfig["use-relative-paths"]) {
       url_ = path.relative(this.outdir, url);
     }
     withTestSubject(this._json, url_, title, version, identifier, metadata, links);
