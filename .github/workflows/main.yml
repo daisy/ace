@@ -74,7 +74,7 @@ jobs:
       shell: bash
     - name: non-PR action, Windows, YARN INSTALL
       if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
-      run: echo "${{ matrix.osarch }}" && dir C:\Users\runneradmin\AppData\Local\electron\Cache\ && yarn install --network-timeout 1000000
+      run: echo "${{ matrix.osarch }}" && yarn install --network-timeout 1000000 || dir C:\Users\runneradmin\AppData\Local\electron\Cache\
       shell: cmd
     - name: non-PR action, Windows, Puppeteer
       if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
