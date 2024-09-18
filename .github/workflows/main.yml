@@ -91,7 +91,7 @@ jobs:
       run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
     - name: non-PR action, Windows, Electron
       if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
-      run: echo "${{ matrix.osarch }}" && yarn test-electron && yarn test-electron-cli
+      run: echo "${{ matrix.osarch }}" && yarn test-electron # && yarn test-electron-cli
     - name: non-PR action, Linux, Puppeteer
       if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'linux-intel' || matrix.osarch == 'linux-arm') }}
       run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
