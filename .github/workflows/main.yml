@@ -74,7 +74,7 @@ jobs:
       shell: bash
     - name: non-PR action, Windows, YARN INSTALL
       if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
-      run: echo "${{ matrix.osarch }}" && yarn install --network-timeout 1000000 || (dir C:\Users\runneradmin\AppData\Local\electron\Cache\ && dir C:\Users\runneradmin\AppData\Local\electron\Cache\763e1ded5bfc6f3862bfcc801d7ca46745b5e20a39e4263b4dbb680e7c92f0ad && dir C:\Users\runneradmin\AppData\Local\electron\Cache\70829cbb4e1572da61893254d04a0c0c66e78deccc85ea1b8d262f6689158c77)
+      run: echo "${{ matrix.osarch }}" && yarn install --network-timeout 1000000 # || (dir C:\Users\runneradmin\AppData\Local\electron\Cache\ && dir C:\Users\runneradmin\AppData\Local\electron\Cache\763e1ded5bfc6f3862bfcc801d7ca46745b5e20a39e4263b4dbb680e7c92f0ad && dir C:\Users\runneradmin\AppData\Local\electron\Cache\70829cbb4e1572da61893254d04a0c0c66e78deccc85ea1b8d262f6689158c77)
       shell: cmd
     - name: non-PR action, Windows, ELECTRON CHECK
       if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
