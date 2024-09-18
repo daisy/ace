@@ -97,6 +97,8 @@ USER notroot
 #ENV DISPLAY :99.0
 
 RUN cd /ACE/ &&\
+# export DBUS_SYSTEM_BUS_ADDRESS='unix:path=/var/run/dbus/system_bus_socket'
+# export DBUS_SESSION_BUS_ADDRESS='unix:path=/var/run/dbus/system_bus_socket'
 #    export DISPLAY=:99.0 &&\
 #    echo $DISPLAY &&\
 #    (Xvfb :99 -ac -screen 0 1024x768x16 &> /ACE/xvfb.log &) &&\
