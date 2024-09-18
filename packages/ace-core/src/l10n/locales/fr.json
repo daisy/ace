@@ -56,8 +56,8 @@
         },
         "pagesourceviolation": {
             "kbtitle": "Navigation par page",
-            "resdesc": "Ajouter la métadonnée 'dc:source' au Document de Package",
-            "ruledesc": "Une publication avec des sauts de page doit déclarer la métadonnée 'dc:source'",
+            "resdesc": "Ajouter la métadonnée 'dc:source / pageBreakSource' au Document de Package",
+            "ruledesc": "Une publication avec des sauts de page doit déclarer la métadonnée 'dc:source / pageBreakSource'",
             "testdesc": "Vérifie que la source des sauts de page est identifiée"
         },
         "titleviolation": {

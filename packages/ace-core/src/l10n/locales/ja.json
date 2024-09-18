@@ -56,8 +56,8 @@
     },
     "pagesourceviolation": {
       "kbtitle": "ページナビゲーション",
-      "resdesc": "「dc:source」メタデータプロパティをパッケージドキュメントに追加する",
-      "ruledesc": "改ページのある出版物は、「dc:source」メタデータを宣言する必要があります",
+      "resdesc": "「dc:source / pageBreakSource」メタデータプロパティをパッケージドキュメントに追加する",
+      "ruledesc": "改ページのある出版物は、「dc:source / pageBreakSource」メタデータを宣言する必要があります",
       "testdesc": "改ページのソースが特定されていることを確認する"
     },
     "titleviolation": {

@@ -56,8 +56,8 @@
         },
         "pagesourceviolation": {
             "kbtitle": "Seitennavigation",
-            "resdesc": "Eine 'dc:source' Metadateneigenschaft zum Dokumentenpaket hinzufügen",
-            "ruledesc": "Veröffentlichungen mit Seitenumbrüchen müssen die Metadaten 'dc:source' angeben",
+            "resdesc": "Eine 'dc:source / pageBreakSource' Metadateneigenschaft zum Dokumentenpaket hinzufügen",
+            "ruledesc": "Veröffentlichungen mit Seitenumbrüchen müssen die Metadaten 'dc:source / pageBreakSource' angeben",
             "testdesc": "Stellt sicher, dass die Quelle von Seitenumbrüchen identifiziert wird"
         },
         "titleviolation": {

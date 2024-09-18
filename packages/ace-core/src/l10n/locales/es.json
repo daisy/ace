@@ -56,8 +56,8 @@
         },
         "pagesourceviolation": {
             "kbtitle": "Navegación por páginas",
-            "resdesc": "Añadir una propiedad de metadatos 'dc:source' al documento package",
-            "ruledesc": "Las publicaciones con saltos de página deben declarar 'dc:source' en los metadatos",
+            "resdesc": "Añadir una propiedad de metadatos 'dc:source / pageBreakSource' al documento package",
+            "ruledesc": "Las publicaciones con saltos de página deben declarar 'dc:source / pageBreakSource' en los metadatos",
             "testdesc": "Garantiza que la fuente de los saltos de página está identificada"
         },
         "titleviolation": {

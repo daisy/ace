@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package xmlns="http://www.idpf.org/2007/opf" version="3.0" xml:lang="en" unique-identifier="uid">
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" xml:lang="en" unique-identifier="uid">
 <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
   <dc:title id="title">Minimal EPUB 3.0</dc:title>
   <dc:language>en</dc:language>
   <dc:identifier id="uid">NOID</dc:identifier>
-  <dc:source>https://example.com</dc:source>
+  
+  <!-- see package@version="2.0" which is used here in the unzipped version, note that the zipped version of this test is 3.0 and activates the conformsTo below to pass the missing @refines for dc:source -->
+  <dc:source id="pg-src">urn:isbn:9781234567891</dc:source>
+  <!-- meta property="source-of" refines="#pg-src">pagination</meta -->
+  <!-- meta property="pageBreakSource">urn:isbn:9781234567891</meta -->
+  <!-- <link rel="dcterms:conformsTo" href="http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-aa"/> -->
+  <!-- <meta property="dcterms:conformsTo">http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-aa</meta> -->
+
   <meta property="dcterms:modified">2017-01-01T00:00:01Z</meta>
   <meta property="schema:accessibilityFeature">structuralNavigation</meta>
   <meta property="schema:accessibilitySummary">everything OK!</meta>

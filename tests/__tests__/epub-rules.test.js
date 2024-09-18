@@ -179,6 +179,10 @@ describe('page list and breaks', () => {
     const report = await ace('../data/epubrules-pagelist');
     expect(report['earl:result']['earl:outcome']).toEqual('pass');
   });
+  test('page list correctly sourced using new metadata', async () => {
+    const report = await ace('../data/epubrules-pagelist-newsource');
+    expect(report['earl:result']['earl:outcome']).toEqual('pass');
+  });
 });
 
 describe('page list and breaks FXL', () => {

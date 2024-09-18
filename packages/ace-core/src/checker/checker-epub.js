@@ -492,6 +492,9 @@ function checkPageSource(assertion, epub) {
     && (
       (!epub.metadata['dc:source'] || epub.metadata['dc:source'].toString() === '')
       &&
+      // https://www.w3.org/publishing/a11y/page-source-id/
+      (!epub.metadata['pageBreakSource'] || epub.metadata['pageBreakSource'].toString() === '')
+      &&
       (!epub.metadata['rendition:layout'] || epub.metadata['rendition:layout'].toString() !== "pre-paginated")
     )
   ) {

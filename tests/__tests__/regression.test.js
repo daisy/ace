@@ -123,5 +123,6 @@ test('issue #290 (unzipped): URL percent encoding', async () => {
 
 test('issue #290 (zipped): URL percent encoding', async () => {
   const report = await ace('../data/issue-290.epub');
+  // console.log(JSON.stringify(report, null, 4));
   expect(report['earl:result']['earl:outcome']).toEqual('pass');
 });

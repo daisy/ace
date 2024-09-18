@@ -108,9 +108,20 @@ function addMeta(name, value, meta) {
     meta[name].push(value);
   }
 }
-function parseMetadata(doc, select) {
+function parseMetadata(doc, select, epub) {
+  const isEPUB3 = epub.version && epub.version.startsWith("3");
   const result = {};
+  let dcSourceAdded = false;
+  let dcSource = undefined;
+  let dcSourceId = undefined;
   select('/opf:package/opf:metadata/dc:*', doc).forEach((dcElem) => {
+    if (isEPUB3 && dcElem.localName === "source") {
+      // if (!!dcElem.getAttribute("id")) {
+        dcSource = dcElem.textContent;
+        dcSourceId = dcElem.getAttribute("id");
+      // }
+      return;
+    }
     addMeta(`dc:${dcElem.localName}`, dcElem.textContent, result);
   });
   select('/opf:package/opf:metadata/opf:meta', doc).forEach((meta) => {
@@ -118,6 +129,7 @@ function parseMetadata(doc, select) {
     const name = meta.getAttribute('name');
     const md = prop || name;
 
+    // implies isEPUB3
     let refines = meta.getAttribute('refines');
     if (refines) {
       refines = refines.trim();
@@ -126,6 +138,12 @@ function parseMetadata(doc, select) {
       }
       refines = refines.trim();
       if (refines) {
+        // isEPUB3 implied
+        if (md === "source-of" && meta.textContent === "pagination" && refines === dcSourceId) {
+          dcSourceAdded = true;
+          addMeta(`dc:source`, dcSource, result);
+          return;
+        }
         // we exclude most refined metadata such as audio duration for individual spine items, or title-type=subtitle for dc:title, etc.
         // ... but we preserve known global metadata:
         // here, this accessibility metadata can typically associated with a particular dcterms:conformsTo statement
@@ -148,6 +166,15 @@ function parseMetadata(doc, select) {
       }
     }
   });
+
+  if (isEPUB3 && dcSource && !dcSourceAdded) {
+    // console.log(JSON.stringify(result));
+    const confTo = result["dcterms:conformsTo"] || epub.links && epub.links["dcterms:conformsTo"];
+    if (confTo && confTo.startsWith("http://www.idpf.org/epub/a11y/")) { // EPUB a11y 1.0
+      addMeta(`dc:source`, dcSource, result);
+    }
+  }
+
   return result;
 }
 
@@ -235,8 +262,8 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
   const versionAttr = select('/opf:package/@version', doc)[0];
   this.version = versionAttr ? versionAttr.nodeValue : undefined;
 
-  this.metadata = parseMetadata(doc, select);
   this.links = parseLinks(doc, select);
+  this.metadata = parseMetadata(doc, select, this);
 
   var spineContainsNavDoc = undefined;
   const spineItemIdrefs = select('/opf:package/opf:spine/opf:itemref/@idref', doc);
