@@ -72,15 +72,15 @@ jobs:
       run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
     - name: non-PR action, Linux, Electron
       if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'linux-intel' || matrix.osarch == 'linux-arm') }}
-      uses: coactions/setup-xvfb@v1
-      with:
-        run: yarn test-electron && yarn test-electron-cli
-        working-directory: ./
-        # options:
-# run: echo "${{ matrix.osarch }}" && xvfb-run yarn test-electron && xvfb-run yarn test-electron-cli
+      # uses: coactions/setup-xvfb@6b00cf1889f4e1d5a48635647013c0508128ee1a #v1
+      # with:
+      #   run: yarn test-electron && yarn test-electron-cli
+      #   working-directory: ./
+      #   # options:
+      run: echo "${{ matrix.osarch }}" && xvfb-run yarn test-electron && xvfb-run yarn test-electron-cli
     - name: non-PR action, Mac, Puppeteer
-      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'mac-intel' || matrix.osarch == 'mac-arm') }}
+      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
       run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
     - name: non-PR action, Mac, Electron
-      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'mac-intel' || matrix.osarch == 'mac-arm') }}
+      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
       run: echo "${{ matrix.osarch }}" && yarn test-electron && yarn test-electron-cli
