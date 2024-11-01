@@ -5,6 +5,8 @@
 
 'use strict';
 
+// yarn test -t="packages/ace-core/src/scripts/ace-extraction.test.js"
+
 const $ = require('@daisy/jest-puppeteer');
 
 beforeAll(async () => {

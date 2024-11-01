@@ -35,7 +35,7 @@
     "strip-ansi": "^6.0.0"
   },
   "resolutions": {
-    "electron": "^32.1.1"
+    "electron": "^33.0.2"
   },
   "scripts": {
     "axe-dev": "cpy \"../axe-core_DAISY/axe.js\" \"node_modules/@daisy/axe-core-for-ace/\" && cpy \"../axe-core_DAISY/axe.min.js\" \"node_modules/@daisy/axe-core-for-ace/\" && cpy \"../axe-core_DAISY/axe.d.ts\" \"node_modules/@daisy/axe-core-for-ace/\" && cpy \"../axe-core_DAISY/locales/*.*\" \"node_modules/@daisy/axe-core-for-ace/locales/\" && cpy \"../axe-core_DAISY/package.json\" \"node_modules/@daisy/axe-core-for-ace/\"",

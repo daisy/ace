@@ -23,8 +23,8 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "jest-environment-node": "^26.6.2",
-    "puppeteer": "^23.4.0"
+    "jest-environment-node": "^29.7.0",
+    "puppeteer": "^23.6.1"
   },
   "publishConfig": {
     "access": "public"
