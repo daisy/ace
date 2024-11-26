@@ -39,3 +39,11 @@ Thumbs.db
 
 # PNP state file
 .pnp.*
+
+.flox/run
+.flox/cache
+.flox/lib
+.flox/log
+.flox/NPM_PREFIX
+.flox/NPM_CACHE
+.flox/YARN_CACHE
