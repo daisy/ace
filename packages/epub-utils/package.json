@@ -27,10 +27,10 @@
     "file-url": "^3.0.0",
     "fs-extra": "^10.1.0",
     "node-stream-zip": "^1.15.0",
-    "tmp": "^0.2.1",
-    "winston": "^3.10.0",
+    "tmp": "^0.2.3",
+    "winston": "^3.17.0",
     "xmldom": "^0.6.0",
-    "xpath": "^0.0.32"
+    "xpath": "^0.0.34"
   },
   "publishConfig": {
     "access": "public"
