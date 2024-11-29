@@ -199,7 +199,13 @@ ace.getImages = function() {
           imageObj.figcaption = imageObj.figcaption.trim().replace(/\s\s+/g, " ");
         }
       }
-      images.push(imageObj);
+
+      // if (!imageObj.src) {
+      //   throw new Error(img.getAttribute('src'));
+      // }
+      if (imageObj.src) {
+        images.push(imageObj);
+      }
     });
   }
 
@@ -209,7 +215,7 @@ ace.getImages = function() {
     const len = svgimgElems.length;
     for (let i = 0; i < len; i += 1) {
       const img = svgimgElems[i];
-      
+
       if (img.parentElement && img.parentElement.getAttribute && img.parentElement.localName === "svg" && img.parentElement.namespaceURI === 'http://www.w3.org/2000/svg') {
         let title = img.parentElement.getAttribute("title");
         if (title) {
@@ -227,14 +233,15 @@ ace.getImages = function() {
         if (!title) {
           title = undefined;
         }
-    
+
         let imageObj = {
-          src: img.getAttributeNS('http://www.w3.org/1999/xlink', 'href'),
+          src: img.getAttributeNS('http://www.w3.org/1999/xlink', 'href') || img.getAttributeNS("http://www.w3.org/2000/svg", 'href') || img.getAttributeNS("http://www.w3.org/1999/xhtml", 'href') || img.getAttribute('href'),
           alt: title,
           role: role,
           cfi: window.daisy.epub.createCFI(img.parentElement),
           html: img.parentElement.outerHTML,
         }
+
         let describedby = img.parentElement.getAttribute('aria-describedby')
         if (describedby) {
           var describedbyID = describedby.trim().replace(/\s{2,}/g, ' ').split(' ').shift();
@@ -244,7 +251,13 @@ ace.getImages = function() {
             imageObj.describedby = imageObj.describedby.trim().replace(/\s\s+/g, " ");
           }
         }
-        images.push(imageObj);
+
+        // if (!imageObj.src) {
+        //   throw new Error(img.getAttributeNS('http://www.w3.org/1999/xlink', 'href') + " -- " + img.getAttributeNS("http://www.w3.org/2000/svg", 'href') + " -- " + img.getAttributeNS("http://www.w3.org/1999/xhtml", 'href') + " -- " + img.getAttribute('href'));
+        // }
+        if (imageObj.src) {
+          images.push(imageObj);
+        }
       }
     }
   }
