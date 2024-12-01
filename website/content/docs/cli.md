@@ -35,7 +35,7 @@ info:    Consolidating results...
 {
   "@type": "earl:report",
   "@context": "http://daisy.github.io/ace/ace-report-1.0.jsonld",
-  "dct:title": "Ace Report",  
+  "dct:title": "Ace Report",
   ...
 }
 info:   Done
@@ -76,6 +76,9 @@ Ace by DAISY, an Accessibility Checker for EPUB
     -l, --lang  <language> language code for localized messages (e.g. "fr"), default is "en"
   Examples
     $ ace -o out ~/Documents/book.epub
+
+If you find DAISY Ace useful, please help us by donating to support its ongoing maintenance.
+Support our work https://daisy.org/AceCLSponsor
 ```
 
 ### version

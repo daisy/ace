@@ -14,6 +14,8 @@ const cliConfig  = config.get('cli', defaults.cli);
 
 const pkg = require('@daisy/ace-meta/package');
 
+const { localizer } = require('@daisy/ace-report');
+
 const meowHelpMessage = `
   Usage: ace [options] <input>
 
@@ -32,7 +34,11 @@ const meowHelpMessage = `
 
     -l, --lang  <language> language code for localized messages (e.g. "fr"), default is "en"
   Examples
-    $ ace -o out ~/Documents/book.epub`;
+    $ ace -o out ~/Documents/book.epub
+
+  ${localizer.localize("sponsorship_prompt")}
+  ${localizer.localize("sponsorship_link")} https://daisy.org/AceCLSponsor`;
+
 const meowOptions = {
   autoHelp: false,
   autoVersion: false,
@@ -154,7 +160,7 @@ ${overrides.map(file => `  - ${file}`).join('\n')}
   .catch(async (err) => {
     winston.error(err.message ? err.message : err);
     if (err.stack) winston.debug(err.stack);
-    
+
     const res = await winston.logAndWaitFinish('info', 'Closing logs.');
     console.log('Re-run Ace using the --verbose option to enable full debug logging.');
     quit(1);

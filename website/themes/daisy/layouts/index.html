@@ -4,6 +4,21 @@
   <main id="main">
     <h1>{{ .Title }}</h1>
     {{ .Content }}
+    <div id="sponsorship">
+    <span>If you find DAISY Ace useful, please help us by donating to support its ongoing maintenance.</span>
+    <a target="_BLANK" href="https://daisy.org/AceCLSponsor">Support our work</a>
+    <input onclick="document.getElementById('sponsorship').remove();localStorage.setItem('DAISY-ACE-SPONSOR-HIDE', new Date().toISOString())" type="button" value="X" aria-label="Close" title="Close">
+    </div>
+    <script type="text/javascript">
+    const dateStr = localStorage.getItem('DAISY-ACE-SPONSOR-HIDE');
+    if (dateStr) {
+    if ((new Date().getTime() - new Date(dateStr).getTime()) > (7*24*60*60*1000)) { // 24h * 7
+      localStorage.removeItem('DAISY-ACE-SPONSOR-HIDE');
+    } else {
+      setTimeout(()=>{document.getElementById('sponsorship').remove()}, 0);
+    }
+    }
+    </script>
     <ul class="pages-list">
       {{ range $.Site.Sections.ByWeight }}
         <li>

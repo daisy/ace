@@ -208,6 +208,38 @@
       padding-left: 0 !important;
     }
 
+
+#sponsorship {
+display: flex;
+width: 100%;
+column-gap: 1em;
+align-items: center;
+background-color: rgb(255,255,240);
+color: black;
+font-size: 90%;
+border:0;
+border-top: 0.1rem solid lightgrey;
+border-bottom: 0.1rem solid lightgrey;
+padding: 0;
+padding: 0.5em;
+margin: 0;
+margin-top: 0.5em;
+margin-bottom: 0.5em;
+}
+#sponsorship > span {
+color: black;
+}
+#sponsorship > a {
+font-weight: bold;
+}
+#sponsorship > input {
+margin-left: auto;
+border: 1px solid grey;
+border-radius: 6px;
+background-color: lightgrey;
+font-weight: bold;
+font-size: 90%;
+}
   </style>
 
   <title>{{#localize "doctitle"}}{{/localize}}</title>
@@ -221,6 +253,21 @@
 
     <h1>{{#localize "doctopheading"}}{{/localize}}</h1>
     <p class="font-italic">{{#generatedBy}}{{/generatedBy}}</p>
+    <div id="sponsorship">
+    <span>{{#localize "sponsorship_prompt"}}{{/localize}}</span>
+    <a target="_BLANK" href="https://daisy.org/AceCLSponsor">{{#localize "sponsorship_link"}}{{/localize}}</a>
+    <input onclick="document.getElementById('sponsorship').remove();localStorage.setItem('DAISY-ACE-SPONSOR-HIDE', new Date().toISOString())" type="button" value="X" aria-label="{{#localize "sponsorship_close"}}{{/localize}}" title="{{#localize "sponsorship_close"}}{{/localize}}">
+    </div>
+    <script type="text/javascript">
+    const dateStr = localStorage.getItem('DAISY-ACE-SPONSOR-HIDE');
+    if (dateStr) {
+    if ((new Date().getTime() - new Date(dateStr).getTime()) > (24*60*60*1000)) { // 24h
+      localStorage.removeItem('DAISY-ACE-SPONSOR-HIDE');
+    } else {
+      setTimeout(()=>{document.getElementById('sponsorship').remove()}, 0);
+    }
+    }
+    </script>
     <p><span class="font-weight-bold">{{#localize "title"}}{{/localize}}</span> {{earl:testSubject.metadata.dc:title}}</p>
     <p>(EPUB {{earl:testSubject.epubVersion}})</p>
   </header>
@@ -426,7 +473,7 @@
     <!-- OUTLINES TAB -->
     <div id="outlines" role="tabpanel">
       <h2>{{#localize "outlines"}}{{/localize}}</h2>
-      <p class="sectionnav">{{#localize "goto"}}{{/localize}} <a href="#toc-outline">{{#localize "tocoutline"}}{{/localize}}</a> | <a href="#headings-outline">{{#localize "headsoutline"}}{{/localize}}</a> | <a href="#html-outline">{{#localize "htmloutline"}}{{/localize}}</a> </p>
+      <p class="sectionnav">{{#localize "goto"}}{{/localize}} <a href="#toc-outline">{{#localize "tocoutline"}}{{/localize}}</a> | <a href="#headings-outline">{{#localize "headsoutline"}}{{/localize}}</a> </p> <!--  | <a href="#html-outline">{{#localize "htmloutline"}}{{/localize}}</a> -->
 
       <div class="row">
 

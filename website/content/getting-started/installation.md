@@ -10,8 +10,8 @@ _Note: this documentation applies to the Ace by DAISY command line tool. For mor
 
 Operating systems: Microsoft Windows 10+, Apple MacOS High Sierra 10.13+, Linux 64-bit Ubuntu 14.04+, Debian 8+, openSUSE 13.3+, or Fedora Linux 24+
 
-Ace is a NodeJS / Javascript program that launches either Electron or Puppeteer to execute the accessibility tests in headless Chromium webviews, see 
-[implementation notes]({{<relref "contributing/notes.md">}}). Ace has other software dependencies that require a modern NodeJS runtime, for security and performance reasons. NodeJS version 16+ is required, and NodeJS 18+ is recommended as v16 is scheduled to exit maintenance phase by the end of 2023.
+Ace is a NodeJS / Javascript program that launches either Electron or Puppeteer to execute the accessibility tests in headless Chromium webviews, see
+[implementation notes]({{<relref "contributing/notes.md">}}). Ace has other software dependencies that require a modern NodeJS runtime, for security and performance reasons. NodeJS version 20 is required, and NodeJS 22 is recommended.
 
 Further information:
 
