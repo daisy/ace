@@ -1,5 +1,6 @@
 'use strict';
 
+const { localize } = require('../l10n/localize').localizer;
 const htmlChecker = require('./checker-chromium.js');
 const epubChecker = require('./checker-epub.js');
 const winston = require('winston');
@@ -43,6 +44,46 @@ function consolidate(results, report) {
 
 module.exports.check = function check(epub, report, lang, axeRunner) {
   return epubChecker.check(epub, report)
-    .then(() => htmlChecker.check(epub, lang, axeRunner))
-    .then(results => consolidate(results, report));
+    .then(async (obj) => {
+      return htmlChecker.check(epub, lang, axeRunner).then((results) => {
+        return new Promise((res) => {
+          res({
+            assertion: obj.assertion,
+            has_accessibilityFeature_printPageNumbersPageBreakMarkers: obj.has_accessibilityFeature_printPageNumbersPageBreakMarkers,
+            res: results,
+          });
+        });
+      });
+    })
+    .then((results) => {
+      // console.log(JSON.stringify(results, null, 4));
+      // throw new Error("DEBUGG");
+
+      const hasPageBreaks = !!results.res.find((item) => {
+        return !!item.properties.hasPageBreaks;
+      });
+      if (results.has_accessibilityFeature_printPageNumbersPageBreakMarkers && !hasPageBreaks
+        // || !results.has_accessibilityFeature_printPageNumbersPageBreakMarkers && hasPageBreaks
+      ) {
+        results.assertion.withAssertions(epubChecker.newViolation({
+          impact: 'moderate',
+          title: `metadata-accessibilityFeature-printPageNumbers-nopagebreaks`,
+          testDesc: localize("checkepub.metadatapagebreaks.testdesc", {}),
+          resDesc: localize("checkepub.metadatapagebreaks.resdesc", {}),
+          kbPath: 'docs/metadata/schema.org/index.html',
+          kbTitle: localize("checkepub.metadatapagebreaks.kbtitle"),
+          ruleDesc: localize("checkepub.metadatapagebreaks.ruledesc", {})
+        }));
+      }
+
+      const builtAssertions = results.assertion.build();
+      report.addAssertions(builtAssertions);
+
+      winston.info(`- ${epub.packageDoc.src}: ${
+          (builtAssertions.assertions && builtAssertions.assertions.length > 0)
+            ? builtAssertions.assertions.length
+            : 'No'} issues found`);
+
+      return consolidate(results.res, report);
+    });
 };

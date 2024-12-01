@@ -27,8 +27,8 @@
         "metadataprintpagenumbers": {
             "kbtitle": "Schema.org可及性詮釋資料",
             "resdesc": "在導覽文件中加入頁面列表",
-            "ruledesc": "當宣告可及性功能「printPageNumbers」/「pageBreakMarkers」時，導覽文件中應該包含一份頁面列表",
-            "testdesc": "可及性功能中宣告了「printPageNumbers」/「pageBreakMarkers」，但未包含頁面列表"
+            "ruledesc": "當宣告可及性功能「pageNavigation」時，導覽文件中應該包含一份頁面列表",
+            "testdesc": "可及性功能中宣告了「pageNavigation」，但未包含頁面列表"
         },
         "metadataviolation": {
             "kbtitle": "Schema.org可及性詮釋資料",

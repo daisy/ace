@@ -7,9 +7,10 @@ In addition to the [HTML rules]({{<ref "html.md">}}), Ace implements EPUB-specif
 
 * Missing metadata (impact = "serious"): `metadata-accessmode`, `metadata-accessibilityfeature`, `metadata-accessibilityhazard`
 * Missing metadata (impact = "moderate"): `metadata-accessibilitysummary`, `metadata-accessModesufficient`
-* Incorrect metadata values (impact = "moderate"): `metadata-accessibilityfeature-invalid`, `metadata-accessibilityhazard-invalid` (mixed positive and negative terms (e.g. `noFlashingHazard` and `flashing`), `unknown` mixed with `none` or other vocabulary values, or usage of terms not defined by the specification)
-* Incorrect metadata values (impact = "minor"): `metadata-accessmode-invalid`, `metadata-accessmodesufficient-invalid` (usage of terms not defined by the specification)
-* Missing authored page list when metadata `printPageNumbers`/`pageBreakMarkers` is present (impact = "moderate"): `metadata-accessibilityFeature-printPageNumbers-nopagelist`
+* Incorrect metadata values (impact = "moderate"): `metadata-accessibilityfeature-invalid`, `metadata-accessibilityhazard-invalid` (mixed positive and negative terms (e.g. `noFlashingHazard` and `flashing`), `unknown` mixed with `none` or other vocabulary values, or usage of terms not defined by the specification)
+* Incorrect metadata values (impact = "minor"): `metadata-accessmode-invalid`, `metadata-accessmodesufficient-invalid` (usage of terms not defined by the specification)
+* Missing authored page list when metadata `pageNavigation` is present (impact = "moderate"): `metadata-accessibilityFeature-printPageNumbers-nopagelist`
+* Missing page breaks when metadata `printPageNumbers`/`pageBreakMarkers` is present (impact = "moderate"): `metadata-accessibilityFeature-printPageNumbers-nopagebreaks`
 * Mismatched page breaks in SMIL and in HTML documents (impact = "serious"): `epub-pagelist-mediaoverlays`
 * Authored page list references elements in HTML documents that are not page breaks (impact = "minor") or do not exist (impact = "serious"): `epub-pagelist-broken`
 * Authored page list does not reference all elements that are page breaks in HTML documents (impact = serious): `epub-pagelist-missing-pagebreak`

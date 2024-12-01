@@ -27,8 +27,8 @@
         "metadataprintpagenumbers": {
             "kbtitle": "Metadata for tilgængelighed fra Schema.org",
             "resdesc": "Tilføj en liste over sider til navigations-dokumentet",
-            "ruledesc": "Når tilgængeligheds-egenskaben 'printPageNumbers'/'pageBreakMarkers' bruges, bør navigations-dokumentet indeholde en liste over sider",
-            "testdesc": "Tilgængeligheds-egenskaben 'printPageNumbers'/'pageBreakMarkers' bruges, men ingen liste over sider er angivet"
+            "ruledesc": "Når tilgængeligheds-egenskaben 'pageNavigation' bruges, bør navigations-dokumentet indeholde en liste over sider",
+            "testdesc": "Tilgængeligheds-egenskaben 'pageNavigation' bruges, men ingen liste over sider er angivet"
         },
         "metadataviolation": {
             "kbtitle": "Metadata for tilgængelighed fra Schema.org",

@@ -67,6 +67,8 @@ function newMetadataAssertion(name, impact = 'serious') {
 //   "Value '{{value}}' is invalid for '{{name}}' metadata"
 
 function checkMetadata(assertions, epub) {
+  let has_accessibilityFeature_printPageNumbersPageBreakMarkers = false;
+
   // Check metadata values
   for (const name in a11yMetadata.A11Y_META) {
     const meta = a11yMetadata.A11Y_META[name];
@@ -198,12 +200,18 @@ function checkMetadata(assertions, epub) {
               }))
             });
           }
-  
+
           // Check consistency of the printPageNumbers feature
-          if (name === 'schema:accessibilityFeature'
-            && (splitValues.includes('printPageNumbers') || splitValues.includes('pageBreakMarkers'))
-            && !epub.navDoc.hasPageList) {
-    
+          const has_accessibilityFeature_pageNavigation =
+            name === 'schema:accessibilityFeature'
+            && splitValues.includes('pageNavigation');
+
+          has_accessibilityFeature_printPageNumbersPageBreakMarkers = has_accessibilityFeature_printPageNumbersPageBreakMarkers ||
+            name === 'schema:accessibilityFeature' && (splitValues.includes('printPageNumbers') || splitValues.includes('pageBreakMarkers'));
+
+          if (has_accessibilityFeature_pageNavigation && !epub.navDoc.hasPageList
+            // || !has_accessibilityFeature_pageNavigation && epub.navDoc.hasPageList
+          ) {
             assertions.withAssertions(newViolation({
               impact: 'moderate',
               title: `metadata-accessibilityFeature-printPageNumbers-nopagelist`,
@@ -212,12 +220,13 @@ function checkMetadata(assertions, epub) {
               kbPath: 'docs/metadata/schema.org/index.html',
               kbTitle: localize("checkepub.metadataprintpagenumbers.kbtitle"),
               ruleDesc: localize("checkepub.metadataprintpagenumbers.ruledesc", {})
-            }))
+            }));
           }
         });
       }
     }
   }
+  return has_accessibilityFeature_printPageNumbersPageBreakMarkers;
 }
 
 function checkMediaOverlays(epub) {
@@ -327,7 +336,7 @@ function checkReadingOrder(epub) {
     .withTestSubject(resPath, "");
 
   // console.log("EPUB", JSON.stringify(epub, null, 4));
-  
+
   const docs = [];
   for (const doc of epub.contentDocs) {
     if (doc.notInReadingOrder) { // NavDoc artificially appended
@@ -532,7 +541,7 @@ function check(epub, report) {
   const assertionsMO = checkMediaOverlays(epub);
 
   // Check a11y metadata
-  checkMetadata(assertion, epub);
+  const has_accessibilityFeature_printPageNumbersPageBreakMarkers = checkMetadata(assertion, epub);
 
   // Check presence of a title
   checkTitle(assertion, epub);
@@ -552,8 +561,8 @@ function check(epub, report) {
     }
   }
 
-  const builtAssertions = assertion.build();
-  report.addAssertions(builtAssertions);
+  // const builtAssertions = assertion.build();
+  // report.addAssertions(builtAssertions);
 
   // Report the Nav Doc
   report.addEPUBNav(epub.navDoc);
@@ -565,12 +574,16 @@ function check(epub, report) {
     hasSVGContentDocuments: epub.hasSVGContentDocuments,
   });
 
-  winston.info(`- ${epub.packageDoc.src}: ${
-    (builtAssertions.assertions && builtAssertions.assertions.length > 0)
-      ? builtAssertions.assertions.length
-      : 'No'} issues found`);
+  // winston.info(`- ${epub.packageDoc.src}: ${
+  //   (builtAssertions.assertions && builtAssertions.assertions.length > 0)
+  //     ? builtAssertions.assertions.length
+  //     : 'No'} issues found`);
 
-  return Promise.resolve();
+  return Promise.resolve({
+    assertion,
+    has_accessibilityFeature_printPageNumbersPageBreakMarkers,
+  });
 }
 
 module.exports.check = check;
+module.exports.newViolation = newViolation;

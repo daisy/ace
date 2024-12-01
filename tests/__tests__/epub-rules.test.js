@@ -420,8 +420,10 @@ describe('accessibility metadata', () => {
       }),
     ]));
   });
-  test('`printPageNumbers` is declared as a feature but the Nav Doc has no page list', async () => {
-    const report = await ace('../data/epubrules-metadata-printPageNumbers-nopagelist');
+
+  test('`pageNavigation` is declared as a feature but the Nav Doc has no page list', async () => {
+    const report = await ace('../data/epubrules-metadata-pageNavigation-nopagelist');
+    // console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']['earl:outcome']).toEqual('fail');
     const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
     expect(assertions).toEqual(expect.arrayContaining([
@@ -432,14 +434,29 @@ describe('accessibility metadata', () => {
       }),
     ]));
   });
-  test('`pageBreakMarkers` is declared as a feature but the Nav Doc has no page list', async () => {
-    const report = await ace('../data/epubrules-metadata-pageBreakMarkers-nopagelist');
+
+  test('`printPageNumbers` is declared as a feature but the publication content has no page breaks', async () => {
+    const report = await ace('../data/epubrules-metadata-printPageNumbers-nopagelist');
+    // console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']['earl:outcome']).toEqual('fail');
     const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
     expect(assertions).toEqual(expect.arrayContaining([
       expect.objectContaining({
         'earl:test': expect.objectContaining({
-          'dct:title': 'metadata-accessibilityFeature-printPageNumbers-nopagelist',
+          'dct:title': 'metadata-accessibilityFeature-printPageNumbers-nopagebreaks',
+        }),
+      }),
+    ]));
+  });
+  test('`pageBreakMarkers` is declared as a feature but the publication content has no page breaks', async () => {
+    const report = await ace('../data/epubrules-metadata-pageBreakMarkers-nopagelist');
+    // console.log(JSON.stringify(report, null, 4));
+    expect(report['earl:result']['earl:outcome']).toEqual('fail');
+    const assertions = findAssertionsForDoc(report, 'EPUB/package.opf');
+    expect(assertions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({
+          'dct:title': 'metadata-accessibilityFeature-printPageNumbers-nopagebreaks',
         }),
       }),
     ]));

@@ -27,8 +27,8 @@
     "metadataprintpagenumbers": {
       "kbtitle": "Schema.orgアクセシビリティメタデータ",
       "resdesc": "ナビゲーションドキュメントにページリストを追加する",
-      "ruledesc": "アクセシビリティ機能「printPageNumbers」/「pageBreakMarkers」が宣言されている場合、ナビゲーションドキュメントにページリストを含める必要があります",
-      "testdesc": "アクセシビリティ機能「printPageNumbers」/「pageBreakMarkers」は宣言されていますが、ページリストがありません"
+      "ruledesc": "アクセシビリティ機能「pageNavigation」が宣言されている場合、ナビゲーションドキュメントにページリストを含める必要があります",
+      "testdesc": "アクセシビリティ機能「pageNavigation」は宣言されていますが、ページリストがありません"
     },
     "metadataviolation": {
       "kbtitle": "Schema.orgアクセシビリティメタデータ",
