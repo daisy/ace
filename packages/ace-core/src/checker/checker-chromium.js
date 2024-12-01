@@ -11,6 +11,15 @@ const axe2ace = require('@daisy/ace-report-axe');
 
 const { getRawResourcesForCurrentLanguage } = require('../l10n/localize').localizer;
 
+
+// const encodeURIComponent_RFC3986 = require('@daisy/epub-utils').encodeURIComponent_RFC3986;
+function encodeURIComponent_RFC3986(str) {
+    return encodeURIComponent(str)
+        .replace(/[!'()*]/g, (c) => {
+            return "%" + c.charCodeAt(0).toString(16);
+        });
+}
+
 tmp.setGracefulCleanup();
 
 const scripts = [
@@ -38,7 +47,7 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
     }
     let url = spineItem.url;
     let ext = path.extname(spineItem.filepath);
-    
+
     // File extensions other than 'xhtml' or 'html' are not propertly loaded
     // by puppeteer, so we copy the file to a new `.xhtml` temp file.
     if (!process.versions['electron'] && // The Electron-based Axe runner handles .xml files just fine
@@ -132,7 +141,7 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
                     console.log("----- ITEMs SRC 1");
                     console.log(srcItem.src);
                   }
-                  srcItem.path = path.resolve(path.dirname(spineItem.filepath), decodeURI(srcItem.src.toString()));
+                  srcItem.path = path.resolve(path.dirname(spineItem.filepath), decodeURIComponent(srcItem.src.toString()));
                   if (LOG_DEBUG_URLS) {
                     console.log("----- ITEMs SRC 2");
                     console.log(srcItem.path);
@@ -150,7 +159,7 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
                 console.log("----- ITEM SRC 1");
                 console.log(item.src);
               }
-              item.path = path.resolve(path.dirname(spineItem.filepath), decodeURI(item.src.toString()));
+              item.path = path.resolve(path.dirname(spineItem.filepath), decodeURIComponent(item.src.toString()));
               if (LOG_DEBUG_URLS) {
                 console.log("----- ITEM SRC 2");
                 console.log(item.path);
@@ -167,6 +176,7 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
                 console.log(spineItem.relpath);
                 console.log(item.cfi);
               }
+              // encodeURIComponent_RFC3986
               item.location = `${encodeURI(spineItem.relpath)}#epubcfi(${encodeURI(item.cfi)})`;
               if (LOG_DEBUG_URLS) {
                 console.log("----- CFI 2");

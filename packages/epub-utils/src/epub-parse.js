@@ -60,15 +60,15 @@ function parseNavDoc(fullpath, epubDir) {
   let pageListHrefs = undefined;
   if (hasPageList) {
     const arr1 = select('descendant::html:a/@href', sPageList[0]);
-    pageListHrefs = arr1.map((o) => decodeURI(o.nodeValue));
+    pageListHrefs = arr1.map((o) => decodeURIComponent(o.nodeValue));
     // console.log(arr1.length, JSON.stringify(pageListHrefs, null, 4));
   }
-  
+
   let tocHrefs = undefined;
   const sTOC = select('//html:nav[@epub:type="toc"]/html:ol', doc);
   if (sTOC[0]) {
     const arr2 = select('descendant::html:a/@href', sTOC[0]);
-    tocHrefs = arr2.map((o) => decodeURI(o.nodeValue));
+    tocHrefs = arr2.map((o) => decodeURIComponent(o.nodeValue));
     // console.log(arr2.length, JSON.stringify(tocHrefs, null, 4));
   }
 
@@ -80,7 +80,7 @@ function parseNavDoc(fullpath, epubDir) {
     while (a.firstChild) a.parentNode.insertBefore(a.firstChild, a);
     a.parentNode.removeChild(a);
   }
-  
+
   const tocHTML = new XMLSerializer().serializeToString(sTOC[0]);
   // console.log(tocHTML);
 
@@ -216,7 +216,7 @@ function parseLinks(doc, select) {
       }
     }
 
-    addLink(rel, decodeURI(link.getAttribute('href')), result);
+    addLink(rel, decodeURIComponent(link.getAttribute('href')), result);
   });
   return result;
 }
@@ -274,7 +274,8 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
       if (this.contentDocMediaType === contentType) {
 
         var spineItem = new SpineItem();
-        spineItem.relpath = decodeURI(manifestItem[0].getAttribute('href'));
+        spineItem.relpath = decodeURIComponent(manifestItem[0].getAttribute('href'));
+        // if (manifestItem[0].getAttribute('href').includes("%")) console.log(`${manifestItem[0].getAttribute('href')} ===> ${spineItem.relpath}`);
         spineItem.filepath = path.join(path.dirname(packageDocPath), spineItem.relpath);
 
         const o = this.parseContentDocTitleAndIds(spineItem.filepath);
@@ -298,7 +299,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
         const smilManifestItem = select(`/opf:package/opf:manifest/opf:item[@id='${moAttr}']`, doc);
         if (smilManifestItem.length > 0) {
           spineItem.mediaOverlay = {};
-          spineItem.mediaOverlay.smilRelPath = decodeURI(smilManifestItem[0].getAttribute('href'));
+          spineItem.mediaOverlay.smilRelPath = decodeURIComponent(smilManifestItem[0].getAttribute('href'));
           spineItem.mediaOverlay.smilFilePath = path.join(path.dirname(packageDocPath), spineItem.mediaOverlay.smilRelPath );
           // spineItem.mediaOverlay.smilUrl = fileUrl(spineItem.mediaOverlay.smilFilePath);
           spineItem.mediaOverlay.smilRefs = this.parseSmilRefs(spineItem.mediaOverlay.smilFilePath);
@@ -315,7 +316,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
                             + '[contains(concat(" ", normalize-space(@properties), " ")," nav ")]'
                             + '/@href', doc);
   if (navDocRef.length > 0) {
-    const navDocPath = decodeURI(navDocRef[0].nodeValue);
+    const navDocPath = decodeURIComponent(navDocRef[0].nodeValue);
     const navDocFullPath = path.join(path.dirname(packageDocPath), navDocPath);
     this.navDoc = parseNavDoc(navDocFullPath, epubDir);
 
@@ -354,7 +355,7 @@ EpubParser.prototype.parseSmilRefs = function(filepath) {
   const content = fs.readFileSync(filepath).toString();
   const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xml');
   const select = xpath.useNamespaces({smil: "http://www.w3.org/ns/SMIL", epub: "http://www.idpf.org/2007/ops"});
-  
+
   const arr = select('//smil:text[@src]', doc);
   let smilRefs = arr.map((o) => {
     let epubType = o.parentNode ? o.parentNode.getAttributeNS('http://www.idpf.org/2007/ops', 'type') : undefined;
@@ -425,11 +426,19 @@ EpubParser.prototype.calculatePackageDocPath = function(epubDir) {
   const rootfiles = select('/ocf:container/ocf:rootfiles/ocf:rootfile[@media-type="application/oebps-package+xml"]/@full-path', doc);
   // just grab the first one as we're not handling the case of multiple renditions
   if (rootfiles.length > 0) {
-    return (path.join(epubDir, decodeURI(rootfiles[0].nodeValue)));
+    return (path.join(epubDir, decodeURIComponent(rootfiles[0].nodeValue)));
   }
   return '';
 }
 
+function encodeURIComponent_RFC3986(str) {
+    return encodeURIComponent(str)
+        .replace(/[!'()*]/g, (c) => {
+            return "%" + c.charCodeAt(0).toString(16);
+        });
+}
 
 module.exports.SpineItem = SpineItem;
 module.exports.EpubParser = EpubParser;
+
+module.exports.encodeURIComponent_RFC3986 = encodeURIComponent_RFC3986;

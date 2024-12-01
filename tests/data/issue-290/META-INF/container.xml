@@ -2,7 +2,12 @@
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
    <rootfiles>
       <!-- decodeURI("E%25PU%20B/pa&c%26kag%2Fe%C3%A8_.opf"): "E%PU B/pa&c%26kag%2Feè_.opf" -->
+
+      <!-- encodeURIComponent("E%PU B/pa&c%26kag%2Feè_.opf"): "E%25PU%20B%2Fpa%26c%2526kag%252Fe%C3%A8_.opf" -->
+      <!-- decodeURIComponent("E%25PU%20B%2Fpa%26c%2526kag%252Fe%C3%A8_.opf"): "E%PU B/pa&c%26kag%2Feè_.opf" -->
+
       <!-- NOTE that "%26" is ampersand "£", and "%2F" is forward slash "/" -->
-      <rootfile full-path="E%25PU%20B/pa&c%26kag%2Fe%C3%A8_.opf" media-type="application/oebps-package+xml"/>
+
+      <rootfile full-path="E%25PU%20B%2Fpa%26c%2526kag%252Fe%C3%A8_.opf" media-type="application/oebps-package+xml"/>
    </rootfiles>
 </container>

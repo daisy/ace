@@ -119,7 +119,7 @@ const streamProtocolHandler = async (
 
     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} streamProtocolHandler req.url: ${req.url}`);
     const u = new URL(req.url);
-    
+
     if (LOG_DEBUG) {
         Object.keys(req.headers).forEach((header) => {
             const val = req.headers[header];
@@ -211,7 +211,7 @@ function loadUrl(browserWindow) {
         clearTimeout(browserWindow.ace__timeout);
     }
     browserWindow.ace__timeout = undefined;
-    
+
     const options = {}; // { extraHeaders: 'pragma: no-cache\n' };
     const uareel = `${rootUrl}${browserWindow.ace__currentUrl}?${HTTP_QUERY_PARAM}=${iHttpReq++}`;
     if (LOG_DEBUG_URLS) {
@@ -267,7 +267,7 @@ function loadUrl(browserWindow) {
 
             if (!browserWindow.ace__TIME_executeJavaScript) {
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner ${MILLISECONDS_TIMEOUT_INITIAL}ms timeout [[RELOAD]] (${timeElapsed1[0]} seconds + ${timeElapsed1[1]} nanoseconds) (${timeElapsed2[0]} seconds + ${timeElapsed2[1]} nanoseconds) ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
-                
+
                 browserWindow.ace__TIME_loadURL = process.hrtime();
                 browserWindow.ace__TIME_executeJavaScript = 0;
                 try {
@@ -286,9 +286,9 @@ function loadUrl(browserWindow) {
                 browserWindow.ace__timeout = setTimeout(timeoutFunc, MILLISECONDS_TIMEOUT_INITIAL);
                 return;
             }
-    
+
             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner ${MILLISECONDS_TIMEOUT_INITIAL}ms timeout [[EXTEND]] (${timeElapsed1[0]} seconds + ${timeElapsed1[1]} nanoseconds) (${timeElapsed2[0]} seconds + ${timeElapsed2[1]} nanoseconds) ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
-            
+
             browserWindow.ace__timeoutExtended = true;
             browserWindow.ace__timeout = setTimeout(timeoutFunc, MILLISECONDS_TIMEOUT_EXTENSION);
         }
@@ -588,7 +588,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
             console.log("######## URL 3");
             console.log(uarelObj.pathname);
         }
-        const full = (windowsDrive + decodeURI(uarelObj.pathname));
+        const full = (windowsDrive + decodeURIComponent(uarelObj.pathname));
         if (LOG_DEBUG_URLS) {
             console.log("######## URL 4");
             console.log(full);
@@ -603,7 +603,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
             console.log("######## URL 6");
             console.log(httpUrl);
         }
- 
+
         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner running ... ${basedir} --- ${uarel} => ${httpUrl}`);
 
         function poolPush() {
@@ -718,7 +718,7 @@ new Promise((resolve, reject) => {
                 browserWindow.webContents.executeJavaScript(js, true)
                     .then((ok) => {
                         const timeElapsed = process.hrtime(browserWindow.ace__TIME_executeJavaScript);
-                
+
                         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner done. (${timeElapsed[0]} seconds + ${timeElapsed[1]} nanoseconds) ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
                         // if (LOG_DEBUG && ok.axe.violations.length) console.log(ok.axe.url, JSON.stringify(ok, null, 4));
                         if (browserWindow.ace__replySent) {
@@ -870,7 +870,7 @@ function startAxeServer(basedir, scripts, scriptContents) {
                     console.log(">>>>>>>>>> URL 2");
                     console.log(ptn);
                 }
-                const pn = decodeURI(ptn);
+                const pn = decodeURIComponent(ptn);
                 if (LOG_DEBUG_URLS) {
                     console.log(">>>>>>>>>> URL 3");
                     console.log(pn);
@@ -946,7 +946,7 @@ function startAxeServer(basedir, scripts, scriptContents) {
                 console.log(">>>>>>>>>>- URL 2");
                 console.log(ptn);
             }
-            const pn = decodeURI(ptn);
+            const pn = decodeURIComponent(ptn);
             if (LOG_DEBUG_URLS) {
                 console.log(">>>>>>>>>>- URL 3");
                 console.log(pn);
@@ -1000,7 +1000,7 @@ function startAxeServer(basedir, scripts, scriptContents) {
 
             //     // const url = new URL(`https://fake.org${req.url}`);
             //     // const pathname = url.pathname;
-            //     const pathname = decodeURI(u.pathname);
+            //     const pathname = decodeURIComponent(u.pathname);
 
             //     const filePath = path.join(basedir, pathname);
             //     if (filePathsExpressStaticNotExist[filePath]) {
@@ -1170,11 +1170,11 @@ function prepareLaunch(eventEmmitter, CONCURRENT_INSTANCES) {
     eventEmmitter.on('AXE_RUNNER_LAUNCH', (event, arg) => {
         // const payload = eventEmmitter.ace_notElectronIpcMainRenderer ? event : arg;
         const sender = eventEmmitter.ace_notElectronIpcMainRenderer ? eventEmmitter : event.sender;
-    
+
         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner AXE_RUNNER_LAUNCH ...`);
-    
+
         axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES);
-    
+
         if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner sending launched event ...`);
         sender.send("AXE_RUNNER_LAUNCH_", {
             ok: true
