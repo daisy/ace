@@ -11,6 +11,7 @@ version = 1
 [install]
 nodejs_22.pkg-path = "nodejs_22"
 yarn.pkg-path = "yarn"
+hugo.pkg-path = "hugo"
 # hello.pkg-path = "hello"
 # nodejs = { version = "^20.15.1", pkg-path = "nodejs" }
 
@@ -39,6 +40,11 @@ echo "-----> PWD: ${PWD}";
 #_FLOX_ENV_LOG_DIR
 FLOX_ENV_DIR="$(dirname ${FLOX_ENV_CACHE})"
 echo "-----> FLOX_ENV_DIR: ${FLOX_ENV_DIR}";
+
+echo "=====> HUGO VERSION: $(hugo version)";
+WHICH_HUGO=$(which hugo);
+echo ".....> HUGO WHICH: ${WHICH_HUGO}";
+ls -alshF --color=auto "${WHICH_HUGO}";
 
 echo "=====> NODE VERSION: $(node --version)";
 WHICH_NODE=$(which node);
@@ -123,6 +129,11 @@ echo "########## FLOX PROFILE COMMON (${SHELL})...";
 
 PWD=$(pwd);
 echo "-----> PWD: ${PWD}";
+
+echo "=====> HUGO VERSION: $(hugo version)";
+WHICH_HUGO=$(which hugo);
+echo ".....> HUGO WHICH: ${WHICH_HUGO}";
+ls -alshF --color=auto "${WHICH_HUGO}";
 
 echo "=====> NODE VERSION: $(node --version)";
 WHICH_NODE=$(which node);

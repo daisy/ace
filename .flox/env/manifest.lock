@@ -3,6 +3,9 @@
   "manifest": {
     "version": 1,
     "install": {
+      "hugo": {
+        "pkg-path": "hugo"
+      },
       "nodejs_22": {
         "pkg-path": "nodejs_22"
       },
@@ -15,10 +18,10 @@
       "FLOX_DISABLE_METRICS": "true"
     },
     "hook": {
-      "on-activate": "echo \"##################################################\";\necho \"########## FLOX ACTIVATE...\";\n\nPWD=$(pwd);\necho \"-----> PWD: ${PWD}\";\n\n#_FLOX_ENV_LOG_DIR\nFLOX_ENV_DIR=\"$(dirname ${FLOX_ENV_CACHE})\"\necho \"-----> FLOX_ENV_DIR: ${FLOX_ENV_DIR}\";\n\necho \"=====> NODE VERSION: $(node --version)\";\nWHICH_NODE=$(which node);\necho \".....> NODE WHICH: ${WHICH_NODE}\";\nls -alshF --color=auto \"${WHICH_NODE}\";\n\necho \"=====> NPM VERSION (init): $(npm --version)\";\nWHICH_NPM=$(which npm);\necho \".....> NPM WHICH: ${WHICH_NPM}\";\nls -alshF --color=auto \"${WHICH_NPM}\";\n\necho \"=====> YARN VERSION: $(yarn --version)\";\nWHICH_YARN=$(which yarn);\necho \".....> YARN WHICH: ${WHICH_YARN}\";\nls -alshF --color=auto \"${WHICH_YARN}\";\n\necho \"-----> NPM CONFIG PREFIX (init): $(npm config get prefix)\";\necho \"-----> NPM_CONFIG_PREFIX (init): ${NPM_CONFIG_PREFIX}\";\n\necho \"-----> NPM CONFIG CACHE (init): $(npm config get cache)\"\necho \"-----> NPM_CONFIG_CACHE (init): ${NPM_CONFIG_CACHE}\";\n\nexport YARN_CACHE_DIR=\"${FLOX_ENV_DIR}/YARN_CACHE\";\nexport YARN_CACHE_FOLDER=\"${YARN_CACHE_DIR}\";\nyarn config set cache-folder \"${YARN_CACHE_DIR}\";\n\necho \"-----> YARN CACHE DIR: $(yarn cache dir)\";\necho \"-----> YARN_CACHE_DIR: ${YARN_CACHE_DIR}\";\necho \"-----> YARN_CACHE_FOLDER: ${YARN_CACHE_FOLDER}\";\n\n# envName=\"${_FLOX_ACTIVE_ENVIRONMENTS##:*}\";\n#echo \"${envName}\";\n#export NPM_CONFIG_PREFIX=\"/tmp/${envName}-npm\";\n\nexport NPM_CONFIG_PREFIX=\"${FLOX_ENV_DIR}/NPM_PREFIX\";\necho \"-----> NPM CONFIG PREFIX: $(npm config get prefix)\";\necho \"-----> NPM_CONFIG_PREFIX: ${NPM_CONFIG_PREFIX}\";\n#### rm -rf \"$NPM_CONFIG_PREFIX\";\nmkdir -p \"$NPM_CONFIG_PREFIX\";\nls -alshF --color=auto \"$NPM_CONFIG_PREFIX\";\nls -alshF --color=auto \"$NPM_CONFIG_PREFIX/bin\";\nls -alshF --color=auto \"$NPM_CONFIG_PREFIX/lib\";\nls -alshF --color=auto \"$NPM_CONFIG_PREFIX/lib/node_modules\";\n\nexport NPM_CONFIG_CACHE=\"${FLOX_ENV_DIR}/NPM_CACHE\";\necho \"-----> NPM CONFIG CACHE: $(npm config get cache)\"\necho \"-----> NPM_CONFIG_CACHE: ${NPM_CONFIG_CACHE}\";\n#### rm -rf \"$NPM_CONFIG_CACHE\";\nmkdir -p \"$NPM_CONFIG_CACHE\";\nls -alshF --color=auto \"$NPM_CONFIG_CACHE\";\n\necho \"-----> NODE_PATH (init): ${NODE_PATH}\";\nexport NODE_PATH=\"$NPM_CONFIG_PREFIX/lib/node_modules${NODE_PATH:+:$NODE_PATH}\";\necho \"-----> NODE_PATH: ${NODE_PATH}\";\n\nexport PATH=\"$NPM_CONFIG_PREFIX/bin:$PATH\";\n\nnpm install -g npm\nnpm install -g npm-check-updates\n"
+      "on-activate": "echo \"##################################################\";\necho \"########## FLOX ACTIVATE...\";\n\nPWD=$(pwd);\necho \"-----> PWD: ${PWD}\";\n\n#_FLOX_ENV_LOG_DIR\nFLOX_ENV_DIR=\"$(dirname ${FLOX_ENV_CACHE})\"\necho \"-----> FLOX_ENV_DIR: ${FLOX_ENV_DIR}\";\n\necho \"=====> HUGO VERSION: $(hugo version)\";\nWHICH_HUGO=$(which hugo);\necho \".....> HUGO WHICH: ${WHICH_HUGO}\";\nls -alshF --color=auto \"${WHICH_HUGO}\";\n\necho \"=====> NODE VERSION: $(node --version)\";\nWHICH_NODE=$(which node);\necho \".....> NODE WHICH: ${WHICH_NODE}\";\nls -alshF --color=auto \"${WHICH_NODE}\";\n\necho \"=====> NPM VERSION (init): $(npm --version)\";\nWHICH_NPM=$(which npm);\necho \".....> NPM WHICH: ${WHICH_NPM}\";\nls -alshF --color=auto \"${WHICH_NPM}\";\n\necho \"=====> YARN VERSION: $(yarn --version)\";\nWHICH_YARN=$(which yarn);\necho \".....> YARN WHICH: ${WHICH_YARN}\";\nls -alshF --color=auto \"${WHICH_YARN}\";\n\necho \"-----> NPM CONFIG PREFIX (init): $(npm config get prefix)\";\necho \"-----> NPM_CONFIG_PREFIX (init): ${NPM_CONFIG_PREFIX}\";\n\necho \"-----> NPM CONFIG CACHE (init): $(npm config get cache)\"\necho \"-----> NPM_CONFIG_CACHE (init): ${NPM_CONFIG_CACHE}\";\n\nexport YARN_CACHE_DIR=\"${FLOX_ENV_DIR}/YARN_CACHE\";\nexport YARN_CACHE_FOLDER=\"${YARN_CACHE_DIR}\";\nyarn config set cache-folder \"${YARN_CACHE_DIR}\";\n\necho \"-----> YARN CACHE DIR: $(yarn cache dir)\";\necho \"-----> YARN_CACHE_DIR: ${YARN_CACHE_DIR}\";\necho \"-----> YARN_CACHE_FOLDER: ${YARN_CACHE_FOLDER}\";\n\n# envName=\"${_FLOX_ACTIVE_ENVIRONMENTS##:*}\";\n#echo \"${envName}\";\n#export NPM_CONFIG_PREFIX=\"/tmp/${envName}-npm\";\n\nexport NPM_CONFIG_PREFIX=\"${FLOX_ENV_DIR}/NPM_PREFIX\";\necho \"-----> NPM CONFIG PREFIX: $(npm config get prefix)\";\necho \"-----> NPM_CONFIG_PREFIX: ${NPM_CONFIG_PREFIX}\";\n#### rm -rf \"$NPM_CONFIG_PREFIX\";\nmkdir -p \"$NPM_CONFIG_PREFIX\";\nls -alshF --color=auto \"$NPM_CONFIG_PREFIX\";\nls -alshF --color=auto \"$NPM_CONFIG_PREFIX/bin\";\nls -alshF --color=auto \"$NPM_CONFIG_PREFIX/lib\";\nls -alshF --color=auto \"$NPM_CONFIG_PREFIX/lib/node_modules\";\n\nexport NPM_CONFIG_CACHE=\"${FLOX_ENV_DIR}/NPM_CACHE\";\necho \"-----> NPM CONFIG CACHE: $(npm config get cache)\"\necho \"-----> NPM_CONFIG_CACHE: ${NPM_CONFIG_CACHE}\";\n#### rm -rf \"$NPM_CONFIG_CACHE\";\nmkdir -p \"$NPM_CONFIG_CACHE\";\nls -alshF --color=auto \"$NPM_CONFIG_CACHE\";\n\necho \"-----> NODE_PATH (init): ${NODE_PATH}\";\nexport NODE_PATH=\"$NPM_CONFIG_PREFIX/lib/node_modules${NODE_PATH:+:$NODE_PATH}\";\necho \"-----> NODE_PATH: ${NODE_PATH}\";\n\nexport PATH=\"$NPM_CONFIG_PREFIX/bin:$PATH\";\n\nnpm install -g npm\nnpm install -g npm-check-updates\n"
     },
     "profile": {
-      "common": "echo \"##################################################\";\necho \"########## FLOX PROFILE COMMON (${SHELL})...\";\n\nPWD=$(pwd);\necho \"-----> PWD: ${PWD}\";\n\necho \"=====> NODE VERSION: $(node --version)\";\nWHICH_NODE=$(which node);\necho \".....> NODE WHICH: ${WHICH_NODE}\";\nls -alshF --color=auto \"${WHICH_NODE}\";\n\necho \"=====> NPM VERSION: $(npm --version)\";\nWHICH_NPM=$(which npm);\necho \".....> NPM WHICH: ${WHICH_NPM}\";\nls -alshF --color=auto \"${WHICH_NPM}\";\n\necho \"=====> YARN VERSION: $(yarn --version)\";\nWHICH_YARN=$(which yarn);\necho \".....> YARN WHICH: ${WHICH_YARN}\";\nls -alshF --color=auto \"${WHICH_YARN}\";\n\necho \"-----> NPM CONFIG PREFIX: $(npm config get prefix)\";\necho \"-----> NPM_CONFIG_PREFIX: ${NPM_CONFIG_PREFIX}\";\n\necho \"-----> NPM CONFIG CACHE: $(npm config get cache)\";\necho \"-----> NPM_CONFIG_CACHE: ${NPM_CONFIG_CACHE}\";\n\necho \"-----> YARN CACHE DIR: $(yarn cache dir)\";\necho \"-----> YARN_CACHE_DIR: ${YARN_CACHE_DIR}\";\necho \"-----> YARN_CACHE_FOLDER: ${YARN_CACHE_FOLDER}\";\n\necho \"=====> NCU VERSION: $(ncu --version)\";\nWHICH_NCU=$(which ncu);\necho \".....> NCU WHICH: ${WHICH_NCU}\";\nls -alshF --color=auto \"${WHICH_NCU}\";\n\necho \"=====> GIT VERSION: $(git --version)\";\nWHICH_GIT=$(which git);\necho \".....> GIT WHICH: ${WHICH_GIT}\";\nls -alshF --color=auto \"${WHICH_GIT}\";\n\nENV=$(env);\necho \"-----> ENV: ${ENV}\";\necho \"||||||||||||||||||||||||||\";\n\necho \"-----> DEBUG: ${DEBUG}\";\n\necho \"-----> USER: ${USER}\";\necho \"-----> USERNAME: ${USERNAME}\";\n\necho \"-----> NODE_ENV: ${NODE_ENV}\";\n\ngit branch\ngit status\n"
+      "common": "echo \"##################################################\";\necho \"########## FLOX PROFILE COMMON (${SHELL})...\";\n\nPWD=$(pwd);\necho \"-----> PWD: ${PWD}\";\n\necho \"=====> HUGO VERSION: $(hugo version)\";\nWHICH_HUGO=$(which hugo);\necho \".....> HUGO WHICH: ${WHICH_HUGO}\";\nls -alshF --color=auto \"${WHICH_HUGO}\";\n\necho \"=====> NODE VERSION: $(node --version)\";\nWHICH_NODE=$(which node);\necho \".....> NODE WHICH: ${WHICH_NODE}\";\nls -alshF --color=auto \"${WHICH_NODE}\";\n\necho \"=====> NPM VERSION: $(npm --version)\";\nWHICH_NPM=$(which npm);\necho \".....> NPM WHICH: ${WHICH_NPM}\";\nls -alshF --color=auto \"${WHICH_NPM}\";\n\necho \"=====> YARN VERSION: $(yarn --version)\";\nWHICH_YARN=$(which yarn);\necho \".....> YARN WHICH: ${WHICH_YARN}\";\nls -alshF --color=auto \"${WHICH_YARN}\";\n\necho \"-----> NPM CONFIG PREFIX: $(npm config get prefix)\";\necho \"-----> NPM_CONFIG_PREFIX: ${NPM_CONFIG_PREFIX}\";\n\necho \"-----> NPM CONFIG CACHE: $(npm config get cache)\";\necho \"-----> NPM_CONFIG_CACHE: ${NPM_CONFIG_CACHE}\";\n\necho \"-----> YARN CACHE DIR: $(yarn cache dir)\";\necho \"-----> YARN_CACHE_DIR: ${YARN_CACHE_DIR}\";\necho \"-----> YARN_CACHE_FOLDER: ${YARN_CACHE_FOLDER}\";\n\necho \"=====> NCU VERSION: $(ncu --version)\";\nWHICH_NCU=$(which ncu);\necho \".....> NCU WHICH: ${WHICH_NCU}\";\nls -alshF --color=auto \"${WHICH_NCU}\";\n\necho \"=====> GIT VERSION: $(git --version)\";\nWHICH_GIT=$(which git);\necho \".....> GIT WHICH: ${WHICH_GIT}\";\nls -alshF --color=auto \"${WHICH_GIT}\";\n\nENV=$(env);\necho \"-----> ENV: ${ENV}\";\necho \"||||||||||||||||||||||||||\";\n\necho \"-----> DEBUG: ${DEBUG}\";\n\necho \"-----> USER: ${USER}\";\necho \"-----> USERNAME: ${USERNAME}\";\n\necho \"-----> NODE_ENV: ${NODE_ENV}\";\n\ngit branch\ngit status\n"
     },
     "options": {
       "systems": [
@@ -35,21 +38,136 @@
   },
   "packages": [
     {
+      "attr_path": "hugo",
+      "broken": false,
+      "derivation": "/nix/store/kf7zjw2v14ki822cidysj0n6j81h1ni2-hugo-0.139.0.drv",
+      "description": "Fast and modern static website engine",
+      "install_id": "hugo",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "name": "hugo-0.139.0",
+      "pname": "hugo",
+      "rev": "970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "rev_count": 713897,
+      "rev_date": "2024-11-28T23:45:21Z",
+      "scrape_date": "2024-12-01T03:54:50Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.139.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/cjkcbn1wkzn6d8syb1cyppdq9h50rkzp-hugo-0.139.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "hugo",
+      "broken": false,
+      "derivation": "/nix/store/6c6g1a39vic4n1j78hggzp7d0pwzjczj-hugo-0.139.0.drv",
+      "description": "Fast and modern static website engine",
+      "install_id": "hugo",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "name": "hugo-0.139.0",
+      "pname": "hugo",
+      "rev": "970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "rev_count": 713897,
+      "rev_date": "2024-11-28T23:45:21Z",
+      "scrape_date": "2024-12-01T03:54:50Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.139.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/mnxim04ppi0dqmzhzkh45lavmfra4n2g-hugo-0.139.0"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "hugo",
+      "broken": false,
+      "derivation": "/nix/store/9j75v79zg1lszkycknlf4i4jyjj6mnsb-hugo-0.139.0.drv",
+      "description": "Fast and modern static website engine",
+      "install_id": "hugo",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "name": "hugo-0.139.0",
+      "pname": "hugo",
+      "rev": "970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "rev_count": 713897,
+      "rev_date": "2024-11-28T23:45:21Z",
+      "scrape_date": "2024-12-01T03:54:50Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.139.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/96cinf0bmch7gkrq1izvy2lhwrdi0p1m-hugo-0.139.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "hugo",
+      "broken": false,
+      "derivation": "/nix/store/gw1bqw0n0rvjb1rb527rnb30lgvrkh5d-hugo-0.139.0.drv",
+      "description": "Fast and modern static website engine",
+      "install_id": "hugo",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "name": "hugo-0.139.0",
+      "pname": "hugo",
+      "rev": "970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "rev_count": 713897,
+      "rev_date": "2024-11-28T23:45:21Z",
+      "scrape_date": "2024-12-01T03:54:50Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.139.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/13g2k2qivwizb70gi533da0c13grgfk7-hugo-0.139.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
       "attr_path": "nodejs_22",
       "broken": false,
       "derivation": "/nix/store/ghzk28xlqjdjqyicfng40r4hyglr7nxm-nodejs-22.10.0.drv",
       "description": "Event-driven I/O framework for the V8 JavaScript engine",
       "install_id": "nodejs_22",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=970e93b9f82e2a0f3675757eb0bfc73297cc6370",
       "name": "nodejs-22.10.0",
       "pname": "nodejs_22",
-      "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
-      "rev_count": 710087,
-      "rev_date": "2024-11-19T11:04:08Z",
-      "scrape_date": "2024-11-21T04:00:36Z",
+      "rev": "970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "rev_count": 713897,
+      "rev_date": "2024-11-28T23:45:21Z",
+      "scrape_date": "2024-12-01T03:54:50Z",
       "stabilities": [
-        "staging",
         "unstable"
       ],
       "unfree": false,
@@ -72,15 +190,14 @@
       "description": "Event-driven I/O framework for the V8 JavaScript engine",
       "install_id": "nodejs_22",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=970e93b9f82e2a0f3675757eb0bfc73297cc6370",
       "name": "nodejs-22.10.0",
       "pname": "nodejs_22",
-      "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
-      "rev_count": 710087,
-      "rev_date": "2024-11-19T11:04:08Z",
-      "scrape_date": "2024-11-21T04:00:36Z",
+      "rev": "970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "rev_count": 713897,
+      "rev_date": "2024-11-28T23:45:21Z",
+      "scrape_date": "2024-12-01T03:54:50Z",
       "stabilities": [
-        "staging",
         "unstable"
       ],
       "unfree": false,
@@ -103,15 +220,14 @@
       "description": "Event-driven I/O framework for the V8 JavaScript engine",
       "install_id": "nodejs_22",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=970e93b9f82e2a0f3675757eb0bfc73297cc6370",
       "name": "nodejs-22.10.0",
       "pname": "nodejs_22",
-      "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
-      "rev_count": 710087,
-      "rev_date": "2024-11-19T11:04:08Z",
-      "scrape_date": "2024-11-21T04:00:36Z",
+      "rev": "970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "rev_count": 713897,
+      "rev_date": "2024-11-28T23:45:21Z",
+      "scrape_date": "2024-12-01T03:54:50Z",
       "stabilities": [
-        "staging",
         "unstable"
       ],
       "unfree": false,
@@ -134,15 +250,14 @@
       "description": "Event-driven I/O framework for the V8 JavaScript engine",
       "install_id": "nodejs_22",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=970e93b9f82e2a0f3675757eb0bfc73297cc6370",
       "name": "nodejs-22.10.0",
       "pname": "nodejs_22",
-      "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
-      "rev_count": 710087,
-      "rev_date": "2024-11-19T11:04:08Z",
-      "scrape_date": "2024-11-21T04:00:36Z",
+      "rev": "970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "rev_count": 713897,
+      "rev_date": "2024-11-28T23:45:21Z",
+      "scrape_date": "2024-12-01T03:54:50Z",
       "stabilities": [
-        "staging",
         "unstable"
       ],
       "unfree": false,
@@ -165,15 +280,14 @@
       "description": "Fast, reliable, and secure dependency management for javascript",
       "install_id": "yarn",
       "license": "BSD-2-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=970e93b9f82e2a0f3675757eb0bfc73297cc6370",
       "name": "yarn-1.22.22",
       "pname": "yarn",
-      "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
-      "rev_count": 710087,
-      "rev_date": "2024-11-19T11:04:08Z",
-      "scrape_date": "2024-11-21T04:00:36Z",
+      "rev": "970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "rev_count": 713897,
+      "rev_date": "2024-11-28T23:45:21Z",
+      "scrape_date": "2024-12-01T03:54:50Z",
       "stabilities": [
-        "staging",
         "unstable"
       ],
       "unfree": false,
@@ -195,15 +309,14 @@
       "description": "Fast, reliable, and secure dependency management for javascript",
       "install_id": "yarn",
       "license": "BSD-2-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=970e93b9f82e2a0f3675757eb0bfc73297cc6370",
       "name": "yarn-1.22.22",
       "pname": "yarn",
-      "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
-      "rev_count": 710087,
-      "rev_date": "2024-11-19T11:04:08Z",
-      "scrape_date": "2024-11-21T04:00:36Z",
+      "rev": "970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "rev_count": 713897,
+      "rev_date": "2024-11-28T23:45:21Z",
+      "scrape_date": "2024-12-01T03:54:50Z",
       "stabilities": [
-        "staging",
         "unstable"
       ],
       "unfree": false,
@@ -225,15 +338,14 @@
       "description": "Fast, reliable, and secure dependency management for javascript",
       "install_id": "yarn",
       "license": "BSD-2-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=970e93b9f82e2a0f3675757eb0bfc73297cc6370",
       "name": "yarn-1.22.22",
       "pname": "yarn",
-      "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
-      "rev_count": 710087,
-      "rev_date": "2024-11-19T11:04:08Z",
-      "scrape_date": "2024-11-21T04:00:36Z",
+      "rev": "970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "rev_count": 713897,
+      "rev_date": "2024-11-28T23:45:21Z",
+      "scrape_date": "2024-12-01T03:54:50Z",
       "stabilities": [
-        "staging",
         "unstable"
       ],
       "unfree": false,
@@ -255,15 +367,14 @@
       "description": "Fast, reliable, and secure dependency management for javascript",
       "install_id": "yarn",
       "license": "BSD-2-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=970e93b9f82e2a0f3675757eb0bfc73297cc6370",
       "name": "yarn-1.22.22",
       "pname": "yarn",
-      "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
-      "rev_count": 710087,
-      "rev_date": "2024-11-19T11:04:08Z",
-      "scrape_date": "2024-11-21T04:00:36Z",
+      "rev": "970e93b9f82e2a0f3675757eb0bfc73297cc6370",
+      "rev_count": 713897,
+      "rev_date": "2024-11-28T23:45:21Z",
+      "scrape_date": "2024-12-01T03:54:50Z",
       "stabilities": [
-        "staging",
         "unstable"
       ],
       "unfree": false,
