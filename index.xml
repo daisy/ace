@@ -4,190 +4,127 @@
     <title>Ace, by DAISY</title>
     <link>https://daisy.github.io/ace/</link>
     <description>Recent content on Ace, by DAISY</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://daisy.github.io/ace/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://daisy.github.io/ace/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Command line interface</title>
       <link>https://daisy.github.io/ace/docs/cli/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/docs/cli/</guid>
-      <description>Overview The easiest way to run Ace is to type this on the command line:
-$ ace ~/Documents/book.epub You&amp;rsquo;ll then see a description of Ace&amp;rsquo;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify --outdir for that).
-Example:
-info: Processing ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub info: Parsing EPUB info: Analyzing accessibility metadata info: Checking package.</description>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;The easiest way to run Ace is to type this on the command line:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ ace ~/Documents/book.epub&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You&amp;rsquo;ll then see a description of Ace&amp;rsquo;s actions as it runs tests on the book. The JSON report is printed to the command line at the end (nothing is saved to disk; you need to specify &lt;a href=&#34;#outdir&#34;&gt;&lt;code&gt;--outdir&lt;/code&gt;&lt;/a&gt; for that).&lt;/p&gt;&#xA;&lt;p&gt;Example:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;info:    Processing ../epub-a11y-checker/samples/build/epub-a11y-tests-001.epub&#xA;info:    Parsing EPUB&#xA;info:    Analyzing accessibility metadata&#xA;info:    Checking package...&#xA;info:    - EPUB/package.opf: 4 issues found&#xA;info:    Checking documents...&#xA;info:    - xhtml/front.xhtml: No issues found&#xA;info:    - xhtml/nav.xhtml: 2 issues found&#xA;info:    - xhtml/table-structure.xhtml: 2 issues found&#xA;info:    - xhtml/image-desc.xhtml: 4 issues found&#xA;info:    - xhtml/heading-order-01.xhtml: No issues found&#xA;info:    - xhtml/heading-order-02.xhtml: No issues found&#xA;info:    - xhtml/heading-order-03.xhtml: No issues found&#xA;info:    - xhtml/color-contrast.xhtml: 2 issues found&#xA;info:    - xhtml/epub-type-and-aria.xhtml: 5 issues found&#xA;info:    - xhtml/out-of-spine-content.xhtml: 2 issues found&#xA;info:    Consolidating results...&#xA;{&#xA;  &amp;#34;@type&amp;#34;: &amp;#34;earl:report&amp;#34;,&#xA;  &amp;#34;@context&amp;#34;: &amp;#34;http://daisy.github.io/ace/ace-report-1.0.jsonld&amp;#34;,&#xA;  &amp;#34;dct:title&amp;#34;: &amp;#34;Ace Report&amp;#34;,&#xA;  ...&#xA;}&#xA;info:   Done&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Ace will exit with a return code of &lt;code&gt;0&lt;/code&gt; when complete, or &lt;code&gt;1&lt;/code&gt; if there was an error that prevented Ace from successfully executing. Note that these return codes do not indicate whether there were violations in the publication; for that, you need to first edit Ace&amp;rsquo;s &lt;a href=&#34;https://daisy.github.io/ace/docs/config/&#34;&gt;configuration&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>How to contribute?</title>
       <link>https://daisy.github.io/ace/contributing/contributing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/contributing/contributing/</guid>
-      <description>First, welcome to Ace and thank you so much for being willing to contribute!
-Submitting an issue You can first check the issue tracker to see if someone already reported the issue. Don’t forget to included the closed issues in your search in case we fixed it already!
-If you can’t find any mention of your issue in our tracker, please file a new issue!
-When filing an issue, please provide the following details:</description>
+      <description>&lt;p&gt;First, welcome to Ace and thank you so much for being willing to contribute!&lt;/p&gt;&#xA;&lt;h2 id=&#34;submitting-an-issue&#34;&gt;Submitting an issue&lt;/h2&gt;&#xA;&lt;p&gt;You can first check the &lt;a href=&#34;https://github.com/daisy/ace/issues&#34;&gt;issue tracker&lt;/a&gt; to see if someone already reported the issue. Don’t forget to included the closed issues in your search in case we fixed it already!&lt;/p&gt;&#xA;&lt;p&gt;If you can’t find any mention of your issue in our tracker, please &lt;a href=&#34;https://github.com/daisy/ace/issues/new&#34;&gt;file a new issue&lt;/a&gt;!&lt;/p&gt;&#xA;&lt;p&gt;When filing an issue, please provide the following details:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>HTML Rules</title>
       <link>https://daisy.github.io/ace/rules/html/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/rules/html/</guid>
-      <description>Under the hood, most of the accessibility checks ran by Ace are powered by Deque axe, an engine for automated testing of HTML.
-Deque axe defines over 100 rules (including a few experimental and deprecated ones): https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/rule-descriptions.md
-Note that the link above references the DAISY fork of Axe which adds a few EPUB-specific rules not present in Deque&amp;rsquo;s original ruleset (epub-type-has-matching-role and pagebreak-label). Also note that Ace defines additional EPUB rules related to publication package metadata, etc.</description>
+      <description>&lt;p&gt;Under the hood, most of the accessibility checks ran by Ace are powered by &lt;a href=&#34;https://github.com/dequelabs/axe-core&#34;&gt;Deque axe&lt;/a&gt;, an engine for automated testing of HTML.&lt;/p&gt;&#xA;&lt;p&gt;Deque axe defines over 100 rules (including a few experimental and deprecated ones): &lt;a href=&#34;https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/rule-descriptions.md&#34;&gt;https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/rule-descriptions.md&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Note that the link above references the DAISY fork of Axe which adds a few EPUB-specific rules not present in Deque&amp;rsquo;s original ruleset (&lt;code&gt;epub-type-has-matching-role&lt;/code&gt; and &lt;code&gt;pagebreak-label&lt;/code&gt;). Also note that Ace defines additional &lt;a href=&#34;https://daisy.github.io/ace/rules/epub/&#34;&gt;EPUB rules&lt;/a&gt; related to publication package metadata, etc. (in other words, accessibility checks that require analysing other files than the publication&amp;rsquo;s HTML documents)&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Troubleshooting</title>
       <link>https://daisy.github.io/ace/help/troubleshooting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/help/troubleshooting/</guid>
-      <description>Ace fails with &amp;ldquo;Unexpected error&amp;rdquo; Erm… you probably just hit a bug in Ace. Follow the guidelines for submitting an issue. You may also contact us.
-I receive an EACCESS error when trying to install Ace You may receive an EACCESS error when you try to install Ace, for instance when installing the puppeteer dependency. This indicates the you do not have write permissions to the npm installation directories. You can fix this by following the instructions in the npm documentation.</description>
+      <description>&lt;h2 id=&#34;ace-fails-with-unexpected-error&#34;&gt;Ace fails with &amp;ldquo;Unexpected error&amp;rdquo;&lt;/h2&gt;&#xA;&lt;p&gt;Erm… you probably just hit a bug in Ace. Follow the &lt;a href=&#34;https://daisy.github.io/ace/ace/contributing/contributing/#submitting-an-issue&#34;&gt;guidelines for submitting an issue&lt;/a&gt;. You may also &lt;a href=&#34;https://daisy.github.io/ace/help/contact/&#34;&gt;contact us&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;i-receive-an-eaccess-error-when-trying-to-install-ace&#34;&gt;I receive an &lt;code&gt;EACCESS&lt;/code&gt; error when trying to install Ace&lt;/h2&gt;&#xA;&lt;p&gt;You may receive an &lt;code&gt;EACCESS&lt;/code&gt; error when you try to install Ace, for instance when installing the &lt;code&gt;puppeteer&lt;/code&gt; dependency. This indicates the you do not have write permissions to the &lt;code&gt;npm&lt;/code&gt; installation directories. You can fix this by following the &lt;a href=&#34;https://docs.npmjs.com/getting-started/fixing-npm-permissions&#34;&gt;instructions in the &lt;code&gt;npm&lt;/code&gt; documentation&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Why Ace?</title>
       <link>https://daisy.github.io/ace/getting-started/why-ace/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/getting-started/why-ace/</guid>
-      <description>What is Ace? Ace is a tool to run automated accessibility checks for EPUB Publications, in order to assist in the evaluation of conformance to the EPUB Accessibility specification.
-What does Ace do? Specifically, Ace:
- runs automated accessibility tests on EPUB content documents extracts the publication metadata, and checks accessibility-related metadata extracts various document outlines (the ToC, headings, and HTML structure) for side-by-side comparison extracts all the EPUBs images and graphics and their associated accessibility descriptions in a consolidated table, for easier review extracts other various content features to facilitate human-driven accessibility audits can be run as a command line tool, or integrated as a Javascript node module, or driven by an HTTP API  Under the hood, Ace currently runs axe, an engine for automated testing of HTML developed by the good folks at Deque Systems.</description>
+      <description>&lt;h2 id=&#34;what-is-ace&#34;&gt;What is Ace?&lt;/h2&gt;&#xA;&lt;p&gt;Ace is a tool to run automated accessibility checks for EPUB Publications, in order to assist in the evaluation of conformance to the &lt;a href=&#34;http://www.idpf.org/epub/latest/accessibility&#34;&gt;EPUB Accessibility&lt;/a&gt; specification.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-does-ace-do&#34;&gt;What does Ace do?&lt;/h2&gt;&#xA;&lt;p&gt;Specifically, Ace:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;runs automated accessibility tests on EPUB content documents&lt;/li&gt;&#xA;&lt;li&gt;extracts the publication metadata, and checks accessibility-related metadata&lt;/li&gt;&#xA;&lt;li&gt;extracts various document outlines (the ToC, headings, and HTML structure) for side-by-side comparison&lt;/li&gt;&#xA;&lt;li&gt;extracts all the EPUBs images and graphics and their associated accessibility descriptions in a consolidated table, for easier review&lt;/li&gt;&#xA;&lt;li&gt;extracts other various content features to facilitate human-driven accessibility audits&lt;/li&gt;&#xA;&lt;li&gt;can be run as a command line tool, or integrated as a Javascript node module, or driven by an HTTP API&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Under the hood, Ace currently runs &lt;a href=&#34;https://github.com/dequelabs/axe-core&#34;&gt;axe&lt;/a&gt;, an engine for automated testing of HTML developed by the good folks at Deque Systems.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Code base overview</title>
       <link>https://daisy.github.io/ace/contributing/code/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/contributing/code/</guid>
-      <description>Ace consists of the following packages:
- ace-cli: the command line interface ace-config: unifies the per-package configuration files into a global config file ace-core: the core checker’s logic, and the code responsible for running the underlying Web checker ace-core/scripts: the Javascript files injected in the headless browser to run Ace’s checks ace-http: the Http API ace-logger: logging ace-report and ace-report-axe: utils for building Ace’s reports epub-utils: utils for parsing EPUBs jest-env-puppeteer, jest-puppeteer, and puppeteer-utils: for working with the headless browser  </description>
+      <description>&lt;p&gt;Ace consists of the following packages:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-cli&lt;/strong&gt;: the command line interface&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-config&lt;/strong&gt;: unifies the per-package configuration files into a global config file&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-core&lt;/strong&gt;: the core checker’s logic, and the code responsible for running the underlying Web checker&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-core/scripts&lt;/strong&gt;: the Javascript files injected in the headless browser to run Ace’s checks&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-http&lt;/strong&gt;: the Http API&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-logger&lt;/strong&gt;: logging&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-report&lt;/strong&gt; and &lt;strong&gt;ace-report-axe&lt;/strong&gt;: utils for building Ace’s reports&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;epub-utils&lt;/strong&gt;: utils for parsing EPUBs&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;jest-env-puppeteer&lt;/strong&gt;, &lt;strong&gt;jest-puppeteer&lt;/strong&gt;, and &lt;strong&gt;puppeteer-utils&lt;/strong&gt;: for working with the headless browser&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title>Contact us</title>
       <link>https://daisy.github.io/ace/help/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/help/contact/</guid>
-      <description>You can reach us:
- via the contact form on InclusivePublishing.org on GitHub, we’re @daisy on Twitter, we’re @InclusivePub  </description>
+      <description>&lt;p&gt;You can reach us:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;via the &lt;a href=&#34;https://inclusivepublishing.org/contact/&#34;&gt;contact form on InclusivePublishing.org&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;on GitHub, we’re &lt;a href=&#34;https://github.com/daisy/ace&#34;&gt;@daisy&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;on Twitter, we’re &lt;a href=&#34;http://twitter.com/InclusivePub&#34;&gt;@InclusivePub&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title>EPUB Rules</title>
       <link>https://daisy.github.io/ace/rules/epub/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/rules/epub/</guid>
-      <description>In addition to the HTML rules, Ace implements EPUB-specific checks. The &amp;ldquo;impact&amp;rdquo; property indicates the severity of each violation (&amp;ldquo;minor&amp;rdquo;, &amp;ldquo;moderate&amp;rdquo;, &amp;ldquo;serious&amp;rdquo;, or &amp;ldquo;critical&amp;rdquo;), as per Deque axe&amp;rsquo;s definition described in their documentation ( https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/issue_impact.md ).
- Missing metadata (impact = &amp;ldquo;serious&amp;rdquo;): metadata-accessmode, metadata-accessibilityfeature, metadata-accessibilityhazard Missing metadata (impact = &amp;ldquo;moderate&amp;rdquo;): metadata-accessibilitysummary, metadata-accessModesufficient Incorrect metadata values (impact = &amp;ldquo;moderate&amp;rdquo;): metadata-accessibilityfeature-invalid, metadata-accessibilityhazard-invalid (mixed positive and negative terms (e.g. noFlashingHazard and flashing), unknown mixed with none or other vocabulary values, or usage of terms not defined by the specification) Incorrect metadata values (impact = &amp;ldquo;minor&amp;rdquo;): metadata-accessmode-invalid, metadata-accessmodesufficient-invalid (usage of terms not defined by the specification) Missing authored page list when metadata printPageNumbers/pageBreakMarkers is present (impact = &amp;ldquo;moderate&amp;rdquo;): metadata-accessibilityFeature-printPageNumbers-nopagelist Mismatched page breaks in SMIL and in HTML documents (impact = &amp;ldquo;serious&amp;rdquo;): epub-pagelist-mediaoverlays Authored page list references elements in HTML documents that are not page breaks or do not exist (impact = &amp;ldquo;serious&amp;rdquo;): epub-pagelist-broken Authored page list does not reference all elements that are page breaks in HTML documents (impact = serious): epub-pagelist-missing-pagebreak Mismatched authored table of contents and reading order of elements inside HTML documents (impact = &amp;ldquo;serious&amp;rdquo;): epub-toc-order Missing publication title metadata (impact = &amp;ldquo;serious&amp;rdquo;): epub-title Missing OPF lang attribute (impact = &amp;ldquo;serious&amp;rdquo;): epub-lang Missing dc:source publication metadata when reflowable EPUB has authored page list (impact = &amp;ldquo;serious&amp;rdquo;): epub-pagesource  </description>
+      <description>&lt;p&gt;In addition to the &lt;a href=&#34;https://daisy.github.io/ace/rules/html/&#34;&gt;HTML rules&lt;/a&gt;, Ace implements EPUB-specific checks. The &amp;ldquo;impact&amp;rdquo; property indicates the severity of each violation (&amp;ldquo;minor&amp;rdquo;, &amp;ldquo;moderate&amp;rdquo;, &amp;ldquo;serious&amp;rdquo;, or &amp;ldquo;critical&amp;rdquo;), as per Deque axe&amp;rsquo;s definition described in their documentation ( &lt;a href=&#34;https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/issue_impact.md&#34;&gt;https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/issue_impact.md&lt;/a&gt; ).&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Missing metadata (impact = &amp;ldquo;serious&amp;rdquo;): &lt;code&gt;metadata-accessmode&lt;/code&gt;, &lt;code&gt;metadata-accessibilityfeature&lt;/code&gt;, &lt;code&gt;metadata-accessibilityhazard&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Missing metadata (impact = &amp;ldquo;moderate&amp;rdquo;): &lt;code&gt;metadata-accessibilitysummary&lt;/code&gt;, &lt;code&gt;metadata-accessModesufficient&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Incorrect metadata values (impact = &amp;ldquo;moderate&amp;rdquo;): &lt;code&gt;metadata-accessibilityfeature-invalid&lt;/code&gt;, &lt;code&gt;metadata-accessibilityhazard-invalid&lt;/code&gt; (mixed positive and negative terms (e.g. &lt;code&gt;noFlashingHazard&lt;/code&gt; and &lt;code&gt;flashing&lt;/code&gt;), &lt;code&gt;unknown&lt;/code&gt; mixed with &lt;code&gt;none&lt;/code&gt; or other vocabulary values, or usage of terms not defined by the specification)&lt;/li&gt;&#xA;&lt;li&gt;Incorrect metadata values (impact = &amp;ldquo;minor&amp;rdquo;): &lt;code&gt;metadata-accessmode-invalid&lt;/code&gt;, &lt;code&gt;metadata-accessmodesufficient-invalid&lt;/code&gt; (usage of terms not defined by the specification)&lt;/li&gt;&#xA;&lt;li&gt;Missing authored page list when metadata &lt;code&gt;printPageNumbers&lt;/code&gt;/&lt;code&gt;pageBreakMarkers&lt;/code&gt; is present (impact = &amp;ldquo;moderate&amp;rdquo;): &lt;code&gt;metadata-accessibilityFeature-printPageNumbers-nopagelist&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Mismatched page breaks in SMIL and in HTML documents (impact = &amp;ldquo;serious&amp;rdquo;): &lt;code&gt;epub-pagelist-mediaoverlays&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Authored page list references elements in HTML documents that are not page breaks (impact = &amp;ldquo;minor&amp;rdquo;) or do not exist (impact = &amp;ldquo;serious&amp;rdquo;): &lt;code&gt;epub-pagelist-broken&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Authored page list does not reference all elements that are page breaks in HTML documents (impact = serious): &lt;code&gt;epub-pagelist-missing-pagebreak&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Mismatched authored table of contents and reading order of elements inside HTML documents (impact = &amp;ldquo;serious&amp;rdquo;): &lt;code&gt;epub-toc-order&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Missing publication title metadata (impact = &amp;ldquo;serious&amp;rdquo;): &lt;code&gt;epub-title&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Missing OPF lang attribute (impact = &amp;ldquo;serious&amp;rdquo;): &lt;code&gt;epub-lang&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Missing &lt;code&gt;dc:source&lt;/code&gt; / &lt;code&gt;pageBreakSource&lt;/code&gt; publication metadata when reflowable EPUB has authored page list (impact = &amp;ldquo;serious&amp;rdquo;): &lt;code&gt;epub-pagesource&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title>HTML Report</title>
       <link>https://daisy.github.io/ace/docs/report-html/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/docs/report-html/</guid>
-      <description>Ace outputs a human-readable report in HTML format, containing information about which automated tests failed, as well as extracted data visualizations, to highlight potential problem areas and to assist in manual checking.
-Note that the report looks best with javascript enabled, though it&amp;rsquo;s not required.
-After the header, which contains the Ace version, report date, and publication title, there are four sections, detailed below.
-Violations Summary of Violations This table lists statistics for the violations, in terms of severity: Critical, Serious, Moderate, or Minor; and by ruleset category: WCAG 2.</description>
+      <description>&lt;p&gt;Ace outputs a human-readable report in HTML format, containing information about which automated tests failed, as well as extracted data visualizations, to highlight potential problem areas and to assist in manual checking.&lt;/p&gt;&#xA;&lt;p&gt;Note that the report looks best with javascript enabled, though it&amp;rsquo;s not required.&lt;/p&gt;&#xA;&lt;p&gt;After the header, which contains the Ace version, report date, and publication title, there are four sections, detailed below.&lt;/p&gt;&#xA;&lt;h2 id=&#34;violations&#34;&gt;Violations&lt;/h2&gt;&#xA;&lt;h3 id=&#34;summary-of-violations&#34;&gt;Summary of Violations&lt;/h3&gt;&#xA;&lt;p&gt;This table lists statistics for the violations, in terms of severity: Critical, Serious, Moderate, or Minor; and by ruleset category: WCAG 2.0 A, WCAG 2.0 AA, EPUB, Best Practice, or Other. It&amp;rsquo;s useful for getting a quick overview of the violations.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Installation</title>
       <link>https://daisy.github.io/ace/getting-started/installation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/getting-started/installation/</guid>
-      <description>Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please visit this page.
-Minimum System Requirements Operating systems: Microsoft Windows 10+, Apple MacOS High Sierra 10.13+, Linux 64-bit Ubuntu 14.04+, Debian 8+, openSUSE 13.3+, or Fedora Linux 24+
-Ace is a NodeJS / Javascript program that launches either Electron or Puppeteer to execute the accessibility tests in headless Chromium webviews, see implementation notes.</description>
+      <description>&lt;p&gt;&lt;em&gt;Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please &lt;a href=&#34;https://daisy.github.io/ace/ace/getting-started/ace-app/&#34;&gt;visit this page&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;minimum-system-requirements&#34;&gt;Minimum System Requirements&lt;/h2&gt;&#xA;&lt;p&gt;Operating systems: Microsoft Windows 10+, Apple MacOS High Sierra 10.13+, Linux 64-bit Ubuntu 14.04+, Debian 8+, openSUSE 13.3+, or Fedora Linux 24+&lt;/p&gt;&#xA;&lt;p&gt;Ace is a NodeJS / Javascript program that launches either Electron or Puppeteer to execute the accessibility tests in headless Chromium webviews, see&#xA;&lt;a href=&#34;https://daisy.github.io/ace/ace/contributing/notes/&#34;&gt;implementation notes&lt;/a&gt;. Ace has other software dependencies that require a modern NodeJS runtime, for security and performance reasons. NodeJS version 20 is required, and NodeJS 22 is recommended.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Implementation notes</title>
       <link>https://daisy.github.io/ace/contributing/notes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/contributing/notes/</guid>
-      <description>HTML checker Under the hood, most of the HTML checks are powered by axe, an engine for automated testing of HTML from Deque Systems.
-Headless browser During the evaluation of an EPUB, Ace loads each HTML content document in a &amp;ldquo;headless&amp;rdquo; web browser window (i.e. invisible from the point of view of the user of the command line tool, but nonetheless using a real rendering engine). Ace was originally based on Puppeteer but it is now using Electron by default.</description>
+      <description>&lt;h2 id=&#34;html-checker&#34;&gt;HTML checker&lt;/h2&gt;&#xA;&lt;p&gt;Under the hood, most of the HTML checks are powered by &lt;a href=&#34;https://github.com/dequelabs/axe-core&#34;&gt;axe&lt;/a&gt;, an engine for automated testing of HTML from &lt;a href=&#34;https://www.deque.com/&#34;&gt;Deque Systems&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;headless-browser&#34;&gt;Headless browser&lt;/h2&gt;&#xA;&lt;p&gt;During the evaluation of an EPUB, Ace loads each HTML content document in a &amp;ldquo;headless&amp;rdquo; web browser window (i.e. invisible from the point of view of the user of the command line tool, but nonetheless using a real rendering engine). Ace was originally based on &lt;a href=&#34;https://github.com/GoogleChrome/puppeteer&#34;&gt;Puppeteer&lt;/a&gt; but it is now using &lt;a href=&#34;https://github.com/electron/electron&#34;&gt;Electron&lt;/a&gt; by default. Electron and Puppeteer both use Chromium which is the open source component that powers various web browsers (including Google Chrome and Microsoft Edge). Both Ace (command line) and Ace App (Graphical User Interface) now rely on this Electron runtime to perform the accessibility checks, but the legacy Puppeteer method remains available via the command &lt;code&gt;ace-puppeteer&lt;/code&gt; (similarly, the default Electron variant can also be explicitly invoked with &lt;code&gt;ace-electron&lt;/code&gt; instead of &lt;code&gt;ace&lt;/code&gt;).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>JSON Report</title>
       <link>https://daisy.github.io/ace/docs/report-json/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/docs/report-json/</guid>
-      <description>Ace&amp;rsquo;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of EARL (Evaluation and Reporting Language), Dublin Core, and custom terms.
-Document structure Each example piece of the report shown below appears in order, in one JSON file.
- Header information Outlines Data Properties earl:testSubject for this EPUB file Accessibility metadata summary Assertions  Header information This gives basic information about Ace and when the report was created.</description>
+      <description>&lt;p&gt;Ace&amp;rsquo;s outputs a machine-readable report in JSON format, detailing the automated tests. The vocabulary of this report is a mix of &lt;a href=&#34;https://www.w3.org/TR/EARL10-Schema/&#34;&gt;EARL&lt;/a&gt; (Evaluation and Reporting Language), Dublin Core, and custom terms.&lt;/p&gt;&#xA;&lt;h2 id=&#34;document-structure&#34;&gt;Document structure&lt;/h2&gt;&#xA;&lt;p&gt;Each example piece of the report shown below appears in order, in one JSON file.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#header-information&#34;&gt;Header information&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#outlines&#34;&gt;Outlines&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#data&#34;&gt;Data&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#properties&#34;&gt;Properties&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#earltestsubject-for-this-epub-file&#34;&gt;earl:testSubject for this EPUB file&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#accessibility-metadata-summary&#34;&gt;Accessibility metadata summary&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#assertions&#34;&gt;Assertions&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;header-information&#34;&gt;Header information&lt;/h3&gt;&#xA;&lt;p&gt;This gives basic information about Ace and when the report was created.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Running Ace</title>
       <link>https://daisy.github.io/ace/getting-started/running/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/getting-started/running/</guid>
-      <description>Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please visit this page.
-Checking an EPUB You can check an EPUB by running the ace command followed by the path to the EPUB document (if the file name includes spaces, place it inside &amp;quot; marks). For example:
-$ ace ~/Documents/moby-dick.epub The above command will run the automated accessibility tests on the EPUB document and output the results.</description>
+      <description>&lt;p&gt;&lt;em&gt;Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please &lt;a href=&#34;https://daisy.github.io/ace/ace/getting-started/ace-app/&#34;&gt;visit this page&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;checking-an-epub&#34;&gt;Checking an EPUB&lt;/h2&gt;&#xA;&lt;p&gt;You can check an EPUB by running the &lt;code&gt;ace&lt;/code&gt; command followed by the path to the EPUB document (if the file name includes spaces, place it inside &lt;code&gt;&amp;quot;&lt;/code&gt; marks). For example:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ ace ~/Documents/moby-dick.epub&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The above command will run the automated accessibility tests on the EPUB document and output the results.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Configuration</title>
       <link>https://daisy.github.io/ace/docs/config/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/docs/config/</guid>
-      <description>Overview Ace can be configured through a config.json file located in an OS-specific directory:
- on Windows in &amp;quot;%HOME%\AppData\Local\DAISY Ace\Config\&amp;quot; on macOS in &amp;quot;~/Library/Preferences/DAISY\ Ace/&amp;quot; on Linux in &amp;quot;~/.config/DAISY Ace/&amp;quot;  Defaults The defaults for Ace configuration are:
-{ &amp;#34;cli&amp;#34;: { &amp;#34;return-2-on-validation-error&amp;#34;: false }, &amp;#34;logging&amp;#34;: { &amp;#34;fileName&amp;#34;: &amp;#34;ace.log&amp;#34;, &amp;#34;level&amp;#34;: &amp;#34;info&amp;#34; }, &amp;#34;output&amp;#34;: { &amp;#34;force&amp;#34;: false, &amp;#34;subdir&amp;#34;: false }, &amp;#34;report&amp;#34;: { &amp;#34;use-relative-paths&amp;#34;: true }, &amp;#34;runtime&amp;#34;: { &amp;#34;concurrencyLevel&amp;#34;: 4 } } Reference cli.</description>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Ace can be configured through a &lt;code&gt;config.json&lt;/code&gt; file located in an OS-specific directory:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;on Windows in &lt;code&gt;&amp;quot;%HOME%\AppData\Local\DAISY Ace\Config\&amp;quot;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;on macOS in &lt;code&gt;&amp;quot;~/Library/Preferences/DAISY\ Ace/&amp;quot;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;on Linux in &lt;code&gt;&amp;quot;~/.config/DAISY Ace/&amp;quot;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;defaults&#34;&gt;Defaults&lt;/h2&gt;&#xA;&lt;p&gt;The defaults for Ace configuration are:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;cli&amp;#34;&lt;/span&gt;: {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;return-2-on-validation-error&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  },&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;logging&amp;#34;&lt;/span&gt;: {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;fileName&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ace.log&amp;#34;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;level&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;info&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  },&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;output&amp;#34;&lt;/span&gt;: {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;force&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;subdir&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  },&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;report&amp;#34;&lt;/span&gt;: {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;use-relative-paths&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  },&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;: {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;concurrencyLevel&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;&#xA;&lt;h3 id=&#34;clireturn-2-on-validation-error&#34;&gt;&lt;code&gt;cli.return-2-on-validation-error&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;p&gt;Default: &amp;ldquo;&lt;code&gt;false&lt;/code&gt;&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;Indicates whether the CLI should return with the error code &lt;code&gt;2&lt;/code&gt; if any violations were found in the input publication.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>The Ace App</title>
       <link>https://daisy.github.io/ace/getting-started/ace-app/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/getting-started/ace-app/</guid>
-      <description>What is the Ace by DAISY App? Ace by DAISY App is the official graphical user interface for the EPUB accessibility checker developed by the DAISY Consortium. The Ace App is available for the Windows, MacOS and Linux desktop operating systems.
-Where can I download the Ace App? The latest version of the Ace App is 1.3.2. The application installers are distributed via the GitHub development website. Here are convenient download links:</description>
+      <description>&lt;h2 id=&#34;what-is-the-ace-by-daisy-app&#34;&gt;What is the Ace by DAISY App?&lt;/h2&gt;&#xA;&lt;p&gt;Ace by DAISY App is the official graphical user interface for the EPUB accessibility checker developed by the &lt;a href=&#34;http://daisy.org&#34;&gt;DAISY Consortium&lt;/a&gt;. The Ace App is available for the Windows, MacOS and Linux desktop operating systems.&lt;/p&gt;&#xA;&lt;h2 id=&#34;where-can-i-download-the-ace-app&#34;&gt;Where can I download the Ace App?&lt;/h2&gt;&#xA;&lt;p&gt;The latest version of the Ace App is 1.3.2. The application installers are distributed via the GitHub development website. Here are convenient download links:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Logging</title>
       <link>https://daisy.github.io/ace/docs/logging/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/docs/logging/</guid>
-      <description>Overview Ace prints a log of messages in a ace.log file located in an OS-specific directory:
- on Windows in &amp;quot;%HOME%\AppData\Local\DAISY Ace\Log\&amp;quot; on macOS in &amp;quot;~/Library/Logs/DAISY\ Ace/&amp;quot; on Linux in &amp;quot;~/.local/state/DAISY Ace/&amp;quot;  Configuration The logging level and the name of the log file can be configured through Ace’s config file. Read more on Ace configuration to know more.</description>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Ace prints a log of messages in a &lt;code&gt;ace.log&lt;/code&gt; file located in an OS-specific directory:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;on Windows in &lt;code&gt;&amp;quot;%HOME%\AppData\Local\DAISY Ace\Log\&amp;quot;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;on macOS in &lt;code&gt;&amp;quot;~/Library/Logs/DAISY\ Ace/&amp;quot;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;on Linux in &lt;code&gt;&amp;quot;~/.local/state/DAISY Ace/&amp;quot;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;configuration&#34;&gt;Configuration&lt;/h2&gt;&#xA;&lt;p&gt;The logging level and the name of the log file can be configured through Ace’s config file. Read more on &lt;a href=&#34;https://daisy.github.io/ace/docs/config/&#34;&gt;Ace configuration&lt;/a&gt; to know more.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Http API</title>
       <link>https://daisy.github.io/ace/docs/http-api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/docs/http-api/</guid>
-      <description>Starting the server After installing Ace, run the ace-http command from the terminal:
-$ ace-http info: [ace-http] server listening on http://localhost:8000 The command line options are printed when you run ace-http --help:
-Ace by DAISY, an Accessibility Checker for EPUB Usage: ace-http [options] Options: -h, --help output usage information -v, --version output the version number -H, --host set the server&#39;s hostname (default: localhost) -p, --port set the server&#39;s port (default: 8000) -V, --verbose display verbose output -s, --silent do not display any output -l, --lang &amp;lt;language&amp;gt; language code for localized messages (e.</description>
+      <description>&lt;h2 id=&#34;starting-the-server&#34;&gt;Starting the server&lt;/h2&gt;&#xA;&lt;p&gt;After &lt;a href=&#34;https://daisy.github.io/ace/ace/getting-started/installation/&#34;&gt;installing Ace&lt;/a&gt;, run the &lt;code&gt;ace-http&lt;/code&gt; command from the terminal:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ ace-http&#xA;info:    [ace-http] server listening on http://localhost:8000&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The command line options are printed when you run &lt;code&gt;ace-http --help&lt;/code&gt;:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Ace by DAISY, an Accessibility Checker for EPUB&#xA;&#xA;  Usage: ace-http [options]&#xA;&#xA;  Options:&#xA;&#xA;    -h, --help             output usage information&#xA;    -v, --version          output the version number&#xA;&#xA;    -H, --host             set the server&amp;#39;s hostname (default: localhost)&#xA;    -p, --port             set the server&amp;#39;s port (default: 8000)&#xA;&#xA;    -V, --verbose          display verbose output&#xA;    -s, --silent           do not display any output&#xA;&#xA;    -l, --lang  &amp;lt;language&amp;gt; language code for localized messages (e.g. &amp;#34;fr&amp;#34;), default is &amp;#34;en&amp;#34;&#xA;  Examples&#xA;    $ ace-http -p 3000&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;api&#34;&gt;API&lt;/h2&gt;&#xA;&lt;p&gt;This API is available to client applications.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

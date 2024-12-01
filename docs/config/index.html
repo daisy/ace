@@ -13,12 +13,54 @@
   gtag('js', new Date());
   gtag('config', 'UA-327448-5');
 </script>
+<style>
+#sponsorship {
+display: flex;
+width: 100%;
+column-gap: 1em;
+align-items: center;
+background-color: rgb(255,255,240);
+color: black;
+font-size: 90%;
+border:0;
+border-top: 0.1rem solid lightgrey;
+border-bottom: 0.1rem solid lightgrey;
+padding: 0;
+padding: 0.5em;
+margin: 0;
+margin-top: 1.5em;
+margin-bottom: 0.5em;
+}
+#sponsorship > span {
+margin: 0;
+padding: 0;
+color: black;
+font-weight: bold;
+}
+#sponsorship > a {
+margin: 0;
+padding: 0;
+font-weight: bold;
+color: blue;
+}
+#sponsorship > input {
+margin: 0;
+padding: 0;
+padding: 0.2em;
+margin-left: auto;
+border: 1px solid grey;
+border-radius: 6px;
+background-color: lightgrey;
+font-weight: bold;
+font-size: 90%;
+}
+</style>
 
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" rel="stylesheet" media="none" onload="this.media='all';">
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.92.1" />
+    <meta name="generator" content="Hugo 0.139.0">
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -115,7 +157,7 @@
       <header class="intro-and-nav" role="banner">
         <div>
           <div class="intro">
-            <a class="logo" href="https://daisy.github.io/ace" aria-label="Ace, by DAISY home page">
+            <a class="logo" href="https://daisy.github.io/ace/" aria-label="Ace, by DAISY home page">
               <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
             </a>
             <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.3.2</p>
@@ -428,26 +470,26 @@
 </ul>
 <h2 id="defaults">Defaults</h2>
 <p>The defaults for Ace configuration are:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;cli&#34;</span>: {
-    <span style="color:#f92672">&#34;return-2-on-validation-error&#34;</span>: <span style="color:#66d9ef">false</span>
-  },
-  <span style="color:#f92672">&#34;logging&#34;</span>: {
-    <span style="color:#f92672">&#34;fileName&#34;</span>: <span style="color:#e6db74">&#34;ace.log&#34;</span>,
-    <span style="color:#f92672">&#34;level&#34;</span>: <span style="color:#e6db74">&#34;info&#34;</span>
-  },
-  <span style="color:#f92672">&#34;output&#34;</span>: {
-    <span style="color:#f92672">&#34;force&#34;</span>: <span style="color:#66d9ef">false</span>,
-    <span style="color:#f92672">&#34;subdir&#34;</span>: <span style="color:#66d9ef">false</span>
-  },
-  <span style="color:#f92672">&#34;report&#34;</span>: {
-    <span style="color:#f92672">&#34;use-relative-paths&#34;</span>: <span style="color:#66d9ef">true</span>
-  },
-  <span style="color:#f92672">&#34;runtime&#34;</span>: {
-    <span style="color:#f92672">&#34;concurrencyLevel&#34;</span>: <span style="color:#ae81ff">4</span>
-  }
-}
-</code></pre></div><h2 id="reference">Reference</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;cli&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;return-2-on-validation-error&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;logging&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;fileName&#34;</span>: <span style="color:#e6db74">&#34;ace.log&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;level&#34;</span>: <span style="color:#e6db74">&#34;info&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;output&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;force&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;subdir&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;report&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;use-relative-paths&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;runtime&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;concurrencyLevel&#34;</span>: <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="reference">Reference</h2>
 <h3 id="clireturn-2-on-validation-error"><code>cli.return-2-on-validation-error</code></h3>
 <p>Default: &ldquo;<code>false</code>&rdquo;</p>
 <p>Indicates whether the CLI should return with the error code <code>2</code> if any violations were found in the input publication.</p>

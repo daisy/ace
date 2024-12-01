@@ -4,39 +4,29 @@
     <title>Contributing on Ace, by DAISY</title>
     <link>https://daisy.github.io/ace/contributing/</link>
     <description>Recent content in Contributing on Ace, by DAISY</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://daisy.github.io/ace/contributing/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://daisy.github.io/ace/contributing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to contribute?</title>
       <link>https://daisy.github.io/ace/contributing/contributing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/contributing/contributing/</guid>
-      <description>First, welcome to Ace and thank you so much for being willing to contribute!
-Submitting an issue You can first check the issue tracker to see if someone already reported the issue. Don’t forget to included the closed issues in your search in case we fixed it already!
-If you can’t find any mention of your issue in our tracker, please file a new issue!
-When filing an issue, please provide the following details:</description>
+      <description>&lt;p&gt;First, welcome to Ace and thank you so much for being willing to contribute!&lt;/p&gt;&#xA;&lt;h2 id=&#34;submitting-an-issue&#34;&gt;Submitting an issue&lt;/h2&gt;&#xA;&lt;p&gt;You can first check the &lt;a href=&#34;https://github.com/daisy/ace/issues&#34;&gt;issue tracker&lt;/a&gt; to see if someone already reported the issue. Don’t forget to included the closed issues in your search in case we fixed it already!&lt;/p&gt;&#xA;&lt;p&gt;If you can’t find any mention of your issue in our tracker, please &lt;a href=&#34;https://github.com/daisy/ace/issues/new&#34;&gt;file a new issue&lt;/a&gt;!&lt;/p&gt;&#xA;&lt;p&gt;When filing an issue, please provide the following details:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Code base overview</title>
       <link>https://daisy.github.io/ace/contributing/code/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/contributing/code/</guid>
-      <description>Ace consists of the following packages:
- ace-cli: the command line interface ace-config: unifies the per-package configuration files into a global config file ace-core: the core checker’s logic, and the code responsible for running the underlying Web checker ace-core/scripts: the Javascript files injected in the headless browser to run Ace’s checks ace-http: the Http API ace-logger: logging ace-report and ace-report-axe: utils for building Ace’s reports epub-utils: utils for parsing EPUBs jest-env-puppeteer, jest-puppeteer, and puppeteer-utils: for working with the headless browser  </description>
+      <description>&lt;p&gt;Ace consists of the following packages:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-cli&lt;/strong&gt;: the command line interface&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-config&lt;/strong&gt;: unifies the per-package configuration files into a global config file&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-core&lt;/strong&gt;: the core checker’s logic, and the code responsible for running the underlying Web checker&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-core/scripts&lt;/strong&gt;: the Javascript files injected in the headless browser to run Ace’s checks&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-http&lt;/strong&gt;: the Http API&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-logger&lt;/strong&gt;: logging&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ace-report&lt;/strong&gt; and &lt;strong&gt;ace-report-axe&lt;/strong&gt;: utils for building Ace’s reports&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;epub-utils&lt;/strong&gt;: utils for parsing EPUBs&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;jest-env-puppeteer&lt;/strong&gt;, &lt;strong&gt;jest-puppeteer&lt;/strong&gt;, and &lt;strong&gt;puppeteer-utils&lt;/strong&gt;: for working with the headless browser&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title>Implementation notes</title>
       <link>https://daisy.github.io/ace/contributing/notes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/contributing/notes/</guid>
-      <description>HTML checker Under the hood, most of the HTML checks are powered by axe, an engine for automated testing of HTML from Deque Systems.
-Headless browser During the evaluation of an EPUB, Ace loads each HTML content document in a &amp;ldquo;headless&amp;rdquo; web browser window (i.e. invisible from the point of view of the user of the command line tool, but nonetheless using a real rendering engine). Ace was originally based on Puppeteer but it is now using Electron by default.</description>
+      <description>&lt;h2 id=&#34;html-checker&#34;&gt;HTML checker&lt;/h2&gt;&#xA;&lt;p&gt;Under the hood, most of the HTML checks are powered by &lt;a href=&#34;https://github.com/dequelabs/axe-core&#34;&gt;axe&lt;/a&gt;, an engine for automated testing of HTML from &lt;a href=&#34;https://www.deque.com/&#34;&gt;Deque Systems&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;headless-browser&#34;&gt;Headless browser&lt;/h2&gt;&#xA;&lt;p&gt;During the evaluation of an EPUB, Ace loads each HTML content document in a &amp;ldquo;headless&amp;rdquo; web browser window (i.e. invisible from the point of view of the user of the command line tool, but nonetheless using a real rendering engine). Ace was originally based on &lt;a href=&#34;https://github.com/GoogleChrome/puppeteer&#34;&gt;Puppeteer&lt;/a&gt; but it is now using &lt;a href=&#34;https://github.com/electron/electron&#34;&gt;Electron&lt;/a&gt; by default. Electron and Puppeteer both use Chromium which is the open source component that powers various web browsers (including Google Chrome and Microsoft Edge). Both Ace (command line) and Ace App (Graphical User Interface) now rely on this Electron runtime to perform the accessibility checks, but the legacy Puppeteer method remains available via the command &lt;code&gt;ace-puppeteer&lt;/code&gt; (similarly, the default Electron variant can also be explicitly invoked with &lt;code&gt;ace-electron&lt;/code&gt; instead of &lt;code&gt;ace&lt;/code&gt;).&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

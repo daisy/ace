@@ -4,50 +4,36 @@
     <title>Getting started on Ace, by DAISY</title>
     <link>https://daisy.github.io/ace/getting-started/</link>
     <description>Recent content in Getting started on Ace, by DAISY</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://daisy.github.io/ace/getting-started/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://daisy.github.io/ace/getting-started/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why Ace?</title>
       <link>https://daisy.github.io/ace/getting-started/why-ace/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/getting-started/why-ace/</guid>
-      <description>What is Ace? Ace is a tool to run automated accessibility checks for EPUB Publications, in order to assist in the evaluation of conformance to the EPUB Accessibility specification.
-What does Ace do? Specifically, Ace:
- runs automated accessibility tests on EPUB content documents extracts the publication metadata, and checks accessibility-related metadata extracts various document outlines (the ToC, headings, and HTML structure) for side-by-side comparison extracts all the EPUBs images and graphics and their associated accessibility descriptions in a consolidated table, for easier review extracts other various content features to facilitate human-driven accessibility audits can be run as a command line tool, or integrated as a Javascript node module, or driven by an HTTP API  Under the hood, Ace currently runs axe, an engine for automated testing of HTML developed by the good folks at Deque Systems.</description>
+      <description>&lt;h2 id=&#34;what-is-ace&#34;&gt;What is Ace?&lt;/h2&gt;&#xA;&lt;p&gt;Ace is a tool to run automated accessibility checks for EPUB Publications, in order to assist in the evaluation of conformance to the &lt;a href=&#34;http://www.idpf.org/epub/latest/accessibility&#34;&gt;EPUB Accessibility&lt;/a&gt; specification.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-does-ace-do&#34;&gt;What does Ace do?&lt;/h2&gt;&#xA;&lt;p&gt;Specifically, Ace:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;runs automated accessibility tests on EPUB content documents&lt;/li&gt;&#xA;&lt;li&gt;extracts the publication metadata, and checks accessibility-related metadata&lt;/li&gt;&#xA;&lt;li&gt;extracts various document outlines (the ToC, headings, and HTML structure) for side-by-side comparison&lt;/li&gt;&#xA;&lt;li&gt;extracts all the EPUBs images and graphics and their associated accessibility descriptions in a consolidated table, for easier review&lt;/li&gt;&#xA;&lt;li&gt;extracts other various content features to facilitate human-driven accessibility audits&lt;/li&gt;&#xA;&lt;li&gt;can be run as a command line tool, or integrated as a Javascript node module, or driven by an HTTP API&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Under the hood, Ace currently runs &lt;a href=&#34;https://github.com/dequelabs/axe-core&#34;&gt;axe&lt;/a&gt;, an engine for automated testing of HTML developed by the good folks at Deque Systems.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Installation</title>
       <link>https://daisy.github.io/ace/getting-started/installation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/getting-started/installation/</guid>
-      <description>Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please visit this page.
-Minimum System Requirements Operating systems: Microsoft Windows 10+, Apple MacOS High Sierra 10.13+, Linux 64-bit Ubuntu 14.04+, Debian 8+, openSUSE 13.3+, or Fedora Linux 24+
-Ace is a NodeJS / Javascript program that launches either Electron or Puppeteer to execute the accessibility tests in headless Chromium webviews, see implementation notes.</description>
+      <description>&lt;p&gt;&lt;em&gt;Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please &lt;a href=&#34;https://daisy.github.io/ace/ace/getting-started/ace-app/&#34;&gt;visit this page&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;minimum-system-requirements&#34;&gt;Minimum System Requirements&lt;/h2&gt;&#xA;&lt;p&gt;Operating systems: Microsoft Windows 10+, Apple MacOS High Sierra 10.13+, Linux 64-bit Ubuntu 14.04+, Debian 8+, openSUSE 13.3+, or Fedora Linux 24+&lt;/p&gt;&#xA;&lt;p&gt;Ace is a NodeJS / Javascript program that launches either Electron or Puppeteer to execute the accessibility tests in headless Chromium webviews, see&#xA;&lt;a href=&#34;https://daisy.github.io/ace/ace/contributing/notes/&#34;&gt;implementation notes&lt;/a&gt;. Ace has other software dependencies that require a modern NodeJS runtime, for security and performance reasons. NodeJS version 20 is required, and NodeJS 22 is recommended.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Running Ace</title>
       <link>https://daisy.github.io/ace/getting-started/running/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/getting-started/running/</guid>
-      <description>Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please visit this page.
-Checking an EPUB You can check an EPUB by running the ace command followed by the path to the EPUB document (if the file name includes spaces, place it inside &amp;quot; marks). For example:
-$ ace ~/Documents/moby-dick.epub The above command will run the automated accessibility tests on the EPUB document and output the results.</description>
+      <description>&lt;p&gt;&lt;em&gt;Note: this documentation applies to the Ace by DAISY command line tool. For more information about the Ace by DAISY &amp;ldquo;desktop application&amp;rdquo; (as known as the Ace App), please &lt;a href=&#34;https://daisy.github.io/ace/ace/getting-started/ace-app/&#34;&gt;visit this page&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;checking-an-epub&#34;&gt;Checking an EPUB&lt;/h2&gt;&#xA;&lt;p&gt;You can check an EPUB by running the &lt;code&gt;ace&lt;/code&gt; command followed by the path to the EPUB document (if the file name includes spaces, place it inside &lt;code&gt;&amp;quot;&lt;/code&gt; marks). For example:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ ace ~/Documents/moby-dick.epub&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The above command will run the automated accessibility tests on the EPUB document and output the results.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>The Ace App</title>
       <link>https://daisy.github.io/ace/getting-started/ace-app/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://daisy.github.io/ace/getting-started/ace-app/</guid>
-      <description>What is the Ace by DAISY App? Ace by DAISY App is the official graphical user interface for the EPUB accessibility checker developed by the DAISY Consortium. The Ace App is available for the Windows, MacOS and Linux desktop operating systems.
-Where can I download the Ace App? The latest version of the Ace App is 1.3.2. The application installers are distributed via the GitHub development website. Here are convenient download links:</description>
+      <description>&lt;h2 id=&#34;what-is-the-ace-by-daisy-app&#34;&gt;What is the Ace by DAISY App?&lt;/h2&gt;&#xA;&lt;p&gt;Ace by DAISY App is the official graphical user interface for the EPUB accessibility checker developed by the &lt;a href=&#34;http://daisy.org&#34;&gt;DAISY Consortium&lt;/a&gt;. The Ace App is available for the Windows, MacOS and Linux desktop operating systems.&lt;/p&gt;&#xA;&lt;h2 id=&#34;where-can-i-download-the-ace-app&#34;&gt;Where can I download the Ace App?&lt;/h2&gt;&#xA;&lt;p&gt;The latest version of the Ace App is 1.3.2. The application installers are distributed via the GitHub development website. Here are convenient download links:&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
