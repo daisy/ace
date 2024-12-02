@@ -5,7 +5,7 @@
 const builders = require('@daisy/ace-report').builders;
 const winston = require('winston');
 
-const { localize, setCurrentLanguage } = require('./l10n/localize').localizer;
+const { localize, setCurrentLanguage, getCurrentLanguage } = require('./l10n/localize').localizer;
 
 const axeRulesKbMapping = require('./axe-rules-kb-mapping').kbMap;
 
@@ -17,9 +17,9 @@ async function axe2ace(spineItem, axeResults, lang) {
     winston.verbose(`Converting aXe results to ace for ${spineItem.relpath}`);
 
     function l10nDoneCallback() {
-  
+
       const kbMap = axeRulesKbMapping;
-  
+
       // the content doc-level assertion
       const assertion = new builders.AssertionBuilder()
         .withSubAssertions()
@@ -27,11 +27,10 @@ async function axe2ace(spineItem, axeResults, lang) {
       // process axe's individual checks for a single content document
       // console.log("axe2ace ------- ", JSON.stringify(axeResults, null, 4));
       axeResults.violations.forEach((violation) => {
-  
-        const kbURL = (kbMap.map.hasOwnProperty(violation.id))
-          ? kbMap.baseUrl + kbMap.map[violation.id].url
-          : kbMap.baseUrl;
-        let kbTitle = (kbMap.map.hasOwnProperty(violation.id))
+        const kbURL = kbMap.map.hasOwnProperty(violation.id)
+          ? (kbMap.baseUrl + (getCurrentLanguage() === "ja" ? kbMap.map[violation.id].url.replace(/^docs/, "ja") : kbMap.map[violation.id].url))
+          : ((kbMap.baseUrl + (getCurrentLanguage() === "ja" ? "ja" : "")));
+        let kbTitle = kbMap.map.hasOwnProperty(violation.id)
           ? kbMap.map[violation.id].title
           : '??';
         if (kbTitle == '??') {
@@ -45,11 +44,11 @@ async function axe2ace(spineItem, axeResults, lang) {
           .withHelp(kbURL, kbTitle, violation.help)
           .withRulesetTags(violation.tags) // .map(t => t.replace("wcag2a", "wcag21a")) TO TEST TAG FILTERING IN HTML REPORT
           .build();
-  
+
         violation.nodes.forEach((node) => {
-  
+
           let description = node.failureSummary;
-  
+
           // https://github.com/dequelabs/axe-core/blob/v3.2.2/lib/core/reporters/helpers/failure-summary.js
           // // https://github.com/dequelabs/axe-core/blob/v3.2.2/lib/misc/none-failure-summary.json#L4
           // Fix all of the following:
@@ -59,7 +58,7 @@ async function axe2ace(spineItem, axeResults, lang) {
           // Fix any of the following:
           // // https://github.com/dequelabs/axe-core/blob/v3.2.2/locales/fr.json#L656
           // Corriger l’un des éléments suivants :
-  
+
           // TODO: this is a hacky way to fix the Axe bug that forces the wrong language (en) into `failureSummary`.
           description = description.replace(/Fix any of the following:/g, "");
           description = description.replace(/Fix all of the following:/g, "");
@@ -68,11 +67,11 @@ async function axe2ace(spineItem, axeResults, lang) {
           description = description.replace(/\n/g, " --- ");
           description = description.replace(/\s+/g, " ");
           description = description.replace(/ --- /g, "\n");
-  
+
           let target = node.target;
           let targetCFI = node.targetCFI;
           let html = node.html;
-  
+
           const allAnyArrayItems = [];
           if (node.any) {
             node.any.forEach((anyItem) => {
@@ -90,14 +89,14 @@ async function axe2ace(spineItem, axeResults, lang) {
                 if (relatedNode.html && relatedNode.target && relatedNode.target.length && relatedNode.targetCFI && relatedNode.targetCFI.length) {
                   html += " <!--##--> ";
                   html += relatedNode.html;
-  
+
                   target.push(relatedNode.target[0]);
                   targetCFI.push(relatedNode.targetCFI[0]);
                 }
               });
             }
           });
-    
+
           assertion.withAssertions(
             new builders.AssertionBuilder()
               .withAssertedBy('aXe')
@@ -112,7 +111,7 @@ async function axe2ace(spineItem, axeResults, lang) {
               .build());
         });
       });
-  
+
       const ass = assertion.build();
       resolve(ass);
     }

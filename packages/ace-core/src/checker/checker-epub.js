@@ -4,7 +4,7 @@ const path = require('path');
 const builders = require('@daisy/ace-report').builders;
 const winston = require('winston');
 
-const { localize } = require('../l10n/localize').localizer;
+const { localize, getCurrentLanguage } = require('../l10n/localize').localizer;
 
 const a11yMetadata = require('../core/a11y-metadata');
 
@@ -31,7 +31,7 @@ function newViolation({ impact = 'serious', title, testDesc, resDesc, kbPath, kb
         .withTitle(title)
         .withDescription(testDesc)
         .withHelp(
-          KB_BASE + kbPath,
+          KB_BASE + (getCurrentLanguage() === "ja" ? kbPath.replace(/^docs/, "ja") : kbPath),
           kbTitle,
           resDesc)
         .withRulesetTags(['EPUB'])
