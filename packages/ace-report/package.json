@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-report",
-  "version": "1.3.3-alpha.3",
+  "version": "1.3.3-alpha.4",
   "engines": {
     "node": ">=12.0.0",
     "yarn": "^1.22.0",
@@ -23,9 +23,9 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-config": "1.3.3-alpha.3",
-    "@daisy/ace-localize": "1.3.3-alpha.3",
-    "@daisy/ace-meta": "1.3.3-alpha.3",
+    "@daisy/ace-config": "1.3.3-alpha.4",
+    "@daisy/ace-localize": "1.3.3-alpha.4",
+    "@daisy/ace-meta": "1.3.3-alpha.4",
     "escape-html": "^1.0.3",
     "fs-extra": "^10.1.0",
     "handlebars": "^4.7.8",
