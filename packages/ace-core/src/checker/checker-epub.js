@@ -510,10 +510,15 @@ function checkPageSource(assertion, epub) {
     && (
       (!epub.metadata['dc:source'] || epub.metadata['dc:source'].toString() === '')
       &&
+      // https://github.com/daisy/ace/issues/403
+      // a11y: pageBreakSource vs. pageBreakSource?? (examples were inconsistent, now fixed)
       // https://www.w3.org/publishing/a11y/page-source-id/#examples
       // https://www.w3.org/TR/epub-a11y-tech-11/#pageSource
-      // a11y:pageBreakSource or pageBreakSource?? (inconsistent examples)
-      (!epub.metadata['a11y:pageBreakSource'] || epub.metadata['a11y:pageBreakSource'].toString() === '')
+      // https://www.w3.org/TR/epub/#sec-default-vocab
+      // https://github.com/w3c/epub-specs/issues/2667
+      // https://github.com/w3c/epub-specs/pull/2668
+      // EPUBCHECK: https://github.com/w3c/epubcheck/issues/1491 + https://github.com/w3c/epubcheck/issues/1491 + https://github.com/w3c/epubcheck/pull/1507
+      (!epub.metadata['pageBreakSource'] || epub.metadata['pageBreakSource'].toString() === '')
       &&
       (!epub.metadata['rendition:layout'] || epub.metadata['rendition:layout'].toString() !== "pre-paginated")
     )

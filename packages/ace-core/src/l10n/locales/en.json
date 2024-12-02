@@ -62,8 +62,8 @@
         },
         "pagesourceviolation": {
             "kbtitle": "Page Navigation",
-            "resdesc": "Add a 'dc:source / a11y:pageBreakSource' metadata property to the Package Document",
-            "ruledesc": "Publications with page breaks must declare the 'dc:source / a11y:pageBreakSource' metadata",
+            "resdesc": "Add a 'dc:source / pageBreakSource' metadata property to the Package Document",
+            "ruledesc": "Publications with page breaks must declare the 'dc:source / pageBreakSource' metadata",
             "testdesc": "Ensures the source of page breaks is identified"
         },
         "titleviolation": {
