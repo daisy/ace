@@ -56,8 +56,8 @@
         },
         "pagesourceviolation": {
             "kbtitle": "Sidenavigation",
-            "resdesc": "Tilføj et 'dc:source / pageBreakSource' metadata-element til pakke-dokumentet",
-            "ruledesc": "Publikationer med sideskift skal angive et 'dc:source / pageBreakSource' metadata-element",
+            "resdesc": "Tilføj et 'dc:source / a11y:pageBreakSource' metadata-element til pakke-dokumentet",
+            "ruledesc": "Publikationer med sideskift skal angive et 'dc:source / a11y:pageBreakSource' metadata-element",
             "testdesc": "Sikrer at kilden til sideskift er identificeret"
         },
         "titleviolation": {

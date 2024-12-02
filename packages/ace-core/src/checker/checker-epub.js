@@ -501,8 +501,10 @@ function checkPageSource(assertion, epub) {
     && (
       (!epub.metadata['dc:source'] || epub.metadata['dc:source'].toString() === '')
       &&
-      // https://www.w3.org/publishing/a11y/page-source-id/
-      (!epub.metadata['pageBreakSource'] || epub.metadata['pageBreakSource'].toString() === '')
+      // https://www.w3.org/publishing/a11y/page-source-id/#examples
+      // https://www.w3.org/TR/epub-a11y-tech-11/#pageSource
+      // a11y:pageBreakSource or pageBreakSource?? (inconsistent examples)
+      (!epub.metadata['a11y:pageBreakSource'] || epub.metadata['a11y:pageBreakSource'].toString() === '')
       &&
       (!epub.metadata['rendition:layout'] || epub.metadata['rendition:layout'].toString() !== "pre-paginated")
     )

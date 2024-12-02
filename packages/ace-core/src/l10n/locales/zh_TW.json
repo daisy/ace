@@ -56,8 +56,8 @@
         },
         "pagesourceviolation": {
             "kbtitle": "頁面導覽",
-            "resdesc": "在包裝文件中提供詮釋資料「dc:source / pageBreakSource」特性",
-            "ruledesc": "具備頁面列表的出版品，必須在詮釋資料中宣告「dc:source / pageBreakSource」",
+            "resdesc": "在包裝文件中提供詮釋資料「dc:source / a11y:pageBreakSource」特性",
+            "ruledesc": "具備頁面列表的出版品，必須在詮釋資料中宣告「dc:source / a11y:pageBreakSource」",
             "testdesc": "確保能識別換頁位置的來源"
         },
         "titleviolation": {

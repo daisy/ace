@@ -56,8 +56,8 @@
         },
         "pagesourceviolation": {
             "kbtitle": "Navegação de Páginas",
-            "resdesc": "Adicione a propriedade 'dc:source / pageBreakSource' ao arquivo OPF",
-            "ruledesc": "Publicações com quebras de página devem declarar o metadado 'dc:source / pageBreakSource'",
+            "resdesc": "Adicione a propriedade 'dc:source / a11y:pageBreakSource' ao arquivo OPF",
+            "ruledesc": "Publicações com quebras de página devem declarar o metadado 'dc:source / a11y:pageBreakSource'",
             "testdesc": "Certifique-se de que a fonte de quebra de páginas foi identificada"
         },
         "titleviolation": {
