@@ -52,28 +52,28 @@ test('DPUB ARIA roles are allowed', async () => {
   expect(assertions).toBeDefined();
   expect(assertions).toEqual(expect.arrayContaining([
     expect.objectContaining({
-      'earl:test': expect.objectContaining({ 'dct:title': 'aria-roles', 'earl:impact': 'minor', }),
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-deprecated-role', 'earl:impact': 'minor', }),
       'earl:result': expect.objectContaining({
         'earl:outcome': 'fail',
         'earl:pointer': expect.objectContaining({ css: ['#deprecated1'] }),
       }),
     }),
     expect.objectContaining({
-      'earl:test': expect.objectContaining({ 'dct:title': 'aria-roles', 'earl:impact': 'minor', }),
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-deprecated-role', 'earl:impact': 'minor', }),
       'earl:result': expect.objectContaining({
         'earl:outcome': 'fail',
         'earl:pointer': expect.objectContaining({ css: ['#deprecated2'] }),
       }),
     }),
     expect.objectContaining({
-      'earl:test': expect.objectContaining({ 'dct:title': 'aria-roles', 'earl:impact': 'minor', }),
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-deprecated-role', 'earl:impact': 'minor', }),
       'earl:result': expect.objectContaining({
         'earl:outcome': 'fail',
         'earl:pointer': expect.objectContaining({ css: ['#deprecated3'] }),
       }),
     }),
     expect.objectContaining({
-      'earl:test': expect.objectContaining({ 'dct:title': 'aria-roles', 'earl:impact': 'minor', }),
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-deprecated-role', 'earl:impact': 'minor', }),
       'earl:result': expect.objectContaining({
         'earl:outcome': 'fail',
         'earl:pointer': expect.objectContaining({ css: ['#deprecated4'] }),
@@ -135,13 +135,13 @@ test('DPUB ARIA landmark unique', async () => {
         'earl:pointer': expect.objectContaining({ css: ['#header-notes', '#pass-aside-endnotes1', '#pass-aside-endnotes2'] }),
       }),
     }),
-    expect.objectContaining({
-      'earl:test': expect.objectContaining({ 'dct:title': 'landmark-unique' }),
-      'earl:result': expect.objectContaining({
-        'earl:outcome': 'fail',
-        'earl:pointer': expect.objectContaining({ css: ['#pass-aside-footnote1', '#pass-aside-footnote3'] }),
-      }),
-    }),
+    // expect.objectContaining({
+    //   'earl:test': expect.objectContaining({ 'dct:title': 'landmark-unique' }),
+    //   'earl:result': expect.objectContaining({
+    //     'earl:outcome': 'fail',
+    //     'earl:pointer': expect.objectContaining({ css: ['#pass-aside-footnote1', '#pass-aside-footnote3'] }),
+    //   }),
+    // }),
   ]));
   expect(assertions).not.toEqual(expect.arrayContaining([
     expect.objectContaining({

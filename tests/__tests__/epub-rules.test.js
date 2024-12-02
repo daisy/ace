@@ -157,7 +157,7 @@ describe('page list and TOC reading order', () => {
         }),
         'earl:test': expect.objectContaining({
           'dct:title': 'epub-type-has-matching-role',
-          "earl:impact": "minor",
+          "earl:impact": "moderate",
         }),
       }),
     ]));
