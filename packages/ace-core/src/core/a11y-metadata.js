@@ -141,7 +141,7 @@ const A11Y_META = {
             'fullMouseControl',
             'fullSwitchControl',
             'fullTouchControl',
-            'fullVideoControl',            
+            'fullVideoControl',
             'fullVoiceControl',
             // 'fullAudioControl',
         ]
@@ -165,7 +165,7 @@ const A11Y_META = {
             'tableOfContents',
             'taggedPDF',
             // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#adaptation-terms
-            'alternativeText',            
+            'alternativeText',
             'audioDescription',
             'captions', // deprecated => closedCaptions, openCaptions
             'closedCaptions',
@@ -214,11 +214,11 @@ const A11Y_META = {
         allowedValues: [
             // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessibilityHazard-vocabulary
             'flashing',
-            'noFlashingHazard',
+            'noFlashingHazard', 'unknownFlashingHazard',
             'motionSimulation',
-            'noMotionSimulationHazard',
+            'noMotionSimulationHazard', 'unknownMotionSimultationHazard',
             'sound',
-            'noSoundHazard',
+            'noSoundHazard', 'unknownSoundHazard',
             'unknown',
             'none',
         ]

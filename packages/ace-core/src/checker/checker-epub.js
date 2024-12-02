@@ -140,33 +140,42 @@ function checkMetadata(assertions, epub) {
             }))
           }
           if (name === 'schema:accessibilityHazard') {
-            if (values.includes('flashing') && values.includes('noFlashingHazard')) {
+            if (values.includes('flashing') && values.includes('noFlashingHazard')
+              || values.includes('flashing') && values.includes('unknownFlashingHazard')
+              || values.includes('noFlashingHazard') && values.includes('unknownFlashingHazard')
+            ) {
               assertions.withAssertions(newViolation({
                 impact: 'moderate',
                 title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
-                testDesc: localize("checkepub.metadatainvalid.testdesc", { value: 'flashing/noFlashingHazard', name, interpolation: { escapeValue: false } }),
+                testDesc: localize("checkepub.metadatainvalid.testdesc", { value: 'flashing/noFlashingHazard/unknownFlashingHazard', name, interpolation: { escapeValue: false } }),
                 resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
                 kbPath: 'docs/metadata/schema.org/index.html',
                 kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
                 ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
               }))
             }
-            if (values.includes('motionSimulation') && values.includes('noMotionSimulationHazard')) {
+            if (values.includes('motionSimulation') && values.includes('noMotionSimulationHazard')
+              || values.includes('motionSimulation') && values.includes('unknownMotionSimultationHazard')
+              || values.includes('noMotionSimulationHazard') && values.includes('unknownMotionSimultationHazard')
+            ) {
               assertions.withAssertions(newViolation({
                 impact: 'moderate',
                 title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
-                testDesc: localize("checkepub.metadatainvalid.testdesc", { value: 'motionSimulation/noMotionSimulationHazard', name, interpolation: { escapeValue: false } }),
+                testDesc: localize("checkepub.metadatainvalid.testdesc", { value: 'motionSimulation/noMotionSimulationHazard/unknownMotionSimultationHazard', name, interpolation: { escapeValue: false } }),
                 resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
                 kbPath: 'docs/metadata/schema.org/index.html',
                 kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
                 ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
               }))
             }
-            if (values.includes('sound') && values.includes('noSoundHazard')) {
+            if (values.includes('sound') && values.includes('noSoundHazard')
+              || values.includes('sound') && values.includes('unknownSoundHazard')
+              || values.includes('noSoundHazard') && values.includes('unknownSoundHazard')
+            ) {
               assertions.withAssertions(newViolation({
                 impact: 'moderate',
                 title: `metadata-${name.toLowerCase().replace('schema:', '')}-invalid`,
-                testDesc: localize("checkepub.metadatainvalid.testdesc", { value: 'sound/noSoundHazard', name, interpolation: { escapeValue: false } }),
+                testDesc: localize("checkepub.metadatainvalid.testdesc", { value: 'sound/noSoundHazard/unknownSoundHazard', name, interpolation: { escapeValue: false } }),
                 resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
                 kbPath: 'docs/metadata/schema.org/index.html',
                 kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
