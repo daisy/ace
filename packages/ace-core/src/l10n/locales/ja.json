@@ -25,9 +25,9 @@
       "testdesc": "値 '{{value}}'は '{{name}}'メタデータに対して無効です"
     },
     "metadatapagebreaks": {
-      "kbtitle": "Schema.org アクセシビリティメタデータ",
+      "kbtitle": "Schema.orgアクセシビリティ メタデータ",
       "resdesc": "出版ドキュメントにページ区切りを追加してください",
-      "ruledesc": "アクセシビリティ機能の「printPageNumbers」や「pageBreakMarkers」が宣言されている場合、ドキュメントにページ区切りを含める必要があります",
+      "ruledesc": "アクセシビリティ機能の「printPageNumbers」や「pageBreakMarkers」が宣言されている場合、ドキュメントにページ区切りを付ける必要があります",
       "testdesc": "アクセシビリティ機能の「printPageNumbers」や「pageBreakMarkers」が宣言されていますが、ページ区切りがありません"
     },
     "metadataprintpagenumbers": {
