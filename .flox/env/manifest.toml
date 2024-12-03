@@ -92,13 +92,13 @@ unset WHICH_NPM
 echo "=====> YARN VERSION: $(yarn --version)";
 WHICH_YARN=$(which yarn);
 echo ".....> YARN WHICH: ${WHICH_YARN}";
-ls -alshF --color=auto "${WHICH_YARN}";
+lss "${WHICH_YARN}";
 unset WHICH_YARN
 
 echo "=====> HUGO VERSION: $(hugo version)";
 WHICH_HUGO=$(which hugo);
 echo ".....> HUGO WHICH: ${WHICH_HUGO}";
-ls -alshF --color=auto "${WHICH_HUGO}";
+lss "${WHICH_HUGO}";
 unset WHICH_HUGO
 
 echo "-----> NPM CONFIG PREFIX (init): $(npm config get prefix)";
@@ -193,7 +193,7 @@ unset WHICH_NPM
 echo "=====> YARN VERSION: $(yarn --version)";
 WHICH_YARN=$(which yarn);
 echo ".....> YARN WHICH: ${WHICH_YARN}";
-ls -alshF --color=auto "${WHICH_YARN}";
+lss "${WHICH_YARN}";
 unset WHICH_YARN
 
 echo "-----> NPM CONFIG PREFIX: $(npm config get prefix)";
@@ -216,7 +216,7 @@ unset WHICH_NCU
 echo "=====> HUGO VERSION: $(hugo version)";
 WHICH_HUGO=$(which hugo);
 echo ".....> HUGO WHICH: ${WHICH_HUGO}";
-ls -alshF --color=auto "${WHICH_HUGO}";
+lss "${WHICH_HUGO}";
 unset WHICH_HUGO
 
 echo "=====> GIT VERSION: $(git --version)";
