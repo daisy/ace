@@ -6,10 +6,14 @@ echo "ElectronAxeRunner ..."
 #node node_modules/electron/cli.js ./packages/ace-axe-runner-electron/lib/cli.js
 #node ./packages/ace-axe-runner-electron/bin/ace.js
 #node ./packages/ace/bin/ace-electron.js
-ACE_PERF=1 node ./packages/ace/bin/ace-electron.js -f -s -o ./CompareAxeRunners/ElectronAxeRunner "$1"
+
+# ACE_TIMEOUT_INITIAL=10000 ACE_TIMEOUT_EXTENSION=480000
+ACE_TIMEOUT_INITIAL=5000 ACE_TIMEOUT_EXTENSION=5000 ACE_PERF=1 node ./packages/ace/bin/ace-electron.js -f -s -o ./CompareAxeRunners/ElectronAxeRunner "$1"
 
 echo "PuppeteerAxeRunner ..."
-ACE_PERF=1 node ./packages/ace-cli/bin/ace.js -f -s -o ./CompareAxeRunners/PuppeteerAxeRunner "$1"
+
+# ACE_TIMEOUT_INITIAL=10000 ACE_TIMEOUT_EXTENSION=480000
+ACE_TIMEOUT_INITIAL=5000 ACE_TIMEOUT_EXTENSION=5000 ACE_PERF=1 node ./packages/ace-cli/bin/ace.js -f -s -o ./CompareAxeRunners/PuppeteerAxeRunner "$1"
 
 node ./scripts/normalise_report_json.js ./CompareAxeRunners/PuppeteerAxeRunner/report.json
 node ./scripts/normalise_report_json.js ./CompareAxeRunners/ElectronAxeRunner/report.json

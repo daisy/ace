@@ -204,6 +204,7 @@ function loadUrl(browserWindow) {
 
     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner LOAD URL ... ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
 
+    browserWindow.ace__TIME_loadURL_ELLAPSED = undefined;
     browserWindow.ace__TIME_loadURL = process.hrtime();
     browserWindow.ace__TIME_executeJavaScript = 0;
 
@@ -241,8 +242,8 @@ function loadUrl(browserWindow) {
     } catch(_e) {
         // ignore
     }
-    const MILLISECONDS_TIMEOUT_INITIAL = _MILLISECONDS_TIMEOUT_INITIAL || 10000; // 10s max to load the window's web contents
-    const MILLISECONDS_TIMEOUT_EXTENSION = _MILLISECONDS_TIMEOUT_EXTENSION || 480000; // 480s (8mn) max to load + execute Axe checkers
+    const MILLISECONDS_TIMEOUT_INITIAL = _MILLISECONDS_TIMEOUT_INITIAL || 10000; // 10s check to load the browser window web contents + execute Axe checkers
+    const MILLISECONDS_TIMEOUT_EXTENSION = _MILLISECONDS_TIMEOUT_EXTENSION || 480000; // 480s (8mn) extension (window contents usually loads fast, but Axe runtime takes time...)
 
     const timeoutFunc = () => {
         if (browserWindow.ace__replySent) {
@@ -251,7 +252,7 @@ function loadUrl(browserWindow) {
             return;
         }
 
-        const timeElapsed1 = process.hrtime(browserWindow.ace__TIME_loadURL);
+        const timeElapsed1 = browserWindow.ace__TIME_loadURL_ELLAPSED || (browserWindow.ace__TIME_loadURL_ELLAPSED = process.hrtime(browserWindow.ace__TIME_loadURL));
         const timeElapsed2 = browserWindow.ace__TIME_executeJavaScript ? process.hrtime(browserWindow.ace__TIME_executeJavaScript) : [0, 0];
 
         if (browserWindow.ace__timeoutExtended) {
@@ -268,6 +269,7 @@ function loadUrl(browserWindow) {
             if (!browserWindow.ace__TIME_executeJavaScript) {
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner ${MILLISECONDS_TIMEOUT_INITIAL}ms timeout [[RELOAD]] (${timeElapsed1[0]} seconds + ${timeElapsed1[1]} nanoseconds) (${timeElapsed2[0]} seconds + ${timeElapsed2[1]} nanoseconds) ${browserWindow.ace__currentUrlOriginal} => ${rootUrl}${browserWindow.ace__currentUrl}`);
 
+                browserWindow.ace__TIME_loadURL_ELLAPSED = undefined;
                 browserWindow.ace__TIME_loadURL = process.hrtime();
                 browserWindow.ace__TIME_executeJavaScript = 0;
                 try {
@@ -674,7 +676,9 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                 // (node:5505) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 did-fail-load listeners added to [EventEmitter]. Use emitter.setMaxListeners() to increase limit
                 browserWindow.webContents.removeListener("did-fail-load", didFailLoadHandler);
 
-                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner did-finish-load ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
+                browserWindow.ace__TIME_loadURL_ELLAPSED = process.hrtime(browserWindow.ace__TIME_loadURL);
+
+                if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner did-finish-load (${browserWindow.ace__TIME_loadURL_ELLAPSED[0]} seconds + ${browserWindow.ace__TIME_loadURL_ELLAPSED[1]} nanoseconds) ${browserWindow.ace__poolIndex} ${browserWindow.ace__currentUrlOriginal} --- ${browserWindow.ace__currentUrl}`);
 
                 browserWindow.ace__TIME_executeJavaScript = process.hrtime();
 

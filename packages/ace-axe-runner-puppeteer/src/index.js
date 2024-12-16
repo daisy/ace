@@ -10,6 +10,21 @@ let _browser = undefined;
 
 const isDev = process && process.env && (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true');
 
+let _MILLISECONDS_TIMEOUT_INITIAL = 0;
+try {
+    _MILLISECONDS_TIMEOUT_INITIAL = process.env.ACE_TIMEOUT_INITIAL ? parseInt(process.env.ACE_TIMEOUT_INITIAL, 10) : 0;
+} catch(_e) {
+    // ignore
+}
+let _MILLISECONDS_TIMEOUT_EXTENSION = 0;
+try {
+    _MILLISECONDS_TIMEOUT_EXTENSION = process.env.ACE_TIMEOUT_EXTENSION ? parseInt(process.env.ACE_TIMEOUT_EXTENSION, 10) : 0;
+} catch(_e) {
+    // ignore
+}
+const MILLISECONDS_TIMEOUT_INITIAL = _MILLISECONDS_TIMEOUT_INITIAL || 10000; // 10s check to load the browser window web contents + execute Axe checkers
+const MILLISECONDS_TIMEOUT_EXTENSION = _MILLISECONDS_TIMEOUT_EXTENSION || 480000; // 480s (8mn) extension (window contents usually loads fast, but Axe runtime takes time...)
+
 module.exports = {
     concurrency: 4,
     launch: async function() {
@@ -19,9 +34,14 @@ module.exports = {
         // }
         args.push('--no-sandbox');
         args.push('--disable-setuid-sandbox');
+
+        // https://github.com/puppeteer/puppeteer/blob/2b8ee62475b6614fc95b963c399b0bbad32e9e70/packages/puppeteer-core/src/common/ConnectOptions.ts#L88-L93
+        // https://github.com/puppeteer/puppeteer/blob/2b8ee62475b6614fc95b963c399b0bbad32e9e70/packages/puppeteer-core/src/node/BrowserLauncher.ts#L85
         _browser = await puppeteer.launch({
             args,
             headless: true,
+            timeout: MILLISECONDS_TIMEOUT_INITIAL, // 30000 default
+            protocolTimeout: MILLISECONDS_TIMEOUT_EXTENSION, // 180000 default
         });
         return Promise.resolve();
     },
@@ -85,54 +105,67 @@ module.exports = {
 
             request.continue();
         });
-      
+
         // page.on('response', (resp) => {
         //     console.log("RESPONSE: ", resp.url(), " ==> ", JSON.stringify(resp.headers(), null, 4), resp.status());
         // });
-      
+
         await page.goto(url);
 
         await utils.addScriptContents(scriptContents, page);
         await utils.addScripts(scripts, page);
 
-        const results = await page.evaluate(() => new Promise((resolve, reject) => {
-            /* eslint-disable */
-            try {
-                window.tryAceAxe = () => {
-                    if (!window.daisy ||
-                        !window.daisy.ace ||
-                        !window.daisy.ace.run ||
-                        !window.daisy.ace.createReport
-                        || !window.axe
-                        // || !window.HTML5Outline
-                    ) {
-        
-                        window.tryAceAxeN++;
-                        if (window.tryAceAxeN < 15) {
-                            setTimeout(window.tryAceAxe, 400);
-                            return;
-                        }
-        
-                        reject("window.tryAceAxe " + window.tryAceAxeN);
-                        return;
-                    }
-        
-                    window.daisy.ace.run((err, res) => {
-                        if (err) {
-                            reject(err);
-                            return;
-                        }
-                        resolve(res);
-                    });
-                };
-                window.tryAceAxeN = 0;
-                window.tryAceAxe();
-            } catch (exc) {
-                reject(exc);
-            }
-            /* eslint-enable */
+        let results = undefined;
+        try {
+        results = await page.evaluate(() => new Promise((resolve, reject) => {
+          /* eslint-disable */
+          try {
+            window.tryAceAxe = () => {
+              if (!window.daisy ||
+                !window.daisy.ace ||
+                !window.daisy.ace.run ||
+                !window.daisy.ace.createReport
+                || !window.axe
+                // || !window.HTML5Outline
+              ) {
+
+                window.tryAceAxeN++;
+                if (window.tryAceAxeN < 15) {
+                  setTimeout(window.tryAceAxe, 400);
+                  return;
+                }
+
+                reject("window.tryAceAxe " + window.tryAceAxeN);
+                return;
+              }
+
+              window.daisy.ace.run((err, res) => {
+                if (err) {
+                  reject(err);
+                  return;
+                }
+                resolve(res);
+              });
+            };
+            window.tryAceAxeN = 0;
+            window.tryAceAxe();
+          } catch (exc) {
+            reject(exc);
+          }
+          /* eslint-enable */
         }));
+        } catch (err) {
+          // ProtocolError: Runtime.callFunctionOn timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed.
+          if (err && err.toString && err.toString().indexOf("protocolTimeout") >= 0) {
+            err = new Error(`Timeout :( ${MILLISECONDS_TIMEOUT_EXTENSION}ms`);
+          }
+          try {
+            await page.close();
+          } catch (_e) {
+          }
+          throw err;
+        }
         await page.close();
         return results;
     }
-};  
+};

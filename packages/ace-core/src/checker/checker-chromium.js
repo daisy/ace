@@ -11,6 +11,7 @@ const axe2ace = require('@daisy/ace-report-axe');
 
 const { getRawResourcesForCurrentLanguage } = require('../l10n/localize').localizer;
 
+const DISABLE_CONCURRENT_TO_DEBUG_INDIVIDUAL_SPINE_ITEM = false;
 
 // const encodeURIComponent_RFC3986 = require('@daisy/epub-utils').encodeURIComponent_RFC3986;
 function encodeURIComponent_RFC3986(str) {
@@ -114,7 +115,9 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
       winston.debug(`- Axe locale problem? [${lang}] => ${localePath}`);
     }
 
+    if (DISABLE_CONCURRENT_TO_DEBUG_INDIVIDUAL_SPINE_ITEM) console.log("BEFORE axeRunner... ", lang, url, JSON.stringify(spineItem, null, 4), JSON.stringify(scripts, null, 4), JSON.stringify(scriptContents, null, 4)); // JSON.stringify(epub, null, 4)
     const results = await axeRunner.run(url, scripts, scriptContents, epub.basedir);
+    if (DISABLE_CONCURRENT_TO_DEBUG_INDIVIDUAL_SPINE_ITEM) console.log("AFTER axeRunner. ", url);
 
     // Post-process results
     if (!results.axe) {
@@ -201,7 +204,9 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
 module.exports.check = async (epub, lang, axeRunner) => {
   await axeRunner.launch();
   winston.info('Checking documents...');
-  return pMap(epub.contentDocs, doc => checkSingle(doc, epub, lang, axeRunner), { concurrency: axeRunner.concurrency })
+  return pMap(epub.contentDocs, (doc) => {
+    return checkSingle(doc, epub, lang, axeRunner); // not AWAIT'ed! (pMap takes the Promise)
+  }, { concurrency: DISABLE_CONCURRENT_TO_DEBUG_INDIVIDUAL_SPINE_ITEM ? 1 : axeRunner.concurrency })
   .then(async (results) => {
     await axeRunner.close();
     return results;

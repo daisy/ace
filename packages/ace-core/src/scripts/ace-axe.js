@@ -137,7 +137,7 @@ daisy.ace.run = function(done) {
     //         ['tip', 'doc-tip'],
     //         ['toc', 'doc-toc']
     //       ]);
-          
+
     //       if (node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')) {
     //         // abort if descendant of landmarks nav (nav with epub:type=landmarks)
     //         if (axe.utils.matchesSelector(node, 'nav[*|type~="landmarks"] *')) {
@@ -197,7 +197,7 @@ daisy.ace.run = function(done) {
     //     // selector: '[*|type]',
     //     matches: function matches(node, virtualNode, context) {
     //       return node.hasAttributeNS('http://www.idpf.org/2007/ops', 'type')
-    //     },        
+    //     },
     //     any: ['matching-aria-role'],
     //     metadata: {
     //       // configured from host bootstrapper page (checker-chromium)
@@ -246,6 +246,8 @@ daisy.ace.run = function(done) {
       } catch(e) {
         done(e, null);
       }
+      // done(new Error("test"), null);
+      // done(null, aceResult);
 
     }
   );
