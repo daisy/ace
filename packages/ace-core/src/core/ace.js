@@ -18,6 +18,8 @@ tmp.setGracefulCleanup();
 
 module.exports = function ace(epubPath, options, axeRunner) {
 
+  if (options.timeout) axeRunner.setTimeout(options.timeout);
+
   return new Promise((resolve, reject) => {
 
     function l10nDoneCallback() {
@@ -25,20 +27,20 @@ module.exports = function ace(epubPath, options, axeRunner) {
       if (options.initLogger) {
         logger.initLogger({ verbose: options.verbose, silent: options.silent, fileName: options.fileName });
       }
-    
+
       // the jobid option just gets returned in the resolve/reject
       // so the calling function can track which job finished
       var jobId = 'jobid' in options ? options.jobid : '';
       winston.verbose(`Ace ${pkg.version}, Node ${process.version}, ${os.type()} ${os.release()}`);
       winston.verbose("Options:", options);
-  
+
       // Check that the EPUB exists
       const epubPathResolved = path.resolve(options.cwd, epubPath);
       if (!fs.existsSync(epubPathResolved)) {
         winston.error(`Couldn’t find EPUB file '${epubPath}'`);
         return reject(jobId);
       }
-    
+
       // Process options
       /* eslint-disable no-param-reassign */
       if (typeof options.tmpdir === 'string') {
@@ -57,11 +59,11 @@ module.exports = function ace(epubPath, options, axeRunner) {
       } else {
         delete options.outdir;
       }
-  
+
       winston.info("Processing " + epubPath);
-  
+
       /* eslint-enable no-param-reassign */
-  
+
       // Unzip the EPUB
       const epub = new EPUB(epubPathResolved);
       epub.extract()

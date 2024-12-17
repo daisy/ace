@@ -39,6 +39,8 @@ const fsOriginal = require('original-fs');
 const isDev = process && process.env && (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true');
 const showWindow = false;
 
+let cliOption_MILLISECONDS_TIMEOUT_EXTENSION = undefined;
+
 const LOG_DEBUG_URLS = process.env.LOG_DEBUG_URLS === "1";
 
 const LOG_DEBUG = false;
@@ -242,8 +244,8 @@ function loadUrl(browserWindow) {
     } catch(_e) {
         // ignore
     }
-    const MILLISECONDS_TIMEOUT_INITIAL = _MILLISECONDS_TIMEOUT_INITIAL || 10000; // 10s check to load the browser window web contents + execute Axe checkers
-    const MILLISECONDS_TIMEOUT_EXTENSION = _MILLISECONDS_TIMEOUT_EXTENSION || 480000; // 480s (8mn) extension (window contents usually loads fast, but Axe runtime takes time...)
+    const MILLISECONDS_TIMEOUT_INITIAL = _MILLISECONDS_TIMEOUT_INITIAL || 5000; // 5s check to load the browser window web contents + execute Axe checkers
+    const MILLISECONDS_TIMEOUT_EXTENSION = cliOption_MILLISECONDS_TIMEOUT_EXTENSION || _MILLISECONDS_TIMEOUT_EXTENSION || 240000; // 240s (4mn) extension (window contents usually loads fast, but Axe runtime takes time...)
 
     const timeoutFunc = () => {
         if (browserWindow.ace__replySent) {
@@ -572,6 +574,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         const uarel = payload.url;
         const scripts = payload.scripts;
         const scriptContents = payload.scriptContents;
+        cliOption_MILLISECONDS_TIMEOUT_EXTENSION = payload.cliOption_MILLISECONDS_TIMEOUT_EXTENSION;
 
         if (LOG_DEBUG_URLS) {
             console.log("######## URL 1");

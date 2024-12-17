@@ -33,6 +33,8 @@ const meowHelpMessage = `
     -s, --silent           do not display any output
 
     -l, --lang  <language> language code for localized messages (e.g. "fr"), default is "en"
+
+    -T, --timeout <milliseconds> (default is 240000 per document)
   Examples
     $ ace -o out ~/Documents/book.epub
 
@@ -75,6 +77,10 @@ const meowOptions = {
     },
     lang: {
       alias: 'l',
+      type: 'string'
+    },
+    timeout: {
+      alias: 'T',
       type: 'string'
     }
   }
@@ -149,6 +155,7 @@ ${overrides.map(file => `  - ${file}`).join('\n')}
     silent: cli.flags.silent,
     jobId: '',
     lang: cli.flags.lang,
+    timeout: cli.flags.timeout || undefined,
   }, axeRunner)
   .then(async (jobData) => {
     var reportJson = jobData[1];

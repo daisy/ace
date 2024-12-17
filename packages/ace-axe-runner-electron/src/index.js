@@ -3,9 +3,18 @@
 const LOG_DEBUG = false;
 const ACE_LOG_PREFIX = "[ACE-AXE]";
 
+let cliOption_MILLISECONDS_TIMEOUT_EXTENSION = undefined;
+
 function createAxeRunner(eventEmmitter, CONCURRENT_INSTANCES) {
 
     return {
+        setTimeout: function (ms) {
+          try {
+              cliOption_MILLISECONDS_TIMEOUT_EXTENSION = parseInt(ms, 10);
+          } catch(_e) {
+              // ignore
+          }
+        },
         concurrency: CONCURRENT_INSTANCES,
         launch: function () {
             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner will launch ...`);
@@ -42,7 +51,7 @@ function createAxeRunner(eventEmmitter, CONCURRENT_INSTANCES) {
         },
         close: function () {
             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner will close ...`);
-    
+
             // // ipcRenderer
             // eventEmmitter.send('AXE_RUNNER_CLOSE', {});
             // return Promise.resolve();
@@ -79,7 +88,7 @@ function createAxeRunner(eventEmmitter, CONCURRENT_INSTANCES) {
         },
         run: function (url, scripts, scriptContents, basedir) {
             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner will run ... ${url}`);
-    
+
             return new Promise((resolve, reject) => {
                 // ipcRenderer
                 const callback = (event, arg) => {
@@ -110,6 +119,7 @@ function createAxeRunner(eventEmmitter, CONCURRENT_INSTANCES) {
                     scripts,
                     scriptContents,
                     basedir,
+                    cliOption_MILLISECONDS_TIMEOUT_EXTENSION,
                 });
             });
         }

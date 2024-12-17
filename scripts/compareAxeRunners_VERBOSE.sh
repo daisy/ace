@@ -7,15 +7,19 @@ echo "ElectronAxeRunner ..."
 #node ./packages/ace-axe-runner-electron/bin/ace.js
 #node ./packages/ace/bin/ace-electron.js
 
-# defaults: ACE_TIMEOUT_INITIAL=10000 ACE_TIMEOUT_EXTENSION=480000
-# ACE_TIMEOUT_INITIAL=4000 ACE_TIMEOUT_EXTENSION=150000
-ACE_PERF=1 node ./packages/ace/bin/ace-electron.js -l en -f -V -o ./CompareAxeRunners/ElectronAxeRunner "$1"
+# defaults: ACE_TIMEOUT_INITIAL=5000 ACE_TIMEOUT_EXTENSION=240000
+# ACE_TIMEOUT_INITIAL ==> load and Axe
+# ACE_TIMEOUT_EXTENSION ==> Axe...
+# -T/--timeout 100 means 100 milliseconds over the initial 5 seconds for Axe to do its job
+ACE_PERF=1 node ./packages/ace/bin/ace-electron.js -T 100 -l en -f -V -o ./CompareAxeRunners/ElectronAxeRunner "$1"
 
 echo "PuppeteerAxeRunner ..."
 
-# defaults: ACE_TIMEOUT_INITIAL=10000 ACE_TIMEOUT_EXTENSION=480000
-# ACE_TIMEOUT_INITIAL=4000 ACE_TIMEOUT_EXTENSION=150000
-ACE_PERF=1 node ./packages/ace-cli/bin/ace.js -l en -f -V -o ./CompareAxeRunners/PuppeteerAxeRunner "$1"
+# defaults: ACE_TIMEOUT_INITIAL=5000 ACE_TIMEOUT_EXTENSION=240000
+# ACE_TIMEOUT_INITIAL ==> load
+# ACE_TIMEOUT_EXTENSION ==> Axe...
+# -T/--timeout 5100 means 5 seconds and 100 milliseconds for Axe to do its job
+ACE_PERF=1 node ./packages/ace-cli/bin/ace.js -T 5100 -l en -f -V -o ./CompareAxeRunners/PuppeteerAxeRunner "$1"
 
 node ./scripts/normalise_report_json.js ./CompareAxeRunners/PuppeteerAxeRunner/report.json
 node ./scripts/normalise_report_json.js ./CompareAxeRunners/ElectronAxeRunner/report.json

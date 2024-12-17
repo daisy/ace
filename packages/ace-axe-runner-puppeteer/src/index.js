@@ -22,10 +22,19 @@ try {
 } catch(_e) {
     // ignore
 }
-const MILLISECONDS_TIMEOUT_INITIAL = _MILLISECONDS_TIMEOUT_INITIAL || 10000; // 10s check to load the browser window web contents + execute Axe checkers
-const MILLISECONDS_TIMEOUT_EXTENSION = _MILLISECONDS_TIMEOUT_EXTENSION || 480000; // 480s (8mn) extension (window contents usually loads fast, but Axe runtime takes time...)
+const MILLISECONDS_TIMEOUT_INITIAL = _MILLISECONDS_TIMEOUT_INITIAL || 5000; // 5s check to load the browser window web contents
+const MILLISECONDS_TIMEOUT_EXTENSION = _MILLISECONDS_TIMEOUT_EXTENSION || 240000; // 240s (4mn) runtime (window contents usually loads fast, but Axe runtime takes time...)
+
+let cliOption_MILLISECONDS_TIMEOUT_EXTENSION = undefined;
 
 module.exports = {
+    setTimeout: function (ms) {
+      try {
+          cliOption_MILLISECONDS_TIMEOUT_EXTENSION = parseInt(ms, 10);
+      } catch(_e) {
+          // ignore
+      }
+    },
     concurrency: 4,
     launch: async function() {
         const args = [];
@@ -41,7 +50,7 @@ module.exports = {
             args,
             headless: true,
             timeout: MILLISECONDS_TIMEOUT_INITIAL, // 30000 default
-            protocolTimeout: MILLISECONDS_TIMEOUT_EXTENSION, // 180000 default
+            protocolTimeout: cliOption_MILLISECONDS_TIMEOUT_EXTENSION || MILLISECONDS_TIMEOUT_EXTENSION, // 180000 default
         });
         return Promise.resolve();
     },
@@ -157,7 +166,7 @@ module.exports = {
         } catch (err) {
           // ProtocolError: Runtime.callFunctionOn timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed.
           if (err && err.toString && err.toString().indexOf("protocolTimeout") >= 0) {
-            err = new Error(`Timeout :( ${MILLISECONDS_TIMEOUT_EXTENSION}ms`);
+            err = new Error(`Timeout :( ${cliOption_MILLISECONDS_TIMEOUT_EXTENSION || MILLISECONDS_TIMEOUT_EXTENSION}ms`);
           }
           try {
             await page.close();

@@ -42,6 +42,8 @@ const meowHelpMessage = `
     -s, --silent           do not display any output
 
     -l, --lang  <language> language code for localized messages (e.g. "fr"), default is "en"
+
+    -T, --timeout <milliseconds> (default is 240000 per document)
   Examples
     $ ace-http -p 3000`;
 const meowOptions = {
@@ -151,6 +153,7 @@ function postJob(req, res, next) {
         "outputDir": tmp.dirSync({ unsafeCleanup: true }).name,
         "epubPath": req.file.path,
         "lang": cli.flags.lang,
+        "timeout": cli.flags.timeout || undefined,
       }
     };
     newJob(jobdata);
@@ -189,7 +192,7 @@ function newJob(jobdata) {
   joblist.push(jobdata);
 
   // execute the job with Ace
-  ace(jobdata.internal.epubPath, {'jobid': jobdata.internal.id, 'outdir': jobdata.internal.outputDir, 'lang': jobdata.internal.lang}, axeRunner)
+  ace(jobdata.internal.epubPath, {'jobid': jobdata.internal.id, 'outdir': jobdata.internal.outputDir, 'lang': jobdata.internal.lang, 'timeout': jobdata.internal.timeout}, axeRunner)
   .then((jobData) => {
     var jobId = jobData[0];
     var idx = joblist.findIndex(job => job.internal.id === jobId);
