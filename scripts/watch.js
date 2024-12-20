@@ -1,5 +1,5 @@
 /**
- * Watch files for changes and rebuild (copy from 'src/' to `lib/`) if changed
+ * Watch files for changes and rebuild (copy fro_m 'src/' to `lib/`) if changed
  *
  * Inspired from Jest’s build scripts:
  * https://github.com/facebook/jest/tree/master/scripts

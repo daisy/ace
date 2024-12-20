@@ -54,10 +54,10 @@ const ACE_ELECTRON_HTTP_PROTOCOL = "acehttps";
 
 // NO_HTTP_REMOVE
 // const express = require('express');
-// const portfinder = require('portfinder');
+// const portfinder = requir_e('portfinder');
 // // const http = require('http');
 // const https = require('https');
-// const generateSelfSignedData = require('./selfsigned').generateSelfSignedData;
+// const generateSelfSignedData = requir_e('./selfsigned').generateSelfSignedData;
 // let expressApp;
 // let httpServer;
 // let port;

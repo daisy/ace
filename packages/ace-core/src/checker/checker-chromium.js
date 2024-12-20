@@ -25,7 +25,7 @@ tmp.setGracefulCleanup();
 
 const scripts = [
   // require.resolve('../scripts/function-bind-bound-object.js'),
-  require.resolve('../scripts/vendor/outliner.min.js'),
+  // require.resolve('../scripts/vendor/outliner.min.js'),
   path.resolve(require.resolve('@daisy/axe-core-for-ace'), '../axe.js'),
   // require.resolve('../scripts/axe-patch-aria-roles.js'),
   // require.resolve('../scripts/axe-patch-is-aria-role-allowed.js'),
