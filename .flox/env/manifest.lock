@@ -41,27 +41,27 @@
     {
       "attr_path": "hugo",
       "broken": false,
-      "derivation": "/nix/store/kf7zjw2v14ki822cidysj0n6j81h1ni2-hugo-0.139.0.drv",
+      "derivation": "/nix/store/l9b1x4in17bb5w2lfm75aqb1kf78wzq0-hugo-0.140.2.drv",
       "description": "Fast and modern static website engine",
       "install_id": "hugo",
       "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "name": "hugo-0.139.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "name": "hugo-0.140.2",
       "pname": "hugo",
-      "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "rev_count": 714768,
-      "rev_date": "2024-12-01T01:19:13Z",
-      "scrape_date": "2024-12-03T03:55:23Z",
+      "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "rev_count": 738982,
+      "rev_date": "2025-01-16T21:27:11Z",
+      "scrape_date": "2025-01-18T00:14:56Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "0.139.0",
+      "version": "0.140.2",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/cjkcbn1wkzn6d8syb1cyppdq9h50rkzp-hugo-0.139.0"
+        "out": "/nix/store/99qng10gjfhj2nw0mq2wabicym862abg-hugo-0.140.2"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -70,27 +70,27 @@
     {
       "attr_path": "hugo",
       "broken": false,
-      "derivation": "/nix/store/6c6g1a39vic4n1j78hggzp7d0pwzjczj-hugo-0.139.0.drv",
+      "derivation": "/nix/store/pdbx7ymld3xsjpqpv1cfpq8ayii70kkm-hugo-0.140.2.drv",
       "description": "Fast and modern static website engine",
       "install_id": "hugo",
       "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "name": "hugo-0.139.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "name": "hugo-0.140.2",
       "pname": "hugo",
-      "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "rev_count": 714768,
-      "rev_date": "2024-12-01T01:19:13Z",
-      "scrape_date": "2024-12-03T03:55:23Z",
+      "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "rev_count": 738982,
+      "rev_date": "2025-01-16T21:27:11Z",
+      "scrape_date": "2025-01-18T00:14:56Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "0.139.0",
+      "version": "0.140.2",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/mnxim04ppi0dqmzhzkh45lavmfra4n2g-hugo-0.139.0"
+        "out": "/nix/store/i3akr4y3g4rdg5w64q8pis69drz02ayl-hugo-0.140.2"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -99,27 +99,27 @@
     {
       "attr_path": "hugo",
       "broken": false,
-      "derivation": "/nix/store/9j75v79zg1lszkycknlf4i4jyjj6mnsb-hugo-0.139.0.drv",
+      "derivation": "/nix/store/hy8mk3ilgj2xy7jgr108ywx135bkbg62-hugo-0.140.2.drv",
       "description": "Fast and modern static website engine",
       "install_id": "hugo",
       "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "name": "hugo-0.139.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "name": "hugo-0.140.2",
       "pname": "hugo",
-      "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "rev_count": 714768,
-      "rev_date": "2024-12-01T01:19:13Z",
-      "scrape_date": "2024-12-03T03:55:23Z",
+      "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "rev_count": 738982,
+      "rev_date": "2025-01-16T21:27:11Z",
+      "scrape_date": "2025-01-18T00:14:56Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "0.139.0",
+      "version": "0.140.2",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/96cinf0bmch7gkrq1izvy2lhwrdi0p1m-hugo-0.139.0"
+        "out": "/nix/store/ml5dbdn7cs77fz47sr5fklafidg609ln-hugo-0.140.2"
       },
       "system": "x86_64-darwin",
       "group": "toplevel",
@@ -128,27 +128,27 @@
     {
       "attr_path": "hugo",
       "broken": false,
-      "derivation": "/nix/store/gw1bqw0n0rvjb1rb527rnb30lgvrkh5d-hugo-0.139.0.drv",
+      "derivation": "/nix/store/fgbz6xl3ih29a2a54hzvcxsfdzk98p0m-hugo-0.140.2.drv",
       "description": "Fast and modern static website engine",
       "install_id": "hugo",
       "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "name": "hugo-0.139.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "name": "hugo-0.140.2",
       "pname": "hugo",
-      "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "rev_count": 714768,
-      "rev_date": "2024-12-01T01:19:13Z",
-      "scrape_date": "2024-12-03T03:55:23Z",
+      "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "rev_count": 738982,
+      "rev_date": "2025-01-16T21:27:11Z",
+      "scrape_date": "2025-01-18T00:14:56Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "0.139.0",
+      "version": "0.140.2",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/13g2k2qivwizb70gi533da0c13grgfk7-hugo-0.139.0"
+        "out": "/nix/store/6yvswihirak2nyj52w37mm0m3lrwvkvm-hugo-0.140.2"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -157,28 +157,28 @@
     {
       "attr_path": "nodejs_22",
       "broken": false,
-      "derivation": "/nix/store/ghzk28xlqjdjqyicfng40r4hyglr7nxm-nodejs-22.10.0.drv",
+      "derivation": "/nix/store/0awxmh2gnklcbkn7y79znyj1jbwj97s4-nodejs-22.11.0.drv",
       "description": "Event-driven I/O framework for the V8 JavaScript engine",
       "install_id": "nodejs_22",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "name": "nodejs-22.10.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "name": "nodejs-22.11.0",
       "pname": "nodejs_22",
-      "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "rev_count": 714768,
-      "rev_date": "2024-12-01T01:19:13Z",
-      "scrape_date": "2024-12-03T03:55:23Z",
+      "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "rev_count": 738982,
+      "rev_date": "2025-01-16T21:27:11Z",
+      "scrape_date": "2025-01-18T00:14:56Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "nodejs-22.10.0",
+      "version": "nodejs-22.11.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "libv8": "/nix/store/6rgrpzdbylr432xa1r4mi9wc5i2bgvw0-nodejs-22.10.0-libv8",
-        "out": "/nix/store/3r50cvcf5d7fahnkx4nkr2nk3h377h4s-nodejs-22.10.0"
+        "libv8": "/nix/store/m3rxxwm6jp95kjmh4rklqn0d76biz6wm-nodejs-22.11.0-libv8",
+        "out": "/nix/store/9vkabbbbyfn8hv5l1r8fm59d27imq460-nodejs-22.11.0"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -187,28 +187,28 @@
     {
       "attr_path": "nodejs_22",
       "broken": false,
-      "derivation": "/nix/store/59bhgby39hvvss9a3dmzz3pa4mch6fqq-nodejs-22.10.0.drv",
+      "derivation": "/nix/store/j5x3l2jg2rbaadr226bds3v4hbxplh4d-nodejs-22.11.0.drv",
       "description": "Event-driven I/O framework for the V8 JavaScript engine",
       "install_id": "nodejs_22",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "name": "nodejs-22.10.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "name": "nodejs-22.11.0",
       "pname": "nodejs_22",
-      "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "rev_count": 714768,
-      "rev_date": "2024-12-01T01:19:13Z",
-      "scrape_date": "2024-12-03T03:55:23Z",
+      "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "rev_count": 738982,
+      "rev_date": "2025-01-16T21:27:11Z",
+      "scrape_date": "2025-01-18T00:14:56Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "nodejs-22.10.0",
+      "version": "nodejs-22.11.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "libv8": "/nix/store/3df03syl7rz631377l76mjvbizrnl26c-nodejs-22.10.0-libv8",
-        "out": "/nix/store/fxx7iihgsj0ysdvz09wsazi9ih6g1ss8-nodejs-22.10.0"
+        "libv8": "/nix/store/0xiwppqyszilzy9cg71c26fxg5qcxh89-nodejs-22.11.0-libv8",
+        "out": "/nix/store/z2lznj5fq0wagkhj7nkgmb5yr4gyv0ws-nodejs-22.11.0"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -217,28 +217,28 @@
     {
       "attr_path": "nodejs_22",
       "broken": false,
-      "derivation": "/nix/store/8qc98kwvbnakhirfb6w8x38qnwdi25p8-nodejs-22.10.0.drv",
+      "derivation": "/nix/store/mzj668n7kjkcb85n62g1kfpjpmx4ad98-nodejs-22.11.0.drv",
       "description": "Event-driven I/O framework for the V8 JavaScript engine",
       "install_id": "nodejs_22",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "name": "nodejs-22.10.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "name": "nodejs-22.11.0",
       "pname": "nodejs_22",
-      "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "rev_count": 714768,
-      "rev_date": "2024-12-01T01:19:13Z",
-      "scrape_date": "2024-12-03T03:55:23Z",
+      "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "rev_count": 738982,
+      "rev_date": "2025-01-16T21:27:11Z",
+      "scrape_date": "2025-01-18T00:14:56Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "nodejs-22.10.0",
+      "version": "nodejs-22.11.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "libv8": "/nix/store/qs45lfyf8rzgh1ghb1g2m9pa50njwxcx-nodejs-22.10.0-libv8",
-        "out": "/nix/store/vh70nd2rjh0nzfqsn4iwibz1s07f4fhv-nodejs-22.10.0"
+        "libv8": "/nix/store/mm87n14lp5akdjlfwh1yg4l93zm8gv9h-nodejs-22.11.0-libv8",
+        "out": "/nix/store/s81s2z275wnjazk4ij3zvn6kslfa5ipf-nodejs-22.11.0"
       },
       "system": "x86_64-darwin",
       "group": "toplevel",
@@ -247,28 +247,28 @@
     {
       "attr_path": "nodejs_22",
       "broken": false,
-      "derivation": "/nix/store/wxa0y02xqvkr220dgbgjnncyqp4pr4br-nodejs-22.10.0.drv",
+      "derivation": "/nix/store/dy56ll2a0b7gg40jl8fzv759yqcalnwh-nodejs-22.11.0.drv",
       "description": "Event-driven I/O framework for the V8 JavaScript engine",
       "install_id": "nodejs_22",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "name": "nodejs-22.10.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "name": "nodejs-22.11.0",
       "pname": "nodejs_22",
-      "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "rev_count": 714768,
-      "rev_date": "2024-12-01T01:19:13Z",
-      "scrape_date": "2024-12-03T03:55:23Z",
+      "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "rev_count": 738982,
+      "rev_date": "2025-01-16T21:27:11Z",
+      "scrape_date": "2025-01-18T00:14:56Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "nodejs-22.10.0",
+      "version": "nodejs-22.11.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "libv8": "/nix/store/j0nfkz29q3iigzl6ly1a75bivd1bsqc3-nodejs-22.10.0-libv8",
-        "out": "/nix/store/0xvgzkl74v6jrh79ibh7ss770dh4hb69-nodejs-22.10.0"
+        "libv8": "/nix/store/fyaac3q8qn3zfxy72airfabm3dakmgf5-nodejs-22.11.0-libv8",
+        "out": "/nix/store/fkyp1bm5gll9adnfcj92snyym524mdrj-nodejs-22.11.0"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -277,17 +277,17 @@
     {
       "attr_path": "yarn",
       "broken": false,
-      "derivation": "/nix/store/29jq3h1xvi33nid9na3bimxaff8bf67z-yarn-1.22.22.drv",
+      "derivation": "/nix/store/dr0f0r0silq2jn8cr05bmlb1fxhvhiw3-yarn-1.22.22.drv",
       "description": "Fast, reliable, and secure dependency management for javascript",
       "install_id": "yarn",
       "license": "BSD-2-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=ac35b104800bff9028425fec3b6e8a41de2bbfff",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=5df43628fdf08d642be8ba5b3625a6c70731c19c",
       "name": "yarn-1.22.22",
       "pname": "yarn",
-      "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "rev_count": 714768,
-      "rev_date": "2024-12-01T01:19:13Z",
-      "scrape_date": "2024-12-03T03:55:23Z",
+      "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "rev_count": 738982,
+      "rev_date": "2025-01-16T21:27:11Z",
+      "scrape_date": "2025-01-18T00:14:56Z",
       "stabilities": [
         "unstable"
       ],
@@ -297,7 +297,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/0hmmpszg5wfrr43kvlk2cxjqpll0dh2z-yarn-1.22.22"
+        "out": "/nix/store/jcbyc2k0vkkm862r7f9nwxaa69khfr3h-yarn-1.22.22"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -306,17 +306,17 @@
     {
       "attr_path": "yarn",
       "broken": false,
-      "derivation": "/nix/store/vkm27crcfnsh8jvrvpi4bs2k67mb9b2z-yarn-1.22.22.drv",
+      "derivation": "/nix/store/8z323av5jfqarxqwqsc8ib4kpmda3mpd-yarn-1.22.22.drv",
       "description": "Fast, reliable, and secure dependency management for javascript",
       "install_id": "yarn",
       "license": "BSD-2-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=ac35b104800bff9028425fec3b6e8a41de2bbfff",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=5df43628fdf08d642be8ba5b3625a6c70731c19c",
       "name": "yarn-1.22.22",
       "pname": "yarn",
-      "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "rev_count": 714768,
-      "rev_date": "2024-12-01T01:19:13Z",
-      "scrape_date": "2024-12-03T03:55:23Z",
+      "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "rev_count": 738982,
+      "rev_date": "2025-01-16T21:27:11Z",
+      "scrape_date": "2025-01-18T00:14:56Z",
       "stabilities": [
         "unstable"
       ],
@@ -326,7 +326,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/vmx0di4y3m8amqwsfgyccf8zs8kml06q-yarn-1.22.22"
+        "out": "/nix/store/sxxpynsiv8mhq1f0gi1d1rzcj2v0af5w-yarn-1.22.22"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -335,17 +335,17 @@
     {
       "attr_path": "yarn",
       "broken": false,
-      "derivation": "/nix/store/rxkhv6b9iarrklhib18vnr8sj5428bxr-yarn-1.22.22.drv",
+      "derivation": "/nix/store/7jx5rh0z3wvc96a5mjjlqi02vsqldy72-yarn-1.22.22.drv",
       "description": "Fast, reliable, and secure dependency management for javascript",
       "install_id": "yarn",
       "license": "BSD-2-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=ac35b104800bff9028425fec3b6e8a41de2bbfff",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=5df43628fdf08d642be8ba5b3625a6c70731c19c",
       "name": "yarn-1.22.22",
       "pname": "yarn",
-      "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "rev_count": 714768,
-      "rev_date": "2024-12-01T01:19:13Z",
-      "scrape_date": "2024-12-03T03:55:23Z",
+      "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "rev_count": 738982,
+      "rev_date": "2025-01-16T21:27:11Z",
+      "scrape_date": "2025-01-18T00:14:56Z",
       "stabilities": [
         "unstable"
       ],
@@ -355,7 +355,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/nbaa0rip3xw6l3bmnc2k2fm071pzvzwv-yarn-1.22.22"
+        "out": "/nix/store/gw4vlw2qhk94mjwdypqxdzczpml7x1w9-yarn-1.22.22"
       },
       "system": "x86_64-darwin",
       "group": "toplevel",
@@ -364,17 +364,17 @@
     {
       "attr_path": "yarn",
       "broken": false,
-      "derivation": "/nix/store/7bxc3x8jz6jbrg5gi2qlz1cffzgrba3a-yarn-1.22.22.drv",
+      "derivation": "/nix/store/49kqyqbna5ryw307w5m34vs4fdna14zz-yarn-1.22.22.drv",
       "description": "Fast, reliable, and secure dependency management for javascript",
       "install_id": "yarn",
       "license": "BSD-2-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=ac35b104800bff9028425fec3b6e8a41de2bbfff",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=5df43628fdf08d642be8ba5b3625a6c70731c19c",
       "name": "yarn-1.22.22",
       "pname": "yarn",
-      "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
-      "rev_count": 714768,
-      "rev_date": "2024-12-01T01:19:13Z",
-      "scrape_date": "2024-12-03T03:55:23Z",
+      "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+      "rev_count": 738982,
+      "rev_date": "2025-01-16T21:27:11Z",
+      "scrape_date": "2025-01-18T00:14:56Z",
       "stabilities": [
         "unstable"
       ],
@@ -384,7 +384,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/hlf55dc9jjm9xhhjx29ll65ya1rzlmal-yarn-1.22.22"
+        "out": "/nix/store/h705p6lmismdn6ay2pn04rvcb2p6vl6i-yarn-1.22.22"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
