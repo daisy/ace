@@ -160,6 +160,7 @@ test('Ensure page breaks have labels', async () => {
   expect(report['earl:result']['earl:outcome']).toEqual('fail');
   const assertions = findAssertionsForDoc(report, 'content_001.xhtml');
   expect(assertions).toBeDefined();
+
   expect(assertions).toEqual(expect.arrayContaining([
     expect.objectContaining({
       'earl:test': expect.objectContaining({ 'dct:title': 'pagebreak-label' }),
@@ -179,17 +180,18 @@ test('Ensure page breaks have labels', async () => {
       'earl:test': expect.objectContaining({ 'dct:title': 'pagebreak-label' }),
       'earl:result': expect.objectContaining({
         'earl:outcome': 'fail',
-        'earl:pointer': expect.objectContaining({ css: ['#p7'] }),
+        'earl:pointer': expect.objectContaining({ css: ['#p5'] }),
       }),
     }),
     expect.objectContaining({
       'earl:test': expect.objectContaining({ 'dct:title': 'pagebreak-label' }),
       'earl:result': expect.objectContaining({
         'earl:outcome': 'fail',
-        'earl:pointer': expect.objectContaining({ css: ['#p8'] }),
+        'earl:pointer': expect.objectContaining({ css: ['#p5x'] }),
       }),
-    }),
+    })
   ]));
+
   expect(assertions).not.toEqual(expect.arrayContaining([
     expect.objectContaining({
       'earl:test': expect.objectContaining({ 'dct:title': 'pagebreak-label' }),
@@ -213,7 +215,7 @@ test('Ensure page breaks have labels', async () => {
       'earl:test': expect.objectContaining({ 'dct:title': 'pagebreak-label' }),
       'earl:result': expect.objectContaining({
         'earl:outcome': 'fail',
-        'earl:pointer': expect.objectContaining({ css: ['#p5'] }),
+        'earl:pointer': expect.objectContaining({ css: ['#p6'] }),
       }),
     })
   ]));
@@ -222,29 +224,28 @@ test('Ensure page breaks have labels', async () => {
       'earl:test': expect.objectContaining({ 'dct:title': 'pagebreak-label' }),
       'earl:result': expect.objectContaining({
         'earl:outcome': 'fail',
-        'earl:pointer': expect.objectContaining({ css: ['#p6'] }),
+        'earl:pointer': expect.objectContaining({ css: ['#p7'] }),
       }),
     })
   ]));
-  // SEE: https://github.com/daisy/ace/issues/355
-  // expect(assertions).not.toEqual(expect.arrayContaining([
-  //   expect.objectContaining({
-  //     'earl:test': expect.objectContaining({ 'dct:title': 'pagebreak-label' }),
-  //     'earl:result': expect.objectContaining({
-  //       'earl:outcome': 'fail',
-  //       'earl:pointer': expect.objectContaining({ css: ['#p7'] }),
-  //     }),
-  //   })
-  // ]));
-  // expect(assertions).not.toEqual(expect.arrayContaining([
-  //   expect.objectContaining({
-  //     'earl:test': expect.objectContaining({ 'dct:title': 'pagebreak-label' }),
-  //     'earl:result': expect.objectContaining({
-  //       'earl:outcome': 'fail',
-  //       'earl:pointer': expect.objectContaining({ css: ['#p8'] }),
-  //     }),
-  //   })
-  // ]));
+  expect(assertions).not.toEqual(expect.arrayContaining([
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'pagebreak-label' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#p8'] }),
+      }),
+    })
+  ]));
+  expect(assertions).not.toEqual(expect.arrayContaining([
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'pagebreak-label' }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#p9'] }),
+      }),
+    })
+  ]));
 });
 
 test('Checks that `epub:type` have matching ARIA roles', async() => {
