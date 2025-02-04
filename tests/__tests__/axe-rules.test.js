@@ -80,6 +80,34 @@ test('DPUB ARIA roles are allowed', async () => {
       }),
     }),
   ]));
+
+  expect(assertions).not.toEqual(expect.arrayContaining([
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-allowed-role', 'earl:impact': 'minor', }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#separator1'] }),
+      }),
+    }),
+  ]));
+  expect(assertions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        'earl:test': expect.objectContaining({ 'dct:title': 'aria-allowed-role', 'earl:impact': 'minor', }),
+        'earl:result': expect.objectContaining({
+          'earl:outcome': 'fail',
+          'earl:pointer': expect.objectContaining({ css: ['#separator3'] }),
+        }),
+      }),
+    ]));
+  expect(assertions).toEqual(expect.arrayContaining([
+    expect.objectContaining({
+      'earl:test': expect.objectContaining({ 'dct:title': 'aria-allowed-role', 'earl:impact': 'minor', }),
+      'earl:result': expect.objectContaining({
+        'earl:outcome': 'fail',
+        'earl:pointer': expect.objectContaining({ css: ['#separator2'] }),
+      }),
+    }),
+  ]));
 });
 test('DPUB ARIA roles are allowed (with epub:type deprecated)', async () => {
   const report = await ace('../data/axerule-dpubroles-matching');
