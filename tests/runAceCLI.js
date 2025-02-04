@@ -4,7 +4,7 @@
 
 const path = require('path');
 const spawn = require('cross-spawn');
-const spawnSync = require('child_process').spawnSync;
+// const spawnSync = require('child_process').spawnSync;
 
 const EXE_PATH_ELECTRON = path.resolve(__dirname, '../packages/ace-axe-runner-electron/lib/cli.js');
 

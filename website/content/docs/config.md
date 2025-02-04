@@ -30,9 +30,6 @@ The defaults for Ace configuration are:
   },
   "report": {
     "use-relative-paths": true
-  },
-  "runtime": {
-    "concurrencyLevel": 4
   }
 }
 ```
@@ -73,9 +70,3 @@ Indicates whether to save reports in a subdirectory of the output directory. If 
 Default: "`true`"
 
 Indicates whether the report uses relative or absolute paths.
-
-### `runtime.concurrencyLevel`
-
-Default: "`4`"
-
-The number of concurrent headless browser instances used to check HTML content.

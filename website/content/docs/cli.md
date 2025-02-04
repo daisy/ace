@@ -76,6 +76,8 @@ Ace by DAISY, an Accessibility Checker for EPUB
     -l, --lang  <language> language code for localized messages (e.g. "fr"), default is "en"
 
     -T, --timeout <milliseconds> (default is 240000 per document)
+
+    -E, --exiterror2 exit process with code 2 when fail (return-2-on-validation-error)
   Examples
     $ ace -o out ~/Documents/book.epub
 

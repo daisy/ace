@@ -35,6 +35,8 @@ const meowHelpMessage = `
     -l, --lang  <language> language code for localized messages (e.g. "fr"), default is "en"
 
     -T, --timeout <milliseconds> (default is 240000 per document)
+
+    -E, --exiterror2 exit process with code 2 when fail (return-2-on-validation-error)
   Examples
     $ ace -o out ~/Documents/book.epub
 
@@ -82,6 +84,10 @@ const meowOptions = {
     timeout: {
       alias: 'T',
       type: 'string'
+    },
+    exiterror2: { // process exit code
+      alias: 'E',
+      type: 'boolean'
     }
   }
 };
@@ -156,11 +162,12 @@ ${overrides.map(file => `  - ${file}`).join('\n')}
     jobId: '',
     lang: cli.flags.lang,
     timeout: cli.flags.timeout || undefined,
+    exiterror2: cli.flags.exiterror2 || undefined,
   }, axeRunner)
   .then(async (jobData) => {
     var reportJson = jobData[1];
     // if there were violations from the validation process, return 2
-    const fail = cliConfig['return-2-on-validation-error'] && reportJson['earl:result']['earl:outcome'] === 'fail';
+    const fail = (!!cli.flags.exiterror2 || cliConfig['return-2-on-validation-error']) && reportJson['earl:result']['earl:outcome'] === 'fail';
     const res = await winston.logAndWaitFinish('info', 'Closing logs.');
     quit(fail ? 2 : 0);
   })

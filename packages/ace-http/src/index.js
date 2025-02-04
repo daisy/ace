@@ -44,6 +44,8 @@ const meowHelpMessage = `
     -l, --lang  <language> language code for localized messages (e.g. "fr"), default is "en"
 
     -T, --timeout <milliseconds> (default is 240000 per document)
+
+    -E, --exiterror2 exit process with code 2 when fail (return-2-on-validation-error)
   Examples
     $ ace-http -p 3000`;
 const meowOptions = {
@@ -76,6 +78,14 @@ const meowOptions = {
     lang: {
       alias: 'l',
       type: 'string'
+    },
+    timeout: {
+      alias: 'T',
+      type: 'string'
+    },
+    exiterror2: { // process exit code
+      alias: 'E',
+      type: 'boolean'
     }
   }
 };

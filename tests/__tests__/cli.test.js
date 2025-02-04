@@ -100,6 +100,8 @@ describe('Running the CLI', () => {
       });
       const log = stripAnsi(stdout);
       expect(/^warn:/m.test(log)).toBe(false);
+
+      expect(status).toBe(0);
     });
     test('prints the "Done" info', () => {
       const { stdout, stderr, status } = ace(['base-epub-30'], {
@@ -107,6 +109,8 @@ describe('Running the CLI', () => {
       });
       const log = stripAnsi(stdout);
       expect(/^info:\s+Done/m.test(log)).toBe(true);
+
+      expect(status).toBe(0);
     });
   });
 
@@ -120,6 +124,8 @@ describe('Running the CLI', () => {
       // The Electron-based Axe runner handles .xml files just fine
       const condition = process.env.AXE_ELECTRON_RUNNER ? true : /^warn:\s+Copying document with extension/m.test(log);
       expect(condition).toBe(true);
+
+      expect(status).toBe(0);
     });
 
     test('when the EPUB contains SVG Content Documents', () => {
@@ -128,6 +134,8 @@ describe('Running the CLI', () => {
       });
       const log = stripAnsi(stdout);
       expect(/^warn:\s+The SVG Content Documents in this EPUB will be ignored\./m.test(log)).toBe(true);
+
+      expect(status).toBe(0);
     });
   });
 
@@ -138,14 +146,27 @@ describe('Running the CLI', () => {
       });
       const log = stripAnsi(stdout);
       expect(/^warn:\s+\[xmldom error\]	entity not found/m.test(log)).toBe(false);
+
+      expect(status).toBe(0);
     });
   });
 
-  /*test('with return-2-on-validation-error set to true should exit with return code 2', () => {
-    // TODO this test won't work until we can specify the CLI option to enable returning 2 on violation(s)
+  test('without return-2-on-validation-error set to true should exit with return code 0', () => {
     const { stdout, stderr, status } = ace(['has-violations'], {
       cwd: path.resolve(__dirname, '../data')
     });
+    expect(status).toBe(0);
+  });
+  test('with return-2-on-validation-error alias set to true should exit with return code 2', () => {
+    const { stdout, stderr, status } = ace(['-E', 'has-violations'], {
+      cwd: path.resolve(__dirname, '../data')
+    });
     expect(status).toBe(2);
-  });*/
+  });
+  test('with return-2-on-validation-error set to true should exit with return code 2', () => {
+    const { stdout, stderr, status } = ace(['--exiterror2', 'has-violations'], {
+      cwd: path.resolve(__dirname, '../data')
+    });
+    expect(status).toBe(2);
+  });
 });
