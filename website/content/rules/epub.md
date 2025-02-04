@@ -3,7 +3,7 @@ title = "EPUB Rules"
 weight = 2
 +++
 
-In addition to the [HTML rules]({{<ref "html.md">}}), Ace implements EPUB-specific checks. The "impact" property indicates the severity of each violation ("minor", "moderate", "serious", or "critical"), as per Deque axe's definition described in their documentation ( https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/issue_impact.md ).
+In addition to the [HTML rules]({{<ref "html.md">}}), Ace implements EPUB-specific checks. The "impact" property indicates the severity of each violation ("minor", "moderate", "serious", or "critical"), as per Deque axe's definition described in their documentation ( https://github.com/daisy/axe-core/blob/v4.10.2_DAISY/doc/issue_impact.md ).
 
 * Missing metadata (impact = "serious"): `metadata-accessmode`, `metadata-accessibilityfeature`, `metadata-accessibilityhazard`
 * Missing metadata (impact = "moderate"): `metadata-accessibilitysummary`, `metadata-accessModesufficient`
