@@ -1,8 +1,43 @@
-<html>
+<html lang="en">
     <head>
+        <title>Deque Axe</title>
         <script src="../node_modules/@daisy/axe-core-for-ace/axe.min.js"></script>
     </head>
-    <body style="font-family: sans-serif;" onload="javascript: function sanitize(str) { return str.replace(new RegExp('&lt;', 'g'), '&amp;lt;').replace(new RegExp('&gt;', 'g'), '&amp;gt;'); }; var rules = axe.getRules(); console.log(JSON.stringify(rules.map((rule) => { return rule.ruleId; }), null, 4)); console.log(rules); document.body.innerHTML = `<h2><a target='_BLANK' href='https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/rule-descriptions.md'>https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/rule-descriptions.md</a></h2><ol>${rules.reduce((rulesStr, rule) => { return `${rulesStr}\n\n<li><p style='font-size: 1.5em;'><strong>${rule.ruleId}</strong></p><p style='font-size: 1.2em;'><i>${sanitize(rule.description)}</i></p><p><a target='_BLANK' href='${rule.helpUrl}'>${sanitize(rule.help)}</a></p><p>${rule.tags.reduce((tagsStr, tag) => { return `${tagsStr}<span style='margin: 0; margin-right: 0.2em; padding: 0.2em; border: 0.2em solid transparent; border-radius: 0.2em; background-color: #EEEEFF;'>${tag}</span>`; }, '')}</p><hr></li>`; }, '')}</ol>`;">
-
+    <body style="font-family: sans-serif;" onload="javascript: function sanitize(str) { return str.replace(new RegExp('&lt;', 'g'), '&amp;lt;').replace(new RegExp('&gt;', 'g'), '&amp;gt;'); }; var rules = axe.getRules(); console.log(JSON.stringify(rules.map((rule) => { return rule.ruleId; }), null, 4)); console.log(rules); document.body.innerHTML = `<h2><a target='_BLANK' href='https://github.com/daisy/axe-core/blob/v4.10.2_DAISY/doc/rule-descriptions.md'>https://github.com/daisy/axe-core/blob/v4.10.2_DAISY/doc/rule-descriptions.md</a></h2><ol>${rules.reduce((rulesStr, rule) => { return `${rulesStr}\n\n<li><p style='font-size: 1.5em;'><strong>${rule.ruleId}</strong></p><p style='font-size: 1.2em;'><i>${sanitize(rule.description)}</i></p><p><a target='_BLANK' href='${rule.helpUrl}'>${sanitize(rule.help)}</a></p><p>${rule.tags.reduce((tagsStr, tag) => { return `${tagsStr}<span style='margin: 0; margin-right: 0.2em; padding: 0.2em; border: 0.2em solid transparent; border-radius: 0.2em; background-color: #EEEEFF;'>${tag}</span>`; }, '')}</p><hr></li>`; }, '')}</ol>`;">
+      <script type="text/javascript">
+      setTimeout(() => {
+        console.log("DEQUE AXE...");
+        window.axe.run(
+          {
+            "rules": {
+              "bypass": { enabled: false },
+              "region": { enabled: false },
+              "page-has-heading-one": { enabled: false },
+              "landmark-complementary-is-top-level": { enabled: false },
+            }
+          },
+          function(axeError, axeResult) {
+            if (axeError)  {
+              console.log(JSON.stringify(axeError, null, 4));
+              return;
+            }
+            console.log(JSON.stringify(axeResult.violations, null, 4));
+            /*
+            if (axeResult.violations)
+            setTimeout(() => {
+              document.body.textContent = "";
+              for (const v of axeResult.violations.reverse()) {
+                  const el = document.createElement("textarea");
+                  el.setAttribute("style", "width: 100%;");
+                  el.setAttribute("rows", "50");
+                  el.value = JSON.stringify(v, null, 4);
+                  document.body.appendChild(el);
+              }
+            }, 500);
+            */
+          }
+        );
+      }, 1000);
+      </script>
     </body>
-</html>
+</html>l
