@@ -148,6 +148,11 @@
        : $('<td>' + image.describedby + '</td>');
       tr.append(tdDescribedby);
 
+      var tdDetails = !image.details ?
+      $('<td class="missing">N/A</td>')
+        : $('<td>' + image.details + '</td>');
+      tr.append(tdDetails);
+
       var tdFigcaption = !image.figcaption ?
       $('<td class="missing">N/A</td>')
        : $('<td>' + image.figcaption + '</td>');
@@ -175,7 +180,7 @@
     }
   }
   function populateA11yMetadataSummary(a11ymetadata, pubmetadata) {
-    
+
     var tbody = $("#a11y-meta-present tbody");
     var list = $("#a11y-meta-missing");
 

@@ -508,6 +508,8 @@ font-size: 90%;
                 </th>
                 <th><code>aria-describedby</code>
                 </th>
+                <th><code>aria-details</code>
+                </th>
                 <th><code>figcaption</code></th>
                 <th>{{#localize "location"}}{{/localize}}</th>
                 <th>{{#localize "role"}}{{/localize}}</th>
@@ -530,6 +532,12 @@ font-size: 90%;
 
                   {{#if describedby}}
                     <td>{{describedby}}</td>
+                  {{else}}
+                    <td class="missing">{{#localize "na"}}{{/localize}}</td>
+                  {{/if}}
+
+                  {{#if details}}
+                    <td>{{details}}</td>
                   {{else}}
                     <td class="missing">{{#localize "na"}}{{/localize}}</td>
                   {{/if}}

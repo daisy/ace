@@ -99,6 +99,7 @@ test('issue #209: `aria-describedby` can be a list of IDs', async () => {
       expect.objectContaining({
         "src": "EPUB/image_001.jpg",
         "describedby": "description 1",
+        "details": "detail: y description 3 x",
       })
     ])
   }));

@@ -182,19 +182,31 @@ ace.getImages = function() {
         cfi: window.daisy.epub.createCFI(img),
         html: img.outerHTML,
       }
+
       let describedby = img.getAttribute('aria-describedby')
       if (describedby) {
         var describedbyID = describedby.trim().replace(/\s{2,}/g, ' ').split(' ').shift();
         let elem = document.getElementById(describedbyID);
-        if (elem) imageObj.describedby = elem.innerText || elem.textContent;
+        if (elem) imageObj.describedby = elem.textContent || elem.innerText;
         if (imageObj.describedby) {
           imageObj.describedby = imageObj.describedby.trim().replace(/\s\s+/g, " ");
         }
       }
+
+      let details = img.getAttribute('aria-details')
+      if (details) {
+        var detailsID = details.trim().replace(/\s{2,}/g, ' ').split(' ').shift();
+        let elem = document.getElementById(detailsID);
+        if (elem) imageObj.details = elem.textContent || elem.innerText;
+        if (imageObj.details) {
+          imageObj.details = imageObj.details.trim().replace(/\s\s+/g, " ");
+        }
+      }
+
       let figure = findFigure(img);
       if (figure) {
         let figcaption = figure.getElementsByTagNameNS("http://www.w3.org/1999/xhtml", "figcaption");
-        if (figcaption.length > 0) imageObj.figcaption = figcaption[0].innerText || figcaption[0].textContent;
+        if (figcaption.length > 0) imageObj.figcaption = figcaption[0].textContent || figcaption[0].innerText;
         if (imageObj.figcaption) {
           imageObj.figcaption = imageObj.figcaption.trim().replace(/\s\s+/g, " ");
         }
@@ -225,7 +237,7 @@ ace.getImages = function() {
         const role = img.parentElement.getAttribute("role");
 
         if (!title && img.firstElementChild && img.firstElementChild.localName === "title") {
-          title = img.firstElementChild.innerText || img.firstElementChild.textContent;
+          title = img.firstElementChild.textContent || img.firstElementChild.innerText;
           if (title) {
             title = title.trim().replace(/\s\s+/g, " ");
           }
@@ -246,9 +258,19 @@ ace.getImages = function() {
         if (describedby) {
           var describedbyID = describedby.trim().replace(/\s{2,}/g, ' ').split(' ').shift();
           let elem = document.getElementById(describedbyID);
-          if (elem) imageObj.describedby = elem.innerText || elem.textContent;
+          if (elem) imageObj.describedby = elem.textContent || elem.innerText;
           if (imageObj.describedby) {
             imageObj.describedby = imageObj.describedby.trim().replace(/\s\s+/g, " ");
+          }
+        }
+
+        let details = img.parentElement.getAttribute('aria-details')
+        if (details) {
+          var detailsID = details.trim().replace(/\s{2,}/g, ' ').split(' ').shift();
+          let elem = document.getElementById(detailsID);
+          if (elem) imageObj.details = elem.textContent || elem.innerText;
+          if (imageObj.details) {
+            imageObj.details = imageObj.details.trim().replace(/\s\s+/g, " ");
           }
         }
 
