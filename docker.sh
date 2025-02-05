@@ -16,7 +16,7 @@ docker build --progress=plain -f ./Dockerfile -t ace-docker-image .
 
 (docker rm --force ace-docker-container || echo ok_rm) && echo _ok_rm
 
-docker run --name ace-docker-container ace-docker-image
+docker run --init --name ace-docker-container ace-docker-image
 
 (docker stop ace-docker-container || echo ok_stop) && echo _ok_stop
 docker logs -f ace-docker-container

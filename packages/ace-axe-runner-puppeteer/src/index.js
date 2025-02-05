@@ -43,6 +43,7 @@ module.exports = {
         // }
         args.push('--no-sandbox');
         args.push('--disable-setuid-sandbox');
+        // --disable-gpu ?
 
         // https://github.com/puppeteer/puppeteer/blob/2b8ee62475b6614fc95b963c399b0bbad32e9e70/packages/puppeteer-core/src/common/ConnectOptions.ts#L88-L93
         // https://github.com/puppeteer/puppeteer/blob/2b8ee62475b6614fc95b963c399b0bbad32e9e70/packages/puppeteer-core/src/node/BrowserLauncher.ts#L85

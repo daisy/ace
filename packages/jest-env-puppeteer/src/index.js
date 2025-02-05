@@ -32,6 +32,7 @@ class HeadlessChromeEnvironment extends NodeEnvironment {
     // }
     args.push('--no-sandbox');
     args.push('--disable-setuid-sandbox');
+    // --disable-gpu ?
 
     await super.setup();
 

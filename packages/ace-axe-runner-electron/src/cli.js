@@ -20,9 +20,10 @@ const protocol = electron.protocol;
 // https://github.com/electron/electron/issues/20702
 // --in-process-gpu ?
 // app.commandLine.appendSwitch("in-process-gpu");
-app.commandLine.appendSwitch("disable-gpu");
-app.disableHardwareAcceleration();
-app.commandLine.appendSwitch("disable-software-rasterizer");
+// ------------------------------------ see patchElectronJestRunner4
+// app.commandLine.appendSwitch("disable-gpu");
+// app.disableHardwareAcceleration();
+// app.commandLine.appendSwitch("disable-software-rasterizer");
 
 const EventEmitter = require('events');
 class ElectronMockMainRendererEmitter extends EventEmitter {}
@@ -91,7 +92,7 @@ app.on('ready', async () => {
     // // // win.setPosition(Math.round(sz[0] * .10), Math.round(sz[1] * .10));
     // // win.setPosition(Math.round(sz0*0.5-win.getSize()[0]*0.5), Math.round(sz1*0.5-win.getSize()[1]*0.5));
     // // win.show();
-  
+
     // win.loadURL(`file://${__dirname}/index.html`);
     // win.on('closed', function () {
     //     if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} axeRunner win closed.`);

@@ -2,9 +2,9 @@
   "name": "@daisy/ace-report-axe",
   "version": "1.3.4-alpha.1",
   "engines": {
-    "node": ">=12.0.0",
+    "node": ">=20.0.0",
     "yarn": "^1.22.0",
-    "npm": ">=6.0.0"
+    "npm": ">=10.0.0"
   },
   "description": "Ace report adapter for aXe",
   "author": {
