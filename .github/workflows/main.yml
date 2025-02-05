@@ -62,7 +62,7 @@ jobs:
     - run: git --no-pager diff
     # - run: yarn install --frozen-lockfile
 #     - name: YARN install
-# # yarn cache clean && yarn config delete proxy && yarn config delete https-proxy && yarn config delete registry && 
+# # yarn cache clean && yarn config delete proxy && yarn config delete https-proxy && yarn config delete registry &&
 #       run: 'yarn install --network-timeout 1000000'
 #       shell: bash
     # - name: PR action
@@ -102,10 +102,10 @@ jobs:
       #   run: yarn test-electron && yarn test-electron-cli
       #   working-directory: ./
       #   # options:
-      run: echo "${{ matrix.osarch }}" && xvfb-run --auto-servernum yarn test-electron-cli && xvfb-run --auto-servernum yarn test-electron
+      run: echo "${{ matrix.osarch }}" && xvfb-run --auto-servernum yarn test-electron && xvfb-run --auto-servernum yarn test-electron-cli --disable-gpu
     - name: non-PR action, Mac, Puppeteer
       if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
       run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
     - name: non-PR action, Mac, Electron
       if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
-      run: echo "${{ matrix.osarch }}" && yarn test-electron && yarn test-electron-cli
+      run: echo "${{ matrix.osarch }}" && yarn test-electron && yarn test-electron-cli --disable-gpu
