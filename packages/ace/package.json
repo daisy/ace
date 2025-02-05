@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace",
-  "version": "1.3.3",
+  "version": "1.3.4-alpha.1",
   "engines": {
     "node": ">=12.0.0",
     "yarn": "^1.22.0",
@@ -40,10 +40,10 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@daisy/ace-axe-runner-electron": "1.3.3",
-    "@daisy/ace-cli": "1.3.3",
-    "@daisy/ace-core": "1.3.3",
-    "@daisy/ace-http": "1.3.3",
+    "@daisy/ace-axe-runner-electron": "1.3.4-alpha.1",
+    "@daisy/ace-cli": "1.3.4-alpha.1",
+    "@daisy/ace-core": "1.3.4-alpha.1",
+    "@daisy/ace-http": "1.3.4-alpha.1",
     "electron": "^34.0.2"
   },
   "publishConfig": {
