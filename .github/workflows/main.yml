@@ -102,10 +102,10 @@ jobs:
       #   run: yarn test-electron && yarn test-electron-cli
       #   working-directory: ./
       #   # options:
-      run: echo "${{ matrix.osarch }}" && xvfb-run --auto-servernum yarn test-electron && xvfb-run --auto-servernum yarn test-electron-cli --disable-gpu
+      run: echo "${{ matrix.osarch }}" && xvfb-run --auto-servernum yarn test-electron && xvfb-run --auto-servernum yarn test-electron-cli
     - name: non-PR action, Mac, Puppeteer
       if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
       run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
     - name: non-PR action, Mac, Electron
       if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
-      run: echo "${{ matrix.osarch }}" && yarn test-electron && yarn test-electron-cli --disable-gpu
+      run: echo "${{ matrix.osarch }}" && yarn test-electron && yarn test-electron-cli
