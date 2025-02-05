@@ -60,7 +60,7 @@ font-size: 90%;
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.139.0">
+    <meta name="generator" content="Hugo 0.140.2">
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -160,7 +160,7 @@ font-size: 90%;
             <a class="logo" href="https://daisy.github.io/ace/" aria-label="Ace, by DAISY home page">
               <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
             </a>
-            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.3.2</p>
+            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.3.3</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -327,13 +327,14 @@ font-size: 90%;
 
 
     
-    <p>In addition to the <a href="https://daisy.github.io/ace/rules/html/">HTML rules</a>, Ace implements EPUB-specific checks. The &ldquo;impact&rdquo; property indicates the severity of each violation (&ldquo;minor&rdquo;, &ldquo;moderate&rdquo;, &ldquo;serious&rdquo;, or &ldquo;critical&rdquo;), as per Deque axe&rsquo;s definition described in their documentation ( <a href="https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/issue_impact.md">https://github.com/daisy/axe-core/blob/v4.7.2_DAISY/doc/issue_impact.md</a> ).</p>
+    <p>In addition to the <a href="https://daisy.github.io/ace/rules/html/">HTML rules</a>, Ace implements EPUB-specific checks. The &ldquo;impact&rdquo; property indicates the severity of each violation (&ldquo;minor&rdquo;, &ldquo;moderate&rdquo;, &ldquo;serious&rdquo;, or &ldquo;critical&rdquo;), as per Deque axe&rsquo;s definition described in their documentation ( <a href="https://github.com/daisy/axe-core/blob/v4.10.2_DAISY/doc/issue_impact.md">https://github.com/daisy/axe-core/blob/v4.10.2_DAISY/doc/issue_impact.md</a> ).</p>
 <ul>
 <li>Missing metadata (impact = &ldquo;serious&rdquo;): <code>metadata-accessmode</code>, <code>metadata-accessibilityfeature</code>, <code>metadata-accessibilityhazard</code></li>
 <li>Missing metadata (impact = &ldquo;moderate&rdquo;): <code>metadata-accessibilitysummary</code>, <code>metadata-accessModesufficient</code></li>
-<li>Incorrect metadata values (impact = &ldquo;moderate&rdquo;): <code>metadata-accessibilityfeature-invalid</code>, <code>metadata-accessibilityhazard-invalid</code> (mixed positive and negative terms (e.g. <code>noFlashingHazard</code> and <code>flashing</code>), <code>unknown</code> mixed with <code>none</code> or other vocabulary values, or usage of terms not defined by the specification)</li>
-<li>Incorrect metadata values (impact = &ldquo;minor&rdquo;): <code>metadata-accessmode-invalid</code>, <code>metadata-accessmodesufficient-invalid</code> (usage of terms not defined by the specification)</li>
-<li>Missing authored page list when metadata <code>printPageNumbers</code>/<code>pageBreakMarkers</code> is present (impact = &ldquo;moderate&rdquo;): <code>metadata-accessibilityFeature-printPageNumbers-nopagelist</code></li>
+<li>Incorrect metadata values (impact = &ldquo;moderate&rdquo;): <code>metadata-accessibilityfeature-invalid</code>, <code>metadata-accessibilityhazard-invalid</code> (mixed positive and negative terms (e.g. <code>noFlashingHazard</code> and <code>flashing</code>), <code>unknown</code> mixed with <code>none</code> or other vocabulary values, or usage of terms not defined by the specification)</li>
+<li>Incorrect metadata values (impact = &ldquo;minor&rdquo;): <code>metadata-accessmode-invalid</code>, <code>metadata-accessmodesufficient-invalid</code> (usage of terms not defined by the specification)</li>
+<li>Missing authored page list when metadata <code>pageNavigation</code> is present (impact = &ldquo;moderate&rdquo;): <code>metadata-accessibilityFeature-printPageNumbers-nopagelist</code></li>
+<li>Missing page breaks when metadata <code>printPageNumbers</code>/<code>pageBreakMarkers</code> is present (impact = &ldquo;moderate&rdquo;): <code>metadata-accessibilityFeature-printPageNumbers-nopagebreaks</code></li>
 <li>Mismatched page breaks in SMIL and in HTML documents (impact = &ldquo;serious&rdquo;): <code>epub-pagelist-mediaoverlays</code></li>
 <li>Authored page list references elements in HTML documents that are not page breaks (impact = &ldquo;minor&rdquo;) or do not exist (impact = &ldquo;serious&rdquo;): <code>epub-pagelist-broken</code></li>
 <li>Authored page list does not reference all elements that are page breaks in HTML documents (impact = serious): <code>epub-pagelist-missing-pagebreak</code></li>
