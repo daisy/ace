@@ -1,6 +1,6 @@
 {
   "name": "@daisy/ace-meta",
-  "version": "1.3.4-alpha.1",
+  "version": "1.3.4",
   "engines": {
     "node": ">=20.0.0",
     "yarn": "^1.22.0",

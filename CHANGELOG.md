@@ -1,3 +1,10 @@
+<a name="1.3.4"></a>
+## [1.3.4](https://github.com/daisy/ace/compare/v1.3.3...v1.3.4) (2025-02-05)
+
+### Updates:
+
+* Electron GPU headless command line tweaks (removed previous hacks that were necessary due to Electron bugs)
+
 <a name="1.3.3"></a>
 ## [1.3.3](https://github.com/daisy/ace/compare/v1.3.2...v1.3.3) (2025-02-04)
 
