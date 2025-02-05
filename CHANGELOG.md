@@ -1,12 +1,35 @@
-<a name="1.3.3-alpha.2"></a>
-## [1.3.3-alpha.2](https://github.com/daisy/ace/compare/v1.3.2...v1.3.3-alpha.2) (2024-06-25)
+<a name="1.3.3"></a>
+## [1.3.3](https://github.com/daisy/ace/compare/v1.3.2...v1.3.3) (2024-02-04)
 
 ### Updates:
 
+* Deque Axe: latest version 4.10.2
+* Upgraded both Axe runners (Electron and legacy Puppeteer) to latest versions
+* WCAG versions and levels fully enumerated (2.0, 2.1, 2.2 and A-AA-AAA)
+* Translations: added Chinese and German locales, updated Japanese and Danish and Portuguese (Brazil)
+* DAISY Knowledge Base Japanese redirection
+* Website fixes and updates
+* Feature: added Docker script to launch Ace Electron in "headless" mode (via virtual buffer)
+* Feature: command line flag for process exit code 2 instead of 0 when successful evaluation failure
+* Feature: command line flag for evaluation timeout (was only environment variable before)
+* Feature: EPUB version now reported
+* Feature: sponsorship banner link
+* Feature: aria-details reporting on images (alongside alt, figcaption, describedBy)
+* Feature(dev): Flox/Nix dependency management for project environment isolation
+* Feature(dev): GitHub Actions continuous integration
+* Feature(dev): updated the Deque Axe test harness to dump ruleset (DAISY KB mapping) and run single-HTML evaluation
+* Feature(dev): tool to analyse dependency tree and prune unused packages that are needlessly included in the project
+* Fix: metadata accessibility printPageNumbers/pageBreakMarkers (missing page breaks in publication content documents) VERSUS pageNavigation (missing navigation document page list)
+* Fix: EPUB metadata pageBreakSource in addition to dc:source (and optionally the associated refines / source-of / pagination)
+* Fix: added support for unknownXXXHazard
+* Fix: EPUB pagebreak in addition to title and ARIA-label now allows ARIA-labelledBy and element content text
+* Fix: page breaks role does not require epub:type
 * Fix: navigation document page list can reference non-pagebreaks
 * Fix: removed useless HTML outline
-* Translations: added Chinese and German locales, updated Japanese and Danish and Portuguese (Brazil)
-* Feature: added Docker script to launch Ace Electron in "headless" mode (via virtual buffer)
+* Fix: added unit tests for image role separator
+* Fix: report description was incorrectly checked
+* Fix: some URL percent encoding parsing / escaping
+* Fix: images with incorrect SVG xlink:href fallback cascade to non-namespaced href attribute (workaround for broken publications)
 
 <a name="1.3.2"></a>
 ## [1.3.2](https://github.com/daisy/ace/compare/v1.3.1...v1.3.2) (2023-07-11)
