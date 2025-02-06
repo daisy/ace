@@ -1,3 +1,10 @@
+<a name="1.3.5"></a>
+## [1.3.5](https://github.com/daisy/ace/compare/v1.3.4...v1.3.5) (2025-02-06)
+
+### Updates:
+
+* Electron version increment
+
 <a name="1.3.4"></a>
 ## [1.3.4](https://github.com/daisy/ace/compare/v1.3.3...v1.3.4) (2025-02-05)
 
