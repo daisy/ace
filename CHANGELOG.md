@@ -1,3 +1,10 @@
+<a name="1.3.6"></a>
+## [1.3.6](https://github.com/daisy/ace/compare/v1.3.5...v1.3.6) (2025-02-08)
+
+### Updates:
+
+* Page break role / page list errors were reported multiple times
+
 <a name="1.3.5"></a>
 ## [1.3.5](https://github.com/daisy/ace/compare/v1.3.4...v1.3.5) (2025-02-06)
 
