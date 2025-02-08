@@ -388,6 +388,7 @@ function checkReadingOrder(epub) {
     // let pos = -1;
     let failed = undefined;
     for (const page of pageListFilePathsAndTargetIDs) {
+      failed = undefined;
       const found = docs.findIndex((doc) => page.full === doc.full);
       if (found === -1) {
         failed = page;
@@ -418,7 +419,7 @@ function checkReadingOrder(epub) {
           kbTitle: localize("checkepub.pagelistbrokenviolation.kbtitle"),
           ruleDesc: localize("checkepub.pagelistbrokenviolation.ruledesc", { ref, interpolation: { escapeValue: false } })
         }));
-        // break;
+        // break; MAKE SURE failed IS RESET TO undefined at each loop iteration
       }
     }
     if (!isFXL) {
@@ -460,6 +461,7 @@ function checkReadingOrder(epub) {
     let pos = -1;
     let failed = undefined;
     for (const toc of tocFilePathsAndTargetIDs) {
+      failed = undefined;
       const found = docs.findIndex((doc) => toc.full === doc.full);
       if (found === -1) {
         failed = toc;
@@ -483,7 +485,7 @@ function checkReadingOrder(epub) {
           kbTitle: localize("checkepub.ordertocviolation.kbtitle"),
           ruleDesc: localize("checkepub.ordertocviolation.ruledesc", { ref, interpolation: { escapeValue: false } })
         }));
-        break;
+        break; // NO NEED TO MAKE SURE failed IS RESET TO undefined at each loop iteration
       }
     }
   }
