@@ -29,9 +29,9 @@ jobs:
           - osarch: macos-arm
             runson: macos-latest
           - osarch: linux-intel
-            runson: ubuntu-20.04
+            runson: ubuntu-22.04
           - osarch: linux-arm
-            runson: ubuntu-20.04
+            runson: ubuntu-22.04
     env:
       DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
