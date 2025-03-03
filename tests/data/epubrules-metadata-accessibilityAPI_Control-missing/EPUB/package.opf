@@ -7,19 +7,19 @@
   <meta property="dcterms:modified">2017-01-01T00:00:01Z</meta>
 
   <meta property="schema:accessMode">textual</meta>
-  
+
   <meta property="schema:accessibilityFeature">ARIA</meta>
-  
+
   <meta property="schema:accessibilityHazard">noFlashingHazard</meta>
-  
+
   <meta property="schema:accessibilitySummary">everything OK!</meta>
 
   <meta property="schema:accessModeSufficient">visual,textual</meta>
-<!-- 
+<!--
   <meta property="schema:accessibilityControl">fullKeyboardControl</meta>
-  
+
   <meta property="schema:accessibilityAPI">AndroidAcessibility</meta> -->
-  
+
   <meta name="a11y:certifiedBy" content="CERTBY" />
   <meta property="a11y:certifierCredential">CERTCRED</meta>
   <link rel="a11y:certifierReport" href="http://www.example.com/report.html"/>
@@ -31,6 +31,7 @@
     EPUB-A11Y-11_WCAG-21-A
   </meta>
   <meta property="dcterms:conformsTo">EPUB-A11Y-11_WCAG-20-AA</meta>
+  <dc:source>print-source</dc:source>
 </metadata>
 <manifest>
   <item id="nav"  href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>

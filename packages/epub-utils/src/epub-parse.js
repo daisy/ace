@@ -139,7 +139,7 @@ function parseMetadata(doc, select, epub) {
       refines = refines.trim();
       if (refines) {
         // isEPUB3 implied
-        if (md === "source-of" && meta.textContent === "pagination" && refines === dcSourceId) {
+        if (md === "source-of" && meta.textContent === "pagination" && dcSource && refines === dcSourceId) {
           dcSourceAdded = true;
           addMeta(`dc:source`, dcSource, result);
           return;
@@ -168,11 +168,37 @@ function parseMetadata(doc, select, epub) {
   });
 
   if (isEPUB3 && dcSource && !dcSourceAdded) {
-    // console.log(JSON.stringify(result));
-    const confTo = result["dcterms:conformsTo"] || epub.links && epub.links["dcterms:conformsTo"];
-    if (confTo && confTo.startsWith("http://www.idpf.org/epub/a11y/")) { // EPUB a11y 1.0
+    // console.log("LINKS:", JSON.stringify(epub.links, null, 4));
+    // console.log("METADATA 1:", JSON.stringify(result, null, 4));
+    const confTo = [];
+    if (result["dcterms:conformsTo"]) {
+      if (Array.isArray(result["dcterms:conformsTo"])) {
+        confTo.push(...result["dcterms:conformsTo"]);
+      } else {
+        confTo.push(result["dcterms:conformsTo"]);
+      }
+    }
+    if (epub.links && epub.links["dcterms:conformsTo"]) {
+      if (Array.isArray(epub.links["dcterms:conformsTo"])) {
+        confTo.push(...epub.links["dcterms:conformsTo"]);
+      } else {
+        confTo.push(epub.links["dcterms:conformsTo"]);
+      }
+    }
+    // console.log("confTo:", JSON.stringify(confTo, null, 4));
+    // check for EPUB a11y v1.0
+    if (
+    // confTo &&
+    // (
+    //   Array.isArray(confTo) && confTo.find((item) => item.startsWith("http://www.idpf.org/epub/a11y/"))
+    //   ||
+    //   !Array.isArray(confTo) && confTo.startsWith("http://www.idpf.org/epub/a11y/")
+    // )
+    confTo.find((item) => item.startsWith("http://www.idpf.org/epub/a11y/"))
+    ) {
       addMeta(`dc:source`, dcSource, result);
     }
+    // console.log("METADATA 2:", JSON.stringify(result, null, 4));
   }
 
   return result;

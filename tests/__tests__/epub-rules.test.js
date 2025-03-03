@@ -269,10 +269,12 @@ describe('accessibility metadata', () => {
       "schema:accessModeSufficient": "visual,textual",
       "schema:accessibilityControl": "fullKeyboardControl",
       "schema:accessibilityAPI": "AndroidAcessibility",
-      "dcterms:conformsTo": "EPUB-A11Y-11_WCAG-21-AA"
+      // "dc:source": "print-source",
+      "dcterms:conformsTo": ["EPUB-A11Y-11_WCAG-21-AA","EPUB-A11Y-11_WCAG-20-A"]
     });
     expect(report['earl:testSubject']['links']).toEqual({
       "a11y:certifierCredential": "http://GCA",
+      "dcterms:conformsTo": "xxhttp://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-aa",
     });
   });
   test('accessibilityAPI and accessibilityControl metadata are ignored when missing', async () => {
@@ -306,7 +308,8 @@ describe('accessibility metadata', () => {
       "dcterms:conformsTo": [
           "EPUB-A11Y-11_WCAG-21-A",
           "EPUB-A11Y-11_WCAG-20-AA"
-      ]
+      ],
+      "dc:source": "print-source"
     });
     expect(report['earl:testSubject']['links']).toEqual({
       "a11y:certifierReport": "http://www.example.com/report.html",

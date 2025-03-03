@@ -4,24 +4,30 @@
   <dc:title id="title">Minimal EPUB 3.0</dc:title>
   <dc:language>en</dc:language>
   <dc:identifier id="uid">NOID</dc:identifier>
+
   <meta property="dcterms:modified">2017-01-01T00:00:01Z</meta>
 
   <meta property="schema:accessMode">textual</meta>
-  
+
   <meta property="schema:accessibilityFeature">structuralNavigation</meta>
   <meta property="schema:accessibilityFeature">ARIA</meta>
-  
+
   <meta property="schema:accessibilityHazard">noFlashingHazard</meta>
-  
+
   <meta property="schema:accessibilitySummary">everything OK!</meta>
 
   <meta property="schema:accessModeSufficient">visual,textual</meta>
 
   <meta property="schema:accessibilityControl">fullKeyboardControl</meta>
-  
+
   <meta property="schema:accessibilityAPI" refines=" # ">AndroidAcessibility</meta>
-  
+
+  <dc:source>print-source</dc:source>
+
   <meta property="dcterms:conformsTo" id="conf">EPUB-A11Y-11_WCAG-21-AA</meta>
+  <meta property="dcterms:conformsTo" id="conf">EPUB-A11Y-11_WCAG-20-A</meta>
+  <!-- meta property="dcterms:conformsTo">http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-aa</meta -->
+  <link rel="dcterms:conformsTo" href="xxhttp://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-aa" />
   <!-- meta property="dcterms:conformsTo" id="conf">EPUB Accessibility 1.1 - WCAG 2.1 Level AA</meta -->
 
   <meta property="a11y:certifiedBy" id="certifier" refines="#conf">Benetech</meta>
