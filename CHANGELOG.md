@@ -1,3 +1,10 @@
+<a name="1.3.7"></a>
+## [1.3.7](https://github.com/daisy/ace/compare/v1.3.6...v1.3.7) (2025-03-03)
+
+### Updates:
+
+* Fixed crash 'confTo.startsWith is not a function' (was related to EPUB2/3 metadata parsing, handling of "conformsTo")
+
 <a name="1.3.6"></a>
 ## [1.3.6](https://github.com/daisy/ace/compare/v1.3.5...v1.3.6) (2025-02-08)
 
