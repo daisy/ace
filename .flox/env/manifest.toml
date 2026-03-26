@@ -1,3 +1,5 @@
+schema-version = "1.11.0"
+
 # flox config --set-bool set_prompt false
 # ==> .zshrc
 # Warp-ify Flox subshell prompt:
@@ -29,10 +31,8 @@
 # PROMPT="${PROMPT}"$'\n'
 # printf '\eP$f{"hook": "SourcedRcFileForWarp", "value": { "shell": "zsh" }}\x9c'
 
-version = 1
-
 [install]
-nodejs_22.pkg-path = "nodejs_22"
+nodejs_24.pkg-path = "nodejs_24"
 yarn.pkg-path = "yarn"
 hugo.pkg-path = "hugo"
 
@@ -167,6 +167,8 @@ npm install -g npm-check-updates --foreground-scripts 1>/dev/null
 common = '''
 [[ ! -z "${FLX_VERBOSE}" ]] && echo "##################################################";
 [[ ! -z "${FLX_VERBOSE}" ]] && echo "########## FLOX PROFILE COMMON (${SHELL})...";
+
+export PATH="$NPM_CONFIG_PREFIX/bin:$PATH";
 
 alias lss='ls -alshF --color=auto'
 alias flx='flox activate'

@@ -1,13 +1,13 @@
 {
   "lockfile-version": 1,
   "manifest": {
-    "version": 1,
+    "schema-version": "1.11.0",
     "install": {
       "hugo": {
         "pkg-path": "hugo"
       },
-      "nodejs_22": {
-        "pkg-path": "nodejs_22"
+      "nodejs_24": {
+        "pkg-path": "nodejs_24"
       },
       "yarn": {
         "pkg-path": "yarn"
@@ -22,7 +22,7 @@
       "on-activate": "[[ ! -z \"${FLX_VERBOSE}\" ]] && echo \"##################################################\";\n[[ ! -z \"${FLX_VERBOSE}\" ]] && echo \"########## FLOX ACTIVATE...\";\n\n# alias lss='ls -alshF --color=auto'\nlss () {\n    command ls -alshF --color=auto \"$@\"\n}\n\n# PWD=$(pwd);\n# [[ ! -z \"${FLX_VERBOSE}\" ]] && echo \"-----> PWD: ${PWD}\";\n# unset PWD\n\n#FLOX_ENV_PROJECT\n#_FLOX_ENV_LOG_DIR\n#FLOX_CACHE_DIR=\"$(dirname ${FLOX_ENV_CACHE})\"\n#FLOX_CACHE_DIR=\"$(realpath ${FLOX_ENV_CACHE})\"\nFLOX_CACHE_DIR=\"${FLOX_ENV_CACHE}\"\n[[ ! -z \"${FLX_VERBOSE}\" ]] && echo \"-----> FLOX_CACHE_DIR: ${FLOX_CACHE_DIR}\";\n\nif [[ ! -z \"${FLX_VERBOSE}\" ]]; then\n\necho \"=====> NODE VERSION: $(node --version)\";\nWHICH_NODE=$(which node);\necho \".....> NODE WHICH: ${WHICH_NODE}\";\nlss \"${WHICH_NODE}\";\nunset WHICH_NODE\n\necho \"=====> NPM VERSION (init): $(npm --version)\";\nWHICH_NPM=$(which npm);\necho \".....> NPM WHICH: ${WHICH_NPM}\";\nlss \"${WHICH_NPM}\";\nunset WHICH_NPM\n\necho \"=====> YARN VERSION: $(yarn --version)\";\nWHICH_YARN=$(which yarn);\necho \".....> YARN WHICH: ${WHICH_YARN}\";\nlss \"${WHICH_YARN}\";\nunset WHICH_YARN\n\necho \"=====> HUGO VERSION: $(hugo version)\";\nWHICH_HUGO=$(which hugo);\necho \".....> HUGO WHICH: ${WHICH_HUGO}\";\nlss \"${WHICH_HUGO}\";\nunset WHICH_HUGO\n\necho \"-----> NPM CONFIG PREFIX (init): $(npm config get prefix)\";\necho \"-----> NPM_CONFIG_PREFIX (init): ${NPM_CONFIG_PREFIX}\";\n\necho \"-----> NPM CONFIG CACHE (init): $(npm config get cache)\"\necho \"-----> NPM_CONFIG_CACHE (init): ${NPM_CONFIG_CACHE}\";\n\necho \"-----> YARN CONFIG CACHE (init): $(yarn config get cache-folder)\"\necho \"-----> YARN CACHE DIR (init): $(yarn cache dir)\";\necho \"-----> YARN_CACHE_DIR (init): ${YARN_CACHE_DIR}\";\necho \"-----> YARN_CACHE_FOLDER (init): ${YARN_CACHE_FOLDER}\";\n\nfi\n\n# envName=\"${_FLOX_ACTIVE_ENVIRONMENTS##:*}\";\n#echo \"${envName}\";\n#export NPM_CONFIG_PREFIX=\"/tmp/${envName}-npm\";\n\nexport NPM_CONFIG_PREFIX=\"${FLOX_CACHE_DIR}/NPM_PREFIX\";\n#### rm -rf \"$NPM_CONFIG_PREFIX\";\nmkdir -p \"$NPM_CONFIG_PREFIX\";\nif [[ ! -z \"${FLX_VERBOSE}\" ]]; then\necho \"-----> NPM CONFIG PREFIX: $(npm config get prefix)\";\necho \"-----> NPM_CONFIG_PREFIX: ${NPM_CONFIG_PREFIX}\";\nlss \"$NPM_CONFIG_PREFIX\";\nlss \"$NPM_CONFIG_PREFIX/bin\";\nlss \"$NPM_CONFIG_PREFIX/lib\";\nlss \"$NPM_CONFIG_PREFIX/lib/node_modules\";\nfi\n\nexport NPM_CONFIG_CACHE=\"${FLOX_CACHE_DIR}/NPM_CACHE\";\n#### rm -rf \"$NPM_CONFIG_CACHE\";\nmkdir -p \"$NPM_CONFIG_CACHE\";\nif [[ ! -z \"${FLX_VERBOSE}\" ]]; then\necho \"-----> NPM CONFIG CACHE: $(npm config get cache)\"\necho \"-----> NPM_CONFIG_CACHE: ${NPM_CONFIG_CACHE}\";\nlss \"$NPM_CONFIG_CACHE\";\nfi\n\nexport YARN_CACHE_DIR=\"${FLOX_CACHE_DIR}/YARN_CACHE\";\nexport YARN_CACHE_FOLDER=\"${YARN_CACHE_DIR}\";\nyarn config set cache-folder \"${YARN_CACHE_DIR}\" 1>/dev/null;\n#### rm -rf \"$YARN_CACHE_DIR\";\nmkdir -p \"$YARN_CACHE_DIR\";\nif [[ ! -z \"${FLX_VERBOSE}\" ]]; then\necho \"-----> YARN CONFIG CACHE: $(yarn config get cache-folder)\"\necho \"-----> YARN CACHE DIR: $(yarn cache dir)\";\necho \"-----> YARN_CACHE_DIR: ${YARN_CACHE_DIR}\";\nlss \"$YARN_CACHE_DIR\";\nfi\n\nunset FLOX_CACHE_DIR\n\n[[ ! -z \"${FLX_VERBOSE}\" ]] && echo \"-----> NODE_PATH (init): ${NODE_PATH}\";\nexport NODE_PATH=\"$NPM_CONFIG_PREFIX/lib/node_modules${NODE_PATH:+:$NODE_PATH}\";\n[[ ! -z \"${FLX_VERBOSE}\" ]] && echo \"-----> NODE_PATH: ${NODE_PATH}\";\n\nexport PATH=\"$NPM_CONFIG_PREFIX/bin:$PATH\";\n\nnpm install -g npm --foreground-scripts 1>/dev/null\nnpm install -g npm-check-updates --foreground-scripts 1>/dev/null\n"
     },
     "profile": {
-      "common": "[[ ! -z \"${FLX_VERBOSE}\" ]] && echo \"##################################################\";\n[[ ! -z \"${FLX_VERBOSE}\" ]] && echo \"########## FLOX PROFILE COMMON (${SHELL})...\";\n\nalias lss='ls -alshF --color=auto'\nalias flx='flox activate'\nalias flxx='FLOX_VERBOSE=1 flox activate'\n\n# PWD=$(pwd);\n# [[ ! -z \"${FLX_VERBOSE}\" ]] && echo \"-----> PWD: ${PWD}\";\n# unset PWD\n\nif [[ ! -z \"${FLX_VERBOSE}\" ]]; then\n\necho \"=====> NODE VERSION: $(node --version)\";\nWHICH_NODE=$(which node);\necho \".....> NODE WHICH: ${WHICH_NODE}\";\nlss \"${WHICH_NODE}\";\nunset WHICH_NODE\n\necho \"=====> NPM VERSION: $(npm --version)\";\nWHICH_NPM=$(which npm);\necho \".....> NPM WHICH: ${WHICH_NPM}\";\nlss \"${WHICH_NPM}\";\nunset WHICH_NPM\n\necho \"=====> YARN VERSION: $(yarn --version)\";\nWHICH_YARN=$(which yarn);\necho \".....> YARN WHICH: ${WHICH_YARN}\";\nlss \"${WHICH_YARN}\";\nunset WHICH_YARN\n\necho \"-----> NPM CONFIG PREFIX: $(npm config get prefix)\";\necho \"-----> NPM_CONFIG_PREFIX: ${NPM_CONFIG_PREFIX}\";\n\necho \"-----> NPM CONFIG CACHE: $(npm config get cache)\"\necho \"-----> NPM_CONFIG_CACHE: ${NPM_CONFIG_CACHE}\";\n\necho \"-----> YARN CONFIG CACHE: $(yarn config get cache-folder)\"\necho \"-----> YARN CACHE DIR: $(yarn cache dir)\";\necho \"-----> YARN_CACHE_DIR: ${YARN_CACHE_DIR}\";\necho \"-----> YARN_CACHE_FOLDER: ${YARN_CACHE_FOLDER}\";\n\necho \"=====> NCU VERSION: $(ncu --version)\";\nWHICH_NCU=$(which ncu);\necho \".....> NCU WHICH: ${WHICH_NCU}\";\nlss \"${WHICH_NCU}\";\nunset WHICH_NCU\n\necho \"=====> HUGO VERSION: $(hugo version)\";\nWHICH_HUGO=$(which hugo);\necho \".....> HUGO WHICH: ${WHICH_HUGO}\";\nlss \"${WHICH_HUGO}\";\nunset WHICH_HUGO\n\necho \"=====> GIT VERSION: $(git --version)\";\nWHICH_GIT=$(which git);\necho \".....> GIT WHICH: ${WHICH_GIT}\";\nlss \"${WHICH_GIT}\";\nunset WHICH_GIT\n\nENV=$(env);\necho \"-----> ENV: ${ENV}\";\necho \"||||||||||||||||||||||||||\";\n\necho \"-----> APPLEID: ${APPLEID}\";\necho \"-----> APPLEIDTEAM: ${APPLEIDTEAM}\";\necho \"-----> APPLEIDPASS: ${APPLEIDPASS}\";\necho \"-----> SKIP_NOTARIZE: ${SKIP_NOTARIZE}\";\necho \"-----> CSC_NAME: ${CSC_NAME}\";\n\necho \"-----> DEBUG: ${DEBUG}\";\n\necho \"-----> USER: ${USER}\";\necho \"-----> USERNAME: ${USERNAME}\";\n\necho \"-----> NODE_ENV: ${NODE_ENV}\";\n\ngit branch\ngit status\n\nfi\n"
+      "common": "[[ ! -z \"${FLX_VERBOSE}\" ]] && echo \"##################################################\";\n[[ ! -z \"${FLX_VERBOSE}\" ]] && echo \"########## FLOX PROFILE COMMON (${SHELL})...\";\n\nexport PATH=\"$NPM_CONFIG_PREFIX/bin:$PATH\";\n\nalias lss='ls -alshF --color=auto'\nalias flx='flox activate'\nalias flxx='FLOX_VERBOSE=1 flox activate'\n\n# PWD=$(pwd);\n# [[ ! -z \"${FLX_VERBOSE}\" ]] && echo \"-----> PWD: ${PWD}\";\n# unset PWD\n\nif [[ ! -z \"${FLX_VERBOSE}\" ]]; then\n\necho \"=====> NODE VERSION: $(node --version)\";\nWHICH_NODE=$(which node);\necho \".....> NODE WHICH: ${WHICH_NODE}\";\nlss \"${WHICH_NODE}\";\nunset WHICH_NODE\n\necho \"=====> NPM VERSION: $(npm --version)\";\nWHICH_NPM=$(which npm);\necho \".....> NPM WHICH: ${WHICH_NPM}\";\nlss \"${WHICH_NPM}\";\nunset WHICH_NPM\n\necho \"=====> YARN VERSION: $(yarn --version)\";\nWHICH_YARN=$(which yarn);\necho \".....> YARN WHICH: ${WHICH_YARN}\";\nlss \"${WHICH_YARN}\";\nunset WHICH_YARN\n\necho \"-----> NPM CONFIG PREFIX: $(npm config get prefix)\";\necho \"-----> NPM_CONFIG_PREFIX: ${NPM_CONFIG_PREFIX}\";\n\necho \"-----> NPM CONFIG CACHE: $(npm config get cache)\"\necho \"-----> NPM_CONFIG_CACHE: ${NPM_CONFIG_CACHE}\";\n\necho \"-----> YARN CONFIG CACHE: $(yarn config get cache-folder)\"\necho \"-----> YARN CACHE DIR: $(yarn cache dir)\";\necho \"-----> YARN_CACHE_DIR: ${YARN_CACHE_DIR}\";\necho \"-----> YARN_CACHE_FOLDER: ${YARN_CACHE_FOLDER}\";\n\necho \"=====> NCU VERSION: $(ncu --version)\";\nWHICH_NCU=$(which ncu);\necho \".....> NCU WHICH: ${WHICH_NCU}\";\nlss \"${WHICH_NCU}\";\nunset WHICH_NCU\n\necho \"=====> HUGO VERSION: $(hugo version)\";\nWHICH_HUGO=$(which hugo);\necho \".....> HUGO WHICH: ${WHICH_HUGO}\";\nlss \"${WHICH_HUGO}\";\nunset WHICH_HUGO\n\necho \"=====> GIT VERSION: $(git --version)\";\nWHICH_GIT=$(which git);\necho \".....> GIT WHICH: ${WHICH_GIT}\";\nlss \"${WHICH_GIT}\";\nunset WHICH_GIT\n\nENV=$(env);\necho \"-----> ENV: ${ENV}\";\necho \"||||||||||||||||||||||||||\";\n\necho \"-----> APPLEID: ${APPLEID}\";\necho \"-----> APPLEIDTEAM: ${APPLEIDTEAM}\";\necho \"-----> APPLEIDPASS: ${APPLEIDPASS}\";\necho \"-----> SKIP_NOTARIZE: ${SKIP_NOTARIZE}\";\necho \"-----> CSC_NAME: ${CSC_NAME}\";\n\necho \"-----> DEBUG: ${DEBUG}\";\n\necho \"-----> USER: ${USER}\";\necho \"-----> USERNAME: ${USERNAME}\";\n\necho \"-----> NODE_ENV: ${NODE_ENV}\";\n\ngit branch\ngit status\n\nfi\n"
     },
     "options": {
       "systems": [
@@ -37,27 +37,27 @@
     {
       "attr_path": "hugo",
       "broken": false,
-      "derivation": "/nix/store/4jyd9mic42qd704vhv17fhyszs7hg5b5-hugo-0.148.2.drv",
+      "derivation": "/nix/store/hwqlaayjncx36zw8a862g6yll8l6i6h9-hugo-0.155.3.drv",
       "description": "Fast and modern static website engine",
       "install_id": "hugo",
       "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "hugo-0.148.2",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "name": "hugo-0.155.3",
       "pname": "hugo",
-      "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "rev_count": 856926,
-      "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T03:40:55.625047Z",
+      "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "rev_count": 967235,
+      "rev_date": "2026-03-21T15:16:39Z",
+      "scrape_date": "2026-03-25T15:44:16.606397Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "0.148.2",
+      "version": "0.155.3",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/gkddalihy62j24713hdqh3d22wb7niy7-hugo-0.148.2"
+        "out": "/nix/store/kyv898xi6m31ykbdrfdzacc1ba828x5q-hugo-0.155.3"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -66,27 +66,27 @@
     {
       "attr_path": "hugo",
       "broken": false,
-      "derivation": "/nix/store/rb85vzxjsnafrhlqk93nhsi7bb08yi53-hugo-0.148.2.drv",
+      "derivation": "/nix/store/3cpgp7jyhriz8q365hf9bv2kbihvjdg4-hugo-0.155.3.drv",
       "description": "Fast and modern static website engine",
       "install_id": "hugo",
       "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "hugo-0.148.2",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "name": "hugo-0.155.3",
       "pname": "hugo",
-      "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "rev_count": 856926,
-      "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T03:52:41.013487Z",
+      "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "rev_count": 967235,
+      "rev_date": "2026-03-21T15:16:39Z",
+      "scrape_date": "2026-03-25T16:25:04.606221Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "0.148.2",
+      "version": "0.155.3",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/ijx0fhya8f216lssw4qnw9ckhpvq8mfw-hugo-0.148.2"
+        "out": "/nix/store/mcywgy3s0qgv831ci72gbfl1q571h1dh-hugo-0.155.3"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -95,27 +95,27 @@
     {
       "attr_path": "hugo",
       "broken": false,
-      "derivation": "/nix/store/xkbl45xnsd9drv2l72hh0fp0x425ng22-hugo-0.148.2.drv",
+      "derivation": "/nix/store/qbvp7qjx2lyl879nr7q7c2nwz998fvi9-hugo-0.155.3.drv",
       "description": "Fast and modern static website engine",
       "install_id": "hugo",
       "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "hugo-0.148.2",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "name": "hugo-0.155.3",
       "pname": "hugo",
-      "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "rev_count": 856926,
-      "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T04:22:17.049762Z",
+      "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "rev_count": 967235,
+      "rev_date": "2026-03-21T15:16:39Z",
+      "scrape_date": "2026-03-25T17:02:57.808547Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "0.148.2",
+      "version": "0.155.3",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/5ynm59zgsaqvmh77wqf3by97kvvn5agx-hugo-0.148.2"
+        "out": "/nix/store/994d5ycl960yysd0q6f6ldlx0df8424z-hugo-0.155.3"
       },
       "system": "x86_64-darwin",
       "group": "toplevel",
@@ -124,151 +124,143 @@
     {
       "attr_path": "hugo",
       "broken": false,
-      "derivation": "/nix/store/p5c5b1l94srj7gjdqj21haj6m8x1d5cs-hugo-0.148.2.drv",
+      "derivation": "/nix/store/kbhjxf8mvj3yrvjvrmifllqm0i9m87aj-hugo-0.155.3.drv",
       "description": "Fast and modern static website engine",
       "install_id": "hugo",
       "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "hugo-0.148.2",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "name": "hugo-0.155.3",
       "pname": "hugo",
-      "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "rev_count": 856926,
-      "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T04:54:49.472306Z",
+      "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "rev_count": 967235,
+      "rev_date": "2026-03-21T15:16:39Z",
+      "scrape_date": "2026-03-25T17:47:18.297531Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "0.148.2",
+      "version": "0.155.3",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/k3mhlqv9f1lb30qrkf4dfwyk4p5pcxm8-hugo-0.148.2"
+        "out": "/nix/store/ryyspq1b1w5wafl1awcalrhyxvbs89ip-hugo-0.155.3"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "nodejs_22",
+      "attr_path": "nodejs_24",
       "broken": false,
-      "derivation": "/nix/store/0a9kkw6mh0f80jfq1nf9767hvg5gr71k-nodejs-22.18.0.drv",
+      "derivation": "/nix/store/g2yfx00n1lp9i8ka7nbl11fawc0yfm7n-nodejs-24.14.0.drv",
       "description": "Event-driven I/O framework for the V8 JavaScript engine",
-      "install_id": "nodejs_22",
+      "install_id": "nodejs_24",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "nodejs-22.18.0",
-      "pname": "nodejs_22",
-      "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "rev_count": 856926,
-      "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T03:41:04.561357Z",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "name": "nodejs-24.14.0",
+      "pname": "nodejs_24",
+      "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "rev_count": 967235,
+      "rev_date": "2026-03-21T15:16:39Z",
+      "scrape_date": "2026-03-25T15:44:26.151863Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "22.18.0",
+      "version": "24.14.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "dev": "/nix/store/4617bdwn34769c3bxkx9qgyzjh890qvf-nodejs-22.18.0-dev",
-        "libv8": "/nix/store/89zl005215fzsfsbq3ar5dff44c2v3f9-nodejs-22.18.0-libv8",
-        "out": "/nix/store/9yqq8szyz3qx8q6xlv1s3arhw4112wc8-nodejs-22.18.0"
+        "out": "/nix/store/d5hw52iialz64hvfzfp9qm1gr2fp43kx-nodejs-24.14.0"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "nodejs_22",
+      "attr_path": "nodejs_24",
       "broken": false,
-      "derivation": "/nix/store/1si9aramx1b8n9dgnaymh4s0v73zng5h-nodejs-22.18.0.drv",
+      "derivation": "/nix/store/jj8rw2gnisil7dw10xi2qdinad9jqp7s-nodejs-24.14.0.drv",
       "description": "Event-driven I/O framework for the V8 JavaScript engine",
-      "install_id": "nodejs_22",
+      "install_id": "nodejs_24",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "nodejs-22.18.0",
-      "pname": "nodejs_22",
-      "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "rev_count": 856926,
-      "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T03:52:59.390579Z",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "name": "nodejs-24.14.0",
+      "pname": "nodejs_24",
+      "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "rev_count": 967235,
+      "rev_date": "2026-03-21T15:16:39Z",
+      "scrape_date": "2026-03-25T16:25:23.677374Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "22.18.0",
+      "version": "24.14.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "dev": "/nix/store/0nzhmyzfcgynya9yy6gsp66bk47nq8s3-nodejs-22.18.0-dev",
-        "libv8": "/nix/store/5zfqiqmnv1xlx0fv0zy28hwcm332vdm1-nodejs-22.18.0-libv8",
-        "out": "/nix/store/sswndb8p93xa94x53769zh3lhci99g8f-nodejs-22.18.0"
+        "out": "/nix/store/vs8zaq8fvbbjqfg4bzn424kn55sj7s7y-nodejs-24.14.0"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "nodejs_22",
+      "attr_path": "nodejs_24",
       "broken": false,
-      "derivation": "/nix/store/5cxy82gwm7zl4fxbfkj6ah23j9j5wbd6-nodejs-22.18.0.drv",
+      "derivation": "/nix/store/l9ksrfa960964gqf23yfr7a66a2n18c1-nodejs-24.14.0.drv",
       "description": "Event-driven I/O framework for the V8 JavaScript engine",
-      "install_id": "nodejs_22",
+      "install_id": "nodejs_24",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "nodejs-22.18.0",
-      "pname": "nodejs_22",
-      "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "rev_count": 856926,
-      "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T04:22:26.368294Z",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "name": "nodejs-24.14.0",
+      "pname": "nodejs_24",
+      "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "rev_count": 967235,
+      "rev_date": "2026-03-21T15:16:39Z",
+      "scrape_date": "2026-03-25T17:03:08.027427Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "22.18.0",
+      "version": "24.14.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "dev": "/nix/store/f39fwzjpkj0hn26f3av1smbl0lmabizj-nodejs-22.18.0-dev",
-        "libv8": "/nix/store/w90f0kd8h7893i6l8jmh01z3zsr514q0-nodejs-22.18.0-libv8",
-        "out": "/nix/store/c5d89lgzr7np5pfv9l02vcnd84mg4gj4-nodejs-22.18.0"
+        "out": "/nix/store/70ypbaj273w2kk0nrs4vijizyqgbg48v-nodejs-24.14.0"
       },
       "system": "x86_64-darwin",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "nodejs_22",
+      "attr_path": "nodejs_24",
       "broken": false,
-      "derivation": "/nix/store/6hkkd1197yqg4n9k2vk8phx098gn1axv-nodejs-22.18.0.drv",
+      "derivation": "/nix/store/15s1kk2n6vg180wg04wj2wgnl19f03v7-nodejs-24.14.0.drv",
       "description": "Event-driven I/O framework for the V8 JavaScript engine",
-      "install_id": "nodejs_22",
+      "install_id": "nodejs_24",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "name": "nodejs-22.18.0",
-      "pname": "nodejs_22",
-      "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "rev_count": 856926,
-      "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T04:55:10.817077Z",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "name": "nodejs-24.14.0",
+      "pname": "nodejs_24",
+      "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "rev_count": 967235,
+      "rev_date": "2026-03-21T15:16:39Z",
+      "scrape_date": "2026-03-25T17:47:40.184775Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "22.18.0",
+      "version": "24.14.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "dev": "/nix/store/mjgd69ahrwz5skifd30a87l1gb7yc785-nodejs-22.18.0-dev",
-        "libv8": "/nix/store/j5lyv0imv3iiwbqyqc1v9vdscwylmk56-nodejs-22.18.0-libv8",
-        "out": "/nix/store/9d235766g7alzlalw4z8yqxql0jl2mgd-nodejs-22.18.0"
+        "out": "/nix/store/v2210ar51jddnrcx46m53ivv9palc26m-nodejs-24.14.0"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -277,17 +269,17 @@
     {
       "attr_path": "yarn",
       "broken": false,
-      "derivation": "/nix/store/f88jx6ymc4y1hdcglkl3adh3l1nph400-yarn-1.22.22.drv",
+      "derivation": "/nix/store/c9jc3wq89dkncj9qrq99xcpnirpr65nc-yarn-1.22.22.drv",
       "description": "Fast, reliable, and secure dependency management for javascript",
       "install_id": "yarn",
       "license": "BSD-2-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6c9a78c09ff4d6c21d0319114873508a6ec01655",
       "name": "yarn-1.22.22",
       "pname": "yarn",
-      "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "rev_count": 856926,
-      "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T03:43:14.725208Z",
+      "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "rev_count": 967235,
+      "rev_date": "2026-03-21T15:16:39Z",
+      "scrape_date": "2026-03-25T15:46:53.468270Z",
       "stabilities": [
         "unstable"
       ],
@@ -297,7 +289,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/0pcb6qgi2map2pfpn9s0sbz050jya6wr-yarn-1.22.22"
+        "out": "/nix/store/59yqhmvbl7bsyv5qc30nmrpaf4iqj79h-yarn-1.22.22"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -306,17 +298,17 @@
     {
       "attr_path": "yarn",
       "broken": false,
-      "derivation": "/nix/store/v0nq4jvl2kl42pvwir1l29a7khvbwyfl-yarn-1.22.22.drv",
+      "derivation": "/nix/store/123sx54x9qa7yx0z36pyv9l5g42wf02w-yarn-1.22.22.drv",
       "description": "Fast, reliable, and secure dependency management for javascript",
       "install_id": "yarn",
       "license": "BSD-2-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6c9a78c09ff4d6c21d0319114873508a6ec01655",
       "name": "yarn-1.22.22",
       "pname": "yarn",
-      "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "rev_count": 856926,
-      "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T03:55:43.588146Z",
+      "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "rev_count": 967235,
+      "rev_date": "2026-03-21T15:16:39Z",
+      "scrape_date": "2026-03-25T16:28:22.979361Z",
       "stabilities": [
         "unstable"
       ],
@@ -326,7 +318,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/p1hn3w769d6lwlzz9dgj78z0qgxgs3pz-yarn-1.22.22"
+        "out": "/nix/store/ybspc2b9q9j9drfpa5d1bmw2qgrkx4qc-yarn-1.22.22"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -335,17 +327,17 @@
     {
       "attr_path": "yarn",
       "broken": false,
-      "derivation": "/nix/store/q2d7r4axh86y6pjcqwdzlbasq9n6if6j-yarn-1.22.22.drv",
+      "derivation": "/nix/store/205j5clz74n159vl2dgsfnk2g3h97lc3-yarn-1.22.22.drv",
       "description": "Fast, reliable, and secure dependency management for javascript",
       "install_id": "yarn",
       "license": "BSD-2-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6c9a78c09ff4d6c21d0319114873508a6ec01655",
       "name": "yarn-1.22.22",
       "pname": "yarn",
-      "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "rev_count": 856926,
-      "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T04:24:50.915894Z",
+      "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "rev_count": 967235,
+      "rev_date": "2026-03-21T15:16:39Z",
+      "scrape_date": "2026-03-25T17:05:38.815758Z",
       "stabilities": [
         "unstable"
       ],
@@ -355,7 +347,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/hy7yr39khyn5c1pp6r1gnpmgigzscqzj-yarn-1.22.22"
+        "out": "/nix/store/8j2xmk7ijy7nijpy2yc3mcjf7hxpnpyl-yarn-1.22.22"
       },
       "system": "x86_64-darwin",
       "group": "toplevel",
@@ -364,17 +356,17 @@
     {
       "attr_path": "yarn",
       "broken": false,
-      "derivation": "/nix/store/1aa2hqsc1n5yhivjbkrr25p4zl00a96b-yarn-1.22.22.drv",
+      "derivation": "/nix/store/v5q8zcdnc68lpp2pw92bwdk6a1h0sahb-yarn-1.22.22.drv",
       "description": "Fast, reliable, and secure dependency management for javascript",
       "install_id": "yarn",
       "license": "BSD-2-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=6c9a78c09ff4d6c21d0319114873508a6ec01655",
       "name": "yarn-1.22.22",
       "pname": "yarn",
-      "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
-      "rev_count": 856926,
-      "rev_date": "2025-09-05T10:37:24Z",
-      "scrape_date": "2025-09-08T04:58:02.106046Z",
+      "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+      "rev_count": 967235,
+      "rev_date": "2026-03-21T15:16:39Z",
+      "scrape_date": "2026-03-25T17:51:03.419628Z",
       "stabilities": [
         "unstable"
       ],
@@ -384,7 +376,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/0wckc0rh5m1v74g0sb3xa9ax0rf1dfg5-yarn-1.22.22"
+        "out": "/nix/store/g1ksanljq7v16gj8yb7zs6wkv7ikycy3-yarn-1.22.22"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
