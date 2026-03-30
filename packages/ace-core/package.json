@@ -32,8 +32,8 @@
     "@daisy/axe-core-for-ace": "4.11.1-canary.1",
     "file-url": "^3.0.0",
     "p-map": "^4.0.0",
-    "tmp": "^0.2.3",
-    "winston": "^3.17.0"
+    "tmp": "^0.2.5",
+    "winston": "^3.19.0"
   },
   "publishConfig": {
     "access": "public"
