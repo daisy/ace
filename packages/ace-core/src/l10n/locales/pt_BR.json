@@ -34,6 +34,7 @@
             "kbtitle": "Metadados de Acessibilidade Schema.org",
             "resdesc": "Adicione o metadado '{{name}}' ao arquivo OPF",
             "ruledesc": "Publicações devem declarar o metadado '{{name}}'",
+            "ruledesc_alt": "Publicações devem declarar o metadado '{{name}}' (SHOULD)",
             "testdesc": "Certifique-se de que o metadado '{{name}}' está presente"
         },
         "missingpagebreakviolation": {

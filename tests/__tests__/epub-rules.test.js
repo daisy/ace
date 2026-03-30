@@ -358,6 +358,9 @@ describe('accessibility metadata', () => {
         }),
       }),
       expect.objectContaining({
+        'earl:result': expect.objectContaining({
+          'dct:description': "Publications should declare the 'schema:accessibilitySummary' metadata",
+        }),
         'earl:test': expect.objectContaining({
           "earl:impact": "moderate",
           'dct:title': 'metadata-accessibilitysummary',

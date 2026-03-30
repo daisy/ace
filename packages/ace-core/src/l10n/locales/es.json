@@ -34,6 +34,7 @@
             "kbtitle": "Metadatos de Accesibilidad Schema.org",
             "resdesc": "Añadir una propiedad de metadatos '{{name}}' al documento package",
             "ruledesc": "Las publicaciones deben declarar '{{name}}' en los metadatos",
+            "ruledesc_alt": "Las publicaciones deben declarar '{{name}}' en los metadatos (SHOULD)",
             "testdesc": "Garantiza la presencia de '{{name}}' en los metadatos"
         },
         "missingpagebreakviolation": {

@@ -51,7 +51,7 @@ function newMetadataAssertion(name, impact = 'serious') {
     resDesc: localize("checkepub.metadataviolation.resdesc", { name, interpolation: { escapeValue: false } }),
     kbPath: 'docs/metadata/schema.org/index.html',
     kbTitle: localize("checkepub.metadataviolation.kbtitle"),
-    ruleDesc: localize("checkepub.metadataviolation.ruledesc", { name, interpolation: { escapeValue: false } })
+    ruleDesc: impact == 'serious' ? localize("checkepub.metadataviolation.ruledesc", { name, interpolation: { escapeValue: false } }) : localize("checkepub.metadataviolation.ruledesc_alt", { name, interpolation: { escapeValue: false } })
   });
 }
 // newMetadataAssertion =>

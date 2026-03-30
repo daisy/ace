@@ -34,6 +34,7 @@
             "kbtitle": "Metadata for tilgængelighed fra Schema.org",
             "resdesc": "Tilføj et '{{name}}' metadata-element til pakke-dokumentet",
             "ruledesc": "Publikationen skal angive et '{{name}}' metadata-element",
+            "ruledesc_alt": "Publikationen skal angive et '{{name}}' metadata-element (SHOULD)",
             "testdesc": "Sikrer at '{{name}}' metadata-elementet er til stede"
         },
         "missingpagebreakviolation": {

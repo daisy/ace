@@ -40,6 +40,7 @@
             "kbtitle": "Schema.org Accessibility Metadata",
             "resdesc": "Add a '{{name}}' metadata property to the Package Document",
             "ruledesc": "Publications must declare the '{{name}}' metadata",
+            "ruledesc_alt": "Publications should declare the '{{name}}' metadata",
             "testdesc": "Ensures a '{{name}}' metadata is present"
         },
         "missingpagebreakviolation": {

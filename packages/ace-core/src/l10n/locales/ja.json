@@ -40,6 +40,7 @@
       "kbtitle": "Schema.orgアクセシビリティメタデータ",
       "resdesc": "「{{name}}」メタデータプロパティをパッケージドキュメントに追加します",
       "ruledesc": "出版物は「{{name}}」メタデータを宣言する必要があります",
+      "ruledesc_alt": "出版物は「{{name}}」メタデータを宣言する必要があります (SHOULD)",
       "testdesc": "「{{name}}」メタデータが存在することを確認する"
     },
     "missingpagebreakviolation": {

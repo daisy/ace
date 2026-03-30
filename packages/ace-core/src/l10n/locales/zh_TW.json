@@ -34,6 +34,7 @@
             "kbtitle": "Schema.org可及性詮釋資料",
             "resdesc": "在包裝文件中加入詮釋資料「 {{name}} 」特性",
             "ruledesc": "出版品必須宣告詮釋資料「 {{name}} 」",
+            "ruledesc_alt": "出版品必須宣告詮釋資料「 {{name}} 」 (SHOULD)",
             "testdesc": "確保具有詮釋資料「 {{name}} 」"
         },
         "missingpagebreakviolation": {

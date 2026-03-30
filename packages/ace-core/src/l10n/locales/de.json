@@ -34,6 +34,7 @@
             "kbtitle": "Schema.org Barrierefreiheitsmetadaten",
             "resdesc": "Metadateneigenschaft '{{name}}' zum Dokumentenpaket hinzufügen",
             "ruledesc": "Veröffentlichungen müssen die '{{name}}' Metadaten angeben",
+            "ruledesc_alt": "Veröffentlichungen müssen die '{{name}}' Metadaten angeben (SHOULD)",
             "testdesc": "Stellt sicher, dass '{{name}}' Metadaten vorhanden sind"
         },
         "missingpagebreakviolation": {

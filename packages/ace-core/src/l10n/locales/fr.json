@@ -34,6 +34,7 @@
             "kbtitle": "Métadonnées d'accessibilité Schema.org",
             "resdesc": "Ajouter la métadonnée '{{name}}' au Document de Package",
             "ruledesc": "Toute publication doit déclarer la métadonnée '{{name}}'",
+            "ruledesc_alt": "Toute publication devrait déclarer la métadonnée '{{name}}'",
             "testdesc": "Vérifie que la métadonnée '{{name}}' est présente"
         },
         "missingpagebreakviolation": {
