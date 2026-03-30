@@ -16,5 +16,5 @@ In addition to the [HTML rules]({{<ref "html.md">}}), Ace implements EPUB-specif
 * Authored page list does not reference all elements that are page breaks in HTML documents (impact = serious): `epub-pagelist-missing-pagebreak`
 * Mismatched authored table of contents and reading order of elements inside HTML documents (impact = "serious"): `epub-toc-order`
 * Missing publication title metadata (impact = "serious"): `epub-title`
-* Missing OPF lang attribute (impact = "serious"): `epub-lang`
+* Missing OPF lang attribute in EPUB3 (not EPUB2) (impact = "serious"): `epub-lang`
 * Missing `dc:source` / `pageBreakSource` publication metadata when reflowable EPUB has authored page list (impact = "serious"): `epub-pagesource`

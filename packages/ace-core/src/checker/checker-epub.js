@@ -542,7 +542,9 @@ function check(epub, report) {
     .withSubAssertions()
     .withTestSubject(epub.packageDoc.src, asString(epub.metadata['dc:title']));
 
-  if (!epub.opfLang) {
+  // const isEPUB3 = epub.version && epub.version.startsWith("3");
+  const isEPUB2 = epub.version && epub.version.startsWith("2");
+  if (!isEPUB2 && !epub.opfLang) {
     assertion.withAssertions(newViolation({
       // impact: 'serious', DEFAULT
       title: 'epub-lang',
