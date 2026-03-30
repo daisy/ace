@@ -196,7 +196,12 @@ app.whenReady().then(async () => {
 
         sess.setPermissionRequestHandler((wc, permission, callback) => {
             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} setPermissionRequestHandler ${wc.getURL()} => ${permission}`);
-            callback(true);
+            callback(false);
+        });
+
+        sess.setPermissionCheckHandler((wc, permission, origin) => {
+            if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} setPermissionRequestHandler ${wc ? wc.getURL() : "!WC"} => ${permission} (${origin})`);
+            return false;
         });
     }
 });
@@ -332,7 +337,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                 title: "Axe Electron runner",
                 allowRunningInsecureContent: false,
                 backgroundThrottling: false,
-                contextIsolation: false,
+                contextIsolation: true,
                 nodeIntegration: false,
                 nodeIntegrationInWorker: false,
                 sandbox: false,
@@ -348,22 +353,23 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         browserWindow.setSize(1024, 768);
         browserWindow.setPosition(0, 0);
 
-        browserWindow.webContents.session.webRequest.onBeforeRequest({
-            urls: [],
-        }, (details, callback) => {
-            if (details.url
-                &&
-                (
-                /^file:\/\//.test(details.url)
-                ||
-                /^https?:\/\//.test(details.url)
-                // && (
-                //     (rootUrl && !details.url.startsWith(rootUrl))
-                //     ||
-                //     (!rootUrl && !/^https?:\/\/127.0.0.1/.test(details.url))
-                //    )
-                )
-            ) {
+      browserWindow.webContents.session.webRequest.onBeforeRequest({
+        urls: ['<all_urls>'],
+      }, (details, callback) => {
+            if (!details.url || !details.url.startsWith(rootUrl)) { // ACE_ELECTRON_HTTP_PROTOCOL acehttps://0.0.0.0
+            // if (details.url
+            //     &&
+            //     (
+            //     /^file:\/\//.test(details.url)
+            //     ||
+            //     /^https?:\/\//.test(details.url)
+            //     // && (
+            //     //     (rootUrl && !details.url.startsWith(rootUrl))
+            //     //     ||
+            //     //     (!rootUrl && !/^https?:\/\/127.0.0.1/.test(details.url))
+            //     //    )
+            //     )
+            // ) {
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} onBeforeRequest BLOCK: ${details.url} (${rootUrl})`);
 
                 // causes ERR_BLOCKED_BY_CLIENT -20 did-fail-load
@@ -541,11 +547,11 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                         origin: "*",
                         quotas: [
                             "temporary",
-                            "persistent",
-                            "syncable",
+                            // "persistent",
+                            // "syncable",
                         ],
                         storages: [
-                            "appcache",
+                            // "appcache",
                             "cookies",
                             "filesystem",
                             "indexdb",
@@ -553,6 +559,7 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
                             "shadercache",
                             // "websql",
                             "serviceworkers",
+                            "cachestorage",
                         ],
                     });
                 } catch (err) {
@@ -877,12 +884,13 @@ function startAxeServer(basedir, scripts, scriptContents) {
                     console.log(">>>>>>>>>> URL 2");
                     console.log(ptn);
                 }
-                const pn = decodeURIComponent(ptn);
+                let pn = decodeURIComponent(ptn);
                 if (LOG_DEBUG_URLS) {
                     console.log(">>>>>>>>>> URL 3");
                     console.log(pn);
                 }
 
+                pn = pn.replace(/^[/\\]/, "").replace(/\.\.[/\\]?/g, "DoTDoT");
                 let fileSystemPath = path.join(basedir, pn);
                 if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} filepath to read: ${fileSystemPath}`);
                 if (!fs.existsSync(fileSystemPath)) {
@@ -953,11 +961,12 @@ function startAxeServer(basedir, scripts, scriptContents) {
                 console.log(">>>>>>>>>>- URL 2");
                 console.log(ptn);
             }
-            const pn = decodeURIComponent(ptn);
+            let pn = decodeURIComponent(ptn);
             if (LOG_DEBUG_URLS) {
                 console.log(">>>>>>>>>>- URL 3");
                 console.log(pn);
             }
+            pn = pn.replace(/^[/\\]/, "").replace(/\.\.[/\\]?/g, "DoTDoT");
             let fileSystemPath = path.join(basedir, pn);
             if (LOG_DEBUG) console.log(`${ACE_LOG_PREFIX} --filepath to read: ${fileSystemPath}`);
             if (!fs.existsSync(fileSystemPath)) {
@@ -1007,7 +1016,8 @@ function startAxeServer(basedir, scripts, scriptContents) {
 
             //     // const url = new URL(`https://fake.org${req.url}`);
             //     // const pathname = url.pathname;
-            //     const pathname = decodeURIComponent(u.pathname);
+            //     let pathname = decodeURIComponent(u.pathname);
+            //     pathname = pathname.replace(/^[/\\]/, "").replace(/\.\.[/\\]?/g, "DoTDoT");
 
             //     const filePath = path.join(basedir, pathname);
             //     if (filePathsExpressStaticNotExist[filePath]) {

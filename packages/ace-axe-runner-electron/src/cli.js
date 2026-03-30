@@ -72,13 +72,15 @@ app.on('ready', async () => {
     //         show: false,
     //         webPreferences: {
     //             allowRunningInsecureContent: false,
-    //             contextIsolation: false,
-    //             nodeIntegration: true,
+    //             contextIsolation: true,
+    //             nodeIntegration: false,
     //             nodeIntegrationInWorker: false,
     //             sandbox: false,
     //             webSecurity: true,
     //             webviewTag: false,
-    //             nativeWindowOpen: false, // The default of nativeWindowOpen is deprecated and will be changing from false to true in Electron 15. See https://github.com/electron/electron/issues/28511
+    //             enableRemoteModule: false,
+    //             backgroundThrottling: false,
+    //             // nativeWindowOpen: false, // The default of nativeWindowOpen is deprecated and will be changing from false to true in Electron 15. See https://github.com/electron/electron/issues/28511
     //         }
     //     }
     // );
