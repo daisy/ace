@@ -22,13 +22,15 @@ const pkg = require('@daisy/ace-meta/package');
 // });
 // console.log(`##${str}##`);
 
-const cleanupElectronJestStderr = (str) => {
+const cleanupElectronJestStderr = (str, lineBreaks) => {
   let s = str;
   if (s) {
     // [4250:0124/120235.963909:ERROR:mach_port_rendezvous.cc(202)] mach_msg send: (ipc/send) invalid port right (0x1000000a)
     // [4252:0124/120235.964624:ERROR:child_thread_impl.cc(231)] Invalid PlatformChannel receive right
     s = s.replace(/^.+(mach_port_rendezvous|child_thread_impl)\.cc.+$/gm, '');
-    s = s.replace(/\n/gm, ' ').trim();
+    s = s.replace(/^.*Unable to revert mtime:.+$/gm, '');
+    if (lineBreaks) s = s.replace(/\n/gm, ' ');
+    s = s.trim();
   }
   return s;
 };
@@ -37,28 +39,28 @@ describe('Running the CLI', () => {
   test('with no input should fail', () => {
     const { stdout, stderr, status } = ace([]);
     expect(status).toBe(1);
-    expect(stderr.trim()).toMatchSnapshot();
+    expect(cleanupElectronJestStderr(stderr)).toMatchSnapshot();
     expect(stdout).toMatchSnapshot();
   });
 
   test('with the -h option should print help', () => {
     const { stdout, stderr, status } = ace(['-h']);
     expect(status).toBe(0);
-    expect(cleanupElectronJestStderr(stderr)).toBe('');
+    expect(cleanupElectronJestStderr(stderr, true)).toBe('');
     expect(stdout).toMatchSnapshot();
   });
 
   test('with the -v option should print the version number', () => {
     const { stdout, stderr, status } = ace(['-v']);
     expect(status).toBe(0);
-    expect(cleanupElectronJestStderr(stderr)).toBe('');
+    expect(cleanupElectronJestStderr(stderr, true)).toBe('');
     expect(stdout.trim()).toBe(pkg.version);
   });
 
   test('with the --version option should print the version number', () => {
     const { stdout, stderr, status } = ace(['--version']);
     expect(status).toBe(0);
-    expect(cleanupElectronJestStderr(stderr)).toBe('');
+    expect(cleanupElectronJestStderr(stderr, true)).toBe('');
     expect(stdout.trim()).toBe(pkg.version);
   });
 
@@ -66,7 +68,7 @@ describe('Running the CLI', () => {
     const { stdout, stderr, status } = ace(['unexisting.epub']);
     expect(status).toBe(1);
     expect(stdout.trim()).toMatchSnapshot();
-    expect(stderr).toMatchSnapshot();
+    expect(cleanupElectronJestStderr(stderr)).toMatchSnapshot();
   });
 
   test('with -o pointing to an existing directory should fail', () => {
@@ -74,7 +76,7 @@ describe('Running the CLI', () => {
       cwd: path.resolve(__dirname, '../data'),
     });
     expect(status).toBe(1);
-    expect(cleanupElectronJestStderr(stderr)).toBe('');
+    expect(cleanupElectronJestStderr(stderr, true)).toBe('');
     expect(stdout).toMatchSnapshot();
   });
 
@@ -84,10 +86,7 @@ describe('Running the CLI', () => {
     });
     expect(status).toBe(0);
 
-    // https://github.com/electron/electron/issues/18397
-    // https://www.electronjs.org/releases/stable#breaking-changes-1400
-    expect(stderr).toBe(false && process.env.AXE_ELECTRON_RUNNER ? `(electron) The default value of app.allowRendererProcessReuse is deprecated, it is currently "false".  It will change to be "true" in Electron 9.  For more information please check https://github.com/electron/electron/issues/18397
-` : '');
+    expect(cleanupElectronJestStderr(stderr, true)).toBe('');
     expect(() => JSON.parse(stdout)).not.toThrow(SyntaxError);
     const res = JSON.parse(stdout);
     expect(res).toMatchObject({ '@type': 'earl:report' });

@@ -7,8 +7,7 @@ Re-run Ace using the --verbose option to enable full debug logging."
 
 exports[`Running the CLI on a non-existant document should fail 2`] = `
 "[31merror[39m:   Couldn’t find EPUB file 'unexisting.epub'
-[31merror[39m:   
-"
+[31merror[39m:"
 `;
 
 exports[`Running the CLI with -o pointing to an existing directory should fail 1`] = `
