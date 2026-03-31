@@ -102,7 +102,7 @@ jobs:
       #   run: yarn test-electron && yarn test-electron-cli
       #   working-directory: ./
       #   # options:
-      run: echo "${{ matrix.osarch }}" && dbus-run-session -- bash -c "export DBUS_SYSTEM_BUS_ADDRESS=\$DBUS_SESSION_BUS_ADDRESS; xvfb-run --auto-servernum yarn test-electron-cli" && xvfb-run --auto-servernum yarn test-electron
+      run: echo "${{ matrix.osarch }}" && dbus-run-session -- bash -c "export DBUS_SYSTEM_BUS_ADDRESS=\$DBUS_SESSION_BUS_ADDRESS; xvfb-run --auto-servernum yarn test-electron" ; dbus-run-session -- bash -c "export DBUS_SYSTEM_BUS_ADDRESS=\$DBUS_SESSION_BUS_ADDRESS; xvfb-run --auto-servernum yarn test-electron-cli"
     - name: non-PR action, Mac, Puppeteer
       if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
       run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
