@@ -60,7 +60,7 @@ font-size: 90%;
 <link rel="stylesheet" href="https://daisy.github.io/ace/css/prism.css" media="none" onload="this.media='all';">
 <link rel="stylesheet" type="text/css" href="https://daisy.github.io/ace/css/styles.css">
 
-    <meta name="generator" content="Hugo 0.140.2">
+    <meta name="generator" content="Hugo 0.155.3">
   </head>
   <body>
     <a href="#main">skip to content</a>
@@ -160,7 +160,7 @@ font-size: 90%;
             <a class="logo" href="https://daisy.github.io/ace/" aria-label="Ace, by DAISY home page">
               <img src="https://daisy.github.io/ace/images/logo.svg" alt="">
             </a>
-            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.3.6</p>
+            <p class="library-desc"><strong><a href="/ace">Ace</a></strong>, an accessibility checker for EPUB! A <strong><a href="http://daisy.org">DAISY Consortium</a></strong> project. Latest version: v1.4.0</p>
           </div>
           
               <nav id="pages-nav" class="pages" role="navigation">
@@ -463,8 +463,22 @@ font-size: 90%;
             lang
           </a>
     
-    
+      
+      
+        
+        
+        
+        
         </li></ol>
+        
+        </li></ol>
+        
+        
+        <li>
+          <a href="#environment-variables-advanced-usage">
+            Environment variables (advanced usage)
+          </a>
+    
     
         </li></ol>
         
@@ -531,6 +545,8 @@ Ace by DAISY, an Accessibility Checker for EPUB
     -l, --lang  &lt;language&gt; language code for localized messages (e.g. &#34;fr&#34;), default is &#34;en&#34;
 
     -T, --timeout &lt;milliseconds&gt; (default is 240000 per document)
+
+    -M, --doNotReportMedia skips reporting media resources
 
     -E, --exiterror2 exit process with code 2 when fail (return-2-on-validation-error)
   Examples
@@ -611,7 +627,13 @@ The default is &ldquo;en&rdquo; (English). Currently, the only available supplem
 <p>Example:</p>
 <pre tabindex="0"><code>$ ace --lang fr ~/Documents/book.epub
 $
-</code></pre>
+</code></pre><h2 id="environment-variables-advanced-usage">Environment variables (advanced usage)</h2>
+<ul>
+<li><code>ACE_DO_NOT_REPORT_MEDIA_RESOURCES</code>: set to any value (such as <code>1</code>) to activate a special mode that skips image/video/audio reporting. Note that the command line argument and configuration option  <code>doNotReportMedia</code> takes precedence over this env var. This can improve performance with publications that contains a large number of media resources. Furthermore, as the resources are not copied into the report folder this can save storage space too.</li>
+<li><code>ACE_TIMEOUT_INITIAL</code>: integer value in milliseconds, defaults to 5000ms (5s). This is the time allowed for an HTML document to load in the web brower engine (Chromium in both the Electron runner and the legacy Puppeteer runner).</li>
+<li><code>ACE_TIMEOUT_EXTENSION</code>: integer value in milliseconds, defaults to 240000ms (240s / 4mn). Note that the command line argument and configuration option  <code>timeout</code> takes precedence over this env var. This is the time allowed for the Deque Axe analyser to finish its job in a given HTML document.</li>
+</ul>
+
   </main>
 
           <footer role="contentinfo">
