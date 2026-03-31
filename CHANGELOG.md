@@ -1,3 +1,17 @@
+<a name="1.4.0"></a>
+## [1.4.0](https://github.com/daisy/ace/compare/v1.3.7...v1.4.0) (2026-03-31)
+
+### Updates:
+
+* Update: the DAISY fork of Deque Axe is now at the most recent version `4.11.1`.
+* Update: modern revision of the Chromium web browser via Electron (version `41`) and Puppeteer (version `24`),
+* Feature: users can now disable the reporting of images/videos/audios media resources in order to improve performance and save storage space.
+* Fix: `dcterms:conformsTo` values that start with a recognized prefix in the official EPUB accessibility specification but end differently trigger a "moderate" violation.
+* Fix: in EPUB3 publications, accessibility metadata expressed using EPUB2 XML syntax is not valid (`name` + `content`).
+* Fix: `accessModeSufficient` and `accessibilitySummary` are recommended (SHOULD, not MUST) but their translated messages were using the "must" term.
+* Fix: missing OPF `xml:lang` in EPUB2 publications is not a violation, only with EPUB3.
+* Fix: additional security safeguards for path traversal during resource requests on filesystem, activated Electron context isolation (Node integration was already disabled), blocked default web browser permission requests.
+
 <a name="1.3.7"></a>
 ## [1.3.7](https://github.com/daisy/ace/compare/v1.3.6...v1.3.7) (2025-03-03)
 
