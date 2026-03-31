@@ -1,15 +1,15 @@
 #!/bin/bash
 
 rm -rf node_modules
-yarn install --ignore-scripts
+yarn install --frozen-lockfile --ignore-scripts --network-timeout 1000000
 
 cd node_modules/electron
-yarn --verbose run postinstall
+yarn --verbose --network-timeout 1000000 run postinstall
 cd ../..
 
 cd node_modules/puppeteer
 rm -rf ~/.cache/puppeteer/
-yarn --verbose run postinstall
+yarn --verbose --network-timeout 1000000 run postinstall
 cd ../..
 
 yarn --verbose run postinstall
