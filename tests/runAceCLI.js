@@ -36,7 +36,7 @@ function ace(args, options = {}) {
   const result = func(
     process.env.AXE_ELECTRON_RUNNER ? "node" : EXE_PATH,
     process.env.AXE_ELECTRON_RUNNER ?
-      [EXE_PATH, EXE_PATH_ELECTRON].concat(args).concat("--disable-gpu") :
+      [EXE_PATH, EXE_PATH_ELECTRON].concat(args).concat("--disable-gpu").concat("--no-sandbox") :
       args,
     {
       cwd,

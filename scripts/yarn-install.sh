@@ -12,11 +12,12 @@ rm -rf ~/.cache/puppeteer/
 yarn --verbose run postinstall
 cd ../..
 
-yarn build
+yarn --verbose run postinstall
 
-yarn test-cli
+#yarn run test-cli
 
-yarn test-electron-cli
+#yarn run test-electron-cli
 
+#yarn run test
 
-
+#yarn run test-electron

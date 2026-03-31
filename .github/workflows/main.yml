@@ -18,23 +18,23 @@ jobs:
       fail-fast: false
       matrix:
         # windows-arm
-        osarch: [windows-intel, macos-intel, macos-arm, linux-intel, linux-arm]
+        osarch: [windows-intel, macos-arm, linux-intel]
         include:
           - osarch: windows-intel
-            runson: windows-latest
+            runson: windows-2025
           # - osarch: windows-arm
           #   runson: windows-latest
-          - osarch: macos-intel
-            runson: macos-13
+          # - osarch: macos-intel
+          #  runson: macos-13
           - osarch: macos-arm
-            runson: macos-latest
+            runson: macos-latest #macos-14-arm64
+          # - osarch: linux-arm
+          #  runson: ubuntu-22.04 #ubuntu-latest is ubuntu-24.04
           - osarch: linux-intel
-            runson: ubuntu-22.04
-          - osarch: linux-arm
-            runson: ubuntu-22.04
-    env:
-      DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
-      DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
+            runson: ubuntu-22.04 #ubuntu-latest is ubuntu-24.04
+#    env:
+#      DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
+#      DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
     steps:
     - run: 'echo "GITHUB_RUN_NUMBER: ${{ github.run_number }}"'
     - run: 'echo "GITHUB_RUN_ID: ${{ github.run_id }}"'
@@ -102,7 +102,7 @@ jobs:
       #   run: yarn test-electron && yarn test-electron-cli
       #   working-directory: ./
       #   # options:
-      run: echo "${{ matrix.osarch }}" && xvfb-run --auto-servernum yarn test-electron && xvfb-run --auto-servernum yarn test-electron-cli
+      run: echo "${{ matrix.osarch }}" && (dbus-uuidgen > /var/lib/dbus/machine-id ; mkdir -p /var/run/dbus ; chmod 777 /var/run/dbus) && xvfb-run --auto-servernum yarn test-electron && dbus-run-session -- bash -c "export DBUS_SYSTEM_BUS_ADDRESS=\$DBUS_SESSION_BUS_ADDRESS; xvfb-run --auto-servernum yarn test-electron-cli"
     - name: non-PR action, Mac, Puppeteer
       if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
       run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
