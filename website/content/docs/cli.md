@@ -77,6 +77,8 @@ Ace by DAISY, an Accessibility Checker for EPUB
 
     -T, --timeout <milliseconds> (default is 240000 per document)
 
+    -M, --doNotReportMedia skips reporting media resources
+
     -E, --exiterror2 exit process with code 2 when fail (return-2-on-validation-error)
   Examples
     $ ace -o out ~/Documents/book.epub
@@ -215,3 +217,9 @@ Example:
 $ ace --lang fr ~/Documents/book.epub
 $
 ```
+
+## Environment variables (advanced usage)
+
+* `ACE_DO_NOT_REPORT_MEDIA_RESOURCES`: set to any value (such as `1`) to activate a special mode that skips image/video/audio reporting. Note that the command line argument and configuration option  `doNotReportMedia` takes precedence over this env var. This can improve performance with publications that contains a large number of media resources. Furthermore, as the resources are not copied into the report folder this can save storage space too.
+* `ACE_TIMEOUT_INITIAL`: integer value in milliseconds, defaults to 5000ms (5s). This is the time allowed for an HTML document to load in the web brower engine (Chromium in both the Electron runner and the legacy Puppeteer runner).
+* `ACE_TIMEOUT_EXTENSION`: integer value in milliseconds, defaults to 240000ms (240s / 4mn). Note that the command line argument and configuration option  `timeout` takes precedence over this env var. This is the time allowed for the Deque Axe analyser to finish its job in a given HTML document.

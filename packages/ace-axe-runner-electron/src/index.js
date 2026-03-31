@@ -4,10 +4,12 @@ const LOG_DEBUG = false;
 const ACE_LOG_PREFIX = "[ACE-AXE]";
 
 let cliOption_MILLISECONDS_TIMEOUT_EXTENSION = undefined;
+// let cliOption_ACE_DO_NOT_REPORT_MEDIA_RESOURCES = undefined;
 
 function createAxeRunner(eventEmmitter, CONCURRENT_INSTANCES) {
 
     return {
+        // setDoNotReportMedia: function () { cliOption_ACE_DO_NOT_REPORT_MEDIA_RESOURCES = true; },
         setTimeout: function (ms) {
           try {
               cliOption_MILLISECONDS_TIMEOUT_EXTENSION = parseInt(ms, 10);

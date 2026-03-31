@@ -33,6 +33,8 @@ Ace by DAISY, an Accessibility Checker for EPUB
 
     -T, --timeout <milliseconds> (default is 240000 per document)
 
+    -M, --doNotReportMedia skips reporting media resources
+
     -E, --exiterror2 exit process with code 2 when fail (return-2-on-validation-error)
   Examples
     $ ace-http -p 3000

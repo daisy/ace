@@ -45,6 +45,8 @@ const meowHelpMessage = `
 
     -T, --timeout <milliseconds> (default is 240000 per document)
 
+    -M, --doNotReportMedia skips reporting media resources
+
     -E, --exiterror2 exit process with code 2 when fail (return-2-on-validation-error)
   Examples
     $ ace-http -p 3000`;
@@ -202,7 +204,7 @@ function newJob(jobdata) {
   joblist.push(jobdata);
 
   // execute the job with Ace
-  ace(jobdata.internal.epubPath, {'jobid': jobdata.internal.id, 'outdir': jobdata.internal.outputDir, 'lang': jobdata.internal.lang, 'timeout': jobdata.internal.timeout}, axeRunner)
+  ace(jobdata.internal.epubPath, {'jobid': jobdata.internal.id, 'outdir': jobdata.internal.outputDir, 'lang': jobdata.internal.lang, 'timeout': jobdata.internal.timeout, 'doNotReportMedia': jobdata.internal.doNotReportMedia}, axeRunner)
   .then((jobData) => {
     var jobId = jobData[0];
     var idx = joblist.findIndex(job => job.internal.id === jobId);

@@ -26,8 +26,10 @@ const MILLISECONDS_TIMEOUT_INITIAL = _MILLISECONDS_TIMEOUT_INITIAL || 5000; // 5
 const MILLISECONDS_TIMEOUT_EXTENSION = _MILLISECONDS_TIMEOUT_EXTENSION || 240000; // 240s (4mn) runtime (window contents usually loads fast, but Axe runtime takes time...)
 
 let cliOption_MILLISECONDS_TIMEOUT_EXTENSION = undefined;
+// let cliOption_ACE_DO_NOT_REPORT_MEDIA_RESOURCES = undefined;
 
 module.exports = {
+    // setDoNotReportMedia: function () { cliOption_ACE_DO_NOT_REPORT_MEDIA_RESOURCES = true; },
     setTimeout: function (ms) {
       try {
           cliOption_MILLISECONDS_TIMEOUT_EXTENSION = parseInt(ms, 10);

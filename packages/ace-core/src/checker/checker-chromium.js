@@ -37,7 +37,7 @@ const scripts = [
 
 const LOG_DEBUG_URLS = process.env.LOG_DEBUG_URLS === "1";
 
-async function checkSingle(spineItem, epub, lang, axeRunner) {
+async function checkSingle(spineItem, epub, lang, doNotReportMedia, axeRunner) {
   winston.verbose(`- Processing ${spineItem.relpath}`);
   try {
     if (LOG_DEBUG_URLS) {
@@ -114,6 +114,9 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
       winston.verbose(err);
       winston.debug(`- Axe locale problem? [${lang}] => ${localePath}`);
     }
+
+    //  || process && process.env && process.env.ACE_DO_NOT_REPORT_MEDIA_RESOURCES
+    if (doNotReportMedia) scriptContents.push(`window.__skipExpensiveContentExtractions__=true;`);
 
     if (DISABLE_CONCURRENT_TO_DEBUG_INDIVIDUAL_SPINE_ITEM) console.log("BEFORE axeRunner... ", lang, url, JSON.stringify(spineItem, null, 4), JSON.stringify(scripts, null, 4), JSON.stringify(scriptContents, null, 4)); // JSON.stringify(epub, null, 4)
     const results = await axeRunner.run(url, scripts, scriptContents, epub.basedir);
@@ -201,11 +204,11 @@ async function checkSingle(spineItem, epub, lang, axeRunner) {
   }
 }
 
-module.exports.check = async (epub, lang, axeRunner) => {
+module.exports.check = async (epub, lang, doNotReportMedia, axeRunner) => {
   await axeRunner.launch();
   winston.info('Checking documents...');
   return pMap(epub.contentDocs, (doc) => {
-    return checkSingle(doc, epub, lang, axeRunner); // not AWAIT'ed! (pMap takes the Promise)
+    return checkSingle(doc, epub, lang, doNotReportMedia, axeRunner); // not AWAIT'ed! (pMap takes the Promise)
   }, { concurrency: DISABLE_CONCURRENT_TO_DEBUG_INDIVIDUAL_SPINE_ITEM ? 1 : axeRunner.concurrency })
   .then(async (results) => {
     await axeRunner.close();

@@ -20,6 +20,10 @@ module.exports = function ace(epubPath, options, axeRunner) {
 
   if (options.timeout) axeRunner.setTimeout(options.timeout);
 
+  const doNotReportMedia = !!options.doNotReportMedia || process && process.env && !!process.env.ACE_DO_NOT_REPORT_MEDIA_RESOURCES;
+  // if (!!options.doNotReportMedia) axeRunner.setDoNotReportMedia();
+  //if (options.doNotReportMedia && process && process.env) process.env.ACE_DO_NOT_REPORT_MEDIA_RESOURCES = "1";
+
   return new Promise((resolve, reject) => {
 
     function l10nDoneCallback() {
@@ -71,7 +75,7 @@ module.exports = function ace(epubPath, options, axeRunner) {
       // initialize the report
       .then(() => new Report(epub, options.outdir, options.lang).init())
       // Check each Content Doc
-      .then(report => checker.check(epub, report, options.lang, axeRunner))
+      .then(report => checker.check(epub, report, options.lang, doNotReportMedia, axeRunner))
       // Process the Results
       .then((report) => {
         if (!options.outdir) {

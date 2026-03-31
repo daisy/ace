@@ -36,6 +36,8 @@ const meowHelpMessage = `
 
     -T, --timeout <milliseconds> (default is 240000 per document)
 
+    -M, --doNotReportMedia skips reporting media resources
+
     -E, --exiterror2 exit process with code 2 when fail (return-2-on-validation-error)
   Examples
     $ ace -o out ~/Documents/book.epub
@@ -84,6 +86,9 @@ const meowOptions = {
     timeout: {
       alias: 'T',
       type: 'string'
+    },
+    doNotReportMedia: {
+      alias: 'M',
     },
     exiterror2: { // process exit code
       alias: 'E',
@@ -162,6 +167,7 @@ ${overrides.map(file => `  - ${file}`).join('\n')}
     jobId: '',
     lang: cli.flags.lang,
     timeout: cli.flags.timeout || undefined,
+    doNotReportMedia: cli.flags.doNotReportMedia || undefined,
     exiterror2: cli.flags.exiterror2 || undefined,
   }, axeRunner)
   .then(async (jobData) => {

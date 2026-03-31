@@ -42,10 +42,10 @@ function consolidate(results, report) {
   return report;
 }
 
-module.exports.check = function check(epub, report, lang, axeRunner) {
+module.exports.check = function check(epub, report, lang, doNotReportMedia, axeRunner) {
   return epubChecker.check(epub, report)
     .then(async (obj) => {
-      return htmlChecker.check(epub, lang, axeRunner).then((results) => {
+      return htmlChecker.check(epub, lang, doNotReportMedia, axeRunner).then((results) => {
         return new Promise((res) => {
           res({
             assertion: obj.assertion,

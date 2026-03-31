@@ -12,9 +12,11 @@ ace.createReport = function(report) {
     report.outlines = report.outlines || {};
     report.outlines.html = ace.getHTMLOutline();
     report.outlines.headings = ace.getHeadings();
-    report.data = report.data || {};
-    reportData('images', ace.getImages());
-    reportData('audios', ace.getAudios());
+    report.data = report.data || {};  
+    const skipExpensive = !!window.__skipExpensiveContentExtractions__; // configured from host bootstrapper page (checker-chromium) can be undefined
+    reportData('images', skipExpensive ? [] : ace.getImages());
+    reportData('audios', skipExpensive ? [] : ace.getAudios());
+    reportData('videos', skipExpensive ? [] : ace.getVideos());
     reportData('canvases', ace.getCanvases());
     reportData('embeds', ace.getEmbeds());
     reportData('epub-triggers', ace.getEPUBTriggers());
@@ -22,7 +24,6 @@ ace.createReport = function(report) {
     reportData('iframes', ace.getIframes());
     reportData('maps', ace.getMaps());
     reportData('scripts', ace.getScripts());
-    reportData('videos', ace.getVideos());
     report.properties = report.properties || {};
     report.properties.hasFormElements = ace.hasFormElements();
     report.properties.hasMathML = ace.hasMathML();
