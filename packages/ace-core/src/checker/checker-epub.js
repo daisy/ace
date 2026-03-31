@@ -69,6 +69,29 @@ function newMetadataAssertion(name, impact = 'serious') {
 function checkMetadata(assertions, epub) {
   let has_accessibilityFeature_printPageNumbersPageBreakMarkers = false;
 
+  // https://www.w3.org/TR/epub-a11y-11/#sec-conf-reporting-pub
+  if (epub.metadata["dcterms:conformsTo"]) {
+    const name = "dcterms:conformsTo";
+    let values = epub.metadata[name];
+    if (!Array.isArray(values)) {
+        values = [values]
+    }
+    for (val of values) {
+      if (val.startsWith("EPUB Accessibility 1.1") && !a11yMetadata.conformsToStrings.includes(val)
+          || val.startsWith("http://www.idpf.org/epub/a11y/accessibility") && !a11yMetadata.conformsToURLs.includes(val)) {
+        assertions.withAssertions(newViolation({
+          impact: 'moderate',
+          title: `metadata-${name.toLowerCase().replace('dcterms:', '')}-invalid`,
+          testDesc: localize("checkepub.metadatainvalid.testdesc", { value: val, name, interpolation: { escapeValue: false } }),
+          resDesc: localize("checkepub.metadatainvalid.resdesc", { name, interpolation: { escapeValue: false } }),
+          kbPath: 'docs/metadata/evaluation.html',
+          kbTitle: localize("checkepub.metadatainvalid.kbtitle"),
+          ruleDesc: localize("checkepub.metadatainvalid.ruledesc", { name, interpolation: { escapeValue: false } })
+        }));
+      }
+    }
+  }
+
   // Check metadata values
   for (const name in a11yMetadata.A11Y_META) {
     const meta = a11yMetadata.A11Y_META[name];
@@ -94,7 +117,7 @@ function checkMetadata(assertions, epub) {
       if (!Array.isArray(values)) {
         values = [values]
       }
-
+      
       // TODO?
       // "metadatamultiple" would be new localizable label for this kind of error!
       //   "A single occurence of schema.org metadata is expected",

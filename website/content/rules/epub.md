@@ -7,7 +7,7 @@ In addition to the [HTML rules]({{<ref "html.md">}}), Ace implements EPUB-specif
 
 * Missing metadata (impact = "serious"): `metadata-accessmode`, `metadata-accessibilityfeature`, `metadata-accessibilityhazard`
 * Missing metadata (impact = "moderate"): `metadata-accessibilitysummary`, `metadata-accessModesufficient`
-* Incorrect metadata values (impact = "moderate"): `metadata-accessibilityfeature-invalid`, `metadata-accessibilityhazard-invalid` (mixed positive and negative terms (e.g. `noFlashingHazard` and `flashing`), `unknown` mixed with `none` or other vocabulary values, or usage of terms not defined by the specification)
+* Incorrect metadata values (impact = "moderate"): `metadata-accessibilityfeature-invalid`, `metadata-accessibilityhazard-invalid` (mixed positive and negative terms (e.g. `noFlashingHazard` and `flashing`), `unknown` mixed with `none` or other vocabulary values, or usage of terms not defined by the specification such as `dcterms:conformsTo` values that start with a prefix recognised in the official EPUB Accessibility specification but end in some arbitrary fashion)
 * Incorrect metadata values (impact = "minor"): `metadata-accessmode-invalid`, `metadata-accessmodesufficient-invalid` (usage of terms not defined by the specification)
 * Missing authored page list when metadata `pageNavigation` is present (impact = "moderate"): `metadata-accessibilityFeature-printPageNumbers-nopagelist`
 * Missing page breaks when metadata `printPageNumbers`/`pageBreakMarkers` is present (impact = "moderate"): `metadata-accessibilityFeature-printPageNumbers-nopagebreaks`

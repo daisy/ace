@@ -18,6 +18,8 @@
   <!-- Fail #3: good metadata values, but not allowed to combine (unlike accessModeSufficient) -->
   <meta property="schema:accessibilityControl">fullKeyboardControl,fullMouseControl</meta>
   <meta property="schema:accessModeSufficient">visual,textual</meta>
+  <!-- Fail #5: invalid value -->
+  <meta property="dcterms:conformsTo">EPUB Accessibility 1.1 - WCAG 2.0 Level Z</meta>
 </metadata>
 <manifest>
   <item id="nav"  href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>

@@ -25,10 +25,10 @@
   <dc:source>print-source</dc:source>
 
   <meta property="dcterms:conformsTo" id="conf">EPUB-A11Y-11_WCAG-21-AA</meta>
-  <meta property="dcterms:conformsTo" id="conf">EPUB-A11Y-11_WCAG-20-A</meta>
+  <meta property="dcterms:conformsTo" id="conf2">EPUB-A11Y-11_WCAG-20-A</meta>
   <!-- meta property="dcterms:conformsTo">http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-aa</meta -->
   <link rel="dcterms:conformsTo" href="xxhttp://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-aa" />
-  <!-- meta property="dcterms:conformsTo" id="conf">EPUB Accessibility 1.1 - WCAG 2.1 Level AA</meta -->
+  <!-- meta property="dcterms:conformsTo" id="conf3">EPUB Accessibility 1.1 - WCAG 2.1 Level AA</meta -->
 
   <meta property="a11y:certifiedBy" id="certifier" refines="#conf">Benetech</meta>
   <link rel="a11y:certifierCredential" href="http://GCA" refines="#certifier" />
