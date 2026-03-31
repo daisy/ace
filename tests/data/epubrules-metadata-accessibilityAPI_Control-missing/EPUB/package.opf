@@ -20,7 +20,9 @@
 
   <meta property="schema:accessibilityAPI">AndroidAcessibility</meta> -->
 
-  <meta name="a11y:certifiedBy" content="CERTBY" />
+  <!-- meta name="a11y:certifiedBy" content="CERTBY" / -->
+  <meta property="a11y:certifiedBy">CERTBY</meta>
+
   <meta property="a11y:certifierCredential">CERTCRED</meta>
   <link rel="a11y:certifierReport" href="http://www.example.com/report.html"/>
   <link rel="  dcterms:conformsTo   " href="http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-aa"/>

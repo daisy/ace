@@ -162,7 +162,27 @@ function parseMetadata(doc, select, epub) {
     } else {
       const content = meta.getAttribute('content');
       if (name && content) {
-        addMeta(name, content, result);
+        // const a11yMetadata = require('../core/a11y-metadata');
+        // a11yMetadata.A11Y_META
+        const A11Y_META = [
+          "schema:accessMode",
+          "schema:accessibilityFeature",
+          "schema:accessibilityHazard",
+          "schema:accessibilitySummary",
+          "schema:accessModeSufficient",
+          
+          "schema:accessibilityAPI",
+          "schema:accessibilityControl",
+          
+          "a11y:certifiedBy",
+          "a11y:certifierCredential",
+          "a11y:certifierReport",
+          "dcterms:conformsTo"
+        ];
+        const isEPUB2 = epub.version && epub.version.startsWith("2");
+        if (isEPUB2 || !A11Y_META.includes(name)) {
+          addMeta(name, content, result);
+        }
       }
     }
   });

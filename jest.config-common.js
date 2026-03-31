@@ -1,3 +1,4 @@
+// EXAMPLE: yarn test-electron -- epub-rules -t "accessmode"
 module.exports = {
   verbose: true,
   testEnvironment: 'node',
