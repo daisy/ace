@@ -76,7 +76,7 @@ function checkMetadata(assertions, epub) {
     if (!Array.isArray(values)) {
         values = [values]
     }
-    for (val of values) {
+    for (const val of values) {
       if (val.startsWith("EPUB Accessibility 1.1") && !a11yMetadata.conformsToStrings.includes(val)
           || val.startsWith("http://www.idpf.org/epub/a11y/accessibility") && !a11yMetadata.conformsToURLs.includes(val)) {
         assertions.withAssertions(newViolation({
