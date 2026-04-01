@@ -1,3 +1,10 @@
+<a name="1.4.1"></a>
+## [1.4.1](https://github.com/daisy/ace/compare/v1.4.0...v1.4.1) (2026-04-01)
+
+### Updates:
+
+* Fix: in some cases (reproduced by some users, but not during development under NodeJS 20-24), runtime error "val" undefined when checking publication metadata with `dcterms:conformsTo`
+
 <a name="1.4.0"></a>
 ## [1.4.0](https://github.com/daisy/ace/compare/v1.3.7...v1.4.0) (2026-03-31)
 

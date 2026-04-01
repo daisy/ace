@@ -9,15 +9,15 @@ Ace by DAISY App is the official graphical user interface for the EPUB accessibi
 
 ## Where can I download the Ace App?
 
-The latest version of the Ace App is 1.4.0. The application installers are distributed via the GitHub development website. Here are convenient download links:
+The latest version of the Ace App is 1.4.1. The application installers are distributed via the GitHub development website. Here are convenient download links:
 
-* **MacOS**: download the [Intel DMG file](https://github.com/daisy/ace-gui/releases/download/v1.4.0/Ace.by.DAISY-1.4.0.dmg) or the [Apple Silicon (M1, M2, M3, M4) DMG file](https://github.com/daisy/ace-gui/releases/download/v1.4.0/Ace.by.DAISY-1.4.0-arm64.dmg), open it, and drag the `Ace by DAISY.app` file into your Applications folder.
-* **Windows**: download the [Intel NSIS installer](https://github.com/daisy/ace-gui/releases/download/v1.4.0/Ace.by.DAISY.Setup.1.4.0.exe) or the [ARM64 (SnapDragon) NSIS installer](https://github.com/daisy/ace-gui/releases/download/v1.4.0/Ace.by.DAISY.Setup.1.4.0-arm64.exe), and follow the step-by-step instructions.
-* **Linux**: download the [Intel AppImage file](https://github.com/daisy/ace-gui/releases/download/v1.4.0/Ace.by.DAISY-1.4.0.AppImage) or the [ARM64 AppImage file](https://github.com/daisy/ace-gui/releases/download/v1.4.0/Ace.by.DAISY-1.4.0-arm64.AppImage), and double-click the icon to immediately start using the application. Alternatively, you may download the [Intel Debian package](https://github.com/daisy/ace-gui/releases/download/v1.4.0/ace-gui_1.4.0_amd64.deb) or the [ARM64 Debian package](https://github.com/daisy/ace-gui/releases/download/v1.4.0/ace-gui_1.4.0_arm64.deb) to install the app via your package manager (e.g. `sudo apt install ace-gui_1.4.0_amd64.deb`).
+* **MacOS**: download the [Intel DMG file](https://github.com/daisy/ace-gui/releases/download/v1.4.1/Ace.by.DAISY-1.4.1.dmg) or the [Apple Silicon (M1, M2, M3, M4) DMG file](https://github.com/daisy/ace-gui/releases/download/v1.4.1/Ace.by.DAISY-1.4.1-arm64.dmg), open it, and drag the `Ace by DAISY.app` file into your Applications folder.
+* **Windows**: download the [Intel NSIS installer](https://github.com/daisy/ace-gui/releases/download/v1.4.1/Ace.by.DAISY.Setup.1.4.1.exe) or the [ARM64 (SnapDragon) NSIS installer](https://github.com/daisy/ace-gui/releases/download/v1.4.1/Ace.by.DAISY.Setup.1.4.1-arm64.exe), and follow the step-by-step instructions.
+* **Linux**: download the [Intel AppImage file](https://github.com/daisy/ace-gui/releases/download/v1.4.1/Ace.by.DAISY-1.4.1.AppImage) or the [ARM64 AppImage file](https://github.com/daisy/ace-gui/releases/download/v1.4.1/Ace.by.DAISY-1.4.1-arm64.AppImage), and double-click the icon to immediately start using the application. Alternatively, you may download the [Intel Debian package](https://github.com/daisy/ace-gui/releases/download/v1.4.1/ace-gui_1.4.1_amd64.deb) or the [ARM64 Debian package](https://github.com/daisy/ace-gui/releases/download/v1.4.1/ace-gui_1.4.1_arm64.deb) to install the app via your package manager (e.g. `sudo apt install ace-gui_1.4.1_amd64.deb`).
 
 ## How can I obtain further information?
 
-Please read the [full release notes](https://github.com/daisy/ace-gui/releases/tag/v1.4.0) at the GitHub development website.
+Please read the [full release notes](https://github.com/daisy/ace-gui/releases/tag/v1.4.1) at the GitHub development website.
 
 You may also take a look at the project's main [README page](https://github.com/daisy/ace-gui/blob/master/README.md).
 
