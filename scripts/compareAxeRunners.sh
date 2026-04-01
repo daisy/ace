@@ -11,7 +11,7 @@ echo "ElectronAxeRunner ..."
 # ACE_TIMEOUT_INITIAL ==> load and Axe
 # ACE_TIMEOUT_EXTENSION ==> Axe...
 # -T/--timeout 100 means 100 milliseconds over the initial 5 seconds for Axe to do its job
-ACE_PERF=1 node ./packages/ace/bin/ace-electron.js -T 100 -l en -f -s -o ./CompareAxeRunners/ElectronAxeRunner "$1"
+ACE_PERF=1 node ./packages/ace/bin/ace-electron.js $ELECTRON_ARGS -T 100 -l en -f -s -o ./CompareAxeRunners/ElectronAxeRunner "$1"
 
 echo "PuppeteerAxeRunner ..."
 
