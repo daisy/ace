@@ -44,7 +44,7 @@
     "@daisy/ace-cli": "1.4.2-alpha.1",
     "@daisy/ace-core": "1.4.2-alpha.1",
     "@daisy/ace-http": "1.4.2-alpha.1",
-    "electron": "^41.1.0"
+    "electron": "^41.1.1"
   },
   "publishConfig": {
     "access": "public"

@@ -4,6 +4,26 @@
   "workspaces": [
     "packages/*"
   ],
+  "workspaces__": [
+    "packages/ace",
+    "packages/ace-axe-runner-electron",
+    "packages/ace-axe-runner-puppeteer",
+    "packages/ace-cli",
+    "packages/ace-cli-shared",
+    "packages/ace-config",
+    "packages/ace-core",
+    "packages/ace-core-legacy",
+    "packages/ace-http",
+    "packages/ace-localize",
+    "packages/ace-logger",
+    "packages/ace-meta",
+    "packages/ace-report",
+    "packages/ace-report-axe",
+    "packages/epub-utils",
+    "packages/jest-env-puppeteer",
+    "packages/jest-puppeteer",
+    "packages/puppeteer-utils"
+  ],
   "version": "1.4.2-alpha.1",
   "engines": {
     "node": ">=20.0.0",
@@ -27,15 +47,15 @@
     "i18next-json-sync": "^3.1.2",
     "jest": "^30.3.0",
     "json": "^11.0.0",
-    "json-diff": "^0.9.0",
+    "json-diff": "^0.9.1",
     "micromatch": "^4.0.8",
     "mkdirp": "^1.0.4",
     "rimraf": "^3.0.2",
-    "strip-ansi": "^6.0.0",
+    "strip-ansi": "^6.0.1",
     "taze": "^19.11.0"
   },
   "resolutions": {
-    "electron": "^41.1.0",
+    "electron": "^41.1.1",
     "@jest/console": "^30.3.0",
     "@jest/transform": "^30.3.0",
     "jest": "^30.3.0",
