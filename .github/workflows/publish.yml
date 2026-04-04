@@ -14,10 +14,10 @@ name: Publish Package(s)
 
 on:
   push:
-    branches: [ master ]
+    # branches: [ master ]
     tags:
       # https://github.com/daisy/ace/settings/rules
-      - "v*" # excludes slash /
+      - 'v*' # excludes slash /
 
 permissions:
   id-token: write # Required for OIDC
