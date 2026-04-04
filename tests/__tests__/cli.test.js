@@ -27,8 +27,10 @@ const cleanupElectronJestStderr = (str, lineBreaks) => {
   if (s) {
     // [4250:0124/120235.963909:ERROR:mach_port_rendezvous.cc(202)] mach_msg send: (ipc/send) invalid port right (0x1000000a)
     // [4252:0124/120235.964624:ERROR:child_thread_impl.cc(231)] Invalid PlatformChannel receive right
+    // [20611:0404/150403.183018:ERROR:base/process/process_mac.cc:53] task_policy_set TASK_CATEGORY_POLICY: (os/kern) invalid argument (4)
     s = s.replace(/^.+(mach_port_rendezvous|child_thread_impl)\.cc.+$/gm, '');
     s = s.replace(/^.*Unable to revert mtime:.+$/gm, '');
+    s = s.replace(/^.*task_policy_set TASK_CATEGORY_POLICY.+$/gm, '');
     if (lineBreaks) s = s.replace(/\n/gm, ' ');
     s = s.trim();
   }
