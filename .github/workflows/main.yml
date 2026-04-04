@@ -1,14 +1,14 @@
-name: CI
+name: BUILD AND TEST
 on:
   push:
-    branches: [ master ]
+    branches: [master]
     tags-ignore:
-      - '*'
+      - "*"
   pull_request:
-    branches: [ master ]
+    branches: [master]
 jobs:
   build:
-#    if: "!contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
+    #    if: "!contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
     if: "github.event_name == 'pull_request' || !contains(github.event.head_commit.message, 'skip ci')"
     # runs-on: ubuntu-latest # / ubuntu-18.04 ... or ubuntu-16.04, ubuntu-20.04
     # runs-on: macos-latest # / macos-10.15
@@ -33,79 +33,79 @@ jobs:
           - osarch: linux-intel
             runson: ubuntu-22.04 #ubuntu-latest is ubuntu-24.04
     env:
-      DBUS_SYSTEM_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
-      DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
+      DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/var/run/dbus/system_bus_socket"
+      DBUS_SESSION_BUS_ADDRESS: "unix:path=/var/run/dbus/system_bus_socket"
     steps:
-    - run: 'echo "GITHUB_RUN_NUMBER: ${{ github.run_number }}"'
-    - run: 'echo "GITHUB_RUN_ID: ${{ github.run_id }}"'
-    - run: 'echo "GITHUB_SHA: ${{ github.sha }}"'
-    - name: Check sys arch
-      if: ${{ matrix.osarch != 'windows-intel' }}
-      run: echo "${{ matrix.osarch }}" && uname -m && arch
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Git config global dump (post)
-      run: 'git config --global --list || echo NO_GIT_GLOBAL_CONFIG || true'
-      shell: bash
-    - name: Git config local dump (post)
-      run: 'git config --list || echo NO_GIT_GLOBAL_CONFIG || true'
-      shell: bash
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        #check-latest: true
-    - run: node --version && npm --version
-    - run: npm --global install npm@^10
-    - run: npm --version
-    - run: npm --global install yarn@^1
-    - run: yarn --version
-    - run: git --no-pager diff
-    # - run: yarn install --frozen-lockfile
-#     - name: YARN install
-# # yarn cache clean && yarn config delete proxy && yarn config delete https-proxy && yarn config delete registry &&
-#       run: 'yarn install --network-timeout 1000000'
-#       shell: bash
-    # - name: PR action
-    #   if: ${{ github.event_name == 'pull_request' }}
-    #   run: echo PR
-    - name: non-PR action, NOT Windows, YARN INSTALL
-      if: ${{ github.event_name != 'pull_request' && ( matrix.osarch != 'windows-intel' && matrix.osarch != 'windows-arm' ) }}
-      run: echo "${{ matrix.osarch }}" && ./scripts/yarn-install.sh
-      shell: bash
-    - name: non-PR action, Windows, YARN INSTALL
-      if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
-      run: echo "${{ matrix.osarch }}" && yarn install --frozen-lockfile --ignore-scripts --network-timeout 1000000 && cd node_modules && cd electron && yarn --verbose --network-timeout 1000000 run postinstall && cd .. && cd .. && cd node_modules && cd puppeteer && yarn --verbose --network-timeout 1000000 run postinstall && cd .. && cd .. && yarn --verbose run postinstall # || (dir C:\Users\runneradmin\AppData\Local\electron\Cache\ && dir C:\Users\runneradmin\AppData\Local\electron\Cache\763e1ded5bfc6f3862bfcc801d7ca46745b5e20a39e4263b4dbb680e7c92f0ad && dir C:\Users\runneradmin\AppData\Local\electron\Cache\70829cbb4e1572da61893254d04a0c0c66e78deccc85ea1b8d262f6689158c77)
-      shell: cmd
-    - name: non-PR action, Windows, ELECTRON CHECK
-      if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
-      run: echo "${{ matrix.osarch }}" && cat node_modules/electron/package.json | grep -i VERSION # && ls -als packages/ace-axe-runner-electron/node_modules && cat packages/ace-axe-runner-electron/node_modules/electron/package.json | grep -i VERSION
-      shell: bash
-    - name: non-PR action, Linux, Puppeteer vs. Electron test
-      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'linux-intel' || matrix.osarch == 'linux-arm') }}
-      run: echo "${{ matrix.osarch }}" && curl -s -L -o book.epub https://github.com/IDPF/epub3-samples/releases/download/20230704/accessible_epub_3.epub && ls -als book.epub && rm -rf ./CompareAxeRunners && ACE_PERF=1 xvfb-run --auto-servernum node ./packages/ace/bin/ace-electron.js -l en -f -V -o ./CompareAxeRunners/ElectronAxeRunner ./book.epub && ACE_PERF=1 xvfb-run --auto-servernum node ./packages/ace-cli/bin/ace.js -f -s -o ./CompareAxeRunners/PuppeteerAxeRunner ./book.epub && node ./scripts/normalise_report_json.js ./CompareAxeRunners/PuppeteerAxeRunner/report.json && node ./scripts/normalise_report_json.js ./CompareAxeRunners/ElectronAxeRunner/report.json && node node_modules/json-diff/bin/json-diff.js ./CompareAxeRunners/PuppeteerAxeRunner/report_normalised.json ./CompareAxeRunners/ElectronAxeRunner/report_normalised.json || echo OK
-    - name: non-PR action, Mac, Puppeteer vs. Electron test
-      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
-      run: echo "${{ matrix.osarch }}" && curl -s -L -o book.epub https://github.com/IDPF/epub3-samples/releases/download/20230704/accessible_epub_3.epub && ls -als book.epub && rm -rf ./CompareAxeRunners && ACE_PERF=1 node ./packages/ace/bin/ace-electron.js -l en -f -V -o ./CompareAxeRunners/ElectronAxeRunner ./book.epub && ACE_PERF=1 node ./packages/ace-cli/bin/ace.js -f -s -o ./CompareAxeRunners/PuppeteerAxeRunner ./book.epub && node ./scripts/normalise_report_json.js ./CompareAxeRunners/PuppeteerAxeRunner/report.json && node ./scripts/normalise_report_json.js ./CompareAxeRunners/ElectronAxeRunner/report.json && node node_modules/json-diff/bin/json-diff.js ./CompareAxeRunners/PuppeteerAxeRunner/report_normalised.json ./CompareAxeRunners/ElectronAxeRunner/report_normalised.json || echo OK
-    - name: non-PR action, Windows, Puppeteer
-      if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
-      run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
-    - name: non-PR action, Windows, Electron
-      if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
-      run: echo "${{ matrix.osarch }}" && yarn test-electron # && yarn test-electron-cli
-    - name: non-PR action, Linux, Puppeteer
-      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'linux-intel' || matrix.osarch == 'linux-arm') }}
-      run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
-    - name: non-PR action, Linux, Electron
-      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'linux-intel' || matrix.osarch == 'linux-arm') }}
-      # uses: coactions/setup-xvfb@6b00cf1889f4e1d5a48635647013c0508128ee1a #v1
-      # with:
-      #   run: yarn test-electron && yarn test-electron-cli
-      #   working-directory: ./
-      #   # options:
-      run: echo "${{ matrix.osarch }}" && dbus-run-session -- bash -c "export DBUS_SYSTEM_BUS_ADDRESS=\$DBUS_SESSION_BUS_ADDRESS; xvfb-run --auto-servernum yarn test-electron" ; dbus-run-session -- bash -c "export DBUS_SYSTEM_BUS_ADDRESS=\$DBUS_SESSION_BUS_ADDRESS; xvfb-run --auto-servernum yarn test-electron-cli"
-    - name: non-PR action, Mac, Puppeteer
-      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
-      run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
-    - name: non-PR action, Mac, Electron
-      if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
-      run: echo "${{ matrix.osarch }}" && yarn test-electron && yarn test-electron-cli
+      - run: 'echo "GITHUB_RUN_NUMBER: ${{ github.run_number }}"'
+      - run: 'echo "GITHUB_RUN_ID: ${{ github.run_id }}"'
+      - run: 'echo "GITHUB_SHA: ${{ github.sha }}"'
+      - name: Check sys arch
+        if: ${{ matrix.osarch != 'windows-intel' }}
+        run: echo "${{ matrix.osarch }}" && uname -m && arch
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Git config global dump (post)
+        run: "git config --global --list || echo NO_GIT_GLOBAL_CONFIG || true"
+        shell: bash
+      - name: Git config local dump (post)
+        run: "git config --list || echo NO_GIT_GLOBAL_CONFIG || true"
+        shell: bash
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          #check-latest: true
+      - run: node --version ; npm --version ; yarn --version
+      - run: npm --global install npm@^11
+      - run: npm --version
+      - run: npm --global install yarn@^1
+      - run: yarn --version
+      - run: git --no-pager diff
+      # - run: yarn install --frozen-lockfile
+      #     - name: YARN install
+      # # yarn cache clean && yarn config delete proxy && yarn config delete https-proxy && yarn config delete registry &&
+      #       run: 'yarn install --network-timeout 1000000'
+      #       shell: bash
+      # - name: PR action
+      #   if: ${{ github.event_name == 'pull_request' }}
+      #   run: echo PR
+      - name: non-PR action, NOT Windows, YARN INSTALL
+        if: ${{ github.event_name != 'pull_request' && ( matrix.osarch != 'windows-intel' && matrix.osarch != 'windows-arm' ) }}
+        run: echo "${{ matrix.osarch }}" && ./scripts/yarn-install.sh ; npx --no --offline --include-workspace-root --workspace . taze
+        shell: bash
+      - name: non-PR action, Windows, YARN INSTALL
+        if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
+        run: echo "${{ matrix.osarch }}" && yarn install --frozen-lockfile --ignore-scripts --network-timeout 1000000 && cd node_modules && cd electron && yarn --verbose --network-timeout 1000000 run postinstall && cd .. && cd .. && cd node_modules && cd puppeteer && yarn --verbose --network-timeout 1000000 run postinstall && cd .. && cd .. && yarn --verbose run postinstall ; npx --no --offline --include-workspace-root --workspace . taze # || (dir C:\Users\runneradmin\AppData\Local\electron\Cache\ && dir C:\Users\runneradmin\AppData\Local\electron\Cache\763e1ded5bfc6f3862bfcc801d7ca46745b5e20a39e4263b4dbb680e7c92f0ad && dir C:\Users\runneradmin\AppData\Local\electron\Cache\70829cbb4e1572da61893254d04a0c0c66e78deccc85ea1b8d262f6689158c77)
+        shell: cmd
+      - name: non-PR action, Windows, ELECTRON CHECK
+        if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
+        run: echo "${{ matrix.osarch }}" && cat node_modules/electron/package.json | grep -i VERSION # && ls -als packages/ace-axe-runner-electron/node_modules && cat packages/ace-axe-runner-electron/node_modules/electron/package.json | grep -i VERSION
+        shell: bash
+      - name: non-PR action, Linux, Puppeteer vs. Electron test
+        if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'linux-intel' || matrix.osarch == 'linux-arm') }}
+        run: echo "${{ matrix.osarch }}" && curl -s -L -o book.epub https://github.com/IDPF/epub3-samples/releases/download/20230704/accessible_epub_3.epub && ls -als book.epub && rm -rf ./CompareAxeRunners && ACE_PERF=1 xvfb-run --auto-servernum node ./packages/ace/bin/ace-electron.js -l en -f -V -o ./CompareAxeRunners/ElectronAxeRunner ./book.epub && ACE_PERF=1 xvfb-run --auto-servernum node ./packages/ace-cli/bin/ace.js -f -s -o ./CompareAxeRunners/PuppeteerAxeRunner ./book.epub && node ./scripts/normalise_report_json.js ./CompareAxeRunners/PuppeteerAxeRunner/report.json && node ./scripts/normalise_report_json.js ./CompareAxeRunners/ElectronAxeRunner/report.json && node node_modules/json-diff/bin/json-diff.js ./CompareAxeRunners/PuppeteerAxeRunner/report_normalised.json ./CompareAxeRunners/ElectronAxeRunner/report_normalised.json || echo OK
+      - name: non-PR action, Mac, Puppeteer vs. Electron test
+        if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
+        run: echo "${{ matrix.osarch }}" && curl -s -L -o book.epub https://github.com/IDPF/epub3-samples/releases/download/20230704/accessible_epub_3.epub && ls -als book.epub && rm -rf ./CompareAxeRunners && ACE_PERF=1 node ./packages/ace/bin/ace-electron.js -l en -f -V -o ./CompareAxeRunners/ElectronAxeRunner ./book.epub && ACE_PERF=1 node ./packages/ace-cli/bin/ace.js -f -s -o ./CompareAxeRunners/PuppeteerAxeRunner ./book.epub && node ./scripts/normalise_report_json.js ./CompareAxeRunners/PuppeteerAxeRunner/report.json && node ./scripts/normalise_report_json.js ./CompareAxeRunners/ElectronAxeRunner/report.json && node node_modules/json-diff/bin/json-diff.js ./CompareAxeRunners/PuppeteerAxeRunner/report_normalised.json ./CompareAxeRunners/ElectronAxeRunner/report_normalised.json || echo OK
+      - name: non-PR action, Windows, Puppeteer
+        if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
+        run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
+      - name: non-PR action, Windows, Electron
+        if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
+        run: echo "${{ matrix.osarch }}" && yarn test-electron # && yarn test-electron-cli
+      - name: non-PR action, Linux, Puppeteer
+        if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'linux-intel' || matrix.osarch == 'linux-arm') }}
+        run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
+      - name: non-PR action, Linux, Electron
+        if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'linux-intel' || matrix.osarch == 'linux-arm') }}
+        # uses: coactions/setup-xvfb@6b00cf1889f4e1d5a48635647013c0508128ee1a #v1
+        # with:
+        #   run: yarn test-electron && yarn test-electron-cli
+        #   working-directory: ./
+        #   # options:
+        run: echo "${{ matrix.osarch }}" && dbus-run-session -- bash -c "export DBUS_SYSTEM_BUS_ADDRESS=\$DBUS_SESSION_BUS_ADDRESS; xvfb-run --auto-servernum yarn test-electron" ; dbus-run-session -- bash -c "export DBUS_SYSTEM_BUS_ADDRESS=\$DBUS_SESSION_BUS_ADDRESS; xvfb-run --auto-servernum yarn test-electron-cli"
+      - name: non-PR action, Mac, Puppeteer
+        if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
+        run: echo "${{ matrix.osarch }}" && yarn test && yarn test-cli
+      - name: non-PR action, Mac, Electron
+        if: ${{ github.event_name != 'pull_request' && (matrix.osarch == 'macos-intel' || matrix.osarch == 'macos-arm') }}
+        run: echo "${{ matrix.osarch }}" && yarn test-electron && yarn test-electron-cli
