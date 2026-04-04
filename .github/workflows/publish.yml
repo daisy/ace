@@ -14,10 +14,10 @@ name: Publish Package(s)
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
     tags:
       # https://github.com/daisy/ace/settings/rules
-      - 'v*' # excludes slash /
+      - "v*" # excludes slash /
 
 permissions:
   id-token: write # Required for OIDC
@@ -25,7 +25,7 @@ permissions:
 
 jobs:
   publish:
-    #if: "github.event_name == 'push' && contains(github.event.head_commit.message, 'release tag')"
+    if: "github.event_name == 'push' && contains(github.event.head_commit.message, 'release tag')"
     #if: "contains(github.event.head_commit.message, 'release tag')"
     runs-on: ubuntu-latest
     steps:
@@ -49,16 +49,16 @@ jobs:
         #  NPM_CONFIG_PROVENANCE: true
         shell: bash
         run: |
-for relativefilepath in packages/*; do
-    filename=`basename "${relativefilepath}"`
-    echo "${filename} (${relativefilepath})"
-    cd "${relativefilepath}"
-    if [ "${filename}" != "ace-core-legacy" ]; then
-        echo "PUBLISH: [${filename}] ..."
-        # --dry-run
-        # --provenance
-        # npm publish --access public --tag=next .
-        # npm publish --access public --tag=latest .
-    fi
-    cd - &> /dev/null
-done
+          for relativefilepath in packages/*; do
+              filename=`basename "${relativefilepath}"`
+              echo "${filename} (${relativefilepath})"
+              cd "${relativefilepath}"
+              if [ "${filename}" != "ace-core-legacy" ]; then
+                  echo "PUBLISH: [${filename}] ..."
+                  # --dry-run
+                  # --provenance
+                  # npm publish --access public --tag=next .
+                  # npm publish --access public --tag=latest .
+              fi
+              cd - &> /dev/null
+          done
