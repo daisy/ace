@@ -33,6 +33,7 @@ schema-version = "1.11.0"
 
 [install]
 nodejs_24.pkg-path = "nodejs_24"
+nodejs_24.outputs = "all"
 yarn.pkg-path = "yarn"
 hugo.pkg-path = "hugo"
 
@@ -119,7 +120,7 @@ fi
 #export NPM_CONFIG_PREFIX="/tmp/${envName}-npm";
 
 export NPM_CONFIG_PREFIX="${FLOX_CACHE_DIR}/NPM_PREFIX";
-#### rm -rf "$NPM_CONFIG_PREFIX";
+rm -rf "$NPM_CONFIG_PREFIX";
 mkdir -p "$NPM_CONFIG_PREFIX";
 if [[ ! -z "${FLX_VERBOSE}" ]]; then
 echo "-----> NPM CONFIG PREFIX: $(npm config get prefix)";
@@ -131,7 +132,7 @@ lss "$NPM_CONFIG_PREFIX/lib/node_modules";
 fi
 
 export NPM_CONFIG_CACHE="${FLOX_CACHE_DIR}/NPM_CACHE";
-#### rm -rf "$NPM_CONFIG_CACHE";
+rm -rf "$NPM_CONFIG_CACHE";
 mkdir -p "$NPM_CONFIG_CACHE";
 if [[ ! -z "${FLX_VERBOSE}" ]]; then
 echo "-----> NPM CONFIG CACHE: $(npm config get cache)"
@@ -159,8 +160,14 @@ export NODE_PATH="$NPM_CONFIG_PREFIX/lib/node_modules${NODE_PATH:+:$NODE_PATH}";
 
 export PATH="$NPM_CONFIG_PREFIX/bin:$PATH";
 
-npm install -g npm --foreground-scripts 1>/dev/null
-npm install -g npm-check-updates --foreground-scripts 1>/dev/null
+npm install --ignore-scripts --foreground-scripts -g sfw
+
+[[ ! -z "${FLX_VERBOSE}" ]] && ls -alshFR --color=auto "$NPM_CONFIG_PREFIX/lib/node_modules/sfw/.sfw-cache"
+
+sfw npm install -g npm --foreground-scripts 1>/dev/null
+#sfw npm install -g npm-check-updates --foreground-scripts 1>/dev/null
+
+[[ ! -z "${FLX_VERBOSE}" ]] && ls -alshFR --color=auto "$NPM_CONFIG_PREFIX/lib/node_modules/sfw/.sfw-cache"
 '''
 
 [profile]
