@@ -2,9 +2,9 @@
 # https://docs.npmjs.com/trusted-publishers
 #
 
-#GIT_COMMITTER_DATE="$(git show master --format=%aD | head -1)" git tag -a "1.4.2-alpha.1" master -m "release tag 1.4.2-alpha.1" && git push --tags origin master && git --no-pager tag --list --format='%(refname)   %(taggerdate)'
+#GIT_COMMITTER_DATE="$(git show master --format=%aD | head -1)" git tag -a "v1.4.2-alpha.1" master -m "release tag 1.4.2-alpha.1" && git push --tags origin master && git --no-pager tag --list --format='%(refname)   %(taggerdate)'
 
-#git tag -d 1.4.2-alpha.1 && git push origin :refs/tags/1.4.2-alpha.1
+#git tag -d v1.4.2-alpha.1 && git push origin :refs/tags/v1.4.2-alpha.1
 
 name: Publish Package(s)
 
@@ -16,7 +16,8 @@ on:
   push:
     branches: [ master ]
     tags:
-      - "v*" # https://github.com/daisy/ace/settings/rules
+      # https://github.com/daisy/ace/settings/rules
+      - "v*" # excludes slash /
 
 permissions:
   id-token: write # Required for OIDC
