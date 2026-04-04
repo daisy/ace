@@ -40,25 +40,25 @@ jobs:
       - run: npm --version
       - run: npm --global install yarn@^1
       - run: yarn --version
-      - name: YARN INSTALL and POSTINSTALL(s) (includes BUILD)
-        run: rm -rf node_modules ; yarn install --frozen-lockfile --ignore-scripts --network-timeout 1000000 ; cd node_modules/electron ; yarn --verbose --network-timeout 1000000 run postinstall ; cd ../.. ; cd node_modules/puppeteer ; rm -rf ~/.cache/puppeteer/ ; yarn --verbose --network-timeout 1000000 run postinstall ; cd ../.. ; yarn --verbose run postinstall ; npm audit ; npm outdated # ; npx --no --offline --include-workspace-root --workspace . taze
-        shell: bash
-        #POSTINSTALL ===> -run: yarn npmVersionsCheck && yarn build && yarn patchElectronJestRunner && yarn patchElectronJestRunner_
-      - name: PACKAGE PUBLISH
-        #env:
-        #  NPM_CONFIG_PROVENANCE: true
-        shell: bash
-        run: |
-          for relativefilepath in packages/*; do
-              filename=`basename "${relativefilepath}"`
-              echo "${filename} (${relativefilepath})"
-              cd "${relativefilepath}"
-              if [ "${filename}" != "ace-core-legacy" ]; then
-                  echo "PUBLISH: [${filename}] ..."
-                  # --dry-run
-                  # --provenance
-                  # npm publish --access public --tag=next .
-                  # npm publish --access public --tag=latest .
-              fi
-              cd - &> /dev/null
-          done
+      # - name: YARN INSTALL and POSTINSTALL(s) (includes BUILD)
+      #   run: rm -rf node_modules ; yarn install --frozen-lockfile --ignore-scripts --network-timeout 1000000 ; cd node_modules/electron ; yarn --verbose --network-timeout 1000000 run postinstall ; cd ../.. ; cd node_modules/puppeteer ; rm -rf ~/.cache/puppeteer/ ; yarn --verbose --network-timeout 1000000 run postinstall ; cd ../.. ; yarn --verbose run postinstall ; npm audit ; npm outdated # ; npx --no --offline --include-workspace-root --workspace . taze
+      #   shell: bash
+      #   #POSTINSTALL ===> -run: yarn npmVersionsCheck && yarn build && yarn patchElectronJestRunner && yarn patchElectronJestRunner_
+      # - name: PACKAGE PUBLISH
+      #   #env:
+      #   #  NPM_CONFIG_PROVENANCE: true
+      #   shell: bash
+      #   run: |
+      #     for relativefilepath in packages/*; do
+      #         filename=`basename "${relativefilepath}"`
+      #         echo "${filename} (${relativefilepath})"
+      #         cd "${relativefilepath}"
+      #         if [ "${filename}" != "ace-core-legacy" ]; then
+      #             echo "PUBLISH: [${filename}] ..."
+      #             # --dry-run
+      #             # --provenance
+      #             # npm publish --access public --tag=next .
+      #             # npm publish --access public --tag=latest .
+      #         fi
+      #         cd - &> /dev/null
+      #     done
