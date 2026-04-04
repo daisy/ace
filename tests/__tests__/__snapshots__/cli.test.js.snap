@@ -19,16 +19,13 @@ exports[`Running the CLI with -o pointing to an existing directory should fail 1
   - report/report.html
   - report/js
 
-  Use option --force to override.
-
-"
+  Use option --force to override."
 `;
 
 exports[`Running the CLI with no input should fail 1`] = `"[31merror[39m:   Input required"`;
 
 exports[`Running the CLI with no input should fail 2`] = `
-"
-  Ace by DAISY, an Accessibility Checker for EPUB
+"Ace by DAISY, an Accessibility Checker for EPUB
 
   Usage: ace [options] <input>
 
@@ -56,14 +53,11 @@ exports[`Running the CLI with no input should fail 2`] = `
     $ ace -o out ~/Documents/book.epub
 
   If you find DAISY Ace useful, please help us by donating to support its ongoing maintenance.
-  Support our work https://daisy.org/AceCLSponsor
-
-"
+  Support our work https://daisy.org/AceCLSponsor"
 `;
 
 exports[`Running the CLI with the -h option should print help 1`] = `
-"
-  Ace by DAISY, an Accessibility Checker for EPUB
+"Ace by DAISY, an Accessibility Checker for EPUB
 
   Usage: ace [options] <input>
 
@@ -91,7 +85,5 @@ exports[`Running the CLI with the -h option should print help 1`] = `
     $ ace -o out ~/Documents/book.epub
 
   If you find DAISY Ace useful, please help us by donating to support its ongoing maintenance.
-  Support our work https://daisy.org/AceCLSponsor
-
-"
+  Support our work https://daisy.org/AceCLSponsor"
 `;
