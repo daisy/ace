@@ -31,7 +31,8 @@
     "micromatch": "^4.0.8",
     "mkdirp": "^1.0.4",
     "rimraf": "^3.0.2",
-    "strip-ansi": "^6.0.0"
+    "strip-ansi": "^6.0.0",
+    "taze": "^19.11.0"
   },
   "resolutions": {
     "electron": "^41.1.0",
