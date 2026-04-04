@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-const path = require('path');
-const stripAnsi = require('strip-ansi');
+const path = require("path");
+const stripAnsi = require("strip-ansi");
 
-const ace = require('../runAceCLI');
-const pkg = require('@daisy/ace-meta/package');
+const ace = require("../runAceCLI");
+const pkg = require("@daisy/ace-meta/package");
 
 // console.log(`##${stderr}##`);
 // console.log(`##${stripAnsi(stderr)}##`);
@@ -28,76 +28,84 @@ const cleanupElectronJestStderr = (str, lineBreaks) => {
     // [4250:0124/120235.963909:ERROR:mach_port_rendezvous.cc(202)] mach_msg send: (ipc/send) invalid port right (0x1000000a)
     // [4252:0124/120235.964624:ERROR:child_thread_impl.cc(231)] Invalid PlatformChannel receive right
     // [20611:0404/150403.183018:ERROR:base/process/process_mac.cc:53] task_policy_set TASK_CATEGORY_POLICY: (os/kern) invalid argument (4)
-    s = s.replace(/^.+(mach_port_rendezvous|child_thread_impl)\.cc.+$/gm, '');
-    s = s.replace(/^.*Unable to revert mtime:.+$/gm, '');
-    s = s.replace(/^.*task_policy_set TASK_CATEGORY_POLICY.+$/gm, '');
-    if (lineBreaks) s = s.replace(/\n/gm, ' ');
+    s = s.replace(/^.+(mach_port_rendezvous|child_thread_impl)\.cc.+$/gm, "");
+    s = s.replace(/^.*Unable to revert mtime:.+$/gm, "");
+    s = s.replace(/^.*task_policy_set TASK_CATEGORY_POLICY.+$/gm, "");
+    if (lineBreaks) s = s.replace(/\n/gm, " ");
+    s = s.trim();
+  }
+  return s;
+};
+const cleanupElectronJestStdout = (str) => {
+  let s = str;
+  if (s) {
+    // s = s.replace(/^\n/gm, "");
     s = s.trim();
   }
   return s;
 };
 
-describe('Running the CLI', () => {
-  test('with no input should fail', () => {
+describe("Running the CLI", () => {
+  test("with no input should fail", () => {
     const { stdout, stderr, status } = ace([]);
     expect(status).toBe(1);
     expect(cleanupElectronJestStderr(stderr)).toMatchSnapshot();
-    expect(stdout).toMatchSnapshot();
+    expect(cleanupElectronJestStdout(stdout)).toMatchSnapshot();
   });
 
-  test('with the -h option should print help', () => {
-    const { stdout, stderr, status } = ace(['-h']);
+  test("with the -h option should print help", () => {
+    const { stdout, stderr, status } = ace(["-h"]);
     expect(status).toBe(0);
-    expect(cleanupElectronJestStderr(stderr, true)).toBe('');
-    expect(stdout).toMatchSnapshot();
+    expect(cleanupElectronJestStderr(stderr, true)).toBe("");
+    expect(cleanupElectronJestStdout(stdout)).toMatchSnapshot();
   });
 
-  test('with the -v option should print the version number', () => {
-    const { stdout, stderr, status } = ace(['-v']);
+  test("with the -v option should print the version number", () => {
+    const { stdout, stderr, status } = ace(["-v"]);
     expect(status).toBe(0);
-    expect(cleanupElectronJestStderr(stderr, true)).toBe('');
+    expect(cleanupElectronJestStderr(stderr, true)).toBe("");
     expect(stdout.trim()).toBe(pkg.version);
   });
 
-  test('with the --version option should print the version number', () => {
-    const { stdout, stderr, status } = ace(['--version']);
+  test("with the --version option should print the version number", () => {
+    const { stdout, stderr, status } = ace(["--version"]);
     expect(status).toBe(0);
-    expect(cleanupElectronJestStderr(stderr, true)).toBe('');
+    expect(cleanupElectronJestStderr(stderr, true)).toBe("");
     expect(stdout.trim()).toBe(pkg.version);
   });
 
-  test('on a non-existant document should fail', () => {
-    const { stdout, stderr, status } = ace(['unexisting.epub']);
+  test("on a non-existant document should fail", () => {
+    const { stdout, stderr, status } = ace(["unexisting.epub"]);
     expect(status).toBe(1);
     expect(stdout.trim()).toMatchSnapshot();
     expect(cleanupElectronJestStderr(stderr)).toMatchSnapshot();
   });
 
-  test('with -o pointing to an existing directory should fail', () => {
-    const { stdout, stderr, status } = ace(['-o', 'report', 'foo'], {
-      cwd: path.resolve(__dirname, '../data'),
+  test("with -o pointing to an existing directory should fail", () => {
+    const { stdout, stderr, status } = ace(["-o", "report", "foo"], {
+      cwd: path.resolve(__dirname, "../data"),
     });
     expect(status).toBe(1);
-    expect(cleanupElectronJestStderr(stderr, true)).toBe('');
-    expect(stdout).toMatchSnapshot();
+    expect(cleanupElectronJestStderr(stderr, true)).toBe("");
+    expect(cleanupElectronJestStdout(stdout)).toMatchSnapshot();
   });
 
-  test('with --silent and no --outdir should print the JSON report to standard output', () => {
-    const { stdout, stderr, status } = ace(['-s', 'base-epub-30'], {
-      cwd: path.resolve(__dirname, '../data'),
+  test("with --silent and no --outdir should print the JSON report to standard output", () => {
+    const { stdout, stderr, status } = ace(["-s", "base-epub-30"], {
+      cwd: path.resolve(__dirname, "../data"),
     });
     expect(status).toBe(0);
 
-    expect(cleanupElectronJestStderr(stderr, true)).toBe('');
+    expect(cleanupElectronJestStderr(stderr, true)).toBe("");
     expect(() => JSON.parse(stdout)).not.toThrow(SyntaxError);
     const res = JSON.parse(stdout);
-    expect(res).toMatchObject({ '@type': 'earl:report' });
+    expect(res).toMatchObject({ "@type": "earl:report" });
   });
 
-  describe('with a valid input', () => {
-    test('raises no log warnings', () => {
-      const { stdout, stderr, status } = ace(['base-epub-30'], {
-        cwd: path.resolve(__dirname, '../data'),
+  describe("with a valid input", () => {
+    test("raises no log warnings", () => {
+      const { stdout, stderr, status } = ace(["base-epub-30"], {
+        cwd: path.resolve(__dirname, "../data"),
       });
       const log = stripAnsi(stdout);
       expect(/^warn:/m.test(log)).toBe(false);
@@ -105,8 +113,8 @@ describe('Running the CLI', () => {
       expect(status).toBe(0);
     });
     test('prints the "Done" info', () => {
-      const { stdout, stderr, status } = ace(['base-epub-30'], {
-        cwd: path.resolve(__dirname, '../data'),
+      const { stdout, stderr, status } = ace(["base-epub-30"], {
+        cwd: path.resolve(__dirname, "../data"),
       });
       const log = stripAnsi(stdout);
       expect(/^info:\s+Done/m.test(log)).toBe(true);
@@ -115,58 +123,66 @@ describe('Running the CLI', () => {
     });
   });
 
-  describe('raises a warning', () => {
-    test('when the EPUB Content Docs have unusual extensions', () => {
-      const { stdout, stderr, status } = ace(['issue-122'], {
-        cwd: path.resolve(__dirname, '../data'),
+  describe("raises a warning", () => {
+    test("when the EPUB Content Docs have unusual extensions", () => {
+      const { stdout, stderr, status } = ace(["issue-122"], {
+        cwd: path.resolve(__dirname, "../data"),
       });
       const log = stripAnsi(stdout);
 
       // The Electron-based Axe runner handles .xml files just fine
-      const condition = process.env.AXE_ELECTRON_RUNNER ? true : /^warn:\s+Copying document with extension/m.test(log);
+      const condition = process.env.AXE_ELECTRON_RUNNER
+        ? true
+        : /^warn:\s+Copying document with extension/m.test(log);
       expect(condition).toBe(true);
 
       expect(status).toBe(0);
     });
 
-    test('when the EPUB contains SVG Content Documents', () => {
-      const { stdout, stderr, status } = ace(['feat-svg'], {
-        cwd: path.resolve(__dirname, '../data'),
+    test("when the EPUB contains SVG Content Documents", () => {
+      const { stdout, stderr, status } = ace(["feat-svg"], {
+        cwd: path.resolve(__dirname, "../data"),
       });
       const log = stripAnsi(stdout);
-      expect(/^warn:\s+The SVG Content Documents in this EPUB will be ignored\./m.test(log)).toBe(true);
+      expect(
+        /^warn:\s+The SVG Content Documents in this EPUB will be ignored\./m.test(
+          log,
+        ),
+      ).toBe(true);
 
       expect(status).toBe(0);
     });
   });
 
-  describe('does not raise a warning', () => {
-    test('when a named character reference is used in XHTML', () => {
-      const { stdout, stderr, status } = ace(['issue-182'], {
-        cwd: path.resolve(__dirname, '../data'),
+  describe("does not raise a warning", () => {
+    test("when a named character reference is used in XHTML", () => {
+      const { stdout, stderr, status } = ace(["issue-182"], {
+        cwd: path.resolve(__dirname, "../data"),
       });
       const log = stripAnsi(stdout);
-      expect(/^warn:\s+\[xmldom error\]	entity not found/m.test(log)).toBe(false);
+      expect(/^warn:\s+\[xmldom error\]	entity not found/m.test(log)).toBe(
+        false,
+      );
 
       expect(status).toBe(0);
     });
   });
 
-  test('without return-2-on-validation-error set to true should exit with return code 0', () => {
-    const { stdout, stderr, status } = ace(['has-violations'], {
-      cwd: path.resolve(__dirname, '../data')
+  test("without return-2-on-validation-error set to true should exit with return code 0", () => {
+    const { stdout, stderr, status } = ace(["has-violations"], {
+      cwd: path.resolve(__dirname, "../data"),
     });
     expect(status).toBe(0);
   });
-  test('with return-2-on-validation-error alias set to true should exit with return code 2', () => {
-    const { stdout, stderr, status } = ace(['-E', 'has-violations'], {
-      cwd: path.resolve(__dirname, '../data')
+  test("with return-2-on-validation-error alias set to true should exit with return code 2", () => {
+    const { stdout, stderr, status } = ace(["-E", "has-violations"], {
+      cwd: path.resolve(__dirname, "../data"),
     });
     expect(status).toBe(2);
   });
-  test('with return-2-on-validation-error set to true should exit with return code 2', () => {
-    const { stdout, stderr, status } = ace(['--exiterror2', 'has-violations'], {
-      cwd: path.resolve(__dirname, '../data')
+  test("with return-2-on-validation-error set to true should exit with return code 2", () => {
+    const { stdout, stderr, status } = ace(["--exiterror2", "has-violations"], {
+      cwd: path.resolve(__dirname, "../data"),
     });
     expect(status).toBe(2);
   });
