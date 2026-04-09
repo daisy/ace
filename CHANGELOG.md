@@ -1,3 +1,11 @@
+<a name="1.4.2"></a>
+## [1.4.2](https://github.com/daisy/ace/compare/v1.4.1...v1.4.2) (2026-04-09)
+
+### Updates:
+
+* Updated Electron to the latest 41.x version
+* Updated Deque Axe-Core to the latest version 4.11.2 (Daisy fork)
+
 <a name="1.4.1"></a>
 ## [1.4.1](https://github.com/daisy/ace/compare/v1.4.0...v1.4.1) (2026-04-01)
 
