@@ -29,7 +29,7 @@
     "@daisy/ace-report": "1.4.2-alpha.2",
     "@daisy/ace-report-axe": "1.4.2-alpha.2",
     "@daisy/epub-utils": "1.4.2-alpha.2",
-    "@daisy/axe-core-for-ace": "4.11.1-canary.1",
+    "@daisy/axe-core-for-ace": "4.11.2-canary.1",
     "file-url": "^3.0.0",
     "p-map": "^4.0.0",
     "tmp": "^0.2.5",

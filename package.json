@@ -55,7 +55,7 @@
     "taze": "^19.11.0"
   },
   "resolutions": {
-    "electron": "^41.1.1",
+    "electron": "^41.2.0",
     "@jest/console": "^30.3.0",
     "@jest/transform": "^30.3.0",
     "jest": "^30.3.0",
