@@ -2,9 +2,9 @@
 # https://docs.npmjs.com/trusted-publishers
 #
 
-#GIT_COMMITTER_DATE="$(git show master --format=%aD | head -1)" git tag -a "v1.4.2-alpha.1" master -m "release tag v1.4.2-alpha.1" && git push --tags origin master && git --no-pager tag --list --format='%(refname)   %(taggerdate)'
+#GIT_COMMITTER_DATE="$(git show master --format=%aD | head -1)" git tag -a "v1.4.3-alpha.1" master -m "release tag v1.4.3-alpha.1" && git push --tags origin master && git --no-pager tag --list --format='%(refname)   %(taggerdate)'
 
-#git tag -d v1.4.2-alpha.1 && git push origin :refs/tags/v1.4.2-alpha.1
+#git tag -d v1.4.3-alpha.1 && git push origin :refs/tags/v1.4.3-alpha.1
 
 name: Publish Package(s)
 
@@ -57,8 +57,8 @@ jobs:
                   echo "PUBLISH: [${filename}] ..."
                   # --dry-run
                   # --provenance
-                  # npm publish --access public --tag=next .
-                  npm publish --access public --tag=latest .
+                  npm publish --access public --tag=next .
+                  # npm publish --access public --tag=latest .
               fi
               cd - &> /dev/null
           done
