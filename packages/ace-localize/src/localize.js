@@ -24,6 +24,12 @@ export function newLocalizer(resources) {
     const i18nextInstance = i18n.createInstance();
     // https://www.i18next.com/overview/configuration-options
     i18nextInstance.init({
+        compatibilityJSON: "v4",
+        interpolation: {
+            skipOnVariables: false,
+        },
+        nsSeparator: ":",
+        keySeparator: ".",
         ignoreJSONStructure: false,
         debug: false,
         resources: resources,
@@ -41,8 +47,18 @@ export function newLocalizer(resources) {
             }
             return key;
         },
+    }).then((_t) => {
+        // noop
+    }).catch((err) => {
+        console.log(err);
     });
-    
+    const i18nextInstanceEN = i18nextInstance.cloneInstance();
+    i18nextInstanceEN.changeLanguage("en").then((_t) => {
+        // noop
+    }).catch((err) => {
+        console.log(err);
+    });
+
     function ensureLanguage(doneCallback) {
         if (i18nextInstance.language !== _currentLanguage) {
             // https://github.com/i18next/i18next/blob/master/CHANGELOG.md#1800
@@ -93,7 +109,12 @@ export function newLocalizer(resources) {
 
             // ensureLanguage();
         
-            return i18nextInstance.t(msg, opts);
+            const label = i18nextInstance.t(msg, opts);
+            if (!label || !label.length) {
+                // fallbackLng: "en" does not take into account empty string (which we output to normalise JSON locales)
+                return i18nextInstanceEN.t(msg, opts);
+            }
+            return label;
         },
         
         getRawResources: function() {
