@@ -18,7 +18,7 @@ import {mkdirp} from 'mkdirp';
 import path from 'path';
 import spawn from 'cross-spawn';
 
-import { config, listPackages, PACKAGES_DIR } from './build-utils.js';
+import { config, listPackages, PACKAGES_DIR } from './build-utils.mjs';
 
 const __dirname = import.meta.dirname;
 const babelConfig = JSON.parse(
@@ -68,10 +68,12 @@ function buildFile(file, silent) {
 
 function buildPackage(pkg) {
   const srcDir = path.resolve(pkg, config.srcDir);
-  const pattern = path.resolve(srcDir, '**/*');
+  const pattern = '**/*'; // path.resolve(srcDir, '**/*').replace(/\\/g, "/");
   const files = glob.sync(pattern, {
     nodir: true,
-  });
+    cwd: srcDir,
+    //windowsPathsNoEscape: true,
+  }).map((f) => path.join(srcDir, f));
 
   const verbose = process.env.VERBOSE;
 
@@ -79,7 +81,7 @@ function buildPackage(pkg) {
 
   files.forEach(file => buildFile(file, !verbose));
 
-  const buildScript = path.resolve(pkg, 'scripts/build.js');
+  const buildScript = path.resolve(pkg, 'scripts/build.mjs');
   if (fs.existsSync(buildScript)) {
     spawn.sync('node', [buildScript], { stdio: 'inherit' });
   }

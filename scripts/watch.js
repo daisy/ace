@@ -12,10 +12,10 @@ import { execSync } from 'child_process';
 import fs = from 'fs';
 import path from 'path';
 
-import { listPackages } from './build-utils';
+import { listPackages } from './build-utils.mjs';
 
 const __dirname = import.meta.dirname;
-const BUILD_CMD = `node ${path.resolve(__dirname, './build.js')}`;
+const BUILD_CMD = `node ${path.resolve(__dirname, './build.mjs')}`;
 
 let filesToBuild = new Map();
 

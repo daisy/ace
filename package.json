@@ -78,7 +78,7 @@
     "clean-node-modules": "rimraf --glob \"packages/*/node_modules\" && rimraf \"node_modules\"",
     "clean-all": "yarn clean-libs && yarn clean-node-modules",
     "prebuild": "yarn clean-libs",
-    "build": "cross-env VERBOSE=1 node ./scripts/build.js",
+    "build": "cross-env VERBOSE=1 node ./scripts/build.mjs",
     "docs": "echo docs script not implemented",
     "lint": "echo lint script not implemented",
     "postinstall": "yarn npmVersionsCheck && yarn build && yarn patchElectronJestRunner && yarn patchElectronJestRunner_",
