@@ -24,8 +24,8 @@
   "main": "lib/index.js",
   "dependencies": {
     "@daisy/ace-config": "1.4.3-alpha.1",
-    "fs-extra": "^10.1.0",
-    "uuid": "^8.3.2",
+    "fs-extra": "^11.3.4",
+    "uuid": "^11.1.0",
     "winston": "^3.19.0"
   },
   "publishConfig": {

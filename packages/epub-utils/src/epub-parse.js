@@ -10,7 +10,8 @@
 
 'use strict';
 
-const fileUrl = require('file-url');
+// const fileUrl = require('file-url');
+const { pathToFileURL } = require('node:url');
 const DOMParser = require('xmldom').DOMParser;
 const XMLSerializer = require('xmldom').XMLSerializer;
 const fs = require('fs');
@@ -329,7 +330,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
         spineItem.targetIDs = o.docIds;
 
         // does encodeURI() as per https://tools.ietf.org/html/rfc3986#section-3.3 in a nutshell: encodeURI(`file://${tmpFile}`).replace(/[?#]/g, encodeURIComponent)
-        spineItem.url = fileUrl(spineItem.filepath);
+        spineItem.url = pathToFileURL(spineItem.filepath).href;
         // spineItem.url = "file://" + encodeURI(spineItem.filepath);
 
         this.contentDocs.push(spineItem);
@@ -347,7 +348,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
           spineItem.mediaOverlay = {};
           spineItem.mediaOverlay.smilRelPath = decodeURIComponent(smilManifestItem[0].getAttribute('href'));
           spineItem.mediaOverlay.smilFilePath = path.join(path.dirname(packageDocPath), spineItem.mediaOverlay.smilRelPath );
-          // spineItem.mediaOverlay.smilUrl = fileUrl(spineItem.mediaOverlay.smilFilePath);
+          // spineItem.mediaOverlay.smilUrl = pathToFileURL(spineItem.mediaOverlay.smilFilePath).href;
           spineItem.mediaOverlay.smilRefs = this.parseSmilRefs(spineItem.mediaOverlay.smilFilePath);
         }
 
@@ -368,7 +369,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
 
     this.navDoc.relpath = navDocPath;
     this.navDoc.filepath = navDocFullPath;
-    this.navDoc.url = fileUrl(this.navDoc.filepath);
+    this.navDoc.url = pathToFileURL(this.navDoc.filepath).href;
 
     if (spineContainsNavDoc) {
       if (spineContainsNavDoc.filepath !== navDocFullPath) {
@@ -384,7 +385,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
       spi.title = o.titleText;
       spi.targetIDs = o.docIds;
 
-      spi.url = fileUrl(spi.filepath);
+      spi.url = pathToFileURL(spi.filepath).href;
 
       spi.notInReadingOrder = true;
 

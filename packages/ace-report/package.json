@@ -27,7 +27,7 @@
     "@daisy/ace-localize": "1.4.3-alpha.1",
     "@daisy/ace-meta": "1.4.3-alpha.1",
     "escape-html": "^1.0.3",
-    "fs-extra": "^10.1.0",
+    "fs-extra": "^11.3.4",
     "handlebars": "^4.7.9",
     "winston": "^3.19.0"
   },

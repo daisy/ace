@@ -9,18 +9,18 @@
 
 'use strict';
 
-const babel = require('babel-core');
-const chalk = require('chalk');
-const fs = require('fs');
-const glob = require('glob');
-const micromatch = require('micromatch');
-const mkdirp = require('mkdirp');
-const path = require('path');
-const spawn = require('cross-spawn');
+import babel from 'babel-core';
+import chalk from 'chalk';
+import fs from 'fs';
+import {glob} from 'glob';
+import micromatch from 'micromatch';
+import {mkdirp} from 'mkdirp';
+import path from 'path';
+import spawn from 'cross-spawn';
 
+import { config, listPackages, PACKAGES_DIR } from './build-utils.js';
 
-const { config, listPackages, PACKAGES_DIR } = require('./build-utils');
-
+const __dirname = import.meta.dirname;
 const babelConfig = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, '..', '.babelrc'), 'utf8'));
 

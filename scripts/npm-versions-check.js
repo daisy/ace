@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const chalk = require('chalk');
+import fs from'fs';
+import path from'path';
+import chalk from 'chalk';
 
 const getDirectories = dirPath =>
     fs.readdirSync(dirPath, { withFileTypes: true })

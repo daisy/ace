@@ -23,7 +23,7 @@
   "license": "MIT",
   "main": "lib/localize.js",
   "dependencies": {
-    "i18next": "^20.6.1",
+    "i18next": "^26.0.4",
     "winston": "^3.19.0"
   },
   "publishConfig": {

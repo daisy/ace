@@ -5,7 +5,7 @@ const path = require('path');
 const tmp = require('tmp');
 
 const runAce = require('../runAceJS');
-import { findAssertionsForDoc } from "../utils";
+const { findAssertionsForDoc } = require("../utils");
 
 tmp.setGracefulCleanup();
 

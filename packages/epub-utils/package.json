@@ -24,8 +24,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "extract-zip": "^2.0.1",
-    "file-url": "^3.0.0",
-    "fs-extra": "^10.1.0",
+    "fs-extra": "^11.3.4",
     "node-stream-zip": "^1.15.0",
     "tmp": "^0.2.5",
     "winston": "^3.19.0",

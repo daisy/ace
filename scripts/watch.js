@@ -7,13 +7,14 @@
 
 'use strict';
 
-const chalk = require('chalk');
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+import chalk from 'chalk';
+import { execSync } from 'child_process';
+import fs = from 'fs';
+import path from 'path';
 
-const { listPackages } = require('./build-utils');
+import { listPackages } from './build-utils';
 
+const __dirname = import.meta.dirname;
 const BUILD_CMD = `node ${path.resolve(__dirname, './build.js')}`;
 
 let filesToBuild = new Map();

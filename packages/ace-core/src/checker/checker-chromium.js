@@ -1,6 +1,7 @@
 'use strict';
 
-const fileUrl = require('file-url');
+// const fileUrl = require('file-url');
+const { pathToFileURL } = require('node:url');
 const fs = require('fs-extra');
 const path = require('path');
 const pMap = require('p-map');
@@ -60,7 +61,7 @@ async function checkSingle(spineItem, epub, lang, doNotReportMedia, axeRunner) {
       fs.copySync(spineItem.filepath, tmpFile);
 
       // does encodeURI() as per https://tools.ietf.org/html/rfc3986#section-3.3 in a nutshell: encodeURI(`file://${tmpFile}`).replace(/[?#]/g, encodeURIComponent)
-      url = fileUrl(tmpFile);
+      url = pathToFileURL(tmpFile).href;
       // url = "file://" + encodeURI(tmpFile);
 
       winston.debug(`checking copied file at ${tmpFile}`)
