@@ -23,12 +23,12 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
+    "@xmldom/xmldom": "^0.9.9",
     "extract-zip": "^2.0.1",
     "fs-extra": "^11.3.4",
     "node-stream-zip": "^1.15.0",
     "tmp": "^0.2.5",
     "winston": "^3.19.0",
-    "xmldom": "^0.6.0",
     "xpath": "^0.0.34"
   },
   "publishConfig": {

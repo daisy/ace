@@ -23,7 +23,7 @@
             <audio clipBegin="4000ms" clipEnd="5000ms" src="./content_001.mp3"/>
         </par>
         <par>
-            <text src="content_001.xhtml#p2a" epub:type="pagebreak">
+            <text src="content_001.xhtml#p2a" epub:type="pagebreak"/>
             <audio clipBegin="5000ms" clipEnd="6000ms" src="./content_001.mp3"/>
         </par>
     </seq>

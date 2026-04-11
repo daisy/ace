@@ -12,18 +12,33 @@
 
 // const fileUrl = require('file-url');
 const { pathToFileURL } = require('node:url');
-const DOMParser = require('xmldom').DOMParser;
-const XMLSerializer = require('xmldom').XMLSerializer;
+const DOMParser = require('@xmldom/xmldom').DOMParser;
+const XMLSerializer = require('@xmldom/xmldom').XMLSerializer;
 const fs = require('fs');
 const path = require('path');
 const xpath = require('xpath');
 const winston = require('winston');
 
+
+function removeUTF8BOM(str) {
+    // UTF-8 BOM removal (EFBBBF)
+    // because Buffer.toString converts to UTF-16 BOM (FEFF)
+    // str.charCodeAt(0) === 0xFEFF || str.charCodeAt(0) === 65279
+    // str = str.substr(1);
+    // str = str.slice(1);
+    // str = str.replace(/^\uFEFF/gm, "").replace(/^\u00BB\u00BF/gm,"");
+    if (str.charCodeAt(0) === 0xFEFF) {
+        str = str.slice(1);
+    }
+    return str;
+}
+
 // Error Handler for DOMParser instances
-const errorHandler = {
-  warning: w => winston.warn(w),
-  error: e => winston.warn(e),
-  fatalError: fe => winston.error(fe),
+// level === 'warning' | 'error' | 'fatalError'
+function errorHandler (level, msg, context) {
+  if (level === "warning") winston.warn(msg);
+  if (level === "error") winston.warn(msg);
+  if (level === "fatalError") winston.error(msg);
 }
 
 function SpineItem() {
@@ -43,11 +58,7 @@ function EpubParser() {
 
 function parseNavDoc(fullpath, epubDir) {
   const content = fs.readFileSync(fullpath).toString();
-  // not application/xhtml+xml because:
-  // https://github.com/jindw/xmldom/pull/208
-  // https://github.com/jindw/xmldom/pull/242
-  // https://github.com/xmldom/xmldom/blob/3db6ccf3f7ecbde73608490d71f96c727abdd69a/lib/dom-parser.js#L12
-  const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml');
+  const doc = new DOMParser({onError:errorHandler}).parseFromString(removeUTF8BOM(content), 'application/xhtml+xml');
 
   // Select the ToC
   const select = xpath.useNamespaces({
@@ -171,10 +182,10 @@ function parseMetadata(doc, select, epub) {
           "schema:accessibilityHazard",
           "schema:accessibilitySummary",
           "schema:accessModeSufficient",
-          
+
           "schema:accessibilityAPI",
           "schema:accessibilityControl",
-          
+
           "a11y:certifiedBy",
           "a11y:certifierCredential",
           "a11y:certifierReport",
@@ -296,7 +307,7 @@ EpubParser.prototype.parse = function(epubDir) {
 
 EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
   const content = fs.readFileSync(packageDocPath).toString();
-  const doc = new DOMParser({errorHandler}).parseFromString(content);
+  const doc = new DOMParser({onError:errorHandler}).parseFromString(removeUTF8BOM(content), 'application/xml');
   const select = xpath.useNamespaces(
     { opf: 'http://www.idpf.org/2007/opf',
       dc: 'http://purl.org/dc/elements/1.1/',
@@ -400,7 +411,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
 
 EpubParser.prototype.parseSmilRefs = function(filepath) {
   const content = fs.readFileSync(filepath).toString();
-  const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xml');
+  const doc = new DOMParser({onError:errorHandler}).parseFromString(removeUTF8BOM(content), 'application/xml');
   const select = xpath.useNamespaces({smil: "http://www.w3.org/ns/SMIL", epub: "http://www.idpf.org/2007/ops"});
 
   const arr = select('//smil:text[@src]', doc);
@@ -426,11 +437,7 @@ EpubParser.prototype.parseSmilRefs = function(filepath) {
 }
 EpubParser.prototype.parseContentDocTitleAndIds = function(filepath) {
   const content = fs.readFileSync(filepath).toString();
-  // not application/xhtml+xml because:
-  // https://github.com/jindw/xmldom/pull/208
-  // https://github.com/jindw/xmldom/pull/242
-  // https://github.com/xmldom/xmldom/blob/3db6ccf3f7ecbde73608490d71f96c727abdd69a/lib/dom-parser.js#L12
-  const doc = new DOMParser({errorHandler}).parseFromString(content, 'application/xhtml');
+  const doc = new DOMParser({onError:errorHandler}).parseFromString(removeUTF8BOM(content), 'application/xhtml+xml');
   const select = xpath.useNamespaces({html: "http://www.w3.org/1999/xhtml", epub: "http://www.idpf.org/2007/ops"});
   const title = select('/html:html/html:head/html:title/text()', doc);
   let titleText = title.length > 0 ? title[0].nodeValue : "";
@@ -468,7 +475,7 @@ EpubParser.prototype.parseContentDocTitleAndIds = function(filepath) {
 EpubParser.prototype.calculatePackageDocPath = function(epubDir) {
   const containerFilePath = `${epubDir}/META-INF/container.xml`;
   const content = fs.readFileSync(containerFilePath).toString();
-  const doc = new DOMParser({errorHandler}).parseFromString(content);
+  const doc = new DOMParser({onError:errorHandler}).parseFromString(removeUTF8BOM(content), 'application/xml');
   const select = xpath.useNamespaces({ ocf: 'urn:oasis:names:tc:opendocument:xmlns:container' });
   const rootfiles = select('/ocf:container/ocf:rootfiles/ocf:rootfile[@media-type="application/oebps-package+xml"]/@full-path', doc);
   // just grab the first one as we're not handling the case of multiple renditions
