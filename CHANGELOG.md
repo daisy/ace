@@ -1,3 +1,11 @@
+<a name="1.4.3"></a>
+## [1.4.3](https://github.com/daisy/ace/compare/v1.4.2...v1.4.3) (2026-04-11)
+
+### Updates:
+
+* Fixed language handling: when a translation is missing for a given locale, the English fallback now works as expected
+* Updated NPM packages
+
 <a name="1.4.2"></a>
 ## [1.4.2](https://github.com/daisy/ace/compare/v1.4.1...v1.4.2) (2026-04-09)
 
