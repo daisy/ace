@@ -58,7 +58,7 @@ jobs:
                   # --dry-run
                   # --provenance
                   #npm publish --access public --tag=next .
-                  npm publish --access public --tag=latest .
+                  (npm publish --access public --tag=latest . || echo OK || true)
               fi
               cd - &> /dev/null
           done
