@@ -57,8 +57,12 @@ jobs:
                   echo "PUBLISH: [${filename}] ..."
                   # --dry-run
                   # --provenance
+
                   #npm publish --access public --tag=next .
-                  (npm publish --access public --tag=latest . || echo OK || true)
+                  npm publish --access public --tag=latest
+
+                  # IN CASE OF ERROR THAT INTERRUPTS THE PUBLISHING OF ALL PACKAGES (FOR EXAMPLE: NPM REGISTRY 404), TRY AGAIN AND IGNORE "ALREADY EXIST" ERROR ===>
+                  #(npm publish --access public --tag=latest . || echo OK || true)
               fi
               cd - &> /dev/null
           done
