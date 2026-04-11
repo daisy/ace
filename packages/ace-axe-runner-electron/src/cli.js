@@ -55,9 +55,10 @@ protocol.registerSchemesAsPrivileged([{
         bypassCSP: false,
         corsEnabled: true,
         secure: true,
-        standard: true,
         stream: true,
         supportFetchAPI: true,
+        standard: true, // Default false
+        codeCache: false, // Default false (only works with standard=true)
     },
     scheme: ACE_ELECTRON_HTTP_PROTOCOL,
 }]);
