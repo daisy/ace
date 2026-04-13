@@ -1,3 +1,10 @@
+<a name="1.4.5"></a>
+## [1.4.5](https://github.com/daisy/ace/compare/v1.4.4...v1.4.5) (2026-04-13)
+
+### Updates:
+
+* Disabled unnecessarily-permissive Electron BrowserWindow webPreferences sandboxing
+
 <a name="1.4.4"></a>
 ## [1.4.4](https://github.com/daisy/ace/compare/v1.4.3...v1.4.4) (2026-04-11)
 
