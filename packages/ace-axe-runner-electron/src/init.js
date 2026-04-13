@@ -333,17 +333,19 @@ function axeRunnerInit(eventEmmitter, CONCURRENT_INSTANCES) {
         let browserWindow = new BrowserWindow({
             show: showWindow,
             webPreferences: {
-                devTools: isDev && showWindow,
                 title: "Axe Electron runner",
+
+                // enableRemoteModule: false,
                 allowRunningInsecureContent: false,
                 backgroundThrottling: false,
-                contextIsolation: true,
+                devTools: isDev && showWindow,
                 nodeIntegration: false,
+                sandbox: true,
+                contextIsolation: true,
                 nodeIntegrationInWorker: false,
-                sandbox: false,
                 webSecurity: true,
                 webviewTag: false,
-                enableRemoteModule: false,
+
                 partition: SESSION_PARTITION,
                 // (electron) Deprecation Warning: Disabling nativeWindowOpen is deprecated. The nativeWindowOpen option will be removed in Electron 18.
                 // nativeWindowOpen: false, // The default of nativeWindowOpen is deprecated and will be changing from false to true in Electron 15. See https://github.com/electron/electron/issues/28511
