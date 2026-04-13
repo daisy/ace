@@ -19,18 +19,52 @@ on:
       # https://github.com/daisy/ace/settings/rules
       - "v*" # excludes slash /
 
+# https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
 permissions:
-  id-token: write # Required for OIDC
-  contents: read
+  actions: none
+  artifact-metadata: none
+  attestations: none
+  checks: none
+  contents: none # <==========
+  deployments: none
+  discussions: none
+  id-token: none # <==========
+  issues: none
+  models: none
+  packages: none
+  pages: none
+  pull-requests: none
+  repository-projects: none
+  security-events: none
+  statuses: none
 
 jobs:
   publish:
+    permissions:
+      actions: none
+      artifact-metadata: none
+      attestations: none
+      checks: none
+      contents: read # <==========
+      deployments: none
+      discussions: none
+      id-token: write # <========== Trusted Publishing OpenID Connect
+      issues: none
+      models: none
+      packages: none
+      pages: none
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
     #if: "github.event_name == 'push' && contains(github.event.head_commit.message, 'release tag')"
     #if: "contains(github.event.head_commit.message, 'release tag')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version: "24"

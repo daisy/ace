@@ -6,8 +6,46 @@ on:
       - "*"
   pull_request:
     branches: [master]
+
+# https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+permissions:
+  actions: none
+  artifact-metadata: none
+  attestations: none
+  checks: none
+  contents: none # <==========
+  deployments: none
+  discussions: none
+  id-token: none
+  issues: none
+  models: none
+  packages: none
+  pages: none
+  pull-requests: none
+  repository-projects: none
+  security-events: none
+  statuses: none
+
 jobs:
   build:
+    permissions:
+      actions: none
+      artifact-metadata: none
+      attestations: none
+      checks: none
+      contents: read # <==========
+      deployments: none
+      discussions: none
+      id-token: none
+      issues: none
+      models: none
+      packages: none
+      pages: none
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
     #    if: "!contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
     if: "github.event_name == 'pull_request' || !contains(github.event.head_commit.message, 'skip ci')"
     # runs-on: ubuntu-latest # / ubuntu-18.04 ... or ubuntu-16.04, ubuntu-20.04
@@ -44,6 +82,8 @@ jobs:
         run: echo "${{ matrix.osarch }}" && uname -m && arch
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - name: Git config global dump (post)
         run: "git config --global --list || echo NO_GIT_GLOBAL_CONFIG || true"
         shell: bash
