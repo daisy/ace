@@ -41,6 +41,7 @@ permissions:
 
 jobs:
   publish:
+    timeout-minutes: 20
     permissions:
       actions: none
       artifact-metadata: none
