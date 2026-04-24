@@ -32,36 +32,36 @@ const a11yMeta_links = [
 ];
 const a11yMeta = [
     // http://kb.daisy.org/publishing/docs/metadata/schema.org/accessMode.html
-    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessMode
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessMode
     // https://www.w3.org/TR/epub-a11y-tech-11/#meta-001
     "schema:accessMode", // required
 
     // http://kb.daisy.org/publishing/docs/metadata/schema.org/accessibilityFeature.html
-    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessibilityFeature
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessibilityFeature
     // https://www.w3.org/TR/epub-a11y-tech-11/#meta-003
     "schema:accessibilityFeature", // required
 
     // http://kb.daisy.org/publishing/docs/metadata/schema.org/accessibilityHazard.html
-    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessibilityHazard
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessibilityHazard
     // https://www.w3.org/TR/epub-a11y-tech-11/#meta-004
     "schema:accessibilityHazard", // required
 
     // http://kb.daisy.org/publishing/docs/metadata/schema.org/accessibilitySummary.html
-    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessibilitySummary
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessibilitySummary
     // https://www.w3.org/TR/epub-a11y-tech-11/#meta-005
     "schema:accessibilitySummary", // recommended
 
     // http://kb.daisy.org/publishing/docs/metadata/schema.org/accessModeSufficient.html
-    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessModeSufficient
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessModeSufficient
     // https://www.w3.org/TR/epub-a11y-tech-11/#meta-002
     "schema:accessModeSufficient", // recommended
 
     // http://kb.daisy.org/publishing/docs/metadata/schema.org/accessibilityAPI
-    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessibilityAPI
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessibilityAPI
     "schema:accessibilityAPI", // discouraged
 
     // http://kb.daisy.org/publishing/docs/metadata/schema.org/accessibilityControl
-    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessibilityControl
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessibilityControl
     "schema:accessibilityControl", // discouraged
 
     // https://www.w3.org/TR/epub-a11y-11/#sec-evaluator-name
@@ -77,46 +77,10 @@ const a11yMeta = [
 ].concat(a11yMeta_links);
 
 const A11Y_META = {
-    'schema:accessMode': {
-        required: true,
-        allowedValues: [
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessMode-vocabulary
-            'auditory',
-            'chartOnVisual',
-            'chemOnVisual',
-            'colorDependent',
-            'diagramOnVisual',
-            'mathOnVisual',
-            'musicOnVisual',
-            'tactile',
-            'textOnVisual',
-            'textual',
-            'visual',
-        ]
-    },
-    'schema:accessModeSufficient': {
-        recommended: true,
-        allowedValues: [
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessModeSufficient-vocabulary
-            'auditory',
-            'tactile',
-            'textual',
-            'visual',
-
-            // 'chartOnVisual',
-            // 'chemOnVisual',
-            // 'colorDependent',
-            // 'diagramOnVisual',
-            // 'mathOnVisual',
-            // 'musicOnVisual',
-            // 'textOnVisual',
-        ]
-    },
-
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessibilityAPI-vocabulary
     'schema:accessibilityAPI': {
         discouraged: true,
         allowedValues: [
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessibilityAPI-vocabulary
             'AndroidAccessibility',
             'ARIA', // deprecated => accessibilityFeature
             'ATK',
@@ -133,10 +97,11 @@ const A11Y_META = {
             'UIAutomation'
         ]
     },
+
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessibilityControl-vocabulary
     'schema:accessibilityControl': {
         discouraged: true,
         allowedValues: [
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessibilityControl-vocabulary
             'fullKeyboardControl',
             'fullMouseControl',
             'fullSwitchControl',
@@ -147,13 +112,12 @@ const A11Y_META = {
         ]
     },
 
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessibilityFeature-vocabulary
     'schema:accessibilityFeature': {
         required: true,
         allowedValues: [
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessibilityFeature-vocabulary
-            // ----
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#structure-and-navigation-terms
-            'annotations',
+            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#structure-and-navigation-terms
+            'annotations', // deprecated
             'ARIA',
             'bookmarks', // deprecated
             'index',
@@ -164,7 +128,7 @@ const A11Y_META = {
             'structuralNavigation',
             'tableOfContents',
             'taggedPDF',
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#adaptation-terms
+            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#adaptation-terms
             'alternativeText',
             'audioDescription',
             'captions', // deprecated => closedCaptions, openCaptions
@@ -172,10 +136,10 @@ const A11Y_META = {
             'describedMath',
             'longDescription',
             'openCaptions',
-            'rubyAnnotations',
+            // 'rubyAnnotations', ==> internationalization-terms
             'signLanguage',
             'transcript',
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#rendering-control-terms
+            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#rendering-control-terms
             'displayTransformability',
             'displayTransformability/font-size',
             'displayTransformability/font-family',
@@ -187,47 +151,93 @@ const A11Y_META = {
             'synchronizedAudioText',
             'timingControl',
             'unlocked',
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#specialized-markup-terms
+            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#specialized-markup-terms
             'ChemML',
             'latex',
+            'latex-chemistry',
             'MathML',
+            'MathML-chemistry',
             'ttsMarkup',
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#clarity-terms
+            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#clarity-terms
             'highContrastAudio',
             'highContrastAudio/noBackground',
             'highContrastAudio/reducedBackground',
             'highContrastAudio/switchableBackground',
             'highContrastDisplay',
             'largePrint',
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#tactile-terms
+            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#tactile-terms
             'braille',
             'tactileGraphic',
             'tactileObject',
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#feature-none
+            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#internationalization-terms
+            'fullRubyAnnotations',
+            'horizontalWriting',
+            'rubyAnnotations',
+            'verticalWriting',
+            'withAdditionalWordSegmentation',
+            'withoutAdditionalWordSegmentation',
+            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#feature-none
             'none',
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#feature-unknown
+            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#feature-unknown
             'unknown'
         ],
     },
+
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessibilityHazard-vocabulary
     'schema:accessibilityHazard': {
         required: true,
         allowedValues: [
-            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessibilityHazard-vocabulary
+            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#hazards
             'flashing',
-            'noFlashingHazard', 'unknownFlashingHazard',
             'motionSimulation',
-            'noMotionSimulationHazard', 'unknownMotionSimultationHazard',
             'sound',
-            'noSoundHazard', 'unknownSoundHazard',
-            'unknown',
+            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#no-hazards
             'none',
+            'noFlashingHazard',
+            'noMotionSimulationHazard',
+            'noSoundHazard',
+            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#unknown-hazards
+            'unknown',
+            'unknownFlashingHazard',
+            'unknownMotionSimultationHazard',
+            'unknownSoundHazard'
         ]
     },
-    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20230523/#accessibilitySummary
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessibilitySummary
     'schema:accessibilitySummary': {
         // required: true,
         recommended: true, // https://github.com/daisy/ace/issues/378
-    }
+    },
+
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessMode-vocabulary
+    'schema:accessMode': {
+        required: true,
+        allowedValues: [
+            'auditory',
+            'tactile',
+            'textual',
+            'visual',
+            // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessMode-visuals
+            'chartOnVisual',
+            'chemOnVisual',
+            'colorDependent',
+            'diagramOnVisual',
+            'mathOnVisual',
+            'musicOnVisual',
+            'textOnVisual'
+        ]
+    },
+
+    // https://www.w3.org/community/reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260326/#accessModeSufficient-vocabulary
+    'schema:accessModeSufficient': {
+        recommended: true,
+        allowedValues: [
+            'auditory',
+            'tactile',
+            'textual',
+            'visual'
+        ]
+    },
 };
 
 module.exports = {
