@@ -1,3 +1,11 @@
+<a name="1.4.6"></a>
+## [1.4.6](https://github.com/daisy/ace/compare/v1.4.5...v1.4.6) (2026-04-24)
+
+### Updates:
+
+* Fixed accessibility metadata vocabulary (added missing values)
+* Updated NPM packages (notably Electron and Puppeteer, to keep Chromium revisions up to date)
+
 <a name="1.4.5"></a>
 ## [1.4.5](https://github.com/daisy/ace/compare/v1.4.4...v1.4.5) (2026-04-13)
 
