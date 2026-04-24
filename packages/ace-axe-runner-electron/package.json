@@ -28,7 +28,7 @@
     "uuid": "^11.1.0"
   },
   "devDependencies": {
-    "electron": "^41.2.0"
+    "electron": "^41.3.0"
   },
   "publishConfig": {
     "access": "public"
