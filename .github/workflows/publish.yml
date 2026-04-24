@@ -101,3 +101,10 @@ jobs:
               fi
               cd - &> /dev/null
           done
+
+#TECHNICAL NOTE: IT IS POSSIBLE TO RETRIVEVE NPM_TOKEN VIA AN OPENIDCONNECT ENDPOINT (DO NOT DO THIS!)
+#OIDC_TOKEN=$(curl -sH "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=npm:registry.npmjs.org" | jq -r .value)
+#NPM_TOKEN=$(curl -s -X POST https://registry.npmjs.org/-/npm/v1/oidc/token/exchange/package/%40daisy%2Face -H "Content-Type: application/json" -H "Authorization: Bearer $OIDC_TOKEN" -d "{\"oidcToken\":\"$OIDC_TOKEN\"}" | jq -r .token)
+#THIS LEAKS THE SECRET IN LOGS: echo $NPM_TOKEN | base64 -w 0 | base64 -w 0
+#npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+#npm publish...
