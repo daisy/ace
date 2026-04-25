@@ -40,7 +40,7 @@ If everything went smoothly, you should now be able to run the `ace` command in 
 
 ```
 $ ace --version
-1.4.5
+1.4.6
 ```
 
 {{% note %}}
