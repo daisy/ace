@@ -48,7 +48,7 @@ jobs:
       security-events: none
       statuses: none
     #    if: "!contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
-    if: "github.event_name == 'pull_request' || !contains(github.event.head_commit.message, 'skip ci')"
+    if: "github.event_name == 'pull_request' || !contains(github.event.head_commit.message, 'skip ci') && github.ref_name == 'master' && github.repository_owner == 'daisy'"
     # runs-on: ubuntu-latest # / ubuntu-18.04 ... or ubuntu-16.04, ubuntu-20.04
     # runs-on: macos-latest # / macos-10.15
     # runs-on: windows-2016 # not window-latest / windows-2019, see https://github.com/edrlab/thorium-reader/issues/1591
@@ -75,9 +75,9 @@ jobs:
       DBUS_SYSTEM_BUS_ADDRESS: "unix:path=/var/run/dbus/system_bus_socket"
       DBUS_SESSION_BUS_ADDRESS: "unix:path=/var/run/dbus/system_bus_socket"
     steps:
-      - run: 'echo "GITHUB_RUN_NUMBER: ${{ github.run_number }}"'
-      - run: 'echo "GITHUB_RUN_ID: ${{ github.run_id }}"'
-      - run: 'echo "GITHUB_SHA: ${{ github.sha }}"'
+#      - run: 'echo "GITHUB_RUN_NUMBER: ${{ github.run_number }}"'
+#      - run: 'echo "GITHUB_RUN_ID: ${{ github.run_id }}"'
+#      - run: 'echo "GITHUB_SHA: ${{ github.sha }}"'
       - name: Check sys arch
         if: ${{ matrix.osarch != 'windows-intel' }}
         run: echo "${{ matrix.osarch }}" && uname -m && arch
@@ -88,12 +88,12 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           persist-credentials: false
-      - name: Git config global dump (post)
-        run: "git config --global --list || echo NO_GIT_GLOBAL_CONFIG || true"
-        shell: bash
-      - name: Git config local dump (post)
-        run: "git config --list || echo NO_GIT_GLOBAL_CONFIG || true"
-        shell: bash
+#      - name: Git config global dump (post)
+#        run: "git config --global --list || echo NO_GIT_GLOBAL_CONFIG || true"
+#        shell: bash
+#      - name: Git config local dump (post)
+#        run: "git config --list || echo NO_GIT_GLOBAL_CONFIG || true"
+#        shell: bash
       # https://github.com/actions/setup-node/commits/v6.4.0
       # https://github.com/actions/setup-node/commits/48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
       # https://github.com/actions/setup-node/compare/v6.4.0...48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -117,7 +117,7 @@ jobs:
       #   run: echo PR
       - name: non-PR action, NOT Windows, YARN INSTALL
         if: ${{ github.event_name != 'pull_request' && ( matrix.osarch != 'windows-intel' && matrix.osarch != 'windows-arm' ) }}
-        run: echo "${{ matrix.osarch }}" ; ./scripts/yarn-install.sh ; ((npm exec --no --offline -- taze --fail-on-outdated --all --force --recursive --include-locked --concurrency 10 --loglevel debug --cwd . && npm exec --no --offline -- taze major --fail-on-outdated --all --force --recursive --include-locked --concurrency 10 --loglevel debug --cwd .) || echo OK || true)
+        run: echo "${{ matrix.osarch }}" ; rm -rf node_modules ; yarn install --frozen-lockfile --ignore-scripts --network-timeout 1000000 ; cd node_modules/electron ; yarn --verbose --network-timeout 1000000 run postinstall ; cd ../.. ; cd node_modules/puppeteer ; rm -rf ~/.cache/puppeteer/ ; yarn --verbose --network-timeout 1000000 run postinstall ; cd ../.. ; yarn --verbose run postinstall ; ((npm exec --no --offline -- taze --fail-on-outdated --all --force --recursive --include-locked --concurrency 10 --loglevel debug --cwd . && npm exec --no --offline -- taze major --fail-on-outdated --all --force --recursive --include-locked --concurrency 10 --loglevel debug --cwd .) || echo OK || true)
         shell: bash
       - name: non-PR action, Windows, YARN INSTALL
         if: ${{ github.event_name != 'pull_request' && ( matrix.osarch == 'windows-intel' || matrix.osarch == 'windows-arm' ) }}
