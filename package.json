@@ -67,7 +67,11 @@
     "jest-mock": "^30.3.0",
     "jest-resolve": "^30.3.0",
     "jest-runtime": "^30.3.0",
-    "jest-util": "^30.3.0"
+    "jest-util": "^30.3.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^2.1.1",
+    "multer": "^1.4.5-lts.1",
+    "busboy": "^1.6.0"
   },
   "scripts": {
     "axe-dev": "cpy \"../axe-core_DAISY/axe.js\" \"node_modules/@daisy/axe-core-for-ace/\" && cpy \"../axe-core_DAISY/axe.min.js\" \"node_modules/@daisy/axe-core-for-ace/\" && cpy \"../axe-core_DAISY/axe.d.ts\" \"node_modules/@daisy/axe-core-for-ace/\" && cpy \"../axe-core_DAISY/locales/*.*\" \"node_modules/@daisy/axe-core-for-ace/locales/\" && cpy \"../axe-core_DAISY/package.json\" \"node_modules/@daisy/axe-core-for-ace/\"",
