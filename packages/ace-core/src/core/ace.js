@@ -24,6 +24,13 @@ module.exports = function ace(epubPath, options, axeRunner) {
   // if (!!options.doNotReportMedia) axeRunner.setDoNotReportMedia();
   //if (options.doNotReportMedia && process && process.env) process.env.ACE_DO_NOT_REPORT_MEDIA_RESOURCES = "1";
 
+  // When set (via --continue-on-error, options.continueOnError, or
+  // ACE_CONTINUE_ON_ERROR=1), a single content document that hangs or
+  // crashes the axe runner is logged as a warning and skipped, and the
+  // rest of the audit continues. Without the flag the current behavior
+  // is preserved: pMap's default fail-fast aborts the whole run.
+  const continueOnError = !!options.continueOnError || process && process.env && process.env.ACE_CONTINUE_ON_ERROR === '1';
+
   return new Promise((resolve, reject) => {
 
     function l10nDoneCallback() {
@@ -75,7 +82,7 @@ module.exports = function ace(epubPath, options, axeRunner) {
       // initialize the report
       .then(() => new Report(epub, options.outdir, options.lang).init())
       // Check each Content Doc
-      .then(report => checker.check(epub, report, options.lang, doNotReportMedia, axeRunner))
+      .then(report => checker.check(epub, report, options.lang, doNotReportMedia, axeRunner, continueOnError))
       // Process the Results
       .then((report) => {
         if (!options.outdir) {
