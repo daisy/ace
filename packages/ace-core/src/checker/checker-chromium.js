@@ -205,15 +205,29 @@ async function checkSingle(spineItem, epub, lang, doNotReportMedia, axeRunner) {
   }
 }
 
-module.exports.check = async (epub, lang, doNotReportMedia, axeRunner) => {
+module.exports.check = async (epub, lang, doNotReportMedia, axeRunner, continueOnError) => {
   await axeRunner.launch();
   winston.info('Checking documents...');
-  return pMap(epub.contentDocs, (doc) => {
-    return checkSingle(doc, epub, lang, doNotReportMedia, axeRunner); // not AWAIT'ed! (pMap takes the Promise)
+  return pMap(epub.contentDocs, async (doc) => {
+    // When continueOnError is set, a single hung / crashing document
+    // logs a warning and yields a null result, letting the rest of the
+    // audit finish. Without the flag we preserve the original behavior:
+    // pMap's default fail-fast bubbles the first per-doc rejection up
+    // and aborts the whole run.
+    if (!continueOnError) {
+      return checkSingle(doc, epub, lang, doNotReportMedia, axeRunner);
+    }
+    try {
+      return await checkSingle(doc, epub, lang, doNotReportMedia, axeRunner);
+    } catch (err) {
+      const which = (doc && (doc.relpath || doc.href)) || '?';
+      winston.warn(`Skipping document ${which} (continueOnError): ${err && err.message ? err.message : err}`);
+      return null;
+    }
   }, { concurrency: DISABLE_CONCURRENT_TO_DEBUG_INDIVIDUAL_SPINE_ITEM ? 1 : axeRunner.concurrency })
   .then(async (results) => {
     await axeRunner.close();
-    return results;
+    return continueOnError ? results.filter((r) => r !== null) : results;
   }).catch(async (err) => {
     winston.error(`Ace HTML check error: ${err.message ? err.message : err}`);
     if (err.stack) winston.debug(err.stack);

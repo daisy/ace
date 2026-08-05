@@ -38,6 +38,9 @@ const meowHelpMessage = `
 
     -M, --doNotReportMedia skips reporting media resources
 
+    -C, --continueOnError  skip a content document that hangs or crashes the axe runner
+                           (default is to abort the whole audit on the first per-doc error)
+
     -E, --exiterror2 exit process with code 2 when fail (return-2-on-validation-error)
   Examples
     $ ace -o out ~/Documents/book.epub
@@ -89,6 +92,10 @@ const meowOptions = {
     },
     doNotReportMedia: {
       alias: 'M',
+    },
+    continueOnError: {
+      alias: 'C',
+      type: 'boolean'
     },
     exiterror2: { // process exit code
       alias: 'E',
@@ -168,6 +175,7 @@ ${overrides.map(file => `  - ${file}`).join('\n')}
     lang: cli.flags.lang,
     timeout: cli.flags.timeout || undefined,
     doNotReportMedia: cli.flags.doNotReportMedia || undefined,
+    continueOnError: cli.flags.continueOnError || undefined,
     exiterror2: cli.flags.exiterror2 || undefined,
   }, axeRunner)
   .then(async (jobData) => {
