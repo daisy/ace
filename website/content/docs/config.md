@@ -7,7 +7,7 @@ weight = 4
 
 Ace can be configured through a `config.json` file located in an OS-specific directory:
 
-- on Windows in `"%HOME%\AppData\Local\DAISY Ace\Config\"`
+- on Windows in `"%HOME%\AppData\Roaming\DAISY Ace\Config\"`
 - on macOS in `"~/Library/Preferences/DAISY\ Ace/"`
 - on Linux in `"~/.config/DAISY Ace/"`
 
