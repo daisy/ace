@@ -108,8 +108,22 @@ module.exports.initLogger = function initLogger(options = {}) {
 
   const defaultLogger = winston.clear();
 
-  const fileTransport = new winston.transports.File({ name: 'file', filename: logfile, silent: disableWinstonFileTransport });
-  const consoleTransport = new winston.transports.Console({ name: 'console', stderrLevels: ['error'], silent: false });
+  // Colors are for the terminal only; keep ANSI escape codes out of the log file.
+  const fileTransport = new winston.transports.File({
+    name: 'file',
+    filename: logfile,
+    silent: disableWinstonFileTransport,
+    format: winston.format.combine(
+      winston.format.cli(),
+      winston.format.uncolorize()
+    ),
+  });
+  const consoleTransport = new winston.transports.Console({
+    name: 'console',
+    stderrLevels: ['error'],
+    silent: false,
+    format: winston.format.cli(),
+  });
   const transports = [
     fileTransport
   ];
@@ -121,10 +135,6 @@ module.exports.initLogger = function initLogger(options = {}) {
   winston.configure({
     level,
     transports,
-    format: winston.format.combine(
-      // winston.format.colorize(),
-      winston.format.cli()
-    )
   });
 
   // defaultLogger.on('error', () => { });
