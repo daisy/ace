@@ -108,6 +108,11 @@
   var checkbox = document.getElementById('themer');
   var inverter = document.getElementById('inverter');
 
+  // The theme switcher markup is optional; skip if it isn't on the page.
+  if (!checkbox || !inverter) {
+    return;
+  }
+
   if (!CSSSupported('filter', 'invert(100%)')) {
     checkbox.parentNode.hidden = true;
     return;
