@@ -4,12 +4,49 @@ const fs = require('fs-extra');
 const fsNode = require('fs');
 const path = require('path');
 const winston = require('winston');
+const escape = require('escape-html');
 
 const builders = require('./report-builders.js');
 const a11yMetaChecker = require("./analyze-a11y-metadata.js");
 const generateHtmlReport = require("./generate-html-report.js");
 
 const { localize, setCurrentLanguage } = require('./l10n/localize').localizer;
+
+const MAX_HEADING_TEXT = 150;
+
+function collapseAndTruncate(str) {
+  let text = (str || '').replace(/\s+/g, ' ').trim();
+  if (text.length > MAX_HEADING_TEXT) {
+    text = text.substring(0, MAX_HEADING_TEXT).trim() + '…';
+  }
+  return text;
+}
+
+// Text shown for one heading in the headings outline:
+// the visible text, then notes for the alt text of any images and for the label
+// that names the heading (aria-labelledby, else aria-label), truncated and HTML-escaped.
+function headingOutlineText(hx) {
+  const text = collapseAndTruncate(hx.html);
+  let html = escape(text);
+  if (!html.length && !(hx.images && hx.images.length)) {
+    html = `<span class="toc-empty">${escape(localize("headingempty"))}</span>`;
+  }
+  if (hx.images && hx.images.length) {
+    const alts = hx.images.map((alt) => (alt && alt.trim())
+      ? `"${escape(alt.trim())}"`
+      : escape(localize("headingimagenoalt")));
+    html += `${html.length ? ' ' : ''}<span class="toc-image">(${escape(localize("headingimage"))}: ${alts.join(', ')})</span>`;
+  }
+  // aria-labelledby wins over aria-label, as in the accessible name;
+  // no note when the label is the same as the visible text
+  const label = hx.labelledBy
+    ? { attr: 'aria-labelledby', text: collapseAndTruncate(hx.labelledBy) }
+    : hx.ariaLabel ? { attr: 'aria-label', text: collapseAndTruncate(hx.ariaLabel) } : null;
+  if (label && label.text && label.text !== text) {
+    html += ` <span class="toc-label">(${label.attr}: "${escape(label.text)}")</span>`;
+  }
+  return html;
+}
 
 function headingsToOutline(headings) {
   const result = [];
@@ -28,7 +65,7 @@ function headingsToOutline(headings) {
       }
       result.push('<ul>');
     }
-    result.push(`<li><span class="toc-h${hx.level}">`, hx.html, '</span>');
+    result.push(`<li><span class="toc-h${hx.level}">`, headingOutlineText(hx), '</span>');
     level = hx.level;
   });
   for (let i = level; i > 0; i -= 1) {
@@ -42,6 +79,9 @@ function aggregateHTMLOutlines(outlines) {
 }
 
 module.exports = class Report {
+  // exposed for unit tests
+  static headingOutlineText(hx) { return headingOutlineText(hx); }
+
 
   constructor(epub, outdir, lang) {
     this.epub = epub;
