@@ -42,6 +42,12 @@ function withTestSubject(obj, url, title = '', version='', identifier = '', meta
   return obj;
 }
 
+// Convert a decoded, archive-root filesystem path, not an existing URL/reference.
+// Encode segments separately so a literal # or % cannot become URI syntax.
+function archivePathToUrl(archivePath) {
+  return archivePath.split('/').map((segment) => encodeURIComponent(segment)).join('/');
+}
+
 
 class AssertionBuilder {
   constructor() {
@@ -237,3 +243,4 @@ module.exports.AssertionBuilder = AssertionBuilder;
 module.exports.ReportBuilder = ReportBuilder;
 module.exports.TestBuilder = TestBuilder;
 module.exports.ResultBuilder = ResultBuilder;
+module.exports.archivePathToUrl = archivePathToUrl;

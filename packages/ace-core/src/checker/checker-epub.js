@@ -313,7 +313,8 @@ function checkMediaOverlays(epub) {
       }
       const found = docs.find((d) => d.full === smilRef.full);
       if (found) {
-        const resPath = doc.mediaOverlay.smilRelPath;
+        const resPath = doc.mediaOverlay.smilSrc
+          ? builders.archivePathToUrl(doc.mediaOverlay.smilSrc) : doc.mediaOverlay.smilRelPath;
         let assertion = assertionMap[resPath];
         if (!assertion) {
           // console.log("ASS", resPath);
@@ -351,17 +352,8 @@ function checkReadingOrder(epub) {
 
   const isFXL = epub.metadata['rendition:layout'] === "pre-paginated";
 
-  const resPath = "/" + epub.navDoc.src;
-  // Axe generates its own assertions for individual HTML files, including the NavDoc,
-  // but the subject filepath is only the filename, not the complete relative path inside the EPUB,
-  // so to ensure no collision we use a slash prefix (hacky! :( )
-  // TODO: merge assertions?
-  // const i = epub.navDoc.src.lastIndexOf("/");
-  // if (i >= 0) {
-  //   resPath = epub.navDoc.src.substring(i+1);
-  // } else {
-  //   resPath = epub.navDoc.src;
-  // }
+  // Both EPUB and aXe assertions identify the same archive entry from its root.
+  const resPath = builders.archivePathToUrl(epub.navDoc.src);
 
   const assertions = new builders.AssertionBuilder()
     .withSubAssertions()
@@ -563,7 +555,7 @@ function check(epub, report) {
   winston.info('Checking package...');
   const assertion = new builders.AssertionBuilder()
     .withSubAssertions()
-    .withTestSubject(epub.packageDoc.src, asString(epub.metadata['dc:title']));
+    .withTestSubject(builders.archivePathToUrl(epub.packageDoc.src), asString(epub.metadata['dc:title']));
 
   // const isEPUB3 = epub.version && epub.version.startsWith("3");
   const isEPUB2 = epub.version && epub.version.startsWith("2");

@@ -44,6 +44,7 @@ function errorHandler (level, msg, context) {
 function SpineItem() {
   this.filepath = "";
   this.relpath = "";
+  this.src = ""; // Archive-root report path; relpath remains OPF-relative.
   this.title = "";
   this.url = ""; // different from filepath: preceeded by "file://". included for convenience.
   this.properties = "";
@@ -97,7 +98,7 @@ function parseNavDoc(fullpath, epubDir) {
   // console.log(tocHTML);
 
   return {
-    src: path.relative(epubDir, fullpath),
+    src: path.relative(epubDir, fullpath).replace(/\\/g, "/"),
     pageListHrefs,
     tocHrefs,
     tocHTML,
@@ -297,7 +298,7 @@ EpubParser.prototype.parse = function(epubDir) {
       return;
     }
     this.packageDoc = {
-      src: path.relative(epubDir, packageDocPath),
+      src: path.relative(epubDir, packageDocPath).replace(/\\/g, "/"),
       path: packageDocPath,
     };
     this.parseData(packageDocPath, epubDir);
@@ -335,6 +336,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
         spineItem.relpath = decodeURIComponent(manifestItem[0].getAttribute('href'));
         // if (manifestItem[0].getAttribute('href').includes("%")) console.log(`${manifestItem[0].getAttribute('href')} ===> ${spineItem.relpath}`);
         spineItem.filepath = path.join(path.dirname(packageDocPath), spineItem.relpath);
+        spineItem.src = path.relative(epubDir, spineItem.filepath).replace(/\\/g, "/");
 
         const o = this.parseContentDocTitleAndIds(spineItem.filepath);
         spineItem.title = o.titleText;
@@ -359,6 +361,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
           spineItem.mediaOverlay = {};
           spineItem.mediaOverlay.smilRelPath = decodeURIComponent(smilManifestItem[0].getAttribute('href'));
           spineItem.mediaOverlay.smilFilePath = path.join(path.dirname(packageDocPath), spineItem.mediaOverlay.smilRelPath );
+          spineItem.mediaOverlay.smilSrc = path.relative(epubDir, spineItem.mediaOverlay.smilFilePath).replace(/\\/g, "/");
           // spineItem.mediaOverlay.smilUrl = pathToFileURL(spineItem.mediaOverlay.smilFilePath).href;
           spineItem.mediaOverlay.smilRefs = this.parseSmilRefs(spineItem.mediaOverlay.smilFilePath);
         }
@@ -391,6 +394,7 @@ EpubParser.prototype.parseData = function(packageDocPath, epubDir) {
 
       spi.relpath = navDocPath;
       spi.filepath = navDocFullPath;
+      spi.src = this.navDoc.src;
 
       const o = this.parseContentDocTitleAndIds(spi.filepath);
       spi.title = o.titleText;

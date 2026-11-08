@@ -23,7 +23,7 @@ async function axe2ace(spineItem, axeResults, lang) {
       // the content doc-level assertion
       const assertion = new builders.AssertionBuilder()
         .withSubAssertions()
-        .withTestSubject(spineItem.relpath, spineItem.title);
+        .withTestSubject(spineItem.src ? builders.archivePathToUrl(spineItem.src) : spineItem.relpath, spineItem.title);
       // process axe's individual checks for a single content document
       // console.log("axe2ace ------- ", JSON.stringify(axeResults, null, 4));
       axeResults.violations.forEach((violation) => {
