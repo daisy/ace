@@ -48,7 +48,7 @@ test('DPUB ARIA roles are allowed', async () => {
   const report = await ace('../data/axerule-dpubroles');
   // console.log(JSON.stringify(report, null, 4));
   expect(report['earl:result']['earl:outcome']).toEqual('fail');
-  const assertions = findAssertionsForDoc(report, 'content_001.xhtml');
+  const assertions = findAssertionsForDoc(report, 'EPUB/content_001.xhtml');
   expect(assertions).toBeDefined();
   expect(assertions).toEqual(expect.arrayContaining([
     expect.objectContaining({
@@ -118,7 +118,7 @@ test('DPUB ARIA roles are allowed (with epub:type deprecated)', async () => {
 test('DPUB ARIA landmark unique', async () => {
   const report = await ace('../data/axerule-landmark-unique');
   expect(report['earl:result']['earl:outcome']).toEqual('fail');
-  const assertions = findAssertionsForDoc(report, 'content_001.xhtml');
+  const assertions = findAssertionsForDoc(report, 'EPUB/content_001.xhtml');
   expect(assertions).toBeDefined();
   expect(assertions).toEqual(expect.arrayContaining([
     expect.objectContaining({
@@ -186,7 +186,7 @@ test('Ensure page breaks have labels', async () => {
   const report = await ace('../data/axerule-pagebreak-label');
   // console.log(JSON.stringify(report, null, 4));
   expect(report['earl:result']['earl:outcome']).toEqual('fail');
-  const assertions = findAssertionsForDoc(report, 'content_001.xhtml');
+  const assertions = findAssertionsForDoc(report, 'EPUB/content_001.xhtml');
   expect(assertions).toBeDefined();
 
   expect(assertions).toEqual(expect.arrayContaining([
@@ -279,7 +279,7 @@ test('Ensure page breaks have labels', async () => {
 test('Checks that `epub:type` have matching ARIA roles', async() => {
   const report = await ace('../data/axerule-matching-dpub-role');
   expect(report['earl:result']['earl:outcome']).toEqual('fail');
-  const assertions = findAssertionsForDoc(report, 'content_001.xhtml');
+  const assertions = findAssertionsForDoc(report, 'EPUB/content_001.xhtml');
   expect(assertions).toBeDefined();
   expect(assertions).toEqual(expect.arrayContaining([
     expect.objectContaining({
@@ -369,7 +369,7 @@ test('Checks that `epub:type` have matching ARIA roles', async() => {
       }),
     })
   ]));
-  const navAssertions = findAssertionsForDoc(report, 'nav.xhtml');
+  const navAssertions = findAssertionsForDoc(report, 'EPUB/nav.xhtml');
   expect(navAssertions).toBeDefined();
   expect(navAssertions).toEqual([]);
   expect(navAssertions).not.toEqual(expect.arrayContaining([

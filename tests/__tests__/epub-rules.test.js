@@ -51,7 +51,7 @@ describe('page list and TOC reading order', () => {
   const report = await ace('../data/epubrules-pagelist-missing-pagebreak-target');
   // console.log(JSON.stringify(report, null, 4));
   expect(report['earl:result']['earl:outcome']).toEqual('fail');
-  const assertions = findAssertionsForDoc(report, '/EPUB/nav.xhtml');
+  const assertions = findAssertionsForDoc(report, 'EPUB/nav.xhtml');
   // console.log(JSON.stringify(assertions, null, 4));
   expect(assertions).toEqual(expect.arrayContaining([
 
@@ -70,7 +70,7 @@ describe('page list and TOC reading order', () => {
     const report = await ace('../data/epubrules-pagelist-missing-pagebreak');
     // console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']['earl:outcome']).toEqual('fail');
-    const assertions = findAssertionsForDoc(report, '/EPUB/nav.xhtml');
+    const assertions = findAssertionsForDoc(report, 'EPUB/nav.xhtml');
     // console.log(JSON.stringify(assertions, null, 4));
     expect(assertions).toEqual(expect.arrayContaining([
       expect.objectContaining({
@@ -100,7 +100,7 @@ describe('page list and TOC reading order', () => {
     const report = await ace('../data/epubrules-pagelist-smil-pagebreak');
     // console.log(JSON.stringify(report, null, 4));
     expect(report['earl:result']['earl:outcome']).toEqual('fail');
-    const assertions1 = findAssertionsForDoc(report, 'content_001.smil');
+    const assertions1 = findAssertionsForDoc(report, 'EPUB/content_001.smil');
     // console.log(JSON.stringify(assertions1, null, 4));
     expect(assertions1).toEqual(expect.arrayContaining([
       expect.objectContaining({
@@ -109,7 +109,7 @@ describe('page list and TOC reading order', () => {
         }),
       }),
     ]));
-    const assertions2 = findAssertionsForDoc(report, 'content_002.smil');
+    const assertions2 = findAssertionsForDoc(report, 'EPUB/content_002.smil');
     // console.log(JSON.stringify(assertions2, null, 4));
     expect(assertions2).toEqual(expect.arrayContaining([
       expect.objectContaining({
@@ -132,7 +132,7 @@ describe('page list and TOC reading order', () => {
   test('page list and TOC (ordered) FAIL, with missing pagebreak references', async () => {
     const report = await ace('../data/epubrules-pagelist-toc-order-fail');
     // console.log(JSON.stringify(report, null, 4));
-    const assertions = findAssertionsForDoc(report, '/EPUB/nav.xhtml');
+    const assertions = findAssertionsForDoc(report, 'EPUB/nav.xhtml');
     // console.log(JSON.stringify(assertions, null, 4));
     expect(assertions).toEqual(expect.arrayContaining([
       // expect.objectContaining({
@@ -164,7 +164,7 @@ describe('page list and TOC reading order', () => {
         }),
       }),
     ]));
-    const assertions2 = findAssertionsForDoc(report, 'nav.xhtml');
+    const assertions2 = findAssertionsForDoc(report, 'EPUB/nav.xhtml');
     // console.log(JSON.stringify(assertions2, null, 4));
     expect(assertions2).toEqual(expect.arrayContaining([
       expect.objectContaining({
@@ -173,7 +173,7 @@ describe('page list and TOC reading order', () => {
         }),
       }),
     ]));
-    const assertions3 = findAssertionsForDoc(report, 'content_002.xhtml');
+    const assertions3 = findAssertionsForDoc(report, 'EPUB/content_002.xhtml');
     // console.log(JSON.stringify(assertions3, null, 4));
     expect(assertions3).toEqual(expect.arrayContaining([
       expect.objectContaining({

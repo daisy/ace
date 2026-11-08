@@ -85,7 +85,7 @@ test('issue #182: named character references are parsed', async () => {
   expect(report.assertions).toEqual(expect.arrayContaining([
     expect.objectContaining({
       "earl:testSubject": {
-        "url": "content_001.xhtml",
+        "url": "EPUB/content_001.xhtml",
         "dct:title": "Minimal – EPUB"
       }
     })
